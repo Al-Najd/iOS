@@ -1,0 +1,21 @@
+/* 
+  Localizables.strings
+  Proba B.V.
+
+  Created by Ahmed Ramy on 10/1/20.
+//  Copyright © 2020 Proba B.V. All rights reserved.
+  Copyright © 2020 Proba B.V. All rights reserved.
+*/
+"generic_error" = "حدث خطأ ما...";
+"email_not_valid" = "هذا الإيمال غير صالح.";
+"password_too_short" = "كلمة المرور قصيرة للغاية";
+"names_cant_contain_numbers" = "الأسماء لا يوجد فيها أرقام";
+"names_cant_contain_special_characters" = "الأسماء لا يوجد فيها حروف غريبة.";
+"names_cant_contain_emojis" = "الأسماء لا يوجد فيها ايموجيز.";
+"field_cant_be_empty" = "ال%@ لا يمكن ان يكون فارغا.";
+"password_hint_unlocked" = "كلمة المرور.";
+"password_hint_locked" = "••••••••••••••••••••••••••";
+"your_current_password" = "كلمة المرور الحالية";
+"category_name" = "اسم الفئة: %@";
+"category_description" = "وصف الفئة: %@";
+"category_calories" = "عدد السعرات الحرارية: %@";

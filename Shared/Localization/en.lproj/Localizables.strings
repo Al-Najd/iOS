@@ -1,0 +1,21 @@
+/* 
+  Localizables.strings
+  Proba B.V.
+
+  Created by Ahmed Ramy on 10/1/20.
+//  Copyright © 2020 Proba B.V. All rights reserved.
+  Copyright © 2020 Proba B.V. All rights reserved.
+*/
+"email_not_valid" = "This email is not valid.";
+"generic_error" = "Oops... Something went wrong!";
+"password_too_short" = "Password is too short.";
+"names_cant_contain_numbers" = "Names can't contain numbers.";
+"names_cant_contain_special_characters" = "Names can't contain special characters.";
+"names_cant_contain_emojis" = "Names can't contain emojis.";
+"field_cant_be_empty" = "The %@ can't be empty.";
+"password_hint_unlocked" = "Your Super Secret Password.";
+"password_hint_locked" = "••••••••••••••••••••••••••";
+"your_current_password" = "Your current password";
+"category_name" = "Category Name: %@";
+"category_description" = "Category Description: %@";
+"category_calories" = "Category Calories: %@";

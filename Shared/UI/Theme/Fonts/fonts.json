@@ -1,0 +1,18 @@
+{
+  "fonts": [
+    {
+      "family": "SFProRounded",
+      "locale": "english",
+      "type": "sans-serif"
+    },
+    {
+      "family": "Cairo",
+      "locale": "arabic",
+      "type": "sans-serif"
+    }
+  ],
+  "default_configurations": {
+    "type": "sans-serif",
+    "locale": "english"
+  }
+}
