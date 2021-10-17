@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
   @EnvironmentObject var state: AppState
-  
   var body: some View {
     ZStack {
       Color
@@ -18,6 +17,10 @@ struct ContentView: View {
         .ignoresSafeArea()
       VStack {
         BuffCardView()
+          .onTapGesture {
+            guard app.canShowBuffs else { return }
+            state.showBuffs = true
+          }
         List {
           DeedsList(
             sectionTitle: "Faraaid",
@@ -37,13 +40,14 @@ struct ContentView: View {
         
         Spacer()
       }.ignoresSafeArea(.all, edges: .bottom)
-    }
+    }.sheet(isPresented: $state.showBuffs, content: { BuffsView() })
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+      .environmentObject(app.state)
   }
 }
 
@@ -51,34 +55,42 @@ struct DeedsList: View {
   var sectionTitle: String
   var deeds: [Deed] = []
   
+  var allDeedsAreDone: Bool { deeds.first(where: { $0.isDone == false }) == nil }
+  
   var body: some View {
     Section(sectionTitle) {
-      ForEach(deeds) { deed in
-        HStack {
-          Text(deed.title)
-          if deed.isDone {
-            Spacer()
-            Image(systemName: "checkmark.seal.fill")
-              .foregroundColor(.success.default)
+      if allDeedsAreDone {
+        Text("Well Done! You did All of the \(sectionTitle)s")
+          .foregroundColor(.mono.offwhite)
+          .listRowBackground(Color.success.default)
+      } else {
+        ForEach(deeds) { deed in
+          HStack {
+            Text(deed.title)
+            if deed.isDone {
+              Spacer()
+              Image(systemName: "checkmark.seal.fill")
+                .foregroundColor(.success.default)
+            }
+          }.swipeActions(edge: .trailing) {
+            Button(
+              action: {
+                withAnimation {
+                  app.handle(deed: deed)
+                }
+              },
+              label: { Image(systemName: "checkmark.seal") }
+            ).tint(.success.default)
+          }.swipeActions(edge: .leading) {
+            Button(
+              action: {
+                withAnimation {
+                  app.handle(deed: deed)
+                }
+              },
+              label: { Image(systemName: "delete.backward.fill") }
+            ).tint(.danger.default)
           }
-        }.swipeActions(edge: .trailing) {
-          Button(
-            action: {
-              withAnimation {
-                app.handle(deed: deed)
-              }
-            },
-            label: { Image(systemName: "checkmark.seal") }
-          ).tint(.success.default)
-        }.swipeActions(edge: .leading) {
-          Button(
-            action: {
-              withAnimation {
-                app.handle(deed: deed)
-              }
-            },
-            label: { Image(systemName: "delete.backward.fill") }
-          ).tint(.danger.default)
         }
       }
     }

@@ -35,7 +35,8 @@ final class AppState: ObservableObject {
   @Published var faraaid: [Deed] = .faraaid
   @Published var nafila: [Deed] = .nafila
   
-  @Published var accumlatedRewards: [Reward] = []
+  @Published var accumlatedRewards: [Deed] = []
+  @Published var showBuffs: Bool = false
 }
 
 final class AppService {
@@ -45,18 +46,22 @@ final class AppService {
     deed.isDone ? undo(deed: deed) : did(deed: deed)
   }
   
+  var canShowBuffs: Bool {
+    state.accumlatedRewards.isEmpty == false
+  }
+  
   private func did(deed: Deed) {
     var deed = deed
     deed.isDone = true
     updateState(deed: deed)
-    state.accumlatedRewards.append(deed.reward)
+    state.accumlatedRewards.append(deed)
   }
   
   private func undo(deed: Deed) {
     var deed = deed
     deed.isDone = false
     updateState(deed: deed)
-    state.accumlatedRewards.findAndRemove(deed.reward)
+    state.accumlatedRewards.findAndRemove(deed)
   }
   
   private func updateState(deed: Deed) {

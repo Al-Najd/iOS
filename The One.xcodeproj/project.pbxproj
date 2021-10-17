@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
+		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
+		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
+		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
+		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588322716CC5500FC0CBB /* The_OneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* The_OneApp.swift */; };
@@ -99,6 +104,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* The_OneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_OneApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B865880B2716CC5500FC0CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,6 +159,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B31891271C6BE90088F527 /* PulseUI in Frameworks */,
+				04B3188D271C6BE90088F527 /* Pulse in Frameworks */,
+				04B3188F271C6BE90088F527 /* PulseCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				B865880A2716CC5200FC0CBB /* ContentView.swift */,
+				04FAC744271C0F610045AD2E /* BuffsView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -434,6 +444,11 @@
 			dependencies = (
 			);
 			name = "The One (iOS)";
+			packageProductDependencies = (
+				04B3188C271C6BE90088F527 /* Pulse */,
+				04B3188E271C6BE90088F527 /* PulseCore */,
+				04B31890271C6BE90088F527 /* PulseUI */,
+			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* The One.app */;
 			productType = "com.apple.product-type.application";
@@ -526,6 +541,9 @@
 				ar,
 			);
 			mainGroup = B86588032716CC5200FC0CBB;
+			packageReferences = (
+				04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */,
+			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -605,6 +623,7 @@
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
+				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
 				B865889E2716CEEC00FC0CBB /* Then.swift in Sources */,
 				B86588A02716CEEC00FC0CBB /* Aliases.swift in Sources */,
@@ -639,6 +658,7 @@
 				B865889B2716CEEC00FC0CBB /* Promise.swift in Sources */,
 				B865889D2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
 				B86588B22716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
+				04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */,
 				B86588702716CEA000FC0CBB /* Shadow.swift in Sources */,
 				B865889F2716CEEC00FC0CBB /* Then.swift in Sources */,
 				B86588A12716CEEC00FC0CBB /* Aliases.swift in Sources */,
@@ -1040,6 +1060,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Pulse";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		04B3188C271C6BE90088F527 /* Pulse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = Pulse;
+		};
+		04B3188E271C6BE90088F527 /* PulseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = PulseCore;
+		};
+		04B31890271C6BE90088F527 /* PulseUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = PulseUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B86588042716CC5200FC0CBB /* Project object */;
 }
