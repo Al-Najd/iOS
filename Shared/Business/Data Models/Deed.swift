@@ -12,6 +12,8 @@ struct Deed: Identifiable {
   var category: DeedCategory
   var title: String
   var isDone: Bool = false
+//  var startTime: Date
+//  var endTime: Date
   var reward: Reward
 }
 
@@ -28,7 +30,10 @@ enum DeedCategory {
 
 extension Array where Element == Deed {
   static let faraaid: [Deed] = [
-    .init(category: .fard, title: "Fajr", reward: .init(title: "If the Sunnah was better than all of that is good on life, what do you think the Fajr is?")),
+    .init(
+      category: .fard,
+      title: "Fajr",
+      reward: .init(title: "If the Sunnah was better than all of that is good on life, what do you think the Fajr is?")),
     .init(category: .fard, title: "Duhr", reward: .init(title: "There are 25+ benefit in Duhr, the best? Getting closer to Allah!")),
     .init(
       category: .fard,

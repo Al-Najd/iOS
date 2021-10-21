@@ -1,0 +1,8 @@
+{
+  "sentry": {},
+  "sonarqube": {},
+  "slack": {
+    "channel": "#releases-ios-nursery",
+    "slack_url": "https://hooks.slack.com/services/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"
+  }
+}

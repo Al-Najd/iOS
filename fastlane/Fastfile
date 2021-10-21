@@ -1,0 +1,75 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+require 'json'
+
+default_platform(:ios)
+
+# Gathering 3rd party Keys and Secrets from Configs
+configs = JSON.parse(File.read('./Config.json'), object_class: OpenStruct)
+
+def file_prepend(file, str)
+  new_contents = ""
+  File.open(file, 'r') do |fd|
+    contents = fd.read
+    new_contents = str << contents
+  end
+  # Overwrite file but now with prepended string on it
+  File.open(file, 'w') do |fd| 
+    fd.write(new_contents)
+  end
+end
+
+platform :ios do
+  before_all do
+    ENV["SLACK_URL"] = configs.slack.slack_url
+
+    # Gather Secrets from Github if present
+    ENV["FASTLANE_USER"] = ENV["GH_FASTLANE_USER"] || ENV["FASTLANE_USER"]
+    ENV["FASTLANE_PASSWORD"] = ENV["GH_FASTLANE_PASSWORD"] || ENV["FASTLANE_PASSWORD"]
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = ENV["GH_FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] || ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"]
+  end
+  
+  lane :beta do 
+    # Beta Release
+    setup_ci if ENV['CI']
+    # Handles any versionings and Changelogs maintenance
+    increment_build_number
+    # Builds and prepare for exporting the app
+    gym(
+      scheme: "The One (iOS)",
+      export_method: "app-store",
+      export_xcargs: "-allowProvisioningUpdates"
+    )
+    # Uploads the app to Testflight
+    upload_to_testflight(skip_waiting_for_build_processing: ENV['CI'])
+    # Deletes the generated Archive, IPA, Certificates, Profiles and/or dSYM Files
+    clean_build_artifacts
+    # TODO: - Add Sentry dSYM Upload
+    # Report Success
+    # slack
+  end
+
+  lane :test_slack do
+    # slack(message: "Testing Webhook")
+  end
+
+  error do |lane, exception, options|
+    # slack(
+    #   message: "Ooops, looks like something went wrong :O\n\n\n#{exception.message}",
+    #   success: false
+    # )
+  end
+end

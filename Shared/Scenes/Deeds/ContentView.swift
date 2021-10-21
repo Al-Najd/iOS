@@ -60,7 +60,7 @@ struct DeedsList: View {
   var body: some View {
     Section(sectionTitle) {
       if allDeedsAreDone {
-        Text("Well Done! You did All of the \(sectionTitle)s")
+        Text("Well Done! You did All of the \(sectionTitle)s".localized())
           .foregroundColor(.mono.offwhite)
           .listRowBackground(Color.success.default)
       } else {
@@ -104,13 +104,13 @@ struct BuffCardView: View {
   var body: some View {
     VStack {
       if state.accumlatedRewards.isEmpty {
-        Text("A day full of blessings is awaiting your deeds!")
+        Text("A day full of blessings is awaiting your deeds!".localized())
           .multilineTextAlignment(.center)
           .font(.pLargeTitle)
           .foregroundColor(.mono.offwhite)
           .padding(.bottom, .p8)
       } else {
-        Text("Latest Reward")
+        Text("Latest Reward".localized())
           .multilineTextAlignment(.center)
           .font(.pHeadline)
           .foregroundColor(.success.light)
@@ -122,7 +122,7 @@ struct BuffCardView: View {
           .padding(.bottom, .p8)
       
         if state.accumlatedRewards.count > 2 {
-          Text("And \(state.accumlatedRewards.count - 1) other blessings and Buffs...")
+          Text("And \(state.accumlatedRewards.count - 1) other blessings and Buffs...".localized())
             .multilineTextAlignment(.center)
             .font(.pBody)
             .foregroundColor(.success.light)

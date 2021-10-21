@@ -10,6 +10,9 @@
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
+		04B31898271CAE840088F527 /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31897271CAE840088F527 /* ReminderService.swift */; };
+		04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31899271CAE8F0088F527 /* RecommendationService.swift */; };
+		04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3189B271CAF5A0088F527 /* Date+Extensions.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
@@ -104,6 +107,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
+		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
+		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* The_OneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_OneApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -189,6 +195,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04B31892271CAD220088F527 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				B88BECFD2716F08000BC362A /* Deed.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		04B31893271CAD380088F527 /* Deeds */ = {
+			isa = PBXGroup;
+			children = (
+				B865880A2716CC5200FC0CBB /* ContentView.swift */,
+			);
+			path = Deeds;
+			sourceTree = "<group>";
+		};
+		04B31894271CAD3F0088F527 /* Rewards */ = {
+			isa = PBXGroup;
+			children = (
+				04FAC744271C0F610045AD2E /* BuffsView.swift */,
+			);
+			path = Rewards;
+			sourceTree = "<group>";
+		};
+		04B31895271CAE720088F527 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				04B31896271CAE7B0088F527 /* Reminder */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		04B31896271CAE7B0088F527 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				04B31897271CAE840088F527 /* ReminderService.swift */,
+				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
+			);
+			path = Reminder;
+			sourceTree = "<group>";
+		};
 		B86588032716CC5200FC0CBB = {
 			isa = PBXGroup;
 			children = (
@@ -206,9 +253,9 @@
 		B86588082716CC5200FC0CBB /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				B88BECFC2716F05A00BC362A /* Business */,
 				B86588A82716DBF900FC0CBB /* App */,
 				B86588922716CEDA00FC0CBB /* Scenes */,
+				B88BECFC2716F05A00BC362A /* Business */,
 				B86588472716CEA000FC0CBB /* UI */,
 				B86588642716CEA000FC0CBB /* Localization */,
 				B86588912716CED300FC0CBB /* Utils */,
@@ -266,8 +313,8 @@
 		B86588472716CEA000FC0CBB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B86588482716CEA000FC0CBB /* Metrics */,
 				B865884A2716CEA000FC0CBB /* Assets.xcassets */,
+				B86588482716CEA000FC0CBB /* Metrics */,
 				B865884B2716CEA000FC0CBB /* Theme */,
 				B86588612716CEA000FC0CBB /* Reusable */,
 			);
@@ -387,6 +434,7 @@
 				B86588972716CEEC00FC0CBB /* ServiceLocator.swift */,
 				B86588982716CEEC00FC0CBB /* String+Extensions.swift */,
 				B86588952716CEEC00FC0CBB /* Then.swift */,
+				04B3189B271CAF5A0088F527 /* Date+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -394,8 +442,8 @@
 		B86588922716CEDA00FC0CBB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B865880A2716CC5200FC0CBB /* ContentView.swift */,
-				04FAC744271C0F610045AD2E /* BuffsView.swift */,
+				04B31894271CAD3F0088F527 /* Rewards */,
+				04B31893271CAD380088F527 /* Deeds */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -423,7 +471,8 @@
 		B88BECFC2716F05A00BC362A /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				B88BECFD2716F08000BC362A /* Deed.swift */,
+				04B31895271CAE720088F527 /* Services */,
+				04B31892271CAD220088F527 /* Data Models */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -608,6 +657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */,
 				B86588772716CEA000FC0CBB /* Theme.swift in Sources */,
 				B86588A42716CEEC00FC0CBB /* String+Extensions.swift in Sources */,
 				B86588A62716CEEC00FC0CBB /* Codable+Helpers.swift in Sources */,
@@ -616,6 +666,8 @@
 				B86588892716CEA000FC0CBB /* PButton.swift in Sources */,
 				B86588342716CC5500FC0CBB /* ContentView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
+				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
+				04B31898271CAE840088F527 /* ReminderService.swift in Sources */,
 				B86588732716CEA000FC0CBB /* Palettes.swift in Sources */,
 				B865887D2716CEA000FC0CBB /* Fonts.swift in Sources */,
 				B88BECFA2716E1BB00BC362A /* AppearancePlugin.swift in Sources */,
@@ -835,6 +887,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -848,6 +901,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -857,6 +911,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -871,6 +926,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
