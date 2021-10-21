@@ -13,6 +13,7 @@
 		04B31898271CAE840088F527 /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31897271CAE840088F527 /* ReminderService.swift */; };
 		04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31899271CAE8F0088F527 /* RecommendationService.swift */; };
 		04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3189B271CAF5A0088F527 /* Date+Extensions.swift */; };
+		04D468A22721986100D4E12B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A12721986100D4E12B /* NetworkService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
@@ -110,6 +111,7 @@
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		04D468A12721986100D4E12B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* The_OneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_OneApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -222,18 +224,18 @@
 		04B31895271CAE720088F527 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				04B31896271CAE7B0088F527 /* Reminder */,
+				04B31897271CAE840088F527 /* ReminderService.swift */,
+				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
+				04D468A12721986100D4E12B /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		04B31896271CAE7B0088F527 /* Reminder */ = {
+		04D468A32721987800D4E12B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				04B31897271CAE840088F527 /* ReminderService.swift */,
-				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
 			);
-			path = Reminder;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		B86588032716CC5200FC0CBB = {
@@ -442,6 +444,7 @@
 		B86588922716CEDA00FC0CBB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				04D468A32721987800D4E12B /* Onboarding */,
 				04B31894271CAD3F0088F527 /* Rewards */,
 				04B31893271CAD380088F527 /* Deeds */,
 			);
@@ -667,6 +670,7 @@
 				B86588342716CC5500FC0CBB /* ContentView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
+				04D468A22721986100D4E12B /* NetworkService.swift in Sources */,
 				04B31898271CAE840088F527 /* ReminderService.swift in Sources */,
 				B86588732716CEA000FC0CBB /* Palettes.swift in Sources */,
 				B865887D2716CEA000FC0CBB /* Fonts.swift in Sources */,
