@@ -12,7 +12,7 @@ struct PButton: View {
   var action: VoidCallback
   var title: String
   var icon: Image? = nil
-  var color: Color = .primary.default
+  var color: Color = .primary1.default
   var body: some View {
     Button(action: action, label: {
       HStack {

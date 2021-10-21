@@ -12,14 +12,15 @@
 import Foundation
 
 public struct DefaultTheme: Theme {
-  public var primary: BrandColor = PrimaryPalette()
-  public var secondary: BrandColor = SecondaryPalette()
+  public var primary1: BrandColor = PrimaryPalette()
+  public var primary2: BrandColor = PrimaryPalette()
+  public var secondary1: BrandColor = SecondaryPalette()
+  public var secondary2: BrandColor = SecondaryPalette()
+  public var secondary3: BrandColor = SecondaryPalette()
   public var monochromatic: MonochromaticColor = MonochromaticPalette()
   public var transparency: Transparency = TransparencyPalette()
   public var success: BrandColor = SuccessPalette()
-  public var warning: BrandColor = WarningPalette()
   public var danger: BrandColor = DangerPalette()
-  public var info: BrandColor = InfoPalette()
   public var largeShadow: ARShadow = ARShadow(color: .black.opacity(0.09), radius: 72, position: .zero)
   public var mediumShadow: ARShadow = ARShadow(color: .black.opacity(0.09), radius: 32, position: .zero)
   public var smallShadow: ARShadow = ARShadow(color: .black.opacity(0.09), radius: 16, position: .zero)

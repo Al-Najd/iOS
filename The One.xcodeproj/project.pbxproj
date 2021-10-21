@@ -14,6 +14,7 @@
 		04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31899271CAE8F0088F527 /* RecommendationService.swift */; };
 		04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3189B271CAF5A0088F527 /* Date+Extensions.swift */; };
 		04D468A22721986100D4E12B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A12721986100D4E12B /* NetworkService.swift */; };
+		04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A42721C3F300D4E12B /* OnboardingView.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
@@ -26,8 +27,6 @@
 		B86588372716CC5500FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865880B2716CC5500FC0CBB /* Assets.xcassets */; };
 		B86588692716CEA000FC0CBB /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588492716CEA000FC0CBB /* Metrics.swift */; };
 		B865886A2716CEA000FC0CBB /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588492716CEA000FC0CBB /* Metrics.swift */; };
-		B865886B2716CEA000FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865884A2716CEA000FC0CBB /* Assets.xcassets */; };
-		B865886C2716CEA000FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865884A2716CEA000FC0CBB /* Assets.xcassets */; };
 		B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865884D2716CEA000FC0CBB /* Shadowable.swift */; };
 		B865886E2716CEA000FC0CBB /* Shadowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865884D2716CEA000FC0CBB /* Shadowable.swift */; };
 		B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865884E2716CEA000FC0CBB /* Shadow.swift */; };
@@ -112,6 +111,7 @@
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		04D468A12721986100D4E12B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		04D468A42721C3F300D4E12B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* The_OneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_OneApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -128,7 +128,6 @@
 		B865882F2716CC5500FC0CBB /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		B86588312716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86588492716CEA000FC0CBB /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
-		B865884A2716CEA000FC0CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B865884D2716CEA000FC0CBB /* Shadowable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadowable.swift; sourceTree = "<group>"; };
 		B865884E2716CEA000FC0CBB /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		B86588502716CEA000FC0CBB /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -234,6 +233,7 @@
 		04D468A32721987800D4E12B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				04D468A42721C3F300D4E12B /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -261,7 +261,6 @@
 				B86588472716CEA000FC0CBB /* UI */,
 				B86588642716CEA000FC0CBB /* Localization */,
 				B86588912716CED300FC0CBB /* Utils */,
-				B865880B2716CC5500FC0CBB /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -315,7 +314,7 @@
 		B86588472716CEA000FC0CBB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B865884A2716CEA000FC0CBB /* Assets.xcassets */,
+				B865880B2716CC5500FC0CBB /* Assets.xcassets */,
 				B86588482716CEA000FC0CBB /* Metrics */,
 				B865884B2716CEA000FC0CBB /* Theme */,
 				B86588612716CEA000FC0CBB /* Reusable */,
@@ -616,7 +615,6 @@
 				B865887F2716CEA000FC0CBB /* fonts.json in Resources */,
 				B865888D2716CEA000FC0CBB /* Localizables.strings in Resources */,
 				B86588832716CEA000FC0CBB /* Cairo-Bold.ttf in Resources */,
-				B865886B2716CEA000FC0CBB /* Assets.xcassets in Resources */,
 				B86588812716CEA000FC0CBB /* Cairo-Regular.ttf in Resources */,
 				B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */,
 				B86588872716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */,
@@ -631,7 +629,6 @@
 				B86588802716CEA000FC0CBB /* fonts.json in Resources */,
 				B865888E2716CEA000FC0CBB /* Localizables.strings in Resources */,
 				B86588842716CEA000FC0CBB /* Cairo-Bold.ttf in Resources */,
-				B865886C2716CEA000FC0CBB /* Assets.xcassets in Resources */,
 				B86588822716CEA000FC0CBB /* Cairo-Regular.ttf in Resources */,
 				B86588372716CC5500FC0CBB /* Assets.xcassets in Resources */,
 				B86588882716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */,
@@ -681,6 +678,7 @@
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
+				04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */,
 				B865889E2716CEEC00FC0CBB /* Then.swift in Sources */,
 				B86588A02716CEEC00FC0CBB /* Aliases.swift in Sources */,
 				B88BECFE2716F08000BC362A /* Deed.swift in Sources */,

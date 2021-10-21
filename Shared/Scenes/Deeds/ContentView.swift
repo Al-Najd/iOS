@@ -133,7 +133,7 @@ struct BuffCardView: View {
     .padding()
     .background(
       RoundedRectangle(cornerRadius: .r16)
-        .foregroundColor(.primary.default)
+        .foregroundColor(.primary1.default)
         .shadow(radius: .r12)
     )
     .padding(.p16)

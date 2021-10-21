@@ -12,7 +12,7 @@ struct BuffsView: View {
   
   var body: some View {
     ZStack {
-      Color.primary.default.ignoresSafeArea()
+      Color.primary1.default.ignoresSafeArea()
       ScrollView {
       VStack {
         ForEach(state.accumlatedRewards) { deed in
@@ -36,8 +36,7 @@ struct BuffsView: View {
             RoundedRectangle(
               cornerRadius: .r16
             )
-              .foregroundColor(.primary.dark
-                              )
+              .foregroundColor(.primary1.dark)
           )
           .padding()
         }
