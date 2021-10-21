@@ -1,12 +1,12 @@
 {
   "fonts": [
     {
-      "family": "SFProRounded",
+      "family": "Klasik",
       "locale": "english",
       "type": "sans-serif"
     },
     {
-      "family": "Cairo",
+      "family": "Vibes",
       "locale": "arabic",
       "type": "sans-serif"
     }

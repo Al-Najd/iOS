@@ -24,7 +24,7 @@ struct The_OneApp: App {
   
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      OnboardingView()
         .environmentObject(app.state)
     }
   }

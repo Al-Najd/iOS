@@ -15,8 +15,13 @@
 		04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3189B271CAF5A0088F527 /* Date+Extensions.swift */; };
 		04D468A22721986100D4E12B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A12721986100D4E12B /* NetworkService.swift */; };
 		04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A42721C3F300D4E12B /* OnboardingView.swift */; };
+		04D468AD2722045600D4E12B /* splash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468AC2722045500D4E12B /* splash.mp3 */; };
+		04D468AF272204AB00D4E12B /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468AE272204AB00D4E12B /* MusicService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
+		154E0EFA50C42A9AFCE2B64C /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E31E1E679483FBB62C183F2 /* fonts.json */; };
+		46C0C0D74098B3451E6DEF46 /* Vibes-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */; };
+		51B5E9195F941942BF41060D /* Klasik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588322716CC5500FC0CBB /* The_OneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* The_OneApp.swift */; };
@@ -45,15 +50,10 @@
 		B865887C2716CEA000FC0CBB /* FontConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588572716CEA000FC0CBB /* FontConfig.swift */; };
 		B865887D2716CEA000FC0CBB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588582716CEA000FC0CBB /* Fonts.swift */; };
 		B865887E2716CEA000FC0CBB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588582716CEA000FC0CBB /* Fonts.swift */; };
-		B865887F2716CEA000FC0CBB /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = B86588592716CEA000FC0CBB /* fonts.json */; };
-		B86588802716CEA000FC0CBB /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = B86588592716CEA000FC0CBB /* fonts.json */; };
-		B86588812716CEA000FC0CBB /* Cairo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B865885C2716CEA000FC0CBB /* Cairo-Regular.ttf */; };
-		B86588822716CEA000FC0CBB /* Cairo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B865885C2716CEA000FC0CBB /* Cairo-Regular.ttf */; };
-		B86588832716CEA000FC0CBB /* Cairo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B865885D2716CEA000FC0CBB /* Cairo-Bold.ttf */; };
-		B86588842716CEA000FC0CBB /* Cairo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B865885D2716CEA000FC0CBB /* Cairo-Bold.ttf */; };
-		B86588852716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */; };
+		B86588802716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
+		B86588822716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
+		B86588842716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B86588862716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */; };
-		B86588872716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */; };
 		B86588882716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */; };
 		B86588892716CEA000FC0CBB /* PButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588622716CEA000FC0CBB /* PButton.swift */; };
 		B865888A2716CEA000FC0CBB /* PButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588622716CEA000FC0CBB /* PButton.swift */; };
@@ -112,7 +112,13 @@
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		04D468A12721986100D4E12B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		04D468A42721C3F300D4E12B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		04D468AC2722045500D4E12B /* splash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splash.mp3; sourceTree = "<group>"; };
+		04D468AE272204AB00D4E12B /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
+		1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Vibes-Regular.ttf"; path = "Vibes/Vibes-Regular.ttf"; sourceTree = "<group>"; };
+		2E31E1E679483FBB62C183F2 /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
+		73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
+		9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* The_OneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_OneApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B865880B2716CC5500FC0CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -137,9 +143,6 @@
 		B86588552716CEA000FC0CBB /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
 		B86588572716CEA000FC0CBB /* FontConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontConfig.swift; sourceTree = "<group>"; };
 		B86588582716CEA000FC0CBB /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		B86588592716CEA000FC0CBB /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
-		B865885C2716CEA000FC0CBB /* Cairo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-Regular.ttf"; sourceTree = "<group>"; };
-		B865885D2716CEA000FC0CBB /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Regular.otf"; sourceTree = "<group>"; };
 		B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		B86588622716CEA000FC0CBB /* PButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PButton.swift; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 				04B31897271CAE840088F527 /* ReminderService.swift */,
 				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
 				04D468A12721986100D4E12B /* NetworkService.swift */,
+				04D468AE272204AB00D4E12B /* MusicService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -238,15 +242,49 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		04D468A72721C62300D4E12B /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */,
+				B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */,
+				73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		04D468AB2722044200D4E12B /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				04D468AC2722045500D4E12B /* splash.mp3 */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		7D9822F46CDF333670A457B4 /* Klasik */ = {
+			isa = PBXGroup;
+			children = (
+				9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */,
+			);
+			name = Klasik;
+			sourceTree = "<group>";
+		};
+		7DC527CF303B3A1CBBF4F949 /* Vibes */ = {
+			isa = PBXGroup;
+			children = (
+				1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */,
+			);
+			name = Vibes;
+			sourceTree = "<group>";
+		};
 		B86588032716CC5200FC0CBB = {
 			isa = PBXGroup;
 			children = (
 				B86588082716CC5200FC0CBB /* Shared */,
 				B86588122716CC5500FC0CBB /* iOS */,
 				B86588192716CC5500FC0CBB /* macOS */,
-				B86588232716CC5500FC0CBB /* Tests iOS */,
 				B865882E2716CC5500FC0CBB /* Tests macOS */,
 				B86588112716CC5500FC0CBB /* Products */,
+				04D468A72721C62300D4E12B /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -255,6 +293,7 @@
 		B86588082716CC5200FC0CBB /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				04D468AB2722044200D4E12B /* Media */,
 				B86588A82716DBF900FC0CBB /* App */,
 				B86588922716CEDA00FC0CBB /* Scenes */,
 				B88BECFC2716F05A00BC362A /* Business */,
@@ -305,6 +344,7 @@
 		B865882E2716CC5500FC0CBB /* Tests macOS */ = {
 			isa = PBXGroup;
 			children = (
+				B86588232716CC5500FC0CBB /* Tests iOS */,
 				B865882F2716CC5500FC0CBB /* Tests_macOS.swift */,
 				B86588312716CC5500FC0CBB /* Info.plist */,
 			);
@@ -374,8 +414,8 @@
 			children = (
 				B86588572716CEA000FC0CBB /* FontConfig.swift */,
 				B86588582716CEA000FC0CBB /* Fonts.swift */,
-				B86588592716CEA000FC0CBB /* fonts.json */,
 				B865885A2716CEA000FC0CBB /* Families */,
+				2E31E1E679483FBB62C183F2 /* fonts.json */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -383,28 +423,10 @@
 		B865885A2716CEA000FC0CBB /* Families */ = {
 			isa = PBXGroup;
 			children = (
-				B865885B2716CEA000FC0CBB /* Cairo */,
-				B865885E2716CEA000FC0CBB /* SF-Pro-Rounded */,
+				7D9822F46CDF333670A457B4 /* Klasik */,
+				7DC527CF303B3A1CBBF4F949 /* Vibes */,
 			);
 			path = Families;
-			sourceTree = "<group>";
-		};
-		B865885B2716CEA000FC0CBB /* Cairo */ = {
-			isa = PBXGroup;
-			children = (
-				B865885C2716CEA000FC0CBB /* Cairo-Regular.ttf */,
-				B865885D2716CEA000FC0CBB /* Cairo-Bold.ttf */,
-			);
-			path = Cairo;
-			sourceTree = "<group>";
-		};
-		B865885E2716CEA000FC0CBB /* SF-Pro-Rounded */ = {
-			isa = PBXGroup;
-			children = (
-				B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */,
-				B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */,
-			);
-			path = "SF-Pro-Rounded";
 			sourceTree = "<group>";
 		};
 		B86588612716CEA000FC0CBB /* Reusable */ = {
@@ -612,13 +634,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B865887F2716CEA000FC0CBB /* fonts.json in Resources */,
 				B865888D2716CEA000FC0CBB /* Localizables.strings in Resources */,
-				B86588832716CEA000FC0CBB /* Cairo-Bold.ttf in Resources */,
-				B86588812716CEA000FC0CBB /* Cairo-Regular.ttf in Resources */,
 				B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */,
-				B86588872716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */,
-				B86588852716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf in Resources */,
+				51B5E9195F941942BF41060D /* Klasik-Regular.otf in Resources */,
+				04D468AD2722045600D4E12B /* splash.mp3 in Resources */,
+				46C0C0D74098B3451E6DEF46 /* Vibes-Regular.ttf in Resources */,
+				154E0EFA50C42A9AFCE2B64C /* fonts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,10 +647,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B86588802716CEA000FC0CBB /* fonts.json in Resources */,
+				B86588802716CEA000FC0CBB /* (null) in Resources */,
 				B865888E2716CEA000FC0CBB /* Localizables.strings in Resources */,
-				B86588842716CEA000FC0CBB /* Cairo-Bold.ttf in Resources */,
-				B86588822716CEA000FC0CBB /* Cairo-Regular.ttf in Resources */,
+				B86588842716CEA000FC0CBB /* (null) in Resources */,
+				B86588822716CEA000FC0CBB /* (null) in Resources */,
 				B86588372716CC5500FC0CBB /* Assets.xcassets in Resources */,
 				B86588882716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */,
 				B86588862716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf in Resources */,
@@ -672,6 +693,7 @@
 				B86588732716CEA000FC0CBB /* Palettes.swift in Sources */,
 				B865887D2716CEA000FC0CBB /* Fonts.swift in Sources */,
 				B88BECFA2716E1BB00BC362A /* AppearancePlugin.swift in Sources */,
+				04D468AF272204AB00D4E12B /* MusicService.swift in Sources */,
 				B865888F2716CEA000FC0CBB /* Language.swift in Sources */,
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,

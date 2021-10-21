@@ -250,13 +250,13 @@ public struct ARFont: FontProtocol {
 
 public extension ARFont {
   /// Display Huge Bold 34
-  static let largeTitle: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .huge, weight: .bold)
+  static let largeTitle: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .huge, weight: .regular)
   /// Display Large Bold 28
-  static let title1: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .large, weight: .bold)
+  static let title1: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .large, weight: .regular)
   /// Display Medium Bold 24
-  static let title2: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .medium, weight: .bold)
+  static let title2: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .medium, weight: .regular)
   /// Display Small Bold 20
-  static let title3: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .small, weight: .bold)
+  static let title3: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .small, weight: .regular)
   /// Text 'Medium Size' 'Regular Weight' 17
   static let headline: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .medium, weight: .regular)
   /// Link Small Regular 15
@@ -269,13 +269,13 @@ public extension ARFont {
 
 public extension ARFont {
   /// Bold 34
-  static let displayHuge: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .huge, weight: .bold)
+  static let displayHuge: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .huge, weight: .regular)
   /// Bold 28
-  static let displayLarge: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .large, weight: .bold)
+  static let displayLarge: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .large, weight: .regular)
   /// Bold 24
-  static let displayMedium: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .medium, weight: .bold)
+  static let displayMedium: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .medium, weight: .regular)
   /// Bold 20
-  static let displaySmall: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .small, weight: .bold)
+  static let displaySmall: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .small, weight: .regular)
   /// Regular 17
   static let textMedium: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .medium, weight: .regular)
   /// Regular 15
