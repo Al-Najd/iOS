@@ -70,6 +70,7 @@ struct OnboardingView: View {
         }
         
         after(seconds: 3) {
+          MusicService.main.start(effect: .splashEnd)
           withAnimation(.easeIn(duration: 3)) {
             t1YOffset = 1100
             t2YOffset = 1100

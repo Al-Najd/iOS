@@ -17,6 +17,7 @@
 		04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A42721C3F300D4E12B /* OnboardingView.swift */; };
 		04D468AD2722045600D4E12B /* splash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468AC2722045500D4E12B /* splash.mp3 */; };
 		04D468AF272204AB00D4E12B /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468AE272204AB00D4E12B /* MusicService.swift */; };
+		04D468B52722119500D4E12B /* splashEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468B42722119500D4E12B /* splashEnd.mp3 */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		154E0EFA50C42A9AFCE2B64C /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E31E1E679483FBB62C183F2 /* fonts.json */; };
@@ -114,6 +115,7 @@
 		04D468A42721C3F300D4E12B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		04D468AC2722045500D4E12B /* splash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splash.mp3; sourceTree = "<group>"; };
 		04D468AE272204AB00D4E12B /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
+		04D468B42722119500D4E12B /* splashEnd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashEnd.mp3; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Vibes-Regular.ttf"; path = "Vibes/Vibes-Regular.ttf"; sourceTree = "<group>"; };
 		2E31E1E679483FBB62C183F2 /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -255,9 +257,26 @@
 		04D468AB2722044200D4E12B /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				04D468AC2722045500D4E12B /* splash.mp3 */,
+				04D468B127220A1300D4E12B /* SFX */,
+				04D468B027220A0C00D4E12B /* Music */,
 			);
 			path = Media;
+			sourceTree = "<group>";
+		};
+		04D468B027220A0C00D4E12B /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				04D468AC2722045500D4E12B /* splash.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		04D468B127220A1300D4E12B /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				04D468B42722119500D4E12B /* splashEnd.mp3 */,
+			);
+			path = SFX;
 			sourceTree = "<group>";
 		};
 		7D9822F46CDF333670A457B4 /* Klasik */ = {
@@ -634,6 +653,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D468B52722119500D4E12B /* splashEnd.mp3 in Resources */,
 				B865888D2716CEA000FC0CBB /* Localizables.strings in Resources */,
 				B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */,
 				51B5E9195F941942BF41060D /* Klasik-Regular.otf in Resources */,
