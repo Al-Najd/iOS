@@ -12,7 +12,7 @@ struct PButton: View {
   var action: VoidCallback
   var title: String
   var icon: Image? = nil
-  var color: Color = .primary1.default
+  var color: Color = .secondary1.dark
   var body: some View {
     Button(action: action, label: {
       HStack {
@@ -24,7 +24,7 @@ struct PButton: View {
           .padding(.vertical, .p16)
       }
       .background(color)
-      .cornerRadius(.p16)
+      .cornerRadius(.p8)
     })
   }
 }

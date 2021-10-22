@@ -20,12 +20,22 @@ struct The_OneApp: App {
   
   init() {
     plugins.forEach { $0.setup() }
+    for family in UIFont.familyNames {
+
+      let sName: String = family as String
+      print("family: \(sName)")
+                
+      for name in UIFont.fontNames(forFamilyName: sName) {
+        print("name: \(name as String)")
+      }
+    }
   }
   
   var body: some Scene {
     WindowGroup {
       OnboardingView()
         .environmentObject(app.state)
+        .environmentObject(app.state.onboardingState)
     }
   }
 }
@@ -37,6 +47,8 @@ final class AppState: ObservableObject {
   
   @Published var accumlatedRewards: [Deed] = []
   @Published var showBuffs: Bool = false
+  
+  @Published var onboardingState: OnboardingState = .init()
 }
 
 final class AppService {
@@ -55,6 +67,8 @@ final class AppService {
     deed.isDone = true
     updateState(deed: deed)
     state.accumlatedRewards.append(deed)
+    MusicService.main.start(effect: .splashEnd)
+    HapticService.main.generate(feedback: .success)
   }
   
   private func undo(deed: Deed) {

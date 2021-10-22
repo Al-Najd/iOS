@@ -10,14 +10,6 @@ import Foundation
 public extension String {
   static let empty = ""
   
-  /// SwifterSwift: Returns a localized string, with an optional comment for translators.
-  ///
-  ///        "Hello world".localized -> Hallo Welt
-  ///
-  func localized(comment: String = "") -> String {
-      return NSLocalizedString(self, comment: comment)
-  }
-  
   func toURL() -> URL? {
     URL(string: self)
   }
@@ -27,7 +19,17 @@ public extension String {
   }
   
   func matches(_ regex: String) -> Bool {
-      return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+  }
+}
+
+extension String {
+  /// SwifterSwift: Returns a localized string, with an optional comment for translators.
+  ///
+  ///        "Hello world".localized -> Hallo Welt
+  ///
+  var localized: String {
+    return NSLocalizedString(self, tableName: "Localizables", bundle: .main, comment: "")
   }
 }
 
@@ -52,19 +54,19 @@ public extension String {
   var trimCardNumber: String {
     return self.replacingOccurrences(of: "*", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
   }
-
+  
   func replacingOccurrences(with this: [String]) -> String {
     var value = self
     this.forEach { value = value.replacingOccurrences(of: $0, with: "") }
     return value
   }
-
+  
   var trimPhoneNumber: String {
     return
-      self.replacingOccurrences(of: "(", with: "")
+    self.replacingOccurrences(of: "(", with: "")
       .replacingOccurrences(of: ")", with: "")
       .replacingOccurrences(of: "-", with: "")
-        .replacingOccurrences(of: " ", with: "")
+      .replacingOccurrences(of: " ", with: "")
       .trimmingCharacters(in: .whitespacesAndNewlines)
   }
 }

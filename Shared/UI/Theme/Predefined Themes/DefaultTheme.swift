@@ -31,9 +31,10 @@ public struct DefaultTheme: Theme {
     do {
       let data = try Data(contentsOf: url)
       let configs = try JSONDecoder().decode(ConfigFonts.self, from: data)
+      
       return FontManager(
         configuration: FontManager.Configuration(
-          fontsLocale: configs.defaultConfigurations.sdkFriendlyLocale(),
+          fontsLocale: LocalizationService.getCurrentLocale(),
           fontsType: configs.defaultConfigurations.sdkFriendlyType(),
           availableFonts: configs.fonts.map { $0.toSDKFont() }
         )

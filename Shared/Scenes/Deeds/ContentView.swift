@@ -11,9 +11,7 @@ struct ContentView: View {
   @EnvironmentObject var state: AppState
   var body: some View {
     ZStack {
-      Color
-        .mono
-        .background
+      Color("splash")
         .ignoresSafeArea()
       VStack {
         BuffCardView()
@@ -60,7 +58,7 @@ struct DeedsList: View {
   var body: some View {
     Section(sectionTitle) {
       if allDeedsAreDone {
-        Text("Well Done! You did All of the \(sectionTitle)s".localized())
+        Text("Well Done! You did All of the \(sectionTitle)s".localized)
           .foregroundColor(.mono.offwhite)
           .listRowBackground(Color.success.default)
       } else {
@@ -104,13 +102,13 @@ struct BuffCardView: View {
   var body: some View {
     VStack {
       if state.accumlatedRewards.isEmpty {
-        Text("A day full of blessings is awaiting your deeds!".localized())
+        Text("A day full of blessings is awaiting your deeds!".localized)
           .multilineTextAlignment(.center)
           .font(.pLargeTitle)
           .foregroundColor(.mono.offwhite)
           .padding(.bottom, .p8)
       } else {
-        Text("Latest Reward".localized())
+        Text("Latest Reward".localized)
           .multilineTextAlignment(.center)
           .font(.pHeadline)
           .foregroundColor(.success.light)
@@ -122,7 +120,7 @@ struct BuffCardView: View {
           .padding(.bottom, .p8)
       
         if state.accumlatedRewards.count > 2 {
-          Text("And \(state.accumlatedRewards.count - 1) other blessings and Buffs...".localized())
+          Text("And \(state.accumlatedRewards.count - 1) other blessings and Buffs...".localized)
             .multilineTextAlignment(.center)
             .font(.pBody)
             .foregroundColor(.success.light)
@@ -133,7 +131,7 @@ struct BuffCardView: View {
     .padding()
     .background(
       RoundedRectangle(cornerRadius: .r16)
-        .foregroundColor(.primary1.default)
+        .foregroundColor(.secondary1.default)
         .shadow(radius: .r12)
     )
     .padding(.p16)

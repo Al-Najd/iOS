@@ -18,11 +18,18 @@
 		04D468AD2722045600D4E12B /* splash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468AC2722045500D4E12B /* splash.mp3 */; };
 		04D468AF272204AB00D4E12B /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468AE272204AB00D4E12B /* MusicService.swift */; };
 		04D468B52722119500D4E12B /* splashEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468B42722119500D4E12B /* splashEnd.mp3 */; };
+		04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468B627222AF800D4E12B /* LocalizationService.swift */; };
+		04D468BC2722318400D4E12B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BB2722318400D4E12B /* SplashView.swift */; };
+		04D468BD2722318400D4E12B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BB2722318400D4E12B /* SplashView.swift */; };
+		04D468BF2722354000D4E12B /* OnboardingSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */; };
+		04D468C02722354000D4E12B /* OnboardingSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */; };
+		04D468C8272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
+		04D468C9272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
-		154E0EFA50C42A9AFCE2B64C /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E31E1E679483FBB62C183F2 /* fonts.json */; };
-		46C0C0D74098B3451E6DEF46 /* Vibes-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */; };
-		51B5E9195F941942BF41060D /* Klasik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */; };
+		19708B40548DBB6DE5E444D2 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2374C8CC8A25D133E918697E /* fonts.json */; };
+		5BBDA7884FC28BA77DAF8FCB /* Klasik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */; };
+		A9D7F721CADCFF4F57E14F43 /* Vibes-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588322716CC5500FC0CBB /* The_OneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* The_OneApp.swift */; };
@@ -116,10 +123,15 @@
 		04D468AC2722045500D4E12B /* splash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splash.mp3; sourceTree = "<group>"; };
 		04D468AE272204AB00D4E12B /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		04D468B42722119500D4E12B /* splashEnd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashEnd.mp3; sourceTree = "<group>"; };
+		04D468B627222AF800D4E12B /* LocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationService.swift; sourceTree = "<group>"; };
+		04D468BB2722318400D4E12B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSliderContainer.swift; sourceTree = "<group>"; };
+		04D468C7272250F600D4E12B /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
-		1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Vibes-Regular.ttf"; path = "Vibes/Vibes-Regular.ttf"; sourceTree = "<group>"; };
-		2E31E1E679483FBB62C183F2 /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
+		2374C8CC8A25D133E918697E /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
+		3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Vibes-Regular.ttf"; path = "Vibes/Vibes-Regular.ttf"; sourceTree = "<group>"; };
 		73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
+		7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* The_OneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_OneApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -164,6 +176,7 @@
 		B86588B02716DC2D00FC0CBB /* ThemePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		B88BECF92716E1BB00BC362A /* AppearancePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
 		B88BECFD2716F08000BC362A /* Deed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deed.swift; sourceTree = "<group>"; };
+		ED1394907FAA42EB2EC37AE3 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +245,8 @@
 				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
 				04D468A12721986100D4E12B /* NetworkService.swift */,
 				04D468AE272204AB00D4E12B /* MusicService.swift */,
+				04D468B627222AF800D4E12B /* LocalizationService.swift */,
+				04D468C7272250F600D4E12B /* HapticService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -240,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				04D468A42721C3F300D4E12B /* OnboardingView.swift */,
+				04D468BB2722318400D4E12B /* SplashView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -250,6 +266,8 @@
 				B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */,
 				B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */,
 				73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */,
+				9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */,
+				ED1394907FAA42EB2EC37AE3 /* Klasik-Regular.otf */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -279,20 +297,12 @@
 			path = SFX;
 			sourceTree = "<group>";
 		};
-		7D9822F46CDF333670A457B4 /* Klasik */ = {
+		48AE65BE6F9834EECCFB9193 /* Klasik */ = {
 			isa = PBXGroup;
 			children = (
-				9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */,
+				7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */,
 			);
 			name = Klasik;
-			sourceTree = "<group>";
-		};
-		7DC527CF303B3A1CBBF4F949 /* Vibes */ = {
-			isa = PBXGroup;
-			children = (
-				1327B22E227C29477EB1CDBF /* Vibes-Regular.ttf */,
-			);
-			name = Vibes;
 			sourceTree = "<group>";
 		};
 		B86588032716CC5200FC0CBB = {
@@ -434,7 +444,7 @@
 				B86588572716CEA000FC0CBB /* FontConfig.swift */,
 				B86588582716CEA000FC0CBB /* Fonts.swift */,
 				B865885A2716CEA000FC0CBB /* Families */,
-				2E31E1E679483FBB62C183F2 /* fonts.json */,
+				2374C8CC8A25D133E918697E /* fonts.json */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -442,8 +452,8 @@
 		B865885A2716CEA000FC0CBB /* Families */ = {
 			isa = PBXGroup;
 			children = (
-				7D9822F46CDF333670A457B4 /* Klasik */,
-				7DC527CF303B3A1CBBF4F949 /* Vibes */,
+				48AE65BE6F9834EECCFB9193 /* Klasik */,
+				F4F1AA6CAD01E0A603A6754F /* Vibes */,
 			);
 			path = Families;
 			sourceTree = "<group>";
@@ -453,6 +463,7 @@
 			children = (
 				B86588622716CEA000FC0CBB /* PButton.swift */,
 				B86588632716CEA000FC0CBB /* VisualEffectView.swift */,
+				04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -518,6 +529,14 @@
 				04B31892271CAD220088F527 /* Data Models */,
 			);
 			path = Business;
+			sourceTree = "<group>";
+		};
+		F4F1AA6CAD01E0A603A6754F /* Vibes */ = {
+			isa = PBXGroup;
+			children = (
+				3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */,
+			);
+			name = Vibes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -656,10 +675,10 @@
 				04D468B52722119500D4E12B /* splashEnd.mp3 in Resources */,
 				B865888D2716CEA000FC0CBB /* Localizables.strings in Resources */,
 				B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */,
-				51B5E9195F941942BF41060D /* Klasik-Regular.otf in Resources */,
 				04D468AD2722045600D4E12B /* splash.mp3 in Resources */,
-				46C0C0D74098B3451E6DEF46 /* Vibes-Regular.ttf in Resources */,
-				154E0EFA50C42A9AFCE2B64C /* fonts.json in Resources */,
+				5BBDA7884FC28BA77DAF8FCB /* Klasik-Regular.otf in Resources */,
+				A9D7F721CADCFF4F57E14F43 /* Vibes-Regular.ttf in Resources */,
+				19708B40548DBB6DE5E444D2 /* fonts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +717,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D468BF2722354000D4E12B /* OnboardingSliderContainer.swift in Sources */,
 				04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */,
 				B86588772716CEA000FC0CBB /* Theme.swift in Sources */,
 				B86588A42716CEEC00FC0CBB /* String+Extensions.swift in Sources */,
@@ -715,10 +735,13 @@
 				B88BECFA2716E1BB00BC362A /* AppearancePlugin.swift in Sources */,
 				04D468AF272204AB00D4E12B /* MusicService.swift in Sources */,
 				B865888F2716CEA000FC0CBB /* Language.swift in Sources */,
+				04D468C8272250F600D4E12B /* HapticService.swift in Sources */,
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
+				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
+				04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
 				04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */,
 				B865889E2716CEEC00FC0CBB /* Then.swift in Sources */,
@@ -745,6 +768,7 @@
 				B86588AF2716DC1600FC0CBB /* CorePlugin.swift in Sources */,
 				B86588AC2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
 				B865888A2716CEA000FC0CBB /* PButton.swift in Sources */,
+				04D468C9272250F600D4E12B /* HapticService.swift in Sources */,
 				B86588352716CC5500FC0CBB /* ContentView.swift in Sources */,
 				B865886E2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				B86588742716CEA000FC0CBB /* Palettes.swift in Sources */,
@@ -756,7 +780,9 @@
 				B86588B22716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */,
 				B86588702716CEA000FC0CBB /* Shadow.swift in Sources */,
+				04D468BD2722318400D4E12B /* SplashView.swift in Sources */,
 				B865889F2716CEEC00FC0CBB /* Then.swift in Sources */,
+				04D468C02722354000D4E12B /* OnboardingSliderContainer.swift in Sources */,
 				B86588A12716CEEC00FC0CBB /* Aliases.swift in Sources */,
 				B88BECFF2716F08000BC362A /* Deed.swift in Sources */,
 				B865887A2716CEA000FC0CBB /* DefaultTheme.swift in Sources */,

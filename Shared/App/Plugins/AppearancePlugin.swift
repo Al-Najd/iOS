@@ -22,5 +22,7 @@ private extension AppearancesPlugin {
     UISegmentedControl.appearance().backgroundColor = UIColor(.mono.input)
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.mono.offblack)], for: .selected)
     UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.mono.offblack)], for: .normal)
+    
+    UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.secondary3.default)
   }
 }
