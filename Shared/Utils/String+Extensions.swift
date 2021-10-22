@@ -62,8 +62,7 @@ public extension String {
   }
   
   var trimPhoneNumber: String {
-    return
-    self.replacingOccurrences(of: "(", with: "")
+    return self.replacingOccurrences(of: "(", with: "")
       .replacingOccurrences(of: ")", with: "")
       .replacingOccurrences(of: "-", with: "")
       .replacingOccurrences(of: " ", with: "")

@@ -34,12 +34,7 @@ end
 
 platform :ios do
   before_all do
-    ENV["SLACK_URL"] = configs.slack.slack_url
-
-    # Gather Secrets from Github if present
-    ENV["FASTLANE_USER"] = ENV["GH_FASTLANE_USER"] || ENV["FASTLANE_USER"]
-    ENV["FASTLANE_PASSWORD"] = ENV["GH_FASTLANE_PASSWORD"] || ENV["FASTLANE_PASSWORD"]
-    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = ENV["GH_FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] || ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"]
+    
   end
   
   lane :beta do 
