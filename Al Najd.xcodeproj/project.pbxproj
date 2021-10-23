@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0437E4C32723774A005B9B46 /* PulseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C22723774A005B9B46 /* PulseService.swift */; };
+		0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C427244FBE005B9B46 /* ReportPlugin.swift */; };
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
@@ -119,6 +120,7 @@
 
 /* Begin PBXFileReference section */
 		0437E4C22723774A005B9B46 /* PulseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseService.swift; sourceTree = "<group>"; };
+		0437E4C427244FBE005B9B46 /* ReportPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPlugin.swift; sourceTree = "<group>"; };
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				B86588AD2716DC1600FC0CBB /* CorePlugin.swift */,
 				B86588B02716DC2D00FC0CBB /* ThemePlugin.swift */,
 				B88BECF92716E1BB00BC362A /* AppearancePlugin.swift */,
+				0437E4C427244FBE005B9B46 /* ReportPlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				B865888F2716CEA000FC0CBB /* Language.swift in Sources */,
 				04D468C8272250F600D4E12B /* HapticService.swift in Sources */,
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
+				0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,

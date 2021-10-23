@@ -15,20 +15,12 @@ struct AlNajdApp: App {
       ThemePlugin(),
       CorePlugin(),
       AppearancesPlugin(),
+      ReportPlugin(),
     ]
   }
   
   init() {
     plugins.forEach { $0.setup() }
-    for family in UIFont.familyNames {
-
-      let sName: String = family as String
-      print("family: \(sName)")
-                
-      for name in UIFont.fontNames(forFamilyName: sName) {
-        print("name: \(name as String)")
-      }
-    }
   }
   
   var body: some Scene {

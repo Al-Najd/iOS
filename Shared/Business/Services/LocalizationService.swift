@@ -10,8 +10,8 @@ import Foundation
 class LocalizationService {
   static func getCurrentLocale() -> FontLocale {
     switch Locale.preferredLanguages[0] {
-    case "ar": return .arabic
-    case "en": return .english
+    case let str where str.contains("ar"): return .arabic
+    case let str where str.contains("en"): return .english
     default: return .arabic
     }
   }
