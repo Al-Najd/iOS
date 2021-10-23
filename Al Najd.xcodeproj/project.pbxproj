@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0437E4C32723774A005B9B46 /* PulseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C22723774A005B9B46 /* PulseService.swift */; };
 		0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C427244FBE005B9B46 /* ReportPlugin.swift */; };
+		0437E4C7272452FB005B9B46 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C6272452FB005B9B46 /* OnboardingCoordinator.swift */; };
+		0437E4C9272457D1005B9B46 /* OnboardingFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C8272457D1005B9B46 /* OnboardingFirstView.swift */; };
+		0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */; };
+		0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */; };
+		0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4D027245817005B9B46 /* OnboardingForthView.swift */; };
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
@@ -121,6 +126,11 @@
 /* Begin PBXFileReference section */
 		0437E4C22723774A005B9B46 /* PulseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseService.swift; sourceTree = "<group>"; };
 		0437E4C427244FBE005B9B46 /* ReportPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPlugin.swift; sourceTree = "<group>"; };
+		0437E4C6272452FB005B9B46 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		0437E4C8272457D1005B9B46 /* OnboardingFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstView.swift; sourceTree = "<group>"; };
+		0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondView.swift; sourceTree = "<group>"; };
+		0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdView.swift; sourceTree = "<group>"; };
+		0437E4D027245817005B9B46 /* OnboardingForthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthView.swift; sourceTree = "<group>"; };
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -267,6 +277,11 @@
 			children = (
 				04D468A42721C3F300D4E12B /* OnboardingView.swift */,
 				04D468BB2722318400D4E12B /* SplashView.swift */,
+				0437E4C6272452FB005B9B46 /* OnboardingCoordinator.swift */,
+				0437E4C8272457D1005B9B46 /* OnboardingFirstView.swift */,
+				0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */,
+				0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */,
+				0437E4D027245817005B9B46 /* OnboardingForthView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -336,7 +351,7 @@
 			children = (
 				04D468AB2722044200D4E12B /* Media */,
 				B86588A82716DBF900FC0CBB /* App */,
-				B86588922716CEDA00FC0CBB /* Scenes */,
+				B86588922716CEDA00FC0CBB /* Modules */,
 				B88BECFC2716F05A00BC362A /* Business */,
 				B86588472716CEA000FC0CBB /* UI */,
 				B86588642716CEA000FC0CBB /* Localization */,
@@ -503,14 +518,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		B86588922716CEDA00FC0CBB /* Scenes */ = {
+		B86588922716CEDA00FC0CBB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				04D468A32721987800D4E12B /* Onboarding */,
 				04B31894271CAD3F0088F527 /* Rewards */,
 				04B31893271CAD380088F527 /* Deeds */,
 			);
-			path = Scenes;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		B86588A82716DBF900FC0CBB /* App */ = {
@@ -741,6 +756,7 @@
 				B86588892716CEA000FC0CBB /* PButton.swift in Sources */,
 				B86588342716CC5500FC0CBB /* ContentView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
+				0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */,
 				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
 				04D468A22721986100D4E12B /* NetworkService.swift in Sources */,
 				04B31898271CAE840088F527 /* ReminderService.swift in Sources */,
@@ -753,20 +769,24 @@
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
 				0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
+				0437E4C7272452FB005B9B46 /* OnboardingCoordinator.swift in Sources */,
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
 				04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
+				0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */,
 				04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */,
 				B865889E2716CEEC00FC0CBB /* Then.swift in Sources */,
 				B86588A02716CEEC00FC0CBB /* Aliases.swift in Sources */,
 				B88BECFE2716F08000BC362A /* Deed.swift in Sources */,
+				0437E4C9272457D1005B9B46 /* OnboardingFirstView.swift in Sources */,
 				B86588792716CEA000FC0CBB /* DefaultTheme.swift in Sources */,
 				B865887B2716CEA000FC0CBB /* FontConfig.swift in Sources */,
 				B865888B2716CEA000FC0CBB /* VisualEffectView.swift in Sources */,
 				B86588712716CEA000FC0CBB /* Palette.swift in Sources */,
 				B86588A22716CEEC00FC0CBB /* ServiceLocator.swift in Sources */,
+				0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */,
 				04D468CE2722D6A100D4E12B /* SentryService.swift in Sources */,
 				B86588752716CEA000FC0CBB /* Colorable.swift in Sources */,
 				B86588692716CEA000FC0CBB /* Metrics.swift in Sources */,
