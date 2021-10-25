@@ -21,7 +21,7 @@ public final class PulseService {
 public final class PulseLogger: LogEngine {
   public static let main: PulseLogger = .init()
   
-  private let logger = Logger(label: "com.yourcompany.yourapp")
+  private let logger = Logger(label: "com.com.nerdor.theone.The-One")
   private init() { }
   
   public func info(message: String) {

@@ -42,9 +42,9 @@ public struct LoggersManager {
     [
       PulseLogger.main,
       SystemLogger.main,
-//      SentryService.main.logEngine
+      SentryService.main.logEngine
     ]
-//      .compactMap { $0 }
+      .compactMap { $0 }
   }
   
   public static func info(_ message: String) {

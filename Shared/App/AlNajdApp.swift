@@ -28,19 +28,14 @@ struct AlNajdApp: App {
       OnboardingCoordinatorView()
         .environmentObject(app.state)
         .environmentObject(app.state.onboardingState)
+        .environmentObject(app.state.homeState)
     }
   }
 }
 
 final class AppState: ObservableObject {
-  @Published var sunnah: [Deed] = .sunnah
-  @Published var faraaid: [Deed] = .faraaid
-  @Published var nafila: [Deed] = .nafila
-  
-  @Published var accumlatedRewards: [Deed] = []
-  @Published var showBuffs: Bool = false
-  
   @Published var onboardingState: OnboardingState = .init()
+  @Published var homeState: HomeState = .init()
 }
 
 final class AppService {
@@ -51,14 +46,14 @@ final class AppService {
   }
   
   var canShowBuffs: Bool {
-    state.accumlatedRewards.isEmpty == false
+    state.homeState.accumlatedRewards.isEmpty == false
   }
   
   private func did(deed: Deed) {
     var deed = deed
     deed.isDone = true
     updateState(deed: deed)
-    state.accumlatedRewards.append(deed)
+    state.homeState.accumlatedRewards.append(deed)
     MusicService.main.start(effect: .splashEnd)
     HapticService.main.generate(feedback: .success)
   }
@@ -67,18 +62,18 @@ final class AppService {
     var deed = deed
     deed.isDone = false
     updateState(deed: deed)
-    state.accumlatedRewards.findAndRemove(deed)
+    state.homeState.accumlatedRewards.findAndRemove(deed)
     HapticService.main.generate(feedback: .warning)
   }
   
   private func updateState(deed: Deed) {
     switch deed.category {
     case .fard:
-      state.faraaid.findAndReplace(with: deed)
+      state.homeState.faraaid.findAndReplace(with: deed)
     case .sunnah:
-      state.sunnah.findAndReplace(with: deed)
+      state.homeState.sunnah.findAndReplace(with: deed)
     case .nafila:
-      state.nafila.findAndReplace(with: deed)
+      state.homeState.nafila.findAndReplace(with: deed)
     }
   }
 }

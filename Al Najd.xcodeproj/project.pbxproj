@@ -14,6 +14,11 @@
 		0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */; };
 		0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */; };
 		0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4D027245817005B9B46 /* OnboardingForthView.swift */; };
+		045516E32725B22900F4751B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 045516E22725B22900F4751B /* Sentry */; };
+		045516E72725B3D500F4751B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E62725B3D500F4751B /* MainCoordinator.swift */; };
+		045516E92725B55400F4751B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E82725B55400F4751B /* HomeService.swift */; };
+		045516EC2725B98F00F4751B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516EB2725B98F00F4751B /* SettingsView.swift */; };
+		045516EE27260E5E00F4751B /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516ED27260E5E00F4751B /* TimerService.swift */; };
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
@@ -43,8 +48,8 @@
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588322716CC5500FC0CBB /* AlNajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* AlNajdApp.swift */; };
 		B86588332716CC5500FC0CBB /* AlNajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* AlNajdApp.swift */; };
-		B86588342716CC5500FC0CBB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* ContentView.swift */; };
-		B86588352716CC5500FC0CBB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* ContentView.swift */; };
+		B86588342716CC5500FC0CBB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* HomeView.swift */; };
+		B86588352716CC5500FC0CBB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* HomeView.swift */; };
 		B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865880B2716CC5500FC0CBB /* Assets.xcassets */; };
 		B86588372716CC5500FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865880B2716CC5500FC0CBB /* Assets.xcassets */; };
 		B86588692716CEA000FC0CBB /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588492716CEA000FC0CBB /* Metrics.swift */; };
@@ -131,6 +136,10 @@
 		0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondView.swift; sourceTree = "<group>"; };
 		0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdView.swift; sourceTree = "<group>"; };
 		0437E4D027245817005B9B46 /* OnboardingForthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthView.swift; sourceTree = "<group>"; };
+		045516E62725B3D500F4751B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		045516E82725B55400F4751B /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		045516EB2725B98F00F4751B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		045516ED27260E5E00F4751B /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -152,7 +161,7 @@
 		7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* AlNajdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlNajdApp.swift; sourceTree = "<group>"; };
-		B865880A2716CC5200FC0CBB /* ContentView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B865880A2716CC5200FC0CBB /* HomeView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B865880B2716CC5500FC0CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86588132716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -205,6 +214,7 @@
 				04B31891271C6BE90088F527 /* PulseUI in Frameworks */,
 				04B3188D271C6BE90088F527 /* Pulse in Frameworks */,
 				04B3188F271C6BE90088F527 /* PulseCore in Frameworks */,
+				045516E32725B22900F4751B /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,20 +242,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		045516E42725B3BB00F4751B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B865880A2716CC5200FC0CBB /* HomeView.swift */,
+				045516E82725B55400F4751B /* HomeService.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		045516E52725B3C700F4751B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				045516E62725B3D500F4751B /* MainCoordinator.swift */,
+				045516E42725B3BB00F4751B /* Home */,
+				04B31894271CAD3F0088F527 /* Rewards */,
+				045516EA2725B98900F4751B /* Settings */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		045516EA2725B98900F4751B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				045516EB2725B98F00F4751B /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		04B31892271CAD220088F527 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
 				B88BECFD2716F08000BC362A /* Deed.swift */,
 			);
 			path = "Data Models";
-			sourceTree = "<group>";
-		};
-		04B31893271CAD380088F527 /* Deeds */ = {
-			isa = PBXGroup;
-			children = (
-				B865880A2716CC5200FC0CBB /* ContentView.swift */,
-			);
-			path = Deeds;
 			sourceTree = "<group>";
 		};
 		04B31894271CAD3F0088F527 /* Rewards */ = {
@@ -268,6 +298,7 @@
 				04D468C7272250F600D4E12B /* HapticService.swift */,
 				04D468CA2722D55500D4E12B /* LogService.swift */,
 				0437E4C22723774A005B9B46 /* PulseService.swift */,
+				045516ED27260E5E00F4751B /* TimerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -521,9 +552,8 @@
 		B86588922716CEDA00FC0CBB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				045516E52725B3C700F4751B /* Main */,
 				04D468A32721987800D4E12B /* Onboarding */,
-				04B31894271CAD3F0088F527 /* Rewards */,
-				04B31893271CAD380088F527 /* Deeds */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -586,6 +616,7 @@
 				04B3188C271C6BE90088F527 /* Pulse */,
 				04B3188E271C6BE90088F527 /* PulseCore */,
 				04B31890271C6BE90088F527 /* PulseUI */,
+				045516E22725B22900F4751B /* Sentry */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -681,6 +712,7 @@
 			mainGroup = B86588032716CC5200FC0CBB;
 			packageReferences = (
 				04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */,
+				045516E12725B22900F4751B /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -754,17 +786,20 @@
 				B86588AE2716DC1600FC0CBB /* CorePlugin.swift in Sources */,
 				B86588AB2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
 				B86588892716CEA000FC0CBB /* PButton.swift in Sources */,
-				B86588342716CC5500FC0CBB /* ContentView.swift in Sources */,
+				B86588342716CC5500FC0CBB /* HomeView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
+				045516EE27260E5E00F4751B /* TimerService.swift in Sources */,
 				0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */,
 				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
 				04D468A22721986100D4E12B /* NetworkService.swift in Sources */,
+				045516EC2725B98F00F4751B /* SettingsView.swift in Sources */,
 				04B31898271CAE840088F527 /* ReminderService.swift in Sources */,
 				B86588732716CEA000FC0CBB /* Palettes.swift in Sources */,
 				B865887D2716CEA000FC0CBB /* Fonts.swift in Sources */,
 				B88BECFA2716E1BB00BC362A /* AppearancePlugin.swift in Sources */,
 				04D468AF272204AB00D4E12B /* MusicService.swift in Sources */,
 				B865888F2716CEA000FC0CBB /* Language.swift in Sources */,
+				045516E92725B55400F4751B /* HomeService.swift in Sources */,
 				04D468C8272250F600D4E12B /* HapticService.swift in Sources */,
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
 				0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */,
@@ -773,6 +808,7 @@
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
+				045516E72725B3D500F4751B /* MainCoordinator.swift in Sources */,
 				04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
 				0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */,
@@ -805,7 +841,7 @@
 				B86588AC2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
 				B865888A2716CEA000FC0CBB /* PButton.swift in Sources */,
 				04D468C9272250F600D4E12B /* HapticService.swift in Sources */,
-				B86588352716CC5500FC0CBB /* ContentView.swift in Sources */,
+				B86588352716CC5500FC0CBB /* HomeView.swift in Sources */,
 				B865886E2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				B86588742716CEA000FC0CBB /* Palettes.swift in Sources */,
 				B865887E2716CEA000FC0CBB /* Fonts.swift in Sources */,
@@ -1228,6 +1264,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		045516E12725B22900F4751B /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 7.4.0;
+			};
+		};
 		04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Pulse";
@@ -1239,6 +1283,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		045516E22725B22900F4751B /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045516E12725B22900F4751B /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
 		04B3188C271C6BE90088F527 /* Pulse */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
