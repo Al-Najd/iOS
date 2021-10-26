@@ -15,7 +15,7 @@
 		0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */; };
 		0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4D027245817005B9B46 /* OnboardingForthView.swift */; };
 		045516E32725B22900F4751B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 045516E22725B22900F4751B /* Sentry */; };
-		045516E72725B3D500F4751B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E62725B3D500F4751B /* MainCoordinator.swift */; };
+		045516E72725B3D500F4751B /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E62725B3D500F4751B /* MainCoordinatorView.swift */; };
 		045516E92725B55400F4751B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E82725B55400F4751B /* HomeService.swift */; };
 		045516EC2725B98F00F4751B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516EB2725B98F00F4751B /* SettingsView.swift */; };
 		045516EE27260E5E00F4751B /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516ED27260E5E00F4751B /* TimerService.swift */; };
@@ -39,6 +39,8 @@
 		04D468C9272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
 		04D468CB2722D55500D4E12B /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468CA2722D55500D4E12B /* LogService.swift */; };
 		04D468CE2722D6A100D4E12B /* SentryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468CD2722D6A100D4E12B /* SentryService.swift */; };
+		04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329127274F3D00E1B192 /* TabBarView.swift */; };
+		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		19708B40548DBB6DE5E444D2 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2374C8CC8A25D133E918697E /* fonts.json */; };
@@ -136,7 +138,7 @@
 		0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondView.swift; sourceTree = "<group>"; };
 		0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdView.swift; sourceTree = "<group>"; };
 		0437E4D027245817005B9B46 /* OnboardingForthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthView.swift; sourceTree = "<group>"; };
-		045516E62725B3D500F4751B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		045516E62725B3D500F4751B /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
 		045516E82725B55400F4751B /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		045516EB2725B98F00F4751B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		045516ED27260E5E00F4751B /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
@@ -154,6 +156,8 @@
 		04D468C7272250F600D4E12B /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		04D468CA2722D55500D4E12B /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
 		04D468CD2722D6A100D4E12B /* SentryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryService.swift; sourceTree = "<group>"; };
+		04E2329127274F3D00E1B192 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		04E2329327277A0000E1B192 /* StopWatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		2374C8CC8A25D133E918697E /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
 		3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Vibes-Regular.ttf"; path = "Vibes/Vibes-Regular.ttf"; sourceTree = "<group>"; };
@@ -254,7 +258,8 @@
 		045516E52725B3C700F4751B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				045516E62725B3D500F4751B /* MainCoordinator.swift */,
+				04E2328A27274DB800E1B192 /* TabBar */,
+				045516E62725B3D500F4751B /* MainCoordinatorView.swift */,
 				045516E42725B3BB00F4751B /* Home */,
 				04B31894271CAD3F0088F527 /* Rewards */,
 				045516EA2725B98900F4751B /* Settings */,
@@ -299,6 +304,7 @@
 				04D468CA2722D55500D4E12B /* LogService.swift */,
 				0437E4C22723774A005B9B46 /* PulseService.swift */,
 				045516ED27260E5E00F4751B /* TimerService.swift */,
+				04E2329327277A0000E1B192 /* StopWatchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -352,6 +358,14 @@
 				04D468B42722119500D4E12B /* splashEnd.mp3 */,
 			);
 			path = SFX;
+			sourceTree = "<group>";
+		};
+		04E2328A27274DB800E1B192 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				04E2329127274F3D00E1B192 /* TabBarView.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		48AE65BE6F9834EECCFB9193 /* Klasik */ = {
@@ -778,6 +792,7 @@
 			files = (
 				04D468BF2722354000D4E12B /* OnboardingSliderContainer.swift in Sources */,
 				04D468CB2722D55500D4E12B /* LogService.swift in Sources */,
+				04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */,
 				04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */,
 				B86588772716CEA000FC0CBB /* Theme.swift in Sources */,
 				B86588A42716CEEC00FC0CBB /* String+Extensions.swift in Sources */,
@@ -808,7 +823,7 @@
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
-				045516E72725B3D500F4751B /* MainCoordinator.swift in Sources */,
+				045516E72725B3D500F4751B /* MainCoordinatorView.swift in Sources */,
 				04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
 				0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */,
@@ -825,6 +840,7 @@
 				0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */,
 				04D468CE2722D6A100D4E12B /* SentryService.swift in Sources */,
 				B86588752716CEA000FC0CBB /* Colorable.swift in Sources */,
+				04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */,
 				B86588692716CEA000FC0CBB /* Metrics.swift in Sources */,
 				B86588322716CC5500FC0CBB /* AlNajdApp.swift in Sources */,
 			);
@@ -1031,7 +1047,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1055,7 +1071,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;

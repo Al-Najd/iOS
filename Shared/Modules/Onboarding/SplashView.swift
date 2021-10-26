@@ -55,7 +55,7 @@ struct SplashView: View {
   }
   
   func setupInitialAnimations(then nextAction: @escaping VoidCallback) {
-    MusicService.main.start(track: .splash)
+    MusicService.main.start(track: .splash, repeats: true)
     
     withAnimation(.spring().speed(0.25)) {
       state.scaleValue = 1.2

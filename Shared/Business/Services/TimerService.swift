@@ -5,6 +5,7 @@
 //  Created by Ahmed Ramy on 24/10/2021.
 //
 
+import Combine
 import Foundation
 
 public protocol TimerServiceProtocol: Service {
@@ -14,57 +15,36 @@ public protocol TimerServiceProtocol: Service {
 }
 
 public final class TimerService: NSObject {
-
-  private var timer: Timer?
-  private var currentDate: Date?
-  private var timerTickHandler: Callback<Double>?
-  private var finishHandler: VoidCallback?
-
-  private var isTimerEnd: Bool { remaininSeconds <= .zero }
-  private let calendar = Calendar.autoupdatingCurrent
-
-  private var remaininSeconds: Double {
-    guard let currentDate = currentDate else { return 0 }
-    return Double(currentDate.timeIntervalSince(Date()))
+  public var didTimerEnd: Bool { remainingSeconds <= 0 }
+  private var initialDate: Date = .now
+  private var currentDate: Date = .now
+  private var targetDate: Date = .now
+  private var timer = Timer.publish(every: 0.01, on: .current, in: .common).autoconnect()
+  private var cancellables: Set<AnyCancellable> = []
+  private var duration: Double {
+    self.targetDate.secondsSince(self.initialDate)
+  }
+  
+  private var remainingSeconds: Double {
+    return targetDate.secondsSince(currentDate)
   }
 
+  init(seconds: TimeInterval) {
+    targetDate = .now.addingTimeInterval(seconds)
+  }
 }
 
 // MARK: - Public API
 public extension TimerService {
-
-  func setTime(in seconds: TimeInterval) {
-    currentDate = Date().addingTimeInterval(seconds)
-  }
-
-  func start(timerTickHandler: Callback<Double>?, finishHandler: VoidCallback?) {
-    self.timerTickHandler = timerTickHandler
-    self.finishHandler = finishHandler
-
-    timer?.invalidate()
-    timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
-    timer?.fire()
-  }
-
-  func stop() {
-    timer?.invalidate()
-  }
-}
-
-// MARK: - Logic
-private extension TimerService {
-
-  @objc private func timerTick() {
-    guard let timerTickHandler = timerTickHandler else { return }
-    timerTickHandler(remaininSeconds)
-    
-    if isTimerEnd {
-      endTime()
-    }
-  }
-
-  private func endTime() {
-    timer?.invalidate()
-    finishHandler?()
+  func start(progressHandler: @escaping Callback<Double>) {
+    timer.sink { [weak self] currentDate in
+      guard let self = self else { return }
+      self.currentDate = currentDate
+      let progress = min(1, abs(1 - abs((self.remainingSeconds / self.duration))))
+      progressHandler(progress)
+      if self.didTimerEnd {
+        self.timer.upstream.connect().cancel()
+      }
+    }.store(in: &cancellables)
   }
 }

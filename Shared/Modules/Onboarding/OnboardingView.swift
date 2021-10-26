@@ -53,7 +53,7 @@ struct OnboardingView: View {
             .colorScheme(.light)
         }
       }
-    }.fullScreenCover(isPresented: $state.onboardingFinished, content: { MainCoordinator() })
+    }.fullScreenCover(isPresented: $state.onboardingFinished, content: { MainCoordinatorView() })
   }
 }
 

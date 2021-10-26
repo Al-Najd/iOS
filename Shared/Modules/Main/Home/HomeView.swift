@@ -10,13 +10,6 @@ import SwiftUI
 struct HomeView: View {
   @EnvironmentObject var state: HomeState
   var body: some View {
-    ZStack {
-      Color("splash")
-        .ignoresSafeArea()
-      VStack {
-        Spacer()
-        Image("main_background")
-      }.ignoresSafeArea()
       VStack {
         ScrollView {
           BuffCardView()
@@ -41,8 +34,8 @@ struct HomeView: View {
           
           Spacer()
         }
-      }.ignoresSafeArea(.all, edges: .bottom)
-    }.sheet(isPresented: $state.showBuffs, content: { BuffsView() })
+      }.ignoresSafeArea(.all, edges: .vertical)
+      .sheet(isPresented: $state.showBuffs, content: { BuffsView() })
   }
 }
 
@@ -125,8 +118,9 @@ struct BuffCardView: View {
 
 struct DeedRowView: View {
   var deed: Deed
-  var timerService: TimerService = .init()
   @State var progress: CGFloat = 0
+  @State var isPressing: Bool = false
+  @State var duration: CGFloat = 2
   
   var body: some View {
     GeometryReader { geo in
@@ -143,40 +137,61 @@ struct DeedRowView: View {
         .padding(.horizontal, .p32)
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.vertical, .p16)
-        .background(deed.isDone ? Color.primary1.default : Color.primary1.background)
+        .background(
+          RoundedRectangle(cornerRadius: .r16)
+            .fill(Color.primary1.default.opacity(deed.isDone ? 0.3 : 1))
+            .frame(
+              width: (geo.size.width * progress).clamped(to: 0...geo.size.width),
+              alignment: .leading
+            )
+        )
+        .background(deed.isDone ? Color.primary1.default.opacity(0.75) : Color.primary1.background)
         .cornerRadius(.r16)
-        .onLongPressGesture(perform: {
-          timerService.setTime(in: 1)
-          timerService.start(timerTickHandler: { remainingSeconds in
-            withAnimation(.linear(duration: 1)) {
-              progress = max(1, min(0, CGFloat(3 / remainingSeconds)))
+        .onLongPressGesture(minimumDuration: duration) { isPressing in
+          if isPressing {
+            withAnimation(.linear(duration: duration)) {
+              progress = deed.isDone ? 0 : 1
             }
-          }, finishHandler: {
-            withAnimation(.easeInOut(duration: 0.5)) {
-              app.handle(deed: deed)
+            HapticService.main.generateHoldFeedback(for: duration)
+          } else {
+            withAnimation(.linear(duration: duration/2)) {
+              progress = deed.isDone ? 1 : 0
             }
-            MusicService.main.start(effect: .splashEnd)
-          })
-        })
-        .onTapGesture(count: 3, perform: {
-          timerService.setTime(in: 0.5)
-          timerService.start(timerTickHandler: { remainingSeconds in
-            withAnimation(.linear) {
-              progress = min(1, CGFloat(remainingSeconds / 1))
-            }
-          }, finishHandler: {
+            HapticService.main.generateHoldFeedback(for: duration/2)
+          }
+        } perform: {
+          progress = deed.isDone ? 0 : 1
+          HapticService.main.generate(feedback: .success)
+          withAnimation(.easeInOut) {
             app.handle(deed: deed)
             MusicService.main.start(effect: .splashEnd)
-          })
-        })
-        
-        if !deed.isDone {
-          Rectangle()
-            .fill(Color.primary1.default.opacity(0.6))
-            .frame(width: min(geo.size.width, geo.size.width * progress), alignment: .center)
-            .cornerRadius(.r16)
+          }
         }
       }
     }
   }
+}
+
+extension Comparable {
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
+    }
+}
+
+#if swift(<5.1)
+extension Strideable where Stride: SignedInteger {
+    func clamped(to limits: CountableClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
+    }
+}
+#endif
+
+extension Animation {
+    func `repeat`(while expression: Bool, autoreverses: Bool = true) -> Animation {
+        if expression {
+            return self.repeatForever(autoreverses: autoreverses)
+        } else {
+            return self
+        }
+    }
 }

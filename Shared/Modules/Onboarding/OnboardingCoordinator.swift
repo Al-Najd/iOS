@@ -20,7 +20,7 @@ public struct OnboardingCoordinatorView: View {
         })
     } else {
       SplashView()
-        .fullScreenCover(isPresented: .constant(state.startOnboarding && state.onboardingFinished), content: { MainCoordinator() })
+        .fullScreenCover(isPresented: .constant(state.startOnboarding && state.onboardingFinished), content: { MainCoordinatorView() })
     }
   }
 }
