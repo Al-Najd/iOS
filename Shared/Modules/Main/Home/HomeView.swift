@@ -10,31 +10,29 @@ import SwiftUI
 struct HomeView: View {
   @EnvironmentObject var state: HomeState
   var body: some View {
-      VStack {
-        ScrollView {
-          BuffCardView()
-            .onTapGesture {
-              guard app.canShowBuffs else { return }
-              state.showBuffs = true
-            }
-          DeedsList(
-            sectionTitle: "Faraaid",
-            deeds: state.faraaid
-          ).padding()
-          
-          DeedsList(
-            sectionTitle: "Sunnah",
-            deeds: state.sunnah
-          ).padding()
-          
-          DeedsList(
-            sectionTitle: "Nafila",
-            deeds: state.nafila
-          ).padding()
-          
-          Spacer()
+    VStack {
+      BuffCardView()
+        .onTapGesture {
+          guard app.canShowBuffs else { return }
+          state.showBuffs = true
         }
-      }.ignoresSafeArea(.all, edges: .vertical)
+      List {
+        DeedsList(
+          sectionTitle: "Faraaid".localized,
+          deeds: state.faraaid
+        ).padding()
+        
+        DeedsList(
+          sectionTitle: "Sunnah".localized,
+          deeds: state.sunnah
+        ).padding()
+        
+        DeedsList(
+          sectionTitle: "Nafila".localized,
+          deeds: state.nafila
+        ).padding()
+      }
+    }
       .sheet(isPresented: $state.showBuffs, content: { BuffsView() })
   }
 }
@@ -53,20 +51,41 @@ struct DeedsList: View {
   var allDeedsAreDone: Bool { deeds.first(where: { $0.isDone == false }) == nil }
   
   var body: some View {
-    VStack {
-      Text(sectionTitle)
-        .font(.pLargeTitle)
-        .foregroundColor(.mono.offblack)
+    Section(sectionTitle) {
       if allDeedsAreDone {
-        Text("Well Done! You did All of the \(sectionTitle)s".localized)
+        Text("Well Done".localized(arguments: sectionTitle))
           .padding(.p32)
           .foregroundColor(.mono.offwhite)
           .background(Color.success.default)
           .cornerRadius(.r16)
       } else {
         ForEach(deeds) { deed in
-          DeedRowView(deed: deed)
-            .padding(.vertical, .p32)
+          HStack {
+            Text(deed.title)
+            if deed.isDone {
+              Spacer()
+              Image(systemName: "checkmark.seal.fill")
+                .foregroundColor(.success.default)
+            }
+          }.swipeActions(edge: .trailing) {
+            Button(
+              action: {
+                withAnimation {
+                  app.handle(deed: deed)
+                }
+              },
+              label: { Image(systemName: "checkmark.seal") }
+            ).tint(.success.default)
+          }.swipeActions(edge: .leading) {
+            Button(
+              action: {
+                withAnimation {
+                  app.handle(deed: deed)
+                }
+              },
+              label: { Image(systemName: "delete.backward.fill") }
+            ).tint(.danger.default)
+          }
         }
       }
     }
@@ -147,6 +166,7 @@ struct DeedRowView: View {
         )
         .background(deed.isDone ? Color.primary1.default.opacity(0.75) : Color.primary1.background)
         .cornerRadius(.r16)
+        .onTapGesture { } // To avoid conflicts with Drag Gesture of the list
         .onLongPressGesture(minimumDuration: duration) { isPressing in
           if isPressing {
             withAnimation(.linear(duration: duration)) {

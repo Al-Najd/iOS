@@ -14,6 +14,14 @@
 		0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */; };
 		0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */; };
 		0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4D027245817005B9B46 /* OnboardingForthView.swift */; };
+		044F23FB272A17EC00CACBA4 /* Published+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */; };
+		044F6FA22735C0F3008BA334 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FA12735C0F3008BA334 /* LocationService.swift */; };
+		044F6FA52735C26B008BA334 /* Schedule in Frameworks */ = {isa = PBXBuildFile; productRef = 044F6FA42735C26B008BA334 /* Schedule */; };
+		044F6FA82735C3BB008BA334 /* TimeMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FA72735C3BB008BA334 /* TimeMachineView.swift */; };
+		044F6FAB2735C512008BA334 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 044F6FAA2735C512008BA334 /* Moya */; };
+		044F6FAE2735C5A8008BA334 /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FAD2735C5A8008BA334 /* NetworkProtocol.swift */; };
+		044F6FB02735C781008BA334 /* PrayerEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FAF2735C781008BA334 /* PrayerEndpoint.swift */; };
+		044F6FB22735C797008BA334 /* BaseEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FB12735C797008BA334 /* BaseEndpoint.swift */; };
 		045516E32725B22900F4751B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 045516E22725B22900F4751B /* Sentry */; };
 		045516E72725B3D500F4751B /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E62725B3D500F4751B /* MainCoordinatorView.swift */; };
 		045516E92725B55400F4751B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E82725B55400F4751B /* HomeService.swift */; };
@@ -43,9 +51,9 @@
 		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
 		04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
-		19708B40548DBB6DE5E444D2 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2374C8CC8A25D133E918697E /* fonts.json */; };
-		5BBDA7884FC28BA77DAF8FCB /* Klasik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */; };
-		A9D7F721CADCFF4F57E14F43 /* Vibes-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */; };
+		46E6185B2B509E26CA13BDA2 /* Klasik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0906DC8B1229F44E0B76135E /* Klasik-Bold.otf */; };
+		5FABE99E54C669633F483C60 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = 517A9749C615AE866EC1CF57 /* fonts.json */; };
+		654B2CC32A79D6868CD3AD8A /* ElMessiri-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C34F677A583D949A176E909E /* ElMessiri-Regular.ttf */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588322716CC5500FC0CBB /* AlNajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* AlNajdApp.swift */; };
@@ -111,6 +119,8 @@
 		B88BECFB2716E1BB00BC362A /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BECF92716E1BB00BC362A /* AppearancePlugin.swift */; };
 		B88BECFE2716F08000BC362A /* Deed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BECFD2716F08000BC362A /* Deed.swift */; };
 		B88BECFF2716F08000BC362A /* Deed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BECFD2716F08000BC362A /* Deed.swift */; };
+		C3B8E8F498D3591D0C2C7B4C /* ElMessiri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A74AB00340542C867378CCA1 /* ElMessiri-Bold.ttf */; };
+		E9F9E8449C2B58E7DBC1C7D0 /* Klasik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB799A5EB87EC6A7573DCE0B /* Klasik-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +148,12 @@
 		0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondView.swift; sourceTree = "<group>"; };
 		0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdView.swift; sourceTree = "<group>"; };
 		0437E4D027245817005B9B46 /* OnboardingForthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthView.swift; sourceTree = "<group>"; };
+		044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+UserDefaults.swift"; sourceTree = "<group>"; };
+		044F6FA12735C0F3008BA334 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		044F6FA72735C3BB008BA334 /* TimeMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMachineView.swift; sourceTree = "<group>"; };
+		044F6FAD2735C5A8008BA334 /* NetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
+		044F6FAF2735C781008BA334 /* PrayerEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerEndpoint.swift; sourceTree = "<group>"; };
+		044F6FB12735C797008BA334 /* BaseEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEndpoint.swift; sourceTree = "<group>"; };
 		045516E62725B3D500F4751B /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
 		045516E82725B55400F4751B /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		045516EB2725B98F00F4751B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -159,11 +175,13 @@
 		04E2329127274F3D00E1B192 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		04E2329327277A0000E1B192 /* StopWatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
-		2374C8CC8A25D133E918697E /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
-		3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Vibes-Regular.ttf"; path = "Vibes/Vibes-Regular.ttf"; sourceTree = "<group>"; };
+		0906DC8B1229F44E0B76135E /* Klasik-Bold.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Bold.otf"; path = "Klasik/Klasik-Bold.otf"; sourceTree = "<group>"; };
+		517A9749C615AE866EC1CF57 /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
 		73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
+		A74AB00340542C867378CCA1 /* ElMessiri-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "ElMessiri-Bold.ttf"; path = "ElMessiri/ElMessiri-Bold.ttf"; sourceTree = "<group>"; };
+		AB799A5EB87EC6A7573DCE0B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* AlNajdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlNajdApp.swift; sourceTree = "<group>"; };
 		B865880A2716CC5200FC0CBB /* HomeView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B865880B2716CC5500FC0CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,6 +225,7 @@
 		B86588B02716DC2D00FC0CBB /* ThemePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		B88BECF92716E1BB00BC362A /* AppearancePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
 		B88BECFD2716F08000BC362A /* Deed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deed.swift; sourceTree = "<group>"; };
+		C34F677A583D949A176E909E /* ElMessiri-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "ElMessiri-Regular.ttf"; path = "ElMessiri/ElMessiri-Regular.ttf"; sourceTree = "<group>"; };
 		ED1394907FAA42EB2EC37AE3 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,8 +236,10 @@
 			files = (
 				04B31891271C6BE90088F527 /* PulseUI in Frameworks */,
 				04B3188D271C6BE90088F527 /* Pulse in Frameworks */,
+				044F6FAB2735C512008BA334 /* Moya in Frameworks */,
 				04B3188F271C6BE90088F527 /* PulseCore in Frameworks */,
 				045516E32725B22900F4751B /* Sentry in Frameworks */,
+				044F6FA52735C26B008BA334 /* Schedule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +267,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044F6FA62735C3A7008BA334 /* Time Machine */ = {
+			isa = PBXGroup;
+			children = (
+				044F6FA72735C3BB008BA334 /* TimeMachineView.swift */,
+			);
+			path = "Time Machine";
+			sourceTree = "<group>";
+		};
+		044F6FAC2735C59A008BA334 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				04D468A12721986100D4E12B /* NetworkService.swift */,
+				044F6FAD2735C5A8008BA334 /* NetworkProtocol.swift */,
+				044F6FAF2735C781008BA334 /* PrayerEndpoint.swift */,
+				044F6FB12735C797008BA334 /* BaseEndpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		045516E42725B3BB00F4751B /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,8 +298,9 @@
 		045516E52725B3C700F4751B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				04E2328A27274DB800E1B192 /* TabBar */,
 				045516E62725B3D500F4751B /* MainCoordinatorView.swift */,
+				04E2328A27274DB800E1B192 /* TabBar */,
+				044F6FA62735C3A7008BA334 /* Time Machine */,
 				045516E42725B3BB00F4751B /* Home */,
 				04B31894271CAD3F0088F527 /* Rewards */,
 				045516EA2725B98900F4751B /* Settings */,
@@ -297,7 +338,6 @@
 				04D468CD2722D6A100D4E12B /* SentryService.swift */,
 				04B31897271CAE840088F527 /* ReminderService.swift */,
 				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
-				04D468A12721986100D4E12B /* NetworkService.swift */,
 				04D468AE272204AB00D4E12B /* MusicService.swift */,
 				04D468B627222AF800D4E12B /* LocalizationService.swift */,
 				04D468C7272250F600D4E12B /* HapticService.swift */,
@@ -305,6 +345,7 @@
 				0437E4C22723774A005B9B46 /* PulseService.swift */,
 				045516ED27260E5E00F4751B /* TimerService.swift */,
 				04E2329327277A0000E1B192 /* StopWatchService.swift */,
+				044F6FA12735C0F3008BA334 /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -331,6 +372,7 @@
 				73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */,
 				9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */,
 				ED1394907FAA42EB2EC37AE3 /* Klasik-Regular.otf */,
+				7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -368,12 +410,22 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		48AE65BE6F9834EECCFB9193 /* Klasik */ = {
+		0D8AE85A051460D3B0EC740F /* Klasik */ = {
 			isa = PBXGroup;
 			children = (
-				7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */,
+				AB799A5EB87EC6A7573DCE0B /* Klasik-Regular.otf */,
+				0906DC8B1229F44E0B76135E /* Klasik-Bold.otf */,
 			);
 			name = Klasik;
+			sourceTree = "<group>";
+		};
+		A40E18729620249245E638E2 /* ElMessiri */ = {
+			isa = PBXGroup;
+			children = (
+				C34F677A583D949A176E909E /* ElMessiri-Regular.ttf */,
+				A74AB00340542C867378CCA1 /* ElMessiri-Bold.ttf */,
+			);
+			name = ElMessiri;
 			sourceTree = "<group>";
 		};
 		B86588032716CC5200FC0CBB = {
@@ -394,7 +446,6 @@
 		B86588082716CC5200FC0CBB /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				04D468AB2722044200D4E12B /* Media */,
 				B86588A82716DBF900FC0CBB /* App */,
 				B86588922716CEDA00FC0CBB /* Modules */,
 				B88BECFC2716F05A00BC362A /* Business */,
@@ -515,7 +566,7 @@
 				B86588572716CEA000FC0CBB /* FontConfig.swift */,
 				B86588582716CEA000FC0CBB /* Fonts.swift */,
 				B865885A2716CEA000FC0CBB /* Families */,
-				2374C8CC8A25D133E918697E /* fonts.json */,
+				517A9749C615AE866EC1CF57 /* fonts.json */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -523,8 +574,8 @@
 		B865885A2716CEA000FC0CBB /* Families */ = {
 			isa = PBXGroup;
 			children = (
-				48AE65BE6F9834EECCFB9193 /* Klasik */,
-				F4F1AA6CAD01E0A603A6754F /* Vibes */,
+				0D8AE85A051460D3B0EC740F /* Klasik */,
+				A40E18729620249245E638E2 /* ElMessiri */,
 			);
 			path = Families;
 			sourceTree = "<group>";
@@ -559,6 +610,7 @@
 				B86588982716CEEC00FC0CBB /* String+Extensions.swift */,
 				B86588952716CEEC00FC0CBB /* Then.swift */,
 				04B3189B271CAF5A0088F527 /* Date+Extensions.swift */,
+				044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -566,6 +618,7 @@
 		B86588922716CEDA00FC0CBB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				04D468AB2722044200D4E12B /* Media */,
 				045516E52725B3C700F4751B /* Main */,
 				04D468A32721987800D4E12B /* Onboarding */,
 			);
@@ -596,18 +649,11 @@
 		B88BECFC2716F05A00BC362A /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				044F6FAC2735C59A008BA334 /* Network */,
 				04B31895271CAE720088F527 /* Services */,
 				04B31892271CAD220088F527 /* Data Models */,
 			);
 			path = Business;
-			sourceTree = "<group>";
-		};
-		F4F1AA6CAD01E0A603A6754F /* Vibes */ = {
-			isa = PBXGroup;
-			children = (
-				3ECF3A5376B58A83CBBA464D /* Vibes-Regular.ttf */,
-			);
-			name = Vibes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -631,6 +677,8 @@
 				04B3188E271C6BE90088F527 /* PulseCore */,
 				04B31890271C6BE90088F527 /* PulseUI */,
 				045516E22725B22900F4751B /* Sentry */,
+				044F6FA42735C26B008BA334 /* Schedule */,
+				044F6FAA2735C512008BA334 /* Moya */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -727,6 +775,8 @@
 			packageReferences = (
 				04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */,
 				045516E12725B22900F4751B /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				044F6FA32735C26B008BA334 /* XCRemoteSwiftPackageReference "Schedule" */,
+				044F6FA92735C512008BA334 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -749,9 +799,11 @@
 				B865888D2716CEA000FC0CBB /* Localizables.strings in Resources */,
 				B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */,
 				04D468AD2722045600D4E12B /* splash.mp3 in Resources */,
-				5BBDA7884FC28BA77DAF8FCB /* Klasik-Regular.otf in Resources */,
-				A9D7F721CADCFF4F57E14F43 /* Vibes-Regular.ttf in Resources */,
-				19708B40548DBB6DE5E444D2 /* fonts.json in Resources */,
+				E9F9E8449C2B58E7DBC1C7D0 /* Klasik-Regular.otf in Resources */,
+				46E6185B2B509E26CA13BDA2 /* Klasik-Bold.otf in Resources */,
+				654B2CC32A79D6868CD3AD8A /* ElMessiri-Regular.ttf in Resources */,
+				C3B8E8F498D3591D0C2C7B4C /* ElMessiri-Bold.ttf in Resources */,
+				5FABE99E54C669633F483C60 /* fonts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +849,7 @@
 				B86588772716CEA000FC0CBB /* Theme.swift in Sources */,
 				B86588A42716CEEC00FC0CBB /* String+Extensions.swift in Sources */,
 				0437E4C32723774A005B9B46 /* PulseService.swift in Sources */,
+				044F23FB272A17EC00CACBA4 /* Published+UserDefaults.swift in Sources */,
 				B86588A62716CEEC00FC0CBB /* Codable+Helpers.swift in Sources */,
 				B86588AE2716DC1600FC0CBB /* CorePlugin.swift in Sources */,
 				B86588AB2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
@@ -806,6 +859,7 @@
 				045516EE27260E5E00F4751B /* TimerService.swift in Sources */,
 				0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */,
 				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
+				044F6FA22735C0F3008BA334 /* LocationService.swift in Sources */,
 				04D468A22721986100D4E12B /* NetworkService.swift in Sources */,
 				045516EC2725B98F00F4751B /* SettingsView.swift in Sources */,
 				04B31898271CAE840088F527 /* ReminderService.swift in Sources */,
@@ -830,11 +884,15 @@
 				04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */,
 				B865889E2716CEEC00FC0CBB /* Then.swift in Sources */,
 				B86588A02716CEEC00FC0CBB /* Aliases.swift in Sources */,
+				044F6FB22735C797008BA334 /* BaseEndpoint.swift in Sources */,
 				B88BECFE2716F08000BC362A /* Deed.swift in Sources */,
 				0437E4C9272457D1005B9B46 /* OnboardingFirstView.swift in Sources */,
+				044F6FAE2735C5A8008BA334 /* NetworkProtocol.swift in Sources */,
+				044F6FB02735C781008BA334 /* PrayerEndpoint.swift in Sources */,
 				B86588792716CEA000FC0CBB /* DefaultTheme.swift in Sources */,
 				B865887B2716CEA000FC0CBB /* FontConfig.swift in Sources */,
 				B865888B2716CEA000FC0CBB /* VisualEffectView.swift in Sources */,
+				044F6FA82735C3BB008BA334 /* TimeMachineView.swift in Sources */,
 				B86588712716CEA000FC0CBB /* Palette.swift in Sources */,
 				B86588A22716CEEC00FC0CBB /* ServiceLocator.swift in Sources */,
 				0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */,
@@ -1047,7 +1105,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1071,7 +1129,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1280,6 +1338,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		044F6FA32735C26B008BA334 /* XCRemoteSwiftPackageReference "Schedule" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/luoxiu/Schedule";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		044F6FA92735C512008BA334 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		045516E12725B22900F4751B /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
@@ -1299,6 +1373,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		044F6FA42735C26B008BA334 /* Schedule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 044F6FA32735C26B008BA334 /* XCRemoteSwiftPackageReference "Schedule" */;
+			productName = Schedule;
+		};
+		044F6FAA2735C512008BA334 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 044F6FA92735C512008BA334 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		045516E22725B22900F4751B /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 045516E12725B22900F4751B /* XCRemoteSwiftPackageReference "sentry-cocoa" */;

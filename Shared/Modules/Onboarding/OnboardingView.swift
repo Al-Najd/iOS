@@ -42,18 +42,70 @@ struct OnboardingView: View {
           .tag(3)
       }
       .edgesIgnoringSafeArea(.vertical)
-      .tabViewStyle(.page)
-      .indexViewStyle(.page(backgroundDisplayMode: state.offset < 3 ? .always : .interactive))
+      .tabViewStyle(.page(indexDisplayMode: .never))
       
-      if !(state.offset < 3) {
+      
         VStack {
+          HStack {
+            Button(
+              action: {
+                withAnimation {
+                  state.onboardingFinished = true
+                }
+              },
+              label: {
+                Text("Skip".localized)
+                  .font(.displaySmall)
+                  .foregroundColor(.primary1.default)
+                  .frame(maxWidth: .infinity)
+              }
+            )
+              .frame(width: 100, height: 20)
+              .padding(.vertical, .p4)
+              .background(
+                RoundedRectangle(cornerRadius: .r8)
+                  .stroke(lineWidth: 2)
+                  .foregroundColor(.primary1.default)
+              )
+              .colorScheme(.light)
+            
+            Spacer()
+            
+            Button(
+              action: {
+                withAnimation {
+                  state.offset = (state.offset + 1).clamped(to: 0...3)
+                }
+              },
+              label: {
+                Text("Next".localized)
+                  .font(.displaySmall)
+                  .foregroundColor(.mono.offwhite)
+                  .frame(maxWidth: .infinity)
+              }
+            )
+              .frame(width: 100, height: 20)
+              .padding(.vertical, .p4)
+              .background(Color.primary1.default)
+              .cornerRadius(.p8)
+              .colorScheme(.light)
+          }
+          .padding(.top, .p32)
+          .padding(.horizontal)
           Spacer()
-          PButton(action: { state.onboardingFinished = true }, title: "Get Started".localized)
-            .padding(.p24)
-            .colorScheme(.light)
-        }
+          if !(state.offset < 3) {
+            PButton(action: {
+              withAnimation {
+                state.startOnboarding = false
+                state.onboardingFinished = true
+                state.showMainApp = true
+              }
+            }, title: "Get Started".localized)
+              .padding(.p24)
+              .colorScheme(.light)
+          }
       }
-    }.fullScreenCover(isPresented: $state.onboardingFinished, content: { MainCoordinatorView() })
+    }
   }
 }
 
@@ -61,18 +113,5 @@ struct OnboardingView_Previews: PreviewProvider {
   static var previews: some View {
     OnboardingView()
       .environmentObject(app.state.onboardingState)
-  }
-}
-
-
-private var cancellables = [String:AnyCancellable]()
-
-extension Published {
-  init(wrappedValue defaultValue: Value, key: String) {
-    let value = UserDefaults.standard.object(forKey: key) as? Value ?? defaultValue
-    self.init(initialValue: value)
-    cancellables[key] = projectedValue.sink { val in
-      UserDefaults.standard.set(val, forKey: key)
-    }
   }
 }

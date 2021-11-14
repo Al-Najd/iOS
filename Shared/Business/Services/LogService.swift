@@ -18,7 +18,7 @@ public final class LogService: RunnableService {
   public static let main: LogService = .init()
   public func start() {
     LoggingSystem.bootstrap(PersistentLogHandler.init)
-//    SentryService.main.start()
+    SentryService.main.start()
     LoggersManager.info("Loggers Woke Up!")
   }
 }

@@ -2,12 +2,57 @@
   "object": {
     "pins": [
       {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "d120af1e8638c7da36c8481fd61a66c0c08dc4fc",
+          "version": "5.4.4"
+        }
+      },
+      {
+        "package": "Moya",
+        "repositoryURL": "https://github.com/Moya/Moya",
+        "state": {
+          "branch": "master",
+          "revision": "464c29df5b742acbcf78b2db1d6a38ec4ab46525",
+          "version": null
+        }
+      },
+      {
         "package": "Pulse",
         "repositoryURL": "https://github.com/kean/Pulse",
         "state": {
           "branch": "master",
           "revision": "c56182399efe1ef5862454c7d20895a121f799b5",
           "version": null
+        }
+      },
+      {
+        "package": "ReactiveSwift",
+        "repositoryURL": "https://github.com/ReactiveCocoa/ReactiveSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "c43bae3dac73fdd3cb906bd5a1914686ca71ed3c",
+          "version": "6.7.0"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "7c17a6ccca06b5c107cfa4284e634562ddaf5951",
+          "version": "6.2.0"
+        }
+      },
+      {
+        "package": "Schedule",
+        "repositoryURL": "https://github.com/luoxiu/Schedule",
+        "state": {
+          "branch": null,
+          "revision": "e388fcab1d870f32c0359a414fda81b8e81b98c9",
+          "version": "2.1.1"
         }
       },
       {

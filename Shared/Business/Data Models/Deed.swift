@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Deed: Identifiable {
+struct Deed: Identifiable, Codable {
   var id: UUID = .init()
   var category: DeedCategory
   var title: String
@@ -17,12 +17,12 @@ struct Deed: Identifiable {
   var reward: Reward
 }
 
-struct Reward: Identifiable {
+struct Reward: Identifiable, Codable {
   var id: UUID = .init()
   var title: String
 }
 
-enum DeedCategory {
+enum DeedCategory: String, Codable {
   case fard
   case sunnah
   case nafila
@@ -32,45 +32,45 @@ extension Array where Element == Deed {
   static let faraaid: [Deed] = [
     .init(
       category: .fard,
-      title: "Fajr",
-      reward: .init(title: "If the Sunnah was better than all of that is good on life, what do you think the Fajr is?")),
-    .init(category: .fard, title: "Duhr", reward: .init(title: "There are 25+ benefit in Duhr, the best? Getting closer to Allah!")),
+      title: "Fajr".localized,
+      reward: .init(title: "If the Sunnah was better than all of that is good on life, what do you think the Fajr is?".localized)),
+    .init(category: .fard, title: "Duhr".localized, reward: .init(title: "There are 25+ benefit in Duhr, the best? Getting closer to Allah!".localized)),
     .init(
       category: .fard,
-      title: "Aasr",
-      reward: .init(title: "Now Repentence is easier, and so are Solutions to problems!")
+      title: "Aasr".localized,
+      reward: .init(title: "Now Repentence is easier, and so are Solutions to problems!".localized)
     ),
-    .init(category: .fard, title: "Maghrib", reward: .init(title: "Wealth Buffed, Dua and Wishes Buffed, Blessing Showered, That's what you've won with Al Maghrib")),
-    .init(category: .fard, title: "Aishaa", reward: .init(title: "Sleep and tranquility"))
+    .init(category: .fard, title: "Maghrib".localized, reward: .init(title: "Wealth Buffed, Dua and Wishes Buffed, Blessing Showered, That's what you've won with Al Maghrib".localized)),
+    .init(category: .fard, title: "Aishaa".localized, reward: .init(title: "Sleep and tranquility".localized))
   ]
   
   static let sunnah: [Deed] = [
     .init(
       category: .sunnah,
-      title: "2 Raqaat Before Fajr",
+      title: "2 Raqaat Before Fajr".localized,
       reward: .init(
-        title: "Richest Man of all who didn't pray!"
+        title: "Richest Man of all who didn't pray!".localized
       )
     ),
     .init(
       category: .sunnah,
-      title: "4 Raqaat Before Duhr",
+      title: "4 Raqaat Before Duhr".localized,
       reward: .init(
-        title: "Your Iman Grow further!"
+        title: "Your Iman Grow further!".localized
       )
     ),
     .init(
       category: .sunnah,
-      title: "4 Raqaat After Duhr",
+      title: "4 Raqaat After Duhr".localized,
       reward: .init(
-        title: "Your Iman Grow further!"
+        title: "Your Iman Grow further!".localized
       )
     ),
     .init(
       category: .sunnah,
-      title: "2 Raqaat After Al Maghrib",
+      title: "2 Raqaat After Al Maghrib".localized,
       reward: .init(
-        title: "The Prophet SAW never left the Sunnah of Al Maghrib"
+        title: "The Prophet SAW never left the Sunnah of Al Maghrib".localized
       )
     )
   ]
@@ -78,16 +78,16 @@ extension Array where Element == Deed {
   static let nafila: [Deed] = [
     .init(
       category: .nafila,
-      title: "Duha",
+      title: "Duha".localized,
       reward: .init(
-        title: "The Awabeen Prayer, Allah praise those who are Awabeen, and you get sadaqat on any deed you do!"
+        title: "The Awabeen Prayer, Allah praise those who are Awabeen, and you get sadaqat on any deed you do!".localized
       )
     ),
     .init(
       category: .nafila,
-      title: "Qyam Al Layl",
+      title: "Qyam Al Layl".localized,
       reward: .init(
-        title: "The Honor of Muslim, it's said that Angels pray to those who miss it for a day or two if they make a habit of it in case they are sick, and Angels prayers are blessed"
+        title: "The Honor of Muslim, it's said that Angels pray to those who miss it for a day or two if they make a habit of it in case they are sick, and Angels prayers are blessed".localized
       )
     )
   ]

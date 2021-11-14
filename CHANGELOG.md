@@ -1,3 +1,6 @@
+## Updates of version 0.2.0 🚀
+    - Improve Home, Fastlane and Fix some bugs
+
 ## Updates of version 0.1.0 🚀
     - Add Debug Mode and Sentry + Improve Home, a bit 😁
     - Create Onboarding Coordinator

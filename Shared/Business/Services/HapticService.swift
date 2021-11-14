@@ -21,8 +21,8 @@ class HapticService {
   func generateHoldFeedback(for duration: Double) {
     do {
       engine = try CHHapticEngine()
-      let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
-      let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.6)
+      let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.1)
+      let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.2)
       let event = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: duration)
       
       let pattern = try CHHapticPattern(events: [event], parameters: [])

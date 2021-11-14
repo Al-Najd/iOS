@@ -8,14 +8,11 @@
 import Pulse
 import Logging
 import Foundation
+import Moya
+import Alamofire
 
 public final class PulseService {
   public static let main: PulseService = .init()
-  
-  public func setup(sessionDelegate: URLSessionDelegate) -> URLSession {
-    let proxyDelegate = URLSessionProxyDelegate(delegate: sessionDelegate)
-    return URLSession(configuration: .default, delegate: proxyDelegate, delegateQueue: nil)
-  }
 }
 
 public final class PulseLogger: LogEngine {
@@ -41,4 +38,31 @@ public final class PulseLogger: LogEngine {
     logger.error(Logger.Message(stringLiteral: message))
     #endif
   }
+}
+
+struct NetworkLoggerEventMonitor: EventMonitor {
+    let logger: NetworkLogger
+    
+    func request(_ request: Request, didCreateTask task: URLSessionTask) {
+        logger.logTaskCreated(task)
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        logger.logDataTask(dataTask, didReceive: data)
+        
+        guard let response = dataTask.response else { return }
+        logger.logDataTask(dataTask, didReceive: response)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+        logger.logTask(task, didFinishCollecting: metrics)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        logger.logTask(task, didCompleteWithError: error)
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse) {
+        logger.logDataTask(dataTask, didReceive: proposedResponse.response)
+    }
 }

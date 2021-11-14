@@ -7,14 +7,19 @@
 
 import UIKit.UIApplication
 
-public struct ReportPlugin {
-  var services: [RunnableService] = [
-    LogService.main
-  ]
-}
+import Foundation
+import Pulse
+import Logging
+
+struct ReportPlugin {}
 
 extension ReportPlugin: AppPlugin {
-  public func setup() {
-    services.forEach { $0.start() }
-  }
+    func setup() {
+        setupPulse()
+        LoggersManager.info("Loggers Woke up")
+    }
+    
+    private func setupPulse() {
+        LoggingSystem.bootstrap(PersistentLogHandler.init)
+    }
 }

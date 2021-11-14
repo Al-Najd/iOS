@@ -25,10 +25,12 @@ struct AlNajdApp: App {
   
   var body: some Scene {
     WindowGroup {
-      MainCoordinatorView()
+      OnboardingCoordinatorView()
         .environmentObject(app.state)
         .environmentObject(app.state.onboardingState)
         .environmentObject(app.state.homeState)
+        .environment(\.colorScheme, .dark)
+        .preferredColorScheme(.dark)
     }
   }
 }

@@ -13,14 +13,8 @@ public struct OnboardingCoordinatorView: View {
   
   
   public var body: some View {
-    if state.onboardingFinished == false {
     SplashView()
-        .fullScreenCover(isPresented: $state.startOnboarding, content: {
-          OnboardingView()
-        })
-    } else {
-      SplashView()
-        .fullScreenCover(isPresented: .constant(state.startOnboarding && state.onboardingFinished), content: { MainCoordinatorView() })
-    }
+      .fullScreenCover(isPresented: $state.startOnboarding, content: { OnboardingView() })
+      .fullScreenCover(isPresented: $state.showMainApp, content: { MainCoordinatorView() })
   }
 }

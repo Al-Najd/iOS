@@ -4,7 +4,7 @@
 //
 //  Created by Ahmed Ramy on 24/10/2021.
 //
-
+import PulseUI
 import SwiftUI
 
 final class HomeState: ObservableObject {
@@ -20,7 +20,7 @@ struct MainCoordinatorView: View {
   @EnvironmentObject var state: AppState
   @State var selectedTab: Tab = .home
   var body: some View {
-    ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+    ZStack {
       Color("splash")
         .ignoresSafeArea(.all, edges: .vertical)
       VStack {
@@ -33,7 +33,7 @@ struct MainCoordinatorView: View {
         HomeView()
           .tabItem {
             VStack {
-              Text("Home")
+              Text("Home".localized)
                 .font(.pFootnote)
                 .foregroundColor(
                   selectedTab == .home ? .secondary1.default : .secondary3.dark
@@ -56,12 +56,7 @@ struct MainCoordinatorView: View {
           }
           .tag(Tab.settings)
       }
-      .tabViewStyle(.page(indexDisplayMode: .never))
-      
-      TabBarView(selectedTab: $selectedTab)
-        
     }
-    .ignoresSafeArea(.all, edges: .vertical)
   }
 }
 

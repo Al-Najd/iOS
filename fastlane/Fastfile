@@ -78,11 +78,15 @@ platform :ios do
       changelog: changelog,
     )
 
+    # Upload dSYM files to Sentry
+    # upload_symbols_to_sentry
     # Deletes the generated Archive, IPA, Certificates, Profiles and/or dSYM Files
     clean_build_artifacts
     # Report Success
     # slack
-    git_push_to_github
+    # git_add
+    # git_commit(message: "🚀 Released #{current_version}! [Beta Release]")
+    # push_to_git_remote
   end
 
   lane :test_slack do

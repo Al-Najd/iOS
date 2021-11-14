@@ -18,8 +18,12 @@ class MusicService {
       guard let player = musicPlayer else { return }
       player.prepareToPlay()
       player.currentTime = 1
+      if repeats {
+        player.numberOfLoops = -1
+      }
       player.play()
     } catch {
+      LoggersManager.error("\(error)")
       assertionFailure(error.localizedDescription)
     }
   }
@@ -32,6 +36,7 @@ class MusicService {
       player.currentTime = 1
       player.play()
     } catch {
+      LoggersManager.error("\(error)")
       assertionFailure(error.localizedDescription)
     }
   }

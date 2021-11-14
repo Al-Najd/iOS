@@ -20,12 +20,12 @@ struct BuffsView: View {
             Text(deed.title)
               .multilineTextAlignment(.center)
               .font(.pTitle2)
-              .foregroundColor(.mono.offwhite)
+              .foregroundColor(.mono.ash)
               .padding(.bottom, .p4)
             Text( deed.reward.title)
               .multilineTextAlignment(.center)
               .font(.pTitle3)
-              .foregroundColor(.success.light)
+              .foregroundColor(.success.dark)
           }
           .frame(
             maxWidth: .infinity,
