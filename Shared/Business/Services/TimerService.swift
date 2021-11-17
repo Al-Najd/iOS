@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-public protocol TimerServiceProtocol: Service {
+public protocol TimerServiceProtocol {
   func setTime(in seconds: TimeInterval)
   func start(timerTickHandler: Callback<String>?, finishHandler: VoidCallback?)
   func stop()

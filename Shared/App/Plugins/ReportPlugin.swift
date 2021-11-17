@@ -14,12 +14,18 @@ import Logging
 struct ReportPlugin {}
 
 extension ReportPlugin: AppPlugin {
-    func setup() {
-        setupPulse()
-        LoggersManager.info("Loggers Woke up")
-    }
-    
-    private func setupPulse() {
-        LoggingSystem.bootstrap(PersistentLogHandler.init)
-    }
+  func setup() {
+      setupPulse()
+      setupSentry()
+      LoggersManager.info(message: "Loggers Woke up")
+  }
+
+  private func setupPulse() {
+      LoggingSystem.bootstrap(PersistentLogHandler.init)
+      URLSessionProxyDelegate.enableAutomaticRegistration()
+  }
+
+  private func setupSentry() {
+      SentryService.setup()
+  }
 }

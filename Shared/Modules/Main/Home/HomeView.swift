@@ -117,7 +117,9 @@ struct BuffCardView: View {
           .padding(.bottom, .p8)
         
         if state.accumlatedRewards.count > 2 {
-          Text("And \(state.accumlatedRewards.count - 1) other blessings and Buffs...".localized)
+          Text(
+            "And var other blessings and Buffs...".localized(arguments: state.accumlatedRewards.count - 1)
+          )
             .multilineTextAlignment(.center)
             .font(.pBody)
             .foregroundColor(.success.light)

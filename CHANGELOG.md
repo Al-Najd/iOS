@@ -1,3 +1,7 @@
+## Updates of version 0.3.0 🚀
+    - Remove Dead Code
+    - Improve Home and Localization
+
 ## Updates of version 0.2.0 🚀
     - Improve Home, Fastlane and Fix some bugs
 

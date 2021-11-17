@@ -1,12 +1,25 @@
 //
 //  NetworkProtocol.swift
-//  Al Najd (iOS)
+//  RamySDK
 //
-//  Created by Ahmed Ramy on 05/11/2021.
+//  Created by Ahmed Ramy on 03/11/2021.
 //
 
+import Combine
 import Foundation
 
-//public protocol NetworkProtocol {
-//    func call<T: Codable, U: BaseEndpoint>(api: U, model: T.Type) -> AnyPublisher<T, SQError>
-//}
+public typealias RSExpected<T> = Result<T, RSError>
+public typealias RSHandler<T> = (RSExpected<T>) -> Void
+public typealias RSResponse<T: Codable> = AnyPublisher<T, RSError>
+public typealias RSResponseWithProgress<T: Codable> = RSResponse<RSProgressResponse<T>>
+
+public enum RSProgressResponse<T: Codable>: Codable {
+    case loading(Double)
+    case finished(T)
+}
+
+
+public protocol NetworkProtocol {
+    func call<T: Codable, U: Endpoint>(api: U, model: T.Type) -> RSResponse<T>
+    func upload<T: Codable, U: Endpoint>(api: U, model: T.Type) -> RSResponseWithProgress<T>
+}

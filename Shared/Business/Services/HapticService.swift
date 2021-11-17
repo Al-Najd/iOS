@@ -31,7 +31,7 @@ class HapticService {
       try engine?.start()
       try player?.start(atTime: 0)
     } catch let error {
-      LoggersManager.error("\(error)")
+      LoggersManager.error(RSErrorParser().parse(error))
     }
   }
   

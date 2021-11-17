@@ -12,8 +12,6 @@ struct Deed: Identifiable, Codable {
   var category: DeedCategory
   var title: String
   var isDone: Bool = false
-//  var startTime: Date
-//  var endTime: Date
   var reward: Reward
 }
 

@@ -84,9 +84,9 @@ platform :ios do
     clean_build_artifacts
     # Report Success
     # slack
-    # git_add
-    # git_commit(message: "🚀 Released #{current_version}! [Beta Release]")
-    # push_to_git_remote
+    git_add
+    git_commit(message: "🚀 Released #{current_version}! [Beta Release]")
+    push_to_git_remote
   end
 
   lane :test_slack do

@@ -23,7 +23,7 @@ class MusicService {
       }
       player.play()
     } catch {
-      LoggersManager.error("\(error)")
+      LoggersManager.error(RSErrorParser().parse(error))
       assertionFailure(error.localizedDescription)
     }
   }
@@ -36,7 +36,7 @@ class MusicService {
       player.currentTime = 1
       player.play()
     } catch {
-      LoggersManager.error("\(error)")
+      LoggersManager.error(RSErrorParser().parse(error))
       assertionFailure(error.localizedDescription)
     }
   }
