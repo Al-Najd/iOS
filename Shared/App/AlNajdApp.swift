@@ -29,6 +29,7 @@ struct AlNajdApp: App {
         .environmentObject(app.state)
         .environmentObject(app.state.onboardingState)
         .environmentObject(app.state.homeState)
+        .environmentObject(app.state.azkarState)
         .environment(\.colorScheme, .dark)
         .preferredColorScheme(.dark)
     }

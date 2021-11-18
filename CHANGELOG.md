@@ -1,3 +1,7 @@
+## Updates of version 0.4.0 🚀
+    - Add Azkar Infrastructure and Fix some bugs and Add slight persistance
+    - Add a Persistence Layer
+
 ## Updates of version 0.3.0 🚀
     - Remove Dead Code
     - Improve Home and Localization

@@ -38,6 +38,7 @@ public extension Endpoint {
         #elseif RELEASE
             return "https://api.RS.tech/m/"
         #endif
+      return ""
     }
 
     var headers: HTTPHeaders {

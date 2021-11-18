@@ -62,7 +62,7 @@ struct AzkarView: View {
   
   var body: some View {
     VStack {
-      BuffCardView()
+      AzkarBuffCardView()
         .onTapGesture {
           guard app.canShowBuffs else { return }
           state.showBuffs = true
@@ -83,6 +83,51 @@ struct AzkarView: View {
   }
 }
 
+struct AzkarBuffCardView: View {
+  
+  @EnvironmentObject var state: PrayersState
+  
+  var body: some View {
+    VStack {
+      if state.accumlatedRewards.isEmpty {
+        Text("A day full of blessings is awaiting your deeds!".localized)
+          .multilineTextAlignment(.center)
+          .font(.pLargeTitle)
+          .foregroundColor(.mono.offwhite)
+          .padding(.bottom, .p8)
+      } else {
+        Text("Latest Reward".localized)
+          .multilineTextAlignment(.center)
+          .font(.pHeadline)
+          .foregroundColor(.success.light)
+        
+        Text(state.accumlatedRewards.last?.title ?? .empty)
+          .multilineTextAlignment(.center)
+          .font(.pLargeTitle)
+          .foregroundColor(.mono.offwhite)
+          .padding(.bottom, .p8)
+        
+        if state.accumlatedRewards.count > 2 {
+          Text(
+            "And var other blessings and Buffs...".localized(arguments: String(state.accumlatedRewards.count - 1))
+          )
+            .multilineTextAlignment(.center)
+            .font(.pBody)
+            .foregroundColor(.success.light)
+        }
+      }
+    }
+    .frame(maxWidth: .infinity)
+    .padding()
+    .background(
+      RoundedRectangle(cornerRadius: .r16)
+        .foregroundColor(.secondary1.default)
+        .shadow(radius: .r12)
+    )
+    .padding(.p16)
+  }
+}
+
 struct RepeatableDeedsList: View {
   var sectionTitle: String
   var deeds: [RepeatableDeed] = []
@@ -92,7 +137,7 @@ struct RepeatableDeedsList: View {
   var body: some View {
     Section(content: {
       if allDeedsAreDone {
-        Text("Well Done".localized(arguments: sectionTitle))
+        Text("Well Done You Managed to do All the Zekr!".localized(arguments: sectionTitle))
           .padding(.p32)
           .foregroundColor(.mono.offwhite)
           .background(Color.success.default)
@@ -103,10 +148,20 @@ struct RepeatableDeedsList: View {
           HStack {
             Text(deed.title)
               .font(.pBody)
+            Spacer()
             if deed.isDone {
-              Spacer()
               Image(systemName: "checkmark.seal.fill")
                 .foregroundColor(.success.default)
+            } else {
+            Text("\(deed.numberOfRepeats)")
+              .foregroundColor(.mono.offwhite)
+              .font(.pSubheadline)
+              .padding(.p16)
+              .background(
+                Circle()
+                  .fill(Color.mono.offblack)
+                  .padding(.p4)
+                )
             }
           }.onTapGesture {
             app.did(deed: deed)
