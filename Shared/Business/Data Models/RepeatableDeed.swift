@@ -30,7 +30,15 @@ extension Array where Element == RepeatableDeed {
       numberOfRepeats: 1,
       category: .azkar(.sabah),
       reward: .init(title: "??")
-    )
+    ),
+    .init(
+      title: "RadytoBellah".localized,
+      numberOfRepeats: 3,
+      category: .azkar(.sabah),
+      reward: .init(
+        title: "Allah Must Satisfy you".localized
+      )
+    ),
   ]
   
   public static let masaa: [RepeatableDeed] = [
@@ -39,6 +47,14 @@ extension Array where Element == RepeatableDeed {
       numberOfRepeats: 1,
       category: .azkar(.sabah),
       reward: .init(title: "??")
+    ),
+    .init(
+      title: "RadytoBellah".localized,
+      numberOfRepeats: 3,
+      category: .azkar(.masaa),
+      reward: .init(
+        title: "Allah Must Satisfy you".localized
+      )
     )
   ]
 }

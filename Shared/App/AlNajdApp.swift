@@ -66,14 +66,26 @@ final class AppService {
     HapticService.main.generate(feedback: .warning)
   }
   
-  func did(deed: RepeatableDeed) {
+  func decrement(deed: RepeatableDeed) {
+    guard deed.numberOfRepeats > 0 else { return }
     var deed = deed
-    deed.numberOfRepeats = max(0, deed.numberOfRepeats - 1)
+    deed.numberOfRepeats -= 1
+    updateState(repeatableDeed: deed)
+    
     if deed.numberOfRepeats == 0 {
-      state.azkarState.accumlatedRewards.append(deed)
+      state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
       MusicService.main.start(effect: .splashEnd)
     }
+    
+    HapticService.main.generate(feedback: .success)
+  }
+  
+  func did(deed: RepeatableDeed) {
+    var deed = deed
+    deed.numberOfRepeats = 0
+    state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
     updateState(repeatableDeed: deed)
+    MusicService.main.start(effect: .splashEnd)
     HapticService.main.generate(feedback: .success)
   }
   
@@ -106,6 +118,14 @@ final class AppService {
 }
 
 extension Array where Element: Identifiable {
+  mutating func findAndReplaceElseAppend(with replacer: Element) {
+    if let index = firstIndex(where: { $0.id == replacer.id }) {
+      self[index] = replacer
+    } else {
+      self.append(replacer)
+    }
+  }
+  
   mutating func findAndReplace(with replacer: Element) {
     guard let index = firstIndex(where: { $0.id == replacer.id }) else { return }
     self[index] = replacer

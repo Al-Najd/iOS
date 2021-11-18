@@ -85,7 +85,7 @@ struct AzkarView: View {
 
 struct AzkarBuffCardView: View {
   
-  @EnvironmentObject var state: PrayersState
+  @EnvironmentObject var state: AzkarState
   
   var body: some View {
     VStack {
@@ -164,8 +164,32 @@ struct RepeatableDeedsList: View {
                 )
             }
           }.onTapGesture {
-            app.did(deed: deed)
-          }
+            withAnimation {
+              app.did(deed: deed)
+            }
+          }.if(!deed.isDone, transform: { view in
+            view.swipeActions(edge: .trailing) {
+              Button(
+                action: {
+                  withAnimation {
+                    app.decrement(deed: deed)
+                  }
+                },
+                label: { Image(systemName: "checkmark.seal") }
+              ).tint(.success.default)
+            }
+          }).if(!deed.isDone, transform: { view in
+            view.swipeActions(edge: .leading) {
+              Button(
+                action: {
+                  withAnimation {
+                    app.did(deed: deed)
+                  }
+                },
+                label: { Image(systemName: "delete.backward.fill") }
+              ).tint(.danger.default)
+            }
+          })
         }
       }
     }, header: {

@@ -1,3 +1,9 @@
+## Updates of version 0.4.1 🚀
+    - Fix crash in Azkar and Rewards and Improve Localization
+
+## Updates of version 0.4.1 🚀
+    - Fix crash in Azkar and Rewards and Improve Localization
+
 ## Updates of version 0.4.0 🚀
     - Add Azkar Infrastructure and Fix some bugs and Add slight persistance
     - Add a Persistence Layer
