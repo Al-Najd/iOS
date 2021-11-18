@@ -48,7 +48,7 @@ struct SplashView: View {
       setupInitialAnimations(then: {
         withAnimation(.easeInOut(duration: 1)) {
           state.splashOpacity = 0
-          let didSeeOnboarding = false // TODO: - Fetch from Cache
+          let didSeeOnboarding = state.onboardingFinished
           if didSeeOnboarding {
             state.showMainApp = true
           } else {

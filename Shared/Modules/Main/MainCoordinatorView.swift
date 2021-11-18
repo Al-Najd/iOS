@@ -7,7 +7,7 @@
 import PulseUI
 import SwiftUI
 
-final class HomeState: ObservableObject {
+final class PrayersState: ObservableObject {
   @Published var sunnah: [Deed] = .sunnah
   @Published var faraaid: [Deed] = .faraaid
   @Published var nafila: [Deed] = .nafila
@@ -30,29 +30,32 @@ struct MainCoordinatorView: View {
           .aspectRatio(contentMode: .fit)
       }.ignoresSafeArea(.all, edges: .vertical)
       TabView(selection: $selectedTab) {
-        HomeView()
+        PrayersView()
           .tabItem {
-            VStack {
-              Text("Home".localized)
-                .font(.pFootnote)
-                .foregroundColor(
-                  selectedTab == .home ? .secondary1.default : .secondary3.dark
-                )
-              Image("icn_tabBar_home")
-            }
+            Text("Prayers".localized)
+              .font(.pFootnote)
+              .foregroundColor(
+                selectedTab == .home ? .secondary1.default : .secondary3.dark
+              )
           }
           .tag(Tab.home)
         
+        AzkarView()
+          .tabItem {
+            Text("Azkar".localized)
+              .font(.pFootnote)
+              .foregroundColor(
+                selectedTab == .home ? .secondary1.default : .secondary3.dark
+              )
+          }
+        
         SettingsView()
           .tabItem {
-            VStack {
-              Text("Debug Mode")
-                .font(.pFootnote)
-                .foregroundColor(
-                  selectedTab == .home ? .secondary1.default : .secondary3.dark
-                )
-              Image("icn_tabBar_settings")
-            }
+            Text("Debug Mode")
+              .font(.pFootnote)
+              .foregroundColor(
+                selectedTab == .home ? .secondary1.default : .secondary3.dark
+              )
           }
           .tag(Tab.settings)
       }

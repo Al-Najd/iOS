@@ -37,21 +37,18 @@ struct AlNajdApp: App {
 
 final class AppState: ObservableObject {
   @Published var onboardingState: OnboardingState = .init()
-  @Published var homeState: HomeState = .init()
+  @Published var homeState: PrayersState = .init()
+  @Published var azkarState: AzkarState = .init()
 }
 
 final class AppService {
   @ObservedObject var state: AppState = .init()
   
-  func handle(deed: Deed) {
-    deed.isDone ? undo(deed: deed) : did(deed: deed)
-  }
-  
   var canShowBuffs: Bool {
     state.homeState.accumlatedRewards.isEmpty == false
   }
   
-  private func did(deed: Deed) {
+  func did(deed: Deed) {
     var deed = deed
     deed.isDone = true
     updateState(deed: deed)
@@ -60,12 +57,23 @@ final class AppService {
     HapticService.main.generate(feedback: .success)
   }
   
-  private func undo(deed: Deed) {
+  func undo(deed: Deed) {
     var deed = deed
     deed.isDone = false
     updateState(deed: deed)
     state.homeState.accumlatedRewards.findAndRemove(deed)
     HapticService.main.generate(feedback: .warning)
+  }
+  
+  func did(deed: RepeatableDeed) {
+    var deed = deed
+    deed.numberOfRepeats = max(0, deed.numberOfRepeats - 1)
+    if deed.numberOfRepeats == 0 {
+      state.azkarState.accumlatedRewards.append(deed)
+      MusicService.main.start(effect: .splashEnd)
+    }
+    updateState(repeatableDeed: deed)
+    HapticService.main.generate(feedback: .success)
   }
   
   private func updateState(deed: Deed) {
@@ -76,6 +84,22 @@ final class AppService {
       state.homeState.sunnah.findAndReplace(with: deed)
     case .nafila:
       state.homeState.nafila.findAndReplace(with: deed)
+    default:
+      break
+    }
+  }
+  
+  private func updateState(repeatableDeed: RepeatableDeed) {
+    switch repeatableDeed.category {
+    case let .azkar(category):
+      switch category {
+      case .sabah:
+        state.azkarState.sabah.findAndReplace(with: repeatableDeed)
+      case .masaa:
+        state.azkarState.masaa.findAndReplace(with: repeatableDeed)
+      }
+    default:
+      break
     }
   }
 }

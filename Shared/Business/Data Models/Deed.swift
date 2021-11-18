@@ -20,10 +20,38 @@ struct Reward: Identifiable, Codable {
   var title: String
 }
 
-enum DeedCategory: String, Codable {
+enum DeedCategory: Codable {
   case fard
   case sunnah
   case nafila
+  case azkar(AzkarCategory)
+  
+  var title: String {
+    switch self {
+    case .fard:
+      return "Fard".localized
+    case .sunnah:
+      return "Sunnah".localized
+    case .nafila:
+      return "Nafila".localized
+    case let .azkar(category):
+      return category.title
+    }
+  }
+}
+
+enum AzkarCategory: Codable {
+  case sabah
+  case masaa
+  
+  var title: String {
+    switch self {
+    case .sabah:
+      return "Azkar Al-Sabah".localized
+    case .masaa:
+      return "Azkar Al-Masaa".localized
+    }
+  }
 }
 
 extension Array where Element == Deed {

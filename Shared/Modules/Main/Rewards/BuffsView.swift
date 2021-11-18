@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BuffsView: View {
-  @EnvironmentObject var state: HomeState
+  @EnvironmentObject var state: PrayersState
   
   var body: some View {
     ZStack {

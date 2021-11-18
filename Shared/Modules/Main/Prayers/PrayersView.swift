@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HomeView: View {
-  @EnvironmentObject var state: HomeState
+struct PrayersView: View {
+  @EnvironmentObject var state: PrayersState
   var body: some View {
     VStack {
       BuffCardView()
@@ -39,7 +39,7 @@ struct HomeView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeView()
+    PrayersView()
       .environmentObject(app.state.homeState)
   }
 }
@@ -51,50 +51,59 @@ struct DeedsList: View {
   var allDeedsAreDone: Bool { deeds.first(where: { $0.isDone == false }) == nil }
   
   var body: some View {
-    Section(sectionTitle) {
+    Section(content: {
       if allDeedsAreDone {
         Text("Well Done".localized(arguments: sectionTitle))
           .padding(.p32)
           .foregroundColor(.mono.offwhite)
           .background(Color.success.default)
+          .font(.displaySmall)
           .cornerRadius(.r16)
       } else {
         ForEach(deeds) { deed in
           HStack {
             Text(deed.title)
+              .font(.pBody)
             if deed.isDone {
               Spacer()
               Image(systemName: "checkmark.seal.fill")
                 .foregroundColor(.success.default)
             }
-          }.swipeActions(edge: .trailing) {
-            Button(
-              action: {
-                withAnimation {
-                  app.handle(deed: deed)
-                }
-              },
-              label: { Image(systemName: "checkmark.seal") }
-            ).tint(.success.default)
-          }.swipeActions(edge: .leading) {
-            Button(
-              action: {
-                withAnimation {
-                  app.handle(deed: deed)
-                }
-              },
-              label: { Image(systemName: "delete.backward.fill") }
-            ).tint(.danger.default)
-          }
+          }.if(!deed.isDone, transform: { view in
+            view.swipeActions(edge: .trailing) {
+              Button(
+                action: {
+                  withAnimation {
+                    app.did(deed: deed)
+                  }
+                },
+                label: { Image(systemName: "checkmark.seal") }
+              ).tint(.success.default)
+            }
+          }).if(deed.isDone, transform: { view in
+            view.swipeActions(edge: .leading) {
+              Button(
+                action: {
+                  withAnimation {
+                    app.undo(deed: deed)
+                  }
+                },
+                label: { Image(systemName: "delete.backward.fill") }
+              ).tint(.danger.default)
+            }
+          })
         }
       }
-    }
+    }, header: {
+      Text(sectionTitle)
+        .font(.pSubheadline)
+    })
   }
 }
 
 struct BuffCardView: View {
   
-  @EnvironmentObject var state: HomeState
+  @EnvironmentObject var state: PrayersState
   
   var body: some View {
     VStack {

@@ -44,7 +44,7 @@ struct TabBarView: View {
   
   var body: some View {
     TabView {
-      HomeView()
+      PrayersView()
         .tabItem {
           Image(Tab.home.image)
         }

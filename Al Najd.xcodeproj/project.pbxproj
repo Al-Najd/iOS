@@ -16,7 +16,6 @@
 		044F23FB272A17EC00CACBA4 /* Published+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */; };
 		044F6FA22735C0F3008BA334 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FA12735C0F3008BA334 /* LocationService.swift */; };
 		044F6FA52735C26B008BA334 /* Schedule in Frameworks */ = {isa = PBXBuildFile; productRef = 044F6FA42735C26B008BA334 /* Schedule */; };
-		044F6FA82735C3BB008BA334 /* TimeMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FA72735C3BB008BA334 /* TimeMachineView.swift */; };
 		045516E32725B22900F4751B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 045516E22725B22900F4751B /* Sentry */; };
 		045516E72725B3D500F4751B /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E62725B3D500F4751B /* MainCoordinatorView.swift */; };
 		045516E92725B55400F4751B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045516E82725B55400F4751B /* HomeService.swift */; };
@@ -50,6 +49,8 @@
 		045A1CA227454D3900EC700A /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C9D27454D3900EC700A /* ErrorResponse.swift */; };
 		045A1CA42745567500EC700A /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CA32745567500EC700A /* L10n.swift */; };
 		045A1CA7274556D800EC700A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CA6274556D800EC700A /* Alamofire */; };
+		045A1CA92745658C00EC700A /* AzkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CA82745658C00EC700A /* AzkarView.swift */; };
+		045A1CAC2745696D00EC700A /* RepeatableDeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CAB2745696D00EC700A /* RepeatableDeed.swift */; };
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
@@ -78,8 +79,8 @@
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588322716CC5500FC0CBB /* AlNajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* AlNajdApp.swift */; };
 		B86588332716CC5500FC0CBB /* AlNajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588092716CC5200FC0CBB /* AlNajdApp.swift */; };
-		B86588342716CC5500FC0CBB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* HomeView.swift */; };
-		B86588352716CC5500FC0CBB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* HomeView.swift */; };
+		B86588342716CC5500FC0CBB /* PrayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* PrayersView.swift */; };
+		B86588352716CC5500FC0CBB /* PrayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865880A2716CC5200FC0CBB /* PrayersView.swift */; };
 		B86588362716CC5500FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865880B2716CC5500FC0CBB /* Assets.xcassets */; };
 		B86588372716CC5500FC0CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B865880B2716CC5500FC0CBB /* Assets.xcassets */; };
 		B86588692716CEA000FC0CBB /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588492716CEA000FC0CBB /* Metrics.swift */; };
@@ -169,7 +170,6 @@
 		0437E4D027245817005B9B46 /* OnboardingForthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthView.swift; sourceTree = "<group>"; };
 		044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+UserDefaults.swift"; sourceTree = "<group>"; };
 		044F6FA12735C0F3008BA334 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
-		044F6FA72735C3BB008BA334 /* TimeMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMachineView.swift; sourceTree = "<group>"; };
 		045516E62725B3D500F4751B /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
 		045516E82725B55400F4751B /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		045516EB2725B98F00F4751B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -200,6 +200,8 @@
 		045A1C9C27454D3900EC700A /* RSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSError.swift; sourceTree = "<group>"; };
 		045A1C9D27454D3900EC700A /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		045A1CA32745567500EC700A /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		045A1CA82745658C00EC700A /* AzkarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzkarView.swift; sourceTree = "<group>"; };
+		045A1CAB2745696D00EC700A /* RepeatableDeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatableDeed.swift; sourceTree = "<group>"; };
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -222,7 +224,7 @@
 		A74AB00340542C867378CCA1 /* ElMessiri-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "ElMessiri-Bold.ttf"; path = "ElMessiri/ElMessiri-Bold.ttf"; sourceTree = "<group>"; };
 		AB799A5EB87EC6A7573DCE0B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* AlNajdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlNajdApp.swift; sourceTree = "<group>"; };
-		B865880A2716CC5200FC0CBB /* HomeView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B865880A2716CC5200FC0CBB /* PrayersView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PrayersView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B865880B2716CC5500FC0CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86588132716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -307,21 +309,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		044F6FA62735C3A7008BA334 /* Time Machine */ = {
+		045516E42725B3BB00F4751B /* Prayers */ = {
 			isa = PBXGroup;
 			children = (
-				044F6FA72735C3BB008BA334 /* TimeMachineView.swift */,
-			);
-			path = "Time Machine";
-			sourceTree = "<group>";
-		};
-		045516E42725B3BB00F4751B /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				B865880A2716CC5200FC0CBB /* HomeView.swift */,
+				B865880A2716CC5200FC0CBB /* PrayersView.swift */,
 				045516E82725B55400F4751B /* HomeService.swift */,
 			);
-			path = Home;
+			path = Prayers;
 			sourceTree = "<group>";
 		};
 		045516E52725B3C700F4751B /* Main */ = {
@@ -329,8 +323,8 @@
 			children = (
 				045516E62725B3D500F4751B /* MainCoordinatorView.swift */,
 				04E2328A27274DB800E1B192 /* TabBar */,
-				044F6FA62735C3A7008BA334 /* Time Machine */,
-				045516E42725B3BB00F4751B /* Home */,
+				045516E42725B3BB00F4751B /* Prayers */,
+				045A1CAA2745658F00EC700A /* Azkar */,
 				04B31894271CAD3F0088F527 /* Rewards */,
 				045516EA2725B98900F4751B /* Settings */,
 			);
@@ -454,10 +448,19 @@
 			path = Adapter;
 			sourceTree = "<group>";
 		};
+		045A1CAA2745658F00EC700A /* Azkar */ = {
+			isa = PBXGroup;
+			children = (
+				045A1CA82745658C00EC700A /* AzkarView.swift */,
+			);
+			path = Azkar;
+			sourceTree = "<group>";
+		};
 		04B31892271CAD220088F527 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
 				B88BECFD2716F08000BC362A /* Deed.swift */,
+				045A1CAB2745696D00EC700A /* RepeatableDeed.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -991,6 +994,8 @@
 				B86588772716CEA000FC0CBB /* Theme.swift in Sources */,
 				045A1C9627454CDC00EC700A /* SentryLogger.swift in Sources */,
 				B86588A42716CEEC00FC0CBB /* String+Extensions.swift in Sources */,
+				045A1CA92745658C00EC700A /* AzkarView.swift in Sources */,
+				045A1CAC2745696D00EC700A /* RepeatableDeed.swift in Sources */,
 				045A1C4927454A0A00EC700A /* StorageKey.swift in Sources */,
 				045A1C8827454BB700EC700A /* URLRequestFactory.swift in Sources */,
 				045A1CA027454D3900EC700A /* ASAuthorizationErrorToSQError.swift in Sources */,
@@ -1003,7 +1008,7 @@
 				045A1C9E27454D3900EC700A /* GIDSignInErrorToSQErrorAdapter.swift in Sources */,
 				B86588892716CEA000FC0CBB /* PButton.swift in Sources */,
 				045A1C4527454A0A00EC700A /* DiskStorage.swift in Sources */,
-				B86588342716CC5500FC0CBB /* HomeView.swift in Sources */,
+				B86588342716CC5500FC0CBB /* PrayersView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				045A1C8527454BB700EC700A /* RSAlamofireEventsMonitor.swift in Sources */,
 				045A1C9227454CDC00EC700A /* LoggersManager.swift in Sources */,
@@ -1049,7 +1054,6 @@
 				B86588792716CEA000FC0CBB /* DefaultTheme.swift in Sources */,
 				B865887B2716CEA000FC0CBB /* FontConfig.swift in Sources */,
 				B865888B2716CEA000FC0CBB /* VisualEffectView.swift in Sources */,
-				044F6FA82735C3BB008BA334 /* TimeMachineView.swift in Sources */,
 				045A1C4A27454A0A00EC700A /* StorageError.swift in Sources */,
 				B86588712716CEA000FC0CBB /* Palette.swift in Sources */,
 				B86588A22716CEEC00FC0CBB /* ServiceLocator.swift in Sources */,
@@ -1075,7 +1079,7 @@
 				B86588AC2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
 				B865888A2716CEA000FC0CBB /* PButton.swift in Sources */,
 				04D468C9272250F600D4E12B /* HapticService.swift in Sources */,
-				B86588352716CC5500FC0CBB /* HomeView.swift in Sources */,
+				B86588352716CC5500FC0CBB /* PrayersView.swift in Sources */,
 				B865886E2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				B86588742716CEA000FC0CBB /* Palettes.swift in Sources */,
 				B865887E2716CEA000FC0CBB /* Fonts.swift in Sources */,
