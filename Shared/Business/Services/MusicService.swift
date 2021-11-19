@@ -67,5 +67,12 @@ extension MusicService {
         return URL(fileURLWithPath: Bundle.main.path(forResource: "splashEnd", ofType: "mp3") ?? .empty)
       }
     }
+    
+    var name: String {
+      switch self {
+      case .splashEnd:
+        return "splashEnd.mp3"
+      }
+    }
   }
 }

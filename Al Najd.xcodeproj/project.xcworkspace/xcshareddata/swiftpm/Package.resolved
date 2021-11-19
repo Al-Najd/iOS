@@ -47,6 +47,24 @@
         }
       },
       {
+        "package": "SPIndicator",
+        "repositoryURL": "https://github.com/ivanvorobei/SPIndicator",
+        "state": {
+          "branch": null,
+          "revision": "bf89051dbbabf302804c237cc4b8fa324805432c",
+          "version": "1.4.1"
+        }
+      },
+      {
+        "package": "SPPermissions",
+        "repositoryURL": "https://github.com/ivanvorobei/SPPermissions",
+        "state": {
+          "branch": null,
+          "revision": "b83bdd52fc110c34c015e72a36a4a4920bc4e8b8",
+          "version": "6.8.4"
+        }
+      },
+      {
         "package": "swift-log",
         "repositoryURL": "https://github.com/apple/swift-log.git",
         "state": {

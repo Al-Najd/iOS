@@ -1,3 +1,9 @@
+## Updates of version 0.4.2 🚀
+    - Fix Data Duplication, Rewards Buff having a wrong source of truth, ِAnimations
+
+## Updates of version 0.4.2 🚀
+    - Fix Data Duplication, Rewards Buff having a wrong source of truth, ِAnimations
+
 ## Updates of version 0.4.1 🚀
     - Fix crash in Azkar and Rewards and Improve Localization
 

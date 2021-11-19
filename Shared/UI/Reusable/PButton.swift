@@ -20,8 +20,7 @@ struct PButton: View {
         Text(title)
           .font(.displaySmall)
           .foregroundColor(.mono.offwhite)
-          .frame(maxWidth: .infinity)
-          .padding(.vertical, .p16)
+          .padding(.p16)
       }
       .background(color)
       .cornerRadius(.p8)

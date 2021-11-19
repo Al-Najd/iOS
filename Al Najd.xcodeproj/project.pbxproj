@@ -51,6 +51,14 @@
 		045A1CA7274556D800EC700A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CA6274556D800EC700A /* Alamofire */; };
 		045A1CA92745658C00EC700A /* AzkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CA82745658C00EC700A /* AzkarView.swift */; };
 		045A1CAC2745696D00EC700A /* RepeatableDeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CAB2745696D00EC700A /* RepeatableDeed.swift */; };
+		045A1CD92746AB3100EC700A /* SchedulerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CD82746AB3100EC700A /* SchedulerService.swift */; };
+		045A1CDC2746B14300EC700A /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CDB2746B14300EC700A /* PermissionService.swift */; };
+		045A1CDF2746B20000EC700A /* SPPermissionsLocationWhenInUse in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CDE2746B20000EC700A /* SPPermissionsLocationWhenInUse */; };
+		045A1CE12746B20000EC700A /* SPPermissionsNotification in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CE02746B20000EC700A /* SPPermissionsNotification */; };
+		045A1CE32746B20000EC700A /* SPPermissionsReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CE22746B20000EC700A /* SPPermissionsReminders */; };
+		045A1CE52746B20000EC700A /* SPPermissionsSiri in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CE42746B20000EC700A /* SPPermissionsSiri */; };
+		045A1CE82746F21300EC700A /* PlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CE72746F21300EC700A /* PlansView.swift */; };
+		045A1CEB2747DA0D00EC700A /* SPIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CEA2747DA0D00EC700A /* SPIndicator */; };
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
@@ -202,6 +210,9 @@
 		045A1CA32745567500EC700A /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		045A1CA82745658C00EC700A /* AzkarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzkarView.swift; sourceTree = "<group>"; };
 		045A1CAB2745696D00EC700A /* RepeatableDeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatableDeed.swift; sourceTree = "<group>"; };
+		045A1CD82746AB3100EC700A /* SchedulerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerService.swift; sourceTree = "<group>"; };
+		045A1CDB2746B14300EC700A /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
+		045A1CE72746F21300EC700A /* PlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlansView.swift; sourceTree = "<group>"; };
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -277,11 +288,16 @@
 			files = (
 				04B31891271C6BE90088F527 /* PulseUI in Frameworks */,
 				045A1CA7274556D800EC700A /* Alamofire in Frameworks */,
+				045A1CE32746B20000EC700A /* SPPermissionsReminders in Frameworks */,
 				04B3188D271C6BE90088F527 /* Pulse in Frameworks */,
 				045A1C5027454B3200EC700A /* KeychainSwift in Frameworks */,
 				04B3188F271C6BE90088F527 /* PulseCore in Frameworks */,
+				045A1CDF2746B20000EC700A /* SPPermissionsLocationWhenInUse in Frameworks */,
+				045A1CE52746B20000EC700A /* SPPermissionsSiri in Frameworks */,
 				045516E32725B22900F4751B /* Sentry in Frameworks */,
+				045A1CE12746B20000EC700A /* SPPermissionsNotification in Frameworks */,
 				044F6FA52735C26B008BA334 /* Schedule in Frameworks */,
+				045A1CEB2747DA0D00EC700A /* SPIndicator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +339,7 @@
 			children = (
 				045516E62725B3D500F4751B /* MainCoordinatorView.swift */,
 				04E2328A27274DB800E1B192 /* TabBar */,
+				045A1CE62746F20400EC700A /* Plans */,
 				045516E42725B3BB00F4751B /* Prayers */,
 				045A1CAA2745658F00EC700A /* Azkar */,
 				04B31894271CAD3F0088F527 /* Rewards */,
@@ -456,6 +473,32 @@
 			path = Azkar;
 			sourceTree = "<group>";
 		};
+		045A1CD52746AB0D00EC700A /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
+				04B31897271CAE840088F527 /* ReminderService.swift */,
+				045A1CD82746AB3100EC700A /* SchedulerService.swift */,
+			);
+			path = Scheduler;
+			sourceTree = "<group>";
+		};
+		045A1CDA2746B13900EC700A /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				045A1CDB2746B14300EC700A /* PermissionService.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		045A1CE62746F20400EC700A /* Plans */ = {
+			isa = PBXGroup;
+			children = (
+				045A1CE72746F21300EC700A /* PlansView.swift */,
+			);
+			path = Plans;
+			sourceTree = "<group>";
+		};
 		04B31892271CAD220088F527 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,8 +519,8 @@
 		04B31895271CAE720088F527 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				04B31897271CAE840088F527 /* ReminderService.swift */,
-				04B31899271CAE8F0088F527 /* RecommendationService.swift */,
+				045A1CDA2746B13900EC700A /* Permissions */,
+				045A1CD52746AB0D00EC700A /* Scheduler */,
 				04D468AE272204AB00D4E12B /* MusicService.swift */,
 				04D468B627222AF800D4E12B /* LocalizationService.swift */,
 				04D468C7272250F600D4E12B /* HapticService.swift */,
@@ -822,6 +865,11 @@
 				044F6FA42735C26B008BA334 /* Schedule */,
 				045A1C4F27454B3200EC700A /* KeychainSwift */,
 				045A1CA6274556D800EC700A /* Alamofire */,
+				045A1CDE2746B20000EC700A /* SPPermissionsLocationWhenInUse */,
+				045A1CE02746B20000EC700A /* SPPermissionsNotification */,
+				045A1CE22746B20000EC700A /* SPPermissionsReminders */,
+				045A1CE42746B20000EC700A /* SPPermissionsSiri */,
+				045A1CEA2747DA0D00EC700A /* SPIndicator */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -921,6 +969,8 @@
 				044F6FA32735C26B008BA334 /* XCRemoteSwiftPackageReference "Schedule" */,
 				045A1C4E27454B3200EC700A /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				045A1CA5274556D800EC700A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */,
+				045A1CE92747DA0D00EC700A /* XCRemoteSwiftPackageReference "SPIndicator" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -1003,6 +1053,8 @@
 				B86588A62716CEEC00FC0CBB /* Codable+Helpers.swift in Sources */,
 				B86588AE2716DC1600FC0CBB /* CorePlugin.swift in Sources */,
 				045A1C4B27454A0A00EC700A /* CacheProtocol.swift in Sources */,
+				045A1CDC2746B14300EC700A /* PermissionService.swift in Sources */,
+				045A1CD92746AB3100EC700A /* SchedulerService.swift in Sources */,
 				045A1C8427454BB700EC700A /* Endpoint.swift in Sources */,
 				B86588AB2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
 				045A1C9E27454D3900EC700A /* GIDSignInErrorToSQErrorAdapter.swift in Sources */,
@@ -1011,6 +1063,7 @@
 				B86588342716CC5500FC0CBB /* PrayersView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				045A1C8527454BB700EC700A /* RSAlamofireEventsMonitor.swift in Sources */,
+				045A1CE82746F21300EC700A /* PlansView.swift in Sources */,
 				045A1C9227454CDC00EC700A /* LoggersManager.swift in Sources */,
 				045516EE27260E5E00F4751B /* TimerService.swift in Sources */,
 				045A1C4627454A0A00EC700A /* EncryptedStorage.swift in Sources */,
@@ -1269,9 +1322,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1293,9 +1347,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1534,6 +1589,22 @@
 				kind = branch;
 			};
 		};
+		045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPPermissions";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.8.4;
+			};
+		};
+		045A1CE92747DA0D00EC700A /* XCRemoteSwiftPackageReference "SPIndicator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPIndicator";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Pulse";
@@ -1564,6 +1635,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 045A1CA5274556D800EC700A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		045A1CDE2746B20000EC700A /* SPPermissionsLocationWhenInUse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */;
+			productName = SPPermissionsLocationWhenInUse;
+		};
+		045A1CE02746B20000EC700A /* SPPermissionsNotification */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */;
+			productName = SPPermissionsNotification;
+		};
+		045A1CE22746B20000EC700A /* SPPermissionsReminders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */;
+			productName = SPPermissionsReminders;
+		};
+		045A1CE42746B20000EC700A /* SPPermissionsSiri */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */;
+			productName = SPPermissionsSiri;
+		};
+		045A1CEA2747DA0D00EC700A /* SPIndicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045A1CE92747DA0D00EC700A /* XCRemoteSwiftPackageReference "SPIndicator" */;
+			productName = SPIndicator;
 		};
 		04B3188C271C6BE90088F527 /* Pulse */ = {
 			isa = XCSwiftPackageProductDependency;

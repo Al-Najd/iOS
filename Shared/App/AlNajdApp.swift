@@ -30,6 +30,7 @@ struct AlNajdApp: App {
         .environmentObject(app.state.onboardingState)
         .environmentObject(app.state.homeState)
         .environmentObject(app.state.azkarState)
+        .environmentObject(app.state.plansState)
         .environment(\.colorScheme, .dark)
         .preferredColorScheme(.dark)
     }
@@ -40,6 +41,7 @@ final class AppState: ObservableObject {
   @Published var onboardingState: OnboardingState = .init()
   @Published var homeState: PrayersState = .init()
   @Published var azkarState: AzkarState = .init()
+  @Published var plansState: PlansState = .init()
 }
 
 final class AppService {

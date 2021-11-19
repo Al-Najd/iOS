@@ -49,6 +49,15 @@ struct MainCoordinatorView: View {
               )
           }
         
+        PlansView()
+          .tabItem {
+            Text("Plans".localized)
+              .font(.pFootnote)
+              .foregroundColor(
+                selectedTab == .home ? .secondary1.default : .secondary3.dark
+              )
+          }
+        
         SettingsView()
           .tabItem {
             Text("Debug Mode")
