@@ -12,6 +12,7 @@ public struct RepeatableDeed: Identifiable, Codable {
   
   let title: String
   var numberOfRepeats: Int
+  lazy var currentNumberOfRepeats: Int = numberOfRepeats
   
   let category: DeedCategory
   var reward: Reward

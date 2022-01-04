@@ -93,7 +93,16 @@ final class AppService {
   
   func did(deed: RepeatableDeed) {
     var deed = deed
-    deed.numberOfRepeats = 0
+    deed.currentNumberOfRepeats = 0
+    state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
+    updateState(repeatableDeed: deed)
+    MusicService.main.start(effect: .splashEnd)
+    HapticService.main.generate(feedback: .success)
+  }
+  
+  func undo(deed: RepeatableDeed) {
+    var deed = deed
+    deed.currentNumberOfRepeats = deed.numberOfRepeats
     state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
     updateState(repeatableDeed: deed)
     MusicService.main.start(effect: .splashEnd)

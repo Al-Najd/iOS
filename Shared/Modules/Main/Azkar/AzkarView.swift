@@ -173,25 +173,25 @@ struct RepeatableDeedsList: View {
             }
           }.onTapGesture {
             withAnimation {
-              app.did(deed: deed)
+              app.decrement(deed: deed)
             }
           }.if(!deed.isDone, transform: { view in
             view.swipeActions(edge: .trailing) {
               Button(
                 action: {
                   withAnimation {
-                    app.decrement(deed: deed)
+                    app.did(deed: deed)
                   }
                 },
                 label: { Image(systemName: "checkmark.seal") }
               ).tint(.success.default)
             }
-          }).if(!deed.isDone, transform: { view in
+          }).if(deed.isDone, transform: { view in
             view.swipeActions(edge: .leading) {
               Button(
                 action: {
                   withAnimation {
-                    app.did(deed: deed)
+                    app.undo(deed: deed)
                   }
                 },
                 label: { Image(systemName: "delete.backward.fill") }
