@@ -94,6 +94,7 @@
 		04D4927E27849DEC00B3E84E /* Zekr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4927D27849DEC00B3E84E /* Zekr.swift */; };
 		04D4928027849DFA00B3E84E /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D4927F27849DFA00B3E84E /* azkar-db.json */; };
 		04D492822784ADF300B3E84E /* DailyDeedsReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492812784ADF300B3E84E /* DailyDeedsReport.swift */; };
+		04D492852784CA1800B3E84E /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 04D492842784CA1800B3E84E /* PartialSheet */; };
 		04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329127274F3D00E1B192 /* TabBarView.swift */; };
 		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
@@ -323,6 +324,7 @@
 				045A1CE52746B20000EC700A /* SPPermissionsSiri in Frameworks */,
 				045516E32725B22900F4751B /* Sentry in Frameworks */,
 				045A1CE12746B20000EC700A /* SPPermissionsNotification in Frameworks */,
+				04D492852784CA1800B3E84E /* PartialSheet in Frameworks */,
 				044F6FA52735C26B008BA334 /* Schedule in Frameworks */,
 				045A1CEB2747DA0D00EC700A /* SPIndicator in Frameworks */,
 			);
@@ -916,6 +918,7 @@
 				045A1CE22746B20000EC700A /* SPPermissionsReminders */,
 				045A1CE42746B20000EC700A /* SPPermissionsSiri */,
 				045A1CEA2747DA0D00EC700A /* SPIndicator */,
+				04D492842784CA1800B3E84E /* PartialSheet */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -1017,6 +1020,7 @@
 				045A1CA5274556D800EC700A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */,
 				045A1CE92747DA0D00EC700A /* XCRemoteSwiftPackageReference "SPIndicator" */,
+				04D492832784CA1800B3E84E /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -1677,6 +1681,14 @@
 				kind = branch;
 			};
 		};
+		04D492832784CA1800B3E84E /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.1.14;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1739,6 +1751,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
+		};
+		04D492842784CA1800B3E84E /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04D492832784CA1800B3E84E /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

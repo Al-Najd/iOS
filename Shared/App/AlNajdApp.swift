@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import PartialSheet
+import Combine
 
 @main
 struct AlNajdApp: App {
@@ -18,6 +20,8 @@ struct AlNajdApp: App {
       ReportPlugin(),
     ]
   }
+  
+  let sheetManager: PartialSheetManager = PartialSheetManager()
   
   init() {
     plugins.forEach { $0.setup() }
@@ -32,11 +36,15 @@ struct AlNajdApp: App {
         .environmentObject(app.state.azkarState)
         .environmentObject(app.state.plansState)
         .environmentObject(app.state.rewardsState)
+        .environmentObject(app.state.dateState)
+        .environmentObject(sheetManager)
         .environment(\.colorScheme, .dark)
         .preferredColorScheme(.dark)
     }
   }
 }
+
+
 
 final class AppState: ObservableObject {
   @Published var onboardingState: OnboardingState = .init()
@@ -44,6 +52,7 @@ final class AppState: ObservableObject {
   @Published var azkarState: AzkarState = .init()
   @Published var plansState: PlansState = .init()
   @Published var rewardsState: RewardsState = .init()
+  @Published var dateState: DateState = .init()
   
   func sync(with dailyReport: DailyDeedsReport) {
     homeState.faraaid = dailyReport.faraaid
@@ -53,6 +62,15 @@ final class AppState: ObservableObject {
     azkarState.sabah = dailyReport.sabah
     azkarState.masaa = dailyReport.masaa
     azkarState.accumlatedRewards = dailyReport.accumlatedAzkarRewards
+  }
+}
+
+final class DateState: ObservableObject {
+  @Published var selectedDate: Date = .now
+  @Published var showDaySelection: Bool = false
+  @Published var offset: CGFloat = 0
+  var title: String {
+    selectedDate.isInToday ? "Today".localized : "\(Date().day)-\(Date().month)-\(Date().year)"
   }
 }
 
@@ -67,8 +85,11 @@ final class AppService {
   @ObservedObject var state: AppState = .init()
   
   private var todaysString: String {
-    "\(Date().day)-\(Date().month)-\(Date().year)"
+    let date = state.dateState.selectedDate
+    return "\(date.day)-\(date.month)-\(date.year)"
   }
+  
+  private var cancellables: Set<AnyCancellable> = .init()
   
   private var dailyReport: DailyDeedsReport {
     get {
@@ -81,7 +102,12 @@ final class AppService {
   }
   
   init() {
-    state.sync(with: dailyReport)
+    state.dateState.$selectedDate.sink(receiveValue: { [weak self] _ in
+      guard let self = self else { return }
+      withAnimation(.easeInOut) {
+        self.state.sync(with: self.dailyReport)
+      }
+    }).store(in: &cancellables)
   }
   
   var canShowBuffs: Bool {

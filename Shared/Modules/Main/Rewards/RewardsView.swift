@@ -23,10 +23,11 @@ struct RewardsView: View {
           .pagerTabItem {
             TitleNavBarItem(title: "Azkar".localized)
           }
-      }.pagerTabStripViewStyle(
+      }
+      .pagerTabStripViewStyle(
         .segmentedControl(backgroundColor: .primary2.dark, padding: .init(top: 0, leading: .p8, bottom: 0, trailing: .p8), placedInToolbar: false)
       )
-
+      .padding(.top, .p48)
     }
   }
 }
