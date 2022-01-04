@@ -6,16 +6,10 @@
 //
 
 import SPPermissions
-import SPPermissionsSiri
 import SPPermissionsNotification
-import SPPermissionsLocationWhenInUse
-import SPPermissionsReminders
 
 public enum ANPermission: CaseIterable {
-  case siri
   case notifications
-  case locationWhenInUse
-  case reminders
 }
 
 extension ANPermission {

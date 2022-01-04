@@ -5,14 +5,62 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000192">
+      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.000169">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: get_version_number" time="0.03795">
+      <testcase classname="fastlane.lanes" name="01: get_version_number" time="0.042263">
         
-          <failure message="/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:229:in `chdir&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:229:in `execute_action&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;Fastfile:58:in `block (2 levels) in parsing_binding&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:49:in `block in execute&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:45:in `chdir&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/runner.rb:45:in `execute&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/commands_generator.rb:109:in `block (2 levels) in run&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/commander-4.6.0/lib/commander/command.rb:187:in `call&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/commander-4.6.0/lib/commander/command.rb:157:in `run&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:117:in `run!&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/commands_generator.rb:353:in `run&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/commands_generator.rb:42:in `start&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/fastlane/lib/fastlane/cli_tools_distributor.rb:122:in `take_off&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/fastlane-2.198.1/bin/fastlane:23:in `&lt;top (required)&gt;&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/bin/fastlane:23:in `load&apos;&#10;/Users/mac/.rbenv/versions/3.0.2/bin/fastlane:23:in `&lt;main&gt;&apos;&#10;&#10;[!] Data missing closing &apos;&gt;&apos;&#10; #  -------------------------------------------&#10;1&gt;  &lt;dict&gt;&#10;     ^&#10; #    &lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;&lt;string&gt;$(DEVELOPMENT_LANGUAGE)&lt;/string&gt;&#10; #    &lt;key&gt;CFBundleDisplayName&lt;/key&gt;&lt;string&gt;Al Najd&lt;/string&gt;&#10; #  -------------------------------------------&#10;" />
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="02: last_git_tag" time="0.034408">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="03: increment_build_number" time="0.703431">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="04: increment_version_number" time="0.77337">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="05: gym" time="73.767783">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: git_tags" time="0.103056">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: changelog_from_git_commits" time="0.076599">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: Switch to ios update_changelog lane" time="0.000254">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: git_tags" time="0.107594">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: changelog_from_git_commits" time="0.008772">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: pilot" time="1559.904072">
         
       </testcase>
     
