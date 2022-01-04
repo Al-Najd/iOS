@@ -91,6 +91,8 @@
 		04D4927A2784886C00B3E84E /* PagerTabItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926D2784886C00B3E84E /* PagerTabItemModifier.swift */; };
 		04D4927B2784886C00B3E84E /* NavBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926E2784886C00B3E84E /* NavBarModifier.swift */; };
 		04D4927C2784886C00B3E84E /* PagerTabViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */; };
+		04D4927E27849DEC00B3E84E /* Zekr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4927D27849DEC00B3E84E /* Zekr.swift */; };
+		04D4928027849DFA00B3E84E /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D4927F27849DFA00B3E84E /* azkar-db.json */; };
 		04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329127274F3D00E1B192 /* TabBarView.swift */; };
 		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
@@ -251,6 +253,8 @@
 		04D4926D2784886C00B3E84E /* PagerTabItemModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabItemModifier.swift; sourceTree = "<group>"; };
 		04D4926E2784886C00B3E84E /* NavBarModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarModifier.swift; sourceTree = "<group>"; };
 		04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabViewStyle.swift; sourceTree = "<group>"; };
+		04D4927D27849DEC00B3E84E /* Zekr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zekr.swift; sourceTree = "<group>"; };
+		04D4927F27849DFA00B3E84E /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
 		04E2329127274F3D00E1B192 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		04E2329327277A0000E1B192 /* StopWatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
@@ -523,8 +527,10 @@
 		04B31892271CAD220088F527 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				04D4927F27849DFA00B3E84E /* azkar-db.json */,
 				B88BECFD2716F08000BC362A /* Deed.swift */,
 				045A1CAB2745696D00EC700A /* RepeatableDeed.swift */,
+				04D4927D27849DEC00B3E84E /* Zekr.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -1035,6 +1041,7 @@
 				654B2CC32A79D6868CD3AD8A /* ElMessiri-Regular.ttf in Resources */,
 				C3B8E8F498D3591D0C2C7B4C /* ElMessiri-Bold.ttf in Resources */,
 				5FABE99E54C669633F483C60 /* fonts.json in Resources */,
+				04D4928027849DFA00B3E84E /* azkar-db.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,6 +1084,7 @@
 				04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */,
 				04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */,
 				B86588772716CEA000FC0CBB /* Theme.swift in Sources */,
+				04D4927E27849DEC00B3E84E /* Zekr.swift in Sources */,
 				045A1C9627454CDC00EC700A /* SentryLogger.swift in Sources */,
 				B86588A42716CEEC00FC0CBB /* String+Extensions.swift in Sources */,
 				045A1CA92745658C00EC700A /* AzkarView.swift in Sources */,

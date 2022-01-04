@@ -24,37 +24,25 @@ public struct RepeatableDeed: Identifiable, Codable {
 extension Array where Element == RepeatableDeed {
   public static let azkar: [RepeatableDeed] = sabah + masaa
   
-  public static let sabah: [RepeatableDeed] = [
-    .init(
-      title: "Korsi",
-      numberOfRepeats: 1,
-      category: .azkar(.sabah),
-      reward: .init(title: "??")
-    ),
-    .init(
-      title: "RadytoBellah".localized,
-      numberOfRepeats: 3,
-      category: .azkar(.sabah),
-      reward: .init(
-        title: "Allah Must Satisfy you".localized
+  public static var sabah: [RepeatableDeed] = {
+    Zekr.mainAzkar.filter { $0.category == .sabah }.map {
+      return RepeatableDeed(
+        title: $0.zekr,
+        numberOfRepeats: $0.count,
+        category: .azkar(.sabah),
+        reward: .init(title: $0.purpose)
       )
-    ),
-  ]
+    }
+  }()
   
-  public static let masaa: [RepeatableDeed] = [
-    .init(
-      title: "Korsi",
-      numberOfRepeats: 1,
-      category: .azkar(.sabah),
-      reward: .init(title: "??")
-    ),
-    .init(
-      title: "RadytoBellah".localized,
-      numberOfRepeats: 3,
-      category: .azkar(.masaa),
-      reward: .init(
-        title: "Allah Must Satisfy you".localized
+  public static let masaa: [RepeatableDeed] = {
+    Zekr.mainAzkar.filter { $0.category == .masaa }.map {
+      return RepeatableDeed(
+        title: $0.zekr,
+        numberOfRepeats: $0.count,
+        category: .azkar(.masaa),
+        reward: .init(title: $0.purpose)
       )
-    )
-  ]
+    }
+  }()
 }
