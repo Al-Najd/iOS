@@ -10,7 +10,7 @@ import Foundation
 public protocol Cachable: Codable { }
 
 public protocol ReadableStorage {
-  func fetchValue<T: Cachable>(for key: StorageKey) throws -> T
+  func fetchValue<T: Cachable>(for key: StorageKey) -> T?
 }
 
 public protocol WritableStorage {

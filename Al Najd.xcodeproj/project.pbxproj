@@ -93,6 +93,7 @@
 		04D4927C2784886C00B3E84E /* PagerTabViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */; };
 		04D4927E27849DEC00B3E84E /* Zekr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4927D27849DEC00B3E84E /* Zekr.swift */; };
 		04D4928027849DFA00B3E84E /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D4927F27849DFA00B3E84E /* azkar-db.json */; };
+		04D492822784ADF300B3E84E /* DailyDeedsReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492812784ADF300B3E84E /* DailyDeedsReport.swift */; };
 		04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329127274F3D00E1B192 /* TabBarView.swift */; };
 		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
@@ -255,6 +256,7 @@
 		04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabViewStyle.swift; sourceTree = "<group>"; };
 		04D4927D27849DEC00B3E84E /* Zekr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zekr.swift; sourceTree = "<group>"; };
 		04D4927F27849DFA00B3E84E /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
+		04D492812784ADF300B3E84E /* DailyDeedsReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeedsReport.swift; sourceTree = "<group>"; };
 		04E2329127274F3D00E1B192 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		04E2329327277A0000E1B192 /* StopWatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				B88BECFD2716F08000BC362A /* Deed.swift */,
 				045A1CAB2745696D00EC700A /* RepeatableDeed.swift */,
 				04D4927D27849DEC00B3E84E /* Zekr.swift */,
+				04D492812784ADF300B3E84E /* DailyDeedsReport.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				04D492762784886C00B3E84E /* FixedSizeNavBarView.swift in Sources */,
 				045A1CDC2746B14300EC700A /* PermissionService.swift in Sources */,
 				045A1CD92746AB3100EC700A /* SchedulerService.swift in Sources */,
+				04D492822784ADF300B3E84E /* DailyDeedsReport.swift in Sources */,
 				045A1C8427454BB700EC700A /* Endpoint.swift in Sources */,
 				B86588AB2716DC0800FC0CBB /* PluginProtocol.swift in Sources */,
 				045A1C9E27454D3900EC700A /* GIDSignInErrorToSQErrorAdapter.swift in Sources */,
@@ -1380,7 +1384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -1390,6 +1394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
@@ -1405,7 +1410,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -1415,6 +1420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;

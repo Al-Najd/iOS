@@ -44,6 +44,16 @@ final class AppState: ObservableObject {
   @Published var azkarState: AzkarState = .init()
   @Published var plansState: PlansState = .init()
   @Published var rewardsState: RewardsState = .init()
+  
+  func sync(with dailyReport: DailyDeedsReport) {
+    homeState.faraaid = dailyReport.faraaid
+    homeState.nafila = dailyReport.nafila
+    homeState.sunnah = dailyReport.sunnah
+    homeState.accumlatedRewards = dailyReport.accumlatedPrayersRewards
+    azkarState.sabah = dailyReport.sabah
+    azkarState.masaa = dailyReport.masaa
+    azkarState.accumlatedRewards = dailyReport.accumlatedAzkarRewards
+  }
 }
 
 final class RewardsState: ObservableObject {
@@ -56,6 +66,24 @@ final class RewardsState: ObservableObject {
 final class AppService {
   @ObservedObject var state: AppState = .init()
   
+  private var todaysString: String {
+    "\(Date().day)-\(Date().month)-\(Date().year)"
+  }
+  
+  private var dailyReport: DailyDeedsReport {
+    get {
+      CacheManager().fetch(DailyDeedsReport.self, for: .daily(todaysString)) ?? .init()
+    }
+    
+    set {
+      try? CacheManager().save(newValue, for: .daily(todaysString))
+    }
+  }
+  
+  init() {
+    state.sync(with: dailyReport)
+  }
+  
   var canShowBuffs: Bool {
     state.homeState.accumlatedRewards.isEmpty == false
   }
@@ -65,6 +93,7 @@ final class AppService {
     deed.isDone = true
     updateState(deed: deed)
     state.homeState.accumlatedRewards.append(deed)
+    updateCache()
     MusicService.main.start(effect: .splashEnd)
     HapticService.main.generate(feedback: .success)
   }
@@ -74,6 +103,7 @@ final class AppService {
     deed.isDone = false
     updateState(deed: deed)
     state.homeState.accumlatedRewards.findAndRemove(deed)
+    updateCache()
     HapticService.main.generate(feedback: .warning)
   }
   
@@ -82,7 +112,7 @@ final class AppService {
     var deed = deed
     deed.numberOfRepeats -= 1
     updateState(repeatableDeed: deed)
-    
+    updateCache()
     if deed.numberOfRepeats == 0 {
       state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
       MusicService.main.start(effect: .splashEnd)
@@ -96,6 +126,7 @@ final class AppService {
     deed.currentNumberOfRepeats = 0
     state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
     updateState(repeatableDeed: deed)
+    updateCache()
     MusicService.main.start(effect: .splashEnd)
     HapticService.main.generate(feedback: .success)
   }
@@ -105,8 +136,13 @@ final class AppService {
     deed.currentNumberOfRepeats = deed.numberOfRepeats
     state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
     updateState(repeatableDeed: deed)
+    updateCache()
     MusicService.main.start(effect: .splashEnd)
     HapticService.main.generate(feedback: .success)
+  }
+  
+  private func updateCache() {
+    dailyReport = .init(state: state)
   }
   
   private func updateState(deed: Deed) {

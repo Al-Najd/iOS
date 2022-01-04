@@ -57,14 +57,14 @@ extension DiskStorage {
 }
 
 extension DiskStorage: ReadableStorage {
-  public func fetchValue<T: Cachable>(for key: StorageKey) throws -> T {
+  public func fetchValue<T: Cachable>(for key: StorageKey) -> T? {
     let url = path.appendingPathComponent(key.key)
     guard let data = fileManager.contents(atPath: url.path) else {
-      throw StorageError.notFound
+      return nil
     }
     
     guard let value = data.decode(T.self) else {
-      throw StorageError.notFound
+      return nil
     }
     
     return value

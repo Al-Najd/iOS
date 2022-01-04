@@ -23,9 +23,9 @@ extension EncryptedStorage: WritableStorage {
 }
 
 extension EncryptedStorage: ReadableStorage {
-  public func fetchValue<T: Cachable>(for key: StorageKey) throws -> T {
+  public func fetchValue<T: Cachable>(for key: StorageKey) -> T? {
     guard let value = (keychain.getData(key.key) ?? Data()).decode(T.self) else {
-      throw StorageError.notFound
+      return nil
     }
     
     return value

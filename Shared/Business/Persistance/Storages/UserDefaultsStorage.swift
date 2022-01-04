@@ -8,7 +8,7 @@
 import Foundation
 
 final class UserDefaultsStorage {
-  let defaults: UserDefaults = UserDefaults(suiteName: "com.belbaqy.belbaqy") ?? .standard
+  let defaults: UserDefaults = UserDefaults(suiteName: "com.nerdor.theone.The-One") ?? .standard
 }
 
 extension UserDefaultsStorage: WritableStorage {
@@ -22,8 +22,7 @@ extension UserDefaultsStorage: WritableStorage {
 }
 
 extension UserDefaultsStorage: ReadableStorage {
-  func fetchValue<T>(for key: StorageKey) throws -> T where T : Cachable {
-    guard let value = defaults.data(forKey: key.key)?.decode(T.self) else { throw StorageError.notFound }
-    return value
+  func fetchValue<T>(for key: StorageKey) -> T? where T : Cachable {
+    defaults.data(forKey: key.key)?.decode(T.self)
   }
 }

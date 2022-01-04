@@ -55,7 +55,26 @@ platform :ios do
     # Beta Release
     setup_ci if ENV['CI']
     # Handles any versionings and Changelogs maintenance
-    increment_build_number
+    xcode_vesion = get_version_number(target: "Al Najd (iOS)")
+    latest_git_tag_version = last_git_tag
+
+    is_same_vesion = Gem::Version.new(xcode_vesion) == Gem::Version.new(latest_git_tag_version)
+    is_new_version = Gem::Version.new(xcode_vesion) < Gem::Version.new(latest_git_tag_version)
+
+    if is_same_vesion
+      increment_build_number
+    elsif is_new_version
+      increment_build_number(
+        build_number: 1
+      )
+
+      increment_version_number(
+        version_number: latest_git_tag_version
+      )
+    else 
+      abort(`Something went wrong, the Xcode version can't be greater than the latest git tag version\nCurrentVersion: #{xcode_vesion}\nGit Tag Version: #{latest_git_tag_version}`)
+    end
+
     # Builds and prepare for exporting the app
     gym(
       scheme: "The One (iOS)",
@@ -85,7 +104,7 @@ platform :ios do
     # Report Success
     # slack
     git_add
-    git_commit(message: "🚀 Released #{current_version}! [Beta Release]")
+    git_commit(message: "🚀 Released iOS #{get_version_number(target: "Al Najd (iOS)")}! [Beta Release]")
     push_to_git_remote
   end
 

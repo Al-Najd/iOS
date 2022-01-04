@@ -1,3 +1,9 @@
+## Updates of version 0.6.2 🚀
+    - Fix Interaction Logic
+    - Add Azkar DB
+    - Temporarily Disable Plans until it is more Stable
+    - Move Rewards display to their dedicated Page
+
 ## Updates of version 0.4.2 🚀
     - Fix Data Duplication, Rewards Buff having a wrong source of truth, ِAnimations
 

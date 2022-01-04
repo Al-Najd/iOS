@@ -29,8 +29,8 @@ public final class CacheManager {
     self.encoder = encoder
   }
   
-  func fetch<T: Cachable>(_ type: T.Type, for key: StorageKey) throws -> T {
-    return try getSuitableStorage(from: key.suitableStorage).fetchValue(for: key)
+  func fetch<T: Cachable>(_ type: T.Type, for key: StorageKey) -> T? {
+    return getSuitableStorage(from: key.suitableStorage).fetchValue(for: key)
   }
   
   func save<T: Cachable>(_ value: T, for key: StorageKey) throws {
