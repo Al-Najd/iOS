@@ -29,6 +29,7 @@ struct MainCoordinatorView: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
       }.ignoresSafeArea(.all, edges: .vertical)
+      
       TabView(selection: $selectedTab) {
         PrayersView()
           .tabItem {
@@ -37,36 +38,32 @@ struct MainCoordinatorView: View {
               .foregroundColor(
                 selectedTab == .home ? .secondary1.default : .secondary3.dark
               )
-          }
-          .tag(Tab.home)
+          }.tag(Tab.home)
         
         AzkarView()
           .tabItem {
             Text("Azkar".localized)
               .font(.pFootnote)
               .foregroundColor(
-                selectedTab == .home ? .secondary1.default : .secondary3.dark
+                selectedTab == .azkar ? .secondary1.default : .secondary3.dark
               )
-          }
+          }.tag(Tab.azkar)
         
         PlansView()
           .tabItem {
             Text("Plans".localized)
               .font(.pFootnote)
               .foregroundColor(
-                selectedTab == .home ? .secondary1.default : .secondary3.dark
+                selectedTab == .plans ? .secondary1.default : .secondary3.dark
               )
-          }
+          }.tag(Tab.plans)
         
-        SettingsView()
+        RewardsView()
           .tabItem {
-            Text("Debug Mode")
+            Text("Rewards".localized)
               .font(.pFootnote)
-              .foregroundColor(
-                selectedTab == .home ? .secondary1.default : .secondary3.dark
-              )
-          }
-          .tag(Tab.settings)
+              .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
+          }.tag(Tab.rewards)
       }
     }
   }

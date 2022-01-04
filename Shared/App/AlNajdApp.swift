@@ -31,6 +31,7 @@ struct AlNajdApp: App {
         .environmentObject(app.state.homeState)
         .environmentObject(app.state.azkarState)
         .environmentObject(app.state.plansState)
+        .environmentObject(app.state.rewardsState)
         .environment(\.colorScheme, .dark)
         .preferredColorScheme(.dark)
     }
@@ -42,6 +43,14 @@ final class AppState: ObservableObject {
   @Published var homeState: PrayersState = .init()
   @Published var azkarState: AzkarState = .init()
   @Published var plansState: PlansState = .init()
+  @Published var rewardsState: RewardsState = .init()
+}
+
+final class RewardsState: ObservableObject {
+  var prayerRewards: [Deed] = []
+  var azkarRewards: [RepeatableDeed] = []
+  
+  var noRewardsYet: Bool { prayerRewards.isEmpty && azkarRewards.isEmpty }
 }
 
 final class AppService {

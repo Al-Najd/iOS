@@ -9,6 +9,11 @@ import SwiftUI
 import Schedule
 import SPPermissions
 
+enum PlanType {
+  case azkar
+  case duaa
+}
+
 final class PlansState: ObservableObject {
   @Published var plans: [ANPlan] = [
     .init(

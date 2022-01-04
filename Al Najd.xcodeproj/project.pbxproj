@@ -59,6 +59,8 @@
 		045A1CE52746B20000EC700A /* SPPermissionsSiri in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CE42746B20000EC700A /* SPPermissionsSiri */; };
 		045A1CE82746F21300EC700A /* PlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1CE72746F21300EC700A /* PlansView.swift */; };
 		045A1CEB2747DA0D00EC700A /* SPIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 045A1CEA2747DA0D00EC700A /* SPIndicator */; };
+		04A1A3A0277D0C9E00EA0993 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A39F277D0C9E00EA0993 /* RewardsView.swift */; };
+		04A1A3A1277D0C9E00EA0993 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A39F277D0C9E00EA0993 /* RewardsView.swift */; };
 		04B3188D271C6BE90088F527 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188C271C6BE90088F527 /* Pulse */; };
 		04B3188F271C6BE90088F527 /* PulseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B3188E271C6BE90088F527 /* PulseCore */; };
 		04B31891271C6BE90088F527 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04B31890271C6BE90088F527 /* PulseUI */; };
@@ -76,6 +78,7 @@
 		04D468C02722354000D4E12B /* OnboardingSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */; };
 		04D468C8272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
 		04D468C9272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
+		04D4926027844C1400B3E84E /* PagerTabStripView in Frameworks */ = {isa = PBXBuildFile; productRef = 04D4925F27844C1400B3E84E /* PagerTabStripView */; };
 		04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329127274F3D00E1B192 /* TabBarView.swift */; };
 		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
@@ -114,8 +117,6 @@
 		B86588802716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B86588822716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B86588842716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
-		B86588862716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */; };
-		B86588882716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */; };
 		B86588892716CEA000FC0CBB /* PButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588622716CEA000FC0CBB /* PButton.swift */; };
 		B865888A2716CEA000FC0CBB /* PButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588622716CEA000FC0CBB /* PButton.swift */; };
 		B865888B2716CEA000FC0CBB /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588632716CEA000FC0CBB /* VisualEffectView.swift */; };
@@ -213,6 +214,7 @@
 		045A1CD82746AB3100EC700A /* SchedulerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerService.swift; sourceTree = "<group>"; };
 		045A1CDB2746B14300EC700A /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		045A1CE72746F21300EC700A /* PlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlansView.swift; sourceTree = "<group>"; };
+		04A1A39F277D0C9E00EA0993 /* RewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -229,9 +231,6 @@
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
 		0906DC8B1229F44E0B76135E /* Klasik-Bold.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Bold.otf"; path = "Klasik/Klasik-Bold.otf"; sourceTree = "<group>"; };
 		517A9749C615AE866EC1CF57 /* fonts.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
-		73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
-		7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
-		9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		A74AB00340542C867378CCA1 /* ElMessiri-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "ElMessiri-Bold.ttf"; path = "ElMessiri/ElMessiri-Bold.ttf"; sourceTree = "<group>"; };
 		AB799A5EB87EC6A7573DCE0B /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 		B86588092716CC5200FC0CBB /* AlNajdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlNajdApp.swift; sourceTree = "<group>"; };
@@ -258,8 +257,6 @@
 		B86588552716CEA000FC0CBB /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
 		B86588572716CEA000FC0CBB /* FontConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontConfig.swift; sourceTree = "<group>"; };
 		B86588582716CEA000FC0CBB /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Regular.otf"; sourceTree = "<group>"; };
-		B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		B86588622716CEA000FC0CBB /* PButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PButton.swift; sourceTree = "<group>"; };
 		B86588632716CEA000FC0CBB /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		B86588662716CEA000FC0CBB /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizables.strings; sourceTree = "<group>"; };
@@ -278,7 +275,6 @@
 		B88BECF92716E1BB00BC362A /* AppearancePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
 		B88BECFD2716F08000BC362A /* Deed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deed.swift; sourceTree = "<group>"; };
 		C34F677A583D949A176E909E /* ElMessiri-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "ElMessiri-Regular.ttf"; path = "ElMessiri/ElMessiri-Regular.ttf"; sourceTree = "<group>"; };
-		ED1394907FAA42EB2EC37AE3 /* Klasik-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Klasik-Regular.otf"; path = "Klasik/Klasik-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +287,7 @@
 				045A1CE32746B20000EC700A /* SPPermissionsReminders in Frameworks */,
 				04B3188D271C6BE90088F527 /* Pulse in Frameworks */,
 				045A1C5027454B3200EC700A /* KeychainSwift in Frameworks */,
+				04D4926027844C1400B3E84E /* PagerTabStripView in Frameworks */,
 				04B3188F271C6BE90088F527 /* PulseCore in Frameworks */,
 				045A1CDF2746B20000EC700A /* SPPermissionsLocationWhenInUse in Frameworks */,
 				045A1CE52746B20000EC700A /* SPPermissionsSiri in Frameworks */,
@@ -512,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				04FAC744271C0F610045AD2E /* BuffsView.swift */,
+				04A1A39F277D0C9E00EA0993 /* RewardsView.swift */,
 			);
 			path = Rewards;
 			sourceTree = "<group>";
@@ -543,19 +541,6 @@
 				0437E4D027245817005B9B46 /* OnboardingForthView.swift */,
 			);
 			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		04D468A72721C62300D4E12B /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				B86588602716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf */,
-				B865885F2716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf */,
-				73F213DC696A979F0B9AD68B /* Klasik-Regular.otf */,
-				9C955E522D8C822FADA65E6A /* Klasik-Regular.otf */,
-				ED1394907FAA42EB2EC37AE3 /* Klasik-Regular.otf */,
-				7DCBFF0E268BDABC5684DB31 /* Klasik-Regular.otf */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		04D468AB2722044200D4E12B /* Media */ = {
@@ -618,7 +603,6 @@
 				B86588232716CC5500FC0CBB /* Tests iOS */,
 				B865882E2716CC5500FC0CBB /* Tests macOS */,
 				B86588112716CC5500FC0CBB /* Products */,
-				04D468A72721C62300D4E12B /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -870,6 +854,7 @@
 				045A1CE22746B20000EC700A /* SPPermissionsReminders */,
 				045A1CE42746B20000EC700A /* SPPermissionsSiri */,
 				045A1CEA2747DA0D00EC700A /* SPIndicator */,
+				04D4925F27844C1400B3E84E /* PagerTabStripView */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -971,6 +956,7 @@
 				045A1CA5274556D800EC700A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */,
 				045A1CE92747DA0D00EC700A /* XCRemoteSwiftPackageReference "SPIndicator" */,
+				04D4925E27844C1400B3E84E /* XCRemoteSwiftPackageReference "PagerTabStripView" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -1010,8 +996,6 @@
 				B86588842716CEA000FC0CBB /* (null) in Resources */,
 				B86588822716CEA000FC0CBB /* (null) in Resources */,
 				B86588372716CC5500FC0CBB /* Assets.xcassets in Resources */,
-				B86588882716CEA000FC0CBB /* SF-Pro-Rounded-Bold.otf in Resources */,
-				B86588862716CEA000FC0CBB /* SF-Pro-Rounded-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1064,7 @@
 				045A1C8727454BB700EC700A /* ParametersToMultipartFormDataAdapter.swift in Sources */,
 				B865888F2716CEA000FC0CBB /* Language.swift in Sources */,
 				045516E92725B55400F4751B /* HomeService.swift in Sources */,
+				04A1A3A0277D0C9E00EA0993 /* RewardsView.swift in Sources */,
 				04D468C8272250F600D4E12B /* HapticService.swift in Sources */,
 				045A1C9327454CDC00EC700A /* SystemLogger.swift in Sources */,
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
@@ -1156,6 +1141,7 @@
 				B86588762716CEA000FC0CBB /* Colorable.swift in Sources */,
 				B865886A2716CEA000FC0CBB /* Metrics.swift in Sources */,
 				B86588332716CC5500FC0CBB /* AlNajdApp.swift in Sources */,
+				04A1A3A1277D0C9E00EA0993 /* RewardsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1613,6 +1599,14 @@
 				kind = branch;
 			};
 		};
+		04D4925E27844C1400B3E84E /* XCRemoteSwiftPackageReference "PagerTabStripView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/xmartlabs/PagerTabStripView";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1675,6 +1669,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
+		};
+		04D4925F27844C1400B3E84E /* PagerTabStripView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04D4925E27844C1400B3E84E /* XCRemoteSwiftPackageReference "PagerTabStripView" */;
+			productName = PagerTabStripView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

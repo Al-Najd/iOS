@@ -20,7 +20,14 @@ struct AzkarBuffsView: View {
   
   var body: some View {
     ZStack {
-      Color.primary2.default.ignoresSafeArea()
+      Color.mono.offwhite.ignoresSafeArea()
+      buildContent()
+        .padding(.top)
+    }
+  }
+  
+  @ViewBuilder func buildContent() -> some View {
+    if !state.accumlatedRewards.isEmpty {
       ScrollView {
         VStack {
           ForEach(state.accumlatedRewards) { deed in
@@ -51,7 +58,13 @@ struct AzkarBuffsView: View {
         }
         
         Spacer()
-      }.padding(.top)
+      }
+    } else {
+      Text("A day full of blessings is awaiting your deeds!".localized)
+        .multilineTextAlignment(.center)
+        .font(.pLargeTitle)
+        .foregroundColor(.mono.offblack)
+        .padding(.bottom, .p8)
     }
   }
 }
@@ -62,11 +75,6 @@ struct AzkarView: View {
   
   var body: some View {
     VStack {
-      AzkarBuffCardView()
-        .onTapGesture {
-          guard app.canShowBuffs else { return }
-          state.showBuffs = true
-        }
       List {
         RepeatableDeedsList(
           sectionTitle: "Azkar Al-Sabah".localized,

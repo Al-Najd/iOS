@@ -11,11 +11,6 @@ struct PrayersView: View {
   @EnvironmentObject var state: PrayersState
   var body: some View {
     VStack {
-      BuffCardView()
-        .onTapGesture {
-          guard app.canShowBuffs else { return }
-          state.showBuffs = true
-        }
       List {
         DeedsList(
           sectionTitle: "Faraaid".localized,

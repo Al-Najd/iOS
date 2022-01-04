@@ -12,7 +12,14 @@ struct BuffsView: View {
   
   var body: some View {
     ZStack {
-      Color.primary2.default.ignoresSafeArea()
+      Color.mono.offwhite.ignoresSafeArea()
+      buildContentView()
+        .padding(.top)
+    }
+  }
+  
+  @ViewBuilder func buildContentView() -> some View {
+    if !state.accumlatedRewards.isEmpty {
       ScrollView {
       VStack {
         ForEach(state.accumlatedRewards) { deed in
@@ -43,15 +50,21 @@ struct BuffsView: View {
       }
         
         Spacer()
-      }.padding(.top)
+      }
+    } else {
+      Text("A day full of blessings is awaiting your deeds!".localized)
+        .multilineTextAlignment(.center)
+        .font(.pLargeTitle)
+        .foregroundColor(.mono.offblack)
+        .padding(.bottom, .p8)
     }
   }
 }
 
 struct BuffsView_Previews: PreviewProvider {
   static var previews: some View {
-    let state = AppState()
-    state.homeState.accumlatedRewards = .faraaid + .sunnah + .nafila
+    let state = PrayersState()
+    state.accumlatedRewards = .faraaid + .sunnah + .nafila
     return BuffsView()
       .environmentObject(state)
   }
