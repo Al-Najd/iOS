@@ -78,7 +78,19 @@
 		04D468C02722354000D4E12B /* OnboardingSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */; };
 		04D468C8272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
 		04D468C9272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
-		04D4926027844C1400B3E84E /* PagerTabStripView in Frameworks */ = {isa = PBXBuildFile; productRef = 04D4925F27844C1400B3E84E /* PagerTabStripView */; };
+		04D492702784886C00B3E84E /* PagerTabStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492622784886B00B3E84E /* PagerTabStripView.swift */; };
+		04D492712784886C00B3E84E /* PagerTabViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492632784886B00B3E84E /* PagerTabViewDelegate.swift */; };
+		04D492722784886C00B3E84E /* PagerSetAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492642784886C00B3E84E /* PagerSetAppearModifier.swift */; };
+		04D492732784886C00B3E84E /* NavBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492652784886C00B3E84E /* NavBarItem.swift */; };
+		04D492742784886C00B3E84E /* View+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492662784886C00B3E84E /* View+Modifiers.swift */; };
+		04D492752784886C00B3E84E /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492672784886C00B3E84E /* DataStore.swift */; };
+		04D492762784886C00B3E84E /* FixedSizeNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D492692784886C00B3E84E /* FixedSizeNavBarView.swift */; };
+		04D492772784886C00B3E84E /* SegmentedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926A2784886C00B3E84E /* SegmentedNavBarView.swift */; };
+		04D492782784886C00B3E84E /* ScrollableNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926B2784886C00B3E84E /* ScrollableNavBarView.swift */; };
+		04D492792784886C00B3E84E /* IndicatorBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926C2784886C00B3E84E /* IndicatorBarView.swift */; };
+		04D4927A2784886C00B3E84E /* PagerTabItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926D2784886C00B3E84E /* PagerTabItemModifier.swift */; };
+		04D4927B2784886C00B3E84E /* NavBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926E2784886C00B3E84E /* NavBarModifier.swift */; };
+		04D4927C2784886C00B3E84E /* PagerTabViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */; };
 		04E2329227274F3D00E1B192 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329127274F3D00E1B192 /* TabBarView.swift */; };
 		04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2329327277A0000E1B192 /* StopWatchService.swift */; };
 		04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC744271C0F610045AD2E /* BuffsView.swift */; };
@@ -226,6 +238,19 @@
 		04D468BB2722318400D4E12B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSliderContainer.swift; sourceTree = "<group>"; };
 		04D468C7272250F600D4E12B /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		04D492622784886B00B3E84E /* PagerTabStripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripView.swift; sourceTree = "<group>"; };
+		04D492632784886B00B3E84E /* PagerTabViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabViewDelegate.swift; sourceTree = "<group>"; };
+		04D492642784886C00B3E84E /* PagerSetAppearModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerSetAppearModifier.swift; sourceTree = "<group>"; };
+		04D492652784886C00B3E84E /* NavBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarItem.swift; sourceTree = "<group>"; };
+		04D492662784886C00B3E84E /* View+Modifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Modifiers.swift"; sourceTree = "<group>"; };
+		04D492672784886C00B3E84E /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		04D492692784886C00B3E84E /* FixedSizeNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedSizeNavBarView.swift; sourceTree = "<group>"; };
+		04D4926A2784886C00B3E84E /* SegmentedNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedNavBarView.swift; sourceTree = "<group>"; };
+		04D4926B2784886C00B3E84E /* ScrollableNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableNavBarView.swift; sourceTree = "<group>"; };
+		04D4926C2784886C00B3E84E /* IndicatorBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorBarView.swift; sourceTree = "<group>"; };
+		04D4926D2784886C00B3E84E /* PagerTabItemModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabItemModifier.swift; sourceTree = "<group>"; };
+		04D4926E2784886C00B3E84E /* NavBarModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarModifier.swift; sourceTree = "<group>"; };
+		04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabViewStyle.swift; sourceTree = "<group>"; };
 		04E2329127274F3D00E1B192 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		04E2329327277A0000E1B192 /* StopWatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchService.swift; sourceTree = "<group>"; };
 		04FAC744271C0F610045AD2E /* BuffsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffsView.swift; sourceTree = "<group>"; };
@@ -287,7 +312,6 @@
 				045A1CE32746B20000EC700A /* SPPermissionsReminders in Frameworks */,
 				04B3188D271C6BE90088F527 /* Pulse in Frameworks */,
 				045A1C5027454B3200EC700A /* KeychainSwift in Frameworks */,
-				04D4926027844C1400B3E84E /* PagerTabStripView in Frameworks */,
 				04B3188F271C6BE90088F527 /* PulseCore in Frameworks */,
 				045A1CDF2746B20000EC700A /* SPPermissionsLocationWhenInUse in Frameworks */,
 				045A1CE52746B20000EC700A /* SPPermissionsSiri in Frameworks */,
@@ -568,6 +592,34 @@
 			path = SFX;
 			sourceTree = "<group>";
 		};
+		04D492612784886000B3E84E /* PagerView */ = {
+			isa = PBXGroup;
+			children = (
+				04D492682784886C00B3E84E /* NavigationBarStyles */,
+				04D492672784886C00B3E84E /* DataStore.swift */,
+				04D492652784886C00B3E84E /* NavBarItem.swift */,
+				04D4926E2784886C00B3E84E /* NavBarModifier.swift */,
+				04D492642784886C00B3E84E /* PagerSetAppearModifier.swift */,
+				04D4926D2784886C00B3E84E /* PagerTabItemModifier.swift */,
+				04D492622784886B00B3E84E /* PagerTabStripView.swift */,
+				04D492632784886B00B3E84E /* PagerTabViewDelegate.swift */,
+				04D4926F2784886C00B3E84E /* PagerTabViewStyle.swift */,
+				04D492662784886C00B3E84E /* View+Modifiers.swift */,
+			);
+			path = PagerView;
+			sourceTree = "<group>";
+		};
+		04D492682784886C00B3E84E /* NavigationBarStyles */ = {
+			isa = PBXGroup;
+			children = (
+				04D492692784886C00B3E84E /* FixedSizeNavBarView.swift */,
+				04D4926A2784886C00B3E84E /* SegmentedNavBarView.swift */,
+				04D4926B2784886C00B3E84E /* ScrollableNavBarView.swift */,
+				04D4926C2784886C00B3E84E /* IndicatorBarView.swift */,
+			);
+			path = NavigationBarStyles;
+			sourceTree = "<group>";
+		};
 		04E2328A27274DB800E1B192 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -748,6 +800,7 @@
 		B86588612716CEA000FC0CBB /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				04D492612784886000B3E84E /* PagerView */,
 				B86588622716CEA000FC0CBB /* PButton.swift */,
 				B86588632716CEA000FC0CBB /* VisualEffectView.swift */,
 				04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */,
@@ -854,7 +907,6 @@
 				045A1CE22746B20000EC700A /* SPPermissionsReminders */,
 				045A1CE42746B20000EC700A /* SPPermissionsSiri */,
 				045A1CEA2747DA0D00EC700A /* SPIndicator */,
-				04D4925F27844C1400B3E84E /* PagerTabStripView */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -956,7 +1008,6 @@
 				045A1CA5274556D800EC700A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				045A1CDD2746B20000EC700A /* XCRemoteSwiftPackageReference "SPPermissions" */,
 				045A1CE92747DA0D00EC700A /* XCRemoteSwiftPackageReference "SPIndicator" */,
-				04D4925E27844C1400B3E84E /* XCRemoteSwiftPackageReference "PagerTabStripView" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -1035,8 +1086,11 @@
 				045A1CA027454D3900EC700A /* ASAuthorizationErrorToSQError.swift in Sources */,
 				044F23FB272A17EC00CACBA4 /* Published+UserDefaults.swift in Sources */,
 				B86588A62716CEEC00FC0CBB /* Codable+Helpers.swift in Sources */,
+				04D492772784886C00B3E84E /* SegmentedNavBarView.swift in Sources */,
+				04D492742784886C00B3E84E /* View+Modifiers.swift in Sources */,
 				B86588AE2716DC1600FC0CBB /* CorePlugin.swift in Sources */,
 				045A1C4B27454A0A00EC700A /* CacheProtocol.swift in Sources */,
+				04D492762784886C00B3E84E /* FixedSizeNavBarView.swift in Sources */,
 				045A1CDC2746B14300EC700A /* PermissionService.swift in Sources */,
 				045A1CD92746AB3100EC700A /* SchedulerService.swift in Sources */,
 				045A1C8427454BB700EC700A /* Endpoint.swift in Sources */,
@@ -1044,13 +1098,16 @@
 				045A1C9E27454D3900EC700A /* GIDSignInErrorToSQErrorAdapter.swift in Sources */,
 				B86588892716CEA000FC0CBB /* PButton.swift in Sources */,
 				045A1C4527454A0A00EC700A /* DiskStorage.swift in Sources */,
+				04D4927A2784886C00B3E84E /* PagerTabItemModifier.swift in Sources */,
 				B86588342716CC5500FC0CBB /* PrayersView.swift in Sources */,
 				B865886D2716CEA000FC0CBB /* Shadowable.swift in Sources */,
 				045A1C8527454BB700EC700A /* RSAlamofireEventsMonitor.swift in Sources */,
 				045A1CE82746F21300EC700A /* PlansView.swift in Sources */,
 				045A1C9227454CDC00EC700A /* LoggersManager.swift in Sources */,
 				045516EE27260E5E00F4751B /* TimerService.swift in Sources */,
+				04D492732784886C00B3E84E /* NavBarItem.swift in Sources */,
 				045A1C4627454A0A00EC700A /* EncryptedStorage.swift in Sources */,
+				04D4927C2784886C00B3E84E /* PagerTabViewStyle.swift in Sources */,
 				0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */,
 				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
 				044F6FA22735C0F3008BA334 /* LocationService.swift in Sources */,
@@ -1068,11 +1125,14 @@
 				04D468C8272250F600D4E12B /* HapticService.swift in Sources */,
 				045A1C9327454CDC00EC700A /* SystemLogger.swift in Sources */,
 				B865889A2716CEEC00FC0CBB /* Promise.swift in Sources */,
+				04D492712784886C00B3E84E /* PagerTabViewDelegate.swift in Sources */,
 				0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
 				0437E4C7272452FB005B9B46 /* OnboardingCoordinator.swift in Sources */,
 				045A1C8A27454BB700EC700A /* NetworkProtocol.swift in Sources */,
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
+				04D492722784886C00B3E84E /* PagerSetAppearModifier.swift in Sources */,
+				04D4927B2784886C00B3E84E /* NavBarModifier.swift in Sources */,
 				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,
 				045A1CA227454D3900EC700A /* ErrorResponse.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
@@ -1088,11 +1148,15 @@
 				B88BECFE2716F08000BC362A /* Deed.swift in Sources */,
 				0437E4C9272457D1005B9B46 /* OnboardingFirstView.swift in Sources */,
 				045A1C4427454A0A00EC700A /* RealmStorage.swift in Sources */,
+				04D492752784886C00B3E84E /* DataStore.swift in Sources */,
 				045A1CA42745567500EC700A /* L10n.swift in Sources */,
+				04D492702784886C00B3E84E /* PagerTabStripView.swift in Sources */,
 				B86588792716CEA000FC0CBB /* DefaultTheme.swift in Sources */,
+				04D492792784886C00B3E84E /* IndicatorBarView.swift in Sources */,
 				B865887B2716CEA000FC0CBB /* FontConfig.swift in Sources */,
 				B865888B2716CEA000FC0CBB /* VisualEffectView.swift in Sources */,
 				045A1C4A27454A0A00EC700A /* StorageError.swift in Sources */,
+				04D492782784886C00B3E84E /* ScrollableNavBarView.swift in Sources */,
 				B86588712716CEA000FC0CBB /* Palette.swift in Sources */,
 				B86588A22716CEEC00FC0CBB /* ServiceLocator.swift in Sources */,
 				045A1C9F27454D3900EC700A /* NetworkErrorToSQErrorAdapter.swift in Sources */,
@@ -1308,7 +1372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -1333,7 +1397,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -1599,14 +1663,6 @@
 				kind = branch;
 			};
 		};
-		04D4925E27844C1400B3E84E /* XCRemoteSwiftPackageReference "PagerTabStripView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/xmartlabs/PagerTabStripView";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 3.1.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1669,11 +1725,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04B3188B271C6BE90088F527 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
-		};
-		04D4925F27844C1400B3E84E /* PagerTabStripView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04D4925E27844C1400B3E84E /* XCRemoteSwiftPackageReference "PagerTabStripView" */;
-			productName = PagerTabStripView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

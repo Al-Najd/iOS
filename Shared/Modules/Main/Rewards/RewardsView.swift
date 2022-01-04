@@ -6,28 +6,27 @@
 //
 
 import SwiftUI
-import PagerTabStripView
 
 struct RewardsView: View {
   @EnvironmentObject var prayersState: PrayersState
   @EnvironmentObject var azkarState: AzkarState
-  @State var selection: Int = 0
   var body: some View {
     ZStack {
       Color.mono.offwhite.ignoresSafeArea()
-      PagerTabStripView(selection: $selection) {
+      PagerTabStripView() {
         BuffsView()
           .pagerTabItem {
-            TitleNavBarItem(title: "Prayers")
+            TitleNavBarItem(title: "Prayers".localized)
           }
-          .tag(0)
         
         AzkarBuffsView()
           .pagerTabItem {
-            TitleNavBarItem(title: "Azkar")
+            TitleNavBarItem(title: "Azkar".localized)
           }
-          .tag(1)
-      }
+      }.pagerTabStripViewStyle(
+        .segmentedControl(backgroundColor: .primary2.dark, padding: .init(top: 0, leading: .p8, bottom: 0, trailing: .p8), placedInToolbar: false)
+      )
+
     }
   }
 }
@@ -59,7 +58,7 @@ struct TitleNavBarItem: View, PagerTabViewDelegate {
     func setState(state: PagerTabViewState) {
         switch state {
         case .selected:
-          self.theme.textColor = .primary2.dark
+          self.theme.textColor = .mono.offblack
           self.theme.backgroundColor = .primary2.background
         case .highlighted:
           self.theme.textColor = .primary2.light

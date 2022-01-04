@@ -15,4 +15,8 @@ class LocalizationService {
     default: return .arabic
     }
   }
+  
+  static func isRTL() -> Bool {
+    getCurrentLocale() == .arabic
+  }
 }

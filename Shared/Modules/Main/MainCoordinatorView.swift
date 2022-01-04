@@ -49,14 +49,14 @@ struct MainCoordinatorView: View {
               )
           }.tag(Tab.azkar)
         
-        PlansView()
-          .tabItem {
-            Text("Plans".localized)
-              .font(.pFootnote)
-              .foregroundColor(
-                selectedTab == .plans ? .secondary1.default : .secondary3.dark
-              )
-          }.tag(Tab.plans)
+//        PlansView()
+//          .tabItem {
+//            Text("Plans".localized)
+//              .font(.pFootnote)
+//              .foregroundColor(
+//                selectedTab == .plans ? .secondary1.default : .secondary3.dark
+//              )
+//          }.tag(Tab.plans)
         
         RewardsView()
           .tabItem {
