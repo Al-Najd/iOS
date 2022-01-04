@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSSiriUsageDescription</key>
+	<string>(Optional) In case you want to associate automation workflow or other Siri Actions</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>(Optional) In case you want to associate Praying in Masjid with Rewards related to Prayers</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>(Optional) In case you want to list events of Prayers in Calendar</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -19,7 +25,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.7.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
