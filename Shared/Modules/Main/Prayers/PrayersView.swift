@@ -32,50 +32,6 @@ struct PrayersView: View {
           deeds: state.nafila
         ).padding()
       }
-      .simultaneousGesture(DragGesture().onChanged({ value in
-        DispatchQueue.main.async {
-          let isGoingDown = value.predictedEndTranslation.height < 0
-          withAnimation(.easeInOut(duration: 0.3)) {
-            dateState.offset = isGoingDown ? -200 : 0
-          }
-        }
-      }))
-    }
-  }
-  
-  @ViewBuilder private func buildContentOffsetTracker() -> some View {
-    GeometryReader { proxy -> Color in
-      let minY = proxy.frame(in: .named("Scrolling")).minY
-      let durationOffset: CGFloat = 35
-      print("called")
-      if minY < currentOffset {
-        if currentOffset < 0 && -minY > (lastOffset + durationOffset) {
-          
-          // HIding tab and updating
-          withAnimation(.easeOut.speed (1.5)) {
-            dateState.offset = -200
-          }
-          
-          lastOffset = -currentOffset
-        }
-      }
-      
-      // Same
-      
-      if minY > currentOffset && -minY < (lastOffset - durationOffset) {
-        
-        // Showing tab and updating last offset..
-        withAnimation(.easeOut.speed(1.5)) {
-          dateState.offset = 0
-        }
-        
-        lastOffset = -currentOffset
-        
-      }
-      
-      currentOffset = minY
-      
-      return Color.clear
     }
   }
 }

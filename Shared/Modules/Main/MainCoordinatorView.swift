@@ -84,7 +84,6 @@ struct MainCoordinatorView: View {
           .onTapGesture {
             dateState.showDaySelection = true
           }
-          .offset(y: dateState.offset)
         
         Spacer()
       }
@@ -106,5 +105,6 @@ struct MainCoordinatorView_Previews: PreviewProvider {
   static var previews: some View {
     MainCoordinatorView()
       .environmentObject(app.state.homeState)
+      .environmentObject(app.state.dateState)
   }
 }

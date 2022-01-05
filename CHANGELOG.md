@@ -2,14 +2,6 @@
     - Improve Persistance and add ability to revisit older days
     - Add Persistance Per day
 
-## Updates of version 0.7.0 🚀
-    - Improve Persistance and add ability to revisit older days
-    - Add Persistance Per day
-
-## Updates of version 0.7.0 🚀
-    - Improve Persistance and add ability to revisit older days
-    - Add Persistance Per day
-
 ## Updates of version 0.6.2 🚀
     - Fix Interaction Logic
     - Add Azkar DB
