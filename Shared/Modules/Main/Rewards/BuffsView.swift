@@ -14,7 +14,6 @@ struct BuffsView: View {
     ZStack {
       Color.mono.offwhite.ignoresSafeArea()
       buildContentView()
-        .padding(.top)
     }
   }
   

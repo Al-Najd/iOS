@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PartialSheet
 import Combine
 
 @main
@@ -20,9 +19,7 @@ struct AlNajdApp: App {
       ReportPlugin(),
     ]
   }
-  
-  let sheetManager: PartialSheetManager = PartialSheetManager()
-  
+    
   init() {
     plugins.forEach { $0.setup() }
   }
@@ -37,7 +34,7 @@ struct AlNajdApp: App {
         .environmentObject(app.state.plansState)
         .environmentObject(app.state.rewardsState)
         .environmentObject(app.state.dateState)
-        .environmentObject(sheetManager)
+        .environmentObject(app.state.settingsState)
         .environment(\.colorScheme, .dark)
         .preferredColorScheme(.dark)
     }
@@ -53,6 +50,7 @@ final class AppState: ObservableObject {
   @Published var plansState: PlansState = .init()
   @Published var rewardsState: RewardsState = .init()
   @Published var dateState: DateState = .init()
+  @Published var settingsState: SettingsState = .init()
   
   func sync(with dailyReport: DailyDeedsReport) {
     homeState.faraaid = dailyReport.faraaid
@@ -63,6 +61,14 @@ final class AppState: ObservableObject {
     azkarState.masaa = dailyReport.masaa
     azkarState.accumlatedRewards = dailyReport.accumlatedAzkarRewards
   }
+}
+
+final class SettingsState: ObservableObject {
+  @Published(key: "allowHaptic") var allowHaptic: Bool = true
+  @Published(key: "allowSounds") var allowSounds: Bool = true
+  @Published(key: "allowSFX") var allowSFX: Bool = true
+  
+  @Published var showSettings: Bool = false
 }
 
 final class DateState: ObservableObject {

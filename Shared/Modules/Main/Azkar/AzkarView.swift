@@ -22,7 +22,6 @@ struct AzkarBuffsView: View {
     ZStack {
       Color.mono.offwhite.ignoresSafeArea()
       buildContent()
-        .padding(.top)
     }
   }
   

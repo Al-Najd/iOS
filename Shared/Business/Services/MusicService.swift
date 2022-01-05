@@ -13,6 +13,7 @@ class MusicService {
   private var effectPlayer: AVAudioPlayer?
   
   func start(track: Track, repeats: Bool = false) {
+    guard app.state.settingsState.allowSounds else { return }
     do {
       musicPlayer = try AVAudioPlayer(contentsOf: track.fileURL)
       guard let player = musicPlayer else { return }
@@ -29,6 +30,7 @@ class MusicService {
   }
   
   func start(effect: Effect) {
+    guard app.state.settingsState.allowSFX else { return }
     do {
       effectPlayer = try AVAudioPlayer(contentsOf: effect.fileURL)
       guard let player = effectPlayer else { return }

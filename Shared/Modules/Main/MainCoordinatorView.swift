@@ -6,7 +6,6 @@
 //
 import PulseUI
 import SwiftUI
-import PartialSheet
 
 final class PrayersState: ObservableObject {
   @Published var sunnah: [Deed] = .sunnah
@@ -20,73 +19,82 @@ final class PrayersState: ObservableObject {
 struct MainCoordinatorView: View {
   @EnvironmentObject var state: AppState
   @EnvironmentObject var dateState: DateState
+  @EnvironmentObject var settingsState: SettingsState
   @State var selectedTab: Tab = .home
   var body: some View {
-    ZStack {
-      Color("splash")
-        .ignoresSafeArea(.all, edges: .vertical)
-      
-      TabView(selection: $selectedTab) {
-        PrayersView()
-          .tabItem {
-            Text("Prayers".localized)
-              .font(.pFootnote)
-              .foregroundColor(
-                selectedTab == .home ? .secondary1.default : .secondary3.dark
-              )
-          }.tag(Tab.home)
+    NavigationView {
+      ZStack {
+        Color("splash")
+          .ignoresSafeArea(.all, edges: .vertical)
         
-        AzkarView()
-          .tabItem {
-            Text("Azkar".localized)
+        TabView(selection: $selectedTab) {
+          PrayersView()
+            .tabItem {
+              Text("Prayers".localized)
+                .font(.pFootnote)
+                .foregroundColor(
+                  selectedTab == .home ? .secondary1.default : .secondary3.dark
+                )
+            }.tag(Tab.home)
+          
+          AzkarView()
+            .tabItem {
+              Text("Azkar".localized)
+                .font(.pFootnote)
+                .foregroundColor(
+                  selectedTab == .azkar ? .secondary1.default : .secondary3.dark
+                )
+            }.tag(Tab.azkar)
+          
+          RewardsView()
+            .tabItem {
+              Text("Rewards".localized)
+                .font(.pFootnote)
+                .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
+            }.tag(Tab.rewards)
+        }.sheet(isPresented: $dateState.showDaySelection) {
+          VStack {
+            DatePicker("Day you want to review", selection: $dateState.selectedDate.animation(.easeInOut), in: ...Date.now, displayedComponents: .date)
+              .datePickerStyle(.graphical)
+            
+            Text("Hint: Choosing a Date allows you to revisit your achievements at that date!".localized)
               .font(.pFootnote)
-              .foregroundColor(
-                selectedTab == .azkar ? .secondary1.default : .secondary3.dark
-              )
-          }.tag(Tab.azkar)
-        
-//        PlansView()
-//          .tabItem {
-//            Text("Plans".localized)
-//              .font(.pFootnote)
-//              .foregroundColor(
-//                selectedTab == .plans ? .secondary1.default : .secondary3.dark
-//              )
-//          }.tag(Tab.plans)
-        
-        RewardsView()
-          .tabItem {
-            Text("Rewards".localized)
-              .font(.pFootnote)
-              .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
-          }.tag(Tab.rewards)
-      }.sheet(isPresented: $dateState.showDaySelection) {
-        VStack {
-          DatePicker("Day you want to review", selection: $dateState.selectedDate.animation(.easeInOut), in: ...Date.now, displayedComponents: .date)
-            .datePickerStyle(.graphical)
-          
-          Text("Hint: Choosing a Date allows you to revisit your achievements at that date!".localized)
-            .font(.pFootnote)
-            .foregroundColor(.mono.body)
-          
-          Spacer()
-          
-        }.padding()
+              .foregroundColor(.mono.body)
+            
+            Spacer()
+            
+          }.padding()
+        }
       }
-      
-      VStack {
-        Text(dateState.title)
-          .foregroundColor(.mono.offblack)
-          .padding(.vertical, .p8)
-          .padding(.horizontal, .p32)
-          .background(Color.mono.background)
-          .cornerRadius(.p16)
-          .onTapGesture {
-            dateState.showDaySelection = true
-          }
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+            ToolbarItem(placement: .principal) {
+              HStack {
+                Text(dateState.title)
+                  .foregroundColor(.mono.offblack)
+                  .padding(.vertical, .p8)
+                  .padding(.leading, .p32)
+                  .onTapGesture {
+                    dateState.showDaySelection = true
+                  }
+                Image(systemName: "chevron.down.square.fill")
+                  .padding(.trailing, .p32)
+              }
+            }
         
-        Spacer()
+        ToolbarItem(placement: LocalizationService.isRTL() ? .navigationBarLeading : .navigationBarTrailing) {
+          Button(
+            action: {
+              settingsState.showSettings = true
+            }, label: {
+              Image(systemName: "gear")
+                .font(.pBody.bold())
+                .foregroundColor(.mono.offblack)
+            }
+          )
+        }
       }
+      .sheet(isPresented: $settingsState.showSettings, content: { SettingsView() })
     }
   }
   
