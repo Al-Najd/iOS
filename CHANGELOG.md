@@ -1,3 +1,10 @@
+## Updates of version 0.7.1 🚀
+    - Fix an issue with the undo feature in Azkar
+    - Fix some localization issues
+    - 🚀 Released iOS 0.7.0! [Beta Release]
+    - Add Permissions in Info.plist
+    - Remove unneeded permissions
+
 ## Updates of version 0.7.0 🚀
     - Improve Persistance and add ability to revisit older days
     - Add Persistance Per day

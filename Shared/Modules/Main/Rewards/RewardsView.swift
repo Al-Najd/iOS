@@ -10,18 +10,27 @@ import SwiftUI
 struct RewardsView: View {
   @EnvironmentObject var prayersState: PrayersState
   @EnvironmentObject var azkarState: AzkarState
+  
+  var firstViewTitle: String {
+    LocalizationService.isRTL() ? "Azkar".localized : "Prayers".localized
+  }
+  
+  var secondViewTitle: String {
+    !LocalizationService.isRTL() ? "Azkar".localized : "Prayers".localized
+  }
+  
   var body: some View {
     ZStack {
       Color.mono.offwhite.ignoresSafeArea()
       PagerTabStripView() {
         BuffsView()
           .pagerTabItem {
-            TitleNavBarItem(title: "Prayers".localized)
+            TitleNavBarItem(title: firstViewTitle)
           }
         
         AzkarBuffsView()
           .pagerTabItem {
-            TitleNavBarItem(title: "Azkar".localized)
+            TitleNavBarItem(title: secondViewTitle)
           }
       }
       .pagerTabStripViewStyle(
