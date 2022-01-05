@@ -1,3 +1,6 @@
+## Updates of version 0.7.2 🚀
+    - Fix Ordering of titles as per localization in RTL
+
 ## Updates of version 0.7.1 🚀
     - Fix an issue with the undo feature in Azkar
     - Fix some localization issues
