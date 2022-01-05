@@ -1,3 +1,12 @@
+## Updates of version 0.8.1 🚀
+    - lessen padding and improve layout when category is completed
+    - Add TabBarIcons
+    - Add Settings
+    - Disable Onboarding
+    - 🚀 Released iOS 0.7.2! [Beta Release]
+    - Fix Ordering of titles as per localization in RTL
+    - Fix Ordering of titles as per localization in RTL
+
 ## Updates of version 0.7.2 🚀
     - Fix Ordering of titles as per localization in RTL
 
