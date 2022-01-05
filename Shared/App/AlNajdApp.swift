@@ -29,7 +29,7 @@ struct AlNajdApp: App {
   
   var body: some Scene {
     WindowGroup {
-      OnboardingCoordinatorView()
+      MainCoordinatorView()
         .environmentObject(app.state)
         .environmentObject(app.state.onboardingState)
         .environmentObject(app.state.homeState)
