@@ -30,15 +30,29 @@ struct MainCoordinatorView: View {
         TabView(selection: $selectedTab) {
           PrayersView()
             .tabItem {
+              Image("Prayers")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .aspectRatio(contentMode: .fit)
+                .font(.system(size: 25))
+                .foregroundColor(selectedTab == .home ? .secondary1.default : .secondary3.dark)
+                
               Text("Prayers".localized)
                 .font(.pFootnote)
                 .foregroundColor(
                   selectedTab == .home ? .secondary1.default : .secondary3.dark
                 )
             }.tag(Tab.home)
-          
           AzkarView()
             .tabItem {
+              Image("Azkar")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25, height: 25)
+                .aspectRatio(contentMode: .fit)
+                .font(.system(size: 25))
+                .foregroundColor(selectedTab == .azkar ? .secondary1.default : .secondary3.dark)
+                
               Text("Azkar".localized)
                 .font(.pFootnote)
                 .foregroundColor(
@@ -48,6 +62,13 @@ struct MainCoordinatorView: View {
           
           RewardsView()
             .tabItem {
+              Image("Rewards")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .aspectRatio(contentMode: .fit)
+                .font(.system(size: 25))
+                .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
+                
               Text("Rewards".localized)
                 .font(.pFootnote)
                 .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
