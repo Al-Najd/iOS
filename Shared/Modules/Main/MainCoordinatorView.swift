@@ -132,8 +132,22 @@ struct MainCoordinatorView: View {
 
 struct MainCoordinatorView_Previews: PreviewProvider {
   static var previews: some View {
-    MainCoordinatorView()
-      .environmentObject(app.state.homeState)
+    let prayersState = PrayersState()
+    prayersState.faraaid = prayersState.faraaid.map {
+      var temp = $0
+      temp.isDone = true
+      return temp
+    }
+    return MainCoordinatorView()
+      .environmentObject(app.state)
+      .environmentObject(app.state.onboardingState)
+      .environmentObject(prayersState)
+      .environmentObject(AzkarState())
+      .environmentObject(app.state.plansState)
+      .environmentObject(app.state.rewardsState)
       .environmentObject(app.state.dateState)
+      .environmentObject(app.state.settingsState)
+      .environment(\.colorScheme, .dark)
+      .preferredColorScheme(.dark)
   }
 }

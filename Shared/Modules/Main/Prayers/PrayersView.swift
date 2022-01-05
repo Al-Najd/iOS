@@ -55,7 +55,9 @@ struct DeedsList: View {
     Section(content: {
       if allDeedsAreDone {
         Text("Well Done".localized(arguments: sectionTitle))
-          .padding(.p32)
+          .padding(.p48)
+          .multilineTextAlignment(.center)
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
           .foregroundColor(.mono.offwhite)
           .background(Color.success.default)
           .font(.displaySmall)
@@ -99,51 +101,6 @@ struct DeedsList: View {
       Text(sectionTitle)
         .font(.pSubheadline)
     })
-  }
-}
-
-struct BuffCardView: View {
-  
-  @EnvironmentObject var state: PrayersState
-  
-  var body: some View {
-    VStack {
-      if state.accumlatedRewards.isEmpty {
-        Text("A day full of blessings is awaiting your deeds!".localized)
-          .multilineTextAlignment(.center)
-          .font(.pLargeTitle)
-          .foregroundColor(.mono.offwhite)
-          .padding(.bottom, .p8)
-      } else {
-        Text("Latest Reward".localized)
-          .multilineTextAlignment(.center)
-          .font(.pHeadline)
-          .foregroundColor(.success.light)
-        
-        Text(state.accumlatedRewards.last?.title ?? .empty)
-          .multilineTextAlignment(.center)
-          .font(.pLargeTitle)
-          .foregroundColor(.mono.offwhite)
-          .padding(.bottom, .p8)
-        
-        if state.accumlatedRewards.count > 2 {
-          Text(
-            "And var other blessings and Buffs...".localized(arguments: String(state.accumlatedRewards.count - 1))
-          )
-            .multilineTextAlignment(.center)
-            .font(.pBody)
-            .foregroundColor(.success.light)
-        }
-      }
-    }
-    .frame(maxWidth: .infinity)
-    .padding()
-    .background(
-      RoundedRectangle(cornerRadius: .r16)
-        .foregroundColor(.secondary1.default)
-        .shadow(radius: .r12)
-    )
-    .padding(.p16)
   }
 }
 
