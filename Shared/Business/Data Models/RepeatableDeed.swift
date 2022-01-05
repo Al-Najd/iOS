@@ -11,14 +11,23 @@ public struct RepeatableDeed: Identifiable, Codable {
   public var id: UUID = .init()
   
   let title: String
-  var numberOfRepeats: Int
-  lazy var currentNumberOfRepeats: Int = numberOfRepeats
+  let numberOfRepeats: Int
+  var currentNumberOfRepeats: Int
   
   let category: DeedCategory
   var reward: Reward
   
   var isDone: Bool {
-    numberOfRepeats <= 0
+    currentNumberOfRepeats <= 0
+  }
+  
+  init(id: UUID = .init(), title: String, numberOfRepeats: Int, category: DeedCategory, reward: Reward) {
+    self.id = id
+    self.title = title
+    self.numberOfRepeats = numberOfRepeats
+    self.currentNumberOfRepeats = numberOfRepeats
+    self.category = category
+    self.reward = reward
   }
 }
 

@@ -134,12 +134,12 @@ final class AppService {
   }
   
   func decrement(deed: RepeatableDeed) {
-    guard deed.numberOfRepeats > 0 else { return }
+    guard deed.currentNumberOfRepeats > 0 else { return }
     var deed = deed
-    deed.numberOfRepeats -= 1
+    deed.currentNumberOfRepeats -= 1
     updateState(repeatableDeed: deed)
     updateCache()
-    if deed.numberOfRepeats == 0 {
+    if deed.currentNumberOfRepeats == 0 {
       state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
       MusicService.main.start(effect: .splashEnd)
     }
@@ -153,8 +153,7 @@ final class AppService {
     state.azkarState.accumlatedRewards.findAndReplaceElseAppend(with: deed)
     updateState(repeatableDeed: deed)
     updateCache()
-    MusicService.main.start(effect: .splashEnd)
-    HapticService.main.generate(feedback: .success)
+    HapticService.main.generate(feedback: .warning)
   }
   
   func undo(deed: RepeatableDeed) {

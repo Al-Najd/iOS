@@ -161,7 +161,7 @@ struct RepeatableDeedsList: View {
               Image(systemName: "checkmark.seal.fill")
                 .foregroundColor(.success.default)
             } else {
-            Text("\(deed.numberOfRepeats)")
+            Text("\(deed.currentNumberOfRepeats)")
               .foregroundColor(.mono.offwhite)
               .font(.pSubheadline)
               .padding(.p16)
