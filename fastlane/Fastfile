@@ -104,7 +104,10 @@ platform :ios do
     # Report Success
     # slack
     git_add
-    git_commit(message: "🚀 Released iOS #{get_version_number(target: "Al Najd (iOS)")}! [Beta Release]")
+    git_commit(
+      message: "🚀 Released iOS #{get_version_number(target: "Al Najd (iOS)")}! [Beta Release]"
+      path: "*"
+    )
     push_to_git_remote
   end
 

@@ -23,5 +23,9 @@ private extension AppearancesPlugin {
     )
     UITableView.appearance().backgroundColor = .clear
     UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.secondary3.default)
+    UISegmentedControl.appearance().setTitleTextAttributes(
+      [.font: ARFont.subheadline.font],
+      for: .normal
+    )
   }
 }
