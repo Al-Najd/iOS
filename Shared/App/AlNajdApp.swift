@@ -61,8 +61,8 @@ final class AppState: ObservableObject {
 
 final class SettingsState: ObservableObject {
   @Published(key: "allowHaptic") var allowHaptic: Bool = true
-  @Published(key: "allowSounds") var allowSounds: Bool = true
-  @Published(key: "allowSFX") var allowSFX: Bool = true
+  @Published(key: "allowSounds") var allowSounds: Bool = false
+  @Published(key: "allowSFX") var allowSFX: Bool = false
   
   @Published var showSettings: Bool = false
 }

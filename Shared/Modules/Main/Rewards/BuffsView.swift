@@ -28,7 +28,7 @@ struct BuffsView: View {
               .font(.pTitle2)
               .foregroundColor(.mono.ash)
               .padding(.bottom, .p4)
-            Text( deed.reward.title)
+            Text(deed.reward.title)
               .multilineTextAlignment(.center)
               .font(.pTitle3)
               .foregroundColor(.success.dark)
@@ -42,7 +42,7 @@ struct BuffsView: View {
             RoundedRectangle(
               cornerRadius: .r16
             )
-              .foregroundColor(.primary.dark)
+              .foregroundColor(.primary.light)
           )
           .padding()
         }
@@ -53,7 +53,7 @@ struct BuffsView: View {
     } else {
       Text("A day full of blessings is awaiting your deeds!".localized)
         .multilineTextAlignment(.center)
-        .font(.pLargeTitle)
+        .font(.pTitle1)
         .foregroundColor(.mono.offblack)
         .padding(.bottom, .p8)
     }

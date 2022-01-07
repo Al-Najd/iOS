@@ -24,9 +24,6 @@ struct MainCoordinatorView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Color("splash")
-          .ignoresSafeArea(.all, edges: .bottom)
-        
         TabView(selection: $selectedTab) {
           PrayersView()
             .tabItem {
@@ -42,7 +39,8 @@ struct MainCoordinatorView: View {
                 .foregroundColor(
                   selectedTab == .home ? .secondary.default : .secondary.dark
                 )
-            }.tag(Tab.home)
+            }
+            .tag(Tab.home)
           
           AzkarView()
             .tabItem {
@@ -90,24 +88,24 @@ struct MainCoordinatorView: View {
       }
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-            ToolbarItem(placement: .principal) {
-              HStack {
-                Text(dateState.title)
-                  .foregroundColor(.mono.offblack)
-                  .padding(.horizontal, .p16)
-                  .padding(.vertical, .p8)
-                  .cornerRadius(16)
-                  .overlay(
-                    RoundedRectangle(cornerRadius: .p8)
-                      .stroke(Color.mono.line, lineWidth: 2.5)
-                  )
-                  .padding(.bottom, .p4)
-                  .onTapGesture {
-                    dateState.showDaySelection = true
-                  }
-                  .fixedSize(horizontal: true, vertical: false)
-              }
+        ToolbarItem(placement: .principal) {
+            VStack {
+              Text("Bless you".localized)
+                .font(.pTitle3)
             }
+        }
+        
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(
+            action: {
+              dateState.showDaySelection = true
+            }, label: {
+              Image(systemName: "calendar")
+                .font(.pBody.bold())
+                .foregroundColor(.primary.default)
+            }
+          )
+        }
         
         ToolbarItem(placement: .navigationBarLeading) {
           Button(
@@ -116,7 +114,7 @@ struct MainCoordinatorView: View {
             }, label: {
               Image(systemName: "gear")
                 .font(.pBody.bold())
-                .foregroundColor(.mono.offblack)
+                .foregroundColor(.primary.default)
             }
           )
         }
