@@ -25,7 +25,7 @@ final class PlansState: ObservableObject {
                   """.localized,
       purpose: "30x Estigphar / 25 mins".localized,
       image: Image("heart-dynamic-clay"),
-      brandColor: Color.primary1
+      brandColor: Color.primary
     )
   ]
 }
@@ -116,15 +116,15 @@ struct PlansView: View {
             label: {
               Text("Embrace the Change".localized)
                 .font(.pFootnote)
-                .foregroundColor(.primary1.dark)
+                .foregroundColor(.primary.dark)
                 .padding(.p16)
                 .background(
-                  Capsule().fill(Color.primary1.background)
+                  Capsule().fill(Color.primary.background)
                 )
                 .overlay(
                   Capsule()
                     .strokeBorder(
-                      Color.primary1.dark,
+                      Color.primary.dark,
                       lineWidth: 3
                     )
                 )

@@ -12,11 +12,8 @@
 import SwiftUI
 
 public protocol Colorable {
-  var primary1: BrandColor { get }
-  var primary2: BrandColor { get }
-  var secondary1: BrandColor { get }
-  var secondary2: BrandColor { get }
-  var secondary3: BrandColor { get }
+  var primary: BrandColor { get }
+  var secondary: BrandColor { get }
   var transparency: Transparency { get }
   var success: BrandColor { get }
   var danger: BrandColor { get }
@@ -52,11 +49,8 @@ public protocol Transparency {
 }
 
 public extension Color {
-  static var primary1: BrandColor { ThemeManager.shared.selectedTheme.primary1 }
-  static var primary2: BrandColor { ThemeManager.shared.selectedTheme.primary2 }
-  static var secondary1: BrandColor { ThemeManager.shared.selectedTheme.secondary1 }
-  static var secondary2: BrandColor { ThemeManager.shared.selectedTheme.secondary2 }
-  static var secondary3: BrandColor { ThemeManager.shared.selectedTheme.secondary3 }
+  static var primary: BrandColor { ThemeManager.shared.selectedTheme.secondary }
+  static var secondary: BrandColor { ThemeManager.shared.selectedTheme.primary }
   static var mono: MonochromaticColor { ThemeManager.shared.selectedTheme.monochromatic }
   static var transparency: Transparency { ThemeManager.shared.selectedTheme.transparency }
   static var success: BrandColor { ThemeManager.shared.selectedTheme.success }

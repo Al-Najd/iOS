@@ -20,7 +20,7 @@ struct AzkarBuffsView: View {
   
   var body: some View {
     ZStack {
-      Color.mono.offwhite.ignoresSafeArea()
+      Color.mono.offwhite.ignoresSafeArea(.all, edges: .bottom)
       buildContent()
     }
   }
@@ -50,7 +50,7 @@ struct AzkarBuffsView: View {
               RoundedRectangle(
                 cornerRadius: .r16
               )
-                .foregroundColor(.primary2.dark)
+                .foregroundColor(.primary.dark)
             )
             .padding()
           }
@@ -125,7 +125,7 @@ struct AzkarBuffCardView: View {
     .padding()
     .background(
       RoundedRectangle(cornerRadius: .r16)
-        .foregroundColor(.secondary1.default)
+        .foregroundColor(.secondary.default)
         .shadow(radius: .r12)
     )
     .padding(.p16)

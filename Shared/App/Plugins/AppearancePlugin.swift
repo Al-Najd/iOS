@@ -16,13 +16,11 @@ struct AppearancesPlugin: AppPlugin {
 
 private extension AppearancesPlugin {
   func addAppearances() {
-    UITabBar.appearance().isHidden = false
     UITabBarItem.appearance().setTitleTextAttributes(
       [.font : ARFont.textXSmall.font],
       for: []
     )
-    UITableView.appearance().backgroundColor = .clear
-    UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.secondary3.default)
+    UITableView.appearance().backgroundColor = UIColor(.mono.background)
     UISegmentedControl.appearance().setTitleTextAttributes(
       [.font: ARFont.subheadline.font],
       for: .normal

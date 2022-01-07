@@ -25,7 +25,7 @@ struct MainCoordinatorView: View {
     NavigationView {
       ZStack {
         Color("splash")
-          .ignoresSafeArea(.all, edges: .vertical)
+          .ignoresSafeArea(.all, edges: .bottom)
         
         TabView(selection: $selectedTab) {
           PrayersView()
@@ -35,12 +35,12 @@ struct MainCoordinatorView: View {
                 .frame(width: 25, height: 25)
                 .aspectRatio(contentMode: .fit)
                 .font(.system(size: 25))
-                .foregroundColor(selectedTab == .home ? .secondary1.default : .secondary3.dark)
+                .foregroundColor(selectedTab == .home ? .secondary.default : .secondary.dark)
                 
               Text("Prayers".localized)
                 .font(.pFootnote)
                 .foregroundColor(
-                  selectedTab == .home ? .secondary1.default : .secondary3.dark
+                  selectedTab == .home ? .secondary.default : .secondary.dark
                 )
             }.tag(Tab.home)
           
@@ -52,12 +52,12 @@ struct MainCoordinatorView: View {
                 .frame(width: 25, height: 25)
                 .aspectRatio(contentMode: .fit)
                 .font(.system(size: 25))
-                .foregroundColor(selectedTab == .azkar ? .secondary1.default : .secondary3.dark)
+                .foregroundColor(selectedTab == .azkar ? .secondary.default : .secondary.dark)
                 
               Text("Azkar".localized)
                 .font(.pFootnote)
                 .foregroundColor(
-                  selectedTab == .azkar ? .secondary1.default : .secondary3.dark
+                  selectedTab == .azkar ? .secondary.default : .secondary.dark
                 )
             }.tag(Tab.azkar)
           
@@ -68,11 +68,11 @@ struct MainCoordinatorView: View {
                 .frame(width: 25, height: 25)
                 .aspectRatio(contentMode: .fit)
                 .font(.system(size: 25))
-                .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
+                .foregroundColor(selectedTab == .rewards ? .secondary.default : .secondary.dark)
                 
               Text("Rewards".localized)
                 .font(.pFootnote)
-                .foregroundColor(selectedTab == .rewards ? .secondary1.default : .secondary3.dark)
+                .foregroundColor(selectedTab == .rewards ? .secondary.default : .secondary.dark)
             }.tag(Tab.rewards)
         }.sheet(isPresented: $dateState.showDaySelection) {
           VStack {
@@ -146,14 +146,11 @@ struct MainCoordinatorView_Previews: PreviewProvider {
     }
     return MainCoordinatorView()
       .environmentObject(app.state)
-      .environmentObject(app.state.onboardingState)
       .environmentObject(prayersState)
       .environmentObject(AzkarState())
       .environmentObject(app.state.plansState)
       .environmentObject(app.state.rewardsState)
       .environmentObject(app.state.dateState)
       .environmentObject(app.state.settingsState)
-      .environment(\.colorScheme, .dark)
-      .preferredColorScheme(.dark)
   }
 }

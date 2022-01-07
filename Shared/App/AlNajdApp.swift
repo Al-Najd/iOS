@@ -28,15 +28,12 @@ struct AlNajdApp: App {
     WindowGroup {
       MainCoordinatorView()
         .environmentObject(app.state)
-        .environmentObject(app.state.onboardingState)
         .environmentObject(app.state.homeState)
         .environmentObject(app.state.azkarState)
         .environmentObject(app.state.plansState)
         .environmentObject(app.state.rewardsState)
         .environmentObject(app.state.dateState)
         .environmentObject(app.state.settingsState)
-        .environment(\.colorScheme, .dark)
-        .preferredColorScheme(.dark)
     }
   }
 }
@@ -44,7 +41,6 @@ struct AlNajdApp: App {
 
 
 final class AppState: ObservableObject {
-  @Published var onboardingState: OnboardingState = .init()
   @Published var homeState: PrayersState = .init()
   @Published var azkarState: AzkarState = .init()
   @Published var plansState: PlansState = .init()

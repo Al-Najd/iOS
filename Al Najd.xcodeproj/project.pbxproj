@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C427244FBE005B9B46 /* ReportPlugin.swift */; };
-		0437E4C7272452FB005B9B46 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C6272452FB005B9B46 /* OnboardingCoordinator.swift */; };
-		0437E4C9272457D1005B9B46 /* OnboardingFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4C8272457D1005B9B46 /* OnboardingFirstView.swift */; };
-		0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */; };
-		0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */; };
-		0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E4D027245817005B9B46 /* OnboardingForthView.swift */; };
 		044F23FB272A17EC00CACBA4 /* Published+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */; };
 		044F6FA22735C0F3008BA334 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6FA12735C0F3008BA334 /* LocationService.swift */; };
 		044F6FA52735C26B008BA334 /* Schedule in Frameworks */ = {isa = PBXBuildFile; productRef = 044F6FA42735C26B008BA334 /* Schedule */; };
@@ -67,13 +62,10 @@
 		04B31898271CAE840088F527 /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31897271CAE840088F527 /* ReminderService.swift */; };
 		04B3189A271CAE8F0088F527 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B31899271CAE8F0088F527 /* RecommendationService.swift */; };
 		04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3189B271CAF5A0088F527 /* Date+Extensions.swift */; };
-		04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468A42721C3F300D4E12B /* OnboardingView.swift */; };
 		04D468AD2722045600D4E12B /* splash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468AC2722045500D4E12B /* splash.mp3 */; };
 		04D468AF272204AB00D4E12B /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468AE272204AB00D4E12B /* MusicService.swift */; };
 		04D468B52722119500D4E12B /* splashEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04D468B42722119500D4E12B /* splashEnd.mp3 */; };
 		04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468B627222AF800D4E12B /* LocalizationService.swift */; };
-		04D468BC2722318400D4E12B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BB2722318400D4E12B /* SplashView.swift */; };
-		04D468BD2722318400D4E12B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BB2722318400D4E12B /* SplashView.swift */; };
 		04D468BF2722354000D4E12B /* OnboardingSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */; };
 		04D468C02722354000D4E12B /* OnboardingSliderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */; };
 		04D468C8272250F600D4E12B /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468C7272250F600D4E12B /* HapticService.swift */; };
@@ -187,11 +179,6 @@
 
 /* Begin PBXFileReference section */
 		0437E4C427244FBE005B9B46 /* ReportPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPlugin.swift; sourceTree = "<group>"; };
-		0437E4C6272452FB005B9B46 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
-		0437E4C8272457D1005B9B46 /* OnboardingFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstView.swift; sourceTree = "<group>"; };
-		0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondView.swift; sourceTree = "<group>"; };
-		0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdView.swift; sourceTree = "<group>"; };
-		0437E4D027245817005B9B46 /* OnboardingForthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthView.swift; sourceTree = "<group>"; };
 		044F23FA272A17EC00CACBA4 /* Published+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+UserDefaults.swift"; sourceTree = "<group>"; };
 		044F6FA12735C0F3008BA334 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		045516E62725B3D500F4751B /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
@@ -233,12 +220,10 @@
 		04B31897271CAE840088F527 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		04B31899271CAE8F0088F527 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		04B3189B271CAF5A0088F527 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		04D468A42721C3F300D4E12B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		04D468AC2722045500D4E12B /* splash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splash.mp3; sourceTree = "<group>"; };
 		04D468AE272204AB00D4E12B /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		04D468B42722119500D4E12B /* splashEnd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splashEnd.mp3; sourceTree = "<group>"; };
 		04D468B627222AF800D4E12B /* LocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationService.swift; sourceTree = "<group>"; };
-		04D468BB2722318400D4E12B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		04D468BE2722354000D4E12B /* OnboardingSliderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSliderContainer.swift; sourceTree = "<group>"; };
 		04D468C7272250F600D4E12B /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		04D492622784886B00B3E84E /* PagerTabStripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripView.swift; sourceTree = "<group>"; };
@@ -562,20 +547,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		04D468A32721987800D4E12B /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				04D468A42721C3F300D4E12B /* OnboardingView.swift */,
-				04D468BB2722318400D4E12B /* SplashView.swift */,
-				0437E4C6272452FB005B9B46 /* OnboardingCoordinator.swift */,
-				0437E4C8272457D1005B9B46 /* OnboardingFirstView.swift */,
-				0437E4CA272457E5005B9B46 /* OnboardingSecondView.swift */,
-				0437E4CC272457F6005B9B46 /* OnboardingThirdView.swift */,
-				0437E4D027245817005B9B46 /* OnboardingForthView.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
 		04D468AB2722044200D4E12B /* Media */ = {
 			isa = PBXGroup;
 			children = (
@@ -848,7 +819,6 @@
 			children = (
 				04D468AB2722044200D4E12B /* Media */,
 				045516E52725B3C700F4751B /* Main */,
-				04D468A32721987800D4E12B /* Onboarding */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1120,7 +1090,6 @@
 				04D492732784886C00B3E84E /* NavBarItem.swift in Sources */,
 				045A1C4627454A0A00EC700A /* EncryptedStorage.swift in Sources */,
 				04D4927C2784886C00B3E84E /* PagerTabViewStyle.swift in Sources */,
-				0437E4D127245817005B9B46 /* OnboardingForthView.swift in Sources */,
 				04B3189C271CAF5A0088F527 /* Date+Extensions.swift in Sources */,
 				044F6FA22735C0F3008BA334 /* LocationService.swift in Sources */,
 				045516EC2725B98F00F4751B /* SettingsView.swift in Sources */,
@@ -1140,25 +1109,20 @@
 				04D492712784886C00B3E84E /* PagerTabViewDelegate.swift in Sources */,
 				0437E4C527244FBE005B9B46 /* ReportPlugin.swift in Sources */,
 				B865889C2716CEEC00FC0CBB /* Dispatch+Additions.swift in Sources */,
-				0437E4C7272452FB005B9B46 /* OnboardingCoordinator.swift in Sources */,
 				045A1C8A27454BB700EC700A /* NetworkProtocol.swift in Sources */,
 				B86588B12716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04D492722784886C00B3E84E /* PagerSetAppearModifier.swift in Sources */,
 				04D4927B2784886C00B3E84E /* NavBarModifier.swift in Sources */,
-				04D468BC2722318400D4E12B /* SplashView.swift in Sources */,
 				045A1CA227454D3900EC700A /* ErrorResponse.swift in Sources */,
 				04FAC745271C0F610045AD2E /* BuffsView.swift in Sources */,
 				045516E72725B3D500F4751B /* MainCoordinatorView.swift in Sources */,
 				04D468B727222AF800D4E12B /* LocalizationService.swift in Sources */,
 				B865886F2716CEA000FC0CBB /* Shadow.swift in Sources */,
-				0437E4CB272457E5005B9B46 /* OnboardingSecondView.swift in Sources */,
 				045A1CA127454D3900EC700A /* RSError.swift in Sources */,
-				04D468A52721C3F300D4E12B /* OnboardingView.swift in Sources */,
 				B865889E2716CEEC00FC0CBB /* Then.swift in Sources */,
 				045A1C4727454A0A00EC700A /* UserDefaultsStorage.swift in Sources */,
 				B86588A02716CEEC00FC0CBB /* Aliases.swift in Sources */,
 				B88BECFE2716F08000BC362A /* Deed.swift in Sources */,
-				0437E4C9272457D1005B9B46 /* OnboardingFirstView.swift in Sources */,
 				045A1C4427454A0A00EC700A /* RealmStorage.swift in Sources */,
 				04D492752784886C00B3E84E /* DataStore.swift in Sources */,
 				045A1CA42745567500EC700A /* L10n.swift in Sources */,
@@ -1172,7 +1136,6 @@
 				B86588712716CEA000FC0CBB /* Palette.swift in Sources */,
 				B86588A22716CEEC00FC0CBB /* ServiceLocator.swift in Sources */,
 				045A1C9F27454D3900EC700A /* NetworkErrorToSQErrorAdapter.swift in Sources */,
-				0437E4CD272457F6005B9B46 /* OnboardingThirdView.swift in Sources */,
 				B86588752716CEA000FC0CBB /* Colorable.swift in Sources */,
 				045A1C4827454A0A00EC700A /* CacheManager.swift in Sources */,
 				04E2329427277A0000E1B192 /* StopWatchService.swift in Sources */,
@@ -1204,7 +1167,6 @@
 				B86588B22716DC2D00FC0CBB /* ThemePlugin.swift in Sources */,
 				04FAC746271C0F610045AD2E /* BuffsView.swift in Sources */,
 				B86588702716CEA000FC0CBB /* Shadow.swift in Sources */,
-				04D468BD2722318400D4E12B /* SplashView.swift in Sources */,
 				B865889F2716CEEC00FC0CBB /* Then.swift in Sources */,
 				04D468C02722354000D4E12B /* OnboardingSliderContainer.swift in Sources */,
 				B86588A12716CEEC00FC0CBB /* Aliases.swift in Sources */,

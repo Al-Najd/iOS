@@ -12,11 +12,8 @@
 import Foundation
 
 public struct DefaultTheme: Theme {
-  public var primary1: BrandColor = PrimaryPalette(id: 1)
-  public var primary2: BrandColor = PrimaryPalette(id: 2)
-  public var secondary1: BrandColor = SecondaryPalette(id: 1)
-  public var secondary2: BrandColor = SecondaryPalette(id: 2)
-  public var secondary3: BrandColor = SecondaryPalette(id: 3)
+  public var primary: BrandColor = PrimaryPalette()
+  public var secondary: BrandColor = SecondaryPalette()
   public var monochromatic: MonochromaticColor = MonochromaticPalette()
   public var transparency: Transparency = TransparencyPalette()
   public var success: BrandColor = SuccessPalette()

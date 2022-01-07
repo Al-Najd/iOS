@@ -12,35 +12,19 @@
 import SwiftUI
 
 public struct PrimaryPalette: BrandColor {
-  public var `default`: Color
-  public var dark: Color
-  public var darkMode: Color
-  public var light: Color
-  public var background: Color
-  
-  init(id: Int) {
-    self.`default` = .init("Primary\(id).default")
-    self.dark = .init("Primary\(id).dark")
-    self.darkMode = .init("Primary\(id).darkMode")
-    self.light = .init("Primary\(id).light")
-    self.background = .init("Primary\(id).background")
-  }
+  public var `default`: Color = .init("Primary.default")
+  public var dark: Color  = .init("Primary.dark")
+  public var darkMode: Color = .init("Primary.darkMode")
+  public var light: Color = .init("Primary.light")
+  public var background: Color = .init("Primary.background")
 }
 
 public struct SecondaryPalette: BrandColor {
-  public var `default`: Color
-  public var dark: Color
-  public var darkMode: Color
-  public var light: Color
-  public var background: Color
-  
-  init(id: Int) {
-    self.`default` = .init("Secondary\(id).default")
-    self.dark  = .init("Secondary\(id).dark")
-    self.darkMode = .init("Secondary\(id).darkMode")
-    self.light = .init("Secondary\(id).light")
-    self.background = .init("Secondary\(id).background")
-  }
+  public var `default`: Color = .init("Secondary.default")
+  public var dark: Color  = .init("Secondary.dark")
+  public var darkMode: Color = .init("Secondary.darkMode")
+  public var light: Color = .init("Secondary.light")
+  public var background: Color = .init("Secondary.background")
 }
 
 public struct SuccessPalette: BrandColor {

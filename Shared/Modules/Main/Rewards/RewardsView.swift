@@ -21,7 +21,7 @@ struct RewardsView: View {
   
   var body: some View {
     ZStack {
-      Color.mono.offwhite.ignoresSafeArea()
+      Color.mono.offwhite.ignoresSafeArea(.all, edges: .bottom)
       PagerTabStripView() {
         BuffsView()
           .pagerTabItem {
@@ -34,8 +34,9 @@ struct RewardsView: View {
           }
       }
       .pagerTabStripViewStyle(
-        .segmentedControl(backgroundColor: .primary2.dark, padding: .init(top: 0, leading: .p8, bottom: 0, trailing: .p8), placedInToolbar: false)
+        .segmentedControl(backgroundColor: .primary.default, padding: .init(top: 0, leading: .p8, bottom: 0, trailing: .p8), placedInToolbar: false)
       )
+      .padding(.top)
     }
   }
 }
@@ -68,9 +69,9 @@ struct TitleNavBarItem: View, PagerTabViewDelegate {
         switch state {
         case .selected:
           self.theme.textColor = .mono.offblack
-          self.theme.backgroundColor = .primary2.background
+          self.theme.backgroundColor = .primary.background
         case .highlighted:
-          self.theme.textColor = .primary2.light
+          self.theme.textColor = .primary.light
         default:
           self.theme.textColor = .mono.input
           self.theme.backgroundColor = .mono.offwhite

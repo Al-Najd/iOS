@@ -12,7 +12,7 @@ struct BuffsView: View {
   
   var body: some View {
     ZStack {
-      Color.mono.offwhite.ignoresSafeArea()
+      Color.mono.offwhite.ignoresSafeArea(.all, edges: .bottom)
       buildContentView()
     }
   }
@@ -42,7 +42,7 @@ struct BuffsView: View {
             RoundedRectangle(
               cornerRadius: .r16
             )
-              .foregroundColor(.primary2.dark)
+              .foregroundColor(.primary.dark)
           )
           .padding()
         }
