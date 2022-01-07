@@ -43,6 +43,7 @@ struct MainCoordinatorView: View {
                   selectedTab == .home ? .secondary1.default : .secondary3.dark
                 )
             }.tag(Tab.home)
+          
           AzkarView()
             .tabItem {
               Image("Azkar")
@@ -93,17 +94,22 @@ struct MainCoordinatorView: View {
               HStack {
                 Text(dateState.title)
                   .foregroundColor(.mono.offblack)
+                  .padding(.horizontal, .p16)
                   .padding(.vertical, .p8)
-                  .padding(.leading, .p32)
+                  .cornerRadius(16)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: .p8)
+                      .stroke(Color.mono.line, lineWidth: 2.5)
+                  )
+                  .padding(.bottom, .p4)
                   .onTapGesture {
                     dateState.showDaySelection = true
                   }
-                Image(systemName: "chevron.down.square.fill")
-                  .padding(.trailing, .p32)
+                  .fixedSize(horizontal: true, vertical: false)
               }
             }
         
-        ToolbarItem(placement: LocalizationService.isRTL() ? .navigationBarLeading : .navigationBarTrailing) {
+        ToolbarItem(placement: .navigationBarLeading) {
           Button(
             action: {
               settingsState.showSettings = true

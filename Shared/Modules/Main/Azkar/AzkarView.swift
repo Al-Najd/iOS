@@ -73,20 +73,17 @@ struct AzkarView: View {
   @EnvironmentObject var state: AzkarState
   
   var body: some View {
-    VStack {
-      List {
-        RepeatableDeedsList(
-          sectionTitle: "Azkar Al-Sabah".localized,
-          deeds: state.sabah
-        ).padding()
-        
-        RepeatableDeedsList(
-          sectionTitle: "Azkar Al-Masaa".localized,
-          deeds: state.masaa
-        ).padding()
-      }
+    List {
+      RepeatableDeedsList(
+        sectionTitle: "Azkar Al-Sabah".localized,
+        deeds: state.sabah
+      ).padding()
+      
+      RepeatableDeedsList(
+        sectionTitle: "Azkar Al-Masaa".localized,
+        deeds: state.masaa
+      ).padding()
     }
-    .sheet(isPresented: $state.showBuffs, content: { AzkarBuffsView() })
   }
 }
 

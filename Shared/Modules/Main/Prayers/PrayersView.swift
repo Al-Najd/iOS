@@ -15,23 +15,21 @@ struct PrayersView: View {
   @State var lastOffset: CGFloat = 0
   
   var body: some View {
-    VStack {
-      List {
-        DeedsList(
-          sectionTitle: "Faraaid".localized,
-          deeds: state.faraaid
-        ).padding()
-        
-        DeedsList(
-          sectionTitle: "Sunnah".localized,
-          deeds: state.sunnah
-        ).padding()
-        
-        DeedsList(
-          sectionTitle: "Nafila".localized,
-          deeds: state.nafila
-        ).padding()
-      }
+    List {
+      DeedsList(
+        sectionTitle: "Faraaid".localized,
+        deeds: state.faraaid
+      ).padding()
+      
+      DeedsList(
+        sectionTitle: "Sunnah".localized,
+        deeds: state.sunnah
+      ).padding()
+      
+      DeedsList(
+        sectionTitle: "Nafila".localized,
+        deeds: state.nafila
+      ).padding()
     }
   }
 }
