@@ -7,6 +7,7 @@
 
 import UIKit.UIApplication
 import SwiftUI
+import DesignSystem
 
 struct AppearancesPlugin: AppPlugin {
   func setup() {
@@ -26,8 +27,11 @@ private extension AppearancesPlugin {
   }
   
   func adaptUITableViewAppearance() {
-    UITableView.appearance(for: .init(userInterfaceStyle: .light)).backgroundColor = UIColor(.mono.background)
-    UITableView.appearance(for: .init(userInterfaceStyle: .dark)).backgroundColor = UIColor(.mono.offwhite)
+    UITableView.appearance().separatorStyle = .none
+    UITableViewCell.appearance().backgroundColor = .green
+    UITableView.appearance().backgroundColor = .green
+    UITableView.appearance(for: .init(userInterfaceStyle: .light)).backgroundColor = .clear
+    UITableView.appearance(for: .init(userInterfaceStyle: .dark)).backgroundColor = .clear
   }
   
   func adaptTabBarAppearance() {

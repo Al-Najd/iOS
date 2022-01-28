@@ -6,6 +6,7 @@
 //
 
 import UIKit.UIApplication
+import DesignSystem
 
 public struct ThemePlugin: AppPlugin {
   public func setup() {

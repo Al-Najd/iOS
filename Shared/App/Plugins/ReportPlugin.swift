@@ -6,11 +6,8 @@
 //
 
 import UIKit.UIApplication
-
-import Foundation
+import OrdiLogging
 import Pulse
-import Logging
-
 struct ReportPlugin {}
 
 extension ReportPlugin: AppPlugin {
@@ -21,8 +18,7 @@ extension ReportPlugin: AppPlugin {
   }
 
   private func setupPulse() {
-      LoggingSystem.bootstrap(PersistentLogHandler.init)
-      URLSessionProxyDelegate.enableAutomaticRegistration()
+    
   }
 
   private func setupSentry() {

@@ -9,12 +9,6 @@ import UIKit.UIApplication
 
 public struct CorePlugin: AppPlugin {
   public func setup() {
-    setupServiceLocator()
-  }
-}
-
-private extension CorePlugin {
-  func setupServiceLocator() {
-    ServiceLocator.shared = ServiceLocator()
+    
   }
 }

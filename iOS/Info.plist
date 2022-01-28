@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSSiriUsageDescription</key>
-	<string>(Optional) In case you want to associate automation workflow or other Siri Actions</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>(Optional) In case you want to associate Praying in Masjid with Rewards related to Prayers</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>(Optional) In case you want to list events of Prayers in Calendar</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -28,6 +22,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>(Optional) In case you want to list events of Prayers in Calendar</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>(Optional) In case you want to associate Praying in Masjid with Rewards related to Prayers</string>
+	<key>NSSiriUsageDescription</key>
+	<string>(Optional) In case you want to associate automation workflow or other Siri Actions</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Klasik-Regular.otf</string>
@@ -43,7 +43,10 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>
-	<dict/>
+	<dict>
+		<key>UIColorName</key>
+		<string>Primary.background</string>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
