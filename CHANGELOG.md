@@ -4,6 +4,12 @@
     - Fix some layout issues in the navigation bar
     - 🚀 Released iOS 0.8.1! [Beta Release]
 
+## Updates of version 0.8.2 🚀
+    - Change colorings and appearance configurations
+    - Replace Theme and bring back light mode
+    - Fix some layout issues in the navigation bar
+    - 🚀 Released iOS 0.8.1! [Beta Release]
+
 ## Updates of version 0.8.1 🚀
     - lessen padding and improve layout when category is completed
     - Add TabBarIcons
