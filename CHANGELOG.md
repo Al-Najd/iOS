@@ -1,3 +1,9 @@
+## Updates of version 0.8.3 🚀
+    - Fix UI on different sizes
+    - 🚀 Released iOS 0.8.2! [Beta Release]
+    - Revamp UI + introduce TCA
+    - 🚀 Released iOS 0.8.2! [Beta Release]
+
 ## Updates of version 0.8.2 🚀
     - Change colorings and appearance configurations
     - Replace Theme and bring back light mode
