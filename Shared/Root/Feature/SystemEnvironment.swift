@@ -8,6 +8,7 @@
 import Utils
 import Business
 import Foundation
+import Entities
 
 @dynamicMemberLookup
 struct SystemEnvironment<Environment> {

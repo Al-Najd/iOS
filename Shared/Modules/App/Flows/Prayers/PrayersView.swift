@@ -11,6 +11,7 @@ import ReusableUI
 import DesignSystem
 import Utils
 import PreviewableView
+import Entities
 
 struct PrayersView: View {
   let store: Store<PrayerState, PrayerAction>

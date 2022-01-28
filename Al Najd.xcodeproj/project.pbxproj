@@ -13,13 +13,13 @@
 		040AC2C327A38B0C000A47F0 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BD27A38B0C000A47F0 /* L10n.swift */; };
 		040AC2C427A38B0C000A47F0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BE27A38B0C000A47F0 /* Language.swift */; };
 		040AC2C527A38B0C000A47F0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BE27A38B0C000A47F0 /* Language.swift */; };
-		040AC2C627A38B0C000A47F0 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BF27A38B0C000A47F0 /* String+Localization.swift */; };
-		040AC2C727A38B0C000A47F0 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BF27A38B0C000A47F0 /* String+Localization.swift */; };
 		0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0456DAA427A38629009BDC62 /* ComposableArchitecture */; };
+		045849F127A442A60090FB3C /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F027A442A60090FB3C /* Entities */; };
+		045849F427A4921F0090FB3C /* Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F327A4921F0090FB3C /* Calendar */; };
 		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
 		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
-		0472C62927A385A700913892 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EE27A385A600913892 /* CalendarView.swift */; };
+		0472C62927A385A700913892 /* OCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EE27A385A600913892 /* OCalendarView.swift */; };
 		0472C62A27A385A700913892 /* DateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EF27A385A600913892 /* DateFeature.swift */; };
 		0472C62B27A385A700913892 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F127A385A600913892 /* HapticService.swift */; };
 		0472C62C27A385A700913892 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F527A385A600913892 /* SplashView.swift */; };
@@ -32,9 +32,6 @@
 		0472C63327A385A700913892 /* ResourcesAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C60127A385A600913892 /* ResourcesAccess.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
-		0472C63727A385A700913892 /* Deed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C60827A385A600913892 /* Deed.swift */; };
-		0472C63827A385A700913892 /* RepeatableDeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C60927A385A600913892 /* RepeatableDeed.swift */; };
-		0472C63927A385A700913892 /* Zekr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C60A27A385A600913892 /* Zekr.swift */; };
 		0472C63A27A385A700913892 /* SystemEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61227A385A600913892 /* SystemEnvironment.swift */; };
 		0472C63B27A385A700913892 /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61327A385A600913892 /* RootFeature.swift */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
@@ -74,13 +71,13 @@
 		040AC2BC27A38B0C000A47F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizables.strings; sourceTree = "<group>"; };
 		040AC2BD27A38B0C000A47F0 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		040AC2BE27A38B0C000A47F0 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
-		040AC2BF27A38B0C000A47F0 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		040AC2C827A38B20000A47F0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizables.strings; sourceTree = "<group>"; };
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrdiCore; path = ../OrdiKit/SwiftUI/OrdiCore; sourceTree = "<group>"; };
+		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
 		0472C5EA27A385A600913892 /* OTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTabBarView.swift; sourceTree = "<group>"; };
 		0472C5EB27A385A600913892 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0472C5ED27A385A600913892 /* ONavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ONavigationView.swift; sourceTree = "<group>"; };
-		0472C5EE27A385A600913892 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		0472C5EE27A385A600913892 /* OCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCalendarView.swift; sourceTree = "<group>"; };
 		0472C5EF27A385A600913892 /* DateFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFeature.swift; sourceTree = "<group>"; };
 		0472C5F127A385A600913892 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		0472C5F527A385A600913892 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -93,9 +90,6 @@
 		0472C60127A385A600913892 /* ResourcesAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesAccess.swift; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
-		0472C60827A385A600913892 /* Deed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deed.swift; sourceTree = "<group>"; };
-		0472C60927A385A600913892 /* RepeatableDeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatableDeed.swift; sourceTree = "<group>"; };
-		0472C60A27A385A600913892 /* Zekr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zekr.swift; sourceTree = "<group>"; };
 		0472C61227A385A600913892 /* SystemEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEnvironment.swift; sourceTree = "<group>"; };
 		0472C61327A385A600913892 /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
@@ -126,6 +120,8 @@
 			files = (
 				0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */,
 				04D8397727979EB4007FA07D /* Core in Frameworks */,
+				045849F427A4921F0090FB3C /* Calendar in Frameworks */,
+				045849F127A442A60090FB3C /* Entities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +149,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		045849F227A4733A0090FB3C /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				0472C5EE27A385A600913892 /* OCalendarView.swift */,
+				0472C5EF27A385A600913892 /* DateFeature.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		045849F527A493EE0090FB3C /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				0472C5ED27A385A600913892 /* ONavigationView.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
 		0472C5E727A385A600913892 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,10 +178,11 @@
 		0472C5E827A385A600913892 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
 				0472C5EC27A385A600913892 /* Date */,
-				0472C5F027A385A600913892 /* Feedback */,
-				0472C5F227A385A600913892 /* Main */,
+				0472C5F027A385A600913892 /* Haptics */,
+				0472C5F227A385A600913892 /* Flows */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -185,22 +199,20 @@
 		0472C5EC27A385A600913892 /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				0472C5ED27A385A600913892 /* ONavigationView.swift */,
-				0472C5EE27A385A600913892 /* CalendarView.swift */,
-				0472C5EF27A385A600913892 /* DateFeature.swift */,
+				045849F227A4733A0090FB3C /* Calendar */,
 			);
 			path = Date;
 			sourceTree = "<group>";
 		};
-		0472C5F027A385A600913892 /* Feedback */ = {
+		0472C5F027A385A600913892 /* Haptics */ = {
 			isa = PBXGroup;
 			children = (
 				0472C5F127A385A600913892 /* HapticService.swift */,
 			);
-			path = Feedback;
+			path = Haptics;
 			sourceTree = "<group>";
 		};
-		0472C5F227A385A600913892 /* Main */ = {
+		0472C5F227A385A600913892 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
 				0472C5F327A385A600913892 /* Settings */,
@@ -210,7 +222,7 @@
 				0472C5FA27A385A600913892 /* Rewards */,
 				0472C5FD27A385A600913892 /* Azkar */,
 			);
-			path = Main;
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		0472C5F327A385A600913892 /* Settings */ = {
@@ -293,9 +305,6 @@
 		0472C60727A385A600913892 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				0472C60827A385A600913892 /* Deed.swift */,
-				0472C60927A385A600913892 /* RepeatableDeed.swift */,
-				0472C60A27A385A600913892 /* Zekr.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -384,7 +393,6 @@
 				040AC2BD27A38B0C000A47F0 /* L10n.swift */,
 				040AC2BE27A38B0C000A47F0 /* Language.swift */,
 				040AC2BB27A38B0C000A47F0 /* Localizables.strings */,
-				040AC2BF27A38B0C000A47F0 /* String+Localization.swift */,
 			);
 			name = Localization;
 			path = "../../Al Najd/Shared/Localization";
@@ -400,6 +408,7 @@
 		B86588032716CC5200FC0CBB = {
 			isa = PBXGroup;
 			children = (
+				045849EF27A43EE80090FB3C /* AlNajd */,
 				044E004527979E15005E6277 /* OrdiCore */,
 				B86588082716CC5200FC0CBB /* Shared */,
 				B86588122716CC5500FC0CBB /* iOS */,
@@ -490,6 +499,8 @@
 			packageProductDependencies = (
 				04D8397627979EB4007FA07D /* Core */,
 				0456DAA427A38629009BDC62 /* ComposableArchitecture */,
+				045849F027A442A60090FB3C /* Entities */,
+				045849F327A4921F0090FB3C /* Calendar */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -650,19 +661,15 @@
 				0472C62827A385A700913892 /* ONavigationView.swift in Sources */,
 				040AC2C227A38B0C000A47F0 /* L10n.swift in Sources */,
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
-				0472C63927A385A700913892 /* Zekr.swift in Sources */,
 				0472C63027A385A700913892 /* RewardsFeature.swift in Sources */,
-				040AC2C627A38B0C000A47F0 /* String+Localization.swift in Sources */,
 				0472C62A27A385A700913892 /* DateFeature.swift in Sources */,
 				0472C63327A385A700913892 /* ResourcesAccess.swift in Sources */,
 				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
 				0472C62F27A385A700913892 /* RewardsView.swift in Sources */,
-				0472C63827A385A700913892 /* RepeatableDeed.swift in Sources */,
-				0472C63727A385A700913892 /* Deed.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,
 				0472C62627A385A700913892 /* OTabBarView.swift in Sources */,
-				0472C62927A385A700913892 /* CalendarView.swift in Sources */,
+				0472C62927A385A700913892 /* OCalendarView.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
 				0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */,
 				0472C63A27A385A700913892 /* SystemEnvironment.swift in Sources */,
@@ -679,7 +686,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040AC2C727A38B0C000A47F0 /* String+Localization.swift in Sources */,
 				040AC2C327A38B0C000A47F0 /* L10n.swift in Sources */,
 				040AC2C527A38B0C000A47F0 /* Language.swift in Sources */,
 			);
@@ -1103,6 +1109,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0456DAA327A38629009BDC62 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		045849F027A442A60090FB3C /* Entities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Entities;
+		};
+		045849F327A4921F0090FB3C /* Calendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Calendar;
 		};
 		04D8397627979EB4007FA07D /* Core */ = {
 			isa = XCSwiftPackageProductDependency;

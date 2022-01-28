@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import Business
+import Entities
 
 struct PrayerState: Equatable {
   var activeDate: Date = .now

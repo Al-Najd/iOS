@@ -10,18 +10,18 @@ import Foundation
 public struct RepeatableDeed: Identifiable, Codable, Equatable {
   public var id: UUID = .init()
   
-  let title: String
-  let numberOfRepeats: Int
-  var currentNumberOfRepeats: Int
+  public let title: String
+  public let numberOfRepeats: Int
+  public var currentNumberOfRepeats: Int
   
-  let category: AzkarCategory
-  var reward: Reward
+  public let category: AzkarCategory
+  public var reward: Reward
   
-  var isDone: Bool {
+  public var isDone: Bool {
     currentNumberOfRepeats <= 0
   }
   
-  init(id: UUID = .init(), title: String, numberOfRepeats: Int, category: AzkarCategory, reward: Reward) {
+  public init(id: UUID = .init(), title: String, numberOfRepeats: Int, category: AzkarCategory, reward: Reward) {
     self.id = id
     self.title = title
     self.numberOfRepeats = numberOfRepeats

@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import CasePaths
+import Entities
 import Business
 
 struct RootState {
@@ -127,7 +128,10 @@ fileprivate func sync(_ state: inout RootState, with azkarAction: AzkarAction) {
   }
 }
 
-fileprivate func decrement(deed: RepeatableDeed, in state: inout RootState) {
+fileprivate func decrement(
+  deed: RepeatableDeed,
+  in state: inout RootState
+) {
   guard deed.currentNumberOfRepeats > 0 else { return }
   var deed = deed
   deed.currentNumberOfRepeats -= 1

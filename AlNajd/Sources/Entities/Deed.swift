@@ -8,29 +8,29 @@
 import Foundation
 import Utils
 
-struct Deed: Identifiable, Codable, Equatable {
-  var id: UUID = .init()
-  var category: DeedCategory
-  var title: String
-  var isDone: Bool = false
-  var reward: Reward
+public struct Deed: Identifiable, Codable, Equatable {
+  public var id: UUID = .init()
+  public var category: DeedCategory
+  public var title: String
+  public var isDone: Bool = false
+  public var reward: Reward
 }
 
-struct Reward: Identifiable, Codable, Equatable {
-  var id: UUID = .init()
-  var title: String
+public struct Reward: Identifiable, Codable, Equatable {
+  public var id: UUID = .init()
+  public var title: String
 }
 
-enum DeedCategory: Identifiable, Codable, Equatable, Hashable, CaseIterable {
+public enum DeedCategory: Identifiable, Codable, Equatable, Hashable, CaseIterable {
   case fard
   case sunnah
   case nafila
   
-  var id: String {
+  public var id: String {
     return "\(self)"
   }
   
-  var title: String {
+  public var title: String {
     switch self {
     case .fard:
       return "Faraaid".localized
@@ -42,15 +42,15 @@ enum DeedCategory: Identifiable, Codable, Equatable, Hashable, CaseIterable {
   }
 }
 
-enum AzkarCategory: Identifiable, Codable, CaseIterable {
+public enum AzkarCategory: Identifiable, Codable, CaseIterable {
   case sabah
   case masaa
   
-  var id: String {
+  public var id: String {
     "\(self)"
   }
   
-  var title: String {
+  public var title: String {
     switch self {
     case .sabah:
       return "Azkar Al-Sabah".localized
@@ -60,7 +60,7 @@ enum AzkarCategory: Identifiable, Codable, CaseIterable {
   }
 }
 
-extension Array where Element == Deed {
+public extension Array where Element == Deed {
   static let faraaid: [Deed] = [
     .init(
       category: .fard,

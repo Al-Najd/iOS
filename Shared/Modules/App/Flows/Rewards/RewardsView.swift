@@ -11,6 +11,7 @@ import DesignSystem
 import Utils
 import ComposableArchitecture
 import PreviewableView
+import Entities
 
 struct RewardsView: View {
   let store: Store<RewardsState, RewardsAction>

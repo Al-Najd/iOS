@@ -166,7 +166,7 @@ struct ONavigationBar: View {
             }.padding(.p16.adaptRatio())
             
             if didExpand {
-              OCalendarView(viewStore)
+              OCalendarView(store)
                 .padding(.p16.adaptRatio())
                 .background(
                   Rectangle()

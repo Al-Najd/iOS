@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import Business
+import Entities
 
 struct RewardsState: Equatable {
   var activeDate: Date = .now

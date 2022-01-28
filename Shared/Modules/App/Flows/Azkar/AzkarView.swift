@@ -11,6 +11,7 @@ import DesignSystem
 import Utils
 import ComposableArchitecture
 import PreviewableView
+import Entities
 
 struct AzkarView: View {
   let store: Store<AzkarState, AzkarAction>

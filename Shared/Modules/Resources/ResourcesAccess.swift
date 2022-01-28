@@ -8,6 +8,7 @@
 import Foundation
 import Animations
 import Business
+import Entities
 
 extension OAnimation {
   static let splash: OAnimation = .init(name: "splash")

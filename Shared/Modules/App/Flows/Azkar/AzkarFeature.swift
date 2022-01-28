@@ -7,6 +7,7 @@
 
 import Foundation
 import ComposableArchitecture
+import Entities
 
 struct AzkarState: Equatable {
   var activeDate: Date = .now
