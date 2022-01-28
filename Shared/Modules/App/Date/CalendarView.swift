@@ -223,8 +223,8 @@ struct DateElementView: View {
       }
     ) {
       Text("00")
-        .padding(.p8.adaptRatio())
         .foregroundColor(.clear)
+        .padding(.p8.adaptV(min: .p4, max: .p16))
         .background(coloring.background)
         .cornerRadius(.r8.adaptRatio())
         .accessibilityHidden(true)

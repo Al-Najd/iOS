@@ -25,12 +25,20 @@ struct ONavigationBar: View {
     dragOffset > expandThreshold
   }
   
+  private var isDragging: Bool {
+    (dragOffset != 0.0 && dragOffset != topHeight)
+  }
+  
+  private var canCollapse: Bool {
+    !canExpand && isDragging
+  }
+  
   private var didExpand: Bool {
     topHeight == maxHeight
   }
   
   private var maxHeight: CGFloat {
-    getScreenSize().height - 200
+    getScreenSize().height - (200)
   }
   
   private var expandThreshold: CGFloat { getScreenSize().height * 0.2 }
@@ -62,18 +70,14 @@ struct ONavigationBar: View {
             withAnimation(.easeInOut) {
               dragOffset = gesture.translation.height
             }
-            
-            if canExpand {
-              HapticService.main.generate(feedback: .success)
-            } else {
-              HapticService.main.generate(feedback: .warning)
-            }
-          }.onEnded { _ in
+          }.onEnded { gesture in
             withAnimation(.easeInOut(duration: 0.65)) {
               if canExpand {
                 dragOffset = maxHeight
-              } else {
+                HapticService.main.generate(feedback: .success)
+              } else if canCollapse {
                 dragOffset = .zero
+                HapticService.main.generate(feedback: .warning)
               }
             }
           }
@@ -118,6 +122,12 @@ struct ONavigationBar: View {
   ) -> some View {
     WithViewStore(store) { viewStore in
       ZStack {
+        Color
+          .primary
+          .dark
+          .stay(.light)
+          .frame(height: topHeight)
+          .ignoresSafeArea(edges: .top)
         if canExpand {
           VStack(spacing: .p8.adaptRatio()) {
             VStack(alignment: .leading, spacing: .p8.adaptRatio()) {
