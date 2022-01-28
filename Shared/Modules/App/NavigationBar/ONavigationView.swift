@@ -92,7 +92,11 @@ struct ONavigationBar: View {
     WithViewStore(store) { viewStore in
       VStack(spacing: .p8.adaptRatio()) {
         HStack(spacing: 0) {
-          createHorizontalWeekSlider(store)
+          HorizontalWeekSliderView(
+            viewStore.currentDay,
+            viewStore.currentWeek,
+            { viewStore.send(.onChange(currentDay: $0)) }
+          )
         }.frame(maxWidth: .infinity)
           .stay(.light)
           .padding([.horizontal, .bottom], .p16.adaptRatio())
@@ -196,91 +200,6 @@ struct ONavigationView_Previews: PreviewProvider {
   static var previews: some View {
     PreviewableView([.darkMode]) {
       MainTabView(store: .mainRoot)
-    }
-  }
-}
-
-
-// MARK: - Horizontal Week Slider
-extension ONavigationBar {
-  
-  @ViewBuilder
-  func createHorizontalWeekSlider(
-    _ store: Store<DateState, DateAction>
-  ) -> some View {
-    WithViewStore(store) { viewStore in
-      ScrollView(.horizontal, showsIndicators: false) {
-        ScrollViewReader { value in
-          HStack(spacing: .p32.adaptRatio()) {
-            ForEach(viewStore.currentWeek, id: \.self) { date in
-              Button {
-                withAnimation {
-                  viewStore.send(.onChange(currentDay: date))
-                }
-              } label: {
-                createDateText(date, viewStore)
-              }.id(date.day)
-            }
-          }
-          .frame(minWidth: getScreenSize().width)
-          .onAppear(perform: {
-            withAnimation(.spring()) {
-              value.scrollTo(viewStore.currentDay.day, anchor: .center)
-            }
-          })
-          .onChange(of: viewStore.currentDay) { change in
-            withAnimation(.spring()) {
-              value.scrollTo(change, anchor: .center)
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  @ViewBuilder
-  func createDateText(
-    _ date: Date,
-    _ viewStore: ViewStore<DateState, DateAction>
-  ) -> some View {
-    VStack(alignment: .center, spacing: .p8.adaptRatio()) {
-      Text("\(date.day)")
-        .font(date.day == viewStore.currentDay.day
-              ? .pBody.bold()
-              : .pBody)
-        .foregroundColor(
-          date.day == viewStore.currentDay.day
-          ? .mono.offwhite
-          : .mono.placeholder
-        )
-        .scaleEffect(
-          date.day == viewStore.currentDay.day
-          ? 1.0.adaptV(max: 2)
-          : 0.75.adaptV(max: 1.5)
-        )
-      if date.day == viewStore.currentDay.day {
-        Text("\(date.monthName(ofStyle: .threeLetters))")
-          .font(
-            .pFootnote.bold()
-          )
-          .foregroundColor(
-            date.day == viewStore.currentDay.day
-            ? .mono.offwhite
-            : .mono.placeholder
-          )
-      }
-      
-      if date.isInFuture {
-        Image(systemName: "lock")
-          .font(
-            .pFootnote.bold()
-          )
-          .foregroundColor(
-            date.day == viewStore.currentDay.day
-            ? .mono.offwhite
-            : .mono.placeholder
-          )
-      }
     }
   }
 }

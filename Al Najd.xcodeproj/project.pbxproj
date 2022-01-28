@@ -16,6 +16,7 @@
 		0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0456DAA427A38629009BDC62 /* ComposableArchitecture */; };
 		045849F127A442A60090FB3C /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F027A442A60090FB3C /* Entities */; };
 		045849F427A4921F0090FB3C /* Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F327A4921F0090FB3C /* Calendar */; };
+		045849F827A49E480090FB3C /* HorizontalWeekSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */; };
 		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
 		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
@@ -74,6 +75,7 @@
 		040AC2C827A38B20000A47F0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizables.strings; sourceTree = "<group>"; };
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrdiCore; path = ../OrdiKit/SwiftUI/OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
+		045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalWeekSliderView.swift; sourceTree = "<group>"; };
 		0472C5EA27A385A600913892 /* OTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTabBarView.swift; sourceTree = "<group>"; };
 		0472C5EB27A385A600913892 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0472C5ED27A385A600913892 /* ONavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ONavigationView.swift; sourceTree = "<group>"; };
@@ -166,6 +168,14 @@
 			path = NavigationBar;
 			sourceTree = "<group>";
 		};
+		045849F627A49D570090FB3C /* Attic */ = {
+			isa = PBXGroup;
+			children = (
+				045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */,
+			);
+			path = Attic;
+			sourceTree = "<group>";
+		};
 		0472C5E727A385A600913892 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +188,7 @@
 		0472C5E827A385A600913892 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				045849F627A49D570090FB3C /* Attic */,
 				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
 				0472C5EC27A385A600913892 /* Date */,
@@ -215,21 +226,12 @@
 		0472C5F227A385A600913892 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				0472C5F327A385A600913892 /* Settings */,
 				0472C5F427A385A600913892 /* Splash */,
 				0472C5F627A385A600913892 /* Prayers */,
-				0472C5F927A385A600913892 /* Plans */,
 				0472C5FA27A385A600913892 /* Rewards */,
 				0472C5FD27A385A600913892 /* Azkar */,
 			);
 			path = Flows;
-			sourceTree = "<group>";
-		};
-		0472C5F327A385A600913892 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		0472C5F427A385A600913892 /* Splash */ = {
@@ -247,13 +249,6 @@
 				0472C5F827A385A600913892 /* PrayersView.swift */,
 			);
 			path = Prayers;
-			sourceTree = "<group>";
-		};
-		0472C5F927A385A600913892 /* Plans */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Plans;
 			sourceTree = "<group>";
 		};
 		0472C5FA27A385A600913892 /* Rewards */ = {
@@ -677,6 +672,7 @@
 				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
 				0472C62C27A385A700913892 /* SplashView.swift in Sources */,
+				045849F827A49E480090FB3C /* HorizontalWeekSliderView.swift in Sources */,
 				0472C63127A385A700913892 /* AzkarFeature.swift in Sources */,
 				0472C62E27A385A700913892 /* PrayersView.swift in Sources */,
 			);
