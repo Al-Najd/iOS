@@ -106,7 +106,7 @@ public struct RangeAnalysisCardView: View {
                             .foregroundColor(.mono.offblack)
                         
                         if progress.hasEnoughData {
-                            Text("Last \(progress.reports.count) Days")
+                            Text("Last n Days".localized(arguments: progress.reports.count))
                                 .font(.pHeadline.bold())
                                 .foregroundColor(.mono.offblack.opacity(0.5))
                         }
@@ -133,7 +133,7 @@ public struct RangeAnalysisCardView: View {
                 } else {
                     VStack {
                         Image(systemName: "questionmark.circle.fill")
-                        Text("Unfortunately there is not enough data to analyze this week")
+                        Text("Unfortunately there is not enough data to analyze this week".localized)
                     }
                     .font(.pHeadline.bold())
                     .padding(.p8)

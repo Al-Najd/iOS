@@ -17,7 +17,7 @@ public extension String {
   }
   
   func localized(arguments: CVarArg...) -> String {
-    return String(format: self.localized, arguments: arguments)
+      return String(format: self.localized, arguments: arguments.map { "\($0)" })
   }
 }
 

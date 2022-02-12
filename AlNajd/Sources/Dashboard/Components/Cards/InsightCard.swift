@@ -59,7 +59,7 @@ public extension Insight {
     public static let praise: Indicator = .init(
       color: Color.success,
       icon: "hands.clap.fill",
-      title: "Good Job!"
+      title: "Good Job!".localized
     )
     
     public static func == (lhs: Insight.Indicator, rhs: Insight.Indicator) -> Bool {
@@ -69,19 +69,19 @@ public extension Insight {
     public static let encourage: Indicator = .init(
       color: Color.warning,
       icon: "bolt.heart.fill",
-      title: "Keep it up, you can do it!"
+      title: "Keep it up, you can do it!".localized
     )
     
     public static let tipOfTheDay: Indicator = .init(
       color: Color.success,
       icon: "star.fill",
-      title: "Tip of the day"
+      title: "Tip of the day".localized
     )
     
     public static let danger: Indicator = .init(
       color: Color.danger,
       icon: "flame.circle.fill",
-      title: "Heads up!"
+      title: "Heads up!".localized
     )
   }
 }

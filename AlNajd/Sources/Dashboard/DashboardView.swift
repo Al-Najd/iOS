@@ -17,9 +17,9 @@ struct DashboardSegment: Identifiable, Hashable {
 }
 
 extension DashboardSegment {
-  static let prayers: DashboardSegment = .init(title: "Prayers")
-  static let azkar: DashboardSegment = .init(title: "Azkar")
-  static let allStats: DashboardSegment = .init(title: "All Stats")
+    static let prayers: DashboardSegment = .init(title: "Prayers".localized)
+    static let azkar: DashboardSegment = .init(title: "Azkar".localized)
+    static let allStats: DashboardSegment = .init(title: "All Stats".localized)
   
   static let allSegments: [DashboardSegment] = [
     prayers,

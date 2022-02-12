@@ -12,6 +12,7 @@ import Utils
 import ComposableArchitecture
 import PreviewableView
 import Entities
+import Localization
 
 struct RewardsView: View {
   let store: Store<RewardsState, RewardsAction>

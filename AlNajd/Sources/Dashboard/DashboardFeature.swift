@@ -52,9 +52,9 @@ func analyize(_ report: Report.Range) -> [RangeProgress] {
 }
 
 let noEnoughDataMessageBank = [
-    "How about we make it a challenge to us to populate this with great deeds? wouldn't that be awesome?",
-    "Wouldn't it be awesome if we had a week's worth of awesome deeds to display here? let's nail it this week!",
-    "Hmm, sad, but we still have a chance! let's pray hard this week!"
+    "How about we make it a challenge to us to populate this with great deeds? wouldn't that be awesome?".localized,
+    "Wouldn't it be awesome if we had a week's worth of awesome deeds to display here? let's nail it this week!".localized,
+    "Hmm, sad, but we still have a chance! let's pray hard this week!".localized
 ]
 
 func getRangeProgress(
@@ -91,9 +91,9 @@ var fajrPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) 
     let daysString = daysWhereFajrIsPrayed
         .dropLast()
         .joined(separator: ", ")
-    + ", and \(daysWhereFajrIsPrayed.last ?? "")"
+    + ", and day".localized(arguments: daysWhereFajrIsPrayed.last ?? "")
     
-    return .init(indicator: .praise, details: "Well done on praying Al Fajr on \(daysString)")
+    return .init(indicator: .praise, details: "Well done on praying Al Fajr on day".localized(arguments: daysString))
 }
 
 var fajrAdvisor: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight? = { category, dateIndexedDeeds in
