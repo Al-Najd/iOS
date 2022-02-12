@@ -67,16 +67,3 @@ class DashboardTests: QuickSpec {
         }
     }
 }
-
-protocol Changeable {}
-extension Changeable {
-    func changing(_ change: (inout Self) -> Void) -> Self {
-        var a = self
-        change(&a)
-        return a
-    }
-}
-
-extension Deed: Changeable {}
-
-extension Array: Changeable where Element == Deed {}

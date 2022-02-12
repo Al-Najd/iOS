@@ -12,6 +12,7 @@
 import ComposableArchitecture
 import Entities
 import Localization
+import Utils
 
 public struct DashboardState: Equatable {
     public var tipOfTheDay: String
@@ -63,7 +64,9 @@ func getRangeProgress(
 ) -> RangeProgress {
     let countOfDoneDuringRange =  dateIndexedDeeds.values.flatMap { $0 }.filter { $0.isDone }.count
     let rangeNumberOfDays = dateIndexedDeeds.count
-    let reports = countOfDoneDuringRange >= rangeNumberOfDays ? dateIndexedDeeds.map { DayProgress(deeds: $0.value, date: $0.key) } : []
+    let reports = countOfDoneDuringRange >= rangeNumberOfDays
+    ? dateIndexedDeeds.map { (date: $0.key, deeds: $0.value) }.sorted(by: { $0.date > $1.date }).map { DayProgress(deeds: $0.deeds, date: $0.date) }
+    : []
     
     let insight: Insight? = reports.isEmpty ? .init(
         indicator: .encourage,
@@ -124,6 +127,16 @@ extension Store where State == DashboardState, Action == DashboardAction {
         reducer: dashboardReducer,
         environment: DashboardEnvironment()
     )
+    
+    static let noReports: Store = .init(
+        initialState: .init(
+            reports: RangeProgress.mock.map {
+                RangeProgress(title: $0.title, reports: [], isImproving: $0.isImproving, insight: $0.insight)
+            }
+        ),
+        reducer: dashboardReducer,
+        environment: DashboardEnvironment()
+    )
 }
 
 extension DayProgress {
@@ -165,3 +178,6 @@ extension Insight.Indicator {
         return praises + encourages + tipOfTheDay + danger
     }
 }
+
+extension Deed: Changeable {}
+extension RangeProgress: Changeable {}

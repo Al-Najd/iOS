@@ -53,7 +53,7 @@ public struct DashboardView: View {
 struct DashboardView_Previews: PreviewProvider {
   static var previews: some View {
     DashboardView(
-      store: .mock
+      store: .noReports
     ).background(
         Color.mono.background.ignoresSafeArea()
       )

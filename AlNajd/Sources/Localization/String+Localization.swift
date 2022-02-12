@@ -13,7 +13,7 @@ public extension String {
   ///        "Hello world".localized -> Hallo Welt
   ///
   var localized: String {
-      return NSLocalizedString(self, tableName: "Localizables", bundle: .module, comment: "")
+      return NSLocalizedString(self, tableName: "Localizables", bundle: .localizationBundle, comment: "")
   }
   
   func localized(arguments: CVarArg...) -> String {

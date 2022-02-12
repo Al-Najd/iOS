@@ -146,7 +146,7 @@ public extension Deed {
         category: .sunnah,
         title: "2 Raqaat After Al Aishaa".localized,
         reward: .init(
-            title: "The Prophet SAW never left the Sunnah of Al Maghrib".localized
+            title: "Other than being a Sunnah, it contribute towards being Qyam Layil".localized
         )
     )
 }

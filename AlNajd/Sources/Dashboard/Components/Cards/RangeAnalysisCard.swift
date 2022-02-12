@@ -137,7 +137,7 @@ public struct RangeAnalysisCardView: View {
                     }
                     .font(.pHeadline.bold())
                     .padding(.p8)
-                    .foregroundColor(.mono.line)
+                    .foregroundColor(.mono.offblack.opacity(0.5))
                     .multilineTextAlignment(.center)
                 }
             }

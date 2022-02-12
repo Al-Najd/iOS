@@ -47,3 +47,14 @@ extension Sequence {
         }
     }
 }
+
+public protocol Changeable {}
+public extension Changeable {
+    func changing(_ change: (inout Self) -> Void) -> Self {
+        var a = self
+        change(&a)
+        return a
+    }
+}
+
+extension Array: Changeable where Element == Changeable {}
