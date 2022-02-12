@@ -23,10 +23,10 @@ public extension Report {
     }
     
     struct Range: Equatable {
-        public let range: [DeedCategory: [Date: [Deed]]]
+        public let ranges: [DeedCategory: [Date: [Deed]]]
         
-        public init(range: [DeedCategory : [Date : [Deed]]]) {
-            self.range = range
+        public init(ranges: [DeedCategory : [Date : [Deed]]]) {
+            self.ranges = ranges
         }
     }
 }

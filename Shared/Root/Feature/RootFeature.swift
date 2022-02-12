@@ -220,7 +220,7 @@ fileprivate func getLastWeekReport(
   _ activeDay: Date
 ) -> Report.Range {
   .init(
-    range: DeedCategory
+    ranges: DeedCategory
       .allCases
       .reduce(
         into: [DeedCategory: [Date: [Deed]]]()

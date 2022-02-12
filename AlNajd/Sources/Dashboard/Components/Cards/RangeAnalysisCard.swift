@@ -9,138 +9,153 @@ import SwiftUI
 import DesignSystem
 
 public struct RangeProgress: Identifiable, Equatable {
-  public let id = UUID().uuidString
-  public let title: String
-  public let reports: [DayProgress]
-  public let isImproving: Bool?
-  public let progressColor: BrandColor
-  public let insight: Insight?
-  
-  init(
-    title: String,
-    reports: [DayProgress],
-    isImproving: Bool? = nil,
-    insight: Insight? = nil
-  ) {
-    self.title = title
-    self.reports = reports
-    self.isImproving = isImproving
-    self.progressColor = isImproving ?? true ? Color.success : Color.danger
-    self.insight = insight
-  }
-  
-  public static func ==(lhs: RangeProgress, rhs: RangeProgress) -> Bool {
-    lhs.id == rhs.id
-  }
-  
-  static let mock: [RangeProgress] = [
-    .init(
-      title: "Faraaid",
-      reports: DayProgress.mock,
-      isImproving: false,
-      insight: .init(indicator: .danger, details: "Al Faraaid are very important, make sure you don't miss them intentionally and ask for help from Allah, you got this!")
-    ),
-    .init(
-      title: "Sunnah",
-      reports: DayProgress.mock,
-      isImproving: true,
-      insight: .init(
-        indicator: .encourage,
-        details: "You did great with Sunnah last week, let's max out this week's Sunnah!"
-      )
-    ),
-    .init(
-      title: "Nafila",
-      reports: DayProgress.mock,
-      isImproving: false,
-      insight: .init(
-        indicator: .praise,
-        details: "You did Wonderful in Nafila!, I mean, wow! off the charts!, are we speaking to a 'Wali' now or what? haha, great work champ!"
-      )
-    ),
-  ]
+    public let id = UUID().uuidString
+    public let title: String
+    public let reports: [DayProgress]
+    public let hasEnoughData: Bool
+    public let isImproving: Bool?
+    public let progressColor: BrandColor
+    public let insight: Insight?
+    
+    init(
+        title: String,
+        reports: [DayProgress],
+        isImproving: Bool? = nil,
+        insight: Insight? = nil
+    ) {
+        self.title = title
+        self.reports = reports
+        self.isImproving = isImproving
+        self.progressColor = isImproving ?? true ? Color.success : Color.danger
+        self.insight = insight
+        self.hasEnoughData = !reports.isEmpty
+    }
+    
+    public static func ==(lhs: RangeProgress, rhs: RangeProgress) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    static let mock: [RangeProgress] = [
+        .init(
+            title: "Faraaid",
+            reports: DayProgress.mock,
+            isImproving: false,
+            insight: .init(indicator: .danger, details: "Al Faraaid are very important, make sure you don't miss them intentionally and ask for help from Allah, you got this!")
+        ),
+        .init(
+            title: "Sunnah",
+            reports: DayProgress.mock,
+            isImproving: true,
+            insight: .init(
+                indicator: .encourage,
+                details: "You did great with Sunnah last week, let's max out this week's Sunnah!"
+            )
+        ),
+        .init(
+            title: "Nafila",
+            reports: DayProgress.mock,
+            isImproving: false,
+            insight: .init(
+                indicator: .praise,
+                details: "You did Wonderful in Nafila!, I mean, wow! off the charts!, are we speaking to a 'Wali' now or what? haha, great work champ!"
+            )
+        ),
+    ]
 }
 
 public struct DayProgress: Identifiable, Equatable {
-  public var id = UUID().uuidString
-  let count: Int
-  let day: String
-  let limit: Int
-  let indicator: Indicator
-  
-  static let mock: [DayProgress] = [
-    .init(count: 5, day: "S", limit: 5, indicator: .good),
-    .init(count: 0, day: "S", limit: 5, indicator: .bad),
-    .init(count: 1, day: "M", limit: 5, indicator: .bad),
-    .init(count: 2, day: "T", limit: 5, indicator: .moderate),
-    .init(count: 4, day: "W", limit: 5, indicator: .good),
-    .init(count: 3, day: "T", limit: 5, indicator: .moderate),
-    .init(count: 5, day: "F", limit: 5, indicator: .good)
-  ]
-  
-  public struct Indicator {
-    let color: BrandColor
+    public var id = UUID().uuidString
+    let count: Int
+    let day: String
+    let limit: Int
+    let indicator: Indicator
     
-    static let good: Indicator = .init(color: Color.success)
-    static let moderate: Indicator = .init(color: Color.warning)
-    static let bad: Indicator = .init(color: Color.danger)
-  }
-  
-  public static func == (lhs: DayProgress, rhs: DayProgress) -> Bool {
-    lhs.id == rhs.id
-  }
+    static let mock: [DayProgress] = [
+        .init(count: 5, day: "S", limit: 5, indicator: .good),
+        .init(count: 0, day: "S", limit: 5, indicator: .bad),
+        .init(count: 1, day: "M", limit: 5, indicator: .bad),
+        .init(count: 2, day: "T", limit: 5, indicator: .moderate),
+        .init(count: 4, day: "W", limit: 5, indicator: .good),
+        .init(count: 3, day: "T", limit: 5, indicator: .moderate),
+        .init(count: 5, day: "F", limit: 5, indicator: .good)
+    ]
+    
+    public struct Indicator {
+        let color: BrandColor
+        
+        static let good: Indicator = .init(color: Color.success)
+        static let moderate: Indicator = .init(color: Color.warning)
+        static let bad: Indicator = .init(color: Color.danger)
+    }
+    
+    public static func == (lhs: DayProgress, rhs: DayProgress) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 public struct RangeAnalysisCardView: View {
-  let progress: RangeProgress
-  
-  public var body: some View {
-    VStack {
-    VStack(alignment: .leading, spacing: 15) {
-      HStack {
-        VStack(alignment: .leading, spacing: .p8) {
-          Text(progress.title)
-            .font(.pTitle1.bold())
-            .foregroundColor(.mono.offblack)
-          
-          Text("Last \(progress.reports.count) Days")
-            .font(.pHeadline.bold())
-            .foregroundColor(.mono.offblack.opacity(0.5))
-        }
-        
-        Spacer()
-        
-        if let isImproving = progress.isImproving {
-          Image(systemName: "arrow.up.forward")
-            .font(.pTitle3.bold())
-            .padding(.p8)
-            .foregroundColor(progress.progressColor.default)
+    let progress: RangeProgress
+    
+    public var body: some View {
+        VStack {
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    VStack(alignment: .leading, spacing: .p8) {
+                        Text(progress.title)
+                            .font(.pTitle1.bold())
+                            .foregroundColor(.mono.offblack)
+                        
+                        if progress.hasEnoughData {
+                            Text("Last \(progress.reports.count) Days")
+                                .font(.pHeadline.bold())
+                                .foregroundColor(.mono.offblack.opacity(0.5))
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    if let isImproving = progress.isImproving {
+                        Image(systemName: "arrow.up.forward")
+                            .font(.pTitle3.bold())
+                            .padding(.p8)
+                            .foregroundColor(progress.progressColor.default)
+                            .background(
+                                Circle()
+                                    .fill(progress.progressColor.background)
+                                    .shadow(color: progress.progressColor.background, radius: 5, x: 0, y: 0)
+                            )
+                            .rotationEffect(.degrees(isImproving ? 0 : 90))
+                    }
+                }
+                
+                if progress.hasEnoughData {
+                    BarGraph(reports: progress.reports)
+                } else {
+                    VStack {
+                        Image(systemName: "questionmark.circle.fill")
+                        Text("Unfortunately there is not enough data to analyze this week")
+                    }
+                    .font(.pHeadline.bold())
+                    .padding(.p8)
+                    .foregroundColor(.mono.line)
+                    .multilineTextAlignment(.center)
+                }
+            }
+            .padding(.p16)
             .background(
-              Circle()
-                .fill(progress.progressColor.background)
-                .shadow(color: progress.progressColor.background, radius: 5, x: 0, y: 0)
+                RoundedRectangle(cornerRadius: .r16)
+                    .fill(Color.mono.offwhite)
+                    .shadow(
+                        color: .black.opacity(0.25),
+                        radius: 2,
+                        x: 0, y: 0
+                    )
             )
-            .rotationEffect(.degrees(isImproving ? 0 : 90))
         }
-      }
-      
-      BarGraph(reports: progress.reports)
+        if let insight = progress.insight {
+            InsightCardView(insight: insight)
+        }
     }
-    .padding(.p16)
-    .background(
-      RoundedRectangle(cornerRadius: .r16)
-        .fill(Color.mono.offwhite)
-        .shadow(
-          color: .black.opacity(0.25),
-          radius: 2,
-          x: 0, y: 0
-        )
-    )
-  }
-    if let insight = progress.insight {
-      InsightCardView(insight: insight)
-    }
-  }
 }
 
 struct SwiftUIView_3_Previews: PreviewProvider {

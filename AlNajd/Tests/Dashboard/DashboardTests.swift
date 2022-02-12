@@ -6,30 +6,77 @@
 //
 
 import XCTest
+import Quick
+import Nimble
+@testable import Entities
+@testable import Dashboard
 
-class DashboardTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+class DashboardTests: QuickSpec {
+    override func spec() {
+        describe("the dashboard") {
+            describe("ability to generate analysis") {
+                context("on ranges") {
+                    context("when no sufficient data") {
+                        context("where atleast 1 per each date has a deed done") {
+                            let fakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
+                                dictionary[date] = .faraaid
+                            }
+                            
+                            let analysis = analyize(.init(ranges: [.fard: fakeData]))
+                            
+                            it("shouldn't include ranges") {
+                                expect(analysis.map { $0.reports }).to(beEmpty())
+                            }
+                            
+                            it("should tell user that no sufficient data for this") {
+                                expect(
+                                    analysis
+                                        .filter { $0.reports.isEmpty }
+                                        .compactMap { $0.insight?.indicator.id }
+                                        .first
+                                ).to(
+                                    equal(
+                                        Insight.Indicator.tipOfTheDay.id
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            
+            describe("ability to give insights") {
+                context("on praying") {
+                    context("Al Fajr") {
+                        context("multiple times") {
+                            it("should praise him, mentioning the dates") {
+                                let fakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
+                                    dictionary[date] = .faraaid.map {
+                                        $0.changing { $0.isDone = $0 == .fajr ? true : $0.isDone }
+                                    }
+                                }
+                                
+                                let insight = fajrPraiser(.fard, fakeData)
+                                expect(insight).toNot(beNil())
+                                expect(insight!.indicator.id).to(be(Insight.Indicator.praise.id))
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-
 }
+
+protocol Changeable {}
+extension Changeable {
+    func changing(_ change: (inout Self) -> Void) -> Self {
+        var a = self
+        change(&a)
+        return a
+    }
+}
+
+extension Deed: Changeable {}
+
+extension Array: Changeable where Element == Deed {}

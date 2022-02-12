@@ -72,6 +72,7 @@ let dashboard: [Target] = [
         name: "Dashboard",
         dependencies: [
             "Entities",
+            "Localization",
             .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             .product(name: "Core", package: "OrdiCore")
         ]
@@ -80,6 +81,8 @@ let dashboard: [Target] = [
         name: "DashboardTests",
         dependencies: [
             "Dashboard",
+            .product(name: "Quick", package: "Quick"),
+            .product(name: "Nimble", package: "Nimble"),
             .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
         ],
         path: "Tests/Dashboard"
@@ -126,6 +129,14 @@ let package = Package(
     .package(
       url: "https://github.com/pointfreeco/swift-snapshot-testing",
       .upToNextMajor(from: .init(1, 9, 0))
+    ),
+    .package(
+        url: "https://github.com/Quick/Quick",
+        .upToNextMajor(from: .init(4, 0, 0))
+    ),
+    .package(
+        url: "https://github.com/Quick/Nimble",
+        .upToNextMajor(from: .init(9, 2, 1))
     )
   ],
   targets: alCore

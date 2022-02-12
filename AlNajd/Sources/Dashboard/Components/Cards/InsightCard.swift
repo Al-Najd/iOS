@@ -50,7 +50,8 @@ struct InsightCardView: View {
 }
 
 public extension Insight {
-  struct Indicator {
+  struct Indicator: Identifiable, Equatable {
+    public let id = UUID().uuidString
     let color: BrandColor
     let icon: String
     let title: String
@@ -60,6 +61,10 @@ public extension Insight {
       icon: "hands.clap.fill",
       title: "Good Job!"
     )
+    
+    public static func == (lhs: Insight.Indicator, rhs: Insight.Indicator) -> Bool {
+      lhs.id == rhs.id
+    }
     
     public static let encourage: Indicator = .init(
       color: Color.warning,
