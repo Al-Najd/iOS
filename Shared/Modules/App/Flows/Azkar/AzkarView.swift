@@ -108,6 +108,7 @@ private extension RepeatableDeedsList {
           if deed.isDone {
             Image(systemName: "checkmark.seal.fill")
               .foregroundColor(.success.default)
+              .font(.pTitle3.bold())
           } else {
             Text("\(deed.currentNumberOfRepeats)")
               .foregroundColor(.secondary.dark)
@@ -117,17 +118,17 @@ private extension RepeatableDeedsList {
                 Circle()
                   .fill(Color.secondary.background)
               )
+            
+            Text("Repeats are left".localized)
+              .font(.pBody)
+              .foregroundColor(.secondary.dark)
+              .padding(.p8 + .p4)
+              .background(
+                RoundedRectangle(cornerRadius: .r8)
+                  .fill(Color.secondary.light)
+                  .shadow(radius: 2.5)
+              )
           }
-          
-          Text("Repeats are left".localized)
-            .font(.pBody)
-            .foregroundColor(.secondary.dark)
-            .padding(.p8 + .p4)
-            .background(
-              RoundedRectangle(cornerRadius: .r8)
-                .fill(Color.secondary.light)
-                .shadow(radius: 2.5)
-            )
         }
       }
       .fillAndCenter()

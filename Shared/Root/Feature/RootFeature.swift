@@ -10,16 +10,23 @@ import ComposableArchitecture
 import CasePaths
 import Entities
 import Business
+import ComposableCoreLocation
+import Dashboard
+import SwiftDate
 
-struct RootState {
-//  var dashboardState = DashboardState()
+struct RootState: Equatable {
+  var dashboardState = DashboardState()
   var prayerState = PrayerState()
   var azkarState = AzkarState()
   var rewardState = RewardsState()
   var dateState = DateState()
+  var settingsState = SettingsState()
 }
 
 enum RootAction {
+  case dashboardAction(DashboardAction)
+  case lifecycleAction(LifecycleAction)
+  case locationManager(LocationManager.Action)
   case prayerAction(PrayerAction)
   case azkarAction(AzkarAction)
   case rewardAction(RewardsAction)
@@ -53,24 +60,63 @@ let rootReducer = Reducer<
     action: /RootAction.dateAction,
     environment: { _ in DateEnvironment() }
   ),
+  dashboardReducer.pullback(
+    state: \.dashboardState,
+    action: /RootAction.dashboardAction,
+    environment: { _ in DashboardEnvironment() }
+  ),
   syncingReducer
 )
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, SystemEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {
+  case .lifecycleAction(.becameActive):
+    return .init(
+      value: .dashboardAction(
+        .seed(
+          getLastWeekReport(
+            env,
+            state.dateState.currentDay
+          )
+        )
+      )
+    )
+  case .lifecycleAction(.becameInActive),
+      .lifecycleAction(.wentToBackground):
+    break
+  case .locationManager(.didChangeAuthorization(.authorizedAlways)),
+      .locationManager(.didChangeAuthorization(.authorizedWhenInUse)):
+    
+    return env
+      .locationManager()
+      .requestLocation(id: LocationManagerId())
+      .fireAndForget()
+    
+  case .locationManager(.didChangeAuthorization(.denied)),
+       .locationManager(.didChangeAuthorization(.restricted)):
+    return .none
   case .prayerAction(let prayerAction):
     sync(&state, with: prayerAction)
     updateCache(state, env)
+    
+    return .init(
+      value: .dashboardAction(.seed(getLastWeekReport(env, state.dateState.currentDay)))
+    )
   case .azkarAction(let azkarAction):
     sync(&state, with: azkarAction)
     updateCache(state, env)
+    
+    return .init(
+      value: .dashboardAction(.seed(getLastWeekReport(env, state.dateState.currentDay)))
+    )
   case .dateAction(let dateAction):
     sync(&state, with: dateAction)
     return .init(value: .prayerAction(.onAppear))
       .append(.azkarAction(.onAppear))
       .append(.rewardAction(.onAppear))
+      .append(.dashboardAction(.seed(getLastWeekReport(env, state.dateState.currentDay))))
       .eraseToEffect()
-  case .rewardAction:
+  default:
     break
   }
   
@@ -170,6 +216,23 @@ fileprivate func undo(deed: RepeatableDeed, in state: inout RootState) {
   HapticService.main.generate(feedback: .warning)
 }
 
+fileprivate func getLastWeekReport(
+  _ env: SystemEnvironment<RootEnvironment>,
+  _ activeDay: Date
+) -> Report.Range {
+  .init(
+    range: DeedCategory
+      .allCases
+      .reduce(
+        into: [DeedCategory: [Date: [Deed]]]()
+      ) { dictionary, category in
+        dictionary[category] = activeDay.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
+          dictionary[date] = getPrayersFromCache(env.cache(), date, category) ?? category.defaultDeeds
+        }
+      }
+  )
+}
+
 extension Store where State == RootState, Action == RootAction {
   static let mainRoot: Store<State, Action> = .init(
     initialState: .init(),
@@ -177,3 +240,5 @@ extension Store where State == RootState, Action == RootAction {
     environment: .live(RootEnvironment())
   )
 }
+
+private struct LocationManagerId: Hashable {}

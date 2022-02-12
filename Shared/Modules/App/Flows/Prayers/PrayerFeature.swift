@@ -33,11 +33,7 @@ let prayerReducer = Reducer<
 > { state, action, env in
   switch action {
   case .onAppear:
-    state.prayers = [
-      .fard: getPrayersFromCache(env.cache(), state.activeDate, .fard) ?? .faraaid,
-      .sunnah: getPrayersFromCache(env.cache(), state.activeDate, .sunnah) ?? .sunnah,
-      .nafila: getPrayersFromCache(env.cache(), state.activeDate, .nafila) ?? .nafila
-    ]
+    state.prayers = getPrayersCategorized(env.cache(), state.activeDate)
   case let .onDoing(deed):
     var mutation = deed
     mutation.isDone = true

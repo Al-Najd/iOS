@@ -11,6 +11,8 @@ import Utils
 import ReusableUI
 import PreviewableView
 import ComposableArchitecture
+import Schedule
+import Dashboard
 
 struct MainTabView: View {
   let store: Store<RootState, RootAction>
@@ -40,12 +42,15 @@ struct MainTabView: View {
               state: \.prayerState,
               action: RootAction.prayerAction
             )
-          ).tag(Tab.prayer)
+          )
+            .tag(Tab.prayer)
             .background(content: {
               Color
                 .primary
                 .background.ignoresSafeArea()
             })
+          
+          
           
           AzkarView(
             store: store.scope(
@@ -54,6 +59,19 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.azkar)
+            .background(content: {
+              Color
+                .primary
+                .background.ignoresSafeArea()
+            })
+          
+          DashboardView(
+            store: store.scope(
+              state: \.dashboardState,
+              action: RootAction.dashboardAction
+            )
+          )
+            .tag(Tab.dashboard)
             .background(content: {
               Color
                 .primary
@@ -90,43 +108,57 @@ struct MainTabView_Previews: PreviewProvider {
   }
 }
 
-enum Tab: Identifiable, CaseIterable {
-  case prayer
-  case azkar
-  case rewards
+enum Tab: Int, Identifiable, CaseIterable {
+  case dashboard = 3
+  case prayer = 1
+  case azkar = 2
+  case rewards = 4
+  case settings = 5
   
   var id: String { "\(self)" }
   
   var title: String {
     switch self {
+    case .dashboard:
+      return "Dashboard".localized
     case .prayer:
       return "Prayers".localized
     case .azkar:
       return "Azkar".localized
     case .rewards:
       return "Rewards".localized
+    case .settings:
+      return "Settings".localized
     }
   }
   
   var icon: String {
     switch self {
+    case .dashboard:
+      return "chart.xyaxis.line"
     case .prayer:
       return "bolt.heart"
     case .azkar:
       return "moon"
     case .rewards:
       return "gift"
+    case .settings:
+      return "gearshape"
     }
   }
   
   var activeIcon: String {
     switch self {
+    case .dashboard:
+      return "chart.line.uptrend.xyaxis"
     case .prayer:
       return "bolt.heart.fill"
     case .azkar:
       return "moon.stars.fill"
     case .rewards:
       return "gift.fill"
+    case .settings:
+      return "gearshape.fill"
     }
   }
 }

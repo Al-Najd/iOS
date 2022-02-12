@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040AC2C027A38B0C000A47F0 /* Localizables.strings in Resources */ = {isa = PBXBuildFile; fileRef = 040AC2BB27A38B0C000A47F0 /* Localizables.strings */; };
-		040AC2C127A38B0C000A47F0 /* Localizables.strings in Resources */ = {isa = PBXBuildFile; fileRef = 040AC2BB27A38B0C000A47F0 /* Localizables.strings */; };
-		040AC2C227A38B0C000A47F0 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BD27A38B0C000A47F0 /* L10n.swift */; };
-		040AC2C327A38B0C000A47F0 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BD27A38B0C000A47F0 /* L10n.swift */; };
-		040AC2C427A38B0C000A47F0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BE27A38B0C000A47F0 /* Language.swift */; };
-		040AC2C527A38B0C000A47F0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC2BE27A38B0C000A47F0 /* Language.swift */; };
 		0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0456DAA427A38629009BDC62 /* ComposableArchitecture */; };
 		045849F127A442A60090FB3C /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F027A442A60090FB3C /* Entities */; };
 		045849F427A4921F0090FB3C /* Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F327A4921F0090FB3C /* Calendar */; };
@@ -20,7 +14,6 @@
 		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
 		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
-		0472C62927A385A700913892 /* OCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EE27A385A600913892 /* OCalendarView.swift */; };
 		0472C62A27A385A700913892 /* DateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EF27A385A600913892 /* DateFeature.swift */; };
 		0472C62B27A385A700913892 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F127A385A600913892 /* HapticService.swift */; };
 		0472C62C27A385A700913892 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F527A385A600913892 /* SplashView.swift */; };
@@ -43,7 +36,13 @@
 		0472C64127A385A700913892 /* ThemePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61B27A385A600913892 /* ThemePlugin.swift */; };
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
 		0472C64827A385A700913892 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0472C62527A385A700913892 /* Assets.xcassets */; };
+		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
+		0478B68627AA902100891DAA /* ComposableCoreLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 0478B68527AA902100891DAA /* ComposableCoreLocation */; };
+		0478B68927AA934A00891DAA /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68827AA934A00891DAA /* SettingsFeature.swift */; };
+		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
+		04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */; };
+		04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588802716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -69,17 +68,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		040AC2BC27A38B0C000A47F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizables.strings; sourceTree = "<group>"; };
-		040AC2BD27A38B0C000A47F0 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
-		040AC2BE27A38B0C000A47F0 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
-		040AC2C827A38B20000A47F0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizables.strings; sourceTree = "<group>"; };
-		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrdiCore; path = ../OrdiKit/SwiftUI/OrdiCore; sourceTree = "<group>"; };
+		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
-		045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalWeekSliderView.swift; sourceTree = "<group>"; };
 		0472C5EA27A385A600913892 /* OTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTabBarView.swift; sourceTree = "<group>"; };
 		0472C5EB27A385A600913892 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0472C5ED27A385A600913892 /* ONavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ONavigationView.swift; sourceTree = "<group>"; };
-		0472C5EE27A385A600913892 /* OCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCalendarView.swift; sourceTree = "<group>"; };
 		0472C5EF27A385A600913892 /* DateFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFeature.swift; sourceTree = "<group>"; };
 		0472C5F127A385A600913892 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		0472C5F527A385A600913892 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -102,6 +95,10 @@
 		0472C61B27A385A600913892 /* ThemePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		0472C61C27A385A600913892 /* LottiePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottiePlugin.swift; sourceTree = "<group>"; };
 		0472C62527A385A700913892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0478B68227AA8DBB00891DAA /* LocationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFeature.swift; sourceTree = "<group>"; };
+		0478B68827AA934A00891DAA /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
+		04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
+		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86588132716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86588182716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,10 +117,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048CC8D027B08505007BC3C7 /* AlCore in Frameworks */,
 				0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */,
 				04D8397727979EB4007FA07D /* Core in Frameworks */,
-				045849F427A4921F0090FB3C /* Calendar in Frameworks */,
-				045849F127A442A60090FB3C /* Entities in Frameworks */,
+				0478B68627AA902100891DAA /* ComposableCoreLocation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,15 +148,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		045849F227A4733A0090FB3C /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5EE27A385A600913892 /* OCalendarView.swift */,
-				0472C5EF27A385A600913892 /* DateFeature.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
 		045849F527A493EE0090FB3C /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,12 +156,11 @@
 			path = NavigationBar;
 			sourceTree = "<group>";
 		};
-		045849F627A49D570090FB3C /* Attic */ = {
+		0465871827A7096600ED695E /* Plans */ = {
 			isa = PBXGroup;
 			children = (
-				045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */,
 			);
-			path = Attic;
+			path = Plans;
 			sourceTree = "<group>";
 		};
 		0472C5E727A385A600913892 /* Modules */ = {
@@ -188,7 +175,9 @@
 		0472C5E827A385A600913892 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				045849F627A49D570090FB3C /* Attic */,
+				04F8E31127AC3BE1002B96AB /* Recommendation */,
+				0478B68727AA934000891DAA /* Settings */,
+				0478B68127AA8DB200891DAA /* Location */,
 				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
 				0472C5EC27A385A600913892 /* Date */,
@@ -210,7 +199,7 @@
 		0472C5EC27A385A600913892 /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				045849F227A4733A0090FB3C /* Calendar */,
+				0472C5EF27A385A600913892 /* DateFeature.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -226,6 +215,7 @@
 		0472C5F227A385A600913892 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				0465871827A7096600ED695E /* Plans */,
 				0472C5F427A385A600913892 /* Splash */,
 				0472C5F627A385A600913892 /* Prayers */,
 				0472C5FA27A385A600913892 /* Rewards */,
@@ -238,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				0472C5F527A385A600913892 /* SplashView.swift */,
+				04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -290,18 +281,10 @@
 		0472C60627A385A600913892 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				0472C60727A385A600913892 /* Entity */,
 				0472C60B27A385A600913892 /* Business */,
 				0472C61127A385A600913892 /* Feature */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		0472C60727A385A600913892 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		0472C60B27A385A600913892 /* Business */ = {
@@ -382,15 +365,20 @@
 			path = Plugins;
 			sourceTree = "<group>";
 		};
-		0472C61D27A385A600913892 /* Localization */ = {
+		0478B68127AA8DB200891DAA /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				040AC2BD27A38B0C000A47F0 /* L10n.swift */,
-				040AC2BE27A38B0C000A47F0 /* Language.swift */,
-				040AC2BB27A38B0C000A47F0 /* Localizables.strings */,
+				0478B68227AA8DBB00891DAA /* LocationFeature.swift */,
 			);
-			name = Localization;
-			path = "../../Al Najd/Shared/Localization";
+			path = Location;
+			sourceTree = "<group>";
+		};
+		0478B68727AA934000891DAA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0478B68827AA934A00891DAA /* SettingsFeature.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		04D8397527979EB4007FA07D /* Frameworks */ = {
@@ -398,6 +386,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04F8E31127AC3BE1002B96AB /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */,
+			);
+			path = Recommendation;
 			sourceTree = "<group>";
 		};
 		B86588032716CC5200FC0CBB = {
@@ -421,7 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				0472C61427A385A600913892 /* App */,
-				0472C61D27A385A600913892 /* Localization */,
 				0472C5E727A385A600913892 /* Modules */,
 				0472C60627A385A600913892 /* Root */,
 				0472C62527A385A700913892 /* Assets.xcassets */,
@@ -494,8 +489,8 @@
 			packageProductDependencies = (
 				04D8397627979EB4007FA07D /* Core */,
 				0456DAA427A38629009BDC62 /* ComposableArchitecture */,
-				045849F027A442A60090FB3C /* Entities */,
-				045849F327A4921F0090FB3C /* Calendar */,
+				0478B68527AA902100891DAA /* ComposableCoreLocation */,
+				048CC8CF27B08505007BC3C7 /* AlCore */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -588,10 +583,12 @@
 				en,
 				Base,
 				ar,
+				"en-GB",
 			);
 			mainGroup = B86588032716CC5200FC0CBB;
 			packageReferences = (
 				0456DAA327A38629009BDC62 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -611,7 +608,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0472C63527A385A700913892 /* splash.json in Resources */,
-				040AC2C027A38B0C000A47F0 /* Localizables.strings in Resources */,
 				0472C63627A385A700913892 /* azkar-db.json in Resources */,
 				0472C64827A385A700913892 /* Assets.xcassets in Resources */,
 			);
@@ -622,7 +618,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B86588802716CEA000FC0CBB /* (null) in Resources */,
-				040AC2C127A38B0C000A47F0 /* Localizables.strings in Resources */,
 				B86588842716CEA000FC0CBB /* (null) in Resources */,
 				B86588822716CEA000FC0CBB /* (null) in Resources */,
 			);
@@ -652,9 +647,9 @@
 				0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */,
 				0472C63B27A385A700913892 /* RootFeature.swift in Sources */,
 				0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */,
-				040AC2C427A38B0C000A47F0 /* Language.swift in Sources */,
+				0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */,
 				0472C62827A385A700913892 /* ONavigationView.swift in Sources */,
-				040AC2C227A38B0C000A47F0 /* L10n.swift in Sources */,
+				04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */,
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
 				0472C63027A385A700913892 /* RewardsFeature.swift in Sources */,
 				0472C62A27A385A700913892 /* DateFeature.swift in Sources */,
@@ -662,12 +657,13 @@
 				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
 				0472C62F27A385A700913892 /* RewardsView.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
+				0478B68927AA934A00891DAA /* SettingsFeature.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,
 				0472C62627A385A700913892 /* OTabBarView.swift in Sources */,
-				0472C62927A385A700913892 /* OCalendarView.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
 				0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */,
 				0472C63A27A385A700913892 /* SystemEnvironment.swift in Sources */,
+				04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */,
 				0472C63227A385A700913892 /* AzkarView.swift in Sources */,
 				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
@@ -682,8 +678,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040AC2C327A38B0C000A47F0 /* L10n.swift in Sources */,
-				040AC2C527A38B0C000A47F0 /* Language.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,18 +711,6 @@
 			targetProxy = B865882C2716CC5500FC0CBB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		040AC2BB27A38B0C000A47F0 /* Localizables.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				040AC2BC27A38B0C000A47F0 /* en */,
-				040AC2C827A38B20000A47F0 /* ar */,
-			);
-			name = Localizables.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B86588382716CC5500FC0CBB /* Debug */ = {
@@ -998,7 +980,6 @@
 		B86588442716CC5500FC0CBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
@@ -1020,7 +1001,6 @@
 		B86588452716CC5500FC0CBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
@@ -1098,6 +1078,14 @@
 				kind = branch;
 			};
 		};
+		0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/composable-core-location";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1106,13 +1094,14 @@
 			package = 0456DAA327A38629009BDC62 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		045849F027A442A60090FB3C /* Entities */ = {
+		0478B68527AA902100891DAA /* ComposableCoreLocation */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Entities;
+			package = 0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */;
+			productName = ComposableCoreLocation;
 		};
-		045849F327A4921F0090FB3C /* Calendar */ = {
+		048CC8CF27B08505007BC3C7 /* AlCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Calendar;
+			productName = AlCore;
 		};
 		04D8397627979EB4007FA07D /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
