@@ -47,7 +47,9 @@ public let dashboardReducer = Reducer<
 }
 
 func analyize(_ report: Report.Range) -> [RangeProgress] {
-    report.ranges.compactMap { category, dateIndexedDeeds in
+    report.ranges.sorted(by: {
+        $0.key.rawValue > $1.key.rawValue
+    }).compactMap { category, dateIndexedDeeds in
         getRangeProgress(category, dateIndexedDeeds)
     }
 }
@@ -85,7 +87,7 @@ var fajrPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) 
     guard category == .fard else { return nil }
     let daysWhereFajrIsPrayed = dateIndexedDeeds.compactMap { date, deeds -> String? in
         let didDoFajr = deeds.first { $0.isDone == true && $0 == .fajr } != nil
-        guard didDoFajr == false else { return nil }
+        guard didDoFajr == true else { return nil }
         
         return date.dayName(ofStyle: .full)
     }

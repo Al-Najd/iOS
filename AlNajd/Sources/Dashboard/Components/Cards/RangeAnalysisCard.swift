@@ -101,7 +101,7 @@ public struct RangeAnalysisCardView: View {
             VStack(alignment: .leading, spacing: 15) {
                 HStack {
                     VStack(alignment: .leading, spacing: .p8) {
-                        Text(progress.title)
+                        Text(progress.title.localized)
                             .font(.pTitle1.bold())
                             .foregroundColor(.mono.offblack)
                         

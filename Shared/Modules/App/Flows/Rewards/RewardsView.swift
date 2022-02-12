@@ -107,15 +107,15 @@ struct DeedRewardCard: View {
   var body: some View {
     VStack(spacing: .p4.adaptV(min: .p4)) {
       if deed.reward.title.isEmpty == false {
-        Text(deed.title)
+        Text(deed.title.localized)
           .font(.pFootnote.bold())
           .multilineTextAlignment(.center)
-        Text(deed.reward.title)
+        Text(deed.reward.title.localized)
           .font(.pTitle3.bold())
           .foregroundColor(.secondary.dark)
           .multilineTextAlignment(.center)
       } else {
-        Text(deed.title)
+        Text(deed.title.localized)
           .font(.pTitle2.bold())
           .multilineTextAlignment(.center)
       }

@@ -97,7 +97,7 @@ struct DeedsList: View {
         } else {
           ForEach(deeds) { deed in
             HStack {
-              Text(deed.title)
+              Text((deed.title ?? "").localized)
                 .font(.pHeadline.bold())
                 .foregroundColor(.primary.background)
               if deed.isDone {

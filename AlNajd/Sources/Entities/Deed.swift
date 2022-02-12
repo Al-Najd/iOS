@@ -22,10 +22,10 @@ public struct Reward: Identifiable, Codable, Equatable {
     public var title: String
 }
 
-public enum DeedCategory: Identifiable, Codable, Equatable, Hashable, CaseIterable {
-    case fard
-    case sunnah
-    case nafila
+public enum DeedCategory: Int, Identifiable, Codable, Equatable, Hashable, CaseIterable {
+    case fard = 3
+    case sunnah = 2
+    case nafila = 1
     
     public var id: String {
         return "\(self)"
@@ -34,11 +34,11 @@ public enum DeedCategory: Identifiable, Codable, Equatable, Hashable, CaseIterab
     public var title: String {
         switch self {
         case .fard:
-            return "Faraaid".localized
+            return "Faraaid"
         case .sunnah:
-            return "Sunnah".localized
+            return "Sunnah"
         case .nafila:
-            return "Nafila".localized
+            return "Nafila"
         }
     }
     
@@ -65,9 +65,9 @@ public enum AzkarCategory: Identifiable, Codable, CaseIterable {
     public var title: String {
         switch self {
         case .sabah:
-            return "Azkar Al-Sabah".localized
+            return "Azkar Al-Sabah"
         case .masaa:
-            return "Azkar Al-Masaa".localized
+            return "Azkar Al-Masaa"
         }
     }
     
@@ -85,68 +85,68 @@ public enum AzkarCategory: Identifiable, Codable, CaseIterable {
 public extension Deed {
     static let fajr: Deed = .init(
         category: .fard,
-        title: "Fajr".localized,
-        reward: .init(title: "If the Sunnah was better than all of that is good on life, what do you think the Fajr is?".localized)
+        title: "Fajr",
+        reward: .init(title: "If the Sunnah was better than all of that is good on life, what do you think the Fajr is?")
     )
     
     static let duhr: Deed = .init(
         category: .fard,
-        title: "Duhr".localized,
-        reward: .init(title: "There are 25+ benefit in Duhr, the best? Getting closer to Allah!".localized)
+        title: "Duhr",
+        reward: .init(title: "There are 25+ benefit in Duhr, the best? Getting closer to Allah!")
     )
     
     static let aasr: Deed = .init(
         category: .fard,
-        title: "Aasr".localized,
-        reward: .init(title: "Now Repentence is easier, and so are Solutions to problems!".localized)
+        title: "Aasr",
+        reward: .init(title: "Now Repentence is easier, and so are Solutions to problems!")
     )
     
     static let maghrib: Deed = .init(
         category: .fard,
-        title: "Maghrib".localized,
-        reward: .init(title: "Wealth Buffed, Dua and Wishes Buffed, Blessing Showered, That's what you've won with Al Maghrib".localized)
+        title: "Maghrib",
+        reward: .init(title: "Wealth Buffed, Dua and Wishes Buffed, Blessing Showered, That's what you've won with Al Maghrib")
     )
     
-    static let aishaa: Deed = .init(category: .fard, title: "Aishaa".localized, reward: .init(title: "Sleep and tranquility".localized))
+    static let aishaa: Deed = .init(category: .fard, title: "Aishaa", reward: .init(title: "Sleep and tranquility"))
 }
 
 // MARK: - Sunnah
 public extension Deed {
     static let sunnatAlFajr: Deed = .init(
         category: .sunnah,
-        title: "2 Raqaat Before Fajr".localized,
-        reward: .init(title: "Richest Man of all who didn't pray!".localized)
+        title: "2 Raqaat Before Fajr",
+        reward: .init(title: "Richest Man of all who didn't pray!")
     )
     
     static let sunnatAlDuhrBefore: Deed = .init(
         category: .sunnah,
-        title: "4 Raqaat Before Duhr".localized,
+        title: "4 Raqaat Before Duhr",
         reward: .init(
-            title: "Your Iman Grow further!".localized
+            title: "Your Iman Grow further!"
         )
     )
     
     static let sunnatAlDuhrAfter: Deed = .init(
         category: .sunnah,
-        title: "2 Raqaat After Duhr".localized,
+        title: "2 Raqaat After Duhr",
         reward: .init(
-            title: "Your Iman Grow further!".localized
+            title: "Your Iman Grow further!"
         )
     )
     
     static let sunnatAlMaghrib: Deed = .init(
         category: .sunnah,
-        title: "2 Raqaat After Al Maghrib".localized,
+        title: "2 Raqaat After Al Maghrib",
         reward: .init(
-            title: "The Prophet SAW never left the Sunnah of Al Maghrib".localized
+            title: "The Prophet SAW never left the Sunnah of Al Maghrib"
         )
     )
     
     static let sunnatAlAishaa: Deed = .init(
         category: .sunnah,
-        title: "2 Raqaat After Al Aishaa".localized,
+        title: "2 Raqaat After Al Aishaa",
         reward: .init(
-            title: "Other than being a Sunnah, it contribute towards being Qyam Layil".localized
+            title: "Other than being a Sunnah, it contribute towards being Qyam Layil"
         )
     )
 }
@@ -155,25 +155,25 @@ public extension Deed {
 public extension Deed {
     static let duha: Deed = .init(
         category: .nafila,
-        title: "Duha".localized,
+        title: "Duha",
         reward: .init(
-            title: "The Awabeen Prayer, Allah praise those who are Awabeen, and you get sadaqat on any deed you do!".localized
+            title: "The Awabeen Prayer, Allah praise those who are Awabeen, and you get sadaqat on any deed you do!"
         )
     )
     
     static let qeyamAlLayl: Deed = .init(
         category: .nafila,
-        title: "Qyam Al Layl".localized,
+        title: "Qyam Al Layl",
         reward: .init(
-            title: "The Honor of Muslim, it's said that Angels pray to those who miss it for a day or two if they make a habit of it in case they are sick, and Angels prayers are blessed".localized
+            title: "The Honor of Muslim, it's said that Angels pray to those who miss it for a day or two if they make a habit of it in case they are sick, and Angels prayers are blessed"
         )
     )
     
     static let wetr: Deed = .init(
         category: .nafila,
-        title: "Wetr".localized,
+        title: "Wetr",
         reward: .init(
-            title: "Wetr when done with 7 Verses, is same as doing Qyam Al Layl".localized
+            title: "Wetr when done with 7 Verses, is same as doing Qyam Al Layl"
         )
     )
 }
