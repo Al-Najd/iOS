@@ -17,7 +17,7 @@ struct OTabBarView: View {
   
   var body: some View {
     HStack(spacing: 0) {
-      ForEach(Tab.allCases) { tab in
+      ForEach(Tab.allCases.sorted(by: { $0.rawValue < $1.rawValue })) { tab in
         Button {
           withAnimation {
             self.tab = tab

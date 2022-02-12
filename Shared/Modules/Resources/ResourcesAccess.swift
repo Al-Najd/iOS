@@ -43,3 +43,24 @@ extension StorageKey {
     )
   }
 }
+
+extension StorageKey {
+  static let standard: StandardEntity = .main
+  
+  struct StandardEntity {
+    static let main: StandardEntity = .init()
+    let prayers: (_ category: DeedCategory) -> StorageKey = {
+      .init(
+        key: "\($0.id)-prayer",
+        suitableStorage: .userDefaults
+      )
+    }
+    
+    let azkar: (_ category: AzkarCategory) -> StorageKey = {
+      .init(
+        key: "\($0.id)-azkar",
+        suitableStorage: .userDefaults
+      )
+    }
+  }
+}

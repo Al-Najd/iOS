@@ -16,6 +16,6 @@ public struct ThemePlugin: AppPlugin {
 
 private extension ThemePlugin {
   private func setupTheme() {
-    ThemeManager.shared.setup()
+    
   }
 }

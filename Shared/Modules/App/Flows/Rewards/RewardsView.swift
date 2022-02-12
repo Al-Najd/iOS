@@ -137,7 +137,7 @@ struct RepeatableDeedRewardCard: View {
     VStack(spacing: .p4.adaptV(min: .p4)) {
       if deed.reward.title.isEmpty == false {
         Text(deed.title)
-          .font(.pFootnote.bold())
+          .font(.pHeadline.bold())
           .multilineTextAlignment(.center)
         Text(deed.reward.title)
           .font(.pTitle3.bold())

@@ -11,6 +11,8 @@ import Utils
 import ReusableUI
 import PreviewableView
 import ComposableArchitecture
+import DaySlider
+import Calendar
 
 struct ONavigationBar: View {
   @State var dragOffset: CGFloat = 0.0
@@ -48,8 +50,12 @@ struct ONavigationBar: View {
       VStack(spacing: 0) {
         createTopView(store)
         
-        createDaysSlider(
-          store
+        DaysSliderView(
+          currentDate: viewStore.currentDay,
+          currentWeek: viewStore.currentWeek,
+          onChange: {
+            viewStore.send(.onChange(currentDay: $0))
+          }
         )
         
         RoundedRectangle(cornerRadius: CGFloat(2.5).adaptRatio())
@@ -82,41 +88,6 @@ struct ONavigationBar: View {
             }
           }
       )
-    }
-  }
-  
-  @ViewBuilder
-  private func createDaysSlider(
-    _ store: Store<DateState, DateAction>
-  ) -> some View {
-    WithViewStore(store) { viewStore in
-      VStack(spacing: .p8.adaptRatio()) {
-        HStack(spacing: 0) {
-          HorizontalWeekSliderView(
-            viewStore.currentDay,
-            viewStore.currentWeek,
-            { viewStore.send(.onChange(currentDay: $0)) }
-          )
-        }.frame(maxWidth: .infinity)
-          .stay(.light)
-          .padding([.horizontal, .bottom], .p16.adaptRatio())
-          .padding(.top, .p4.adaptRatio())
-          .background(
-            Color
-              .primary
-              .dark
-              .cornerRadius(.r16, corners: [.bottomLeft, .bottomRight])
-              .ignoresSafeArea()
-              .stay(.light)
-          )
-          .shadow(radius: 4.adaptRatio(), x: 0, y: 4.adaptRatio())
-          .background(
-            Color
-              .primary
-              .background
-              .ignoresSafeArea()
-          )
-      }
     }
   }
   
@@ -170,7 +141,11 @@ struct ONavigationBar: View {
             }.padding(.p16.adaptRatio())
             
             if didExpand {
-              OCalendarView(store)
+              OCalendarView(
+                viewStore.calendar,
+                .constant(viewStore.currentDay),
+                { viewStore.send(.onChange(currentDay: $0)) }
+              )
                 .padding(.p16.adaptRatio())
                 .background(
                   Rectangle()

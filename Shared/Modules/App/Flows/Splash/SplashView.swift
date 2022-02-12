@@ -10,6 +10,7 @@ import PreviewableView
 import DesignSystem
 import Utils
 import Animations
+import Localization
 
 struct SplashView<Content: View>: View {
   

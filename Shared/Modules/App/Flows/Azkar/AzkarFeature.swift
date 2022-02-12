@@ -33,10 +33,7 @@ let azkarReducer = Reducer<
 > { state, action, env in
   switch action {
   case .onAppear:
-    state.azkar = [
-      .sabah: env.cache().fetch([RepeatableDeed].self, for: .azkar(state.activeDate, .sabah)) ?? .sabah,
-      .masaa: env.cache().fetch([RepeatableDeed].self, for: .azkar(state.activeDate, .masaa)) ?? .masaa
-    ]
+    state.azkar = getAzkarCategorized(env.cache(), state.activeDate)
   case let .onDoing(deed):
     update(&state, using: deed, with: true)
     updateCache(state, env)
