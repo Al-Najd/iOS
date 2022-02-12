@@ -1,3 +1,10 @@
+## Updates of version 0.9.0 🚀
+    - Build Dashboard Module
+    - Revamp UI + introduce TCA
+    - Prepare TopView for modularization and rename it to 'AtticView'
+    - New Icon, Modularized Entities & Calendar
+    - 🚀 Released iOS 0.8.3! [Beta Release]
+
 ## Updates of version 0.8.3 🚀
     - Fix UI on different sizes
     - 🚀 Released iOS 0.8.2! [Beta Release]

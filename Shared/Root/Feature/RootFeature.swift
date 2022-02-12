@@ -12,7 +12,6 @@ import Entities
 import Business
 import ComposableCoreLocation
 import Dashboard
-import SwiftDate
 
 struct RootState: Equatable {
   var dashboardState = DashboardState()
