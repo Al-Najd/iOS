@@ -9,13 +9,11 @@ import Utils
 import Business
 import Foundation
 import Entities
-import ComposableCoreLocation
 
 @dynamicMemberLookup
 struct SystemEnvironment<Environment> {
   var environment: Environment
   var cache: () -> (CacheManager)
-  var locationManager: () -> LocationManager
 
   subscript<Dependency>(
     dynamicMember keyPath: WritableKeyPath<Environment, Dependency>
@@ -29,9 +27,6 @@ struct SystemEnvironment<Environment> {
       environment: environment,
       cache: {
         CacheManager(decoder: .init(), encoder: .init())
-      },
-      locationManager: {
-        .live
       }
     )
   }

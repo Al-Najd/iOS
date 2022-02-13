@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0456DAA427A38629009BDC62 /* ComposableArchitecture */; };
-		045849F127A442A60090FB3C /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F027A442A60090FB3C /* Entities */; };
-		045849F427A4921F0090FB3C /* Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F327A4921F0090FB3C /* Calendar */; };
-		045849F827A49E480090FB3C /* HorizontalWeekSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */; };
+		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
 		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
@@ -36,7 +34,6 @@
 		0472C64127A385A700913892 /* ThemePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61B27A385A600913892 /* ThemePlugin.swift */; };
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
 		0472C64827A385A700913892 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0472C62527A385A700913892 /* Assets.xcassets */; };
-		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
 		0478B68627AA902100891DAA /* ComposableCoreLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 0478B68527AA902100891DAA /* ComposableCoreLocation */; };
 		0478B68927AA934A00891DAA /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68827AA934A00891DAA /* SettingsFeature.swift */; };
 		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
@@ -95,7 +92,6 @@
 		0472C61B27A385A600913892 /* ThemePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		0472C61C27A385A600913892 /* LottiePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottiePlugin.swift; sourceTree = "<group>"; };
 		0472C62527A385A700913892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0478B68227AA8DBB00891DAA /* LocationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFeature.swift; sourceTree = "<group>"; };
 		0478B68827AA934A00891DAA /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
 		04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
@@ -177,7 +173,6 @@
 			children = (
 				04F8E31127AC3BE1002B96AB /* Recommendation */,
 				0478B68727AA934000891DAA /* Settings */,
-				0478B68127AA8DB200891DAA /* Location */,
 				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
 				0472C5EC27A385A600913892 /* Date */,
@@ -363,14 +358,6 @@
 				0472C61C27A385A600913892 /* LottiePlugin.swift */,
 			);
 			path = Plugins;
-			sourceTree = "<group>";
-		};
-		0478B68127AA8DB200891DAA /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				0478B68227AA8DBB00891DAA /* LocationFeature.swift */,
-			);
-			path = Location;
 			sourceTree = "<group>";
 		};
 		0478B68727AA934000891DAA /* Settings */ = {
@@ -647,7 +634,6 @@
 				0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */,
 				0472C63B27A385A700913892 /* RootFeature.swift in Sources */,
 				0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */,
-				0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */,
 				0472C62827A385A700913892 /* ONavigationView.swift in Sources */,
 				04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */,
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
@@ -668,7 +654,7 @@
 				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
 				0472C62C27A385A700913892 /* SplashView.swift in Sources */,
-				045849F827A49E480090FB3C /* HorizontalWeekSliderView.swift in Sources */,
+				045849F827A49E480090FB3C /* (null) in Sources */,
 				0472C63127A385A700913892 /* AzkarFeature.swift in Sources */,
 				0472C62E27A385A700913892 /* PrayersView.swift in Sources */,
 			);

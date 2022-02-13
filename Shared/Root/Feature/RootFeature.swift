@@ -10,7 +10,6 @@ import ComposableArchitecture
 import CasePaths
 import Entities
 import Business
-import ComposableCoreLocation
 import Dashboard
 
 struct RootState: Equatable {
@@ -26,7 +25,6 @@ enum RootAction {
   case dashboardAction(DashboardAction)
   // TODO: - Delete
   case lifecycleAction(LifecycleAction)
-  case locationManager(LocationManager.Action)
   case prayerAction(PrayerAction)
   case azkarAction(AzkarAction)
   case rewardAction(RewardsAction)
@@ -79,20 +77,6 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, SystemEnvironment
         )
       )
     )
-  case .lifecycleAction(.becameInActive),
-      .lifecycleAction(.wentToBackground):
-    break
-  case .locationManager(.didChangeAuthorization(.authorizedAlways)),
-      .locationManager(.didChangeAuthorization(.authorizedWhenInUse)):
-    
-    return env
-      .locationManager()
-      .requestLocation(id: LocationManagerId())
-      .fireAndForget()
-    
-  case .locationManager(.didChangeAuthorization(.denied)),
-       .locationManager(.didChangeAuthorization(.restricted)):
-    return .none
   case .prayerAction(let prayerAction):
     sync(&state, with: prayerAction)
     updateCache(state, env)
