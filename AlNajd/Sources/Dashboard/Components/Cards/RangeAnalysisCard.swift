@@ -13,15 +13,18 @@ public struct RangeProgress: Identifiable, Equatable {
     public let title: String
     public let reports: [DayProgress]
     public let hasEnoughData: Bool
-    public let isImproving: Bool?
     public let progressColor: BrandColor
     public let insight: Insight?
+    public let score: Int
     
-    init(
+    public var isImproving: Bool?
+    
+    public init(
         title: String,
         reports: [DayProgress],
         isImproving: Bool? = nil,
-        insight: Insight? = nil
+        insight: Insight? = nil,
+        score: Int = 0
     ) {
         self.title = title
         self.reports = reports
@@ -29,12 +32,19 @@ public struct RangeProgress: Identifiable, Equatable {
         self.progressColor = isImproving ?? true ? Color.success : Color.danger
         self.insight = insight
         self.hasEnoughData = !reports.isEmpty
+        self.score = score
     }
     
     public static func ==(lhs: RangeProgress, rhs: RangeProgress) -> Bool {
         lhs.id == rhs.id
     }
     
+    func changeImprovement(to didImprove: Bool) -> RangeProgress {
+        .init(title: self.title, reports: self.reports, isImproving: didImprove, insight: self.insight)
+    }
+}
+
+public extension RangeProgress {
     static let mock: [RangeProgress] = [
         .init(
             title: "Faraaid",
@@ -114,7 +124,7 @@ public struct RangeAnalysisCardView: View {
                     
                     Spacer()
                     
-                    if let isImproving = progress.isImproving {
+                    if progress.hasEnoughData, let isImproving = progress.isImproving {
                         Image(systemName: "arrow.up.forward")
                             .font(.pTitle3.bold())
                             .padding(.p8)

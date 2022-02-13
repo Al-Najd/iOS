@@ -15,6 +15,10 @@ public struct Deed: Identifiable, Codable, Equatable {
     public var title: String
     public var isDone: Bool = false
     public var reward: Reward
+    
+    public static func == (lhs: Deed, rhs: Deed) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 public struct Reward: Identifiable, Codable, Equatable {

@@ -28,7 +28,7 @@ public struct DashboardState: Equatable {
 }
 
 public enum DashboardAction: Equatable {
-    case seed(Report.Range)
+    case seed(current: Report.Range, previous: Report.Range?)
 }
 
 public struct DashboardEnvironment { public init() { } }
@@ -40,17 +40,37 @@ public let dashboardReducer = Reducer<
     DashboardEnvironment
 > { state, action, env in
     switch action {
-    case let .seed(report):
-        state.reports = analyize(report)
+    case let .seed(currentRangeReport, previousRangeReport):
+        state.reports = analyize(
+            currentRangeReport: currentRangeReport,
+            previousRangeReport: previousRangeReport
+        )
     }
     return .none
 }
 
-func analyize(_ report: Report.Range) -> [RangeProgress] {
-    report.ranges.sorted(by: {
+func analyize(
+    currentRangeReport: Report.Range,
+    previousRangeReport: Report.Range? = nil
+) -> [RangeProgress] {
+    let sortModifier: ((key: DeedCategory, value: [Date: [Deed]]), (key: DeedCategory, value: [Date: [Deed]])) -> Bool = {
         $0.key.rawValue > $1.key.rawValue
-    }).compactMap { category, dateIndexedDeeds in
-        getRangeProgress(category, dateIndexedDeeds)
+    }
+    
+    if let previousRangeReport = previousRangeReport {
+        return zip(
+            previousRangeReport.ranges.sorted(by: sortModifier).compactMap { getRangeProgress($0, $1) },
+            currentRangeReport.ranges.sorted(by: sortModifier).compactMap { getRangeProgress($0, $1) }
+        ).compactMap { prev, current in
+            return current.changeImprovement(to: current.score >= prev.score)
+        }
+    } else {
+        return currentRangeReport
+            .ranges
+            .sorted(by: sortModifier)
+            .compactMap {
+                getRangeProgress($0, $1).changeImprovement(to: true)
+            }
     }
 }
 
@@ -78,7 +98,8 @@ func getRangeProgress(
     return RangeProgress(
         title: category.title,
         reports: reports,
-        insight: insight
+        insight: insight,
+        score: countOfDoneDuringRange
     )
 }
 
@@ -116,9 +137,6 @@ var fajrAdvisor: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) 
     )
 }
 
-// IDEAS
-// who prays all sunnah, gets a home in Jannah (Encourage)
-// Qeyam Al Layl can be done with a prayer after Al Aishaa of 7 verses, if you did Wetr, u also did qyam al layl
 func analyize(_ category: DeedCategory, _ reports: [Date: [Deed]]) -> Insight? {
     Insight.Indicator.analysis.compactMap { $0(category, reports) }.first
 }

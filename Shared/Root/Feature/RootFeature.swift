@@ -73,10 +73,8 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, SystemEnvironment
     return .init(
       value: .dashboardAction(
         .seed(
-          getLastWeekReport(
-            env,
-            state.dateState.currentDay
-          )
+          current: getLastWeekReport(env,state.dateState.currentDay),
+          previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
         )
       )
     )
@@ -99,21 +97,38 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, SystemEnvironment
     updateCache(state, env)
     
     return .init(
-      value: .dashboardAction(.seed(getLastWeekReport(env, state.dateState.currentDay)))
+      value: .dashboardAction(
+        .seed(
+          current: getLastWeekReport(env,state.dateState.currentDay),
+          previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
+        )
+      )
     )
   case .azkarAction(let azkarAction):
     sync(&state, with: azkarAction)
     updateCache(state, env)
     
     return .init(
-      value: .dashboardAction(.seed(getLastWeekReport(env, state.dateState.currentDay)))
+      value: .dashboardAction(
+        .seed(
+          current: getLastWeekReport(env,state.dateState.currentDay),
+          previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
+        )
+      )
     )
   case .dateAction(let dateAction):
     sync(&state, with: dateAction)
     return .init(value: .prayerAction(.onAppear))
       .append(.azkarAction(.onAppear))
       .append(.rewardAction(.onAppear))
-      .append(.dashboardAction(.seed(getLastWeekReport(env, state.dateState.currentDay))))
+      .append(
+        .dashboardAction(
+          .seed(
+            current: getLastWeekReport(env,state.dateState.currentDay),
+            previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
+          )
+        )
+      )
       .eraseToEffect()
   default:
     break
@@ -132,10 +147,6 @@ fileprivate func updateCache(_ state: RootState, _ env: SystemEnvironment<RootEn
   }
 }
 
-/**
- # Required
- 1. Deny Edits if not current day [x]
- */
 fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
   switch dateAction {
   case .onAppear:
