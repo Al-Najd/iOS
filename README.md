@@ -1,5 +1,7 @@
 # Al Najd
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/78989287e69f4fd282f2e12a5fcde0f8)](https://app.codacy.com/gh/Al-Najd/iOS?utm_source=github.com&utm_medium=referral&utm_content=Al-Najd/iOS&utm_campaign=Badge_Grade_Settings)
+
 > An App to Gamify the acts of Islam to make good habits out of it
 
 Hi There!
