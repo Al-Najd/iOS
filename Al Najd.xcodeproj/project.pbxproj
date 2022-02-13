@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0456DAA427A38629009BDC62 /* ComposableArchitecture */; };
-		045849F127A442A60090FB3C /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F027A442A60090FB3C /* Entities */; };
-		045849F427A4921F0090FB3C /* Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 045849F327A4921F0090FB3C /* Calendar */; };
-		045849F827A49E480090FB3C /* HorizontalWeekSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045849F727A49E480090FB3C /* HorizontalWeekSliderView.swift */; };
+		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
 		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
@@ -668,7 +666,7 @@
 				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
 				0472C62C27A385A700913892 /* SplashView.swift in Sources */,
-				045849F827A49E480090FB3C /* HorizontalWeekSliderView.swift in Sources */,
+				045849F827A49E480090FB3C /* (null) in Sources */,
 				0472C63127A385A700913892 /* AzkarFeature.swift in Sources */,
 				0472C62E27A385A700913892 /* PrayersView.swift in Sources */,
 			);
@@ -947,10 +945,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "The One (iOS)";
+				TEST_TARGET_NAME = "Al Najd (iOS)";
 			};
 			name = Debug;
 		};
@@ -969,10 +968,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "The One (iOS)";
+				TEST_TARGET_NAME = "Al Najd (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
