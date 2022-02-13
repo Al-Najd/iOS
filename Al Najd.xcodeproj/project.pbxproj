@@ -575,7 +575,7 @@
 			};
 			buildConfigurationList = B86588072716CC5200FC0CBB /* Build configuration list for PBXProject "Al Najd" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = ar;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
