@@ -104,6 +104,7 @@ public struct DayProgress: Identifiable, Equatable {
 }
 
 public struct RangeAnalysisCardView: View {
+    @State var highlightedDay: DayProgress?
     let progress: RangeProgress
     
     public var body: some View {
@@ -116,9 +117,27 @@ public struct RangeAnalysisCardView: View {
                             .foregroundColor(.mono.offblack)
                         
                         if progress.hasEnoughData {
-                            Text("Last n Days".localized(arguments: progress.reports.count))
-                                .font(.pHeadline.bold())
-                                .foregroundColor(.mono.offblack.opacity(0.5))
+                            
+                            if let highlightedDay = highlightedDay {
+                                Text(
+                                    "n out of n".localized(
+                                        arguments: [highlightedDay.count, highlightedDay.limit]
+                                    )
+                                )
+                                    .font(.pHeadline.bold())
+                                    .foregroundColor(highlightedDay.indicator.color.light)
+                                    .padding(.vertical, .p4)
+                                    .padding(.horizontal, .p8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: .r16)
+                                            .fill(highlightedDay.indicator.color.dark)
+                                            .shadow(color: highlightedDay.indicator.color.default, radius: .r4)
+                                    )
+                            } else {
+                                Text("Last n Days".localized(arguments: progress.reports.count))
+                                    .font(.pHeadline.bold())
+                                    .foregroundColor(.mono.offblack.opacity(0.5))
+                            }
                         }
                     }
                     
@@ -139,7 +158,10 @@ public struct RangeAnalysisCardView: View {
                 }
                 
                 if progress.hasEnoughData {
-                    BarGraph(reports: progress.reports)
+                    BarGraph(
+                        days: progress.reports,
+                        highlightedDay: $highlightedDay
+                    )
                 } else {
                     VStack {
                         Image(systemName: "questionmark.circle.fill")

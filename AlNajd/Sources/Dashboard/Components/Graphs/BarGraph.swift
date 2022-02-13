@@ -8,43 +8,42 @@
 import SwiftUI
 
 public struct BarGraph: View {
-  let reports: [DayProgress]
-  @State var isPressing: Bool = false
-  @State var currentReportID: String = ""
+  let days: [DayProgress]
+  @Binding var highlightedDay: DayProgress?
+  var isPressing: Bool { highlightedDay != nil }
   @State var offset: CGFloat = 0
-  
   
   public var body: some View {
     HStack(spacing: .p8) {
-      ForEach(reports) { report in
-        buildGraphBars(report: report)
+      ForEach(days) { day in
+        buildGraphBars(day: day)
       }
     }
-    .animation(.easeInOut, value: isPressing)
+    .animation(.easeInOut, value: highlightedDay)
   }
   
   @ViewBuilder
-  func buildGraphBars(report: DayProgress) -> some View {
+  func buildGraphBars(day: DayProgress) -> some View {
     VStack(spacing: .p24) {
       GeometryReader { proxy in
         ZStack {
           RoundedRectangle(cornerRadius: .r8)
-            .stroke(report.indicator.color.default)
+            .stroke(day.indicator.color.default)
             .frame(maxHeight: .infinity, alignment: .bottom)
           
             RoundedRectangle(cornerRadius: .r8)
-              .fill(report.indicator.color.default)
-              .opacity(isPressing ? (currentReportID == report.id ? 1 : 0.35) : 1)
-              .frame(height: (Double(report.count) / Double(report.limit)) * (proxy.size.height))
+              .fill(day.indicator.color.default)
+              .opacity(!isPressing ? 1 : (highlightedDay == day ? 1 : 0.35))
+              .frame(height: (Double(day.count) / Double(day.limit)) * (proxy.size.height))
               .frame(maxHeight: .infinity, alignment: .bottom)
         }
       }
       .frame(height: 150)
-      Text(report.day)
+      Text(day.day)
         .font(.pFootnote)
         .foregroundColor(
-          isPressing && currentReportID == report.id
-          ? report.indicator.color.default
+          isPressing && highlightedDay == day
+          ? day.indicator.color.default
           : .mono.label
         )
     }
@@ -52,11 +51,13 @@ public struct BarGraph: View {
     .onLongPressGesture(
       minimumDuration: .infinity
     ) { isPressing in
-      self.isPressing = isPressing
-      currentReportID = isPressing ? report.id : ""
+      withAnimation(.easeInOut) {
+        highlightedDay = isPressing ? day : nil
+      }
     } perform: {
-      isPressing = false
-      currentReportID = ""
+      withAnimation(.easeInOut) {
+        highlightedDay = isPressing ? day : nil
+      }
     }
   }
 }

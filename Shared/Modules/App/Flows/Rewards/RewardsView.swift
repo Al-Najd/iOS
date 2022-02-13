@@ -49,7 +49,7 @@ private extension RewardsView {
             )
           } else {
             LockedRewardView(
-              title: "\("Prayers".localized) \(category.title)"
+              title: "\("Prayers".localized) \(category.title.localized)"
             )
           }
         }
@@ -73,7 +73,7 @@ private extension RewardsView {
             AzkarRewardsList(category: category, azkar: azkar)
           } else {
             LockedRewardView(
-              title: "\("Azkar".localized) \(category.title)"
+              title: "\("Azkar".localized) \(category.title.localized)"
             )
           }
         }
@@ -234,7 +234,7 @@ struct LockedRewardView: View {
         .aspectRatio(contentMode: .fit)
         .frame(width: .p24, height: .p24)
       
-      Text("Locked".localized(arguments: title))
+      Text("Locked".localized(arguments: title.localized))
         .font(.pBody.bold())
     }
     .stay(.light)
