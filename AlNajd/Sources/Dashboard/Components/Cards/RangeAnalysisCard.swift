@@ -104,7 +104,7 @@ public struct DayProgress: Identifiable, Equatable {
 }
 
 public struct RangeAnalysisCardView: View {
-    @State var highlightedDay: DayProgress? = nil
+    @State var highlightedDay: DayProgress?
     let progress: RangeProgress
     
     public var body: some View {
