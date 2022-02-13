@@ -13,7 +13,6 @@ public struct BarGraph: View {
   var isPressing: Bool { highlightedDay != nil }
   @State var offset: CGFloat = 0
   
-  
   public var body: some View {
     HStack(spacing: .p8) {
       ForEach(days) { day in
