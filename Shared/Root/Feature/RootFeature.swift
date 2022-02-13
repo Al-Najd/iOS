@@ -24,6 +24,7 @@ struct RootState: Equatable {
 
 enum RootAction {
   case dashboardAction(DashboardAction)
+  // TODO: - Delete
   case lifecycleAction(LifecycleAction)
   case locationManager(LocationManager.Action)
   case prayerAction(PrayerAction)
