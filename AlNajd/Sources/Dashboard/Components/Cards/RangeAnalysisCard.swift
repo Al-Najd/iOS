@@ -119,7 +119,11 @@ public struct RangeAnalysisCardView: View {
                         if progress.hasEnoughData {
                             
                             if let highlightedDay = highlightedDay {
-                                Text("\(highlightedDay.count) out of \(highlightedDay.limit)")
+                                Text(
+                                    "n out of n".localized(
+                                        arguments: [highlightedDay.count, highlightedDay.limit]
+                                    )
+                                )
                                     .font(.pHeadline.bold())
                                     .foregroundColor(highlightedDay.indicator.color.light)
                                     .padding(.vertical, .p4)
