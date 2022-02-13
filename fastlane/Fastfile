@@ -95,6 +95,8 @@ platform :ios do
     # Uploads the app to Testflight
     pilot(
       changelog: changelog,
+      distribute_external: true,
+      groups: ['App Store Connect Users', 'Beta Testers']
     )
 
     # Upload dSYM files to Sentry
