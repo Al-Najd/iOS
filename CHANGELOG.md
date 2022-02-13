@@ -5,6 +5,13 @@
     - Add recommendation and encouraging
     - 🚀 Released iOS 0.9.0! [Beta Release]
 
+## Updates of version 0.9.1 🚀
+    - Fix Sort and some RTL issues and cover some recommendations with tests
+    - Fix Light mode on Dashboard
+    - Localize the dashboard strings
+    - Add recommendation and encouraging
+    - 🚀 Released iOS 0.9.0! [Beta Release]
+
 ## Updates of version 0.9.0 🚀
     - Build Dashboard Module
     - Revamp UI + introduce TCA
