@@ -12,8 +12,8 @@ import Nimble
 @testable import Dashboard
 
 /**
- 1. Measure Performance of each test (TODO)
- 2. Test cases of ranges (9 Done /10)
+ 1. Measure Performance of each test (Done)
+ 2. Test cases of ranges (Done)
  3. Test cases of individual metrics (TODO)
  4. Test cases of caching the calculations (TODO)
  */
@@ -40,6 +40,20 @@ class DashboardTests: QuickSpec {
                         var deeds: [Deed] = .faraaid
                         (0...1).forEach { deeds[$0].isDone = true }
                         dictionary[date] = deeds
+                    }
+                    
+                    context("when previous range is empty and current range is not") {
+                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek.reduce(into: [Date: [Deed]](), emptyWeekSeeder)
+                        let currentWeekFakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]](), goodWeekSeeder)
+                        
+                        let analysis = analyize(
+                            currentRangeReport: .init(ranges: [.fard: currentWeekFakeData]),
+                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData])
+                        )[0]
+                        
+                        it("should have a good indicator") {
+                            expect(analysis.isImproving).to(beTrue())
+                        }
                     }
                     
                     context("when current range is better than the previous") {
