@@ -234,7 +234,7 @@ struct LockedRewardView: View {
         .aspectRatio(contentMode: .fit)
         .frame(width: .p24, height: .p24)
       
-      Text("Locked".localized(arguments: title))
+      Text("Locked".localized(arguments: title.localized))
         .font(.pBody.bold())
     }
     .stay(.light)
