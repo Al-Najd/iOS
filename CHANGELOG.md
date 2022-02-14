@@ -1,3 +1,18 @@
+## Updates of version 0.9.2 🚀
+    - Improve overall structure, improve speed and fix prayers not updating
+    - Set arabic as main language
+    - Add an Indicator when user holds on a graph bar (#11)
+    - Add Precommit script
+    - Add Test Coverage
+    - Update README.md
+    - Add README.md
+    - Add github PR templates
+    - 🚀 Released iOS 0.9.1! [Beta Release]
+    - Add support for external distribution from Fastlane
+    - Add performance measuring tests for analysis
+    - Add comparison between current & previous ranges (+Tests)
+    - 🚀 Released iOS 0.9.1! [Beta Release]
+
 ## Updates of version 0.9.1 🚀
     - Fix Sort and some RTL issues and cover some recommendations with tests
     - Fix Light mode on Dashboard
