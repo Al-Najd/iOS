@@ -57,4 +57,4 @@ public extension Changeable {
     }
 }
 
-extension Array: Changeable where Element == Changeable {}
+extension Array: Changeable where Element: Changeable {}

@@ -15,10 +15,40 @@ public struct Deed: Identifiable, Codable, Equatable {
     public var title: String
     public var isDone: Bool = false
     public var reward: Reward
+}
+
+public extension Deed {
+  struct Categorized: Codable, Equatable {
+    public let category: DeedCategory
+    public var deeds: [Deed]
     
-    public static func == (lhs: Deed, rhs: Deed) -> Bool {
-        lhs.id == rhs.id
+    public init(category: DeedCategory, deeds: [Deed]) {
+      self.category = category
+      self.deeds = deeds
     }
+  }
+}
+
+extension Deed.Categorized: Changeable {}
+
+public extension Deed.Categorized {
+  static let faraaid: Deed.Categorized = .init(category: .fard, deeds: .faraaid)
+  static let sunnah: Deed.Categorized = .init(category: .sunnah, deeds: .sunnah)
+  static let nafila: Deed.Categorized = .init(category: .nafila, deeds: .nafila)
+}
+
+public extension Sequence where Element == Deed.Categorized {
+  var faraaid: Deed.Categorized? {
+    self.first(where: { $0.category == .fard })
+  }
+  
+  var sunnah: Deed.Categorized? {
+    self.first(where: { $0.category == .sunnah })
+  }
+  
+  var nafila: Deed.Categorized? {
+    self.first(where: { $0.category == .nafila })
+  }
 }
 
 public struct Reward: Identifiable, Codable, Equatable {
@@ -26,10 +56,21 @@ public struct Reward: Identifiable, Codable, Equatable {
     public var title: String
 }
 
-public enum DeedCategory: Int, Identifiable, Codable, Equatable, Hashable, CaseIterable {
-    case fard = 3
-    case sunnah = 2
-    case nafila = 1
+public enum DeedCategory: Identifiable, Codable, Equatable, Hashable, CaseIterable {
+    case fard
+    case sunnah
+    case nafila
+    
+    public var sortWeight: Int {
+        switch self {
+        case .fard:
+            return 3
+        case .sunnah:
+            return 2
+        case .nafila:
+            return 1
+        }
+    }
     
     public var id: String {
         return "\(self)"
@@ -58,7 +99,7 @@ public enum DeedCategory: Int, Identifiable, Codable, Equatable, Hashable, CaseI
     }
 }
 
-public enum AzkarCategory: Identifiable, Codable, CaseIterable {
+public enum AzkarCategory: Identifiable, Codable, Equatable, Hashable, CaseIterable {
     case sabah
     case masaa
     

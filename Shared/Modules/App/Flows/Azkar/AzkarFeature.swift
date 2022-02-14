@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import Entities
+import Common
 
 struct AzkarState: Equatable {
   var activeDate: Date = .now
@@ -29,11 +30,11 @@ struct AzkarEnvironment {}
 let azkarReducer = Reducer<
   AzkarState,
   AzkarAction,
-  SystemEnvironment<AzkarEnvironment>
+  CoreEnvironment<AzkarEnvironment>
 > { state, action, env in
   switch action {
   case .onAppear:
-    state.azkar = getAzkarCategorized(env.cache(), state.activeDate)
+    state.azkar = env.getAzkarCategorized(state.activeDate)
   case let .onDoing(deed):
     update(&state, using: deed, with: true)
     updateCache(state, env)
@@ -75,7 +76,7 @@ fileprivate func finish(_ deed: RepeatableDeed, in state: inout AzkarState) {
   state.azkar[deed.category] = state.azkar[deed.category]!.map(finishRepeatableDeedsQuickly(deed))
 }
 
-fileprivate func updateCache(_ state: AzkarState, _ env: SystemEnvironment<AzkarEnvironment>) {
+fileprivate func updateCache(_ state: AzkarState, _ env: CoreEnvironment<AzkarEnvironment>) {
   state.azkar.forEach {
     env.cache().save($0.value, for: .azkar(state.activeDate, $0.key))
   }

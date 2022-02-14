@@ -10,11 +10,11 @@ import Animations
 import Business
 import Entities
 
-extension OAnimation {
+public extension OAnimation {
   static let splash: OAnimation = .init(name: "splash")
 }
 
-extension StorageKey {
+public extension StorageKey {
   static let prayers: (_ date: Date, _ category: DeedCategory) -> StorageKey = {
     .init(
       key: "\($0.day)-\($0.month)-\($0.year)-\($1)-prayers",
@@ -44,7 +44,7 @@ extension StorageKey {
   }
 }
 
-extension StorageKey {
+public extension StorageKey {
   static let standard: StandardEntity = .main
   
   struct StandardEntity {

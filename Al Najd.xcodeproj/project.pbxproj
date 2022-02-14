@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0456DAA427A38629009BDC62 /* ComposableArchitecture */; };
 		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */; };
 		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
 		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
@@ -21,10 +21,8 @@
 		0472C63027A385A700913892 /* RewardsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FC27A385A600913892 /* RewardsFeature.swift */; };
 		0472C63127A385A700913892 /* AzkarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FE27A385A600913892 /* AzkarFeature.swift */; };
 		0472C63227A385A700913892 /* AzkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FF27A385A600913892 /* AzkarView.swift */; };
-		0472C63327A385A700913892 /* ResourcesAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C60127A385A600913892 /* ResourcesAccess.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
-		0472C63A27A385A700913892 /* SystemEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61227A385A600913892 /* SystemEnvironment.swift */; };
 		0472C63B27A385A700913892 /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61327A385A600913892 /* RootFeature.swift */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
 		0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61727A385A600913892 /* PluginProtocol.swift */; };
@@ -80,10 +78,8 @@
 		0472C5FC27A385A600913892 /* RewardsFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsFeature.swift; sourceTree = "<group>"; };
 		0472C5FE27A385A600913892 /* AzkarFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarFeature.swift; sourceTree = "<group>"; };
 		0472C5FF27A385A600913892 /* AzkarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarView.swift; sourceTree = "<group>"; };
-		0472C60127A385A600913892 /* ResourcesAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesAccess.swift; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
-		0472C61227A385A600913892 /* SystemEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEnvironment.swift; sourceTree = "<group>"; };
 		0472C61327A385A600913892 /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		0472C61727A385A600913892 /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
@@ -116,8 +112,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				048CC8D027B08505007BC3C7 /* AlCore in Frameworks */,
-				0456DAA527A38629009BDC62 /* ComposableArchitecture in Frameworks */,
 				04D8397727979EB4007FA07D /* Core in Frameworks */,
+				045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */,
 				0478B68627AA902100891DAA /* ComposableCoreLocation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,7 +259,6 @@
 			children = (
 				0472C60327A385A600913892 /* Animations */,
 				0472C60527A385A600913892 /* azkar-db.json */,
-				0472C60127A385A600913892 /* ResourcesAccess.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -335,7 +330,6 @@
 		0472C61127A385A600913892 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				0472C61227A385A600913892 /* SystemEnvironment.swift */,
 				0472C61327A385A600913892 /* RootFeature.swift */,
 			);
 			path = Feature;
@@ -486,9 +480,9 @@
 			name = "Al Najd (iOS)";
 			packageProductDependencies = (
 				04D8397627979EB4007FA07D /* Core */,
-				0456DAA427A38629009BDC62 /* ComposableArchitecture */,
 				0478B68527AA902100891DAA /* ComposableCoreLocation */,
 				048CC8CF27B08505007BC3C7 /* AlCore */,
+				045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -585,8 +579,8 @@
 			);
 			mainGroup = B86588032716CC5200FC0CBB;
 			packageReferences = (
-				0456DAA327A38629009BDC62 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */,
+				045F0B4527B9FCA700FCEAB2 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -651,7 +645,6 @@
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
 				0472C63027A385A700913892 /* RewardsFeature.swift in Sources */,
 				0472C62A27A385A700913892 /* DateFeature.swift in Sources */,
-				0472C63327A385A700913892 /* ResourcesAccess.swift in Sources */,
 				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
 				0472C62F27A385A700913892 /* RewardsView.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
@@ -660,7 +653,6 @@
 				0472C62627A385A700913892 /* OTabBarView.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
 				0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */,
-				0472C63A27A385A700913892 /* SystemEnvironment.swift in Sources */,
 				04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */,
 				0472C63227A385A700913892 /* AzkarView.swift in Sources */,
 				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
@@ -1070,12 +1062,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0456DAA327A38629009BDC62 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		045F0B4527B9FCA700FCEAB2 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.33.0;
 			};
 		};
 		0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */ = {
@@ -1089,9 +1081,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0456DAA427A38629009BDC62 /* ComposableArchitecture */ = {
+		045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0456DAA327A38629009BDC62 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			package = 045F0B4527B9FCA700FCEAB2 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
 		0478B68527AA902100891DAA /* ComposableCoreLocation */ = {

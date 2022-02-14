@@ -23,19 +23,19 @@ struct PrayersView: View {
       List {
         DeedsList(
           sectionTitle: "Faraaid".localized,
-          deeds: viewStore.prayers[.fard] ?? [],
+          deeds: viewStore.prayers.faraaid?.deeds ?? [],
           store: store
         )
         
         DeedsList(
           sectionTitle: "Sunnah".localized,
-          deeds: viewStore.prayers[.sunnah] ?? [],
+          deeds: viewStore.prayers.sunnah?.deeds ?? [],
           store: store
         )
         
         DeedsList(
           sectionTitle: "Nafila".localized,
-          deeds: viewStore.prayers[.nafila] ?? [],
+          deeds: viewStore.prayers.nafila?.deeds ?? [],
           store: store
         )
       }

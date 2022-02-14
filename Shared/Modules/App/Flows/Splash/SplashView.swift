@@ -40,7 +40,7 @@ struct SplashView<Content: View>: View {
           ]
         )
           .opacity(showAnimation ? 1 : 0)
-          .scaleEffect(showAnimation ? 1 : 0)
+          .scaleEffect(showAnimation ? 1 : .ulpOfOne)
         /* Lottie Wrapping Ends */
         
         if showFooterText {

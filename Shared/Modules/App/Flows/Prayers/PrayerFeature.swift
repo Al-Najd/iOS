@@ -8,14 +8,26 @@
 import ComposableArchitecture
 import Business
 import Entities
+import Common
 
 struct PrayerState: Equatable {
   var activeDate: Date = .now
-  var prayers: [DeedCategory: [Deed]] = [
-    .fard: .faraaid,
-    .sunnah: .sunnah,
-    .nafila: .nafila
-  ]
+  var prayers: [Deed.Categorized] = [
+    .faraaid,
+    .sunnah,
+    .nafila
+  ] {
+    didSet {
+      print("GOOOOOO")
+    }
+  }
+  
+  public static func == (lhs: PrayerState, rhs: PrayerState) -> Bool {
+    lhs.activeDate == rhs.activeDate &&
+    lhs.prayers[0] == rhs.prayers[0] &&
+    lhs.prayers[1] == rhs.prayers[1] &&
+    lhs.prayers[2] == rhs.prayers[2]
+  }
 }
 
 enum PrayerAction: Equatable {
@@ -29,28 +41,29 @@ struct PrayerEnvironment {}
 let prayerReducer = Reducer<
   PrayerState,
   PrayerAction,
-  SystemEnvironment<PrayerEnvironment>
+  CoreEnvironment<PrayerEnvironment>
 > { state, action, env in
   switch action {
   case .onAppear:
-    state.prayers = getPrayersCategorized(env.cache(), state.activeDate)
+    state.prayers = env.getPrayersCategorized(state.activeDate)
   case let .onDoing(deed):
-    var mutation = deed
-    mutation.isDone = true
-    state.prayers[deed.category]?.findAndReplaceElseAppend(with: mutation)
+    guard let index = state.prayers.firstIndex(where: { $0.category == deed.category }) else { return .none }
+    guard let deedIndex = state.prayers[index].deeds.firstIndex(of: deed) else { return .none }
+    state.prayers[index].deeds[deedIndex].isDone = true
     updateCache(state, env)
   case var .onUndoing(deed):
-    var mutation = deed
-    mutation.isDone = false
-    state.prayers[deed.category]?.findAndReplaceElseAppend(with: mutation)
+    guard let index = state.prayers.firstIndex(where: { $0.category == deed.category }) else { return .none }
+    guard let prayerIndex = state.prayers[index].deeds.firstIndex(of: deed) else { return .none }
+    state.prayers[index].deeds[prayerIndex].isDone = true
     updateCache(state, env)
   }
   
   return .none
-}.debug()
+}
 
-fileprivate func updateCache(_ state: PrayerState, _ env: SystemEnvironment<PrayerEnvironment>) {
+
+fileprivate func updateCache(_ state: PrayerState, _ env: CoreEnvironment<PrayerEnvironment>) {
   state.prayers.forEach {
-    env.cache().save($0.value, for: .prayers(state.activeDate, $0.key))
+    env.cache().save($0.deeds, for: .prayers(state.activeDate, $0.category))
   }
 }

@@ -12,6 +12,7 @@ import Entities
 import Business
 import ComposableCoreLocation
 import Dashboard
+import Common
 
 struct RootState: Equatable {
   var dashboardState = DashboardState()
@@ -37,7 +38,7 @@ struct RootEnvironment { }
 let rootReducer = Reducer<
   RootState,
   RootAction,
-  SystemEnvironment<RootEnvironment>
+  CoreEnvironment<RootEnvironment>
 >.combine(
   prayerReducer.pullback(
     state: \.prayerState,
@@ -62,90 +63,37 @@ let rootReducer = Reducer<
   dashboardReducer.pullback(
     state: \.dashboardState,
     action: /RootAction.dashboardAction,
-    environment: { _ in DashboardEnvironment() }
+    environment: { _ in .live(DashboardEnvironment()) }
   ),
   syncingReducer
 )
 
-fileprivate let syncingReducer: Reducer<RootState, RootAction, SystemEnvironment<RootEnvironment>> = .init { state, action, env in
+fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {
-  case .lifecycleAction(.becameActive):
-    return .init(
-      value: .dashboardAction(
-        .seed(
-          current: getLastWeekReport(env,state.dateState.currentDay),
-          previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
-        )
-      )
-    )
-  case .lifecycleAction(.becameInActive),
-      .lifecycleAction(.wentToBackground):
-    break
   case .locationManager(.didChangeAuthorization(.authorizedAlways)),
       .locationManager(.didChangeAuthorization(.authorizedWhenInUse)):
-    
     return env
       .locationManager()
       .requestLocation(id: LocationManagerId())
       .fireAndForget()
     
-  case .locationManager(.didChangeAuthorization(.denied)),
-       .locationManager(.didChangeAuthorization(.restricted)):
-    return .none
   case .prayerAction(let prayerAction):
-    sync(&state, with: prayerAction)
-    updateCache(state, env)
-    
-    return .init(
-      value: .dashboardAction(
-        .seed(
-          current: getLastWeekReport(env,state.dateState.currentDay),
-          previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
-        )
-      )
-    )
+    return syncRewards(with: prayerAction)
   case .azkarAction(let azkarAction):
-    sync(&state, with: azkarAction)
-    updateCache(state, env)
-    
-    return .init(
-      value: .dashboardAction(
-        .seed(
-          current: getLastWeekReport(env,state.dateState.currentDay),
-          previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
-        )
-      )
-    )
+    return syncRewards(with: azkarAction)
   case .dateAction(let dateAction):
     sync(&state, with: dateAction)
     return .init(value: .prayerAction(.onAppear))
       .append(.azkarAction(.onAppear))
       .append(.rewardAction(.onAppear))
-      .append(
-        .dashboardAction(
-          .seed(
-            current: getLastWeekReport(env,state.dateState.currentDay),
-            previous: getLastWeekReport(env,state.dateState.currentDay.adding(.day, value: -7))
-          )
-        )
-      )
+      .append(.dashboardAction(.onAppear))
       .eraseToEffect()
   default:
     break
   }
   
   return .none
-}
-
-fileprivate func updateCache(_ state: RootState, _ env: SystemEnvironment<RootEnvironment>) {
-  state.prayerState.prayers.forEach {
-    env.cache().save($0.value.filter { $0.isDone }, for: .prayersRewards(state.dateState.currentDay, $0.key))
-  }
-  
-  state.azkarState.azkar.forEach {
-    env.cache().save($0.value.filter { $0.isDone }, for: .azkarRewards(state.dateState.currentDay, $0.key))
-  }
-}
+}.debug("-Syncing")
 
 fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
   switch dateAction {
@@ -157,90 +105,32 @@ fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
     state.prayerState.activeDate = currentDay
     state.azkarState.activeDate = currentDay
     state.rewardState.activeDate = currentDay
+    state.dashboardState.activeDate = currentDay
   }
 }
 
-fileprivate func sync(_ state: inout RootState, with prayerAction: PrayerAction) {
+fileprivate func syncRewards(with prayerAction: PrayerAction) -> Effect<RootAction, Never> {
   switch prayerAction {
   case .onDoing(let deed):
-    state.rewardState.prayers[deed.category]?.append(deed)
+    return .init(value: .rewardAction(.onDoingDeed(deed)))
   case .onUndoing(let deed):
-    state.rewardState.prayers[deed.category]?.findAndRemove(deed)
+    return .init(value: .rewardAction(.onUndoingDeed(deed)))
   default:
-    break
+    return .none
   }
 }
 
-fileprivate func sync(_ state: inout RootState, with azkarAction: AzkarAction) {
+fileprivate func syncRewards(with azkarAction: AzkarAction) -> Effect<RootAction, Never> {
   switch azkarAction {
   case .onDoing(let repeatableDeed):
-    decrement(deed: repeatableDeed, in: &state)
+    return .init(value: .rewardAction(.onDoingRepeatableDeed(repeatableDeed)))
   case .onUndoing(let repeatableDeed):
-    undo(deed: repeatableDeed, in: &state)
+    return .init(value: .rewardAction(.onUndoingRepeatableDeed(repeatableDeed)))
   case .onQuickFinish(let repeatableDeed):
-    did(deed: repeatableDeed, in: &state)
+    return .init(value: .rewardAction(.onUndoingRepeatableDeed(repeatableDeed)))
   default:
-    break
+    return .none
   }
-}
-
-fileprivate func decrement(
-  deed: RepeatableDeed,
-  in state: inout RootState
-) {
-  guard deed.currentNumberOfRepeats > 0 else { return }
-  var deed = deed
-  deed.currentNumberOfRepeats -= 1
-  guard deed.currentNumberOfRepeats == 0 else { return }
-  switch deed.category {
-  case .masaa:
-    state.azkarState.azkar[.masaa]?.findAndReplaceElseAppend(with: deed)
-  case .sabah:
-    state.azkarState.azkar[.sabah]?.findAndReplaceElseAppend(with: deed)
-  }
-  
-  HapticService.main.generate(feedback: .success)
-}
-
-fileprivate func did(deed: RepeatableDeed, in state: inout RootState) {
-  var deed = deed
-  deed.currentNumberOfRepeats = 0
-  switch deed.category {
-  case .masaa:
-    state.azkarState.azkar[.masaa]?.findAndReplaceElseAppend(with: deed)
-  case .sabah:
-    state.azkarState.azkar[.sabah]?.findAndReplaceElseAppend(with: deed)
-  }
-  HapticService.main.generate(feedback: .success)
-}
-
-fileprivate func undo(deed: RepeatableDeed, in state: inout RootState) {
-  var deed = deed
-  deed.currentNumberOfRepeats = deed.numberOfRepeats
-  switch deed.category {
-  case .masaa:
-    state.azkarState.azkar[.masaa]?.findAndReplaceElseAppend(with: deed)
-  case .sabah:
-    state.azkarState.azkar[.sabah]?.findAndReplaceElseAppend(with: deed)
-  }
-  HapticService.main.generate(feedback: .warning)
-}
-
-fileprivate func getLastWeekReport(
-  _ env: SystemEnvironment<RootEnvironment>,
-  _ activeDay: Date
-) -> Report.Range {
-  .init(
-    ranges: DeedCategory
-      .allCases
-      .reduce(
-        into: [DeedCategory: [Date: [Deed]]]()
-      ) { dictionary, category in
-        dictionary[category] = activeDay.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
-          dictionary[date] = getPrayersFromCache(env.cache(), date, category) ?? category.defaultDeeds
-        }
-      }
-  )
 }
 
 extension Store where State == RootState, Action == RootAction {
