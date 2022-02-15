@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 public struct ANPermission: Identifiable, Equatable {
     public let id: String = UUID().uuidString
@@ -15,7 +16,7 @@ public struct ANPermission: Identifiable, Equatable {
     
     /// Description of what this permission is used for
     public let usages: [String]
-    public let status: Status
+    public var status: Status
     public let isInternal: Bool
     
     public init(
@@ -37,10 +38,26 @@ public struct ANPermission: Identifiable, Equatable {
 
 public extension ANPermission {
     enum Status: Equatable {
-        case notDetermined
-        case given
-        case denied
-        case insufficient(reason: String)
+      case notDetermined
+      case given
+      case denied
+      case insufficient(reason: String)
+      
+      public init(_ authorization: CLAuthorizationStatus) {
+        switch authorization {
+          case .notDetermined:
+            self = .notDetermined
+          case .denied,
+              .restricted:
+            self = .denied
+          case .authorizedAlways,
+              .authorizedWhenInUse,
+              .authorized:
+            self = .given
+          @unknown default:
+            self = .notDetermined
+        }
+      }
     }
     
     enum `Type`: Equatable {

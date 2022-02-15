@@ -14,6 +14,7 @@ import ComposableArchitecture
 import DesignSystem
 import Utils
 import SwiftUI
+import Common
 
 public struct SettingsState: Equatable {
   @BindableState var enableAccessibilityFont: Bool = false
@@ -36,13 +37,17 @@ public struct SettingsEnvironment { public init() { } }
 public let settingsReducer = Reducer<
   SettingsState,
   SettingsAction,
-  SettingsEnvironment
+  CoreEnvironment<SettingsEnvironment>
 >.init { state, action, env in
   switch action {
+    case .onAppear:
+      state.permissions = [
+        .location.with {
+          $0.status = .init(env.locationManager().authorizationStatus())
+        }
+      ]
     case .binding(\.$enableAccessibilityFont):
       FontManager.shared.supportsAccessibilityAdaption = state.enableAccessibilityFont
-    case .onAppear:
-      state.permissions = [.location]
     case let .onTapPermission(permission):
       openSettings(permission.isInternal, permission.title)
     case let .onTapModifier(modifier):
@@ -105,11 +110,14 @@ public extension ANSettingsModifier {
 }
 
 extension ANSettingsModifier: Then { }
+extension ANPermission: Then {}
 
 extension Store where State == SettingsState, Action == SettingsAction {
   static let live: Store<State, Action> = .init(
     initialState: .init(),
     reducer: settingsReducer,
-    environment: .init()
+    environment: .live(
+      SettingsEnvironment()
+    )
   )
 }

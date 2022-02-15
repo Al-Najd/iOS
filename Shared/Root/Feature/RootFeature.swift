@@ -27,7 +27,6 @@ struct RootState: Equatable {
 enum RootAction {
   case dashboardAction(DashboardAction)
   case lifecycleAction(LifecycleAction)
-  case locationManager(LocationManager.Action)
   case prayerAction(PrayerAction)
   case azkarAction(AzkarAction)
   case rewardAction(RewardsAction)
@@ -77,13 +76,6 @@ let rootReducer = Reducer<
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {
-  case .locationManager(.didChangeAuthorization(.authorizedAlways)),
-      .locationManager(.didChangeAuthorization(.authorizedWhenInUse)):
-    return env
-      .locationManager()
-      .requestLocation(id: LocationManagerId())
-      .fireAndForget()
-    
   case .prayerAction(let prayerAction):
     return syncRewards(with: prayerAction)
   case .azkarAction(let azkarAction):
@@ -147,5 +139,3 @@ extension Store where State == RootState, Action == RootAction {
     environment: .live(RootEnvironment())
   )
 }
-
-private struct LocationManagerId: Hashable {}
