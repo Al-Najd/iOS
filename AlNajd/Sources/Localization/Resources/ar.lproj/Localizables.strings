@@ -119,3 +119,12 @@
 "Wetr" = "رقعة وتر";
 "Wetr when done with 7 Verses, is same as doing Qyam Al Layl" = "إذا قرأت ٧ ايات بعد صلاة العشاء, فقد كتبت من من قام هذه الليلة";
 "n out of n" = "%@ من %@";
+"Font Accessibility" = "سهولة الكتابة";
+"Increases or decreases the font size for better reading experience without straining your eye very much" = "يتيح لك زيادة او إنقاص الكلام المكتوب لسهولة رؤيته";
+"Allowed" = "متاح";
+"Denied" = "ممنوع";
+"Not Determined" = "لم يتحدد بعد";
+"Insufficient" = "غير كافي";
+"Accessibility" = "إمكانية الوصول";
+"Permissions" = "الأذونات";
+"Go to the iOS Settings Page" = "إعدادات التطبيق";

@@ -69,7 +69,7 @@ let rootReducer = Reducer<
   settingsReducer.pullback(
     state: \.settingsState,
     action: /RootAction.settingsAction,
-    environment: { _ in SettingsEnvironment() }
+    environment: { _ in .live(SettingsEnvironment()) }
   ),
   syncingReducer
 )
