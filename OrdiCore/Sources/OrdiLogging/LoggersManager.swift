@@ -53,4 +53,8 @@ public extension String {
     func withPrefix(_ prefix: String) -> String {
         "\(prefix)\(self)"
     }
+  
+  func withSuffix(_ suffix: String) -> String {
+    "\(self)\(suffix)"
+  }
 }

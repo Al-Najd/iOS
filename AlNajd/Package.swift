@@ -13,6 +13,8 @@ let package = Package(
   targets: ANTargets.all
 )
 
+
+// MARK: - Targets
 private enum ANTargets {
     static let all: [Target] = ANTargets.alCore
     + ANTargets.common
@@ -22,15 +24,28 @@ private enum ANTargets {
     + ANTargets.schedule
     + ANTargets.dashboard
     + ANTargets.localization
+    + ANTargets.settings
 }
-
 private extension ANTargets {
+    static let settings: [Target] = [
+        .target(
+            name: "Settings",
+            dependencies: [
+                "Common",
+                "Entities",
+                "Localization",
+                .product(name: "Core", package: "OrdiCore")
+            ]
+        )
+    ]
+    
     static let common: [Target] = [
         .target(
             name: "Common",
             dependencies: [
                 "Entities",
-                .product(name: "Core", package: "OrdiCore")
+                .product(name: "Core", package: "OrdiCore"),
+                .product(name: "ComposableCoreLocation", package: "composable-core-location")
             ]
         )
     ]
@@ -140,12 +155,16 @@ private extension ANTargets {
                 "Schedule",
                 "Localization",
                 "Common",
+                "Settings",
                 .product(name: "Core", package: "OrdiCore")
             ]
         )
     ]
     
 }
+
+
+// MARK: - Dependencies
 private enum ANDependencies {
     static let all: [Package.Dependency] = ordiCore
     + pointFree
@@ -160,6 +179,10 @@ private extension ANDependencies {
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
             .upToNextMajor(from: .init(0, 33, 1))
+        ),
+        .package(
+          url: "https://github.com/pointfreeco/composable-core-location",
+          .upToNextMajor(from: .init(0, 1, 0))
         ),
         .package(
             url: "https://github.com/pointfreeco/swift-snapshot-testing",
@@ -179,6 +202,8 @@ private extension ANDependencies {
     ]
 }
 
+
+// MARK: - Products
 private enum ANProducts {
     static let all = alCore
     + entities
@@ -188,8 +213,16 @@ private enum ANProducts {
     + dashboard
     + localization
     + common
+    + settings
 }
 private extension ANProducts {
+    static let settings: [PackageDescription.Product] = [
+        .library(
+            name: "Settings",
+            targets: ["Settings"]
+        )
+    ]
+    
     static let alCore: [PackageDescription.Product] = [
         .library(
             name: "AlCore",

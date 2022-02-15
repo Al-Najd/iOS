@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  FontManager.swift
 //  
 //
 //  Created by Ahmed Ramy on 06/02/2022.
@@ -13,37 +13,20 @@ import UIKit
 
 import SwiftUI
 import FontBlaster
+import Utils
+import OrdiLogging
 
 public final class FontManager {
   static public var shared: FontManager = .init()
-  public var configuration: Configuration
+  
+  public var supportsAccessibilityAdaption: Bool = false
+  public var supportsDeviceSizeAdaption: Bool = true
+  // Note: Forced here as the app shouldn't run unless this is set
+  private var configuration: Configuration!
   
   public init() {
-    FontBlaster.blast(bundle: .designSystemBundle)
-      guard let url = Bundle.designSystemBundle.url(forResource: "fonts", withExtension: "json")
-    else {
-        fatalError(
-            "zzzz\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
-        ) }
-    
-    do {
-      let data = try Data(contentsOf: url)
-      let configs = try JSONDecoder().decode(ConfigFonts.self, from: data)
-      
-      self.configuration =  .init(
-        fontsLocale: .init(
-          language: .init(
-            Bundle.main.preferredLocalizations.first ?? "en"
-          )
-        ),
-        fontsType: configs.defaultConfigurations.sdkFriendlyType(),
-        availableFonts: configs.fonts.map { $0.toSDKFont() }
-      )
-    } catch {
-      fatalError(
-        "zzzz\(error.localizedDescription)\n\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
-      )
-    }
+    fillUpInfoPListWithCustomFont()
+    parseFontJSON()
   }
   
   public func getSuitableFont(
@@ -84,5 +67,45 @@ public extension FontManager {
     var fontsLocale: FontLocale = .english
     var fontsType: FontType = .sansSerif
     var availableFonts: [FontDetails] = []
+  }
+}
+
+private extension FontManager {
+  func fillUpInfoPListWithCustomFont() {
+    Once().run {
+      FontBlaster.blast(bundle: .designSystemBundle)
+    }
+  }
+  
+  func parseFontJSON() {
+    guard let url = Bundle.designSystemBundle.url(forResource: "fonts", withExtension: "json")
+    else {
+      LoggersManager.error(message: "Couldn't find fonts.json in designSystemBundle")
+      fatalError(
+        "\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
+      )
+    }
+    
+    do {
+      let data = try Data(contentsOf: url)
+      let configs = try JSONDecoder().decode(ConfigFonts.self, from: data)
+      
+      self.configuration =  .init(
+        fontsLocale: .init(
+          language: .init(
+            Bundle.main.preferredLocalizations.first ?? "ar"
+          )
+        ),
+        fontsType: configs.defaultConfigurations.sdkFriendlyType(),
+        availableFonts: configs.fonts.map { $0.toSDKFont() }
+      )
+    } catch {
+      LoggersManager.error(
+        message: "Couldn't parse fonts.json\nerror: \(error),\ndescription: \(error.localizedDescription)"
+      )
+      fatalError(
+        "\(error.localizedDescription)\n\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
+      )
+    }
   }
 }

@@ -13,6 +13,7 @@ import Business
 import ComposableCoreLocation
 import Dashboard
 import Common
+import Settings
 
 struct RootState: Equatable {
   var dashboardState = DashboardState()
@@ -26,11 +27,11 @@ struct RootState: Equatable {
 enum RootAction {
   case dashboardAction(DashboardAction)
   case lifecycleAction(LifecycleAction)
-  case locationManager(LocationManager.Action)
   case prayerAction(PrayerAction)
   case azkarAction(AzkarAction)
   case rewardAction(RewardsAction)
   case dateAction(DateAction)
+  case settingsAction(SettingsAction)
 }
 
 struct RootEnvironment { }
@@ -65,18 +66,16 @@ let rootReducer = Reducer<
     action: /RootAction.dashboardAction,
     environment: { _ in .live(DashboardEnvironment()) }
   ),
+  settingsReducer.pullback(
+    state: \.settingsState,
+    action: /RootAction.settingsAction,
+    environment: { _ in SettingsEnvironment() }
+  ),
   syncingReducer
 )
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {
-  case .locationManager(.didChangeAuthorization(.authorizedAlways)),
-      .locationManager(.didChangeAuthorization(.authorizedWhenInUse)):
-    return env
-      .locationManager()
-      .requestLocation(id: LocationManagerId())
-      .fireAndForget()
-    
   case .prayerAction(let prayerAction):
     return syncRewards(with: prayerAction)
   case .azkarAction(let azkarAction):
@@ -140,5 +139,3 @@ extension Store where State == RootState, Action == RootAction {
     environment: .live(RootEnvironment())
   )
 }
-
-private struct LocationManagerId: Hashable {}

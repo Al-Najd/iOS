@@ -33,8 +33,6 @@
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
 		0472C64827A385A700913892 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0472C62527A385A700913892 /* Assets.xcassets */; };
 		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
-		0478B68627AA902100891DAA /* ComposableCoreLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 0478B68527AA902100891DAA /* ComposableCoreLocation */; };
-		0478B68927AA934A00891DAA /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68827AA934A00891DAA /* SettingsFeature.swift */; };
 		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
 		04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */; };
@@ -90,7 +88,6 @@
 		0472C61C27A385A600913892 /* LottiePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottiePlugin.swift; sourceTree = "<group>"; };
 		0472C62527A385A700913892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0478B68227AA8DBB00891DAA /* LocationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFeature.swift; sourceTree = "<group>"; };
-		0478B68827AA934A00891DAA /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
 		04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +111,6 @@
 				048CC8D027B08505007BC3C7 /* AlCore in Frameworks */,
 				04D8397727979EB4007FA07D /* Core in Frameworks */,
 				045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */,
-				0478B68627AA902100891DAA /* ComposableCoreLocation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				04F8E31127AC3BE1002B96AB /* Recommendation */,
-				0478B68727AA934000891DAA /* Settings */,
 				0478B68127AA8DB200891DAA /* Location */,
 				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
@@ -365,14 +360,6 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		0478B68727AA934000891DAA /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				0478B68827AA934A00891DAA /* SettingsFeature.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		04D8397527979EB4007FA07D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,7 +467,6 @@
 			name = "Al Najd (iOS)";
 			packageProductDependencies = (
 				04D8397627979EB4007FA07D /* Core */,
-				0478B68527AA902100891DAA /* ComposableCoreLocation */,
 				048CC8CF27B08505007BC3C7 /* AlCore */,
 				045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */,
 			);
@@ -579,7 +565,6 @@
 			);
 			mainGroup = B86588032716CC5200FC0CBB;
 			packageReferences = (
-				0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */,
 				045F0B4527B9FCA700FCEAB2 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
@@ -648,7 +633,6 @@
 				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
 				0472C62F27A385A700913892 /* RewardsView.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
-				0478B68927AA934A00891DAA /* SettingsFeature.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,
 				0472C62627A385A700913892 /* OTabBarView.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
@@ -1070,14 +1054,6 @@
 				minimumVersion = 0.33.0;
 			};
 		};
-		0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/composable-core-location";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1085,11 +1061,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 045F0B4527B9FCA700FCEAB2 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		0478B68527AA902100891DAA /* ComposableCoreLocation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0478B68427AA902100891DAA /* XCRemoteSwiftPackageReference "composable-core-location" */;
-			productName = ComposableCoreLocation;
 		};
 		048CC8CF27B08505007BC3C7 /* AlCore */ = {
 			isa = XCSwiftPackageProductDependency;

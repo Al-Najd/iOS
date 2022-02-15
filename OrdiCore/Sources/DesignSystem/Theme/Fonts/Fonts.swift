@@ -326,8 +326,12 @@ public extension Font {
 }
 
 public extension ARFont {
-  func toSwiftUIFont(adaptBySize: Bool = true) -> SwiftUI.Font {
-    return Font(self.sizeAdaptableFont as CTFont)
+  func toSwiftUIFont() -> SwiftUI.Font {
+    return Font(
+      font
+        .addDeviceSizeAdaption()
+        .addAccessibilityAdaption(getMappedTextStyle()) as CTFont
+    )
       .weight(self.fontWeight.toSwiftUIFontWeight())
   }
 }
@@ -339,7 +343,10 @@ public protocol SizeAdaptableFont {
 
 extension ARFont: SizeAdaptableFont {
   public var sizeAdaptableFont: MPFont {
-    return MPFont(name: self.fontName, size: adapt(metrics.size)) ?? .systemFont(ofSize: adapt(metrics.size))
+      return MPFont(
+        name: self.fontName,
+        size: adapt(metrics.size)) ?? .systemFont(ofSize: adapt(metrics.size)
+    )
   }
   
   private func adapt(_ size: CGFloat) -> CGFloat {
@@ -353,8 +360,8 @@ extension ARFont: SizeAdaptableFont {
 }
 
 public protocol AccessibilityFont {
-  /// Dynamically scalled font for FontStyle.
-  var accessibleFont: MPFont { get }
+    /// Dynamically scalled font for FontStyle.
+    var accessibleFont: MPFont { get }
 }
 
 extension ARFont: AccessibilityFont {
@@ -390,6 +397,10 @@ extension ARFont: AccessibilityFont {
     }
   }
   
+  func makeAccessible(font: UIFont) -> MPFont {
+      UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledFont(for: font)
+  }
+  
   public var accessibleFont: MPFont {
 #if os(macOS)
     font
@@ -412,6 +423,22 @@ extension ARFont: AccessibilityFont {
 #else
     UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledValue(for: metrics.letterSpacing)
 #endif
+  }
+}
+
+fileprivate extension MPFont {
+  func addAccessibilityAdaption(_ textStyle: MPFont.TextStyle) -> MPFont {
+    guard FontManager.shared.supportsAccessibilityAdaption else { return self }
+    return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: self)
+  }
+  
+  func addDeviceSizeAdaption() -> MPFont {
+    guard FontManager.shared.supportsDeviceSizeAdaption else { return self }
+    let size = self.pointSize.adaptV(min: self.pointSize * 0.75, max: self.pointSize * 2)
+    return MPFont(
+      name: self.fontName,
+      size: size
+    ) ?? .systemFont(ofSize: size)
   }
 }
 
