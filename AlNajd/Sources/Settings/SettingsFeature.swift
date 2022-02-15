@@ -41,11 +41,7 @@ public let settingsReducer = Reducer<
 >.init { state, action, env in
   switch action {
     case .onAppear:
-      state.permissions = [
-        .location.with {
-          $0.status = .init(env.locationManager().authorizationStatus())
-        }
-      ]
+      state.permissions = []
     case .binding(\.$enableAccessibilityFont):
       FontManager.shared.supportsAccessibilityAdaption = state.enableAccessibilityFont
     case let .onTapPermission(permission):
