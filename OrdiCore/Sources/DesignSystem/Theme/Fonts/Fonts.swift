@@ -329,8 +329,8 @@ public extension ARFont {
   func toSwiftUIFont() -> SwiftUI.Font {
     return Font(
       font
-        .addAccessibilityAdaption(getMappedTextStyle())
-        .addDeviceSizeAdaption() as CTFont
+        .addDeviceSizeAdaption()
+        .addAccessibilityAdaption(getMappedTextStyle()) as CTFont
     )
       .weight(self.fontWeight.toSwiftUIFontWeight())
   }

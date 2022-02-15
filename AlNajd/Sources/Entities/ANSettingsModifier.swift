@@ -6,20 +6,26 @@
 //
 
 import Foundation
+import Utils
 
 public struct ANSettingsModifier: Identifiable, Equatable {
   public let id: String = UUID().uuidString
   public let title: String
   public let icon: String
   public let subtitles: String
-  public let isEnabled: Bool
-  public let url: String?
   
-  public init(title: String, icon: String, subtitles: String, isEnabled: Bool, url: String? = nil) {
+  /// Is specific to the app or general settings in the iOS
+  public let isInternal: Bool
+  
+  public init(
+    title: String,
+    icon: String,
+    subtitles: String,
+    isInternal: Bool
+  ) {
     self.title = title
     self.icon = icon
     self.subtitles = subtitles
-    self.isEnabled = isEnabled
-    self.url = url
+    self.isInternal = isInternal
   }
 }

@@ -13,6 +13,7 @@ import PreviewableView
 import ComposableArchitecture
 import Schedule
 import Dashboard
+import Settings
 
 struct MainTabView: View {
   let store: Store<RootState, RootAction>
@@ -85,6 +86,19 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.rewards)
+            .background(content: {
+              Color
+                .primary
+                .background.ignoresSafeArea()
+            })
+          
+          SettingsView(
+            store: store.scope(
+              state: \.settingsState,
+              action: RootAction.settingsAction
+            )
+          )
+            .tag(Tab.settings)
             .background(content: {
               Color
                 .primary

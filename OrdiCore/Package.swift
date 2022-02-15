@@ -79,6 +79,7 @@ let package = Package(
       name: "DesignSystem",
       dependencies: [
         "OrdiLogging",
+        "Utils",
         .product(name: "FontBlaster", package: "FontBlaster")
       ],
       resources: [

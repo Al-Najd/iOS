@@ -16,11 +16,7 @@ struct PrayerState: Equatable {
     .faraaid,
     .sunnah,
     .nafila
-  ] {
-    didSet {
-      print("GOOOOOO")
-    }
-  }
+  ]
   
   public static func == (lhs: PrayerState, rhs: PrayerState) -> Bool {
     lhs.activeDate == rhs.activeDate &&
