@@ -13,6 +13,7 @@ import Business
 import ComposableCoreLocation
 import Dashboard
 import Common
+import Settings
 
 struct RootState: Equatable {
   var dashboardState = DashboardState()
@@ -31,6 +32,7 @@ enum RootAction {
   case azkarAction(AzkarAction)
   case rewardAction(RewardsAction)
   case dateAction(DateAction)
+  case settingsAction(SettingsAction)
 }
 
 struct RootEnvironment { }
@@ -64,6 +66,11 @@ let rootReducer = Reducer<
     state: \.dashboardState,
     action: /RootAction.dashboardAction,
     environment: { _ in .live(DashboardEnvironment()) }
+  ),
+  settingsReducer.pullback(
+    state: \.settingsState,
+    action: /RootAction.settingsAction,
+    environment: { _ in SettingsEnvironment() }
   ),
   syncingReducer
 )

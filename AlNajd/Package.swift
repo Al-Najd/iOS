@@ -22,9 +22,22 @@ private enum ANTargets {
     + ANTargets.schedule
     + ANTargets.dashboard
     + ANTargets.localization
+    + ANTargets.settings
 }
 
 private extension ANTargets {
+    static let settings: [Target] = [
+        .target(
+            name: "Settings",
+            dependencies: [
+                "Common",
+                "Entities",
+                "Localization",
+                .product(name: "Core", package: "OrdiCore")
+            ]
+        )
+    ]
+    
     static let common: [Target] = [
         .target(
             name: "Common",
@@ -188,8 +201,16 @@ private enum ANProducts {
     + dashboard
     + localization
     + common
+    + settings
 }
 private extension ANProducts {
+    static let settings: [PackageDescription.Product] = [
+        .library(
+            name: "Settings",
+            targets: ["Settings"]
+        )
+    ]
+    
     static let alCore: [PackageDescription.Product] = [
         .library(
             name: "AlCore",
