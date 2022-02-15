@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  FontManager.swift
 //  
 //
 //  Created by Ahmed Ramy on 06/02/2022.
@@ -14,10 +14,13 @@ import UIKit
 import SwiftUI
 import FontBlaster
 import Utils
+import OrdiLogging
 
 public final class FontManager {
   static public var shared: FontManager = .init()
   
+  public var supportsAccessibilityAdaption: Bool = false
+  public var supportsDeviceSizeAdaption: Bool = true
   // Note: Forced here as the app shouldn't run unless this is set
   private var configuration: Configuration!
   
@@ -79,7 +82,7 @@ private extension FontManager {
     else {
       LoggersManager.error(message: "Couldn't find fonts.json in designSystemBundle")
       fatalError(
-        "\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)".tagWith(.)
+        "\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
       )
     }
     

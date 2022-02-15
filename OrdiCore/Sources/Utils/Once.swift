@@ -8,9 +8,11 @@
 import Foundation
 
 public class Once {
-    var didRun: Bool = false
+    private var didRun: Bool = false
     
-    func run(_ action: @escaping VoidCallback) {
+    public init() { }
+    
+    public func run(_ action: @escaping VoidCallback) {
         guard didRun == false else { return }
         didRun = true
         action()

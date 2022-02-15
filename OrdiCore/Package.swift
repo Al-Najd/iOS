@@ -69,7 +69,7 @@ let package = Package(
         dependencies: [
             "Entity",
             "Pulse",
-            .product(name: "Sentry", package: "Sentry")
+            "Sentry"
         ]
     ),
     .target(
@@ -78,6 +78,7 @@ let package = Package(
     .target(
       name: "DesignSystem",
       dependencies: [
+        "OrdiLogging",
         .product(name: "FontBlaster", package: "FontBlaster")
       ],
       resources: [
