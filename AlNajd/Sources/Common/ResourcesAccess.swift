@@ -42,11 +42,22 @@ public extension StorageKey {
       suitableStorage: .userDefaults
     )
   }
+  
+  static let didCompleteOnboarding: StorageKey = .init(
+    key: "didCompleteOnboarding",
+    suitableStorage: .userDefaults
+  )
+  
+  static let onboardingStep: StorageKey = .init(
+    key: "onboardingStep",
+    suitableStorage: .userDefaults
+  )
 }
-
 public extension StorageKey {
   static let standard: StandardEntity = .main
-  
+ 
+  /// Represents Standard set of Data without any user interactions
+  /// Used to seed the iOS project with data for Prayers and Azkars
   struct StandardEntity {
     static let main: StandardEntity = .init()
     let prayers: (_ category: DeedCategory) -> StorageKey = {

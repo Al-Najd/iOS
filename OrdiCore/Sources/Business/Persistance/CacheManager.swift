@@ -43,7 +43,7 @@ public final class CacheManager {
   }
 }
 
-private extension CacheManager {
+public extension CacheManager {
   func getSuitableStorage(from choice: SupportedStorage) -> Storage {
     switch choice {
     case .encrypted:

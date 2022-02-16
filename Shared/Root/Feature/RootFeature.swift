@@ -14,6 +14,7 @@ import ComposableCoreLocation
 import Dashboard
 import Common
 import Settings
+import Onboarding
 
 struct RootState: Equatable {
   var dashboardState = DashboardState()
@@ -22,9 +23,11 @@ struct RootState: Equatable {
   var rewardState = RewardsState()
   var dateState = DateState()
   var settingsState = SettingsState()
+  var onboardingState = OnboardingState()
 }
 
 enum RootAction {
+  case onboardingAction(OnboardingAction)
   case dashboardAction(DashboardAction)
   case lifecycleAction(LifecycleAction)
   case prayerAction(PrayerAction)
@@ -41,6 +44,11 @@ let rootReducer = Reducer<
   RootAction,
   CoreEnvironment<RootEnvironment>
 >.combine(
+  onboardingReducer.pullback(
+    state: \.onboardingState,
+    action: /RootAction.onboardingAction,
+    environment: { _ in .live(OnboardingEnvironment()) }
+  ),
   prayerReducer.pullback(
     state: \.prayerState,
     action: /RootAction.prayerAction,
@@ -92,7 +100,7 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<R
   }
   
   return .none
-}.debug("-Syncing")
+}
 
 fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
   switch dateAction {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Onboarding
 
 enum LifecycleAction {
   case becameActive
@@ -37,11 +38,12 @@ struct Al_NajdApp: App {
   var body: some Scene {
     WithViewStore(self.store) { viewStore in
       WindowGroup {
-        SplashView {
-          MainTabView(
-            store: self.store
+        OnboardingView(
+          store: store.scope(
+            state: \.onboardingState,
+            action: RootAction.onboardingAction
           )
-        }
+        )
       }.onChange(of: scenePhase) { scenePhase in
         switch scenePhase {
         case .active:
