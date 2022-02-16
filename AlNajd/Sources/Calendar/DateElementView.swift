@@ -55,13 +55,13 @@ public struct DateElementView: View {
         .if(date.isInFuture) {
           $0.overlay(
             Image(systemName: "lock")
-              .font(.pHeadline.bold())
+              .scaledFont(.pHeadline, .bold)
               .foregroundColor(coloring.title)
-          )
+            )
         }.if(!date.isInFuture) {
           $0.overlay(
             Text(dayFormatter.string(from: date))
-              .font(.pHeadline.bold())
+              .scaledFont(.pHeadline, .bold)
               .foregroundColor(coloring.title)
           )
         }

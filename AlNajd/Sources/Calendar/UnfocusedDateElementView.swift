@@ -22,12 +22,12 @@ public struct UnfocusedDateElementView: View {
   public var body: some View {
     if date.isInFuture {
       Image(systemName: "lock")
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .padding(4.adaptRatio())
         .foregroundColor(.mono.offblack)
     } else {
       Text(dayFormatter.string(from: date))
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .padding(4.adaptRatio())
         .foregroundColor(.mono.offblack)
     }

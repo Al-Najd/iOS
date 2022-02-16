@@ -20,8 +20,12 @@ public struct OnboardingState: Equatable {
 // MARK: - Step
 public extension OnboardingState {
   enum Step: Int, CaseIterable, Comparable, Equatable, Codable, Identifiable {
+    // MARK: - Memories & Disclaimers Starts
     case step0_InMemoryOfOurLovedOnes
     case step00_ThisWorkIsSadaqaForAllOfUs
+    // MARK: - Memories & Disclaimers Ends
+    
+    // MARK: - Story of You Starts
     case step1_Wakeup
     case step2_YouDontRemember
     case step3_YouAreBetterThanThis
@@ -35,9 +39,43 @@ public extension OnboardingState {
     case step11_TheRoadIsLongAndUnforgiving
     case step12_YouMustBecomeAMuslim
     case step13_Rise
+    // MARK: - Story of You Ends
+    
+    // MARK: - Walkthrough Starts
+    case step14_Prayer
+    case step15_Azkar
+    case step16_Rewards
+    case step17_Dashboard
+    case step18_DashboardInsight
+    case step19_Calendar
+    case step20_Settings
+    // MARK: - Walkthrough Ends
+    
+    // MARK: - Permissions Start
+    case step21_LocationPermission
+    // MARK: - Permission Ends
+    
+    // MARK: - End of Onboarding Starts
+    case step22_UntilWeMeetAgain
+    // MARK: - End of Onboarding Ends
     
     public var id: Int {
       self.rawValue
+    }
+    
+    var isFirstStep: Bool { self == Step.allCases.first }
+    var isLastStep: Bool { self == Step.allCases.last }
+    
+    var isStoryStep: Bool {
+      (Self.step0_InMemoryOfOurLovedOnes ... Self.step13_Rise).contains(self)
+    }
+    
+    var isWalkthroughStep: Bool {
+      (Self.step14_Prayer ... Self.step20_Settings).contains(self)
+    }
+    
+    var isPermissionStep: Bool {
+      (Self.step22_UntilWeMeetAgain ... Self.step22_UntilWeMeetAgain).contains(self)
     }
     
     mutating func next() {

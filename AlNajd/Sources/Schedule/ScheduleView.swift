@@ -32,7 +32,7 @@ public struct ScheduleView: View {
         HStack {
           Text("7th of")
             .padding([.leading, .vertical])
-            .font(.pTitle2)
+            .scaledFont(.pTitle2)
             .foregroundColor(.mono.body)
           
           

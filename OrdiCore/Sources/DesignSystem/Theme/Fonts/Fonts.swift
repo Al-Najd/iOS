@@ -251,21 +251,21 @@ public struct ARFont: FontProtocol {
 
 public extension ARFont {
   /// Display Huge Bold 34
-  static let largeTitle: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .huge, weight: .regular)
+  static let pLargeTitle: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .huge, weight: .regular)
   /// Display Large Bold 28
-  static let title1: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .large, weight: .regular)
+  static let pTitle1: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .large, weight: .regular)
   /// Display Medium Bold 24
-  static let title2: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .medium, weight: .regular)
+  static let pTitle2: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .medium, weight: .regular)
   /// Display Small Bold 20
-  static let title3: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .small, weight: .regular)
+  static let pTitle3: ARFont = FontManager.shared.getSuitableFont(category: .display, scale: .small, weight: .regular)
   /// Text 'Medium Size' 'Regular Weight' 17
-  static let headline: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .medium, weight: .regular)
+  static let pHeadline: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .medium, weight: .regular)
   /// Link Small Regular 15
-  static let subheadline: ARFont = FontManager.shared.getSuitableFont(category: .link, scale: .small, weight: .regular)
+  static let pSubheadline: ARFont = FontManager.shared.getSuitableFont(category: .link, scale: .small, weight: .regular)
   /// Text Small Regular 15
-  static let body: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .small, weight: .regular)
+  static let pBody: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .small, weight: .regular)
   /// Text XSmall Regular 13
-  static let footnote: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .xsmall, weight: .regular)
+  static let pFootnote: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .xsmall, weight: .regular)
 }
 
 public extension ARFont {
@@ -287,52 +287,24 @@ public extension ARFont {
   static let textXSmall: ARFont = FontManager.shared.getSuitableFont(category: .text, scale: .xsmall, weight: .regular)
 }
 
-public extension Font {
-  /// Bold 34
-  static let displayHuge: Font = ARFont.displayHuge.toSwiftUIFont()
-  /// Bold 28
-  static let displayLarge: Font = ARFont.displayLarge.toSwiftUIFont()
-  /// Bold 24
-  static let displayMedium: Font = ARFont.displayMedium.toSwiftUIFont()
-  /// Bold 20
-  static let displaySmall: Font = ARFont.displaySmall.toSwiftUIFont()
-  /// Regular 17
-  static let textMedium: Font = ARFont.textMedium.toSwiftUIFont()
-  /// Regular 15
-  static let linkSmall: Font = ARFont.linkSmall.toSwiftUIFont()
-  /// Regular 15
-  static let textSmall: Font = ARFont.textSmall.toSwiftUIFont()
-  /// Regular 13
-  static let textXSmall: Font = ARFont.textXSmall.toSwiftUIFont()
-}
-
-public extension Font {
-  /// Display Huge Bold 34
-  static let pLargeTitle: Font = .displayHuge
-  /// Display Large Bold 28
-  static let pTitle1: Font = .displayLarge
-  /// Display Medium Bold 24
-  static let pTitle2: Font = .displayMedium
-  /// Display Small Bold 20
-  static let pTitle3: Font = .displaySmall
-  /// Text 'Medium Size' 'Regular Weight' 17
-  static let pHeadline: Font = .textMedium
-  /// Link Small Regular 15
-  static let pSubheadline: Font = .linkSmall
-  /// Text Small Regular 15
-  static let pBody: Font = .textSmall
-  /// Text XSmall Regular 13
-  static let pFootnote: Font = .textXSmall
-}
-
-public extension ARFont {
-  func toSwiftUIFont() -> SwiftUI.Font {
-    return Font(
-      font
-        .addDeviceSizeAdaption()
-        .addAccessibilityAdaption(getMappedTextStyle()) as CTFont
+@available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
+public extension View {
+  func scaledFont(_ font: ARFont, _ weight: Font.Weight = .regular) -> some View {
+    return self.modifier(
+      ScaledFont(name: font.fontName, size: font.metrics.size, weight: weight)
     )
-      .weight(self.fontWeight.toSwiftUIFontWeight())
+  }
+}
+
+struct ScaledFont: ViewModifier {
+  @Environment(\.sizeCategory) var sizeCategory
+  var name: String
+  var size: CGFloat
+  var weight: Font.Weight
+  
+  func body(content: Content) -> some View {
+    let scaledSize = UIFontMetrics.default.scaledValue(for: size).adaptRatio()
+    return content.font(.custom(name, size: scaledSize).weight(weight))
   }
 }
 
@@ -427,14 +399,9 @@ extension ARFont: AccessibilityFont {
 }
 
 fileprivate extension MPFont {
-  func addAccessibilityAdaption(_ textStyle: MPFont.TextStyle) -> MPFont {
-    guard FontManager.shared.supportsAccessibilityAdaption else { return self }
-    return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: self)
-  }
-  
   func addDeviceSizeAdaption() -> MPFont {
     guard FontManager.shared.supportsDeviceSizeAdaption else { return self }
-    let size = self.pointSize.adaptV(min: self.pointSize * 0.75, max: self.pointSize * 2)
+    let size = self.pointSize.adaptV(min: self.pointSize * 0.75, max: self.pointSize * 2) * CGFloat(FontManager.shared.fontMultiplier)
     return MPFont(
       name: self.fontName,
       size: size

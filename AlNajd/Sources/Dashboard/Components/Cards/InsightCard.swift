@@ -28,11 +28,11 @@ struct InsightCardView: View {
       } icon: {
         Image(systemName: insight.indicator.icon)
       }
-      .font(.pHeadline.bold())
+      .scaledFont(.pHeadline, .bold)
       .foregroundColor(insight.indicator.color.default)
       
       Text(insight.details)
-        .font(.pBody.bold())
+        .scaledFont(.pBody, .bold)
         .foregroundColor(.mono.offblack)
     }
     .frame(maxWidth: .infinity)

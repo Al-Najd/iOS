@@ -58,9 +58,12 @@ public struct HorizontalWeekSliderView: View {
   ) -> some View {
     VStack(alignment: .center, spacing: .p8.adaptRatio()) {
       Text("\(date.day)")
-        .font(date.day == activeDate.day
-              ? .pBody.bold()
-              : .pBody)
+        .scaledFont(
+          .pBody,
+          date.day == activeDate.day
+          ? .bold
+          : .regular
+        )
         .foregroundColor(
           date.day == activeDate.day
           ? .mono.offwhite
@@ -73,9 +76,12 @@ public struct HorizontalWeekSliderView: View {
         )
       if date.day == activeDate.day {
         Text("\(date.monthName(ofStyle: .threeLetters))")
-          .font(
-            .pFootnote.bold()
+          .scaledFont(
+            .pBody,
+            .bold
           )
+        
+        
           .foregroundColor(
             date.day == activeDate.day
             ? .mono.offwhite
@@ -85,8 +91,9 @@ public struct HorizontalWeekSliderView: View {
       
       if date.isInFuture {
         Image(systemName: "lock")
-          .font(
-            .pFootnote.bold()
+          .scaledFont(
+            .pFootnote,
+            .bold
           )
           .foregroundColor(
             date.day == activeDate.day

@@ -77,6 +77,9 @@ private extension ANTargets {
         "Entities",
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location")
+      ],
+      resources: [
+        .process("Resources")
       ]
     )
   ]

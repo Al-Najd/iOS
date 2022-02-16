@@ -49,10 +49,10 @@ struct SplashView<Content: View>: View {
             .opacity(showFooterText ? 1 : 0)
             .offset(y: showFooterText ? 0 : 100)
             .padding()
-            .font(.pLargeTitle.bold())
+            .scaledFont(.pLargeTitle, .bold)
 
           Text("Al Najd Aya".localized)
-            .font(
+            .scaledFont(
               FontManager
                 .shared
                 .getFont(
@@ -61,14 +61,14 @@ struct SplashView<Content: View>: View {
                   category: .display,
                   scale: .large,
                   weight: .bold
-                ).toSwiftUIFont()
+                )
             )
             .foregroundColor(.success.default)
             .opacity(showFooterText ? 1 : 0)
             .offset(y: showFooterText ? 0 : 100)
           
           Text("Al Najd Translation".localized)
-            .font(.pTitle2.bold())
+            .scaledFont(.pTitle2, .bold)
             .foregroundColor(.mono.label)
             .multilineTextAlignment(.center)
             .opacity(showFooterText ? 1 : 0)

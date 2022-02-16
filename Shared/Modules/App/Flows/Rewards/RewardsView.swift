@@ -36,7 +36,7 @@ private extension RewardsView {
       VStack {
         VStack(alignment: .leading) {
           Text("Prayers".localized)
-            .font(.pLargeTitle.bold())
+            .scaledFont(.pLargeTitle, .bold)
             .foregroundColor(.mono.offblack)
         }
         .fillOnLeading()
@@ -63,7 +63,7 @@ private extension RewardsView {
       VStack {
         VStack(alignment: .leading) {
           Text("Azkar".localized)
-            .font(.pLargeTitle.bold())
+            .scaledFont(.pLargeTitle, .bold)
             .foregroundColor(.mono.offblack)
         }
         .fillOnLeading()
@@ -88,7 +88,7 @@ struct PrayerRewardsList: View {
   var body: some View {
     VStack {
       Text(category.title)
-        .font(.pTitle2.bold())
+        .scaledFont(.pTitle2, .bold)
         .foregroundColor(.mono.offblack)
       
       ScrollView(.horizontal, showsIndicators: false) {
@@ -108,15 +108,15 @@ struct DeedRewardCard: View {
     VStack(spacing: .p4.adaptV(min: .p4)) {
       if deed.reward.title.isEmpty == false {
         Text(deed.title.localized)
-          .font(.pFootnote.bold())
+          .scaledFont(.pFootnote, .bold)
           .multilineTextAlignment(.center)
         Text(deed.reward.title.localized)
-          .font(.pTitle3.bold())
+          .scaledFont(.pTitle3, .bold)
           .foregroundColor(.secondary.dark)
           .multilineTextAlignment(.center)
       } else {
         Text(deed.title.localized)
-          .font(.pTitle2.bold())
+          .scaledFont(.pTitle2, .bold)
           .multilineTextAlignment(.center)
       }
     }
@@ -138,15 +138,15 @@ struct RepeatableDeedRewardCard: View {
     VStack(spacing: .p4.adaptV(min: .p4)) {
       if deed.reward.title.isEmpty == false {
         Text(deed.title)
-          .font(.pHeadline.bold())
+          .scaledFont(.pHeadline, .bold)
           .multilineTextAlignment(.center)
         Text(deed.reward.title)
-          .font(.pTitle3.bold())
+          .scaledFont(.pTitle3, .bold)
           .foregroundColor(.secondary.dark)
           .multilineTextAlignment(.center)
       } else {
         Text(deed.title)
-          .font(.pTitle2.bold())
+          .scaledFont(.pTitle2, .bold)
           .multilineTextAlignment(.center)
       }
     }
@@ -168,7 +168,7 @@ struct AzkarRewardsList: View {
   var body: some View {
     VStack {
       Text(category.title)
-        .font(.pTitle2.bold())
+        .scaledFont(.pTitle2, .bold)
         .foregroundColor(.mono.offblack)
       
       ScrollView(.horizontal, showsIndicators: false) {
@@ -235,7 +235,7 @@ struct LockedRewardView: View {
         .frame(width: .p24, height: .p24)
       
       Text("Locked".localized(arguments: title.localized))
-        .font(.pBody.bold())
+        .scaledFont(.pBody, .bold)
     }
     .stay(.light)
     .frame(width: getScreenSize().width - .p16, height: CGFloat(200.0).adaptRatio())

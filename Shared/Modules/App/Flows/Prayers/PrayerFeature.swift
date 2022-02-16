@@ -50,7 +50,7 @@ let prayerReducer = Reducer<
   case var .onUndoing(deed):
     guard let index = state.prayers.firstIndex(where: { $0.category == deed.category }) else { return .none }
     guard let prayerIndex = state.prayers[index].deeds.firstIndex(of: deed) else { return .none }
-    state.prayers[index].deeds[prayerIndex].isDone = true
+    state.prayers[index].deeds[prayerIndex].isDone = false
     updateCache(state, env)
   }
   

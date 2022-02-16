@@ -33,7 +33,7 @@ public struct MonthlyElementView: View {
   public var body: some View {
     HStack {
       Text(monthFormatter.string(from: date))
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .padding(.p8.adaptRatio())
       Spacer()
       Button {
