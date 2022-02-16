@@ -121,7 +121,7 @@ struct SettingsPermission: View {
       .foregroundColor(.mono.label)
       .padding(.p8)
     
-    Text("What do we use it for?")
+    Text("What do we use it for?".localized)
       .font(.pHeadline.bold())
       .foregroundColor(.mono.ash)
     
