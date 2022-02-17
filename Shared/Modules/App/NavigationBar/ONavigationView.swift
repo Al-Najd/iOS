@@ -113,7 +113,7 @@ struct ONavigationBar: View {
                   .foregroundColor(.mono.offblack)
                 
                 Text("Al Najd".localized)
-                  .font(.pTitle3.bold())
+                  .scaledFont(.pTitle3, .bold)
                   .foregroundColor(.mono.offblack)
                 Spacer()
                 Button(action: {}, label: {
@@ -125,7 +125,7 @@ struct ONavigationBar: View {
               }
               
               Text("\("hud-88".localized)")
-                .font(
+                .scaledFont(
                   FontManager
                     .shared
                     .getFont(
@@ -134,7 +134,7 @@ struct ONavigationBar: View {
                       category: .text,
                       scale: .medium,
                       weight: .bold
-                    ).toSwiftUIFont()
+                    )
                 )
                 .foregroundColor(.mono.offblack.opacity(0.65))
                 .fixedSize(horizontal: false, vertical: true)

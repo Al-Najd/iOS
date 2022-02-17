@@ -40,7 +40,7 @@ public struct BarGraph: View {
       }
       .frame(height: 150)
       Text(day.day)
-        .font(.pFootnote)
+        .scaledFont(.pFootnote)
         .foregroundColor(
           isPressing && highlightedDay == day
           ? day.indicator.color.default

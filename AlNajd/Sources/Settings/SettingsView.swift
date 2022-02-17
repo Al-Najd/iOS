@@ -14,7 +14,6 @@ import ReusableUI
 
 public struct SettingsView: View {
   let store: Store<SettingsState, SettingsAction>
-  
   public init(store: Store<SettingsState, SettingsAction>) {
     self.store = store
   }
@@ -23,31 +22,16 @@ public struct SettingsView: View {
     WithViewStore(store) { viewStore in
       Form {
         Section(content: {
+          
           SettingsToggle(
             modifier: .fontAccessibility,
             binding: viewStore.binding(\.$enableAccessibilityFont).animation(.easeInOut),
             onTap: {
               viewStore.send(.onTapModifier(.fontAccessibility), animation: .easeInOut)
-            }
-          )
+            })
         }, header: {
           Text("Accessibility".localized)
-            .font(.pHeadline.bold())
-            .foregroundColor(.mono.offblack)
-        })
-        
-        Section(content: {
-          ForEach(viewStore.permissions) { permission in
-            SettingsPermission(
-              permission: permission,
-              onTap: {
-                viewStore.send(.onTapPermission(permission))
-              }
-            )
-          }
-        }, header: {
-          Text("Permissions".localized)
-            .font(.pHeadline.bold())
+            .scaledFont(.pHeadline, .bold)
             .foregroundColor(.mono.offblack)
         })
       }.onAppear {
@@ -73,11 +57,11 @@ struct SettingsToggle: View {
   var body: some View {
     Label {
       Text(modifier.title.localized)
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .foregroundColor(.mono.ash)
     } icon: {
       Image(systemName: modifier.icon)
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .foregroundColor(.primary.darkMode)
     }
     
@@ -85,7 +69,7 @@ struct SettingsToggle: View {
       isOn: $binding,
       label: {
         Text(modifier.subtitles.localized)
-          .font(.pBody)
+          .scaledFont(.pBody)
           .foregroundColor(.mono.label)
       }
     )
@@ -108,32 +92,32 @@ struct SettingsPermission: View {
   var body: some View {
     Label {
       Text(permission.title.localized)
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .foregroundColor(.mono.ash)
     } icon: {
       Image(systemName: permission.icon)
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .foregroundColor(.primary.darkMode)
     }
     
     Text(permission.subtitles.localized)
-      .font(.pBody)
+      .scaledFont(.pBody)
       .foregroundColor(.mono.label)
       .padding(.p8)
     
     Text("What do we use it for?".localized)
-      .font(.pHeadline.bold())
+      .scaledFont(.pHeadline, .bold)
       .foregroundColor(.mono.ash)
     
     ForEach(permission.usages) { usage in
       Text(usage)
-        .font(.pBody)
+        .scaledFont(.pBody)
         .foregroundColor(.mono.label)
     }
   
     HStack {
       Text("Status")
-        .font(.pHeadline.bold())
+        .scaledFont(.pHeadline, .bold)
         .foregroundColor(.mono.ash)
       Spacer()
       
@@ -142,7 +126,7 @@ struct SettingsPermission: View {
     
     if let insufficentReason = insufficentReason {
       Text(insufficentReason)
-        .font(.pBody.bold())
+        .scaledFont(.pBody, .bold)
         .foregroundColor(.mono.label)
         .padding(.vertical, .p8)
         .fillOnLeading()
@@ -211,7 +195,7 @@ struct StatusTagView: View {
   
   var body: some View {
     Text(title)
-      .font(.pBody.bold())
+      .scaledFont(.pBody, .bold)
       .foregroundColor(titleColor)
       .padding(.p8)
       .background(

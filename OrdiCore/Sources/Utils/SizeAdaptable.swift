@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-public extension View {
-  func getScreenSize() -> CGRect {
-    UIScreen.main.bounds
-  }
+public func getScreenSize() -> CGRect {
+  UIScreen.main.bounds
 }
 
 public protocol SizeAdaptable {

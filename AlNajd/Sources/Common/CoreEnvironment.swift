@@ -16,6 +16,7 @@ public struct CoreEnvironment<Environment> {
   public var environment: Environment
   public var cache: () -> (CacheManager)
   public var locationManager: () -> LocationManager
+  public var mainQueue: AnySchedulerOf<DispatchQueue>
 
   public subscript<Dependency>(
     dynamicMember keyPath: WritableKeyPath<Environment, Dependency>
@@ -32,7 +33,8 @@ public struct CoreEnvironment<Environment> {
       },
       locationManager: {
         .live
-      }
+      },
+      mainQueue: .main
     )
   }
 }

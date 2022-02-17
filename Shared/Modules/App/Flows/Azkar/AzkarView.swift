@@ -70,7 +70,7 @@ struct RepeatableDeedsList: View {
     WithViewStore(store) { viewStore in
       VStack {
         Text(sectionTitle)
-          .font(.pLargeTitle)
+          .scaledFont(.pLargeTitle)
           .fillOnLeading()
         
         if allDeedsAreDone {
@@ -89,7 +89,7 @@ private extension RepeatableDeedsList {
       .padding(.p32)
       .foregroundColor(.mono.offwhite)
       .background(Color.success.default)
-      .font(.displaySmall)
+      .scaledFont(.displaySmall)
       .cornerRadius(.r16)
   }
   
@@ -98,8 +98,16 @@ private extension RepeatableDeedsList {
     ForEach(deeds) { deed in
       VStack {
         Text(deed.title)
-          .font(
-            FontManager.shared.getFont(locale: .arabic, type: .sansSerif, category: .text, scale: .xsmall, weight: .bold).toSwiftUIFont()
+          .scaledFont(
+            FontManager
+              .shared
+              .getFont(
+                locale: .arabic,
+                type: .sansSerif,
+                category: .text,
+                scale: .xsmall, weight: .bold
+              ),
+            .bold
           )
           .multilineTextAlignment(.center)
           .stay(.light)
@@ -108,11 +116,11 @@ private extension RepeatableDeedsList {
           if deed.isDone {
             Image(systemName: "checkmark.seal.fill")
               .foregroundColor(.success.default)
-              .font(.pTitle3.bold())
+              .scaledFont(.pTitle3, .bold)
           } else {
             Text("\(deed.currentNumberOfRepeats)")
               .foregroundColor(.secondary.dark)
-              .font(.pSubheadline)
+              .scaledFont(.pSubheadline)
               .padding(.p8)
               .background(
                 Circle()
@@ -120,7 +128,7 @@ private extension RepeatableDeedsList {
               )
             
             Text("Repeats are left".localized)
-              .font(.pBody)
+              .scaledFont(.pBody)
               .foregroundColor(.secondary.dark)
               .padding(.p8 + .p4)
               .background(

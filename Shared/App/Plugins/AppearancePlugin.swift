@@ -21,7 +21,7 @@ private extension AppearancesPlugin {
     adaptNavigationBarAppearance()
     adaptUITableViewAppearance()
     UISegmentedControl.appearance().setTitleTextAttributes(
-      [.font: ARFont.subheadline.font],
+      [.font: ARFont.pSubheadline.font],
       for: .normal
     )
   }

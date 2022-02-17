@@ -22,6 +22,6 @@ public struct WeekdayElementView: View {
   public var body: some View {
     Text(weekDayFormatter.string(from: date))
       .padding(.p8.adaptRatio())
-      .font(.pHeadline.bold())
+      .scaledFont(.pHeadline, .bold)
   }
 }

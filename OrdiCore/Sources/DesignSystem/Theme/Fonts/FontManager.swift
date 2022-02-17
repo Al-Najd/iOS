@@ -21,6 +21,8 @@ public final class FontManager {
   
   public var supportsAccessibilityAdaption: Bool = false
   public var supportsDeviceSizeAdaption: Bool = true
+  public var fontMultiplier: CGFloat = 1.0
+  
   // Note: Forced here as the app shouldn't run unless this is set
   private var configuration: Configuration!
   

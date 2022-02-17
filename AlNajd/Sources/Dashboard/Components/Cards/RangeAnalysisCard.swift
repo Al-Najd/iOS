@@ -113,7 +113,7 @@ public struct RangeAnalysisCardView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: .p8) {
                         Text(progress.title.localized)
-                            .font(.pTitle1.bold())
+                            .scaledFont(.pTitle1, .bold)
                             .foregroundColor(.mono.offblack)
                         
                         if progress.hasEnoughData {
@@ -124,7 +124,7 @@ public struct RangeAnalysisCardView: View {
                                         arguments: [highlightedDay.count, highlightedDay.limit]
                                     )
                                 )
-                                    .font(.pHeadline.bold())
+                                    .scaledFont(.pHeadline, .bold)
                                     .foregroundColor(highlightedDay.indicator.color.light)
                                     .padding(.vertical, .p4)
                                     .padding(.horizontal, .p8)
@@ -135,7 +135,7 @@ public struct RangeAnalysisCardView: View {
                                     )
                             } else {
                                 Text("Last n Days".localized(arguments: progress.reports.count))
-                                    .font(.pHeadline.bold())
+                                    .scaledFont(.pHeadline, .bold)
                                     .foregroundColor(.mono.offblack.opacity(0.5))
                             }
                         }
@@ -145,7 +145,7 @@ public struct RangeAnalysisCardView: View {
                     
                     if progress.hasEnoughData, let isImproving = progress.isImproving {
                         Image(systemName: "arrow.up.forward")
-                            .font(.pTitle3.bold())
+                            .scaledFont(.pTitle3, .bold)
                             .padding(.p8)
                             .foregroundColor(progress.progressColor.default)
                             .background(
@@ -167,7 +167,7 @@ public struct RangeAnalysisCardView: View {
                         Image(systemName: "questionmark.circle.fill")
                         Text("Unfortunately there is not enough data to analyze this week".localized)
                     }
-                    .font(.pHeadline.bold())
+                    .scaledFont(.pHeadline, .bold)
                     .padding(.p8)
                     .foregroundColor(.mono.offblack.opacity(0.5))
                     .multilineTextAlignment(.center)

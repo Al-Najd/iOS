@@ -87,7 +87,7 @@ struct DeedsList: View {
       Section(content: {
         if allDeedsAreDone {
           Text("Well Done".localized(arguments: sectionTitle))
-            .font(.pTitle3.bold())
+            .scaledFont(.pTitle3, .bold)
             .padding(.p48)
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -98,7 +98,7 @@ struct DeedsList: View {
           ForEach(deeds) { deed in
             HStack {
               Text(deed.title.localized)
-                .font(.pHeadline.bold())
+                .scaledFont(.pHeadline, .bold)
                 .foregroundColor(.primary.background)
               if deed.isDone {
                 Spacer()
@@ -145,7 +145,7 @@ struct DeedsList: View {
       }, header: {
         Text(sectionTitle)
           .foregroundColor(Color.primary.darkMode)
-          .font(.pLargeTitle.bold())
+          .scaledFont(.pLargeTitle, .bold)
           .fillOnLeading()
           .padding(.bottom, .p8)
       })

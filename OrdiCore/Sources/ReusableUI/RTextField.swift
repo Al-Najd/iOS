@@ -30,13 +30,13 @@ public struct RTextField: View {
     VStack(alignment: .leading, spacing: 12) {
       Label {
         Text(title)
-          .font(.pBody)
+          .scaledFont(.pBody)
       } icon: {
         Image(systemName: icon)
       }.foregroundColor(.mono.offblack.opacity(0.8))
       
       TextField(hint, text: $value)
-        .font(.pBody)
+        .scaledFont(.pBody)
         .padding(.top, .p4)
       
       Divider()

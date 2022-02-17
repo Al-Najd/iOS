@@ -86,8 +86,8 @@
 		0472C61A27A385A600913892 /* CorePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlugin.swift; sourceTree = "<group>"; };
 		0472C61B27A385A600913892 /* ThemePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		0472C61C27A385A600913892 /* LottiePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottiePlugin.swift; sourceTree = "<group>"; };
-		0472C62527A385A700913892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0478B68227AA8DBB00891DAA /* LocationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFeature.swift; sourceTree = "<group>"; };
+		0479448127BD9A7A0063E746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +252,7 @@
 		0472C60027A385A600913892 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0479448127BD9A7A0063E746 /* Assets.xcassets */,
 				0472C60327A385A600913892 /* Animations */,
 				0472C60527A385A600913892 /* azkar-db.json */,
 			);
@@ -398,7 +399,6 @@
 				0472C61427A385A600913892 /* App */,
 				0472C5E727A385A600913892 /* Modules */,
 				0472C60627A385A600913892 /* Root */,
-				0472C62527A385A700913892 /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -585,8 +585,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0472C63527A385A700913892 /* splash.json in Resources */,
+				0479448227BD9A7A0063E746 /* Assets.xcassets in Resources */,
 				0472C63627A385A700913892 /* azkar-db.json in Resources */,
-				0472C64827A385A700913892 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

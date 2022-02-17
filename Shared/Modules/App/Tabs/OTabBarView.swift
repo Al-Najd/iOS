@@ -35,10 +35,11 @@ struct OTabBarView: View {
               )
             if tab == self.tab {
               Text(tab.title)
-                .font(
+                .scaledFont(
+                  .pFootnote,
                   tab == self.tab
-                  ? .pFootnote.bold()
-                  : .pFootnote
+                  ? .bold
+                  : .regular
                 )
             }
           }

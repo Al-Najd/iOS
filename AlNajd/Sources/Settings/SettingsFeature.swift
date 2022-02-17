@@ -18,7 +18,6 @@ import Common
 
 public struct SettingsState: Equatable {
   @BindableState var enableAccessibilityFont: Bool = false
-
   var permissions: [ANPermission] = []
   
   public init() {}
@@ -42,33 +41,21 @@ public let settingsReducer = Reducer<
   switch action {
     case .onAppear:
       state.permissions = []
+      
+      state.enableAccessibilityFont = env.cache().fetch(Bool.self, for: .enableAccessibilityFont) ?? false
     case .binding(\.$enableAccessibilityFont):
       FontManager.shared.supportsAccessibilityAdaption = state.enableAccessibilityFont
+      env.cache().save(state.enableAccessibilityFont, for: .enableAccessibilityFont)
     case let .onTapPermission(permission):
-      openSettings(permission.isInternal, permission.title)
+      openSettings()
     case let .onTapModifier(modifier):
-      openSettings(modifier.isInternal, modifier.title)
+      openSettings()
     default:
       break
   }
   
   return .none
 }.binding()
-
-fileprivate func openSettings(_ isInternal: Bool, _ title: String) {
-  let suffix = isInternal ? Bundle.main.bundleIdentifier ?? "" : ""
-  let urlString = UIApplication.openSettingsURLString.withSuffix(suffix)
-  guard let url = URL(string: urlString) else {
-    LoggersManager.error(message: "Couldn't create a URL from `\(urlString)` with `\(suffix)` as suffix")
-    return
-  }
-  guard UIApplication.shared.canOpenURL(url) else {
-    LoggersManager.error(message: "Couldn't open \(url) for \(title)")
-    return
-  }
-  
-  UIApplication.shared.open(url)
-}
 
 fileprivate func openURL(using stringURL: String?, _ title: String) {
   guard let urlString = stringURL, let url = URL.init(string: urlString) else { return }
@@ -108,7 +95,7 @@ public extension ANSettingsModifier {
 extension ANSettingsModifier: Then { }
 extension ANPermission: Then {}
 
-extension Store where State == SettingsState, Action == SettingsAction {
+public extension Store where State == SettingsState, Action == SettingsAction {
   static let live: Store<State, Action> = .init(
     initialState: .init(),
     reducer: settingsReducer,
