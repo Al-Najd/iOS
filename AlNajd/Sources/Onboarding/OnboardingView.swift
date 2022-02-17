@@ -11,28 +11,41 @@ import DesignSystem
 import Utils
 import Common
 
-public struct OnboardingView: View {
+public struct OnboardingView<Content: View>: View {
   let store: Store<OnboardingState, OnboardingAction>
   @ObservedObject var viewStore: ViewStore<ViewState, OnboardingAction>
+  private let injectedView: () -> Content
   
-  public init(store: Store<OnboardingState, OnboardingAction>) {
+  public init(
+    store: Store<OnboardingState, OnboardingAction>,
+    @ViewBuilder injectedView: @escaping () -> Content
+  ) {
     self.store = store
     self.viewStore = ViewStore(self.store.scope(state: ViewState.init))
+    self.injectedView = injectedView
   }
   
   struct ViewState: Equatable {
-    let isNextButtonVisible: Bool
-    let step: OnboardingState.Step = .step14_Prayer
-    
+    let step: OnboardingState.Step
+    let didFinishOnboarding: Bool
+    let startNewFlow: Bool
     init(onboardingState state: OnboardingState) {
-      self.isNextButtonVisible = state.step != OnboardingState.Step.allCases.first && state.step != OnboardingState.Step.allCases.last
-//      self.step = state.step
+      self.step = state.step
+      self.startNewFlow = state.showNextFlow
+      self.didFinishOnboarding = state.didFinishOnboarding
     }
   }
   
   public var body: some View {
-    GeometryReader { proxy in
-      ZStack(alignment: .bottom) {
+      ZStack {
+        if viewStore.didFinishOnboarding {
+        injectedView()
+          .offset(
+            y: viewStore.startNewFlow
+            ? 0
+            : -getScreenSize().height
+          )
+        }
         VStack(alignment: .center, spacing: .p16) {
           HStack {
             Spacer()
@@ -51,16 +64,6 @@ public struct OnboardingView: View {
           Spacer()
           Group {
             buildStoryContent()
-              .offset(y: viewStore.step.isStoryStep ? 0 : -1000)
-            
-            buildWalkthroughContent()
-              .offset(y: viewStore.step.isWalkthroughStep ? 0 : -1000)
-            
-//            buildPermissionContent()
-//              .offset(y: viewStore.step.isWalkthroughStep ? 0 : -1000)
-//            
-//            buildLastStepContent()
-//              .offset(y: viewStore.step.isLastStep ? 0 : -1000)
           }.transition(
             AnyTransition.asymmetric(
               insertion: .offset(x: 0, y: 50),
@@ -72,115 +75,82 @@ public struct OnboardingView: View {
           Group {
             Spacer()
             HStack {
-              if viewStore.step > OnboardingState.Step.step00_ThisWorkIsSadaqaForAllOfUs {
+              if !viewStore.step.isLastStep && viewStore.step > OnboardingState.Step.step00_ThisWorkIsSadaqaForAllOfUs {
+                Button(action: {
+                  withAnimation {
+                    viewStore.send(.previousStep)
+                  }
+                }, label: {
+                  Image(systemName: viewStore.step.previousButtonIcon)
+                    .frame(width: 80, height: 80)
+                    .background(
+                      viewStore.step.previousButtonColor.dark
+                    )
+                    .foregroundColor(
+                      viewStore.step.previousButtonColor.light
+                    )
+                    .shadow(
+                      color: viewStore.step.previousButtonColor.light,
+                      radius: 10
+                    )
+                    .font(.system(size: .p32))
+                    .clipShape(
+                      Circle()
+                    )
+                    .shadow(
+                      color: viewStore.step.previousButtonColor.light,
+                      radius: 50
+                    )
+                })
                 
-                if viewStore.step != OnboardingState.Step.allCases.last {
-                  Button(action: {
-                    withAnimation {
-                      viewStore.send(.previousStep)
-                    }
-                  }, label: {
-                    Image(systemName: viewStore.step.previousButtonIcon)
-                      .frame(width: 80, height: 80)
-                      .background(
-                        viewStore.step.previousButtonColor.dark
-                      )
-                      .foregroundColor(
-                        viewStore.step.previousButtonColor.light
-                      )
-                      .shadow(
-                        color: viewStore.step.previousButtonColor.light,
-                        radius: 10
-                      )
-                      .font(.system(size: .p32))
-                      .clipShape(
-                        Circle()
-                      )
-                      .shadow(
-                        color: viewStore.step.previousButtonColor.light,
-                        radius: 50
-                      )
-                  })
-                  
-                  Spacer()
-                }
+                Spacer()
               }
               
               if viewStore.step != .step0_InMemoryOfOurLovedOnes {
-                if viewStore.step != OnboardingState.Step.allCases.last {
-                  Button(action: {
-                    withAnimation {
-                      viewStore.send(.nextStep)
-                    }
-                  }, label: {
-                    Image(systemName: viewStore.step.nextButtonIcon)
-                      .frame(width: 80, height: 80)
-                      .background(
-                        viewStore.step.nextButtonColor.dark
-                      )
-                      .foregroundColor(
-                        viewStore.step.nextButtonColor.light
-                      )
-                      .shadow(
-                        color: viewStore.step.nextButtonColor.light,
-                        radius: 10
-                      )
-                      .font(.system(size: .p32))
-                      .clipShape(
-                        Circle()
-                      )
-                      .shadow(
-                        color: viewStore.step.nextButtonColor.light,
-                        radius: 50
-                      )
-                  })
-                } else {
-                  Button(action: {
-                    withAnimation {
-                      viewStore.send(.nextStep)
-                    }
-                  }, label: {
-                    Image(systemName: "arrow.up")
-                      .frame(width: 80, height: 80)
-                      .background(
-                        viewStore.step.nextButtonColor.dark
-                      )
-                      .foregroundColor(
-                        viewStore.step.nextButtonColor.light
-                      )
-                      .shadow(
-                        color: viewStore.step.nextButtonColor.light,
-                        radius: 10
-                      )
-                      .font(.system(size: .p32))
-                      .clipShape(
-                        Circle()
-                      )
-                      .shadow(
-                        color: viewStore.step.nextButtonColor.light,
-                        radius: 50
-                      )
-                  })
-                }
+                Button(action: {
+                  withAnimation {
+                    viewStore.send(viewStore.step.isLastStep ? .delegate(.getStarted) : .nextStep)
+                  }
+                }, label: {
+                  Image(systemName: viewStore.step.nextButtonIcon)
+                    .frame(width: 80, height: 80)
+                    .rotationEffect(.degrees( viewStore.step.isLastStep ? -90 : 0))
+                    .background(
+                      viewStore.step.nextButtonColor.dark
+                    )
+                    .foregroundColor(
+                      viewStore.step.nextButtonColor.light
+                    )
+                    .shadow(
+                      color: viewStore.step.nextButtonColor.light,
+                      radius: 10
+                    )
+                    .font(.system(size: .p32))
+                    .clipShape(
+                      Circle()
+                    )
+                    .shadow(
+                      color: viewStore.step.nextButtonColor.light,
+                      radius: 50
+                    )
+                })
               }
             }
           }
-        }
+        }.padding()
+          .transition(
+            AnyTransition.asymmetric(
+              insertion: .offset(x: 0, y: 50),
+              removal: .offset(x: 0, y: 50)
+            )
+              .combined(with: .opacity)
+          )
+          .fill()
+          .offset(y: viewStore.didFinishOnboarding ? -getScreenSize().height : 0)
       }
-      .padding()
-      .transition(
-        AnyTransition.asymmetric(
-          insertion: .offset(x: 0, y: 50),
-          removal: .offset(x: 0, y: 50)
-        )
-          .combined(with: .opacity)
-      )
-      .fill()
-    }
     .onAppear { self.viewStore.send(.onAppear) }
     .background(
-      Color
-        .black
+      (viewStore.didFinishOnboarding ? Color.clear : Color.black)
         .ignoresSafeArea()
     )
     .stay(.light)
@@ -191,16 +161,7 @@ extension OnboardingView {
   @ViewBuilder
   func buildStoryContent() -> some View {
     ForEach(OnboardingState.Step.allCases) { step in
-      if step == viewStore.step && step.isStoryStep {
-        step.view
-      }
-    }
-  }
-  
-  @ViewBuilder
-  func buildWalkthroughContent() -> some View {
-    ForEach(OnboardingState.Step.allCases) { step in
-      if step == viewStore.step && step.isWalkthroughStep {
+      if step == viewStore.step {
         step.view
       }
     }
@@ -247,6 +208,18 @@ extension OnboardingState.Step {
     switch self {
       case .step14_Prayer:
         return ImageKey.prayerWalkthrough
+      case .step15_Azkar:
+        return ImageKey.azkarWalkthrough
+      case .step16_Rewards:
+        return ImageKey.azkarWalkthrough
+      case .step17_Dashboard:
+        return ImageKey.dashboardWalkthrough
+      case .step18_DashboardInsight:
+        return ImageKey.dashboardInsightsWalkthrough
+      case .step19_Calendar:
+        return ImageKey.calendarWalkthrough
+      case .step20_Settings:
+        return ImageKey.settingsWalkthrough
       default:
         return ""
     }
@@ -301,9 +274,9 @@ extension OnboardingState.Step {
         buildStep19View()
       case .step20_Settings:
         buildStep20View()
-      case .step21_LocationPermission:
-        // TODO: - Implement Location Permission Then add
-        EmptyView()
+//      case .step21_LocationPermission:
+//        // TODO: - Implement Location Permission Then add
+//        EmptyView()
       case .step22_UntilWeMeetAgain:
         buildStep22View()
     }
@@ -311,14 +284,14 @@ extension OnboardingState.Step {
   
   func buildStep22View() -> some View {
     Group {
-      Text("And now...")
+      Text("And now...\n\n\n\n".localized)
       +
-      Text("Welcome to ")
+      Text("Welcome to ".localized)
       +
-      Text("Al Najd")
+      Text("Al Najd".localized)
         .foregroundColor(.primary.default)
       
-      Text("We hope we may be able to help you, even if by something so little")
+      Text("We hope we may be able to help you, even if by something so little".localized)
     }
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
@@ -334,10 +307,12 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("Don't like the colors? Font is too small? Got a permission you gave us before\n")
-      Text("but now you're not comfortable with it anymore?")
-      Text("All of this and more (in the future In Shaa Allah) will be available from the Settings")
-    }
+      Text("Don't like the colors? Font is too small? Got a permission you gave us before\n".localized)
+      Text("but now you're not comfortable with it anymore?".localized)
+      Text("All of this and more (in the future In Shaa Allah) will be available from the Settings".localized)
+    }.foregroundColor(.mono.offwhite)
+      .scaledFont(.pBody, .bold)
+      .multilineTextAlignment(.center)
   }
   
   func buildStep20View() -> some View {
@@ -349,10 +324,13 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("Don't like the colors? Font is too small? Got a permission you gave us before\n")
-      Text("but now you're not comfortable with it anymore?")
-      Text("All of this and more (in the future In Shaa Allah) will be available from the Settings")
+      Text("Don't like the colors? Font is too small? Got a permission you gave us before\n".localized)
+      Text("but now you're not comfortable with it anymore?".localized)
+      Text("All of this and more (in the future In Shaa Allah) will be available from the Settings".localized)
     }
+    .foregroundColor(.mono.offwhite)
+    .scaledFont(.pBody, .bold)
+    .multilineTextAlignment(.center)
   }
   
   func buildStep19View() -> some View {
@@ -364,10 +342,13 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("Got some day you'd like to revisit?")
-      Text("You can drag the Calendar from above")
-      Text("And revisit your older self to see what insight did you get that day or your work")
+      Text("Got some day you'd like to revisit?".localized)
+      Text("You can drag the Calendar from above".localized)
+      Text("And revisit your older self to see what insight did you get that day or your work".localized)
     }
+    .foregroundColor(.mono.offwhite)
+    .scaledFont(.pBody, .bold)
+    .multilineTextAlignment(.center)
   }
   
   func buildStep18View() -> some View {
@@ -380,16 +361,16 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("The Dashboard is also able to give insights")
-      Text("Like encourage you, praise you, give you some warning for missing critical deeds")
-      Text("Or basically suggest an act combined with something else")
+      Text("The Dashboard is also able to give insights".localized)
+      Text("Like encourage you, praise you, give you some warning for missing critical deeds".localized)
+      Text("Or basically suggest an act combined with something else".localized)
       Text(
-        "This is done on any server, your data and actions are personal, and we intend to keep it that way unless needed, and beforehand, we make sure you know and accept that."
+        "This is not done on any server, your data and actions are personal, and we intend to keep it that way".localized
       )
         .scaledFont(.pBody)
     }
     .foregroundColor(.mono.offwhite)
-    .scaledFont(.pTitle3, .bold)
+    .scaledFont(.pBody, .bold)
     .multilineTextAlignment(.center)
   }
   
@@ -403,12 +384,12 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("And our greatest feature ever (till now)")
-      Text("The Dashboard")
-      Text("Where you will find how did you do during a time period (now its static to 7 days)")
+      Text("And our greatest feature ever (till now)".localized)
+      Text("The Dashboard".localized)
+      Text("Where you will find how did you do during a time period (now its static to 7 days)".localized)
     }
     .foregroundColor(.mono.offwhite)
-    .scaledFont(.pTitle3, .bold)
+    .scaledFont(.pBody, .bold)
     .multilineTextAlignment(.center)
   }
   
@@ -422,12 +403,12 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("And since it's in the nature of mankind to be materalistic")
-      Text("We took an effort to find what are the benefits of most of the deeds here")
-      Text("By the way we need help with this, so if want to help, please reach me out through the settings page")
+      Text("And since it's in the nature of mankind to be materalistic".localized)
+      Text("We took an effort to find what are the benefits of most of the deeds here".localized)
+      Text("By the way we need help with this, so if want to help, please reach me out through the settings page".localized)
     }
     .foregroundColor(.mono.offwhite)
-    .scaledFont(.pTitle3, .bold)
+    .scaledFont(.pBody, .bold)
     .multilineTextAlignment(.center)
   }
   
@@ -441,13 +422,13 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("Azkar are the fort, your defense, and your offense")
+      Text("Azkar are the fort, your defense, and your offense".localized)
       
-      Text("Staying true to it will not only help you reach your destination")
+      Text("Staying true to it will not only help you reach your destination".localized)
       
-      Text("But make your journey full of blessings, unexpected happiness and lots of peace")
+      Text("But make your journey full of blessings, unexpected happiness and lots of peace".localized)
     }.foregroundColor(.mono.offwhite)
-      .scaledFont(.pTitle3, .bold)
+      .scaledFont(.pBody, .bold)
       .multilineTextAlignment(.center)
   }
   
@@ -462,21 +443,21 @@ extension OnboardingState.Step {
         .aspectRatio(contentMode: .fit)
         .shadow(color: .secondary.darkMode, radius: 25, x: 0, y: 0)
       
-      Text("Since Prayer is the column of Deen, we made it easy for you to keep\n")
+      Text("Since Prayer is the column of Deen, we made it easy for you to keep\n".localized)
       +
-      Text("Track of it by just swiping from the side")
+      Text("Track of it by just swiping from the side".localized)
     }
     .foregroundColor(.mono.offwhite)
-    .scaledFont(.pTitle3, .bold)
+    .scaledFont(.pBody, .bold)
     .multilineTextAlignment(.center)
   }
   
   @ViewBuilder
   func buildStep13View() -> some View {
     VStack {
-      Text("Rise from your struggles, and pick your")
+      Text("Rise from your struggles, and pick ".localized)
       +
-      Text("Najd")
+      Text("Your Najd".localized)
         .foregroundColor(.primary.darkMode)
     }
     .foregroundColor(.mono.offwhite)
@@ -487,10 +468,12 @@ extension OnboardingState.Step {
   func buildStep12View() -> some View {
     
     (
-      Text("You must become a")
+      Text("You must become a ".localized)
       +
-      Text("Muslim")
+      Text("Lighter".localized)
         .foregroundColor(.primary.light)
+      +
+      Text(".".localized)
     )
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
@@ -499,10 +482,10 @@ extension OnboardingState.Step {
   
   func buildStep11View() -> some View {
     VStack(spacing: .p16) {
-      Text("The Road ahead is long, and unforgiving.")
+      Text("The Road ahead is long, and unforgiving.".localized)
         .foregroundColor(.mono.offwhite)
       
-      Text("Not that for a dead soul")
+      Text("Not that for a dark heart".localized)
         .foregroundColor(.mono.body)
     }
     .scaledFont(.pLargeTitle, .bold)
@@ -511,7 +494,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep10View() -> some View {
-    Text("Know your weapons, and that you will learn them, train on them, and hopefully from Allah, you will master them")
+    Text("Know your weapons, and that you will learn them, train on them, and hopefully from Allah, you will master them".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -519,7 +502,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep9View() -> some View {
-    Text("Remember that Islam is the only way to there now.")
+    Text("Remember that Islam is the only way to there now.".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -528,33 +511,33 @@ extension OnboardingState.Step {
   @ViewBuilder
   func buildStep8View() -> some View {
     VStack(spacing: .p24) {
-      Text("Remember why you're here in this ")
+      Text("Remember why you're here in this ".localized)
       +
-      Text("Dunia")
+      Text("Dunia".localized)
         .foregroundColor(.danger.darkMode)
       +
-      Text(".")
+      Text(".".localized)
       
-      Text(" to start your Journey to your Home in ")
+      Text(" to start your Journey to your Home in ".localized)
       +
-      Text("Akhra")
+      Text("Akhra".localized)
         .foregroundColor(.success.light)
       +
-      Text(".\n")
+      Text(".\n".localized)
       
-      Text("And that you're a ")
+      Text("And that you're a ".localized)
       +
-      Text("Muslim")
+      Text("Muslim".localized)
       +
-      Text(", whom ")
+      Text(", whom ".localized)
       +
-      Text("\nAllah")
+      Text("\nAllah".localized)
         .foregroundColor(.primary.light)
       +
-      Text(" loves")
+      Text(" loves".localized)
         .foregroundColor(.danger.darkMode)
       +
-      Text(".")
+      Text(".".localized)
     }
     .foregroundColor(.mono.offwhite)
     .scaledFont(.pLargeTitle, .bold)
@@ -564,12 +547,12 @@ extension OnboardingState.Step {
   @ViewBuilder
   func buildStep7View() -> some View {
     (
-      Text("Remember ")
+      Text("Remember ".localized)
       +
-      Text("Allah")
+      Text("Allah".localized)
         .foregroundColor(.primary.light)
       +
-      Text(".")
+      Text(".".localized)
     )
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
@@ -578,7 +561,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep6View() -> some View {
-    Text("Wake up, Muslim.")
+    Text("Wake up, Muslim.".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -586,7 +569,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep5View() -> some View {
-    Text("Try to remember your self, your beautiful self, the alive one, not the current.")
+    Text("Try to remember your self, your beautiful self, the alive one, not the current.".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -594,7 +577,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep4View() -> some View {
-    Text("And that 'thing' you listen to, is not your friend, he is an enemy, but...\nRest assured,\n for he's a weak one.")
+    Text("And that 'thing' you listen to, is not your friend, he is an enemy, but...\nRest assured,\n for he's a weak one.".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -602,7 +585,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep3View() -> some View {
-    Text("You're better than this, than not remembering why you're here.")
+    Text("You're better than this, than not remembering why you're here.".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -610,7 +593,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep2View() -> some View {
-    Text("You don't remember why you're here, do you?")
+    Text("You don't remember why you're here, do you?".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -618,7 +601,7 @@ extension OnboardingState.Step {
   
   @ViewBuilder
   func buildStep1View() -> some View {
-    Text("Wake up.")
+    Text("Wake up.".localized)
       .foregroundColor(.mono.offwhite)
       .scaledFont(.pLargeTitle, .bold)
       .multilineTextAlignment(.center)
@@ -627,19 +610,19 @@ extension OnboardingState.Step {
   @ViewBuilder
   func buildStep00View() -> some View {
     VStack(spacing: .p24) {
-      Text("This work is a Sadaqa for...")
+      Text("This work is a Sadaqa for...".localized)
         .foregroundColor(.mono.background)
       
-      Text("All Muslims")
+      Text("All Muslims".localized)
         .foregroundColor(.mono.input)
       
-      Text("Those who passed away")
+      Text("Those who passed away".localized)
         .foregroundColor(.mono.line)
       
-      Text("And those who are living")
+      Text("And those who are living".localized)
         .foregroundColor(.mono.placeholder)
       
-      Text("And those who may come after")
+      Text("And those who may come after".localized)
         .foregroundColor(.mono.label)
     }
     .scaledFont(.pTitle1, .bold)
@@ -650,33 +633,33 @@ extension OnboardingState.Step {
   func buildStep0View() -> some View {
     Group {
       Group {
-        Text("In the memory of my passed away")
+        Text("In the memory of my passed away".localized)
           .foregroundColor(.mono.line)
         
-        Text("\nGrand Mother")
+        Text("\nGrand Mother".localized)
           .foregroundColor(.mono.offwhite)
           .fontWeight(.bold)
       }
-        .scaledFont(.pLargeTitle)
+        .scaledFont(.pTitle1)
       
       Group {
-        Text("I ask of you to ")
+        Text("I ask of you to ".localized)
         
-        Text("Receit ")
+        Text("Receit ".localized)
         
-        Text("\nAl Fatihaa\n")
+        Text("Al Fatihaa".localized)
           .scaledFont(.pTitle1, .bold)
           .foregroundColor(.mono.offwhite)
         
-        Text("to her\n**&**\n")
-        Text("To all our passed away closed ones.\n❤️")
+        Text("to her".localized)
+        Text("And to all our passed away closed ones.\n❤️".localized)
       }
         .foregroundColor(.mono.label)
         .scaledFont(.pTitle1)
       
       
-      Text("May we reunite again with them in the highest paradise along all of those who preceeded us\n🤲")
-        .scaledFont(.pTitle2, .bold)
+      Text("May we reunite again with them in the highest paradise along all of those who preceeded us\n🤲".localized)
+        .scaledFont(.pHeadline, .bold)
         .foregroundColor(.mono.line)
     }.multilineTextAlignment(.center)
   }
@@ -686,10 +669,14 @@ struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
       OnboardingView(
         store: Store(
-          initialState: .init(),
+          initialState: .init(step: .step22_UntilWeMeetAgain),
           reducer: onboardingReducer,
           environment: .live(OnboardingEnvironment())
         )
       )
+      {
+        Text("You made it!")
+          .foregroundColor(.mono.offwhite)
+      }
     }
 }

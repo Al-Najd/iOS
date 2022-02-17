@@ -16,6 +16,12 @@ public extension OAnimation {
 
 public enum ImageKey {
   public static let prayerWalkthrough: String = "prayer_walkthrough"
+  public static let rewardsWalkthrough: String = "rewards_walkthrough"
+  public static let azkarWalkthrough: String = "azkar_walkthrough"
+  public static let dashboardWalkthrough: String = "dashboard_walkthrough"
+  public static let calendarWalkthrough: String = "calendar_walkthrough"
+  public static let dashboardInsightsWalkthrough: String = "dashboard_insights_walkthrough"
+  public static let settingsWalkthrough: String = "settings_walkthrough"
 }
 
 public extension StorageKey {

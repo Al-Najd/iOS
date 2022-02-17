@@ -39,9 +39,22 @@ struct Al_NajdApp: App {
   var body: some Scene {
     WithViewStore(self.store) { viewStore in
       WindowGroup {
-        MainTabView(
-          store: store
-        )
+        if !viewStore.onboardingState.didFinishOnboarding {
+          OnboardingView(
+            store: store.scope(
+              state: \.onboardingState,
+              action: RootAction.onboardingAction
+            )
+          ) {
+            SplashView {
+              MainTabView(store: store)
+            }
+          }
+        } else {
+          SplashView {
+            MainTabView(store: store)
+          }
+        }
       }.onChange(of: scenePhase) { scenePhase in
         switch scenePhase {
         case .active:

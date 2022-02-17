@@ -75,6 +75,12 @@ struct SettingsToggle: View {
     )
       .padding(.p4)
       .padding(.vertical, .p8)
+    
+    if binding == true {
+      Button(action: onTap, label: {
+        Text("Go to the iOS Settings Page".localized)
+      })
+    }
   }
 }
 

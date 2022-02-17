@@ -101,7 +101,13 @@ private extension RepeatableDeedsList {
           .scaledFont(
             FontManager
               .shared
-              .getFont(locale: .arabic, type: .sansSerif, category: .text, scale: .xsmall, weight: .bold)
+              .getFont(
+                locale: .arabic,
+                type: .sansSerif,
+                category: .text,
+                scale: .xsmall, weight: .bold
+              ),
+            .bold
           )
           .multilineTextAlignment(.center)
           .stay(.light)

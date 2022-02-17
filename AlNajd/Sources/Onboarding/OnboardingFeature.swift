@@ -8,13 +8,18 @@
 import ComposableArchitecture
 import Business
 import Common
+import SwiftUI
 
 // MARK: - State
 public struct OnboardingState: Equatable {
   public var step: Step = .step0_InMemoryOfOurLovedOnes
+  public var didFinishOnboarding: Bool = false
+  public var showNextFlow: Bool = false
   public var presentationStyle: PresentationStyle = .firstLaunch
   
-  public init() { }
+  public init(step: Step = .step0_InMemoryOfOurLovedOnes) {
+    self.step = step
+  }
 }
 
 // MARK: - Step
@@ -52,7 +57,7 @@ public extension OnboardingState {
     // MARK: - Walkthrough Ends
     
     // MARK: - Permissions Start
-    case step21_LocationPermission
+//    case step21_LocationPermission
     // MARK: - Permission Ends
     
     // MARK: - End of Onboarding Starts
@@ -127,8 +132,8 @@ public let onboardingReducer = Reducer<
   switch action {
     case .onAppear:
       state.step = env.cache().fetch(OnboardingState.Step.self, for: .onboardingStep) ?? .step0_InMemoryOfOurLovedOnes
-      
-      return state.step == OnboardingState.Step.allCases[0]
+      state.didFinishOnboarding = env.cache().fetch(Bool.self, for: .didCompleteOnboarding) ?? false
+      return state.step.isFirstStep
       ? Effect(value: .delayedNextStep)
         .delay(for: 4, scheduler: env.mainQueue.animation())
         .eraseToEffect()
@@ -143,6 +148,14 @@ public let onboardingReducer = Reducer<
     case .previousStep:
       state.step.previous()
     case .delegate(.getStarted):
+      withAnimation(.easeInOut(duration: 0.65)) {
+        state.didFinishOnboarding = true
+      }
+      
+      withAnimation(.spring().delay(0.65)) {
+        state.showNextFlow = true
+      }
+      
       return .merge(
         env
           .cache()
