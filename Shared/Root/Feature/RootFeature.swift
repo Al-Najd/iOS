@@ -119,9 +119,9 @@ fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
 fileprivate func syncRewards(with prayerAction: PrayerAction) -> Effect<RootAction, Never> {
   switch prayerAction {
   case .onDoing(let deed):
-    return .init(value: .rewardAction(.onDoingDeed(deed)))
+      return .init(value: .rewardAction(.onDoingDeed(deed.changing { $0.isDone = true })))
   case .onUndoing(let deed):
-    return .init(value: .rewardAction(.onUndoingDeed(deed)))
+      return .init(value: .rewardAction(.onUndoingDeed(deed.changing { $0.isDone = false })))
   default:
     return .none
   }

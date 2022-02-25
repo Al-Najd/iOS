@@ -1,3 +1,23 @@
+## Updates of version 0.10.1 🚀
+    - Finish Onboarding
+    - Add DynamicType to Font
+    - Create Onboarding View, Flow and define new structure to use with TCA
+    - Add Localization (#24)
+    - Settings Module Implementation (#23)
+    - Add PR Template (make sure GPG encryption works) (#20)
+    - Stop tracking ignored file
+    - 🚀 Released iOS 0.9.2! [Beta Release]
+
+## Updates of version 0.10.1 🚀
+    - Finish Onboarding
+    - Add DynamicType to Font
+    - Create Onboarding View, Flow and define new structure to use with TCA
+    - Add Localization (#24)
+    - Settings Module Implementation (#23)
+    - Add PR Template (make sure GPG encryption works) (#20)
+    - Stop tracking ignored file
+    - 🚀 Released iOS 0.9.2! [Beta Release]
+
 ## Updates of version 0.9.2 🚀
     - Improve overall structure, improve speed and fix prayers not updating
     - Set arabic as main language

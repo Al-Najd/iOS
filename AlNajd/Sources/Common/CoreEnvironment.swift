@@ -15,6 +15,7 @@ import ComposableCoreLocation
 public struct CoreEnvironment<Environment> {
   public var environment: Environment
   public var cache: () -> (CacheManager)
+  public var userDefaults: UserDefaultsClient
   public var locationManager: () -> LocationManager
   public var mainQueue: AnySchedulerOf<DispatchQueue>
 
@@ -31,6 +32,7 @@ public struct CoreEnvironment<Environment> {
       cache: {
         CacheManager(decoder: .init(), encoder: .init())
       },
+      userDefaults: .live(),
       locationManager: {
         .live
       },
@@ -91,3 +93,65 @@ public extension CoreEnvironment {
       cache().fetch([RepeatableDeed].self, for: .azkarRewards(date, category))
   }
 }
+
+public struct UserDefaultsClient {
+    public var boolForKey: (String) -> Bool
+    public var dataForKey: (String) -> Data?
+    public var doubleForKey: (String) -> Double
+    public var integerForKey: (String) -> Int
+    public var remove: (String) -> Effect<Never, Never>
+    public var setBool: (Bool, String) -> Effect<Never, Never>
+    public var setData: (Data?, String) -> Effect<Never, Never>
+    public var setDouble: (Double, String) -> Effect<Never, Never>
+    public var setInteger: (Int, String) -> Effect<Never, Never>
+    
+    public var hasShownFirstLaunchOnboarding: Bool {
+        self.boolForKey(StorageKey.didCompleteOnboarding.key)
+    }
+    
+    public func setHasShownFirstLaunchOnboarding(_ bool: Bool) -> Effect<Never, Never> {
+        self.setBool(bool, StorageKey.didCompleteOnboarding.key)
+    }
+}
+
+extension UserDefaultsClient {
+    public static func live(
+        userDefaults: UserDefaults = UserDefaults(suiteName: "com.nerdor.the-one")!
+    ) -> Self {
+        Self(
+            boolForKey: userDefaults.bool(forKey:),
+            dataForKey: userDefaults.data(forKey:),
+            doubleForKey: userDefaults.double(forKey:),
+            integerForKey: userDefaults.integer(forKey:),
+            remove: { key in
+                    .fireAndForget {
+                        userDefaults.removeObject(forKey: key)
+                    }
+            },
+            setBool: { value, key in
+                    .fireAndForget {
+                        userDefaults.set(value, forKey: key)
+                    }
+            },
+            setData: { data, key in
+                    .fireAndForget {
+                        userDefaults.set(data, forKey: key)
+                    }
+            },
+            setDouble: { value, key in
+                    .fireAndForget {
+                        userDefaults.set(value, forKey: key)
+                    }
+            },
+            setInteger: { value, key in
+                    .fireAndForget {
+                        userDefaults.set(value, forKey: key)
+                    }
+            }
+        )
+    }
+}
+
+let hasShownFirstLaunchOnboardingKey = "hasShownFirstLaunchOnboardingKey"
+let installationTimeKey = "installationTimeKey"
+let multiplayerOpensCount = "multiplayerOpensCount"
