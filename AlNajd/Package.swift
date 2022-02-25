@@ -56,6 +56,18 @@ private extension ANTargets {
         "Localization",
         .product(name: "Core", package: "OrdiCore")
       ]
+    ),
+    .testTarget(
+        name: "OnboardingTests",
+        dependencies: [
+            "Onboarding",
+            "Common",
+            "Localization",
+            .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+            .product(name: "Quick", package: "Quick"),
+            .product(name: "Nimble", package: "Nimble")
+        ],
+        path: "Tests/Onboarding"
     )
   ]
   static let settings: [Target] = [

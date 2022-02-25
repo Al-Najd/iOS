@@ -20,7 +20,7 @@ struct RewardsView: View {
   var body: some View {
     WithViewStore(store) { viewStore in
       ScrollView(.vertical, showsIndicators: false) {
-        buildPrayersSection()
+        buildPrayersSection(viewStore)
         buildAzkarSection()
       }.onAppear {
         viewStore.send(.onAppear)
@@ -30,28 +30,28 @@ struct RewardsView: View {
 }
 
 private extension RewardsView {
+  
+  
   @ViewBuilder
-  func buildPrayersSection() -> some View {
-    WithViewStore(store) { viewStore in
-      VStack {
-        VStack(alignment: .leading) {
-          Text("Prayers".localized)
-            .scaledFont(.pLargeTitle, .bold)
-            .foregroundColor(.mono.offblack)
-        }
-        .fillOnLeading()
-        .padding()
-        ForEach(DeedCategory.allCases) { category in
-          if let prayers = viewStore.prayers[category] ?? [], !prayers.isEmpty {
-            PrayerRewardsList(
-              category: category,
-              prayers: prayers
-            )
-          } else {
-            LockedRewardView(
-              title: "\("Prayers".localized) \(category.title.localized)"
-            )
-          }
+  func buildPrayersSection(_ viewStore: ViewStore<RewardsState, RewardsAction>) -> some View {
+    VStack {
+      VStack(alignment: .leading) {
+        Text("Prayers".localized)
+          .scaledFont(.pLargeTitle, .bold)
+          .foregroundColor(.mono.offblack)
+      }
+      .fillOnLeading()
+      .padding()
+      ForEach(DeedCategory.allCases) { category in
+        if let prayers = viewStore.prayers[category] ?? [], !prayers.isEmpty {
+          PrayerRewardsList(
+            category: category,
+            prayers: prayers
+          )
+        } else {
+          LockedRewardView(
+            title: "\("Prayers".localized) \(category.title.localized)"
+          )
         }
       }
     }

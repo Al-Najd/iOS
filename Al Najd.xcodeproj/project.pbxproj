@@ -31,11 +31,12 @@
 		0472C64027A385A700913892 /* CorePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61A27A385A600913892 /* CorePlugin.swift */; };
 		0472C64127A385A700913892 /* ThemePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61B27A385A600913892 /* ThemePlugin.swift */; };
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
-		0472C64827A385A700913892 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0472C62527A385A700913892 /* Assets.xcassets */; };
 		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
 		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
 		04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */; };
+		04F4C81C27BDE3D10091EB9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
+		04F4C81D27BDE3D20091EB9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
@@ -146,13 +147,6 @@
 			path = NavigationBar;
 			sourceTree = "<group>";
 		};
-		0465871827A7096600ED695E /* Plans */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Plans;
-			sourceTree = "<group>";
-		};
 		0472C5E727A385A600913892 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,7 +198,6 @@
 		0472C5F227A385A600913892 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				0465871827A7096600ED695E /* Plans */,
 				0472C5F427A385A600913892 /* Splash */,
 				0472C5F627A385A600913892 /* Prayers */,
 				0472C5FA27A385A600913892 /* Rewards */,
@@ -596,6 +589,7 @@
 			files = (
 				B86588802716CEA000FC0CBB /* (null) in Resources */,
 				B86588842716CEA000FC0CBB /* (null) in Resources */,
+				04F4C81D27BDE3D20091EB9D /* Assets.xcassets in Resources */,
 				B86588822716CEA000FC0CBB /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -806,7 +800,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -832,7 +826,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;

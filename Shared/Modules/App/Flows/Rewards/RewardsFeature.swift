@@ -14,14 +14,14 @@ import Common
 struct RewardsState: Equatable {
   var activeDate: Date = .now
   var prayers: [DeedCategory: [Deed]] = [
-    .fard: [],
-    .sunnah: [],
-    .nafila: []
+    .fard: .faraaid,
+    .sunnah: .sunnah,
+    .nafila: .nafila
   ]
   
   var azkar: [AzkarCategory: [RepeatableDeed]] = [
-    .sabah: [],
-    .masaa: []
+    .sabah: .sabah,
+    .masaa: .masaa
   ]
 }
 
@@ -43,16 +43,7 @@ let rewardsReducer = Reducer<
 > { state, action, env in
   switch action {
   case .onAppear:
-    state.prayers = [
-      .fard: env.getPrayersRewardsFromCache(state.activeDate, .fard) ?? [],
-      .sunnah: env.getPrayersRewardsFromCache(state.activeDate, .sunnah) ?? [],
-      .nafila: env.getPrayersRewardsFromCache(state.activeDate, .nafila) ?? []
-    ]
-    
-    state.azkar = [
-      .sabah: env.getAzkarRewardsFromCache(state.activeDate, .sabah) ?? [],
-      .masaa: env.getAzkarRewardsFromCache(state.activeDate, .masaa) ?? []
-    ]
+    break
   case let .onDoingDeed(deed):
     state.prayers[deed.category]?.findAndReplaceElseAppend(with: deed)
   case let .onUndoingDeed(deed):
@@ -66,7 +57,7 @@ let rewardsReducer = Reducer<
   }
   
   return .none
-}
+}.debug()
 
 fileprivate func cachePrayerRewards(_ state: RewardsState, _ env: CoreEnvironment<RootEnvironment>) {
   state.prayers.forEach {

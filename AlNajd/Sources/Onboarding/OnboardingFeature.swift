@@ -30,6 +30,20 @@ public extension OnboardingState {
     case step00_ThisWorkIsSadaqaForAllOfUs
     // MARK: - Memories & Disclaimers Ends
     
+    // MARK: - Satan's Whispers Starts
+    case step000_ThereIsNoWayYouCanHide
+    case step001_PutAsMuchDistanceBetweenYouAndTheTruth
+    case step002_ItChangesNothing
+    case step003_PretendToBeEverythingYouAreNot
+    case step004_ASheikh
+    case step005_AGoodPerson
+    case step006_AMuslim
+    case step007_ButThereIsOneUnavoidableTruthThatYouWillNeverEscape
+    case step008_YouCanNotChange
+    case step009_YouWillAlwaysBe
+    case step0010_ASinner
+    // MARK: - Satan's Whispers Ends
+    
     // MARK: - Story of You Starts
     case step1_Wakeup
     case step2_YouDontRemember
@@ -94,6 +108,28 @@ public extension OnboardingState {
     public static func < (lhs: OnboardingState.Step, rhs: OnboardingState.Step) -> Bool {
       lhs.rawValue < rhs.rawValue
     }
+        
+        var isADarkThought: Bool {
+            switch self {
+                case .step000_ThereIsNoWayYouCanHide,
+                        .step001_PutAsMuchDistanceBetweenYouAndTheTruth,
+                        .step002_ItChangesNothing,
+                        .step003_PretendToBeEverythingYouAreNot,
+                        .step004_ASheikh,
+                        .step005_AGoodPerson,
+                        .step006_AMuslim,
+                        .step007_ButThereIsOneUnavoidableTruthThatYouWillNeverEscape,
+                        .step008_YouCanNotChange,
+                        .step009_YouWillAlwaysBe,
+                        .step0010_ASinner:
+                    return  true
+                default:
+                    return false
+                    
+            }
+        }
+        
+        
   }
 }
 
