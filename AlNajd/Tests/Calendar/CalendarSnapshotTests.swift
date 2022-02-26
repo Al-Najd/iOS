@@ -16,7 +16,6 @@ class CalendarSnapshotTests: XCTestCase {
     let calendar: Calendar = .current
     
     func testView() {
-        ThemeManager.shared.setup()
         let view = OCalendarView(calendar, .constant(currentDate), { _ in})
         isRecording = true
         assertSnapshot(matching: view, as: .image(layout: .device(config: .iPhoneXsMax)))
