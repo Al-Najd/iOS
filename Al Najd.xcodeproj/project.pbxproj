@@ -33,9 +33,9 @@
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
 		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
 		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
+		04B8B05327CABBD50001F744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
 		04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */; };
-		04F4C81C27BDE3D10091EB9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04F4C81D27BDE3D20091EB9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
@@ -578,7 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0472C63527A385A700913892 /* splash.json in Resources */,
-				0479448227BD9A7A0063E746 /* Assets.xcassets in Resources */,
+				04B8B05327CABBD50001F744 /* Assets.xcassets in Resources */,
 				0472C63627A385A700913892 /* azkar-db.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,8 +799,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -825,8 +826,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;

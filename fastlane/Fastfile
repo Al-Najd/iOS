@@ -75,8 +75,8 @@ platform :ios do
     )
   end
 
-  desc "Generate Changelogs from Git commits"
-  lane :generate_changelog do 
+  desc "Uploads the app to Testflight"
+  lane :upload_to_testflight do 
     changelog = changelog_from_git_commits(
       between: git_tags(limit: 2),  # Optional, lets you specify a revision/tag range between which to collect commit info
       pretty: "- %s",# Optional, lets you provide a custom format to apply to each commit when generating the changelog text
@@ -85,11 +85,6 @@ platform :ios do
       merge_commit_filtering: "exclude_merges" # Optional, lets you filter out merge commits
     )
     
-    update_changelog
-  end
-
-  desc "Uploads the app to Testflight"
-  lane :upload_to_testflight do 
     pilot(
       changelog: changelog,
       distribute_external: true,
@@ -111,7 +106,6 @@ platform :ios do
     setup_for_ci_if_needed
     handle_versioning
     build_for_app_store_distribtion
-    generate_changelog
     upload_to_testflight
     # upload_symbols_to_sentry
     clean_build_artifacts
