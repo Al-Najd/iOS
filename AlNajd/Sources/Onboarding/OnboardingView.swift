@@ -226,6 +226,8 @@ extension OnboardingState.Step {
   }
 }
 
+
+// MARK: - Satan's Whispers Start
 extension OnboardingState.Step {
   @ViewBuilder
   var view: some View {
@@ -305,8 +307,9 @@ extension OnboardingState.Step {
   }
   
   func buildStep000View() -> some View {
-    Group {
-      Text("There is no where you can hide, Muslim".localized)
+    VStack {
+        Text("😈")
+        Text("There is no where you can hide, Muslim".localized)
     }
     .foregroundColor(.mono.offwhite)
     .scaledFont(.pLargeTitle, .bold)
@@ -314,8 +317,9 @@ extension OnboardingState.Step {
   }
   
   func buildStep001View() -> some View {
-    Group {
-      Text("Put as much distance between you and the truth as you want".localized)
+      VStack {
+          Text("😈")
+          Text("Put as much distance between you and the truth as you want".localized)
     }
     .foregroundColor(.mono.offwhite)
     .scaledFont(.pLargeTitle, .bold)
@@ -323,15 +327,66 @@ extension OnboardingState.Step {
   }
   
   func buildStep002View() -> some View {
-    Group {
-      Text("It changes nothing".localized)
+    VStack {
+        Text("😈")
+        Text("It changes nothing".localized)
     }
     .foregroundColor(.mono.offwhite)
     .scaledFont(.pLargeTitle, .bold)
     .multilineTextAlignment(.center)
   }
+  
+  func buildStep003View() -> some View {
+    VStack {
+        Text("😈")
+      Text("Pretend to be everything that you're not.".localized)
+    }
+    .foregroundColor(.mono.offwhite)
+    .scaledFont(.pLargeTitle, .bold)
+    .multilineTextAlignment(.center)
+  }
+    
+    func buildStep004View() -> some View {
+        VStack {
+            Text("😈")
+            Text("A Good Person".localized)
+        }
+        .foregroundColor(.mono.offwhite)
+        .scaledFont(.pLargeTitle, .bold)
+        .multilineTextAlignment(.center)
+    }
+    
+    func buildStep005View() -> some View {
+        VStack {
+            Text("😈")
+            Text("A Sheikh".localized)
+        }.foregroundColor(.mono.offwhite)
+            .scaledFont(.pLargeTitle, .bold)
+            .multilineTextAlignment(.center)
+    }
+    
+    func buildStep006View() -> some View {
+        VStack {
+            Text("😈")
+            Text("A Mo'men".localized)
+        }.foregroundColor(.mono.offwhite)
+            .scaledFont(.pLargeTitle, .bold)
+            .multilineTextAlignment(.center)
+    }
+    
+    func buildStep007View() -> some View {
+        VStack {
+            Text("😈")
+            Text("But there is one unavoidable truth that you'll never escape".localized)
+        }
+        .foregroundColor(.mono.offwhite)
+        .scaledFont(.pLargeTitle, .bold)
+        .multilineTextAlignment(.center)
+    }
+    
     func buildStep008View() -> some View {
-        Group {
+        VStack {
+            Text("😈")
             Text("You can not change...".localized)
         }
         .foregroundColor(.mono.offwhite)
@@ -340,7 +395,8 @@ extension OnboardingState.Step {
     }
     
     func buildStep009View() -> some View {
-        Group {
+        VStack {
+            Text("😈")
             Text("You will always be...".localized)
         }
         .foregroundColor(.mono.offwhite)
@@ -349,62 +405,18 @@ extension OnboardingState.Step {
     }
     
     func buildStep010View() -> some View {
-        Group {
+        VStack {
+            Text("😈")
             Text("A Sinner".localized)
         }
         .foregroundColor(.mono.offwhite)
         .scaledFont(.pLargeTitle, .bold)
         .multilineTextAlignment(.center)
     }
-    
-    func buildStep011View() -> some View {
-        Group {
-            Text("You will always be...".localized)
-        }
-    }
-  
-  func buildStep003View() -> some View {
-    Group {
-      Text("Pretend to be everything that you're not.".localized)
-    }
-    .foregroundColor(.mono.offwhite)
-    .scaledFont(.pLargeTitle, .bold)
-    .multilineTextAlignment(.center)
-  }
-  
-  func buildStep004View() -> some View {
-    Group {
-      Text("A Good Person".localized)
-    }
-    .foregroundColor(.mono.offwhite)
-    .scaledFont(.pLargeTitle, .bold)
-    .multilineTextAlignment(.center)
-  }
-  
-  func buildStep005View() -> some View {
-    Group {
-      Text("A Sheikh".localized)
-    }.foregroundColor(.mono.offwhite)
-      .scaledFont(.pLargeTitle, .bold)
-      .multilineTextAlignment(.center)
-  }
-  
-  func buildStep006View() -> some View {
-    Group {
-        Text("A Mo'men".localized)
-    }.foregroundColor(.mono.offwhite)
-      .scaledFont(.pLargeTitle, .bold)
-      .multilineTextAlignment(.center)
-  }
-  
-  func buildStep007View() -> some View {
-    Group {
-        Text("But there is one unavoidable truth that you'll never escape".localized)
-    }
-    .foregroundColor(.mono.offwhite)
-    .scaledFont(.pLargeTitle, .bold)
-    .multilineTextAlignment(.center)
-  }
+}
+
+// MARK: - Satan's Whispers End
+extension OnboardingState.Step {
   
   func buildStep22View() -> some View {
     Group {
