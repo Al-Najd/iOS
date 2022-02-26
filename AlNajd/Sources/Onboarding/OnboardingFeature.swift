@@ -157,7 +157,19 @@ public extension OnboardingAction {
 }
 
 // MARK: - Environment
-public struct OnboardingEnvironment { public init() { } }
+public struct OnboardingEnvironment {
+    var userDefaults: UserDefaultsClient
+    var mainQueue: AnySchedulerOf<DispatchQueue>
+    
+    public init(
+        userDefaults: UserDefaultsClient = .live(),
+        mainQueue: AnySchedulerOf<DispatchQueue> = .main
+    ) {
+        self.userDefaults = userDefaults
+        self.mainQueue = mainQueue
+    }
+    
+}
 
 // MARK: - Reducer
 public let onboardingReducer = Reducer<
@@ -167,14 +179,15 @@ public let onboardingReducer = Reducer<
 > { state, action, env in
   switch action {
     case .onAppear:
-      state.step = env.cache().fetch(OnboardingState.Step.self, for: .onboardingStep) ?? .step0_InMemoryOfOurLovedOnes
-      state.didFinishOnboarding = env.cache().fetch(Bool.self, for: .didCompleteOnboarding) ?? false
-      return state.step.isFirstStep
-      ? Effect(value: .delayedNextStep)
-        .delay(for: 4, scheduler: env.mainQueue.animation())
-        .eraseToEffect()
-        .cancellable(id: DelayedNextStepId())
-      : .none
+          state.didFinishOnboarding = env.userDefaults.hasShownFirstLaunchOnboarding
+          return state.didFinishOnboarding
+          ? .init(value: .getStarted)
+          : state.step.isFirstStep
+          ? Effect(value: .delayedNextStep)
+              .delay(for: 4, scheduler: env.mainQueue.animation())
+              .eraseToEffect()
+              .cancellable(id: DelayedNextStepId())
+          : .none
     case .nextStep, .delayedNextStep:
       state.step.next()
       return env
@@ -194,17 +207,18 @@ public let onboardingReducer = Reducer<
       
       return .merge(
         env
-          .cache()
-          .asyncSave(true, for: .didCompleteOnboarding)
-          .fireAndForget(),
-        .cancel(id: DelayedNextStepId())
+            .userDefaults
+            .setHasShownFirstLaunchOnboarding(true)
+            .delay(for: .seconds(1.65), scheduler: env.mainQueue.animation())
+            .fireAndForget(),
+            .cancel(id: DelayedNextStepId())
       )
     case .getStarted:
       return .init(value: .delegate(.getStarted))
   }
   
   return .none
-}
+}.debug()
 
 extension CacheManager {
   public func asyncSave<T: Codable>(_ value: T, for key: StorageKey) -> Effect<Never, Never> {
