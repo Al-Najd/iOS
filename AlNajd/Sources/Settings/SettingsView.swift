@@ -34,6 +34,18 @@ public struct SettingsView: View {
             .scaledFont(.pHeadline, .bold)
             .foregroundColor(.mono.offblack)
         })
+        Section(content: {
+          SettingsPermission(
+            permission: viewStore.locationPermission,
+            onTap: {
+              viewStore.send(.onTapPermission(viewStore.locationPermission))
+            }
+          )
+        }, header: {
+          Text("Permissions".localized)
+            .scaledFont(.pHeadline, .bold)
+            .foregroundColor(.mono.offblack)
+        })
       }.onAppear {
         viewStore.send(.onAppear)
       }
@@ -132,7 +144,9 @@ struct SettingsPermission: View {
         .fillOnLeading()
     }
     
-    Button(action: onTap) {
+    Button(action: {
+      onTap()
+    }) {
       Text("Edit")
     }
   }

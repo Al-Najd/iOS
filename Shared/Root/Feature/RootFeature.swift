@@ -95,6 +95,8 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<R
       .append(.rewardAction(.onAppear))
       .append(.dashboardAction(.onAppear))
       .eraseToEffect()
+    case .lifecycleAction(.becameActive):
+      return .init(value: .settingsAction(.onAppear))
   default:
     break
   }

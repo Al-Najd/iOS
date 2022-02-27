@@ -15,16 +15,24 @@ import DesignSystem
 import Utils
 import SwiftUI
 import Common
+import ComposableCoreLocation
+
+/**
+ 1. Check on press location permission
+ 2. when pressed let location manager fetch
+ 3. onAction, handle user interaction or route to settings
+ */
 
 public struct SettingsState: Equatable {
   @BindableState var enableAccessibilityFont: Bool = false
-  var permissions: [ANPermission] = []
+  var locationPermission: ANPermission = .location
   
   public init() {}
 }
 
 public enum SettingsAction: BindableAction, Equatable {
   case onAppear
+  case locationManager(LocationManager.Action)
   case binding(BindingAction<SettingsState>)
   case onTapPermission(ANPermission)
   case onSwitchModifier(ANSettingsModifier, isTurnedOn: Bool)
@@ -39,15 +47,18 @@ public let settingsReducer = Reducer<
   CoreEnvironment<SettingsEnvironment>
 >.init { state, action, env in
   switch action {
+    case let .locationManager(.didChangeAuthorization(currentAuthorization)):
+      state.locationPermission.status = .init(currentAuthorization)
     case .onAppear:
-      state.permissions = []
-      
-      state.enableAccessibilityFont = env.cache().fetch(Bool.self, for: .enableAccessibilityFont) ?? false
+      state.enableAccessibilityFont = env.userDefaults.isFontAccessible
+      state.locationPermission.status = .init(env.locationManager.authorizationStatus())
     case .binding(\.$enableAccessibilityFont):
       FontManager.shared.supportsAccessibilityAdaption = state.enableAccessibilityFont
       env.cache().save(state.enableAccessibilityFont, for: .enableAccessibilityFont)
     case let .onTapPermission(permission):
-      openSettings()
+      return handlePermissionTap(permission, using: env)
+        .eraseToEffect()
+        .fireAndForget()
     case let .onTapModifier(modifier):
       openSettings()
     default:
@@ -55,7 +66,38 @@ public let settingsReducer = Reducer<
   }
   
   return .none
-}.binding()
+}
+.binding()
+
+fileprivate func handlePermissionTap(_ permission: ANPermission, using env: CoreEnvironment<SettingsEnvironment>) -> Effect<SettingsAction, Never> {
+  switch permission.id {
+    case ANPermission.location.id:
+      return handleLocationPermission(permission, using: env)
+    default:
+      assertionFailure("Couldn't hanlde \(permission) in Settings")
+      LoggersManager.error(message: "Couldn't hanlde \(permission) in Settings")
+      break
+  }
+  
+  return .none
+}
+
+fileprivate func handleLocationPermission(_ permission: ANPermission, using env: CoreEnvironment<SettingsEnvironment>) -> Effect<SettingsAction, Never> {
+  switch permission.status {
+    case .notDetermined:
+      return .merge(
+        env.locationManager
+          .create(id: LocationId())
+          .map(SettingsAction.locationManager),
+        env.locationManager
+          .requestWhenInUseAuthorization(id: LocationId())
+          .fireAndForget()
+      )
+    case .given, .denied, .insufficient:
+      openSettings()
+      return .none
+  }
+}
 
 fileprivate func openURL(using stringURL: String?, _ title: String) {
   guard let urlString = stringURL, let url = URL.init(string: urlString) else { return }
@@ -104,3 +146,5 @@ public extension Store where State == SettingsState, Action == SettingsAction {
     )
   )
 }
+
+private struct LocationId: Hashable {}

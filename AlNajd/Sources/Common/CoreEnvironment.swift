@@ -16,7 +16,7 @@ public struct CoreEnvironment<Environment> {
   public var environment: Environment
   public var cache: () -> (CacheManager)
   public var userDefaults: UserDefaultsClient
-  public var locationManager: () -> LocationManager
+  public var locationManager: LocationManager
   public var mainQueue: AnySchedulerOf<DispatchQueue>
 
   public subscript<Dependency>(
@@ -33,9 +33,7 @@ public struct CoreEnvironment<Environment> {
         CacheManager(decoder: .init(), encoder: .init())
       },
       userDefaults: .live(),
-      locationManager: {
-        .live
-      },
+      locationManager: .live,
       mainQueue: .main
     )
   }
@@ -109,8 +107,16 @@ public struct UserDefaultsClient {
         self.boolForKey(StorageKey.didCompleteOnboarding.key)
     }
     
+    public var isFontAccessible: Bool {
+        self.boolForKey(StorageKey.enableAccessibilityFont.key)
+    }
+    
     public func setHasShownFirstLaunchOnboarding(_ bool: Bool) -> Effect<Never, Never> {
         self.setBool(bool, StorageKey.didCompleteOnboarding.key)
+    }
+    
+    public func setFontAccessiblity(_ bool: Bool) {
+        self.setBool(bool, StorageKey.enableAccessibilityFont.key)
     }
 }
 
