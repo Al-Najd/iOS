@@ -51,7 +51,6 @@ public let settingsReducer = Reducer<
       state.locationPermission.status = .init(currentAuthorization)
     case .onAppear:
       state.enableAccessibilityFont = env.userDefaults.isFontAccessible
-      state.locationPermission.status = .init(env.locationManager.authorizationStatus())
     case .binding(\.$enableAccessibilityFont):
       FontManager.shared.supportsAccessibilityAdaption = state.enableAccessibilityFont
       env.cache().save(state.enableAccessibilityFont, for: .enableAccessibilityFont)
@@ -66,8 +65,31 @@ public let settingsReducer = Reducer<
   }
   
   return .none
-}
+}.combined(
+    with: locationManagerReducer.pullback(
+        state: \.self,
+        action: /SettingsAction.locationManager,
+        environment: { $0 }
+    )
+)
 .binding()
+
+private let locationManagerReducer: Reducer<
+    SettingsState,
+    LocationManager.Action,
+    CoreEnvironment<SettingsEnvironment>
+> = .init {
+    state, action, env in
+    
+    switch action {
+      case let .didChangeAuthorization(authStatus):
+        state.locationPermission.status = .init(authStatus)
+      default:
+        break
+    }
+  
+  return .none
+}
 
 fileprivate func handlePermissionTap(_ permission: ANPermission, using env: CoreEnvironment<SettingsEnvironment>) -> Effect<SettingsAction, Never> {
   switch permission.id {
@@ -148,3 +170,11 @@ public extension Store where State == SettingsState, Action == SettingsAction {
 }
 
 private struct LocationId: Hashable {}
+
+extension CLLocationCoordinate2D: Equatable {
+  // NB: CLLocationCoordinate2D doesn't conform to Equatable
+  public static func == (lhs: Self, rhs: Self) -> Bool {
+    lhs.latitude == rhs.latitude
+    && lhs.longitude == rhs.longitude
+    }
+}
