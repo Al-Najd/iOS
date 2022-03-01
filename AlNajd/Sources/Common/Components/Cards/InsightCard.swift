@@ -18,10 +18,14 @@ public struct Insight {
   }
 }
 
-struct InsightCardView: View {
-  let insight: Insight
+public struct InsightCardView: View {
+    public let insight: Insight
   
-  var body: some View {
+    public init(insight: Insight) {
+        self.insight = insight
+    }
+    
+  public var body: some View {
     VStack(alignment: .leading, spacing: .p16) {
       Label {
         Text(insight.indicator.title)
@@ -83,11 +87,5 @@ public extension Insight {
       icon: "flame.circle.fill",
       title: "Heads up!".localized
     )
-  }
-}
-
-struct InsightCard_Previews: PreviewProvider {
-  static var previews: some View {
-    DashboardView(store: .mock)
   }
 }
