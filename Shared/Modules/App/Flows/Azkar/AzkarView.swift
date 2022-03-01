@@ -52,7 +52,7 @@ struct AzkarView_Previews: PreviewProvider {
 
 extension Store where State == AzkarState, Action == AzkarAction {
   static let main: Store<AzkarState, AzkarAction> = .init(
-    initialState: .init(),
+    initialState: .init(dateState: .init()),
     reducer: azkarReducer,
     environment: .live(.init())
   )
