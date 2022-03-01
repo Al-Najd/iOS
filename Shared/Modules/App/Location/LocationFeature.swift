@@ -8,6 +8,6 @@
 import Foundation
 import CoreLocation
 
-struct LocationState {
-  var coordinates: CLLocation
+struct LocationState: Equatable {
+  var coordinates: CLLocationCoordinate2D = .init()
 }

@@ -15,18 +15,38 @@ import Dashboard
 import Common
 import Settings
 import Onboarding
+import Date
 
 struct RootState: Equatable {
-  var dashboardState = DashboardState()
-  var prayerState = PrayerState()
-  var azkarState = AzkarState()
-  var rewardState = RewardsState()
-  var dateState = DateState()
-  var settingsState = SettingsState()
-  var onboardingState = OnboardingState()
+  var locationState: LocationState
+  var dashboardState: DashboardState
+  var prayerState: PrayerState
+  var azkarState: AzkarState
+  var rewardState: RewardsState
+  var dateState: DateState
+  var settingsState: SettingsState
+  var onboardingState: OnboardingState?
+  
+  init(
+    locationState: LocationState = LocationState(),
+    dashboardState: DashboardState = DashboardState(),
+    dateState: DateState = .init(),
+    settingsState: SettingsState = SettingsState(),
+    onboardingState: OnboardingState? = nil
+  ) {
+    self.locationState = locationState
+    self.dashboardState = dashboardState
+    self.dateState = dateState
+    self.settingsState = settingsState
+    self.onboardingState = onboardingState
+    self.azkarState = .init(dateState: dateState)
+    self.prayerState = .init(dateState: dateState)
+    self.rewardState = .init(dateState: dateState)
+  }
 }
 
 enum RootAction {
+  case locationAction(LocationManager.Action)
   case onboardingAction(OnboardingAction)
   case dashboardAction(DashboardAction)
   case lifecycleAction(LifecycleAction)
@@ -44,7 +64,9 @@ let rootReducer = Reducer<
   RootAction,
   CoreEnvironment<RootEnvironment>
 >.combine(
-  onboardingReducer.pullback(
+  onboardingReducer
+    .optional()
+    .pullback(
     state: \.onboardingState,
     action: /RootAction.onboardingAction,
     environment: { _ in .live(OnboardingEnvironment()) }
@@ -80,7 +102,11 @@ let rootReducer = Reducer<
     environment: { _ in .live(SettingsEnvironment()) }
   ),
   syncingReducer
-)
+).combined(with: locationManagerReducer.pullback(
+  state: \.self,
+  action: /RootAction.locationAction,
+  environment: { $0 }
+))
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {
@@ -104,6 +130,24 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<R
   return .none
 }
 
+private let locationManagerReducer: Reducer<
+  RootState,
+  LocationManager.Action,
+  CoreEnvironment<RootEnvironment>
+> = .init {
+  state, action, env in
+  
+  switch action {
+    case let .didUpdateLocations(locations):
+      guard let coordinates = locations.first?.coordinate else { return .none }
+      state.locationState.coordinates = coordinates
+    default:
+      break
+  }
+  
+  return .none
+}
+
 fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
   switch dateAction {
   case .onAppear:
@@ -111,10 +155,6 @@ fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
   case .onChange(let currentDay):
     guard !currentDay.isInFuture else { return }
     state.dateState.currentDay = currentDay
-    state.prayerState.activeDate = currentDay
-    state.azkarState.activeDate = currentDay
-    state.rewardState.activeDate = currentDay
-    state.dashboardState.activeDate = currentDay
   }
 }
 
@@ -146,6 +186,6 @@ extension Store where State == RootState, Action == RootAction {
   static let mainRoot: Store<State, Action> = .init(
     initialState: .init(),
     reducer: rootReducer,
-    environment: .live(RootEnvironment())
+    environment: CoreEnvironment.live(RootEnvironment())
   )
 }

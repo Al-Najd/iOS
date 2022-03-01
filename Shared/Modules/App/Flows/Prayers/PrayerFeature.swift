@@ -11,7 +11,8 @@ import Entities
 import Common
 
 struct PrayerState: Equatable {
-  var activeDate: Date = .now
+  var activeDate: Date { dateState.currentDay }
+  var dateState: DateState
   var prayers: [Deed.Categorized] = [
     .faraaid,
     .sunnah,

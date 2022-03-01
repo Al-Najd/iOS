@@ -26,7 +26,11 @@ private enum ANTargets {
   + ANTargets.localization
   + ANTargets.settings
   + ANTargets.onboarding
+  + ANTargets.prayersClient
+  + ANTargets.home
+  + ANTargets.date
 }
+
 private extension ANTargets {
   static let alCore: [Target] = [
     .target(
@@ -41,12 +45,49 @@ private extension ANTargets {
         "Common",
         "Settings",
         "Onboarding",
+        "PrayersClient",
+        "Date",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
   ]
 }
 private extension ANTargets {
+  static let date: [Target] = [
+    .target(
+      name: "Date",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
+  static let home: [Target] = [
+    .target(
+      name: "Home",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
+  static let prayersClient: [Target] = [
+    .target(
+      name: "PrayersClient",
+      dependencies: [
+        "Entities",
+        "Localization",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
   static let onboarding: [Target] = [
     .target(
       name: "Onboarding",
@@ -67,7 +108,8 @@ private extension ANTargets {
             .product(name: "Quick", package: "Quick"),
             .product(name: "Nimble", package: "Nimble")
         ],
-        path: "Tests/Onboarding"
+        path: "Tests/Onboarding",
+        exclude: ["__Snapshots__", "OnboardingTests.xctestplan"]
     )
   ]
   static let settings: [Target] = [
@@ -87,6 +129,7 @@ private extension ANTargets {
       name: "Common",
       dependencies: [
         "Entities",
+        "PrayersClient",
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location")
       ],
@@ -172,6 +215,7 @@ private extension ANTargets {
       name: "Dashboard",
       dependencies: [
         "Entities",
+        "Date",
         "Localization",
         "Common",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
@@ -198,7 +242,6 @@ private enum ANDependencies {
   + pointFree
   + quickAndNimble
 }
-
 private extension ANDependencies {
   static let ordiCore: [Package.Dependency] = [
     .package(path: "../OrdiCore")
@@ -244,8 +287,33 @@ private enum ANProducts {
   + common
   + settings
   + onboarding
+  + prayersClient
+  + home
+  + date
 }
 private extension ANProducts {
+  
+  static let date: [PackageDescription.Product] = [
+    .library(
+      name: "Date",
+      targets: ["Date"]
+    )
+  ]
+  
+  static let home: [PackageDescription.Product] = [
+    .library(
+      name: "Home",
+      targets: ["Home"]
+    )
+  ]
+  
+  static let prayersClient: [PackageDescription.Product] = [
+    .library(
+      name: "PrayersClient",
+      targets: ["PrayersClient"]
+    )
+  ]
+  
   static let onboarding: [PackageDescription.Product] = [
     .library(
       name: "Onboarding",

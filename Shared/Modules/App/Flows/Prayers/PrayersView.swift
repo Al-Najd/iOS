@@ -12,6 +12,7 @@ import DesignSystem
 import Utils
 import PreviewableView
 import Entities
+import Date
 
 struct PrayersView: View {
   let store: Store<PrayerState, PrayerAction>
@@ -69,7 +70,7 @@ struct PrayersView_Previews: PreviewProvider {
 
 extension Store where State == PrayerState, Action == PrayerAction {
   static let main: Store<PrayerState, PrayerAction> = .init(
-    initialState: .init(),
+    initialState: .init(dateState: .init()),
     reducer: prayerReducer,
     environment: .live(PrayerEnvironment())
   )
