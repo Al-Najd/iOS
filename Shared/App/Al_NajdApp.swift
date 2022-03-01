@@ -28,7 +28,7 @@ struct Al_NajdApp: App {
     let isOnboardingPresented: Bool
     
     init(state: RootState) {
-      self.isOnboardingPresented = state.onboardingState?.didFinishOnboarding ?? false
+      self.isOnboardingPresented = state.onboardingState.didFinishOnboarding
     }
   }
   
@@ -48,22 +48,21 @@ struct Al_NajdApp: App {
   var body: some Scene {
     WithViewStore(self.store) { viewStore in
       WindowGroup {
-        if !(viewStore.onboardingState?.didFinishOnboarding ?? true) {
+        if viewStore.onboardingState.didFinishOnboarding {
           SplashView {
             MainTabView(store: store)
           }
         } else {
-        IfLetStore(
-          self.store.scope(state: \.onboardingState, action: RootAction.onboardingAction),
-          then: { scopedStore in
-            OnboardingView(store: scopedStore) {
-                SplashView {
-                  MainTabView(store: store)
-                }
-              }
+          OnboardingView(
+            store: store.scope(
+              state: \.onboardingState,
+              action: RootAction.onboardingAction
+            )
+          ) {
+            SplashView {
+              MainTabView(store: store)
+            }
           }
-        )
-          .zIndex(2)
         }
       }.onChange(of: scenePhase) { scenePhase in
         switch scenePhase {

@@ -13,6 +13,7 @@ import ComposableArchitecture
 import PreviewableView
 import Entities
 import Localization
+import Date
 
 struct RewardsView: View {
   let store: Store<RewardsState, RewardsAction>
@@ -87,7 +88,7 @@ struct PrayerRewardsList: View {
   let prayers: [Deed]
   var body: some View {
     VStack {
-      Text(category.title)
+      Text(category.title.localized)
         .scaledFont(.pTitle2, .bold)
         .foregroundColor(.mono.offblack)
       
@@ -167,7 +168,7 @@ struct AzkarRewardsList: View {
   let azkar: [RepeatableDeed]
   var body: some View {
     VStack {
-      Text(category.title)
+      Text(category.title.localized)
         .scaledFont(.pTitle2, .bold)
         .foregroundColor(.mono.offblack)
       
@@ -191,7 +192,7 @@ struct RewardsView_Previews: PreviewProvider {
         store: .init(
           initialState: .init(dateState: .init()),
           reducer: rewardsReducer,
-          environment: RewardsEnvironment.init()
+          environment: .live(RewardsEnvironment.init())
         )
       )
     }

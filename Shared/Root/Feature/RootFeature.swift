@@ -25,14 +25,14 @@ struct RootState: Equatable {
   var rewardState: RewardsState
   var dateState: DateState
   var settingsState: SettingsState
-  var onboardingState: OnboardingState?
+  var onboardingState: OnboardingState
   
   init(
     locationState: LocationState = LocationState(),
     dashboardState: DashboardState = DashboardState(),
     dateState: DateState = .init(),
     settingsState: SettingsState = SettingsState(),
-    onboardingState: OnboardingState? = nil
+    onboardingState: OnboardingState = .init()
   ) {
     self.locationState = locationState
     self.dashboardState = dashboardState
@@ -65,7 +65,6 @@ let rootReducer = Reducer<
   CoreEnvironment<RootEnvironment>
 >.combine(
   onboardingReducer
-    .optional()
     .pullback(
     state: \.onboardingState,
     action: /RootAction.onboardingAction,
