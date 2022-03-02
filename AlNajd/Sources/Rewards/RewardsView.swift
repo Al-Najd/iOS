@@ -15,10 +15,14 @@ import Entities
 import Localization
 import Date
 
-struct RewardsView: View {
+public struct RewardsView: View {
   let store: Store<RewardsState, RewardsAction>
   
-  var body: some View {
+  public init(store: Store<RewardsState, RewardsAction>) {
+    self.store = store
+  }
+  
+  public var body: some View {
     WithViewStore(store) { viewStore in
       ScrollView(.vertical, showsIndicators: false) {
         buildPrayersSection(viewStore)

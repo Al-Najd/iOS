@@ -14,6 +14,9 @@ import ComposableArchitecture
 import Schedule
 import Dashboard
 import Settings
+import Prayers
+import Azkar
+import Rewards
 
 struct MainTabView: View {
   let store: Store<RootState, RootAction>

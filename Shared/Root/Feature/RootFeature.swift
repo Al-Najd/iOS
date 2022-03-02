@@ -16,6 +16,10 @@ import Common
 import Settings
 import Onboarding
 import Date
+import Prayers
+import Azkar
+import Rewards
+import Location
 
 struct RootState: Equatable {
   var locationState: LocationState
