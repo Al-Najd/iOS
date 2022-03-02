@@ -10,19 +10,50 @@ import ComposableArchitecture
 import Onboarding
 import Settings
 import Utils
+import Root
 
-enum LifecycleAction {
-  case becameActive
-  case becameInActive
-  case wentToBackground
+final class AppDelegate: NSObject, UIApplicationDelegate {
+  let store = Store(
+    initialState: RootState.init(),
+    reducer: rootReducer,
+    environment: .live
+  )
+  
+  lazy var viewStore = ViewStore(
+    self.store.scope(state: { _ in () }),
+    removeDuplicates: ==
+  )
+  
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+  ) -> Bool {
+    self.viewStore.send(.appDelegate(.didFinishLaunching))
+    return true
+  }
+  
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    self.viewStore.send(.appDelegate(.didRegisterForRemoteNotifications(.success(deviceToken))))
+  }
+  
+  func application(
+    _ application: UIApplication,
+    didFailToRegisterForRemoteNotificationsWithError error: Error
+  ) {
+    self.viewStore.send(
+      .appDelegate(.didRegisterForRemoteNotifications(.failure(error as NSError)))
+    )
+  }
 }
 
 @main
 struct Al_NajdApp: App {
-  
-  @Environment(\.scenePhase) var scenePhase
+  @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+  @Environment(\.scenePhase) private var scenePhase
   @ObservedObject var viewStore: ViewStore<ViewState, RootAction>
-  let store: Store<RootState, RootAction> = .mainRoot
   
   struct ViewState: Equatable {
     let isOnboardingPresented: Bool
@@ -48,45 +79,17 @@ struct Al_NajdApp: App {
   var body: some Scene {
     WithViewStore(self.store) { viewStore in
       WindowGroup {
-        if viewStore.onboardingState.didFinishOnboarding {
-          SplashView {
-            MainTabView(store: store)
-          }
-        } else {
-          OnboardingView(
+        RootView()
+#if os(macOS)
+        Settings {
+          SettingsView(
             store: store.scope(
-              state: \.onboardingState,
-              action: RootAction.onboardingAction
+              state: \.settingsState,
+              action: RootAction.settingsAction
             )
-          ) {
-            SplashView {
-              MainTabView(store: store)
-            }
-          }
-        }
-      }.onChange(of: scenePhase) { scenePhase in
-        switch scenePhase {
-        case .active:
-          viewStore.send(.lifecycleAction(.becameActive))
-        case .inactive:
-          viewStore.send(.lifecycleAction(.becameInActive))
-        case .background:
-          viewStore.send(.lifecycleAction(.wentToBackground))
-        @unknown default:
-          break
-        }
-      }
-      
-      #if os(macOS)
-      Settings {
-        SettingsView(
-          store: store.scope(
-            state: \.settingsState,
-            action: RootAction.settingsAction
           )
-        )
-      }
-      #endif
+        }
+#endif
     }
   }
 }
