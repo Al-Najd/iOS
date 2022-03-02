@@ -13,10 +13,14 @@ import ComposableArchitecture
 import PreviewableView
 import Entities
 
-struct AzkarView: View {
+public struct AzkarView: View {
   let store: Store<AzkarState, AzkarAction>
   
-  var body: some View {
+  public init(store: Store<AzkarState, AzkarAction>) {
+    self.store = store
+  }
+  
+  public var body: some View {
     WithViewStore(store) { viewStore in
       ScrollView {
         RepeatableDeedsList(

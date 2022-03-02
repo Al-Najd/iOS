@@ -14,12 +14,6 @@
 		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
 		0472C62B27A385A700913892 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F127A385A600913892 /* HapticService.swift */; };
 		0472C62C27A385A700913892 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F527A385A600913892 /* SplashView.swift */; };
-		0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F727A385A600913892 /* PrayerFeature.swift */; };
-		0472C62E27A385A700913892 /* PrayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F827A385A600913892 /* PrayersView.swift */; };
-		0472C62F27A385A700913892 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FB27A385A600913892 /* RewardsView.swift */; };
-		0472C63027A385A700913892 /* RewardsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FC27A385A600913892 /* RewardsFeature.swift */; };
-		0472C63127A385A700913892 /* AzkarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FE27A385A600913892 /* AzkarFeature.swift */; };
-		0472C63227A385A700913892 /* AzkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FF27A385A600913892 /* AzkarView.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
 		0472C63B27A385A700913892 /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61327A385A600913892 /* RootFeature.swift */; };
@@ -30,7 +24,6 @@
 		0472C64027A385A700913892 /* CorePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61A27A385A600913892 /* CorePlugin.swift */; };
 		0472C64127A385A700913892 /* ThemePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61B27A385A600913892 /* ThemePlugin.swift */; };
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
-		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
 		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
 		04B8B05327CABBD50001F744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
@@ -69,12 +62,6 @@
 		0472C5ED27A385A600913892 /* ONavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ONavigationView.swift; sourceTree = "<group>"; };
 		0472C5F127A385A600913892 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		0472C5F527A385A600913892 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		0472C5F727A385A600913892 /* PrayerFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayerFeature.swift; sourceTree = "<group>"; };
-		0472C5F827A385A600913892 /* PrayersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayersView.swift; sourceTree = "<group>"; };
-		0472C5FB27A385A600913892 /* RewardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
-		0472C5FC27A385A600913892 /* RewardsFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsFeature.swift; sourceTree = "<group>"; };
-		0472C5FE27A385A600913892 /* AzkarFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarFeature.swift; sourceTree = "<group>"; };
-		0472C5FF27A385A600913892 /* AzkarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarView.swift; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
 		0472C61327A385A600913892 /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
@@ -85,7 +72,6 @@
 		0472C61A27A385A600913892 /* CorePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlugin.swift; sourceTree = "<group>"; };
 		0472C61B27A385A600913892 /* ThemePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		0472C61C27A385A600913892 /* LottiePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottiePlugin.swift; sourceTree = "<group>"; };
-		0478B68227AA8DBB00891DAA /* LocationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFeature.swift; sourceTree = "<group>"; };
 		0479448127BD9A7A0063E746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
@@ -158,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				04F8E31127AC3BE1002B96AB /* Recommendation */,
-				0478B68127AA8DB200891DAA /* Location */,
 				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
 				0472C5F027A385A600913892 /* Haptics */,
@@ -188,9 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				0472C5F427A385A600913892 /* Splash */,
-				0472C5F627A385A600913892 /* Prayers */,
-				0472C5FA27A385A600913892 /* Rewards */,
-				0472C5FD27A385A600913892 /* Azkar */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -202,33 +184,6 @@
 				04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */,
 			);
 			path = Splash;
-			sourceTree = "<group>";
-		};
-		0472C5F627A385A600913892 /* Prayers */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5F727A385A600913892 /* PrayerFeature.swift */,
-				0472C5F827A385A600913892 /* PrayersView.swift */,
-			);
-			path = Prayers;
-			sourceTree = "<group>";
-		};
-		0472C5FA27A385A600913892 /* Rewards */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5FB27A385A600913892 /* RewardsView.swift */,
-				0472C5FC27A385A600913892 /* RewardsFeature.swift */,
-			);
-			path = Rewards;
-			sourceTree = "<group>";
-		};
-		0472C5FD27A385A600913892 /* Azkar */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5FE27A385A600913892 /* AzkarFeature.swift */,
-				0472C5FF27A385A600913892 /* AzkarView.swift */,
-			);
-			path = Azkar;
 			sourceTree = "<group>";
 		};
 		0472C60027A385A600913892 /* Resources */ = {
@@ -252,57 +207,9 @@
 		0472C60627A385A600913892 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				0472C60B27A385A600913892 /* Business */,
 				0472C61127A385A600913892 /* Feature */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		0472C60B27A385A600913892 /* Business */ = {
-			isa = PBXGroup;
-			children = (
-				0472C60C27A385A600913892 /* Schedule */,
-				0472C60D27A385A600913892 /* Time */,
-				0472C60E27A385A600913892 /* Haptic */,
-				0472C60F27A385A600913892 /* Permission */,
-				0472C61027A385A600913892 /* Localization */,
-			);
-			path = Business;
-			sourceTree = "<group>";
-		};
-		0472C60C27A385A600913892 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Schedule;
-			sourceTree = "<group>";
-		};
-		0472C60D27A385A600913892 /* Time */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Time;
-			sourceTree = "<group>";
-		};
-		0472C60E27A385A600913892 /* Haptic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Haptic;
-			sourceTree = "<group>";
-		};
-		0472C60F27A385A600913892 /* Permission */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Permission;
-			sourceTree = "<group>";
-		};
-		0472C61027A385A600913892 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Localization;
 			sourceTree = "<group>";
 		};
 		0472C61127A385A600913892 /* Feature */ = {
@@ -333,14 +240,6 @@
 				0472C61C27A385A600913892 /* LottiePlugin.swift */,
 			);
 			path = Plugins;
-			sourceTree = "<group>";
-		};
-		0478B68127AA8DB200891DAA /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				0478B68227AA8DBB00891DAA /* LocationFeature.swift */,
-			);
-			path = Location;
 			sourceTree = "<group>";
 		};
 		04D8397527979EB4007FA07D /* Frameworks */ = {
@@ -607,26 +506,19 @@
 				0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */,
 				0472C63B27A385A700913892 /* RootFeature.swift in Sources */,
 				0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */,
-				0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */,
 				0472C62827A385A700913892 /* ONavigationView.swift in Sources */,
 				04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */,
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
-				0472C63027A385A700913892 /* RewardsFeature.swift in Sources */,
 				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
-				0472C62F27A385A700913892 /* RewardsView.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,
 				0472C62627A385A700913892 /* OTabBarView.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
-				0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */,
 				04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */,
-				0472C63227A385A700913892 /* AzkarView.swift in Sources */,
 				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
 				0472C62C27A385A700913892 /* SplashView.swift in Sources */,
 				045849F827A49E480090FB3C /* (null) in Sources */,
-				0472C63127A385A700913892 /* AzkarFeature.swift in Sources */,
-				0472C62E27A385A700913892 /* PrayersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

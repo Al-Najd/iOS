@@ -12,22 +12,36 @@ import Entities
 import Common
 import Date
 
-struct RewardsState: Equatable {
-  var activeDate: Date = .init()
-  var dateState: DateState
-  var prayers: [DeedCategory: [Deed]] = [
+public struct RewardsState: Equatable {
+  public var activeDate: Date = .init()
+  public var dateState: DateState
+  public var prayers: [DeedCategory: [Deed]] = [
     .fard: .faraaid,
     .sunnah: .sunnah,
     .nafila: .nafila
   ]
   
-  var azkar: [AzkarCategory: [RepeatableDeed]] = [
+  public var azkar: [AzkarCategory: [RepeatableDeed]] = [
     .sabah: .sabah,
     .masaa: .masaa
   ]
+  
+  public init(activeDate: Date = .init(), dateState: DateState, prayers: [DeedCategory : [Deed]] = [
+    .fard: .faraaid,
+    .sunnah: .sunnah,
+    .nafila: .nafila
+  ], azkar: [AzkarCategory : [RepeatableDeed]] = [
+    .sabah: .sabah,
+    .masaa: .masaa
+  ]) {
+    self.activeDate = activeDate
+    self.dateState = dateState
+    self.prayers = prayers
+    self.azkar = azkar
+  }
 }
 
-enum RewardsAction: Equatable {
+public enum RewardsAction: Equatable {
   case onAppear
   case date(DateAction)
   case onDoingDeed(Deed)
@@ -37,9 +51,9 @@ enum RewardsAction: Equatable {
   case onQuickFinishRepeatableDeed(RepeatableDeed)
 }
 
-struct RewardsEnvironment {}
+public struct RewardsEnvironment { public init() { } }
 
-let rewardsReducer = Reducer<
+public let rewardsReducer = Reducer<
   RewardsState,
   RewardsAction,
   CoreEnvironment<RewardsEnvironment>
@@ -66,19 +80,19 @@ let rewardsReducer = Reducer<
   return .none
 }.debug()
 
-fileprivate func cachePrayerRewards(_ state: RewardsState, _ env: CoreEnvironment<RootEnvironment>) {
+fileprivate func cachePrayerRewards(_ state: RewardsState, _ env: CoreEnvironment<RewardsEnvironment>) {
   state.prayers.forEach {
     env.cache().save($0.value.filter { $0.isDone }, for: .prayersRewards(state.activeDate, $0.key))
   }
 }
 
-fileprivate func cacheAzkarRewards(_ state: RewardsState, _ env: CoreEnvironment<RootEnvironment>) {
+fileprivate func cacheAzkarRewards(_ state: RewardsState, _ env: CoreEnvironment<RewardsEnvironment>) {
   state.azkar.forEach {
     env.cache().save($0.value.filter { $0.isDone }, for: .azkarRewards(state.activeDate, $0.key))
   }
 }
 
-extension Store where State == RewardsState, Action == RewardsAction {
+public extension Store where State == RewardsState, Action == RewardsAction {
   static let dev: (
     _ prayers: [Deed],
     _ azkar: [RepeatableDeed]
