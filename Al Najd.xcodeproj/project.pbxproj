@@ -16,7 +16,6 @@
 		0472C62C27A385A700913892 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F527A385A600913892 /* SplashView.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
-		0472C63B27A385A700913892 /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61327A385A600913892 /* RootFeature.swift */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
 		0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61727A385A600913892 /* PluginProtocol.swift */; };
 		0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61827A385A600913892 /* AppearancePlugin.swift */; };
@@ -64,7 +63,6 @@
 		0472C5F527A385A600913892 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
-		0472C61327A385A600913892 /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		0472C61727A385A600913892 /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
 		0472C61827A385A600913892 /* AppearancePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
@@ -207,17 +205,8 @@
 		0472C60627A385A600913892 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				0472C61127A385A600913892 /* Feature */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		0472C61127A385A600913892 /* Feature */ = {
-			isa = PBXGroup;
-			children = (
-				0472C61327A385A600913892 /* RootFeature.swift */,
-			);
-			path = Feature;
 			sourceTree = "<group>";
 		};
 		0472C61427A385A600913892 /* App */ = {
@@ -337,6 +326,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B865883A2716CC5500FC0CBB /* Build configuration list for PBXNativeTarget "Al Najd (iOS)" */;
 			buildPhases = (
+				04B7E96D27CF546E003E15AC /* Sync SPM */,
 				B865880C2716CC5500FC0CBB /* Sources */,
 				B865880D2716CC5500FC0CBB /* Frameworks */,
 				B865880E2716CC5500FC0CBB /* Resources */,
@@ -498,13 +488,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04B7E96D27CF546E003E15AC /* Sync SPM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sync SPM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"${SYMROOT}/Release${EFFECTIVE_PLATFORM_NAME}/\" ] && [ \"${SYMROOT}/Release${EFFECTIVE_PLATFORM_NAME}/\" != \"${SYMROOT}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/\" ] \nthen\n  cp -f -R \"${SYMROOT}/Release${EFFECTIVE_PLATFORM_NAME}/\" \"${SYMROOT}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B865880C2716CC5500FC0CBB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */,
-				0472C63B27A385A700913892 /* RootFeature.swift in Sources */,
 				0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */,
 				0472C62827A385A700913892 /* ONavigationView.swift in Sources */,
 				04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */,

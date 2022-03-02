@@ -12,6 +12,7 @@ import Azkar
 import Rewards
 import Date
 import Settings
+import Location
 
 struct HomeFeature: Equatable {
   var locationState: LocationState
