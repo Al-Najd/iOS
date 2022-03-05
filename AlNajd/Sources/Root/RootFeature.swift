@@ -57,6 +57,7 @@ public enum LifecycleAction {
 }
 
 public enum RootAction {
+  case onAppear
   case locationAction(LocationManager.Action)
   case onboardingAction(OnboardingAction)
   case dashboardAction(DashboardAction)
@@ -121,7 +122,12 @@ public let rootReducer = Reducer<
 ))
 
 let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
-  state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init()
+  switch action {
+    case .onAppear:
+      state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init()
+    default:
+      break
+  }
   return .none
 }
 
