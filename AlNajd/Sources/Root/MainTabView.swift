@@ -11,7 +11,6 @@ import Utils
 import ReusableUI
 import PreviewableView
 import ComposableArchitecture
-import Schedule
 import Dashboard
 import Settings
 import Prayers

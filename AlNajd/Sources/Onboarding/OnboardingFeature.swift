@@ -168,7 +168,6 @@ public struct OnboardingEnvironment {
         self.userDefaults = userDefaults
         self.mainQueue = mainQueue
     }
-    
 }
 
 // MARK: - Reducer

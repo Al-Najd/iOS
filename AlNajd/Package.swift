@@ -71,6 +71,11 @@ private extension ANTargets {
         "Entities",
         "Localization",
         "Onboarding",
+        "Dashboard",
+        "Settings",
+        "Prayers",
+        "Azkar",
+        "Rewards",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
