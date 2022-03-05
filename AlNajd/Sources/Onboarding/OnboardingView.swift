@@ -13,19 +13,18 @@ import Common
 
 public struct OnboardingView: View {
   let store: Store<OnboardingState, OnboardingAction>
-  @ObservedObject var viewStore: ViewStore<ViewState, OnboardingAction>
   
   public init(
     store: Store<OnboardingState, OnboardingAction>
   ) {
     self.store = store
-    self.viewStore = ViewStore(self.store.scope(state: ViewState.init))
   }
   
   struct ViewState: Equatable {
     let step: OnboardingState.Step
     let didFinishOnboarding: Bool
     let startNewFlow: Bool
+    
     init(onboardingState state: OnboardingState) {
       self.step = state.step
       self.startNewFlow = state.showNextFlow
@@ -34,123 +33,125 @@ public struct OnboardingView: View {
   }
   
   public var body: some View {
-    ZStack {
-      VStack(alignment: .center, spacing: .p16) {
-        HStack {
-          Spacer()
-          Button(action: {
-            openSettings()
-          }, label: {
-            Label(
-              "Language".localized,
-              systemImage: "character"
-            )
-              .scaledFont(.pHeadline, .bold)
-              .foregroundColor(.mono.offwhite)
-              .labelStyle(.titleAndIcon)
-          })
-        }
-        Spacer()
-        Group {
-          buildStoryContent()
-        }.transition(
-          AnyTransition.asymmetric(
-            insertion: .offset(x: 0, y: 50),
-            removal: .offset(x: 0, y: -50)
-          )
-            .combined(with: .opacity)
-        )
-        
-        Group {
-          Spacer()
+    WithViewStore(store) { viewStore in
+      ZStack {
+        VStack(alignment: .center, spacing: .p16) {
           HStack {
-            if !viewStore.step.isLastStep && viewStore.step > OnboardingState.Step.step00_ThisWorkIsSadaqaForAllOfUs {
-              Button(action: {
-                withAnimation {
-                  viewStore.send(.previousStep)
-                }
-              }, label: {
-                Image(systemName: viewStore.step.previousButtonIcon)
-                  .frame(width: 80, height: 80)
-                  .background(
-                    viewStore.step.previousButtonColor.dark
-                  )
-                  .foregroundColor(
-                    viewStore.step.previousButtonColor.light
-                  )
-                  .shadow(
-                    color: viewStore.step.previousButtonColor.light,
-                    radius: 10
-                  )
-                  .font(.system(size: .p32))
-                  .clipShape(
-                    Circle()
-                  )
-                  .shadow(
-                    color: viewStore.step.previousButtonColor.light,
-                    radius: 50
-                  )
-              })
+            Spacer()
+            Button(action: {
+              openSettings()
+            }, label: {
+              Label(
+                "Language".localized,
+                systemImage: "character"
+              )
+                .scaledFont(.pHeadline, .bold)
+                .foregroundColor(.mono.offwhite)
+                .labelStyle(.titleAndIcon)
+            })
+          }
+          Spacer()
+          Group {
+            buildStoryContent(viewStore)
+          }.transition(
+            AnyTransition.asymmetric(
+              insertion: .offset(x: 0, y: 50),
+              removal: .offset(x: 0, y: -50)
+            )
+              .combined(with: .opacity)
+          )
+          
+          Group {
+            Spacer()
+            HStack {
+              if !viewStore.step.isLastStep && viewStore.step > OnboardingState.Step.step00_ThisWorkIsSadaqaForAllOfUs {
+                Button(action: {
+                  withAnimation {
+                    viewStore.send(.previousStep)
+                  }
+                }, label: {
+                  Image(systemName: viewStore.step.previousButtonIcon)
+                    .frame(width: 80, height: 80)
+                    .background(
+                      viewStore.step.previousButtonColor.dark
+                    )
+                    .foregroundColor(
+                      viewStore.step.previousButtonColor.light
+                    )
+                    .shadow(
+                      color: viewStore.step.previousButtonColor.light,
+                      radius: 10
+                    )
+                    .font(.system(size: .p32))
+                    .clipShape(
+                      Circle()
+                    )
+                    .shadow(
+                      color: viewStore.step.previousButtonColor.light,
+                      radius: 50
+                    )
+                })
+                
+                Spacer()
+              }
               
-              Spacer()
-            }
-            
-            if viewStore.step != .step0_InMemoryOfOurLovedOnes {
-              Button(action: {
-                withAnimation {
-                  viewStore.send(viewStore.step.isLastStep ? .delegate(.getStarted) : .nextStep)
-                }
-              }, label: {
-                Image(systemName: viewStore.step.nextButtonIcon)
-                  .frame(width: 80, height: 80)
-                  .rotationEffect(.degrees( viewStore.step.isLastStep ? -90 : 0))
-                  .background(
-                    viewStore.step.nextButtonColor.dark
-                  )
-                  .foregroundColor(
-                    viewStore.step.nextButtonColor.light
-                  )
-                  .shadow(
-                    color: viewStore.step.nextButtonColor.light,
-                    radius: 10
-                  )
-                  .font(.system(size: .p32))
-                  .clipShape(
-                    Circle()
-                  )
-                  .shadow(
-                    color: viewStore.step.nextButtonColor.light,
-                    radius: 50
-                  )
-              })
+              if viewStore.step != .step0_InMemoryOfOurLovedOnes {
+                Button(action: {
+                  withAnimation {
+                    viewStore.send(viewStore.step.isLastStep ? .delegate(.getStarted) : .nextStep)
+                  }
+                }, label: {
+                  Image(systemName: viewStore.step.nextButtonIcon)
+                    .frame(width: 80, height: 80)
+                    .rotationEffect(.degrees( viewStore.step.isLastStep ? -90 : 0))
+                    .background(
+                      viewStore.step.nextButtonColor.dark
+                    )
+                    .foregroundColor(
+                      viewStore.step.nextButtonColor.light
+                    )
+                    .shadow(
+                      color: viewStore.step.nextButtonColor.light,
+                      radius: 10
+                    )
+                    .font(.system(size: .p32))
+                    .clipShape(
+                      Circle()
+                    )
+                    .shadow(
+                      color: viewStore.step.nextButtonColor.light,
+                      radius: 50
+                    )
+                })
+              }
             }
           }
-        }
-      }.padding()
-        .transition(
-          AnyTransition.asymmetric(
-            insertion: .offset(x: 0, y: 50),
-            removal: .offset(x: 0, y: 50)
+        }.padding()
+          .transition(
+            AnyTransition.asymmetric(
+              insertion: .offset(x: 0, y: 50),
+              removal: .offset(x: 0, y: 50)
+            )
+              .combined(with: .opacity)
           )
-            .combined(with: .opacity)
-        )
-        .fill()
-        .offset(y: viewStore.didFinishOnboarding ? -getScreenSize().height : 0)
-    }
-    .onAppear { self.viewStore.send(.onAppear) }
-    .background(
+          .fill()
+          .offset(y: viewStore.didFinishOnboarding ? -getScreenSize().height : 0)
+      }
+      .onAppear { viewStore.send(.onAppear) }
+      .background(
         (viewStore.didFinishOnboarding ? Color.clear : Color.mono.offblack)
-        .ignoresSafeArea()
-    )
-    .stay(viewStore.step.isADarkThought ? .light : .dark)
+          .ignoresSafeArea()
+      )
+      .stay(viewStore.step.isADarkThought ? .light : .dark)
+    }
   }
 }
 
 extension OnboardingView {
   @ViewBuilder
-  func buildStoryContent() -> some View {
+  func buildStoryContent(_ viewStore: ViewStore<OnboardingState, OnboardingAction>) -> some View {
     ForEach(OnboardingState.Step.allCases) { step in
-      if step == viewStore.step {
+      if viewStore.step == step {
         step.view
       }
     }

@@ -39,7 +39,11 @@ public struct RootView: View {
           )
             .zIndex(1)
         }
-      }.modifier(DeviceStateModifier())
+      }
+      .modifier(DeviceStateModifier())
+      .onAppear {
+        viewStore.send(.onAppear)
+      }
     }
 }
 
