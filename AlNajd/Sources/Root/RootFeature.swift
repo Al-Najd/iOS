@@ -112,12 +112,18 @@ public let rootReducer = Reducer<
     action: /RootAction.settingsAction,
     environment: { _ in .live(SettingsEnvironment()) }
   ),
-  syncingReducer
+  syncingReducer,
+  rootReducerCore
 ).combined(with: locationManagerReducer.pullback(
   state: \.self,
   action: /RootAction.locationAction,
   environment: { $0 }
 ))
+
+let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
+  state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init()
+  return .none
+}
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {

@@ -24,6 +24,7 @@ import ComposableCoreLocation
  */
 
 public struct SettingsState: Equatable {
+  @BindableState public var userSettings: UserSettings = .init()
   @BindableState var enableAccessibilityFont: Bool = false
   var locationPermission: ANPermission = .location
   

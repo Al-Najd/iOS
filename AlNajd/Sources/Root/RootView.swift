@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import Onboarding
 import ComposableArchitecture
+import Onboarding
 
 public struct RootView: View {
   public let store: Store<RootState, RootAction>
-  @ObservedObject public var viewStore: ViewStore<ViewState, RootAction>
-  @Environment(\.deviceState) public var deviceState
-
+  @ObservedObject var viewStore: ViewStore<ViewState, RootAction>
+  @Environment(\.deviceState) var deviceState
+  
   struct ViewState: Equatable {
     let isOnboardingPresented: Bool
     
@@ -28,7 +28,18 @@ public struct RootView: View {
   }
   
     public var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      ZStack {
+        if !viewStore.isOnboardingPresented {
+          MainTabView(store: store)
+            .zIndex(0)
+        } else {
+          IfLetStore(
+            self.store.scope(state: \.onboardingState, action: RootAction.onboardingAction),
+            then: OnboardingView.init(store:)
+          )
+            .zIndex(1)
+        }
+      }.modifier(DeviceStateModifier())
     }
 }
 

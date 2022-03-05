@@ -11,18 +11,15 @@ import DesignSystem
 import Utils
 import Common
 
-public struct OnboardingView<Content: View>: View {
+public struct OnboardingView: View {
   let store: Store<OnboardingState, OnboardingAction>
   @ObservedObject var viewStore: ViewStore<ViewState, OnboardingAction>
-  private let injectedView: () -> Content
   
   public init(
-    store: Store<OnboardingState, OnboardingAction>,
-    @ViewBuilder injectedView: @escaping () -> Content
+    store: Store<OnboardingState, OnboardingAction>
   ) {
     self.store = store
     self.viewStore = ViewStore(self.store.scope(state: ViewState.init))
-    self.injectedView = injectedView
   }
   
   struct ViewState: Equatable {
@@ -38,14 +35,6 @@ public struct OnboardingView<Content: View>: View {
   
   public var body: some View {
     ZStack {
-      if viewStore.didFinishOnboarding {
-        injectedView()
-          .offset(
-            y: viewStore.startNewFlow
-            ? 0
-            : -getScreenSize().height
-          )
-      }
       VStack(alignment: .center, spacing: .p16) {
         HStack {
           Spacer()
@@ -810,9 +799,5 @@ struct OnboardingView_Previews: PreviewProvider {
         environment: .live(OnboardingEnvironment())
       )
     )
-    {
-      Text("You made it!")
-        .foregroundColor(.mono.offwhite)
-    }
   }
 }

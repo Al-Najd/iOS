@@ -81,10 +81,10 @@ struct ONavigationBar: View {
             withAnimation(.easeInOut(duration: 0.65)) {
               if canExpand {
                 dragOffset = maxHeight
-                HapticService.main.generate(feedback: .success)
+//                HapticService.main.generate(feedback: .success)
               } else if canCollapse {
                 dragOffset = .zero
-                HapticService.main.generate(feedback: .warning)
+//                HapticService.main.generate(feedback: .warning)
               }
             }
           }

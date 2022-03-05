@@ -11,57 +11,16 @@ import Onboarding
 import Settings
 import Utils
 import Root
-
-final class AppDelegate: NSObject, UIApplicationDelegate {
-  let store = Store(
-    initialState: RootState.init(),
-    reducer: rootReducer,
-    environment: .live
-  )
-  
-  lazy var viewStore = ViewStore(
-    self.store.scope(state: { _ in () }),
-    removeDuplicates: ==
-  )
-  
-  func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
-  ) -> Bool {
-    self.viewStore.send(.appDelegate(.didFinishLaunching))
-    return true
-  }
-  
-  func application(
-    _ application: UIApplication,
-    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-  ) {
-    self.viewStore.send(.appDelegate(.didRegisterForRemoteNotifications(.success(deviceToken))))
-  }
-  
-  func application(
-    _ application: UIApplication,
-    didFailToRegisterForRemoteNotificationsWithError error: Error
-  ) {
-    self.viewStore.send(
-      .appDelegate(.didRegisterForRemoteNotifications(.failure(error as NSError)))
-    )
-  }
-}
+import Common
 
 @main
 struct Al_NajdApp: App {
-  @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
   @Environment(\.scenePhase) private var scenePhase
-  @ObservedObject var viewStore: ViewStore<ViewState, RootAction>
-  
-  struct ViewState: Equatable {
-    let isOnboardingPresented: Bool
-    
-    init(state: RootState) {
-      self.isOnboardingPresented = state.onboardingState.didFinishOnboarding
-    }
-  }
+  public let store = Store<RootState, RootAction>(
+    initialState: RootState(),
+    reducer: rootReducer,
+    environment: CoreEnvironment.live(RootEnvironment())
+  )
   
   lazy var plugins: [AppPlugin] = {
     [
@@ -72,24 +31,9 @@ struct Al_NajdApp: App {
     ].with { $0.forEach { $0.setup() } }
   }()
   
-  init() {
-    self.viewStore = ViewStore(self.store.scope(state: ViewState.init))
-  }
-  
   var body: some Scene {
-    WithViewStore(self.store) { viewStore in
-      WindowGroup {
-        RootView()
-#if os(macOS)
-        Settings {
-          SettingsView(
-            store: store.scope(
-              state: \.settingsState,
-              action: RootAction.settingsAction
-            )
-          )
-        }
-#endif
+    WindowGroup {
+      RootView(store: self.store)
     }
   }
 }
