@@ -10,6 +10,7 @@ import Business
 import Foundation
 import Entities
 import ComposableCoreLocation
+import PrayersClient
 
 @dynamicMemberLookup
 public struct CoreEnvironment<Environment> {
@@ -18,6 +19,8 @@ public struct CoreEnvironment<Environment> {
   public var userDefaults: UserDefaultsClient
   public var locationManager: LocationManager
   public var mainQueue: AnySchedulerOf<DispatchQueue>
+  public var prayersClient: PrayersClient
+  public var coordinates: CLLocationCoordinate2D? = nil
 
   public subscript<Dependency>(
     dynamicMember keyPath: WritableKeyPath<Environment, Dependency>
@@ -34,7 +37,8 @@ public struct CoreEnvironment<Environment> {
       },
       userDefaults: .live(),
       locationManager: .live,
-      mainQueue: .main
+      mainQueue: .main,
+      prayersClient: .live
     )
   }
 }
@@ -115,7 +119,7 @@ public struct UserDefaultsClient {
         self.setBool(bool, StorageKey.didCompleteOnboarding.key)
     }
     
-    public func setFontAccessiblity(_ bool: Bool) {
+    public func setFontAccessiblity(_ bool: Bool) -> Effect<Never, Never> {
         self.setBool(bool, StorageKey.enableAccessibilityFont.key)
     }
 }

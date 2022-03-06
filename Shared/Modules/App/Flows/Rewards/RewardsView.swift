@@ -187,7 +187,13 @@ struct RewardsView_Previews: PreviewProvider {
     PreviewableView([
       .darkMode
     ]) {
-      RewardsView(store: .main)
+      RewardsView(
+        store: .init(
+          initialState: .init(dateState: .init()),
+          reducer: rewardsReducer,
+          environment: RewardsEnvironment.init()
+        )
+      )
     }
   }
 }

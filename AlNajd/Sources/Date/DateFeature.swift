@@ -6,27 +6,36 @@
 //
 
 import ComposableArchitecture
+import Utils
 
-struct DateState: Equatable {
-  var currentDay: Date = .init()
+public struct DateState: Equatable {
+  public var currentDay: Date = .init()
   
-  var currentWeek: [Date] {
+  public var currentWeek: [Date] {
     ((-4)...(-1)).map { currentDay.adding(.day, value: $0) }
     .appending(currentDay)
     .appending(elements: ((1)...(4)).map { currentDay.adding(.day, value: $0) })
   }
   
-  var calendar: Calendar = .init(identifier: .islamic)
+  public var calendar: Calendar = .init(identifier: .islamic)
+  
+  public init(
+    currentDay: Date = .init(),
+    calendar: Calendar = .init(identifier: .islamic)
+  ) {
+    self.currentDay = currentDay
+    self.calendar = calendar
+  }
 }
 
-enum DateAction: Equatable {
+public enum DateAction: Equatable {
   case onAppear
   case onChange(currentDay: Date)
 }
 
-struct DateEnvironment {}
+public struct DateEnvironment { public init() { } }
 
-let dateReducer = Reducer<
+public let dateReducer = Reducer<
   DateState,
   DateAction,
   DateEnvironment

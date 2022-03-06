@@ -10,9 +10,11 @@ import ComposableArchitecture
 import Business
 import Entities
 import Common
+import Date
 
 struct RewardsState: Equatable {
-  var activeDate: Date = .now
+  var activeDate: Date = .init()
+  var dateState: DateState
   var prayers: [DeedCategory: [Deed]] = [
     .fard: .faraaid,
     .sunnah: .sunnah,
@@ -27,6 +29,7 @@ struct RewardsState: Equatable {
 
 enum RewardsAction: Equatable {
   case onAppear
+  case date(DateAction)
   case onDoingDeed(Deed)
   case onUndoingDeed(Deed)
   case onDoingRepeatableDeed(RepeatableDeed)
@@ -54,6 +57,10 @@ let rewardsReducer = Reducer<
     state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
   case let .onQuickFinishRepeatableDeed(repeatableDeed: deed):
     state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
+    case let .date(.onChange(date)):
+      state.activeDate = date
+    default:
+      break
   }
   
   return .none
@@ -72,12 +79,6 @@ fileprivate func cacheAzkarRewards(_ state: RewardsState, _ env: CoreEnvironment
 }
 
 extension Store where State == RewardsState, Action == RewardsAction {
-  static let main: Store<State, Action>  = .init(
-    initialState: .init(),
-    reducer: rewardsReducer,
-    environment: .live(RewardsEnvironment())
-  )
-  
   static let dev: (
     _ prayers: [Deed],
     _ azkar: [RepeatableDeed]
@@ -100,7 +101,7 @@ extension Store where State == RewardsState, Action == RewardsAction {
     )
     
     return .init(
-      initialState: .init(),
+      initialState: .init(dateState: .init()),
       reducer: rewardsReducer,
       environment: env
     )
