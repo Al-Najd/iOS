@@ -8,6 +8,8 @@
 import XCTest
 import Quick
 import Nimble
+import Dashboard
+import Common
 @testable import Entities
 @testable import Dashboard
 
@@ -132,7 +134,7 @@ class DashboardTests: QuickSpec {
                                     analysis.insight?.indicator.id
                                 ).to(
                                     equal(
-                                        Insight.Indicator.encourage.id
+                                      Insight.Indicator.encourage.id
                                     )
                                 )
                             }
@@ -144,20 +146,34 @@ class DashboardTests: QuickSpec {
             describe("ability to give insights") {
                 context("on praying") {
                     context("Al Fajr") {
-                        context("multiple times") {
-                            it("should praise him, mentioning the dates") {
-                                let fakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
-                                    dictionary[date] = .faraaid.map {
-                                        $0.changing { $0.isDone = $0 == .fajr ? true : $0.isDone }
-                                    }
-                                }
-                                
-                                let insight = fajrPraiser(.fard, fakeData)
-                                expect(insight).toNot(beNil())
-                                expect(insight!.indicator.id).to(be(Insight.Indicator.praise.id))
-                            }
+                      context("multiple times") {
+                        it("should praise him, mentioning the dates") {
+                          let fakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
+                            dictionary[date] = .faraaid.map { $0.changing { $0.isDone = $0 == .fajr }}
+                          }
+                          
+                          let insight = fajrPraiser(.fard, fakeData)
+                          expect(insight).toNot(beNil())
+                          guard let insight = insight else { return }
+                          expect(insight.indicator.id).to(be(Insight.Indicator.praise.id))
                         }
+                      }
                     }
+                  
+                  context("Al Fajr & Aishaa") {
+                    it("should motivate the user by mentioning u did qeyam al layl") {
+                      let fakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
+                        dictionary[date] = .faraaid.map { $0.changing {
+                          $0.isDone = $0.title == Deed.fajr.title || $0.title == Deed.aishaa.title
+                        }}
+                      }
+                      
+                      let insight = fajrAndAishaaPraiser(.fard, fakeData)
+                      expect(insight).toNot(beNil())
+                      guard let insight = insight else { return }
+                      expect(insight.indicator.id).to(be(Insight.Indicator.praise.id))
+                    }
+                  }
                 }
             }
         }

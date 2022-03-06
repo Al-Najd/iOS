@@ -10,7 +10,6 @@ import ComposableArchitecture
 import Onboarding
 import Settings
 import Utils
-import Root
 import Common
 
 @main
