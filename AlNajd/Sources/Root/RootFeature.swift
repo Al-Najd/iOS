@@ -16,18 +16,22 @@ import Common
 import Settings
 import Onboarding
 import Date
+import Prayers
+import Azkar
+import Rewards
+import Location
 
-struct RootState: Equatable {
-  var locationState: LocationState
-  var dashboardState: DashboardState
-  var prayerState: PrayerState
-  var azkarState: AzkarState
-  var rewardState: RewardsState
-  var dateState: DateState
-  var settingsState: SettingsState
-  var onboardingState: OnboardingState?
+public struct RootState: Equatable {
+  public var locationState: LocationState
+  public var dashboardState: DashboardState
+  public var prayerState: PrayerState
+  public var azkarState: AzkarState
+  public var rewardState: RewardsState
+  public var dateState: DateState
+  public var settingsState: SettingsState
+  public var onboardingState: OnboardingState?
   
-  init(
+  public init(
     locationState: LocationState = LocationState(),
     dashboardState: DashboardState = DashboardState(),
     dateState: DateState = .init(),
@@ -45,7 +49,15 @@ struct RootState: Equatable {
   }
 }
 
-enum RootAction {
+// TODO: - Move to its own Client
+public enum LifecycleAction {
+  case becameActive
+  case becameInActive
+  case wentToBackground
+}
+
+public enum RootAction {
+  case onAppear
   case locationAction(LocationManager.Action)
   case onboardingAction(OnboardingAction)
   case dashboardAction(DashboardAction)
@@ -57,9 +69,9 @@ enum RootAction {
   case settingsAction(SettingsAction)
 }
 
-struct RootEnvironment { }
+public struct RootEnvironment { public init() { } }
 
-let rootReducer = Reducer<
+public let rootReducer = Reducer<
   RootState,
   RootAction,
   CoreEnvironment<RootEnvironment>
@@ -101,12 +113,23 @@ let rootReducer = Reducer<
     action: /RootAction.settingsAction,
     environment: { _ in .live(SettingsEnvironment()) }
   ),
-  syncingReducer
+  syncingReducer,
+  rootReducerCore
 ).combined(with: locationManagerReducer.pullback(
   state: \.self,
   action: /RootAction.locationAction,
   environment: { $0 }
 ))
+
+let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
+  switch action {
+    case .onAppear:
+      state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init()
+    default:
+      break
+  }
+  return .none
+}
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {

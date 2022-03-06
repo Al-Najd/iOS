@@ -29,6 +29,11 @@ private enum ANTargets {
   + ANTargets.prayersClient
   + ANTargets.home
   + ANTargets.date
+  + ANTargets.location
+  + ANTargets.prayers
+  + ANTargets.azkar
+  + ANTargets.rewards
+  + ANTargets.root
 }
 
 private extension ANTargets {
@@ -36,7 +41,6 @@ private extension ANTargets {
     .target(
       name: "AlCore",
       dependencies: [
-        "Dashboard",
         "Calendar",
         "Entities",
         "DaySlider",
@@ -47,12 +51,86 @@ private extension ANTargets {
         "Onboarding",
         "PrayersClient",
         "Date",
+        "Location",
+        "Prayers",
+        "Azkar",
+        "Rewards",
+        "Root",
+        "Dashboard",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
   ]
 }
 private extension ANTargets {
+  static let root: [Target] = [
+    .target(
+      name: "Root",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        "Onboarding",
+        "Dashboard",
+        "Settings",
+        "Prayers",
+        "Azkar",
+        "Rewards",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
+  static let rewards: [Target] = [
+    .target(
+      name: "Rewards",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
+  static let azkar: [Target] = [
+    .target(
+      name: "Azkar",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        "Date",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
+  static let prayers: [Target] = [
+    .target(
+      name: "Prayers",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        "Date",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
+  static let location: [Target] = [
+    .target(
+      name: "Location",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        .product(name: "Core", package: "OrdiCore")
+      ]
+    )
+  ]
+  
   static let date: [Target] = [
     .target(
       name: "Date",
@@ -72,6 +150,12 @@ private extension ANTargets {
         "Common",
         "Entities",
         "Localization",
+        "Dashboard",
+        "Azkar",
+        "Prayers",
+        "Rewards",
+        "Settings",
+        "Location",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -218,7 +302,6 @@ private extension ANTargets {
         "Date",
         "Localization",
         "Common",
-        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
         .product(name: "Core", package: "OrdiCore")
       ]
     ),
@@ -248,10 +331,6 @@ private extension ANDependencies {
   ]
   
   static let pointFree: [Package.Dependency] = [
-    .package(
-      url: "https://github.com/pointfreeco/swift-composable-architecture",
-      .upToNextMajor(from: .init(0, 33, 1))
-    ),
     .package(
       url: "https://github.com/pointfreeco/composable-core-location",
       .upToNextMajor(from: .init(0, 1, 0))
@@ -290,8 +369,48 @@ private enum ANProducts {
   + prayersClient
   + home
   + date
+  + location
+  + prayers
+  + azkar
+  + rewards
+  + root
 }
 private extension ANProducts {
+  
+  static let root: [PackageDescription.Product] = [
+    .library(
+      name: "Root",
+      targets: ["Root"]
+    )
+  ]
+  
+  static let location: [PackageDescription.Product] = [
+    .library(
+      name: "Location",
+      targets: ["Location"]
+    )
+  ]
+  
+  static let prayers: [PackageDescription.Product] = [
+    .library(
+      name: "Prayers",
+      targets: ["Prayers"]
+    )
+  ]
+  
+  static let azkar: [PackageDescription.Product] = [
+    .library(
+      name: "Azkar",
+      targets: ["Azkar"]
+    )
+  ]
+  
+  static let rewards: [PackageDescription.Product] = [
+    .library(
+      name: "Rewards",
+      targets: ["Rewards"]
+    )
+  ]
   
   static let date: [PackageDescription.Product] = [
     .library(

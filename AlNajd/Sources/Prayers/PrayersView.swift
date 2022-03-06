@@ -14,12 +14,14 @@ import PreviewableView
 import Entities
 import Date
 
-struct PrayersView: View {
+public struct PrayersView: View {
   let store: Store<PrayerState, PrayerAction>
   
-  @State var showTip: Bool = true
+  public init(store: Store<PrayerState, PrayerAction>) {
+    self.store = store
+  }
   
-  var body: some View {
+  public var body: some View {
     WithViewStore(self.store) { viewStore in
       List {
         DeedsList(
@@ -42,10 +44,6 @@ struct PrayersView: View {
       }
       .onAppear {
         viewStore.send(.onAppear)
-        
-        withAnimation(.easeInOut.delay(1)) {
-          showTip = true
-        }
       }
       .padding(.top, .p4)
     }

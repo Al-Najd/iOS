@@ -21,10 +21,6 @@ let package = Package(
   ],
   dependencies: [
     .package(
-        url: "https://github.com/pointfreeco/swift-composable-architecture",
-        .upToNextMajor(from: .init(0, 33, 1))
-    ),
-    .package(
       name: "FontBlaster",
       url: "https://github.com/ArtSabintsev/FontBlaster.git",
       .upToNextMinor(from: .init(5, 2, 0))

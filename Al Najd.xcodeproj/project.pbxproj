@@ -9,20 +9,9 @@
 /* Begin PBXBuildFile section */
 		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */; };
-		0472C62627A385A700913892 /* OTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EA27A385A600913892 /* OTabBarView.swift */; };
-		0472C62727A385A700913892 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5EB27A385A600913892 /* MainTabView.swift */; };
-		0472C62827A385A700913892 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5ED27A385A600913892 /* ONavigationView.swift */; };
 		0472C62B27A385A700913892 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F127A385A600913892 /* HapticService.swift */; };
-		0472C62C27A385A700913892 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F527A385A600913892 /* SplashView.swift */; };
-		0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F727A385A600913892 /* PrayerFeature.swift */; };
-		0472C62E27A385A700913892 /* PrayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F827A385A600913892 /* PrayersView.swift */; };
-		0472C62F27A385A700913892 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FB27A385A600913892 /* RewardsView.swift */; };
-		0472C63027A385A700913892 /* RewardsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FC27A385A600913892 /* RewardsFeature.swift */; };
-		0472C63127A385A700913892 /* AzkarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FE27A385A600913892 /* AzkarFeature.swift */; };
-		0472C63227A385A700913892 /* AzkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5FF27A385A600913892 /* AzkarView.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
-		0472C63B27A385A700913892 /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61327A385A600913892 /* RootFeature.swift */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
 		0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61727A385A600913892 /* PluginProtocol.swift */; };
 		0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61827A385A600913892 /* AppearancePlugin.swift */; };
@@ -30,11 +19,9 @@
 		0472C64027A385A700913892 /* CorePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61A27A385A600913892 /* CorePlugin.swift */; };
 		0472C64127A385A700913892 /* ThemePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61B27A385A600913892 /* ThemePlugin.swift */; };
 		0472C64227A385A700913892 /* LottiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61C27A385A600913892 /* LottiePlugin.swift */; };
-		0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478B68227AA8DBB00891DAA /* LocationFeature.swift */; };
 		048CC8D027B08505007BC3C7 /* AlCore in Frameworks */ = {isa = PBXBuildFile; productRef = 048CC8CF27B08505007BC3C7 /* AlCore */; };
 		04B8B05327CABBD50001F744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
-		04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */; };
 		04F4C81D27BDE3D20091EB9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
 		04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
@@ -64,20 +51,9 @@
 /* Begin PBXFileReference section */
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
-		0472C5EA27A385A600913892 /* OTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTabBarView.swift; sourceTree = "<group>"; };
-		0472C5EB27A385A600913892 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		0472C5ED27A385A600913892 /* ONavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ONavigationView.swift; sourceTree = "<group>"; };
 		0472C5F127A385A600913892 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
-		0472C5F527A385A600913892 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		0472C5F727A385A600913892 /* PrayerFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayerFeature.swift; sourceTree = "<group>"; };
-		0472C5F827A385A600913892 /* PrayersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayersView.swift; sourceTree = "<group>"; };
-		0472C5FB27A385A600913892 /* RewardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
-		0472C5FC27A385A600913892 /* RewardsFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsFeature.swift; sourceTree = "<group>"; };
-		0472C5FE27A385A600913892 /* AzkarFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarFeature.swift; sourceTree = "<group>"; };
-		0472C5FF27A385A600913892 /* AzkarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarView.swift; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
-		0472C61327A385A600913892 /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		0472C61727A385A600913892 /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
 		0472C61827A385A600913892 /* AppearancePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
@@ -85,9 +61,7 @@
 		0472C61A27A385A600913892 /* CorePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlugin.swift; sourceTree = "<group>"; };
 		0472C61B27A385A600913892 /* ThemePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemePlugin.swift; sourceTree = "<group>"; };
 		0472C61C27A385A600913892 /* LottiePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottiePlugin.swift; sourceTree = "<group>"; };
-		0478B68227AA8DBB00891DAA /* LocationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFeature.swift; sourceTree = "<group>"; };
 		0479448127BD9A7A0063E746 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86588132716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,7 +114,6 @@
 		045849F527A493EE0090FB3C /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				0472C5ED27A385A600913892 /* ONavigationView.swift */,
 			);
 			path = NavigationBar;
 			sourceTree = "<group>";
@@ -158,11 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				04F8E31127AC3BE1002B96AB /* Recommendation */,
-				0478B68127AA8DB200891DAA /* Location */,
 				045849F527A493EE0090FB3C /* NavigationBar */,
 				0472C5E927A385A600913892 /* Tabs */,
 				0472C5F027A385A600913892 /* Haptics */,
-				0472C5F227A385A600913892 /* Flows */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -170,8 +141,6 @@
 		0472C5E927A385A600913892 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				0472C5EA27A385A600913892 /* OTabBarView.swift */,
-				0472C5EB27A385A600913892 /* MainTabView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -182,53 +151,6 @@
 				0472C5F127A385A600913892 /* HapticService.swift */,
 			);
 			path = Haptics;
-			sourceTree = "<group>";
-		};
-		0472C5F227A385A600913892 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5F427A385A600913892 /* Splash */,
-				0472C5F627A385A600913892 /* Prayers */,
-				0472C5FA27A385A600913892 /* Rewards */,
-				0472C5FD27A385A600913892 /* Azkar */,
-			);
-			path = Flows;
-			sourceTree = "<group>";
-		};
-		0472C5F427A385A600913892 /* Splash */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5F527A385A600913892 /* SplashView.swift */,
-				04EF0FB627B3F80D00724CB7 /* SplashFeature.swift */,
-			);
-			path = Splash;
-			sourceTree = "<group>";
-		};
-		0472C5F627A385A600913892 /* Prayers */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5F727A385A600913892 /* PrayerFeature.swift */,
-				0472C5F827A385A600913892 /* PrayersView.swift */,
-			);
-			path = Prayers;
-			sourceTree = "<group>";
-		};
-		0472C5FA27A385A600913892 /* Rewards */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5FB27A385A600913892 /* RewardsView.swift */,
-				0472C5FC27A385A600913892 /* RewardsFeature.swift */,
-			);
-			path = Rewards;
-			sourceTree = "<group>";
-		};
-		0472C5FD27A385A600913892 /* Azkar */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5FE27A385A600913892 /* AzkarFeature.swift */,
-				0472C5FF27A385A600913892 /* AzkarView.swift */,
-			);
-			path = Azkar;
 			sourceTree = "<group>";
 		};
 		0472C60027A385A600913892 /* Resources */ = {
@@ -252,65 +174,8 @@
 		0472C60627A385A600913892 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				0472C60B27A385A600913892 /* Business */,
-				0472C61127A385A600913892 /* Feature */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		0472C60B27A385A600913892 /* Business */ = {
-			isa = PBXGroup;
-			children = (
-				0472C60C27A385A600913892 /* Schedule */,
-				0472C60D27A385A600913892 /* Time */,
-				0472C60E27A385A600913892 /* Haptic */,
-				0472C60F27A385A600913892 /* Permission */,
-				0472C61027A385A600913892 /* Localization */,
-			);
-			path = Business;
-			sourceTree = "<group>";
-		};
-		0472C60C27A385A600913892 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Schedule;
-			sourceTree = "<group>";
-		};
-		0472C60D27A385A600913892 /* Time */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Time;
-			sourceTree = "<group>";
-		};
-		0472C60E27A385A600913892 /* Haptic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Haptic;
-			sourceTree = "<group>";
-		};
-		0472C60F27A385A600913892 /* Permission */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Permission;
-			sourceTree = "<group>";
-		};
-		0472C61027A385A600913892 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Localization;
-			sourceTree = "<group>";
-		};
-		0472C61127A385A600913892 /* Feature */ = {
-			isa = PBXGroup;
-			children = (
-				0472C61327A385A600913892 /* RootFeature.swift */,
-			);
-			path = Feature;
 			sourceTree = "<group>";
 		};
 		0472C61427A385A600913892 /* App */ = {
@@ -333,14 +198,6 @@
 				0472C61C27A385A600913892 /* LottiePlugin.swift */,
 			);
 			path = Plugins;
-			sourceTree = "<group>";
-		};
-		0478B68127AA8DB200891DAA /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				0478B68227AA8DBB00891DAA /* LocationFeature.swift */,
-			);
-			path = Location;
 			sourceTree = "<group>";
 		};
 		04D8397527979EB4007FA07D /* Frameworks */ = {
@@ -438,6 +295,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B865883A2716CC5500FC0CBB /* Build configuration list for PBXNativeTarget "Al Najd (iOS)" */;
 			buildPhases = (
+				04B7E96D27CF546E003E15AC /* Sync SPM */,
 				B865880C2716CC5500FC0CBB /* Sources */,
 				B865880D2716CC5500FC0CBB /* Frameworks */,
 				B865880E2716CC5500FC0CBB /* Resources */,
@@ -599,34 +457,42 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04B7E96D27CF546E003E15AC /* Sync SPM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sync SPM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"${SYMROOT}/Release${EFFECTIVE_PLATFORM_NAME}/\" ] && [ \"${SYMROOT}/Release${EFFECTIVE_PLATFORM_NAME}/\" != \"${SYMROOT}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/\" ] \nthen\n  cp -f -R \"${SYMROOT}/Release${EFFECTIVE_PLATFORM_NAME}/\" \"${SYMROOT}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B865880C2716CC5500FC0CBB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */,
-				0472C63B27A385A700913892 /* RootFeature.swift in Sources */,
 				0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */,
-				0478B68327AA8DBB00891DAA /* LocationFeature.swift in Sources */,
-				0472C62827A385A700913892 /* ONavigationView.swift in Sources */,
 				04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */,
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
-				0472C63027A385A700913892 /* RewardsFeature.swift in Sources */,
 				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
-				0472C62F27A385A700913892 /* RewardsView.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,
-				0472C62627A385A700913892 /* OTabBarView.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
-				0472C62D27A385A700913892 /* PrayerFeature.swift in Sources */,
-				04EF0FB727B3F80D00724CB7 /* SplashFeature.swift in Sources */,
-				0472C63227A385A700913892 /* AzkarView.swift in Sources */,
-				0472C62727A385A700913892 /* MainTabView.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
-				0472C62C27A385A700913892 /* SplashView.swift in Sources */,
 				045849F827A49E480090FB3C /* (null) in Sources */,
-				0472C63127A385A700913892 /* AzkarFeature.swift in Sources */,
-				0472C62E27A385A700913892 /* PrayersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
