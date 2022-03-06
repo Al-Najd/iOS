@@ -9,25 +9,36 @@ import Foundation
 import ComposableArchitecture
 import Entities
 import Common
+import Date
+import Utils
 
-struct AzkarState: Equatable {
-  var activeDate: Date = .now
+public struct AzkarState: Equatable {
+  var activeDate: Date { dateState.currentDay }
+  var dateState: DateState
   var azkar: [AzkarCategory: [RepeatableDeed]] = [
     .sabah: .sabah,
     .masaa: .masaa
   ]
+  
+  public init(dateState: DateState, azkar: [AzkarCategory : [RepeatableDeed]] = [
+    .sabah: .sabah,
+    .masaa: .masaa
+  ]) {
+    self.dateState = dateState
+    self.azkar = azkar
+  }
 }
 
-enum AzkarAction: Equatable {
+public enum AzkarAction: Equatable {
   case onAppear
   case onDoing(RepeatableDeed)
   case onUndoing(RepeatableDeed)
   case onQuickFinish(RepeatableDeed)
 }
 
-struct AzkarEnvironment {}
+public struct AzkarEnvironment { public init() { } }
 
-let azkarReducer = Reducer<
+public let azkarReducer = Reducer<
   AzkarState,
   AzkarAction,
   CoreEnvironment<AzkarEnvironment>

@@ -13,6 +13,7 @@ import PreviewableView
 import ComposableArchitecture
 import DaySlider
 import Calendar
+import Date
 
 struct ONavigationBar: View {
   @State var dragOffset: CGFloat = 0.0
@@ -80,10 +81,10 @@ struct ONavigationBar: View {
             withAnimation(.easeInOut(duration: 0.65)) {
               if canExpand {
                 dragOffset = maxHeight
-                HapticService.main.generate(feedback: .success)
+//                HapticService.main.generate(feedback: .success)
               } else if canCollapse {
                 dragOffset = .zero
-                HapticService.main.generate(feedback: .warning)
+//                HapticService.main.generate(feedback: .warning)
               }
             }
           }

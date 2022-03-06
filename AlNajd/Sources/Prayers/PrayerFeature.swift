@@ -9,14 +9,25 @@ import ComposableArchitecture
 import Business
 import Entities
 import Common
+import Date
 
-struct PrayerState: Equatable {
-  var activeDate: Date = .now
-  var prayers: [Deed.Categorized] = [
+public struct PrayerState: Equatable {
+  public var activeDate: Date { dateState.currentDay }
+  public var dateState: DateState
+  public var prayers: [Deed.Categorized] = [
     .faraaid,
     .sunnah,
     .nafila
   ]
+  
+  public init(dateState: DateState, prayers: [Deed.Categorized] = [
+    .faraaid,
+    .sunnah,
+    .nafila
+  ]) {
+    self.dateState = dateState
+    self.prayers = prayers
+  }
   
   public static func == (lhs: PrayerState, rhs: PrayerState) -> Bool {
     lhs.activeDate == rhs.activeDate &&
@@ -26,15 +37,15 @@ struct PrayerState: Equatable {
   }
 }
 
-enum PrayerAction: Equatable {
+public enum PrayerAction: Equatable {
   case onAppear
   case onDoing(Deed)
   case onUndoing(Deed)
 }
 
-struct PrayerEnvironment {}
+public struct PrayerEnvironment { public init() { } }
 
-let prayerReducer = Reducer<
+public let prayerReducer = Reducer<
   PrayerState,
   PrayerAction,
   CoreEnvironment<PrayerEnvironment>

@@ -157,19 +157,7 @@ public extension OnboardingAction {
 }
 
 // MARK: - Environment
-public struct OnboardingEnvironment {
-    var userDefaults: UserDefaultsClient
-    var mainQueue: AnySchedulerOf<DispatchQueue>
-    
-    public init(
-        userDefaults: UserDefaultsClient = .live(),
-        mainQueue: AnySchedulerOf<DispatchQueue> = .main
-    ) {
-        self.userDefaults = userDefaults
-        self.mainQueue = mainQueue
-    }
-    
-}
+public struct OnboardingEnvironment { public init() { } }
 
 // MARK: - Reducer
 public let onboardingReducer = Reducer<
@@ -180,14 +168,14 @@ public let onboardingReducer = Reducer<
   switch action {
     case .onAppear:
           state.didFinishOnboarding = env.userDefaults.hasShownFirstLaunchOnboarding
-          return state.didFinishOnboarding
-          ? .init(value: .getStarted)
-          : state.step.isFirstStep
-          ? Effect(value: .delayedNextStep)
-              .delay(for: 4, scheduler: env.mainQueue.animation())
-              .eraseToEffect()
-              .cancellable(id: DelayedNextStepId())
-          : .none
+      if state.didFinishOnboarding {
+        return .init(value: .getStarted)
+      } else {
+        return Effect(value: .delayedNextStep)
+          .delay(for: 4, scheduler: env.mainQueue.animation())
+          .eraseToEffect()
+          .cancellable(id: DelayedNextStepId())
+      }
     case .nextStep, .delayedNextStep:
       state.step.next()
       return env

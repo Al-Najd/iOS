@@ -15,18 +15,50 @@ import Dashboard
 import Common
 import Settings
 import Onboarding
+import Date
+import Prayers
+import Azkar
+import Rewards
+import Location
 
-struct RootState: Equatable {
-  var dashboardState = DashboardState()
-  var prayerState = PrayerState()
-  var azkarState = AzkarState()
-  var rewardState = RewardsState()
-  var dateState = DateState()
-  var settingsState = SettingsState()
-  var onboardingState = OnboardingState()
+public struct RootState: Equatable {
+  public var locationState: LocationState
+  public var dashboardState: DashboardState
+  public var prayerState: PrayerState
+  public var azkarState: AzkarState
+  public var rewardState: RewardsState
+  public var dateState: DateState
+  public var settingsState: SettingsState
+  public var onboardingState: OnboardingState?
+  
+  public init(
+    locationState: LocationState = LocationState(),
+    dashboardState: DashboardState = DashboardState(),
+    dateState: DateState = .init(),
+    settingsState: SettingsState = SettingsState(),
+    onboardingState: OnboardingState? = nil
+  ) {
+    self.locationState = locationState
+    self.dashboardState = dashboardState
+    self.dateState = dateState
+    self.settingsState = settingsState
+    self.onboardingState = onboardingState
+    self.azkarState = .init(dateState: dateState)
+    self.prayerState = .init(dateState: dateState)
+    self.rewardState = .init(dateState: dateState)
+  }
 }
 
-enum RootAction {
+// TODO: - Move to its own Client
+public enum LifecycleAction {
+  case becameActive
+  case becameInActive
+  case wentToBackground
+}
+
+public enum RootAction {
+  case onAppear
+  case locationAction(LocationManager.Action)
   case onboardingAction(OnboardingAction)
   case dashboardAction(DashboardAction)
   case lifecycleAction(LifecycleAction)
@@ -37,14 +69,16 @@ enum RootAction {
   case settingsAction(SettingsAction)
 }
 
-struct RootEnvironment { }
+public struct RootEnvironment { public init() { } }
 
-let rootReducer = Reducer<
+public let rootReducer = Reducer<
   RootState,
   RootAction,
   CoreEnvironment<RootEnvironment>
 >.combine(
-  onboardingReducer.pullback(
+  onboardingReducer
+    .optional()
+    .pullback(
     state: \.onboardingState,
     action: /RootAction.onboardingAction,
     environment: { _ in .live(OnboardingEnvironment()) }
@@ -79,8 +113,23 @@ let rootReducer = Reducer<
     action: /RootAction.settingsAction,
     environment: { _ in .live(SettingsEnvironment()) }
   ),
-  syncingReducer
-)
+  syncingReducer,
+  rootReducerCore
+).combined(with: locationManagerReducer.pullback(
+  state: \.self,
+  action: /RootAction.locationAction,
+  environment: { $0 }
+))
+
+let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
+  switch action {
+    case .onAppear:
+      state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init()
+    default:
+      break
+  }
+  return .none
+}
 
 fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
   switch action {
@@ -95,8 +144,28 @@ fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<R
       .append(.rewardAction(.onAppear))
       .append(.dashboardAction(.onAppear))
       .eraseToEffect()
+    case .lifecycleAction(.becameActive):
+      return .init(value: .settingsAction(.onAppear))
   default:
     break
+  }
+  
+  return .none
+}
+
+private let locationManagerReducer: Reducer<
+  RootState,
+  LocationManager.Action,
+  CoreEnvironment<RootEnvironment>
+> = .init {
+  state, action, env in
+  
+  switch action {
+    case let .didUpdateLocations(locations):
+      guard let coordinates = locations.first?.coordinate else { return .none }
+      state.locationState.coordinates = coordinates
+    default:
+      break
   }
   
   return .none
@@ -109,10 +178,6 @@ fileprivate func sync(_ state: inout RootState, with dateAction: DateAction) {
   case .onChange(let currentDay):
     guard !currentDay.isInFuture else { return }
     state.dateState.currentDay = currentDay
-    state.prayerState.activeDate = currentDay
-    state.azkarState.activeDate = currentDay
-    state.rewardState.activeDate = currentDay
-    state.dashboardState.activeDate = currentDay
   }
 }
 
@@ -144,6 +209,6 @@ extension Store where State == RootState, Action == RootAction {
   static let mainRoot: Store<State, Action> = .init(
     initialState: .init(),
     reducer: rootReducer,
-    environment: .live(RootEnvironment())
+    environment: CoreEnvironment.live(RootEnvironment())
   )
 }

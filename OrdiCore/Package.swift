@@ -68,8 +68,8 @@ let package = Package(
         name: "OrdiLogging",
         dependencies: [
             "Entity",
-            "Pulse",
-            "Sentry"
+            .product(name: "Pulse", package: "Pulse"),
+            .product(name: "Sentry", package: "Sentry")
         ]
     ),
     .target(

@@ -37,7 +37,7 @@ public struct ANPermission: Identifiable, Equatable {
 }
 
 public extension ANPermission {
-    enum Status: Equatable {
+    enum Status: Equatable, Codable {
       case notDetermined
       case given
       case denied

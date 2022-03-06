@@ -9,75 +9,31 @@ import SwiftUI
 import ComposableArchitecture
 import Onboarding
 import Settings
-
-enum LifecycleAction {
-  case becameActive
-  case becameInActive
-  case wentToBackground
-}
+import Utils
+import Root
+import Common
 
 @main
 struct Al_NajdApp: App {
+  @Environment(\.scenePhase) private var scenePhase
+  public let store = Store<RootState, RootAction>(
+    initialState: RootState(),
+    reducer: rootReducer,
+    environment: CoreEnvironment.live(RootEnvironment())
+  )
   
-  @Environment(\.scenePhase) var scenePhase
-  
-  let store: Store<RootState, RootAction> = .mainRoot
-  
-  var plugins: [AppPlugin] {
+  lazy var plugins: [AppPlugin] = {
     [
       ThemePlugin(),
       CorePlugin(),
       AppearancesPlugin(),
       ReportPlugin(),
-    ]
-  }
-  
-  init() {
-    plugins.forEach { $0.setup() }
-  }
+    ].with { $0.forEach { $0.setup() } }
+  }()
   
   var body: some Scene {
-    WithViewStore(self.store) { viewStore in
-      WindowGroup {
-        if !viewStore.onboardingState.didFinishOnboarding {
-          OnboardingView(
-            store: store.scope(
-              state: \.onboardingState,
-              action: RootAction.onboardingAction
-            )
-          ) {
-            SplashView {
-              MainTabView(store: store)
-            }
-          }
-        } else {
-          SplashView {
-            MainTabView(store: store)
-          }
-        }
-      }.onChange(of: scenePhase) { scenePhase in
-        switch scenePhase {
-        case .active:
-          viewStore.send(.lifecycleAction(.becameActive))
-        case .inactive:
-          viewStore.send(.lifecycleAction(.becameInActive))
-        case .background:
-          viewStore.send(.lifecycleAction(.wentToBackground))
-        @unknown default:
-          break
-        }
-      }
-      
-      #if os(macOS)
-      Settings {
-        SettingsView(
-          store: store.scope(
-            state: \.settingsState,
-            action: RootAction.settingsAction
-          )
-        )
-      }
-      #endif
+    WindowGroup {
+      RootView(store: self.store)
     }
   }
 }
