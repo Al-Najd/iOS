@@ -138,12 +138,31 @@ func getRangeProgress(
   )
 }
 
+var fajrAndAishaaPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight? = { category, dateIndexedDeeds in
+  guard category == .fard else { return nil }
+  let daysWhereFajrAndAishaaArePrayed = dateIndexedDeeds.compactMap { date, deeds -> Bool in
+    let fajrPrayed = deeds.filter { $0.title == Deed.fajr.title }
+    let aishaaPrayed = deeds.filter { $0.title == Deed.aishaa.title }
+    
+    return zip(fajrPrayed, aishaaPrayed).map { fajr, aishaa in
+      fajr.isDone && aishaa.isDone
+    }
+    .filter { $0 == false }
+    .count == 0
+  }
+  
+  let didPrayFajrAndAishaa = daysWhereFajrAndAishaaArePrayed.filter { $0 == true }.count > 0
+  guard didPrayFajrAndAishaa else { return nil }
+  
+  return .init(indicator: .praise, details: "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night".localized)
+}
 
 var fajrPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight? = { category, dateIndexedDeeds in
   guard category == .fard else { return nil }
   let daysWhereFajrIsPrayed = dateIndexedDeeds.compactMap { date, deeds -> String? in
-    let didDoFajr = deeds.first { $0.isDone == true && $0 == .fajr } != nil
-    guard didDoFajr == true else { return nil }
+    let fajrDonePerDate = deeds.filter { $0.title == Deed.fajr.title }.filter { $0.isDone }
+    
+    guard fajrDonePerDate.isEmpty == false else { return nil }
     
     return date.dayName(ofStyle: .full)
   }
