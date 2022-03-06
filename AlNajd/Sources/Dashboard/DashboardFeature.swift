@@ -13,16 +13,20 @@ import Localization
 import Utils
 import Business
 import Common
+import Date
 
 public struct DashboardState: Equatable {
   public var tipOfTheDay: String
   public var reports: [RangeProgress]
+  public var dateState: DateState
   public var activeDate: Date = .now
   
   public init(
+    dateState: DateState = .init(),
     tipOfTheDay: String = "",
     reports: [RangeProgress] = []
   ) {
+    self.dateState = dateState
     self.reports = reports
     self.tipOfTheDay = tipOfTheDay
   }
@@ -31,6 +35,7 @@ public struct DashboardState: Equatable {
 public enum DashboardAction: Equatable {
   case onAppear
   case populate(with: [RangeProgress])
+  case date(DateAction)
 }
 
 public struct DashboardEnvironment { public init() { } }
@@ -54,6 +59,10 @@ public let dashboardReducer = Reducer<
     )
   case let .populate(with: ranges):
     state.reports = ranges
+    case let .date(.onChange(activeDate)):
+      state.activeDate = activeDate
+    default:
+      break
   }
   return .none
 }
@@ -169,7 +178,10 @@ func analyize(_ category: DeedCategory, _ reports: [Date: [Deed]]) -> Insight? {
 
 extension Store where State == DashboardState, Action == DashboardAction {
   static let mock: Store = .init(
-    initialState: .init(reports: RangeProgress.mock),
+    initialState: .init(
+      dateState: .init(),
+      reports: RangeProgress.mock
+    ),
     reducer: dashboardReducer,
     environment: .live(DashboardEnvironment())
   )

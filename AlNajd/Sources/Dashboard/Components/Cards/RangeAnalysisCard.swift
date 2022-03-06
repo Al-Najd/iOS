@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DesignSystem
+import Common
 
 public struct RangeProgress: Identifiable, Equatable {
     public let id = UUID().uuidString

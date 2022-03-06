@@ -10,14 +10,17 @@ import Business
 import Foundation
 import Entities
 import ComposableCoreLocation
+import PrayersClient
 
 @dynamicMemberLookup
 public struct CoreEnvironment<Environment> {
   public var environment: Environment
   public var cache: () -> (CacheManager)
   public var userDefaults: UserDefaultsClient
-  public var locationManager: () -> LocationManager
+  public var locationManager: LocationManager
   public var mainQueue: AnySchedulerOf<DispatchQueue>
+  public var prayersClient: PrayersClient
+  public var coordinates: CLLocationCoordinate2D? = nil
 
   public subscript<Dependency>(
     dynamicMember keyPath: WritableKeyPath<Environment, Dependency>
@@ -33,10 +36,9 @@ public struct CoreEnvironment<Environment> {
         CacheManager(decoder: .init(), encoder: .init())
       },
       userDefaults: .live(),
-      locationManager: {
-        .live
-      },
-      mainQueue: .main
+      locationManager: .live,
+      mainQueue: .main,
+      prayersClient: .live
     )
   }
 }
@@ -109,8 +111,16 @@ public struct UserDefaultsClient {
         self.boolForKey(StorageKey.didCompleteOnboarding.key)
     }
     
+    public var isFontAccessible: Bool {
+        self.boolForKey(StorageKey.enableAccessibilityFont.key)
+    }
+    
     public func setHasShownFirstLaunchOnboarding(_ bool: Bool) -> Effect<Never, Never> {
         self.setBool(bool, StorageKey.didCompleteOnboarding.key)
+    }
+    
+    public func setFontAccessiblity(_ bool: Bool) -> Effect<Never, Never> {
+        self.setBool(bool, StorageKey.enableAccessibilityFont.key)
     }
 }
 

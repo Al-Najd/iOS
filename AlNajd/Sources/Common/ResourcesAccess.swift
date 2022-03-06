@@ -25,6 +25,8 @@ public enum ImageKey {
 }
 
 public extension StorageKey {
+    static let locationPermissionStatus: StorageKey = .init(key: "locationPermissionStatus", suitableStorage: .userDefaults)
+    
   static let prayers: (_ date: Date, _ category: DeedCategory) -> StorageKey = {
     .init(
       key: "\($0.day)-\($0.month)-\($0.year)-\($1)-prayers",

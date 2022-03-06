@@ -11,7 +11,8 @@ import Entities
 import Common
 
 struct AzkarState: Equatable {
-  var activeDate: Date = .now
+  var activeDate: Date { dateState.currentDay }
+  var dateState: DateState
   var azkar: [AzkarCategory: [RepeatableDeed]] = [
     .sabah: .sabah,
     .masaa: .masaa

@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import Onboarding
 import Settings
+import Utils
 
 enum LifecycleAction {
   case becameActive
@@ -20,40 +21,49 @@ enum LifecycleAction {
 struct Al_NajdApp: App {
   
   @Environment(\.scenePhase) var scenePhase
-  
+  @ObservedObject var viewStore: ViewStore<ViewState, RootAction>
   let store: Store<RootState, RootAction> = .mainRoot
   
-  var plugins: [AppPlugin] {
+  struct ViewState: Equatable {
+    let isOnboardingPresented: Bool
+    
+    init(state: RootState) {
+      self.isOnboardingPresented = state.onboardingState?.didFinishOnboarding ?? false
+    }
+  }
+  
+  lazy var plugins: [AppPlugin] = {
     [
       ThemePlugin(),
       CorePlugin(),
       AppearancesPlugin(),
       ReportPlugin(),
-    ]
-  }
+    ].with { $0.forEach { $0.setup() } }
+  }()
   
   init() {
-    plugins.forEach { $0.setup() }
+    self.viewStore = ViewStore(self.store.scope(state: ViewState.init))
   }
   
   var body: some Scene {
     WithViewStore(self.store) { viewStore in
       WindowGroup {
-        if !viewStore.onboardingState.didFinishOnboarding {
-          OnboardingView(
-            store: store.scope(
-              state: \.onboardingState,
-              action: RootAction.onboardingAction
-            )
-          ) {
-            SplashView {
-              MainTabView(store: store)
-            }
-          }
-        } else {
+        if !(viewStore.onboardingState?.didFinishOnboarding ?? true) {
           SplashView {
             MainTabView(store: store)
           }
+        } else {
+        IfLetStore(
+          self.store.scope(state: \.onboardingState, action: RootAction.onboardingAction),
+          then: { scopedStore in
+            OnboardingView(store: scopedStore) {
+                SplashView {
+                  MainTabView(store: store)
+                }
+              }
+          }
+        )
+          .zIndex(2)
         }
       }.onChange(of: scenePhase) { scenePhase in
         switch scenePhase {

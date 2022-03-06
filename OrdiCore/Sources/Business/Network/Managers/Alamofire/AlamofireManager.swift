@@ -14,6 +14,7 @@ import OrdiLogging
 import Pulse
 
 public final class AlamofireManager: NetworkProtocol {
+    public static let main = AlamofireManager()
     public let logger: NetworkLogger = .init()
     public typealias Percentage = Double
     public typealias Publisher = AnyPublisher<Percentage, Error>
