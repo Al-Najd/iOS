@@ -124,7 +124,7 @@ public let rootReducer = Reducer<
 let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
   switch action {
     case .onAppear:
-      state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init(step: .step22_UntilWeMeetAgain)
+      state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init(step: .step0_InMemoryOfOurLovedOnes)
     default:
       break
   }
