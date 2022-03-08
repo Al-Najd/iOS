@@ -16,9 +16,11 @@ public struct RootView: View {
   
   struct ViewState: Equatable {
     let isOnboardingPresented: Bool
+    let didFinishOnboarding: Bool
     
     init(state: RootState) {
       self.isOnboardingPresented = state.onboardingState != nil
+      self.didFinishOnboarding = state.onboardingState?.didFinishOnboarding ?? true
     }
   }
   
@@ -28,16 +30,24 @@ public struct RootView: View {
   }
   
     public var body: some View {
-      ZStack {
+      Group {
         if !viewStore.isOnboardingPresented {
-          MainTabView(store: store)
-            .zIndex(0)
+          SplashView {
+            MainTabView(store: store)
+          }
         } else {
-          IfLetStore(
-            self.store.scope(state: \.onboardingState, action: RootAction.onboardingAction),
-            then: OnboardingView.init(store:)
-          )
-            .zIndex(1)
+          ZStack {
+            if viewStore.didFinishOnboarding {
+              SplashView {
+                MainTabView(store: store)
+              }
+            }
+            
+            IfLetStore(
+              self.store.scope(state: \.onboardingState, action: RootAction.onboardingAction),
+              then: OnboardingView.init(store:)
+            )
+          }
         }
       }
       .modifier(DeviceStateModifier())

@@ -33,7 +33,6 @@ private enum ANTargets {
   + ANTargets.prayers
   + ANTargets.azkar
   + ANTargets.rewards
-  + ANTargets.root
 }
 
 private extension ANTargets {
@@ -55,7 +54,6 @@ private extension ANTargets {
         "Prayers",
         "Azkar",
         "Rewards",
-        "Root",
         "Dashboard",
         .product(name: "Core", package: "OrdiCore")
       ]
@@ -63,24 +61,6 @@ private extension ANTargets {
   ]
 }
 private extension ANTargets {
-  static let root: [Target] = [
-    .target(
-      name: "Root",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        "Onboarding",
-        "Dashboard",
-        "Settings",
-        "Prayers",
-        "Azkar",
-        "Rewards",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
   static let rewards: [Target] = [
     .target(
       name: "Rewards",
@@ -88,6 +68,7 @@ private extension ANTargets {
         "Common",
         "Entities",
         "Localization",
+        "Date",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -268,6 +249,7 @@ private extension ANTargets {
       dependencies: [
         "Entities",
         "Common",
+        "Date",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -373,17 +355,8 @@ private enum ANProducts {
   + prayers
   + azkar
   + rewards
-  + root
 }
 private extension ANProducts {
-  
-  static let root: [PackageDescription.Product] = [
-    .library(
-      name: "Root",
-      targets: ["Root"]
-    )
-  ]
-  
   static let location: [PackageDescription.Product] = [
     .library(
       name: "Location",
