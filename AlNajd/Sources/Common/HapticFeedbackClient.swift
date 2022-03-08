@@ -9,12 +9,12 @@ import Foundation
 import CoreHaptics
 import UIKit
 
-class HapticService {
-  static let main = HapticService()
+public class HapticFeedbackClient {
+  public static let main = HapticFeedbackClient()
   
   private let generator = UINotificationFeedbackGenerator()
   
-  func generate(feedback type: UINotificationFeedbackGenerator.FeedbackType) {
-    generator.notificationOccurred(type)
+  public func send(_ feedback: UINotificationFeedbackGenerator.FeedbackType) {
+    generator.notificationOccurred(feedback)
   }
 }
