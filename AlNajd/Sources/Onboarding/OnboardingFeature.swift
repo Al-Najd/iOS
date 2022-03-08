@@ -178,12 +178,14 @@ public let onboardingReducer = Reducer<
       }
     case .nextStep, .delayedNextStep:
       state.step.next()
+      env.haptic.send(.success)
       return env
         .cache()
         .asyncSave(state.step, for: .onboardingStep)
         .fireAndForget()
     case .previousStep:
       state.step.previous()
+      env.haptic.send(.warning)
     case .delegate(.getStarted):
       withAnimation(.easeInOut(duration: 0.65)) {
         state.didFinishOnboarding = true

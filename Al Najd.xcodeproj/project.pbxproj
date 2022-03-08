@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */; };
-		0472C62B27A385A700913892 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C5F127A385A600913892 /* HapticService.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
@@ -61,7 +60,6 @@
 /* Begin PBXFileReference section */
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
-		0472C5F127A385A600913892 /* HapticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
@@ -131,13 +129,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		045849F527A493EE0090FB3C /* NavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NavigationBar;
-			sourceTree = "<group>";
-		};
 		0472C5E727A385A600913892 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,26 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				04F8E31127AC3BE1002B96AB /* Recommendation */,
-				045849F527A493EE0090FB3C /* NavigationBar */,
-				0472C5E927A385A600913892 /* Tabs */,
-				0472C5F027A385A600913892 /* Haptics */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		0472C5E927A385A600913892 /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tabs;
-			sourceTree = "<group>";
-		};
-		0472C5F027A385A600913892 /* Haptics */ = {
-			isa = PBXGroup;
-			children = (
-				0472C5F127A385A600913892 /* HapticService.swift */,
-			);
-			path = Haptics;
 			sourceTree = "<group>";
 		};
 		0472C60027A385A600913892 /* Resources */ = {
@@ -539,7 +512,6 @@
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
 				04C2FB0427D4A3A9002CEC77 /* AppDelegate.swift in Sources */,
 				04C2FB0327D4A3A9002CEC77 /* AppDelegateFeature.swift in Sources */,
-				0472C62B27A385A700913892 /* HapticService.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
 				04C2FB0027D4A3A9002CEC77 /* RootView.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,

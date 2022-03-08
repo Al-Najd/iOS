@@ -20,6 +20,7 @@ public struct CoreEnvironment<Environment> {
   public var locationManager: LocationManager
   public var mainQueue: AnySchedulerOf<DispatchQueue>
   public var prayersClient: PrayersClient
+  public var haptic: HapticFeedbackClient
   public var coordinates: CLLocationCoordinate2D? = nil
 
   public subscript<Dependency>(
@@ -38,7 +39,8 @@ public struct CoreEnvironment<Environment> {
       userDefaults: .live(),
       locationManager: .live,
       mainQueue: .main,
-      prayersClient: .live
+      prayersClient: .live,
+      haptic: .main
     )
   }
 }
