@@ -46,7 +46,9 @@ public struct SettingsView: View {
             .scaledFont(.pHeadline, .bold)
             .foregroundColor(.mono.offblack)
         })
-      }.onAppear {
+      }
+      .background(Color.primary.background)
+      .onAppear {
         viewStore.send(.onAppear)
       }
     }

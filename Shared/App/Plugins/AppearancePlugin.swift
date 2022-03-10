@@ -28,8 +28,8 @@ private extension AppearancesPlugin {
   
   func adaptUITableViewAppearance() {
     UITableView.appearance().separatorStyle = .none
-    UITableViewCell.appearance().backgroundColor = .green
-    UITableView.appearance().backgroundColor = .green
+    UITableViewCell.appearance().backgroundColor = .clear
+    UITableView.appearance().backgroundColor = .clear
     UITableView.appearance(for: .init(userInterfaceStyle: .light)).backgroundColor = .clear
     UITableView.appearance(for: .init(userInterfaceStyle: .dark)).backgroundColor = .clear
   }

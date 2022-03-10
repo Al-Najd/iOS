@@ -37,7 +37,7 @@ public struct AzkarView: View {
       }
       .onAppear {
         viewStore.send(.onAppear)
-      }
+      }.background(Color.primary.background)
     }
   }
 }

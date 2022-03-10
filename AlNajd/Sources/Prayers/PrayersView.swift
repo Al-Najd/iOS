@@ -42,10 +42,12 @@ public struct PrayersView: View {
           store: store
         )
       }
+      .background(Color.primary.background.ignoresSafeArea())
       .onAppear {
         viewStore.send(.onAppear)
       }
       .padding(.top, .p4)
+      
     }
   }
 }
