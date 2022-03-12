@@ -16,28 +16,19 @@ public struct RewardsState: Equatable {
   public var activeDate: Date = .init()
   public var dateState: DateState
   public var prayers: [DeedCategory: [Deed]] = [
-    .fard: .faraaid,
-    .sunnah: .sunnah,
-    .nafila: .nafila
+    .fard: [],
+    .sunnah: [],
+    .nafila: []
   ]
   
   public var azkar: [AzkarCategory: [RepeatableDeed]] = [
-    .sabah: .sabah,
-    .masaa: .masaa
+    .sabah: [],
+    .masaa: []
   ]
   
-  public init(activeDate: Date = .init(), dateState: DateState, prayers: [DeedCategory : [Deed]] = [
-    .fard: .faraaid,
-    .sunnah: .sunnah,
-    .nafila: .nafila
-  ], azkar: [AzkarCategory : [RepeatableDeed]] = [
-    .sabah: .sabah,
-    .masaa: .masaa
-  ]) {
+  public init(activeDate: Date = .init(), dateState: DateState) {
     self.activeDate = activeDate
     self.dateState = dateState
-    self.prayers = prayers
-    self.azkar = azkar
   }
 }
 
@@ -60,19 +51,44 @@ public let rewardsReducer = Reducer<
 > { state, action, env in
   switch action {
   case .onAppear:
-    break
+      DeedCategory.allCases.forEach {
+        state.prayers[$0] = env.getPrayersRewardsFromCache(state.activeDate, $0)
+      }
+      
+      AzkarCategory.allCases.forEach {
+        state.azkar[$0] = env.getAzkarRewardsFromCache(state.activeDate, $0)
+      }
   case let .onDoingDeed(deed):
-    state.prayers[deed.category]?.findAndReplaceElseAppend(with: deed)
+      if state.prayers[deed.category] != nil {
+        state.prayers[deed.category]?.findAndReplaceElseAppend(with: deed)
+      } else {
+        state.prayers[deed.category] = [deed]
+      }
+      cachePrayerRewards(state, env)
   case let .onUndoingDeed(deed):
-    state.prayers[deed.category]?.findAndReplaceElseAppend(with: deed)
+      state.prayers[deed.category]?.findAndRemove(deed)
+      cachePrayerRewards(state, env)
+      
   case let .onDoingRepeatableDeed(repeatableDeed: deed):
-    state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
+      if state.azkar[deed.category] != nil {
+        state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
+      } else {
+        state.azkar[deed.category] = [deed]
+      }
+      cacheAzkarRewards(state, env)
   case let .onUndoingRepeatableDeed(repeatableDeed: deed):
-    state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
+      state.azkar[deed.category]?.findAndRemove(deed)
+      cacheAzkarRewards(state, env)
   case let .onQuickFinishRepeatableDeed(repeatableDeed: deed):
-    state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
+      if state.azkar[deed.category] != nil {
+        state.azkar[deed.category]?.findAndReplaceElseAppend(with: deed)
+      } else {
+        state.azkar[deed.category] = [deed]
+      }
+      cacheAzkarRewards(state, env)
     case let .date(.onChange(date)):
       state.activeDate = date
+      return .init(value: .onAppear)
     default:
       break
   }
