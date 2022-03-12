@@ -19,40 +19,58 @@ public struct SettingsView: View {
   }
   
   public var body: some View {
-    WithViewStore(store) { viewStore in
-      Form {
-        Section(content: {
+      SettingsForm {
+          SettingsSection(title: "Permissions") {
+              SettingsNavigationLink(
+                destination: EmptyView(),
+                title: "Permissions"
+              )
+              
+              SettingsNavigationLink(
+                destination: EmptyView(),
+                title: "Sounds"
+              )
+              
+              SettingsNavigationLink(
+                destination: EmptyView(),
+                title: "Notifications"
+              )
+              
+              SettingsNavigationLink(
+                destination: EmptyView(),
+                title: "Accessibility"
+              )
+          }
           
-          SettingsToggle(
-            modifier: .fontAccessibility,
-            binding: viewStore.binding(\.$enableAccessibilityFont).animation(.easeInOut),
-            onTap: {
-              viewStore.send(.onTapModifier(.fontAccessibility), animation: .easeInOut)
-            })
-        }, header: {
-          Text("Accessibility".localized)
-            .scaledFont(.pHeadline, .bold)
-            .foregroundColor(.mono.offblack)
-        })
-        Section(content: {
-          SettingsPermission(
-            permission: viewStore.locationPermission,
-            onTap: {
-              viewStore.send(.onTapPermission(viewStore.locationPermission))
-            }
-          )
-        }, header: {
-          Text("Permissions".localized)
-            .scaledFont(.pHeadline, .bold)
-            .foregroundColor(.mono.offblack)
-        })
-      }
-      .background(Color.primary.background)
-      .onAppear {
-        viewStore.send(.onAppear)
-      }
-    }
+          SettingsSection(title: "Developer Settings") {
+              SettingsNavigationLink(
+                destination: EmptyView(),
+                title: "Developer Settings"
+              )
+          }
+      }.padding()
   }
+}
+
+struct SettingsNavigationLink<Destination>: View where Destination: View {
+    let destination: Destination
+    let title: LocalizedStringKey
+    
+    var body: some View {
+        SettingsRow {
+            NavigationLink(
+                destination: self.destination,
+                label: {
+                    HStack {
+                        Text(self.title)
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 20))
+                    }
+                }
+            )
+        }
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {
