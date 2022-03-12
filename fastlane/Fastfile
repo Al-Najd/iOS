@@ -89,7 +89,7 @@ platform :ios do
     pilot(
       changelog: changelog,
       distribute_external: true,
-      groups: ['App Store Connect Users', 'Beta Testers']
+      groups: ['App Store Connect Users', 'Beta Testers'],
     )
   end
 
