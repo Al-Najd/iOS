@@ -47,13 +47,6 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.prayer)
-            .background(content: {
-              Color
-                .primary
-                .background.ignoresSafeArea()
-            })
-          
-          
           
           AzkarView(
             store: store.scope(
@@ -62,11 +55,7 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.azkar)
-            .background(content: {
-              Color
-                .primary
-                .background.ignoresSafeArea()
-            })
+
           
           DashboardView(
             store: store.scope(
@@ -75,11 +64,6 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.dashboard)
-            .background(content: {
-              Color
-                .primary
-                .background.ignoresSafeArea()
-            })
           
           RewardsView(
             store: store.scope(
@@ -88,11 +72,6 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.rewards)
-            .background(content: {
-              Color
-                .primary
-                .background.ignoresSafeArea()
-            })
           
           SettingsView(
             store: store.scope(
@@ -101,11 +80,8 @@ struct MainTabView: View {
             )
           )
             .tag(Tab.settings)
-            .background(content: {
-              Color
-                .primary
-                .background.ignoresSafeArea()
-            })
+          
+
         }
         
         OTabBarView(tab: $tab)

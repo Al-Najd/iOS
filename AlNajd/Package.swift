@@ -148,7 +148,8 @@ private extension ANTargets {
       dependencies: [
         "Entities",
         "Localization",
-        .product(name: "Core", package: "OrdiCore")
+        .product(name: "Core", package: "OrdiCore"),
+        .product(name: "ComposableCoreLocation", package: "composable-core-location")
       ]
     )
   ]

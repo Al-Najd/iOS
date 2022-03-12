@@ -5,92 +5,42 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.000184">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000169">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to ios setup_for_ci_if_needed lane" time="8.3e-05">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios setup_for_ci_if_needed lane" time="7.9e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: Switch to ios handle_versioning lane" time="8.7e-05">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios handle_versioning lane" time="6.1e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: get_version_number" time="0.057942">
+      <testcase classname="fastlane.lanes" name="3: get_version_number" time="0.024542">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: last_git_tag" time="0.033864">
+      <testcase classname="fastlane.lanes" name="4: last_git_tag" time="0.047124">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: increment_build_number" time="1.407557">
+      <testcase classname="fastlane.lanes" name="5: increment_build_number" time="0.8729">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to ios build_for_app_store_distribtion lane" time="0.000138">
+      <testcase classname="fastlane.lanes" name="6: Switch to ios build_for_app_store_distribtion lane" time="0.000134">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: gym" time="66.529449">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="08: Switch to ios upload_to_testflight lane" time="0.000187">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="09: git_tags" time="0.198246">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="10: changelog_from_git_commits" time="0.00983">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="11: pilot" time="310.823191">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="12: clean_build_artifacts" time="0.002724">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="13: Switch to ios sync_git lane" time="0.000576">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="14: git_add" time="0.080325">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="15: get_version_number" time="0.012011">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="16: git_commit" time="0.140934">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="17: push_to_git_remote" time="1.947192">
+      <testcase classname="fastlane.lanes" name="7: gym" time="0.37925">
         
       </testcase>
     
