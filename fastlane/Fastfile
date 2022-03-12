@@ -71,7 +71,8 @@ platform :ios do
     gym(
       scheme: "Al Najd (iOS)",
       export_method: "app-store",
-      export_xcargs: "-allowProvisioningUpdates"
+      export_xcargs: "-allowProvisioningUpdates",
+      configuration: "Beta"
     )
   end
 
