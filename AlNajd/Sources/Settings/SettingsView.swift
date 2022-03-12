@@ -10,7 +10,10 @@ import DesignSystem
 import ComposableArchitecture
 import Localization
 import Entities
+import Pulse
 import ReusableUI
+import OrdiLogging
+import PulseUI
 
 public struct SettingsView: View {
   let store: Store<SettingsState, SettingsAction>
@@ -19,36 +22,61 @@ public struct SettingsView: View {
   }
   
   public var body: some View {
-      SettingsForm {
-          SettingsSection(title: "Permissions") {
-              SettingsNavigationLink(
-                destination: EmptyView(),
-                title: "Permissions"
-              )
+      NavigationView {
+          SettingsForm {
+              SettingsSection(title: "Permissions") {
+                  SettingsNavigationLink(
+                    destination: LocationPermissionView(store: store),
+                    title: "Location"
+                  )
+                  
+                  SettingsNavigationLink(
+                    destination: NotificationsPermissionView(store: self.store),
+                    title: "Notifications"
+                  )
+              }
               
-              SettingsNavigationLink(
-                destination: EmptyView(),
-                title: "Sounds"
-              )
+#if DEBUG
+              SettingsSection(title: "Developer Settings") {
+                  SettingsNavigationLink(
+                    destination: MainView(),
+                    title: "Developer Settings"
+                  )
+              }
+#endif
               
-              SettingsNavigationLink(
-                destination: EmptyView(),
-                title: "Notifications"
-              )
-              
-              SettingsNavigationLink(
-                destination: EmptyView(),
-                title: "Accessibility"
-              )
+              SettingsSection(title: "Support us!  🙌", padContents: false) {
+                  ScrollView(.horizontal, showsIndicators: false) {
+                      HStack(spacing: 16) {
+                          Button(action: {
+                              
+                          }, label: {
+                              SupportUsCard(
+                                iconName: "star.fill",
+                                text: "Leave us a review",
+                                color: Color.primary
+                              )
+                          })
+                          
+                          Button(action: { }, label: {
+                              SupportUsCard(
+                                iconName: "square.and.arrow.up.fill",
+                                text: "Share with a friend",
+                                color: Color.secondary
+                              )
+                          })
+                          // NB: gives a little bit of space at the end of the scroll view
+                          Divider()
+                              .hidden()
+                      }
+                      .padding(.leading)
+                  }
+              }
           }
-          
-          SettingsSection(title: "Developer Settings") {
-              SettingsNavigationLink(
-                destination: EmptyView(),
-                title: "Developer Settings"
-              )
-          }
-      }.padding()
+          .padding([.leading, .trailing, .top])
+          .navigationTitle("Settings")
+          .navigationBarTitleDisplayMode(.inline)
+      }
   }
 }
 
@@ -64,9 +92,9 @@ struct SettingsNavigationLink<Destination>: View where Destination: View {
                     HStack {
                         Text(self.title)
                         Spacer()
-                        Image(systemName: "arrow.right")
+                        Image(systemName: "arrow.forward")
                             .font(.system(size: 20))
-                    }
+                    }.foregroundColor(Color.mono.label)
                 }
             )
         }
@@ -132,28 +160,30 @@ struct SettingsPermission: View {
         .foregroundColor(.primary.darkMode)
     }
     
-    Text(permission.subtitles.localized)
-      .scaledFont(.pBody)
-      .foregroundColor(.mono.label)
-      .padding(.p8)
-    
-    Text("What do we use it for?".localized)
-      .scaledFont(.pHeadline, .bold)
-      .foregroundColor(.mono.ash)
-    
-    ForEach(permission.usages) { usage in
-      Text(usage)
-        .scaledFont(.pBody)
-        .foregroundColor(.mono.label)
-    }
-  
-    HStack {
+      HStack {
       Text("Status")
         .scaledFont(.pHeadline, .bold)
         .foregroundColor(.mono.ash)
       Spacer()
       
       buildStatusSection(status: permission.status)
+          
+          if permission.status == .given {
+              Text(permission.subtitles.localized)
+                  .scaledFont(.pBody)
+                  .foregroundColor(.mono.label)
+                  .padding(.p8)
+              
+              Text("What do we use it for?".localized)
+                  .scaledFont(.pHeadline, .bold)
+                  .foregroundColor(.mono.ash)
+              
+              ForEach(permission.usages) { usage in
+                  Text(usage)
+                      .scaledFont(.pBody)
+                      .foregroundColor(.mono.label)
+              }
+          }
     }.padding(.vertical, .p8)
     
     if let insufficentReason = insufficentReason {
@@ -247,4 +277,31 @@ struct StatusTagView: View {
 
 extension String: Identifiable {
   public var id: String { self }
+}
+
+struct SupportUsCard: View {
+    let iconName: String
+    let text: String
+    let color: BrandColor
+    
+    var body: some View {
+        VStack {
+            Image(systemName: iconName)
+                .scaledFont(.pLargeTitle)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: .r12)
+                        .stroke(lineWidth: .r4)
+                ).padding()
+            Text(text)
+                .scaledFont(.pHeadline, .bold)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: .r12)
+                .stroke(lineWidth: .r4)
+        )
+        .padding()
+        .foregroundColor(color.default)
+    }
 }

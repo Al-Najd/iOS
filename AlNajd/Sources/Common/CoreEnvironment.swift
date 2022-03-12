@@ -113,6 +113,10 @@ public struct UserDefaultsClient {
         self.boolForKey(StorageKey.didCompleteOnboarding.key)
     }
     
+    public var isNotificationsEnabled: Bool {
+        self.boolForKey(StorageKey.isNotificationsEnabled.key)
+    }
+    
     public var isFontAccessible: Bool {
         self.boolForKey(StorageKey.enableAccessibilityFont.key)
     }
