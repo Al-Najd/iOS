@@ -32,7 +32,7 @@ let package = Package(
     ),
     .package(
         name: "Pulse",
-        url: "https://github.com/kean/Pulse.git",
+        url: "https://github.com/kean/Pulse",
         .upToNextMinor(from: .init(0, 20, 1))
     ),
     .package(
@@ -69,6 +69,8 @@ let package = Package(
         dependencies: [
             "Entity",
             .product(name: "Pulse", package: "Pulse"),
+            .product(name: "PulseUI", package: "Pulse"),
+            .product(name: "PulseCore", package: "Pulse"),
             .product(name: "Sentry", package: "Sentry")
         ]
     ),

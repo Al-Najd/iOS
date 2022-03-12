@@ -55,6 +55,11 @@ public extension StorageKey {
     )
   }
   
+    static let isNotificationsEnabled: StorageKey = .init(
+        key: "isNotificationsEnabled",
+        suitableStorage: .userDefaults
+    )
+    
   static let enableAccessibilityFont: StorageKey = .init(
     key: "enableAccessibilityFont",
     suitableStorage: .userDefaults

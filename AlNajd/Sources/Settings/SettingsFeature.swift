@@ -24,8 +24,9 @@ import ComposableCoreLocation
  */
 
 public struct SettingsState: Equatable {
-  @BindableState public var userSettings: UserSettings = .init()
-  @BindableState var enableAccessibilityFont: Bool = false
+    @BindableState public var userSettings: UserSettings = .init()
+    @BindableState var enableAccessibilityFont: Bool = false
+    @BindableState var enableNotifications: Bool = false
   var locationPermission: ANPermission = .location
   
   public init() {}
@@ -51,10 +52,13 @@ public let settingsReducer = Reducer<
     case let .locationManager(.didChangeAuthorization(currentAuthorization)):
       state.locationPermission.status = .init(currentAuthorization)
     case .onAppear:
-      state.enableAccessibilityFont = env.userDefaults.isFontAccessible
+          state.enableAccessibilityFont = env.userDefaults.isFontAccessible
+          state.enableNotifications = env.userDefaults.isNotificationsEnabled
     case .binding(\.$enableAccessibilityFont):
       FontManager.shared.supportsAccessibilityAdaption = state.enableAccessibilityFont
       env.cache().save(state.enableAccessibilityFont, for: .enableAccessibilityFont)
+      case .binding(\.$enableNotifications):
+          env.cache().save(state.enableNotifications, for: .isNotificationsEnabled)
     case let .onTapPermission(permission):
       return handlePermissionTap(permission, using: env)
         .eraseToEffect()
