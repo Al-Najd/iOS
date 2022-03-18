@@ -43,9 +43,9 @@ public struct RootState: Equatable {
     self.dateState = dateState
     self.settingsState = settingsState
     self.onboardingState = onboardingState
-    self.azkarState = .init(dateState: dateState)
-    self.prayerState = .init(dateState: dateState)
-    self.rewardState = .init(dateState: dateState)
+    self.azkarState = .init()
+    self.prayerState = .init()
+    self.rewardState = .init()
   }
 }
 
@@ -113,7 +113,8 @@ public let rootReducer = Reducer<
     action: /RootAction.settingsAction,
     environment: { _ in .live(SettingsEnvironment()) }
   ),
-  syncingReducer,
+  rewardsSyncerReducer,
+  dateSyncerReducer,
   rootReducerCore
 ).combined(with: locationManagerReducer.pullback(
   state: \.self,
@@ -121,35 +122,38 @@ public let rootReducer = Reducer<
   environment: { $0 }
 ))
 
-let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
+fileprivate let rewardsSyncerReducer = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
+  switch action {
+    case .prayerAction(let action):
+      return syncRewards(with: action)
+    case .azkarAction(let action):
+      return syncRewards(with: action)
+    default:
+      return .none
+  }
+}.debug()
+
+fileprivate let dateSyncerReducer = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
+  switch action {
+    case .dateAction(.onChange(let currentDay)):
+      return .merge(
+        .init(value: .prayerAction(.onChange(currentDay))),
+        .init(value: .azkarAction(.onChange(currentDay))),
+        .init(value: .rewardAction(.onChange(currentDay))),
+        .init(value: .dashboardAction(.onChange(currentDay)))
+      )
+    default:
+      return .none
+  }
+}.debug()
+
+fileprivate let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
   switch action {
     case .onAppear:
       state.onboardingState = env.userDefaults.hasShownFirstLaunchOnboarding ? nil : .init(step: .step0_InMemoryOfOurLovedOnes)
     default:
       break
   }
-  return .none
-}
-
-fileprivate let syncingReducer: Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> = .init { state, action, env in
-  switch action {
-  case .prayerAction(let prayerAction):
-    return syncRewards(with: prayerAction)
-  case .azkarAction(let azkarAction):
-    return syncRewards(with: azkarAction)
-  case .dateAction(let dateAction):
-    sync(&state, with: dateAction)
-    return .init(value: .prayerAction(.onAppear))
-      .append(.azkarAction(.onAppear))
-      .append(.rewardAction(.onAppear))
-      .append(.dashboardAction(.onAppear))
-      .eraseToEffect()
-    case .lifecycleAction(.becameActive):
-      return .init(value: .settingsAction(.onAppear))
-  default:
-    break
-  }
-  
   return .none
 }
 
@@ -195,11 +199,35 @@ fileprivate func syncRewards(with prayerAction: PrayerAction) -> Effect<RootActi
 fileprivate func syncRewards(with azkarAction: AzkarAction) -> Effect<RootAction, Never> {
   switch azkarAction {
   case .onDoing(let repeatableDeed):
-    return .init(value: .rewardAction(.onDoingRepeatableDeed(repeatableDeed)))
+      return .init(
+        value: .rewardAction(
+          .onDoingRepeatableDeed(
+            repeatableDeed.changing {
+              $0.currentNumberOfRepeats = ($0.currentNumberOfRepeats - 1).clamped(to: 0...$0.numberOfRepeats)
+            }
+          )
+        )
+      )
   case .onUndoing(let repeatableDeed):
-    return .init(value: .rewardAction(.onUndoingRepeatableDeed(repeatableDeed)))
+    return .init(
+      value: .rewardAction(
+        .onUndoingRepeatableDeed(
+          repeatableDeed.changing {
+            $0.currentNumberOfRepeats = $0.numberOfRepeats
+          }
+        )
+      )
+    )
   case .onQuickFinish(let repeatableDeed):
-    return .init(value: .rewardAction(.onUndoingRepeatableDeed(repeatableDeed)))
+    return .init(
+      value: .rewardAction(
+        .onUndoingRepeatableDeed(
+          repeatableDeed.changing {
+            $0.currentNumberOfRepeats = 0
+          }
+        )
+      )
+    )
   default:
     return .none
   }

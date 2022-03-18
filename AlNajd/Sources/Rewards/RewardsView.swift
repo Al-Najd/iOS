@@ -26,7 +26,7 @@ public struct RewardsView: View {
     WithViewStore(store) { viewStore in
       ScrollView(.vertical, showsIndicators: false) {
         buildPrayersSection(viewStore)
-        buildAzkarSection()
+        buildAzkarSection(viewStore)
       }.onAppear {
         viewStore.send(.onAppear)
       }.background(Color.primary.background)
@@ -63,27 +63,25 @@ private extension RewardsView {
   }
   
   @ViewBuilder
-  func buildAzkarSection() -> some View {
-    WithViewStore(store) { viewStore in
+  func buildAzkarSection(_ viewStore: ViewStore<RewardsState, RewardsAction>) -> some View {
       VStack {
-        VStack(alignment: .leading) {
-          Text("Azkar".localized)
-            .scaledFont(.pLargeTitle, .bold)
-            .foregroundColor(.mono.offblack)
-        }
-        .fillOnLeading()
-        .padding()
-        ForEach(AzkarCategory.allCases) { category in
-          if let azkar = viewStore.azkar[category] ?? [], !azkar.isEmpty {
-            AzkarRewardsList(category: category, azkar: azkar)
-          } else {
-            LockedRewardView(
-              title: "\("Azkar".localized) \(category.title.localized)"
-            )
+          VStack(alignment: .leading) {
+              Text("Azkar".localized)
+                  .scaledFont(.pLargeTitle, .bold)
+                  .foregroundColor(.mono.offblack)
           }
-        }
+          .fillOnLeading()
+          .padding()
+          ForEach(AzkarCategory.allCases) { category in
+              if let azkar = viewStore.azkar[category] ?? [], !azkar.isEmpty {
+                  AzkarRewardsList(category: category, azkar: azkar)
+              } else {
+                  LockedRewardView(
+                    title: "\("Azkar".localized) \(category.title.localized)"
+                  )
+              }
+          }
       }
-    }
   }
 }
 
@@ -194,7 +192,7 @@ struct RewardsView_Previews: PreviewProvider {
     ]) {
       RewardsView(
         store: .init(
-          initialState: .init(dateState: .init()),
+          initialState: .init(),
           reducer: rewardsReducer,
           environment: .live(RewardsEnvironment.init())
         )

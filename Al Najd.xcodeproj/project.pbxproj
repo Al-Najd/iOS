@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044BB70B27DD4511004C2E0C /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB70A27DD4511004C2E0C /* RootFeature.swift */; };
 		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
@@ -24,15 +25,12 @@
 		04C2FAFC27D4A3A9002CEC77 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF127D4A3A9002CEC77 /* MainTabView.swift */; };
 		04C2FAFD27D4A3A9002CEC77 /* DeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF227D4A3A9002CEC77 /* DeviceState.swift */; };
 		04C2FAFE27D4A3A9002CEC77 /* ONavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF327D4A3A9002CEC77 /* ONavigationView.swift */; };
-		04C2FAFF27D4A3A9002CEC77 /* SplashFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF427D4A3A9002CEC77 /* SplashFeature.swift */; };
 		04C2FB0027D4A3A9002CEC77 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF527D4A3A9002CEC77 /* RootView.swift */; };
 		04C2FB0127D4A3A9002CEC77 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF627D4A3A9002CEC77 /* SplashView.swift */; };
-		04C2FB0227D4A3A9002CEC77 /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF727D4A3A9002CEC77 /* RootFeature.swift */; };
 		04C2FB0327D4A3A9002CEC77 /* AppDelegateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAF927D4A3A9002CEC77 /* AppDelegateFeature.swift */; };
 		04C2FB0427D4A3A9002CEC77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2FAFA27D4A3A9002CEC77 /* AppDelegate.swift */; };
 		04D8397727979EB4007FA07D /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 04D8397627979EB4007FA07D /* Core */; };
 		04F4C81D27BDE3D20091EB9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0479448127BD9A7A0063E746 /* Assets.xcassets */; };
-		04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */; };
 		B86588252716CC5500FC0CBB /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86588242716CC5500FC0CBB /* Tests_iOS.swift */; };
 		B86588302716CC5500FC0CBB /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B865882F2716CC5500FC0CBB /* Tests_macOS.swift */; };
 		B86588802716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -58,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044BB70A27DD4511004C2E0C /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
@@ -74,13 +73,10 @@
 		04C2FAF127D4A3A9002CEC77 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		04C2FAF227D4A3A9002CEC77 /* DeviceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceState.swift; sourceTree = "<group>"; };
 		04C2FAF327D4A3A9002CEC77 /* ONavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ONavigationView.swift; sourceTree = "<group>"; };
-		04C2FAF427D4A3A9002CEC77 /* SplashFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashFeature.swift; sourceTree = "<group>"; };
 		04C2FAF527D4A3A9002CEC77 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		04C2FAF627D4A3A9002CEC77 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		04C2FAF727D4A3A9002CEC77 /* RootFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFeature.swift; sourceTree = "<group>"; };
 		04C2FAF927D4A3A9002CEC77 /* AppDelegateFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateFeature.swift; sourceTree = "<group>"; };
 		04C2FAFA27D4A3A9002CEC77 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationFeature.swift; sourceTree = "<group>"; };
 		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86588132716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86588182716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,18 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				04C2FAEF27D4A3A9002CEC77 /* Root */,
-				0472C5E827A385A600913892 /* App */,
 				0472C60027A385A600913892 /* Resources */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		0472C5E827A385A600913892 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				04F8E31127AC3BE1002B96AB /* Recommendation */,
-			);
-			path = App;
 			sourceTree = "<group>";
 		};
 		0472C60027A385A600913892 /* Resources */ = {
@@ -163,13 +150,6 @@
 				0472C60427A385A600913892 /* splash.json */,
 			);
 			path = Animations;
-			sourceTree = "<group>";
-		};
-		0472C60627A385A600913892 /* Root */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Root;
 			sourceTree = "<group>";
 		};
 		0472C61427A385A600913892 /* App */ = {
@@ -197,14 +177,11 @@
 		04C2FAEF27D4A3A9002CEC77 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				04C2FAF027D4A3A9002CEC77 /* OTabBarView.swift */,
-				04C2FAF127D4A3A9002CEC77 /* MainTabView.swift */,
+				04EFA76227E3504D008AE1D7 /* Components */,
 				04C2FAF227D4A3A9002CEC77 /* DeviceState.swift */,
-				04C2FAF327D4A3A9002CEC77 /* ONavigationView.swift */,
-				04C2FAF427D4A3A9002CEC77 /* SplashFeature.swift */,
 				04C2FAF527D4A3A9002CEC77 /* RootView.swift */,
 				04C2FAF627D4A3A9002CEC77 /* SplashView.swift */,
-				04C2FAF727D4A3A9002CEC77 /* RootFeature.swift */,
+				044BB70A27DD4511004C2E0C /* RootFeature.swift */,
 				04C2FAF827D4A3A9002CEC77 /* AppDelegate */,
 			);
 			path = Root;
@@ -226,12 +203,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		04F8E31127AC3BE1002B96AB /* Recommendation */ = {
+		04EFA76227E3504D008AE1D7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				04F8E31227AC3BEF002B96AB /* RecommendationFeature.swift */,
+				04C2FAF027D4A3A9002CEC77 /* OTabBarView.swift */,
+				04C2FAF127D4A3A9002CEC77 /* MainTabView.swift */,
+				04C2FAF327D4A3A9002CEC77 /* ONavigationView.swift */,
 			);
-			path = Recommendation;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		B86588032716CC5200FC0CBB = {
@@ -256,7 +235,6 @@
 			children = (
 				0472C61427A385A600913892 /* App */,
 				0472C5E727A385A600913892 /* Modules */,
-				0472C60627A385A600913892 /* Root */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -506,16 +484,14 @@
 				0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */,
 				04C2FB0127D4A3A9002CEC77 /* SplashView.swift in Sources */,
 				0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */,
-				04C2FB0227D4A3A9002CEC77 /* RootFeature.swift in Sources */,
 				04C2FAFB27D4A3A9002CEC77 /* OTabBarView.swift in Sources */,
-				04F8E31327AC3BEF002B96AB /* RecommendationFeature.swift in Sources */,
 				0472C64127A385A700913892 /* ThemePlugin.swift in Sources */,
 				04C2FB0427D4A3A9002CEC77 /* AppDelegate.swift in Sources */,
 				04C2FB0327D4A3A9002CEC77 /* AppDelegateFeature.swift in Sources */,
 				0472C64027A385A700913892 /* CorePlugin.swift in Sources */,
 				04C2FB0027D4A3A9002CEC77 /* RootView.swift in Sources */,
 				0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */,
-				04C2FAFF27D4A3A9002CEC77 /* SplashFeature.swift in Sources */,
+				044BB70B27DD4511004C2E0C /* RootFeature.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
 				045849F827A49E480090FB3C /* (null) in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Utils
 
 public struct RepeatableDeed: Identifiable, Codable, Equatable {
   public var id: UUID = .init()
@@ -56,3 +57,5 @@ extension Array where Element == RepeatableDeed {
     }
   }()
 }
+
+extension RepeatableDeed: Changeable {}

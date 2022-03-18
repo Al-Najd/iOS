@@ -70,7 +70,7 @@ struct PrayersView_Previews: PreviewProvider {
 
 extension Store where State == PrayerState, Action == PrayerAction {
   static let main: Store<PrayerState, PrayerAction> = .init(
-    initialState: .init(dateState: .init()),
+    initialState: .init(),
     reducer: prayerReducer,
     environment: .live(PrayerEnvironment())
   )
