@@ -208,7 +208,7 @@ public let onboardingReducer = Reducer<
   }
   
   return .none
-}.debug()
+}
 
 extension CacheManager {
   public func asyncSave<T: Codable>(_ value: T, for key: StorageKey) -> Effect<Never, Never> {

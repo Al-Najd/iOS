@@ -25,7 +25,7 @@ public struct PrayersView: View {
     WithViewStore(self.store) { viewStore in
       List {
         DeedsList(
-          sectionTitle: "Faraaid".localized,
+            sectionTitle: "Faraaid".localized,
           deeds: viewStore.prayers.faraaid?.deeds ?? [],
           store: store
         )

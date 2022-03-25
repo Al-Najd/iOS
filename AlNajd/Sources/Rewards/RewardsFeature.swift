@@ -89,7 +89,7 @@ public let rewardsReducer = Reducer<
     }
     
     return .none
-}.debug()
+}
 
 fileprivate func cachePrayerRewards(_ state: RewardsState, _ env: CoreEnvironment<RewardsEnvironment>) {
     state.prayers.forEach {

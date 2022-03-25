@@ -141,10 +141,10 @@ struct RepeatableDeedRewardCard: View {
     VStack(spacing: .p4.adaptV(min: .p4)) {
       if deed.reward.title.isEmpty == false {
         Text(deed.title)
-          .scaledFont(.pHeadline, .bold)
+          .scaledFont(locale: .arabic, .pHeadline, .bold)
           .multilineTextAlignment(.center)
         Text(deed.reward.title)
-          .scaledFont(.pTitle3, .bold)
+          .scaledFont(locale: .arabic, .pTitle3, .bold)
           .foregroundColor(.secondary.dark)
           .multilineTextAlignment(.center)
       } else {

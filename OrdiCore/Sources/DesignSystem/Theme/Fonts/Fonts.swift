@@ -294,6 +294,27 @@ public extension View {
       ScaledFont(name: font.fontName, size: font.metrics.size, weight: weight)
     )
   }
+  
+  func scaledFont(
+    locale: FontLocale,
+    _ font: ARFont,
+    _ weight: Font.Weight = .regular
+  ) -> some View {
+    let extractedExpr: ScaledFont = { (font: ARFont) -> ScaledFont in
+      ScaledFont(name: font.fontName, size: font.metrics.size, weight: weight)
+    }(
+      FontManager.shared.getFont(
+        locale: locale,
+        type: font.fontDetails.fontType,
+        category: font.fontCategory,
+        scale: font.fontScale,
+        weight: font.fontWeight
+      )
+    )
+    return self.modifier(
+      extractedExpr
+    )
+  }
 }
 
 struct ScaledFont: ViewModifier {

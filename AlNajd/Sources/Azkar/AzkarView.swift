@@ -103,14 +103,8 @@ private extension RepeatableDeedsList {
       VStack {
         Text(deed.title)
           .scaledFont(
-            FontManager
-              .shared
-              .getFont(
-                locale: .arabic,
-                type: .sansSerif,
-                category: .text,
-                scale: .xsmall, weight: .bold
-              ),
+            locale: .arabic,
+            .pFootnote,
             .bold
           )
           .multilineTextAlignment(.center)

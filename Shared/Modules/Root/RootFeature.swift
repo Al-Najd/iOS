@@ -131,7 +131,7 @@ fileprivate let rewardsSyncerReducer = Reducer<RootState, RootAction, CoreEnviro
     default:
       return .none
   }
-}.debug()
+}
 
 fileprivate let dateSyncerReducer = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
   switch action {
@@ -145,7 +145,7 @@ fileprivate let dateSyncerReducer = Reducer<RootState, RootAction, CoreEnvironme
     default:
       return .none
   }
-}.debug()
+}
 
 fileprivate let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { state, action, env in
   switch action {
