@@ -122,7 +122,7 @@ public struct RangeAnalysisCardView: View {
                             if let highlightedDay = highlightedDay {
                                 Text(
                                     "n out of n".localized(
-                                        arguments: [highlightedDay.count, highlightedDay.limit]
+                                        arguments: highlightedDay.count, highlightedDay.limit
                                     )
                                 )
                                     .scaledFont(.pHeadline, .bold)

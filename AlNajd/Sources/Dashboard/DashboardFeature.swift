@@ -45,7 +45,6 @@ public let dashboardReducer = Reducer<
 > { state, action, env in
     switch action {
         case .onAppear:
-            // TODO: - Optimize
             return .init(
                 value: .populate(
                     with: analyize(

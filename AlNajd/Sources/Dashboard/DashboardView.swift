@@ -37,15 +37,15 @@ public struct DashboardView: View {
   
   public var body: some View {
     WithViewStore(store) { viewStore in
-      VStack(spacing: .zero) {
-        ScrollView(.vertical, showsIndicators: false) {
-          VStack(spacing: .p16) {
-            ForEach(viewStore.reports) { report in
-              RangeAnalysisCardView(progress: report)
-            }
-          }.padding(.p16)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-      }
+      ScrollView(.vertical, showsIndicators: false) {
+        VStack(spacing: .p16) {
+          ForEach(viewStore.reports) { report in
+            RangeAnalysisCardView(progress: report)
+          }
+        }.padding(.p16)
+      }.onAppear {
+          viewStore.send(.onAppear)
+      }.background(Color.primary.background)
     }
   }
 }
@@ -53,7 +53,7 @@ public struct DashboardView: View {
 struct DashboardView_Previews: PreviewProvider {
   static var previews: some View {
     DashboardView(
-      store: .noReports
+      store: .mock
     ).background(
         Color.mono.background.ignoresSafeArea()
       )

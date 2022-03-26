@@ -21,18 +21,19 @@ struct Al_NajdApp: App {
     environment: CoreEnvironment.live(RootEnvironment())
   )
   
-  lazy var plugins: [AppPlugin] = {
-    [
-      ThemePlugin(),
-      CorePlugin(),
-      AppearancesPlugin(),
-      ReportPlugin(),
-    ].with { $0.forEach { $0.setup() } }
-  }()
+  let plugins: [AppPlugin] = [
+    ThemePlugin(),
+    CorePlugin(),
+    AppearancesPlugin(),
+    ReportPlugin(),
+  ]
   
   var body: some Scene {
     WindowGroup {
       RootView(store: self.store)
+        .onAppear {
+          plugins.forEach { $0.setup() }
+        }
     }
   }
 }
