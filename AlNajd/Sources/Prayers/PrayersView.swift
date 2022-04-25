@@ -23,30 +23,32 @@ public struct PrayersView: View {
   
   public var body: some View {
     WithViewStore(self.store) { viewStore in
-      List {
-        DeedsList(
-            sectionTitle: "Faraaid".localized,
-          deeds: viewStore.prayers.faraaid?.deeds ?? [],
-          store: store
-        )
-        
-        DeedsList(
-          sectionTitle: "Sunnah".localized,
-          deeds: viewStore.prayers.sunnah?.deeds ?? [],
-          store: store
-        )
-        
-        DeedsList(
-          sectionTitle: "Nafila".localized,
-          deeds: viewStore.prayers.nafila?.deeds ?? [],
-          store: store
-        )
-      }
-      .onAppear {
-        viewStore.send(.onAppear)
-      }
-      .padding(.top, .p4)
-      .background(Color.primary.background.ignoresSafeArea())
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                DeedsList(
+                    sectionTitle: "Faraaid".localized,
+                    deeds: viewStore.prayers.faraaid?.deeds ?? [],
+                    store: store
+                )
+                
+                DeedsList(
+                    sectionTitle: "Sunnah".localized,
+                    deeds: viewStore.prayers.sunnah?.deeds ?? [],
+                    store: store
+                )
+                
+                DeedsList(
+                    sectionTitle: "Nafila".localized,
+                    deeds: viewStore.prayers.nafila?.deeds ?? [],
+                    store: store
+                )
+            }
+        }
+        .onAppear {
+            viewStore.send(.onAppear)
+        }
+        .padding(.top, .p4)
+        .background(Color.primary.background.ignoresSafeArea())
     }
   }
 }
@@ -84,71 +86,78 @@ struct DeedsList: View {
   
   var body: some View {
     WithViewStore(store) { viewStore in
-      Section(content: {
-        if allDeedsAreDone {
-          Text("Well Done".localized(arguments: sectionTitle))
-            .scaledFont(.pTitle3, .bold)
-            .padding(.p48)
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .foregroundColor(.mono.offwhite)
-            .background(Color.success.default)
-            .cornerRadius(.r16)
-        } else {
-          ForEach(deeds) { deed in
-            HStack {
-              Text(deed.title.localized)
-                .scaledFont(.pHeadline, .bold)
-                .foregroundColor(.primary.background)
-              if deed.isDone {
-                Spacer()
-                Image(systemName: "checkmark.seal.fill")
-                  .foregroundColor(.success.default)
-                  .padding(.p4)
-                  .background(
-                    Rectangle()
-                      .fill(Color.mono.offwhite)
-                      .frame(maxHeight: .infinity)
-                      .cornerRadius(.r8)
-                  )
-              }
+        VStack {
+            Text(sectionTitle)
+                .foregroundColor(Color.primary.darkMode)
+                .scaledFont(.pLargeTitle, .bold)
+                .fillOnLeading()
+                .padding(.bottom, .p8)
+            
+            if allDeedsAreDone {
+                Text("Well Done".localized(arguments: sectionTitle))
+                    .scaledFont(.pTitle3, .bold)
+                    .padding(.p48)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .foregroundColor(.mono.offwhite)
+                    .background(Color.success.default)
+                    .cornerRadius(.r16)
+            } else {
+                ForEach(deeds) { deed in
+                    VStack(alignment: .leading, spacing: .p16) {
+                        HStack {
+                            Image(
+                                systemName: deed.isDone
+                                ? "checkmark.circle"
+                                : "circle"
+                            )
+                                .scaledFont(.pHeadline, .bold)
+                                .foregroundColor(
+                                    deed.isDone
+                                    ? .success.default
+                                    : .mono.offblack
+                                )
+                            Text(deed.title.localized)
+                                .scaledFont(.pHeadline, .bold)
+                                .foregroundColor(
+                                    deed.isDone
+                                    ? .success.default
+                                    : .mono.offblack
+                                )
+                        }.fillOnLeading()
+                        Text(deed.reward.title)
+                            .scaledFont(
+                                deed.isDone
+                                ? .pHeadline
+                                : .pSubheadline,
+                                deed.isDone
+                                ? .bold
+                                : .regular
+                            )
+                            .foregroundColor(
+                                deed.isDone
+                                ? .secondary.darkMode
+                                : .mono.label
+                            )
+                    }
+                    .padding()
+                    .background(
+                        Color.mono.offwhite
+                            .cornerRadius(.r12)
+                            .shadow(radius: .r4)
+                    )
+                    .onTapGesture {
+                        withAnimation {
+                            viewStore.send(
+                                deed.isDone
+                                ? .onUndoing(deed)
+                                : .onDoing(deed)
+                            )
+                        }
+                    }
+                }
             }
-            .if(!deed.isDone, transform: { view in
-              view.swipeActions(edge: .trailing) {
-                Button(
-                  action: {
-                    withAnimation {
-                      viewStore.send(.onDoing(deed))
-                    }
-                  },
-                  label: { Image(systemName: "checkmark.seal") }
-                ).tint(.success.default)
-              }
-            }).if(deed.isDone, transform: { view in
-              view.swipeActions(edge: .leading) {
-                Button(
-                  action: {
-                    withAnimation {
-                      viewStore.send(.onUndoing(deed))
-                    }
-                  },
-                  label: { Image(systemName: "delete.backward.fill") }
-                ).tint(.danger.default)
-              }
-            })
-          }.listRowBackground(
-            Color
-              .primary
-              .default.ignoresSafeArea()
-          )
-        }
-      }, header: {
-        Text(sectionTitle)
-          .foregroundColor(Color.primary.darkMode)
-          .scaledFont(.pLargeTitle, .bold)
-          .fillOnLeading()
-          .padding(.bottom, .p8)
-      })
+        }.padding()
     }
   }
 }
