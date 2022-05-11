@@ -19,7 +19,7 @@ import Rewards
 
 struct MainTabView: View {
   let store: Store<RootState, RootAction>
-  @State var tab: Tab = .dashboard
+  @State var tab: Tab = .prayer
   
   init(store: Store<RootState, RootAction>) {
     self.store = store
