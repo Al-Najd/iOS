@@ -15,6 +15,7 @@ import Entities
 
 public struct AzkarView: View {
   let store: Store<AzkarState, AzkarAction>
+  @State var azkarCategory: AzkarCategory = .sabah
   
   public init(store: Store<AzkarState, AzkarAction>) {
     self.store = store
@@ -22,35 +23,44 @@ public struct AzkarView: View {
   
   public var body: some View {
     WithViewStore(store) { viewStore in
-      ScrollView {
-        RepeatableDeedsList(
-          sectionTitle: "Azkar Al-Sabah".localized,
-          store: store,
-          deeds: viewStore.azkar[.sabah] ?? []
-        ).padding()
-        
-        RepeatableDeedsList(
-          sectionTitle: "Azkar Al-Masaa".localized,
-          store: store,
-          deeds: viewStore.azkar[.masaa] ?? []
-        ).padding()
-      }
-      .onAppear {
-        viewStore.send(.onAppear)
-      }.background(Color.primary.background)
+        VStack {
+            Picker("", selection: $azkarCategory.animation()) {
+                ForEach(AzkarCategory.allCases) {
+                    Text($0.title.localized)
+                        .tag($0)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding()
+            
+            ScrollView {
+                if azkarCategory == .sabah {
+                    RepeatableDeedsList(
+                        sectionTitle: "Azkar Al-Sabah".localized,
+                        store: store,
+                        deeds: viewStore.azkar[.sabah] ?? []
+                    ).padding()
+                } else if azkarCategory == .masaa {
+                    RepeatableDeedsList(
+                        sectionTitle: "Azkar Al-Masaa".localized,
+                        store: store,
+                        deeds: viewStore.azkar[.masaa] ?? []
+                    ).padding()
+                }
+            }
+          
+        }
+        .onAppear {
+            viewStore.send(.onAppear)
+        }
+        .background(Color.primary.background)
     }
   }
 }
 
 struct AzkarView_Previews: PreviewProvider {
     static var previews: some View {
-      PreviewableView([
-        .noNotch,
-        .darkMode,
-        .iPad
-      ]) {
         AzkarView(store: .main)
-      }
     }
 }
 
@@ -73,10 +83,6 @@ struct RepeatableDeedsList: View {
   var body: some View {
     WithViewStore(store) { viewStore in
       VStack {
-        Text(sectionTitle)
-          .scaledFont(.pLargeTitle)
-          .fillOnLeading()
-        
         if allDeedsAreDone {
           buildDoneView()
         } else {
@@ -110,6 +116,19 @@ private extension RepeatableDeedsList {
           .multilineTextAlignment(.center)
           .stay(.light)
         
+          Text(deed.reward.title)
+              .scaledFont(
+                locale: .arabic,
+                deed.isDone ? .pHeadline : .pSubheadline,
+                deed.isDone ? .bold : .regular
+              )
+              .foregroundColor(
+                deed.isDone
+                ? .secondary.darkMode
+                : .mono.label
+              )
+              .multilineTextAlignment(.center)
+          
         HStack {
           if deed.isDone {
             Image(systemName: "checkmark.seal.fill")
@@ -117,21 +136,21 @@ private extension RepeatableDeedsList {
               .scaledFont(.pTitle3, .bold)
           } else {
             Text("\(deed.currentNumberOfRepeats)")
-              .foregroundColor(.secondary.dark)
+              .foregroundColor(.primary.dark)
               .scaledFont(.pSubheadline)
               .padding(.p8)
               .background(
                 Circle()
-                  .fill(Color.secondary.background)
+                  .fill(Color.primary.light)
               )
             
             Text("Repeats are left".localized)
               .scaledFont(.pBody)
-              .foregroundColor(.secondary.dark)
+              .foregroundColor(.primary.dark)
               .padding(.p8 + .p4)
               .background(
                 RoundedRectangle(cornerRadius: .r8)
-                  .fill(Color.secondary.light)
+                  .fill(Color.primary.light)
                   .shadow(radius: 2.5)
               )
           }
@@ -140,8 +159,9 @@ private extension RepeatableDeedsList {
       .fillAndCenter()
       .padding()
       .background(
-        RoundedRectangle(cornerRadius: .r16)
-          .fill(Color.primary.default)
+        Color.mono.offwhite
+            .cornerRadius(.r12)
+            .shadow(radius: .r4)
       )
       .onTapGesture {
         withAnimation {

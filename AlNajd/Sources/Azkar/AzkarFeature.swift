@@ -43,20 +43,23 @@ public let azkarReducer = Reducer<
     CoreEnvironment<AzkarEnvironment>
 > { state, action, env in
     switch action {
-        case .onAppear:
-            state.azkar = env.getAzkarCategorized(state.activeDate)
-        case let .onDoing(deed):
-            update(&state, using: deed, with: true)
-            updateCache(state, env)
-        case let .onUndoing(deed):
-            update(&state, using: deed, with: false)
-            updateCache(state, env)
-        case let .onQuickFinish(deed):
-            finish(deed, in: &state)
-            updateCache(state, env)
-        case let .onChange(date):
-            state.activeDate = date
-            return .init(value: .onAppear)
+    case .onAppear:
+        state.azkar = env.getAzkarCategorized(state.activeDate)
+    case let .onDoing(deed):
+        update(&state, using: deed, with: true)
+        updateCache(state, env)
+        env.haptic.send(.success)
+    case let .onUndoing(deed):
+        update(&state, using: deed, with: false)
+        updateCache(state, env)
+        env.haptic.send(.error)
+    case let .onQuickFinish(deed):
+        finish(deed, in: &state)
+        updateCache(state, env)
+        env.haptic.send(.success)
+    case let .onChange(date):
+        state.activeDate = date
+        return .init(value: .onAppear)
     }
     
     return .none
