@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		044BB70B27DD4511004C2E0C /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB70A27DD4511004C2E0C /* RootFeature.swift */; };
-		045849F827A49E480090FB3C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
 		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
@@ -494,7 +493,6 @@
 				044BB70B27DD4511004C2E0C /* RootFeature.swift in Sources */,
 				0472C63F27A385A700913892 /* ReportPlugin.swift in Sources */,
 				0472C64227A385A700913892 /* LottiePlugin.swift in Sources */,
-				045849F827A49E480090FB3C /* (null) in Sources */,
 				04C2FAFE27D4A3A9002CEC77 /* ONavigationView.swift in Sources */,
 				04C2FAFC27D4A3A9002CEC77 /* MainTabView.swift in Sources */,
 			);
@@ -610,6 +608,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
@@ -762,6 +764,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
@@ -974,6 +980,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One.dev";
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
@@ -1001,6 +1011,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;

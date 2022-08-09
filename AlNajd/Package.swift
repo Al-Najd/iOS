@@ -55,6 +55,7 @@ private extension ANTargets {
         "Azkar",
         "Rewards",
         "Dashboard",
+        "Home",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -137,7 +138,11 @@ private extension ANTargets {
         "Rewards",
         "Settings",
         "Location",
-        .product(name: "Core", package: "OrdiCore")
+        .product(name: "Core", package: "OrdiCore"),
+        .product(name: "Snap", package: "Snap")
+      ],
+      resources: [
+        .process("Resources")
       ]
     )
   ]
@@ -149,7 +154,8 @@ private extension ANTargets {
         "Entities",
         "Localization",
         .product(name: "Core", package: "OrdiCore"),
-        .product(name: "ComposableCoreLocation", package: "composable-core-location")
+        .product(name: "ComposableCoreLocation", package: "composable-core-location"),
+        .product(name: "Adhan", package: "adhan-swift")
       ]
     )
   ]
@@ -197,7 +203,8 @@ private extension ANTargets {
         "Entities",
         "PrayersClient",
         .product(name: "Core", package: "OrdiCore"),
-        .product(name: "ComposableCoreLocation", package: "composable-core-location")
+        .product(name: "ComposableCoreLocation", package: "composable-core-location"),
+        .product(name: "Inject", package: "Inject")
       ],
       resources: [
         .process("Resources")
@@ -307,6 +314,8 @@ private enum ANDependencies {
   static let all: [Package.Dependency] = ordiCore
   + pointFree
   + quickAndNimble
+  + inject
+  + home
 }
 private extension ANDependencies {
   static let ordiCore: [Package.Dependency] = [
@@ -332,6 +341,24 @@ private extension ANDependencies {
     .package(
       url: "https://github.com/Quick/Nimble",
       .upToNextMajor(from: .init(9, 2, 1))
+    )
+  ]
+  
+  static let inject: [Package.Dependency] = [
+    .package(
+      url: "https://github.com/krzysztofzablocki/Inject",
+      .upToNextMajor(from: .init(1, 2, 1))
+    )
+  ]
+  
+  static let home: [Package.Dependency] = [
+    .package(
+      url: "https://github.com/batoulapps/adhan-swift",
+      branch: "main"
+    ),
+    .package(
+      url: "https://github.com/nerdsupremacist/Snap",
+      .upToNextMinor(from: .init(0, 2, 2))
     )
   ]
 }

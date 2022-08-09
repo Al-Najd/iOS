@@ -71,7 +71,7 @@
 "A day full of blessings is awaiting your deeds!" = "يوما مليئ بالاعمال الطيبة في انتظارك!";
 "Latest Reward" = "اخر بركة";
 "And var other blessings and Buffs..." = "و %@ بركات و معززات اخري";
-"Prayers" = "الصلاوات";
+"Prayers" = "الصلوات";
 "Azkar" = "الأذكار";
 "Well Done You Managed to do All the Zekr!" = "ما شاء الله! الله عليك! اتممت الأذكار كلها, ما شاء الله!";
 "Azkar Al-Sabah" = "اذكار الصباح";
@@ -166,7 +166,6 @@
 "Dunia" = "الدنيا";
 " to start your Journey to your Home in " = " لبدء رحلتك إلى منزلك في ";
 "Akhra" = "أخرة";
-".\n" = ".\n";
 "And that you're a " = "وأنك ";
 ", whom " = ", ممن ";
 "\nAllah" = "\nيحبهم";
@@ -206,3 +205,4 @@
 "You will always be..." = "ستظل دائما...";
 "A Sinner" = "عاصي";
 "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night" = "بارك الله فيك 👏\nإن كنت صليتم في جماعة, فكأنما قمت الليل كله";
+"al_ra3d_28" = "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ";
