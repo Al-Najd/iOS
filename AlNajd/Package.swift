@@ -19,20 +19,9 @@ private enum ANTargets {
   static let all: [Target] = ANTargets.alCore
   + ANTargets.common
   + ANTargets.entities
-  + ANTargets.daySlider
-  + ANTargets.calendar
-  + ANTargets.schedule
-  + ANTargets.dashboard
   + ANTargets.localization
-  + ANTargets.settings
-  + ANTargets.onboarding
   + ANTargets.prayersClient
   + ANTargets.home
-  + ANTargets.date
-  + ANTargets.location
-  + ANTargets.prayers
-  + ANTargets.azkar
-  + ANTargets.rewards
 }
 
 private extension ANTargets {
@@ -40,21 +29,10 @@ private extension ANTargets {
     .target(
       name: "AlCore",
       dependencies: [
-        "Calendar",
         "Entities",
-        "DaySlider",
-        "Schedule",
         "Localization",
         "Common",
-        "Settings",
-        "Onboarding",
         "PrayersClient",
-        "Date",
-        "Location",
-        "Prayers",
-        "Azkar",
-        "Rewards",
-        "Dashboard",
         "Home",
         .product(name: "Core", package: "OrdiCore")
       ]
@@ -62,69 +40,6 @@ private extension ANTargets {
   ]
 }
 private extension ANTargets {
-  static let rewards: [Target] = [
-    .target(
-      name: "Rewards",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        "Date",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
-  static let azkar: [Target] = [
-    .target(
-      name: "Azkar",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        "Date",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
-  static let prayers: [Target] = [
-    .target(
-      name: "Prayers",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        "Date",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
-  static let location: [Target] = [
-    .target(
-      name: "Location",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
-  static let date: [Target] = [
-    .target(
-      name: "Date",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
   static let home: [Target] = [
     .target(
       name: "Home",
@@ -132,12 +47,6 @@ private extension ANTargets {
         "Common",
         "Entities",
         "Localization",
-        "Dashboard",
-        "Azkar",
-        "Prayers",
-        "Rewards",
-        "Settings",
-        "Location",
         "PrayersClient",
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "Drawer", package: "swiftui-drawer"),
@@ -161,42 +70,6 @@ private extension ANTargets {
     )
   ]
   
-  static let onboarding: [Target] = [
-    .target(
-      name: "Onboarding",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    ),
-    .testTarget(
-        name: "OnboardingTests",
-        dependencies: [
-            "Onboarding",
-            "Common",
-            "Localization",
-            .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
-            .product(name: "Quick", package: "Quick"),
-            .product(name: "Nimble", package: "Nimble")
-        ],
-        path: "Tests/Onboarding",
-        exclude: ["__Snapshots__", "OnboardingTests.xctestplan"]
-    )
-  ]
-  static let settings: [Target] = [
-    .target(
-      name: "Settings",
-      dependencies: [
-        "Common",
-        "Entities",
-        "Localization",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
   static let common: [Target] = [
     .target(
       name: "Common",
@@ -212,26 +85,6 @@ private extension ANTargets {
       resources: [
         .process("Resources")
       ]
-    )
-  ]
-  
-  static let calendar: [Target] = [
-    .target(
-      name: "Calendar",
-      dependencies: [
-        "Entities",
-        "Common",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    ),
-    .testTarget(
-      name: "CalendarTests",
-      dependencies: [
-        "Calendar",
-        "Common",
-        .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
-      ],
-      path: "Tests/Calendar"
     )
   ]
   
@@ -251,62 +104,6 @@ private extension ANTargets {
       dependencies: [
         .product(name: "Core", package: "OrdiCore")
       ]
-    )
-  ]
-  
-  static let daySlider: [Target] = [
-    .target(
-      name: "DaySlider",
-      dependencies: [
-        "Entities",
-        "Common",
-        "Date",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    )
-  ]
-  
-  static let schedule: [Target] = [
-    .target(
-      name: "Schedule",
-      dependencies: [
-        "Calendar",
-        "Entities",
-        "Common",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    ),
-    .testTarget(
-      name: "ScheduleTests",
-      dependencies: [
-        "Schedule",
-        "Common",
-        .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
-      ],
-      path: "Tests/Schedule"
-    )
-  ]
-  
-  static let dashboard: [Target] = [
-    .target(
-      name: "Dashboard",
-      dependencies: [
-        "Entities",
-        "Date",
-        "Localization",
-        "Common",
-        .product(name: "Core", package: "OrdiCore")
-      ]
-    ),
-    .testTarget(
-      name: "DashboardTests",
-      dependencies: [
-        "Dashboard",
-        .product(name: "Quick", package: "Quick"),
-        .product(name: "Nimble", package: "Nimble"),
-        .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
-      ],
-      path: "Tests/Dashboard"
     )
   ]
 }
@@ -335,12 +132,12 @@ private extension ANDependencies {
       .upToNextMajor(from: .init(1, 9, 0))
     ),
     .package(
-        url: "https://github.com/pointfreeco/swift-composable-architecture",
-        branch: "main"
+      url: "https://github.com/pointfreeco/swift-composable-architecture",
+      branch: "main"
     ),
     .package(
-        url: "https://github.com/johnpatrickmorgan/TCACoordinators",
-        .upToNextMajor(from: .init(0, 2, 0))
+      url: "https://github.com/johnpatrickmorgan/TCACoordinators",
+      .upToNextMajor(from: .init(0, 2, 0))
     )
   ]
   
@@ -379,58 +176,12 @@ private extension ANDependencies {
 private enum ANProducts {
   static let all = alCore
   + entities
-  + calendar
-  + daySlider
-  + schedule
-  + dashboard
   + localization
   + common
-  + settings
-  + onboarding
   + prayersClient
   + home
-  + date
-  + location
-  + prayers
-  + azkar
-  + rewards
 }
 private extension ANProducts {
-  static let location: [PackageDescription.Product] = [
-    .library(
-      name: "Location",
-      targets: ["Location"]
-    )
-  ]
-  
-  static let prayers: [PackageDescription.Product] = [
-    .library(
-      name: "Prayers",
-      targets: ["Prayers"]
-    )
-  ]
-  
-  static let azkar: [PackageDescription.Product] = [
-    .library(
-      name: "Azkar",
-      targets: ["Azkar"]
-    )
-  ]
-  
-  static let rewards: [PackageDescription.Product] = [
-    .library(
-      name: "Rewards",
-      targets: ["Rewards"]
-    )
-  ]
-  
-  static let date: [PackageDescription.Product] = [
-    .library(
-      name: "Date",
-      targets: ["Date"]
-    )
-  ]
-  
   static let home: [PackageDescription.Product] = [
     .library(
       name: "Home",
@@ -445,56 +196,20 @@ private extension ANProducts {
     )
   ]
   
-  static let onboarding: [PackageDescription.Product] = [
-    .library(
-      name: "Onboarding",
-      targets: ["Onboarding"]
-    )
-  ]
-  
-  static let settings: [PackageDescription.Product] = [
-    .library(
-      name: "Settings",
-      targets: ["Settings"]
-    )
-  ]
-  
   static let alCore: [PackageDescription.Product] = [
     .library(
       name: "AlCore",
       targets: ["AlCore"]
     )
   ]
+  
   static let entities: [PackageDescription.Product] = [
     .library(
       name: "Entities",
       targets: ["Entities"]
     )
   ]
-  static let calendar: [PackageDescription.Product] = [
-    .library(
-      name: "Calendar",
-      targets: ["Calendar"]
-    )
-  ]
-  static let daySlider: [PackageDescription.Product] = [
-    .library(
-      name: "DaySlider",
-      targets: ["DaySlider"]
-    )
-  ]
-  static let schedule: [PackageDescription.Product] = [
-    .library(
-      name: "Schedule",
-      targets: ["Schedule"]
-    )
-  ]
-  static let dashboard: [PackageDescription.Product] = [
-    .library(
-      name: "Dashboard",
-      targets: ["Dashboard"]
-    )
-  ]
+  
   static let localization: [PackageDescription.Product] = [
     .library(
       name: "Localization",
