@@ -10,14 +10,17 @@ import Common
 import Inject
 import Localization
 import Entities
+import ComposableArchitecture
 
 public struct HomeView: View {
     @ObserveInjection var inject
     @State var showDetails: Bool = true
+    let store: Store<HomeState, PrayerAction>
     
     public init() { }
     
     public var body: some View {
+        WithViewStore(<#T##store: Store<_, _>##Store<_, _>#>, content: <#T##(ViewStore<_, _>) -> _#>)
       ScrollView(.vertical, showsIndicators: false) {
           VStack {
               HeaderView()

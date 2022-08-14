@@ -35,6 +35,7 @@
 		B86588802716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B86588822716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B86588842716CEA000FC0CBB /* (null) in Resources */ = {isa = PBXBuildFile; };
+		E2C78A3328A93A02002FB0A7 /* TCACoordinators in Frameworks */ = {isa = PBXBuildFile; productRef = E2C78A3228A93A02002FB0A7 /* TCACoordinators */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 			files = (
 				048CC8D027B08505007BC3C7 /* AlCore in Frameworks */,
 				04D8397727979EB4007FA07D /* Core in Frameworks */,
+				E2C78A3328A93A02002FB0A7 /* TCACoordinators in Frameworks */,
 				045F0B4727B9FCA700FCEAB2 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +307,7 @@
 				04D8397627979EB4007FA07D /* Core */,
 				048CC8CF27B08505007BC3C7 /* AlCore */,
 				045F0B4627B9FCA700FCEAB2 /* ComposableArchitecture */,
+				E2C78A3228A93A02002FB0A7 /* TCACoordinators */,
 			);
 			productName = "The One (iOS)";
 			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
@@ -402,6 +405,7 @@
 			mainGroup = B86588032716CC5200FC0CBB;
 			packageReferences = (
 				045F0B4527B9FCA700FCEAB2 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				E2C78A3128A93A02002FB0A7 /* XCRemoteSwiftPackageReference "TCACoordinators" */,
 			);
 			productRefGroup = B86588112716CC5500FC0CBB /* Products */;
 			projectDirPath = "";
@@ -1236,6 +1240,14 @@
 				minimumVersion = 0.33.0;
 			};
 		};
+		E2C78A3128A93A02002FB0A7 /* XCRemoteSwiftPackageReference "TCACoordinators" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/TCACoordinators";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1251,6 +1263,11 @@
 		04D8397627979EB4007FA07D /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
+		};
+		E2C78A3228A93A02002FB0A7 /* TCACoordinators */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2C78A3128A93A02002FB0A7 /* XCRemoteSwiftPackageReference "TCACoordinators" */;
+			productName = TCACoordinators;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

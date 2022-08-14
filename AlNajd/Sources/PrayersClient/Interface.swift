@@ -15,7 +15,6 @@ import Entity
 import Adhan
 
 public struct PrayersClient {
-    public var prayers: (CLLocationCoordinate2D) -> Effect<PrayerScheduleResponse, OError>
 }
 
 public extension Prayer {

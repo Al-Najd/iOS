@@ -140,7 +140,7 @@ private extension ANTargets {
         "Location",
         "PrayersClient",
         .product(name: "Core", package: "OrdiCore"),
-        .product(name: "Drawer", package: "swiftui-drawer")
+        .product(name: "Drawer", package: "swiftui-drawer"),
       ],
       resources: [
         .process("Resources")
@@ -205,7 +205,9 @@ private extension ANTargets {
         "PrayersClient",
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
-        .product(name: "Inject", package: "Inject")
+        .product(name: "Inject", package: "Inject"),
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+        .product(name: "TCACoordinators", package: "TCACoordinators")
       ],
       resources: [
         .process("Resources")
@@ -331,6 +333,14 @@ private extension ANDependencies {
     .package(
       url: "https://github.com/pointfreeco/swift-snapshot-testing",
       .upToNextMajor(from: .init(1, 9, 0))
+    ),
+    .package(
+        url: "https://github.com/pointfreeco/swift-composable-architecture",
+        branch: "main"
+    ),
+    .package(
+        url: "https://github.com/johnpatrickmorgan/TCACoordinators",
+        .upToNextMajor(from: .init(0, 2, 0))
     )
   ]
   
