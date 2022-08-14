@@ -44,17 +44,14 @@ struct PrayerDetailsView: View {
                             )
                     }
                 }.padding()
-                
+                                
                 Text(prayer.title)
                     .foregroundColor(.mono.offwhite)
                     .scaledFont(locale: .arabic, .pBody)
                     .multilineTextAlignment(.center)
-                
                 Spacer()
-            }.padding(.top, getSafeArea().top)
-            
-            Spacer()
-            
+            }
+                        
             Drawer(startingHeight: 50) {
                 ZStack {
                     BlurView(.systemChromeMaterialDark)
@@ -99,7 +96,7 @@ struct PrayerDetailsView: View {
                     0.5.asPercentage()
                 ]
             ))
-            .impact(.light)
+            .impact(.heavy)
             .spring(.p32)
             .padding(.bottom, getSafeArea().bottom)
             .padding(.bottom, .p16)

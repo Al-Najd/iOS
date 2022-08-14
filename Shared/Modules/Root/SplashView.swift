@@ -118,9 +118,7 @@ struct SplashView_Previews: PreviewProvider {
     PreviewableView(
       [.darkMode]
     ) {
-      SplashView {
-        MainTabView(store: .mainRoot)
-      }
+      RootView(store: .mainRoot)
     }
   }
 }
