@@ -138,8 +138,9 @@ private extension ANTargets {
         "Rewards",
         "Settings",
         "Location",
+        "PrayersClient",
         .product(name: "Core", package: "OrdiCore"),
-        .product(name: "Snap", package: "Snap")
+        .product(name: "Drawer", package: "swiftui-drawer")
       ],
       resources: [
         .process("Resources")
@@ -357,9 +358,9 @@ private extension ANDependencies {
       branch: "main"
     ),
     .package(
-      url: "https://github.com/nerdsupremacist/Snap",
-      .upToNextMinor(from: .init(0, 2, 2))
-    )
+      url: "https://github.com/maustinstar/swiftui-drawer",
+      branch: "master"
+    ),
   ]
 }
 

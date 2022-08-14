@@ -129,7 +129,6 @@
 "Permissions" = "الأذونات";
 "Go to the iOS Settings Page" = "إعدادات التطبيق";
 "language character" = "ض";
-"And now...\n\n\n\n" = "والآن...\n\n";
 "Welcome to " = "مرحبا بكم في ";
 "We hope we may be able to help you, even if by something so little" = "نأمل أن نتمكن من مساعدتك، حتى لو كان ذلك عن طريق شيء صغير جدا";
 "Don't like the colors? Font is too small? Got a permission you gave us before\n" = "لا تحب الألوان؟ الخط صغير جدا؟ حصلت على إذن أعطيتنا إياه من قبل\n";
@@ -157,7 +156,6 @@
 "Your Najd" = "نچدك";
 "It must become a " = "يجب أن يصبح ";
 "Lighter" = "مشرقا";
-"." = ".";
 "The Road ahead is long, and unforgiving." = "إن الطريق أمامنا طويل ولا يرحم.";
 "Not that for a dark heart" = "ليس لقلب مظلم";
 "Know your weapons, and that you will learn them, train on them, and hopefully from Allah, you will master them" = "تعرف على أسلحتك، وأنك ستتعلمها، وتتدرب عليها، ونأمل من الله أن تتقنها";
@@ -168,8 +166,6 @@
 "Akhra" = "أخرة";
 "And that you're a " = "وأنك ";
 ", whom " = ", ممن ";
-"\nAllah" = "\nيحبهم";
-" loves" = " الله";
 "Remember " = "تذكر ";
 "Allah" = "الله";
 "Wake up, Muslim." = "إستيقظ أيها المسلم.";
@@ -206,3 +202,11 @@
 "A Sinner" = "عاصي";
 "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night" = "بارك الله فيك 👏\nإن كنت صليتم في جماعة, فكأنما قمت الليل كله";
 "al_ra3d_28" = "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ";
+"prayer_title" = "صلاة %@";
+"sunnah_title" = "سنة %@ %@";
+"sunnah_affirmed" = "(مؤكدة)";
+"sunnah_desired" = "(مستحبة)";
+"raqaat_position_before" = "قبل";
+"raqaat_position_after" = "بعد";
+"sunnah_subtitle" = "%@ %@ %@";
+"estigphar" = "استغفر الله";

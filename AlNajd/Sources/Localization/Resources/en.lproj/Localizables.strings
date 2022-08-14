@@ -209,3 +209,7 @@
 "A Sinner" = "A Sinner";
 "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night" = "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night";
 "al_ra3d_28" = "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ";
+"prayer_title" = "%@ Prayer";
+"sunnah_title" = "%@ Sunnah";
+"sunnah_title_mustahaba" = "%@ Sunnah (Desirable)";
+"sunnah_subtitle" = "%@ %@ %@";

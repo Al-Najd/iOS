@@ -9,8 +9,7 @@ import SwiftUI
 import Common
 import Inject
 import Localization
-import Snap
-import ReusableUI
+import Entities
 
 public struct HomeView: View {
     @ObserveInjection var inject
@@ -26,8 +25,8 @@ public struct HomeView: View {
           }
       }
       .ignoresSafeArea(edges: .top)
-      .sheet(isPresented: $showDetails) {
-          PrayerDetailsView()
+      .fullScreenCover(isPresented: $showDetails) {
+          PrayerDetailsView(prayer: .dhuhr)
       }
       .enableInjection()
     }
@@ -36,114 +35,6 @@ public struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-    }
-}
-
-struct PrayerDetailsView: View {
-    var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack {
-                HStack {
-                    Label("مارس, ٢٣, ٢٠٢١", systemImage: "calendar")
-                        .foregroundColor(.mono.offwhite)
-                        .scaledFont(locale: .arabic, .pFootnote)
-                        .multilineTextAlignment(.center)
-                    
-                    Spacer()
-                    
-                    Button {
-                        // TODO: - Send dismiss action
-                    } label: {
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .foregroundColor(.mono.offwhite)
-                            .scaledFont(locale: .arabic, .pFootnote)
-                            .frame(width: 12, height: 12)
-                            .padding(.p8)
-                            .background(
-                                Circle()
-                                    .foregroundColor(.mono.offwhite.opacity(0.25))
-                            )
-                    }
-                }.padding()
-                
-                Text(L10n.fajr)
-                    .foregroundColor(.mono.offwhite)
-                    .scaledFont(locale: .arabic, .pBody)
-                    .multilineTextAlignment(.center)
-                
-                Text("صلاة الفجر هي الوقت الذي أطلّ الله به على عباده بيوم جديد، فإنّ إدراك الفجر هبة من الله، فيجب شكره عليه عبر طاعته.")
-                    .foregroundColor(.mono.offwhite)
-                    .scaledFont(locale: .arabic, .pFootnote)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, .p32)
-                
-                Spacer()
-                Text("صلاة الفجر سببٌ من أسباب دفْع الكسل والخمول.")
-                    .foregroundColor(.mono.offwhite)
-                    .scaledFont(locale: .arabic, .pFootnote)
-                    .multilineTextAlignment(.center)
-                Spacer()
-            }.padding(.top, getSafeArea().top)
-            
-            SnapDrawer(large: .fraction(0.5), tiny: .height(100), allowInvisible: false, background: BlurView(.systemThinMaterialDark)) { state in
-                switch state {
-                case .tiny:
-                    SubtaskView()
-                case .large:
-                    VStack {
-                        SubtaskView()
-                        SubtaskView()
-                        SubtaskView()
-                        Spacer()
-                    }
-                }
-            }
-        }.background(
-          Asset.Images.maghribImage.swiftUIImage
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .ignoresSafeArea()
-              .overlay(
-                  Color.mono.offblack.opacity(0.4)
-              )
-        )
-    }
-}
-
-struct SubtaskView: View {
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("صلاة الفجر")
-                    .foregroundColor(.mono.offwhite)
-                    .scaledFont(.pFootnote, .bold)
-                    .multilineTextAlignment(.center)
-                Text("ركعتان")
-                    .foregroundColor(.mono.offwhite)
-                    .scaledFont(.pFootnote)
-                    .multilineTextAlignment(.center)
-            }
-            
-            Spacer()
-            
-            Button {
-                // TODO: - Send done action
-            } label: {
-                Image(systemName: "checkmark.square.fill")
-                    .resizable()
-                    .foregroundColor(.success.darkMode)
-                    .frame(width: .p24, height: .p24)
-                    .padding()
-                    .background(
-                        Circle()
-                            .foregroundColor(.success.light.opacity(0.25))
-                    )
-            }
-
-        }
-        .padding(.horizontal, .p16)
-        .padding(.bottom, .p8)
     }
 }
 

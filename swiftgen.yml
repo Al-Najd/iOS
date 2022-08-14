@@ -20,7 +20,8 @@ xcassets:
       output: AlNajd/Sources/Home/Generated.swift
 strings:
   inputs:
-    - AlNajd/Sources/Localization/Resources/en.lproj/Localizables.strings
+    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.strings
+    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.stringsdict
   outputs:
     - templateName: structured-swift5
       params:
