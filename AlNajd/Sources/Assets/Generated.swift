@@ -14,48 +14,68 @@
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias AssetColorTypeAlias = ColorAsset.Color
+public typealias AssetColorTypeAlias = ColorAsset.Color
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias AssetImageTypeAlias = ImageAsset.Image
+public typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum Asset {
-  internal enum Colors {
-    internal static let asrColor = ColorAsset(name: "asrColor")
-    internal static let dhuhrColor = ColorAsset(name: "dhuhrColor")
-    internal static let duhaColor = ColorAsset(name: "duhaColor")
-    internal static let fajrColor = ColorAsset(name: "fajrColor")
-    internal static let headerBackgroundColor = ColorAsset(name: "headerBackgroundColor")
-    internal static let ishaaColor = ColorAsset(name: "ishaaColor")
-    internal static let maghribColor = ColorAsset(name: "maghribColor")
+public enum Asset {
+  public enum Prayers {
+    public enum Colors {
+      public static let asrColor = ColorAsset(name: "asrColor")
+      public static let dhuhrColor = ColorAsset(name: "dhuhrColor")
+      public static let duhaColor = ColorAsset(name: "duhaColor")
+      public static let fajrColor = ColorAsset(name: "fajrColor")
+      public static let headerBackgroundColor = ColorAsset(name: "headerBackgroundColor")
+      public static let ishaaColor = ColorAsset(name: "ishaaColor")
+      public static let maghribColor = ColorAsset(name: "maghribColor")
+    }
+    public enum Images {
+      public static let asrImage = ImageAsset(name: "asrImage")
+      public static let dhuhrImage = ImageAsset(name: "dhuhrImage")
+      public static let fajrImage = ImageAsset(name: "fajrImage")
+      public static let ishaImage = ImageAsset(name: "ishaImage")
+      public static let maghribImage = ImageAsset(name: "maghribImage")
+    }
   }
-  internal enum Images {
-    internal static let asrImage = ImageAsset(name: "asrImage")
-    internal static let dhuhrImage = ImageAsset(name: "dhuhrImage")
-    internal static let fajrImage = ImageAsset(name: "fajrImage")
-    internal static let ishaImage = ImageAsset(name: "ishaImage")
-    internal static let maghribImage = ImageAsset(name: "maghribImage")
+  public enum Walkthrough {
+    public enum Walkthrough {
+      public static let azkarWalkthrough = ImageAsset(name: "azkar_walkthrough")
+      public static let calendarWalkthrough = ImageAsset(name: "calendar_walkthrough")
+      public static let dashboardInsightsWalkthrough = ImageAsset(name: "dashboard_insights_walkthrough")
+      public static let dashboardWalkthrough = ImageAsset(name: "dashboard_walkthrough")
+      public static let prayerWalkthrough = ImageAsset(name: "prayer_walkthrough")
+      public static let rewardsWalkthrough = ImageAsset(name: "rewards_walkthrough")
+      public static let settingsWalkthrough = ImageAsset(name: "settings_walkthrough")
+    }
+    public static let azkarWalkthrough = ImageAsset(name: "azkar_walkthrough")
+    public static let calendarWalkthrough = ImageAsset(name: "calendar_walkthrough")
+    public static let dashboardInsightsWalkthrough = ImageAsset(name: "dashboard_insights_walkthrough")
+    public static let dashboardWalkthrough = ImageAsset(name: "dashboard_walkthrough")
+    public static let prayerWalkthrough = ImageAsset(name: "prayer_walkthrough")
+    public static let rewardsWalkthrough = ImageAsset(name: "rewards_walkthrough")
+    public static let settingsWalkthrough = ImageAsset(name: "settings_walkthrough")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-internal final class ColorAsset {
-  internal fileprivate(set) var name: String
+public final class ColorAsset {
+  public fileprivate(set) var name: String
 
   #if os(macOS)
-  internal typealias Color = NSColor
+  public typealias Color = NSColor
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Color = UIColor
+  public typealias Color = UIColor
   #endif
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
-  internal private(set) lazy var color: Color = {
+  public private(set) lazy var color: Color = {
     guard let color = Color(asset: self) else {
       fatalError("Unable to load color asset named \(name).")
     }
@@ -64,7 +84,7 @@ internal final class ColorAsset {
 
   #if os(iOS) || os(tvOS)
   @available(iOS 11.0, tvOS 11.0, *)
-  internal func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+  public func color(compatibleWith traitCollection: UITraitCollection) -> Color {
     let bundle = BundleToken.bundle
     guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
       fatalError("Unable to load color asset named \(name).")
@@ -75,7 +95,7 @@ internal final class ColorAsset {
 
   #if canImport(SwiftUI)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  internal private(set) lazy var swiftUIColor: SwiftUI.Color = {
+  public private(set) lazy var swiftUIColor: SwiftUI.Color = {
     SwiftUI.Color(asset: self)
   }()
   #endif
@@ -85,7 +105,7 @@ internal final class ColorAsset {
   }
 }
 
-internal extension ColorAsset.Color {
+public extension ColorAsset.Color {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
   convenience init?(asset: ColorAsset) {
     let bundle = BundleToken.bundle
@@ -101,7 +121,7 @@ internal extension ColorAsset.Color {
 
 #if canImport(SwiftUI)
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-internal extension SwiftUI.Color {
+public extension SwiftUI.Color {
   init(asset: ColorAsset) {
     let bundle = BundleToken.bundle
     self.init(asset.name, bundle: bundle)
@@ -109,17 +129,17 @@ internal extension SwiftUI.Color {
 }
 #endif
 
-internal struct ImageAsset {
-  internal fileprivate(set) var name: String
+public struct ImageAsset {
+  public fileprivate(set) var name: String
 
   #if os(macOS)
-  internal typealias Image = NSImage
+  public typealias Image = NSImage
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Image = UIImage
+  public typealias Image = UIImage
   #endif
 
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
-  internal var image: Image {
+  public var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
@@ -137,7 +157,7 @@ internal struct ImageAsset {
 
   #if os(iOS) || os(tvOS)
   @available(iOS 8.0, tvOS 9.0, *)
-  internal func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+  public func image(compatibleWith traitCollection: UITraitCollection) -> Image {
     let bundle = BundleToken.bundle
     guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
       fatalError("Unable to load image asset named \(name).")
@@ -148,13 +168,13 @@ internal struct ImageAsset {
 
   #if canImport(SwiftUI)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  internal var swiftUIImage: SwiftUI.Image {
+  public var swiftUIImage: SwiftUI.Image {
     SwiftUI.Image(asset: self)
   }
   #endif
 }
 
-internal extension ImageAsset.Image {
+public extension ImageAsset.Image {
   @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
@@ -172,7 +192,7 @@ internal extension ImageAsset.Image {
 
 #if canImport(SwiftUI)
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-internal extension SwiftUI.Image {
+public extension SwiftUI.Image {
   init(asset: ImageAsset) {
     let bundle = BundleToken.bundle
     self.init(asset.name, bundle: bundle)

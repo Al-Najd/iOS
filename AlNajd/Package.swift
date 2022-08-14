@@ -13,15 +13,16 @@ let package = Package(
   targets: ANTargets.all
 )
 
-
 // MARK: - Targets
 private enum ANTargets {
   static let all: [Target] = ANTargets.alCore
   + ANTargets.common
   + ANTargets.entities
   + ANTargets.localization
+  + ANTargets.prayerDetails
   + ANTargets.prayersClient
   + ANTargets.home
+  + ANTargets.assets
 }
 
 private extension ANTargets {
@@ -32,14 +33,39 @@ private extension ANTargets {
         "Entities",
         "Localization",
         "Common",
+        "PrayerDetails",
         "PrayersClient",
         "Home",
+        "Assets",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
   ]
 }
 private extension ANTargets {
+  static let assets: [Target] = [
+    .target(
+      name: "Assets",
+      resources: [
+        .process("Resources")
+      ]
+    )
+  ]
+  
+  static let prayerDetails: [Target] = [
+    .target(
+      name: "PrayerDetails",
+      dependencies: [
+        "Common",
+        "Entities",
+        "Localization",
+        "PrayersClient",
+        .product(name: "Drawer", package: "swiftui-drawer"),
+        .product(name: "Core", package: "OrdiCore"),
+      ]
+    )
+  ]
+  
   static let home: [Target] = [
     .target(
       name: "Home",
@@ -47,12 +73,8 @@ private extension ANTargets {
         "Common",
         "Entities",
         "Localization",
-        "PrayersClient",
+        "PrayerDetails",
         .product(name: "Core", package: "OrdiCore"),
-        .product(name: "Drawer", package: "swiftui-drawer"),
-      ],
-      resources: [
-        .process("Resources")
       ]
     )
   ]
@@ -81,9 +103,6 @@ private extension ANTargets {
         .product(name: "Inject", package: "Inject"),
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
         .product(name: "TCACoordinators", package: "TCACoordinators")
-      ],
-      resources: [
-        .process("Resources")
       ]
     )
   ]
@@ -102,6 +121,8 @@ private extension ANTargets {
     .target(
       name: "Entities",
       dependencies: [
+        "Localization",
+        "Assets",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -174,53 +195,21 @@ private extension ANDependencies {
 
 // MARK: - Products
 private enum ANProducts {
-  static let all = alCore
-  + entities
-  + localization
-  + common
-  + prayersClient
-  + home
-}
-private extension ANProducts {
-  static let home: [PackageDescription.Product] = [
-    .library(
-      name: "Home",
-      targets: ["Home"]
-    )
+  static let all: [PackageDescription.Product] = [
+    ANProducts.product(name: "AlCore"),
+    ANProducts.product(name: "Entities"),
+    ANProducts.product(name: "Localization"),
+    ANProducts.product(name: "Common"),
+    ANProducts.product(name: "PrayerDetails"),
+    ANProducts.product(name: "PrayersClient"),
+    ANProducts.product(name: "Home"),
+    ANProducts.product(name: "Assets"),
   ]
-  
-  static let prayersClient: [PackageDescription.Product] = [
+
+  static func product(name: String) -> PackageDescription.Product {
     .library(
-      name: "PrayersClient",
-      targets: ["PrayersClient"]
+      name: name,
+      targets: [name]
     )
-  ]
-  
-  static let alCore: [PackageDescription.Product] = [
-    .library(
-      name: "AlCore",
-      targets: ["AlCore"]
-    )
-  ]
-  
-  static let entities: [PackageDescription.Product] = [
-    .library(
-      name: "Entities",
-      targets: ["Entities"]
-    )
-  ]
-  
-  static let localization: [PackageDescription.Product] = [
-    .library(
-      name: "Localization",
-      targets: ["Localization"]
-    )
-  ]
-  
-  static let common: [PackageDescription.Product] = [
-    .library(
-      name: "Common",
-      targets: ["Common"]
-    )
-  ]
+  }
 }
