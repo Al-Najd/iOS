@@ -13,11 +13,13 @@ struct RepeatableSubtaskView: View {
     var subtitle: String
     var repetation: Int
     var isDone: Bool { repetation == .zero }
+    var onDoing: () -> Void
         
-    init(_ zekr: ANAzkar) {
+    init(_ zekr: ANAzkar, onDoing: @escaping () -> Void) {
         title = zekr.name
         subtitle = zekr.reward
-        repetation = zekr.repetation
+        repetation = zekr.currentCount
+        self.onDoing = onDoing
     }
     
     var body: some View {
@@ -35,9 +37,7 @@ struct RepeatableSubtaskView: View {
             
             Spacer()
             
-            Button {
-                // TODO: - Send done action
-            } label: {
+            Button(action: onDoing, label: {
                 Group {
                     if isDone {
                         Image(systemName: "checkmark.square.fill")
@@ -68,10 +68,10 @@ struct RepeatableSubtaskView: View {
                                 : .mono.offwhite.opacity(0.1)
                             )
                     )
-            }
-
+            })
         }
         .padding(.horizontal, .p16)
         .padding(.bottom, .p8)
+        .onTapGesture(perform: onDoing)
     }
 }

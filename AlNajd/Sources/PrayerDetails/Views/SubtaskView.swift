@@ -11,16 +11,21 @@ import Entities
 struct SubtaskView: View {
     var title: String
     var subtitle: String
-    var isDone: Bool = false
+    var isDone: Bool
+    var onDoing: () -> Void
     
-    init(_ prayer: ANPrayer) {
+    init(_ prayer: ANPrayer, onDoing: @escaping () -> Void) {
         title = prayer.title
         subtitle = prayer.subtitle
+        isDone = prayer.isDone
+        self.onDoing = onDoing
     }
     
-    init(_ sunnah: ANSunnah) {
+    init(_ sunnah: ANSunnah, onDoing: @escaping () -> Void) {
         title = sunnah.title
         subtitle = sunnah.subtitle
+        isDone = sunnah.isDone
+        self.onDoing = onDoing
     }
         
     var body: some View {
@@ -38,9 +43,7 @@ struct SubtaskView: View {
             
             Spacer()
             
-            Button {
-                // TODO: - Send done action
-            } label: {
+            Button(action: onDoing, label: {
                 Image(systemName: isDone ? "checkmark.square.fill" : "square")
                     .resizable()
                     .foregroundColor(
@@ -58,10 +61,10 @@ struct SubtaskView: View {
                                 : .mono.offwhite.opacity(0.1)
                             )
                     )
-            }
-
+            })
         }
         .padding(.horizontal, .p16)
         .padding(.bottom, .p8)
+        .onTapGesture(perform: onDoing)
     }
 }

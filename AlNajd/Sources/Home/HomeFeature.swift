@@ -30,5 +30,6 @@ public let homeReducer = Reducer<
     HomeAction,
     CoreEnvironment<HomeEnvironment>
 > { state, action, env in
+    state.prayers = env.prayersClient.prayers
     return .none
 }

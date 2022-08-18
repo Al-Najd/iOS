@@ -30,7 +30,7 @@ public struct PrayerDetailsView: View {
                     HStack {
                         Label("مارس, ٢٣, ٢٠٢١", systemImage: "calendar")
                             .foregroundColor(.mono.offwhite)
-                            .scaledFont(locale: .arabic, .pFootnote)
+                            .scaledFont(.pFootnote)
                             .multilineTextAlignment(.center)
                         
                         Spacer()
@@ -41,7 +41,7 @@ public struct PrayerDetailsView: View {
                             Image(systemName: "xmark")
                                 .resizable()
                                 .foregroundColor(.mono.offwhite)
-                                .scaledFont(locale: .arabic, .pFootnote)
+                                .scaledFont(.pFootnote)
                                 .frame(width: 12, height: 12)
                                 .padding(.p8)
                                 .background(
@@ -72,22 +72,26 @@ public struct PrayerDetailsView: View {
                                 .padding(.bottom, .p8)
                             
                             VStack {
-                                SubtaskView(viewStore.prayer)
+                                SubtaskView(viewStore.prayer) { viewStore.send(.onDoingPrayer, animation: .default) }
                                 ScrollView(.vertical, showsIndicators: false) {
                                     Text(L10n.sunnah)
                                         .foregroundColor(.mono.offwhite)
                                         .scaledFont(.pFootnote, .bold)
                                         .multilineTextAlignment(.center)
                                         .if(viewStore.prayer.sunnah.isEmpty, transform: { _ in EmptyView() })
-                                            ForEach(viewStore.prayer.sunnah) {
-                                            SubtaskView($0).frame(maxWidth: .infinity)
+                                            ForEach(viewStore.prayer.sunnah) { sunnah in
+                                            SubtaskView(sunnah) {
+                                                viewStore.send(.onDoingSunnah(sunnah), animation: .default)
+                                            }.frame(maxWidth: .infinity)
                                         }
                                     Text(L10n.azkar)
                                         .foregroundColor(.mono.offwhite)
                                         .scaledFont(.pFootnote, .bold)
                                         .multilineTextAlignment(.center)
-                                    ForEach(viewStore.prayer.afterAzkar) {
-                                        RepeatableSubtaskView($0).frame(maxWidth: .infinity)
+                                    ForEach(viewStore.prayer.afterAzkar) { zekr in
+                                        RepeatableSubtaskView(zekr) {
+                                            viewStore.send(.onDoingZekr(zekr), animation: .default)
+                                        }.frame(maxWidth: .infinity)
                                     }
                                 }
                             }
@@ -108,7 +112,7 @@ public struct PrayerDetailsView: View {
                 .padding(.bottom, .p16)
                 
             }.background(
-                viewStore.prayer.image.swiftUIImage
+                viewStore.prayer.image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()

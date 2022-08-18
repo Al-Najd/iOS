@@ -32,8 +32,8 @@ struct RootView_Previews: PreviewProvider {
 
 extension Store where State == CoordinatorState, Action == CoordinatorAction {
   static let live: Store<CoordinatorState, CoordinatorAction> = .init(
-    initialState: .init(),
+    initialState: .init(routes: [.root(.home(.init()))]),
     reducer: coordinatorReducer,
-    environment: ()
+    environment: .live(())
   )
 }

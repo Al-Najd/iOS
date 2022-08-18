@@ -137,7 +137,7 @@ struct PrayerSliderView: View {
         HStack {
           ForEach(prayers) { prayer in
             ZStack {
-              prayer.image.swiftUIImage
+              prayer.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 125, height: 150)

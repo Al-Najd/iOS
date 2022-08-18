@@ -16,8 +16,6 @@ import PrayerDetails
 public enum RootState: Equatable {
   case home(HomeState)
   case prayerDetails(PrayerDetailsState)
-  
-  static let initial: RootState = .home(.init())
 }
 
 public enum RootAction: Equatable {
@@ -54,7 +52,7 @@ fileprivate let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment
 
 extension Store where State == RootState, Action == RootAction {
   static let mainRoot: Store<State, Action> = .init(
-    initialState: .home(HomeState()),
+    initialState: .home(.init()),
     reducer: rootReducer,
     environment: CoreEnvironment.live(RootEnvironment())
   )
@@ -62,12 +60,6 @@ extension Store where State == RootState, Action == RootAction {
 
 public struct CoordinatorState: Equatable, IndexedRouterState {
   public var routes: [Route<RootState>]
-  
-  init(routes: [Route<RootState>] = [
-    .root(.initial)
-  ]) {
-    self.routes = routes
-  }
 }
 
 public enum CoordinatorAction: IndexedRouterAction {
@@ -75,10 +67,10 @@ public enum CoordinatorAction: IndexedRouterAction {
   case updateRoutes([Route<RootState>])
 }
 
-public let coordinatorReducer: Reducer<CoordinatorState, CoordinatorAction, Void> = rootReducer
+public let coordinatorReducer: Reducer<CoordinatorState, CoordinatorAction, CoreEnvironment<Void>> = rootReducer
   .forEachIndexedRoute(environment: { _ in .live(.init()) })
   .withRouteReducer(
-    Reducer<CoordinatorState, CoordinatorAction, Void> { state, action, environment in
+    Reducer<CoordinatorState, CoordinatorAction, CoreEnvironment<Void>> { state, action, environment in
       switch action {
       case let .routeAction(_, action: .home(.onSelecting(prayer))):
         state.routes.presentCover(RootState.prayerDetails(.init(prayer: prayer)))

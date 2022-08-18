@@ -8,13 +8,28 @@
 import Foundation
 import Localization
 import Assets
+import Utils
+import SwiftUI
 
 public struct ANPrayer: Identifiable, Equatable {
   public let id: UUID = .init()
-  public let name: String
+  public let title: String
+  public let subtitle: String
   public let raqaat: Int
-  public let sunnah: [ANSunnah]
-  public let afterAzkar: [ANAzkar]
+  public let image: Image
+  public var sunnah: [ANSunnah]
+  public var afterAzkar: [ANAzkar]
+  public var isDone: Bool = false
+  
+  init(name: String, raqaat: Int, image: Image, sunnah: [ANSunnah], afterAzkar: [ANAzkar], isDone: Bool = false) {
+    self.title = L10n.prayerTitle(name)
+    self.subtitle = L10n.raqaatCount(raqaat)
+    self.raqaat = raqaat
+    self.image = image
+    self.sunnah = sunnah
+    self.afterAzkar = afterAzkar
+    self.isDone = isDone
+  }
 }
 
 public extension ANPrayer {
@@ -22,6 +37,7 @@ public extension ANPrayer {
   static let fajr: ANPrayer = .init(
     name: L10n.fajr,
     raqaat: 2,
+    image: Asset.Prayers.Images.fajrImage.swiftUIImage,
     sunnah: [.fajrSunnah],
     afterAzkar: .common
   )
@@ -29,6 +45,7 @@ public extension ANPrayer {
   static let sunrise: ANPrayer = .init(
     name: "Sunrise",
     raqaat: 2,
+    image: Asset.Prayers.Images.fajrImage.swiftUIImage,
     sunnah: [],
     afterAzkar: .common
   )
@@ -36,6 +53,7 @@ public extension ANPrayer {
   static let dhuhr: ANPrayer = .init(
     name: L10n.duhr,
     raqaat: 4,
+    image: Asset.Prayers.Images.dhuhrImage.swiftUIImage,
     sunnah: [.dhuhrBeforeSunnah, .dhuhrAfterSunnah, .dhuhrAfterMostahabSunnah],
     afterAzkar: .common
   )
@@ -43,6 +61,7 @@ public extension ANPrayer {
   static let asr: ANPrayer = .init(
     name: L10n.aasr,
     raqaat: 4,
+    image: Asset.Prayers.Images.asrImage.swiftUIImage,
     sunnah: [],
     afterAzkar: .common
   )
@@ -50,6 +69,7 @@ public extension ANPrayer {
   static let maghrib: ANPrayer = .init(
     name: L10n.maghrib,
     raqaat: 3,
+    image: Asset.Prayers.Images.maghribImage.swiftUIImage,
     sunnah: [.maghribBeforeMostahabSunnah, .maghribAfterSunnah],
     afterAzkar: .common
   )
@@ -57,6 +77,7 @@ public extension ANPrayer {
   static let isha: ANPrayer = .init(
     name: L10n.aishaa,
     raqaat: 4,
+    image: Asset.Prayers.Images.ishaImage.swiftUIImage,
     sunnah: [.ishaaBeforeMostahabSunnah, .ishaaAfterSunnah],
     afterAzkar: .common
   )
@@ -79,6 +100,7 @@ public struct ANSunnah: Identifiable, Equatable {
   public let position: Position
   public let affirmation: Affirmation
   public let azkar: [ANAzkar]
+  public var isDone: Bool = false
 }
 
 public extension ANSunnah {
@@ -202,6 +224,15 @@ public struct ANAzkar: Identifiable, Equatable {
   public let name: String
   public let reward: String
   public let repetation: Int
+  public var currentCount: Int
+  public var isDone: Bool { repetation == .zero }
+  
+  init(name: String, reward: String, repetation: Int) {
+    self.name = name
+    self.reward = reward
+    self.repetation = repetation
+    self.currentCount = repetation
+  }
 }
 
 extension Array where Element == ANAzkar {
@@ -214,52 +245,6 @@ extension Array where Element == ANAzkar {
   ]
 }
 
-public extension ANPrayer {
-  var title: String {
-    L10n.prayerTitle(name)
-  }
-  
-  var subtitle: String {
-    L10n.raqaatCount(raqaat)
-  }
-  
-  var image: ImageAsset {
-    switch self {
-    case .fajr:
-      return Asset.Prayers.Images.fajrImage
-    case .dhuhr:
-      return Asset.Prayers.Images.dhuhrImage
-    case .asr:
-      return Asset.Prayers.Images.asrImage
-    case .maghrib:
-      return Asset.Prayers.Images.maghribImage
-    case .isha:
-      return Asset.Prayers.Images.ishaImage
-    default:
-      return Asset.Prayers.Images.fajrImage
-    }
-  }
-  
-  var color: ColorAsset {
-    switch self {
-    case .fajr:
-      return Asset.Prayers.Colors.fajrColor
-    case .sunrise:
-      return Asset.Prayers.Colors.duhaColor
-    case .dhuhr:
-      return Asset.Prayers.Colors.dhuhrColor
-    case .asr:
-      return Asset.Prayers.Colors.asrColor
-    case .maghrib:
-      return Asset.Prayers.Colors.maghribColor
-    case .isha:
-      return Asset.Prayers.Colors.ishaaColor
-    default:
-      return Asset.Prayers.Colors.fajrColor
-    }
-  }
-}
-
 public extension ANSunnah {
   var title: String {
     L10n.sunnahTitle(name, affirmation.text)
@@ -269,3 +254,7 @@ public extension ANSunnah {
     return L10n.sunnahSubtitle(name, position.text, L10n.raqaatCount(raqaat))
   }
 }
+
+extension ANPrayer: Changeable {}
+extension ANSunnah: Changeable {}
+extension ANAzkar: Changeable {}
