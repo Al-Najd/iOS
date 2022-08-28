@@ -18,7 +18,10 @@ require 'json'
 default_platform(:ios)
 
 # Gathering 3rd party Keys and Secrets from Configs
-configs = JSON.parse(File.read('./Config.json'), object_class: OpenStruct)
+configs = JSON.parse(File.read('./LocalConfig.json'), object_class: OpenStruct)
+ENV["SENTRY_AUTH_TOKEN"] =  configs.sentry.auth_token
+ENV["SENTRY_ORG_SLUG"] =  configs.sentry.org
+ENV["SENTRY_PROJECT_SLUG"] =  configs.sentry.proj
 
 def file_prepend(file, str)
   new_contents = ""
@@ -103,12 +106,28 @@ platform :ios do
     push_to_git_remote
   end
 
+  desc "Uploads dSYMs to Sentry, Creates a Release Deployment, and specifies the commits"
+  lande :sentry_wetwork do 
+    sentry_upload_dif
+    sentry_create_release(
+      version: get_version_number(target: "Al Najd (iOS)"), # release version to create
+      app_identifier: get_info_plist_value(path: "./iOS/Info.plist", key: "CFBundleIdentifier") # pass in the bundle_identifer of your app
+    )
+    sentry_set_commits(
+      version: get_version_number(target: "Al Najd (iOS)"),
+      app_identifier: get_info_plist_value(path: "./iOS/Info.plist", key: "CFBundleIdentifier"), # pass in the bundle_identifer of your app
+      build: get_build_number, # Optionally pass in the build number of your app
+      auto: true, # enable completely automated commit management
+      clear: false, # clear all current commits from the release
+    )
+  end
+
   lane :beta do 
     setup_for_ci_if_needed
     handle_versioning
     build_for_app_store_distribtion
     upload_to_testflight
-    # upload_symbols_to_sentry
+    sentry_wetwork
     clean_build_artifacts
     # slack
     sync_git

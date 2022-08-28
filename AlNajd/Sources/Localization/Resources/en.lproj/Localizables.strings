@@ -130,7 +130,6 @@
 "Permissions" = "Permissions";
 "Go to the iOS Settings Page" = "iOS Settings Page";
 "language character" = "A";
-"And now...\n\n\n\n" = "And now...\n\n\n\n";
 "Welcome to " = "Welcome to ";
 "Al Najd" = "Al Najd";
 "We hope we may be able to help you, even if by something so little" = "We hope we may be able to help you, even if by something so little";
@@ -172,15 +171,11 @@
 "." = ".";
 " to start your Journey to your Home in " = " to start your Journey to your Home in ";
 "Akhra" = "Akhra";
-".\n" = ".\n";
 "And that you're a " = "And that you're a ";
 ", whom " = ", whom ";
-"\nAllah" = "\nAllah";
 " loves" = " loves";
-"." = ".";
 "Remember " = "Remember ";
 "Allah" = "Allah";
-"." = ".";
 "Wake up, Muslim." = "Wake up, Muslim.";
 "Try to remember your self, your beautiful self, the alive one, not the current." = "Try to remember your self, your beautiful self, the alive one, not the current.";
 "And that 'thing' you listen to, is not your friend, he is an enemy, but...\nRest assured,\n for he's a weak one." = "And that 'thing' you listen to, is not your friend, he is an enemy, but...\nRest assured,\n for he's a weak one.";
@@ -213,3 +208,8 @@
 "You will always be..." = "You will always be...";
 "A Sinner" = "A Sinner";
 "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night" = "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night";
+"al_ra3d_28" = "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ";
+"prayer_title" = "%@ Prayer";
+"sunnah_title" = "%@ Sunnah";
+"sunnah_title_mustahaba" = "%@ Sunnah (Desirable)";
+"sunnah_subtitle" = "%@ %@ %@";

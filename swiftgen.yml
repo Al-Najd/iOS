@@ -1,0 +1,30 @@
+## Note: all of the config entries below are just examples with placeholders. Be sure to edit and adjust to your needs when uncommenting.
+
+## Generate constants for your localized strings.
+##   Be sure that SwiftGen only parses ONE locale (typically Base.lproj, or en.lproj, or whichever your development region is); otherwise it will generate the same keys multiple times.
+##   SwiftGen will parse all `.strings` files found in that folder.
+# strings:
+#   inputs:
+#     - Resources/Base.lproj
+#   outputs:
+#     - templateName: structured-swift5
+#       output: Strings+Generated.swift
+
+xcassets:
+  inputs:
+    - AlNajd/Sources/Assets/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      params:
+        forceProvidesNamespaces: true
+        publicAccess: true
+      output: AlNajd/Sources/Assets/Generated.swift
+strings:
+  inputs:
+    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.strings
+    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.stringsdict
+  outputs:
+    - templateName: structured-swift5
+      params:
+        publicAccess: true
+      output: AlNajd/Sources/Localization/Generated.swift
