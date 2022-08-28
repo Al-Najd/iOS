@@ -42,24 +42,6 @@ public enum Asset {
       public static let maghribImage = ImageAsset(name: "maghribImage")
     }
   }
-  public enum Walkthrough {
-    public enum Walkthrough {
-      public static let azkarWalkthrough = ImageAsset(name: "azkar_walkthrough")
-      public static let calendarWalkthrough = ImageAsset(name: "calendar_walkthrough")
-      public static let dashboardInsightsWalkthrough = ImageAsset(name: "dashboard_insights_walkthrough")
-      public static let dashboardWalkthrough = ImageAsset(name: "dashboard_walkthrough")
-      public static let prayerWalkthrough = ImageAsset(name: "prayer_walkthrough")
-      public static let rewardsWalkthrough = ImageAsset(name: "rewards_walkthrough")
-      public static let settingsWalkthrough = ImageAsset(name: "settings_walkthrough")
-    }
-    public static let azkarWalkthrough = ImageAsset(name: "azkar_walkthrough")
-    public static let calendarWalkthrough = ImageAsset(name: "calendar_walkthrough")
-    public static let dashboardInsightsWalkthrough = ImageAsset(name: "dashboard_insights_walkthrough")
-    public static let dashboardWalkthrough = ImageAsset(name: "dashboard_walkthrough")
-    public static let prayerWalkthrough = ImageAsset(name: "prayer_walkthrough")
-    public static let rewardsWalkthrough = ImageAsset(name: "rewards_walkthrough")
-    public static let settingsWalkthrough = ImageAsset(name: "settings_walkthrough")
-  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

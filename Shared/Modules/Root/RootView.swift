@@ -9,13 +9,18 @@ import SwiftUI
 import ComposableArchitecture
 import Home
 import PrayerDetails
+import Localization
+import DesignSystem
+import Assets
 
 public struct RootView: View {
   public let store: Store<RootState, RootAction>
 
   public var body: some View {
     WithViewStore(store) { viewStore in
-      HomeView(store: store.scope(state: { $0.home }, action: RootAction.home))
+      SplashView {
+        HomeView(store: store.scope(state: { $0.home }, action: RootAction.home))
+      }
     }
   }
 }

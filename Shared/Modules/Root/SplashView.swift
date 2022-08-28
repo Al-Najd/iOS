@@ -83,9 +83,7 @@ struct SplashView<Content: View>: View {
         }
       }.offset(y: endSplashFlow ? getScreenSize().height : 0)
     }.background(
-      Color
-        .primary
-        .background
+      Color.init("96A8B1")
         .ignoresSafeArea()
     )
   }

@@ -26,16 +26,17 @@ public struct HomeView: View {
     WithViewStore(store) { viewStore in
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
-          HeaderView()
-            PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
+          HeaderView(viewStore: viewStore)
+          PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
         }
       }
       .ignoresSafeArea(edges: .top)
       .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
-          IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
-              PrayerDetailsView(store: $0)
-          })
+        IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
+          PrayerDetailsView(store: $0)
+        })
       }
+      .background(Color.mono.background)
       .onAppear { viewStore.send(.onAppear) }
       .enableInjection()
     }
@@ -43,6 +44,8 @@ public struct HomeView: View {
 }
 
 struct HeaderView: View {
+  let viewStore: ViewStore<HomeState, HomeAction>
+  
   var body: some View {
     VStack(spacing: .p4) {
       Text(L10n.alRa3d28)
@@ -50,27 +53,27 @@ struct HeaderView: View {
         .scaledFont(locale: .arabic, .pFootnote, .bold)
         .multilineTextAlignment(.center)
       
-      Label("مارس, ٢٣, ٢٠٢١", systemImage: "calendar")
+      Label(viewStore.date, systemImage: "calendar")
         .foregroundColor(.mono.offwhite)
         .scaledFont(locale: .arabic, .pFootnote)
         .multilineTextAlignment(.center)
       
       VStack(spacing: .p4) {
         HStack {
-          Text("محصلة اليوم")
+          Text(L10n.todaySummary)
             .foregroundColor(.mono.offwhite)
             .scaledFont(.textXSmall)
             .multilineTextAlignment(.center)
           
           Spacer()
           
-          Text("١/١٨")
+          Text(L10n.todaySummaryNumeric(viewStore.doneTodos.formatted(), viewStore.todosCount.formatted(), viewStore.percentage))
             .foregroundColor(.mono.offwhite)
             .scaledFont(.textXSmall)
             .multilineTextAlignment(.center)
         }
         
-        ProgressBar(value: .constant(1/18).animation())
+        ProgressBar(value: viewStore.binding(\.$percentageValue).animation())
           .frame(height: 5)
       }
     }

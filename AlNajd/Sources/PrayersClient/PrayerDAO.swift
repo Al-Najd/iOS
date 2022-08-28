@@ -41,30 +41,35 @@ public extension ANPrayerDAO {
         $0.name = "Fajr"
         $0.raqaat = 2
         $0.sunnah.append(objectsIn: [.fajrSunnah])
+        $0.azkar.append(objectsIn: ANAzkarDAO.common + [.laIlahIlaAllahWahdah, .alKursiFajrMaghrib, .alIkhlasFajrMaghrib, .alFalaqFajrMaghrib, .alNasFajrMaghrib])
     }
     
     static let dhuhr: ANPrayerDAO = ANPrayerDAO().then {
         $0.name = "Duhr"
         $0.raqaat = 4
         $0.sunnah.append(objectsIn: [.dhuhrBeforeSunnah, .dhuhrAfterSunnah, .dhuhrAfterMostahabSunnah])
+        $0.azkar.append(objectsIn: ANAzkarDAO.common + [.alKursi, .alIkhlas, .alFalaq, .alNas])
     }
     
     static let asr: ANPrayerDAO = ANPrayerDAO().then {
         $0.name = "Aasr"
         $0.raqaat = 4
         $0.sunnah.append(objectsIn: [])
+        $0.azkar.append(objectsIn: ANAzkarDAO.common + [.alKursi, .alIkhlas, .alFalaq, .alNas])
     }
     
     static let maghrib: ANPrayerDAO = ANPrayerDAO().then {
         $0.name = "Maghrib"
         $0.raqaat = 3
         $0.sunnah.append(objectsIn: [.maghribBeforeMostahabSunnah, .maghribAfterSunnah])
+        $0.azkar.append(objectsIn: ANAzkarDAO.common + [.laIlahIlaAllahWahdah, .alKursiFajrMaghrib, .alIkhlasFajrMaghrib, .alFalaqFajrMaghrib, .alNasFajrMaghrib])
     }
     
     static let isha: ANPrayerDAO = ANPrayerDAO().then {
         $0.name = "Aishaa"
         $0.raqaat = 4
         $0.sunnah.append(objectsIn: [.ishaaBeforeMostahabSunnah, .ishaaAfterSunnah])
+        $0.azkar.append(objectsIn: ANAzkarDAO.common + [.alKursi, .alIkhlas, .alFalaq, .alNas])
     }
 }
 
@@ -141,4 +146,127 @@ public class ANAzkarDAO: Object {
     @Persisted public var reward: String
     @Persisted public var repetation: Int
     @Persisted public var currentCount: Int
+}
+
+extension ANAzkarDAO {
+    static let common: [ANAzkarDAO] = [
+        .estigphar,
+        .antAlSalam,
+        .mokhlseenLahoLDeen,
+        .laManiaaLemaAatyt,
+        .subhanAllah,
+        .alhamdulellah,
+        .allahuAkbar,
+        .laIlahIlaAllah,
+        .laIlahIlaAllahLaHawlWalaQwataIlaBellah
+    ]
+    
+    static let estigphar = ANAzkarDAO().then {
+        $0.name = "estigphar"
+        $0.repetation = 3
+        $0.currentCount = 3
+    }
+    
+    static let antAlSalam = ANAzkarDAO().then {
+        $0.name = "ant_al_salam"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let laIlahIlaAllahWahdah = ANAzkarDAO().then {
+        $0.name = "la_ilah_ila_allah_wahdah"
+        $0.reward = "la_ilah_ila_allah_wahdah_reward"
+        $0.repetation = 10
+        $0.currentCount = 10
+    }
+    
+    static let mokhlseenLahoLDeen = ANAzkarDAO().then {
+        $0.name = "mokhlseen_laho_l_deen"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let laManiaaLemaAatyt = ANAzkarDAO().then {
+        $0.name = "la_mani3_lema_a3tyt"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let subhanAllah = ANAzkarDAO().then {
+        $0.name = "subhan_allah"
+        $0.repetation = 33
+        $0.currentCount = 33
+    }
+    
+    static let alhamdulellah = ANAzkarDAO().then {
+        $0.name = "alhamdulellah"
+        $0.repetation = 33
+        $0.currentCount = 33
+    }
+    
+    static let allahuAkbar = ANAzkarDAO().then {
+        $0.name = "allahuakbar"
+        $0.repetation = 33
+        $0.currentCount = 33
+    }
+    
+    static let laIlahIlaAllah = ANAzkarDAO().then {
+        $0.name = "la_ilah_ila_allah"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let laIlahIlaAllahLaHawlWalaQwataIlaBellah = ANAzkarDAO().then {
+        $0.name = "la_ilah_ila_allah_la_hawl_wala_qwata_ila_bellah"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let alKursi = ANAzkarDAO().then {
+        $0.name = "ayat_al_kursi"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let alIkhlas = ANAzkarDAO().then {
+        $0.name = "ayat_al_ikhlas"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let alFalaq = ANAzkarDAO().then {
+        $0.name = "ayat_al_falaq"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let alNas = ANAzkarDAO().then {
+        $0.name = "ayat_al_alnas"
+        $0.repetation = 1
+        $0.currentCount = 1
+    }
+    
+    static let alKursiFajrMaghrib = ANAzkarDAO().then {
+        $0.name = "ayat_al_kursi"
+        $0.repetation = 3
+        $0.currentCount = 3
+    }
+    
+    static let alIkhlasFajrMaghrib = ANAzkarDAO().then {
+        $0.name = "ayat_al_ikhlas"
+        $0.repetation = 3
+        $0.currentCount = 3
+    }
+    
+    static let alFalaqFajrMaghrib = ANAzkarDAO().then {
+        $0.name = "ayat_al_falaq"
+        $0.repetation = 3
+        $0.currentCount = 3
+    }
+    
+    static let alNasFajrMaghrib = ANAzkarDAO().then {
+        $0.name = "ayat_al_alnas"
+        $0.repetation = 3
+        $0.currentCount = 3
+    }
 }

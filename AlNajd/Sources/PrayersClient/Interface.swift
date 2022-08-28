@@ -32,6 +32,7 @@ public struct PrayersClient {
     }
     
     public func save(prayer: ANPrayer?) {
+        guard let prayer = prayer else { return }
         guard let dao = realm.object(ofType: ANPrayerDAO.self, forPrimaryKey: prayer.id) else { return }
         do {
             try realm.write {
@@ -43,6 +44,7 @@ public struct PrayersClient {
     }
     
     public func save(sunnah: ANSunnah?) {
+        guard let sunnah = sunnah else { return }
         guard let dao = realm.object(ofType: ANSunnahDAO.self, forPrimaryKey: sunnah.id) else { return }
         do {
             try realm.write {
@@ -54,6 +56,7 @@ public struct PrayersClient {
     }
     
     public func save(zekr: ANAzkar?) {
+        guard let zekr = zekr else { return }
         guard let dao = realm.object(ofType: ANAzkarDAO.self, forPrimaryKey: zekr.id) else { return }
         do {
             try realm.write {
@@ -122,7 +125,7 @@ public extension ANAzkarDAO {
 class CurrentBundleFinder {}
 
 extension Foundation.Bundle {
-        
+    
     static var prayersClientBundle: Bundle = {
         /* The name of your local package, prepended by "LocalPackages_" */
         let bundleName = "AlNajd_PrayersClient"

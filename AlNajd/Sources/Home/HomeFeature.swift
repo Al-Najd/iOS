@@ -13,12 +13,20 @@ import TCACoordinators
 import PrayerDetails
 
 public struct HomeState: Equatable {
-    public var prayers: IdentifiedArrayOf<ANPrayer>
-    @BindableState var selectedPrayer: PrayerDetailsState?
-    
-    public init(prayers: IdentifiedArrayOf<ANPrayer> = []) {
-        self.prayers = prayers
+    public var prayers: IdentifiedArrayOf<ANPrayer> = []
+    public var date: String = ""
+    public var todosCount: Int = 0
+    public var doneTodos: Int = 0
+    public var percentage: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        return formatter.string(from: .init(value: percentageValue)) ?? "%0"
     }
+    
+    @BindableState var selectedPrayer: PrayerDetailsState?
+    @BindableState var percentageValue: Float = 0
+    
+    public init() { }
 }
 
 public enum HomeAction: BindableAction, Equatable {
@@ -47,15 +55,25 @@ public let homeReducer = Reducer<
             if state.prayers.isEmpty {
                 state.prayers = .init(uniqueElements: env.prayersClient.prayers())
             }
+            state.date = Date.now.startOfDay.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
+            calculateProgress(&state)
         case let .onSelecting(prayer):
             state.selectedPrayer = .init(prayer: prayer)
         case .prayerDetails(.dismiss):
             guard let selectedState = state.selectedPrayer else { return .none }
             state.prayers[id: selectedState.prayer.id] = selectedState.prayer
             state.selectedPrayer = nil
+            calculateProgress(&state)
         case .prayerDetails, .binding:
             break
         }
         return .none
     }
 ).binding()
+
+fileprivate func calculateProgress(_ state: inout HomeState) {
+    state.todosCount = state.prayers.count + state.prayers.map { $0.sunnah.count }.reduce(0, +)
+    let doneDeeds = state.prayers.filter { $0.isDone }
+    state.doneTodos = doneDeeds.count + state.prayers.flatMap { $0.sunnah.filter { $0.isDone } }.count
+    state.percentageValue = Float(state.doneTodos)/Float(state.todosCount)
+}
