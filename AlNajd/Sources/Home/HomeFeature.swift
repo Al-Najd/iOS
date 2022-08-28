@@ -16,7 +16,7 @@ public struct HomeState: Equatable {
     public var prayers: IdentifiedArrayOf<ANPrayer>
     @BindableState var selectedPrayer: PrayerDetailsState?
     
-    public init(prayers: IdentifiedArrayOf<ANPrayer> = ANPrayer.faraaid) {
+    public init(prayers: IdentifiedArrayOf<ANPrayer> = []) {
         self.prayers = prayers
     }
 }
@@ -44,15 +44,14 @@ public let homeReducer = Reducer<
     .init { state, action, env in
         switch action {
         case .onAppear:
-            state.prayers.forEach {
-                state.prayers[id: $0.id]?.update(from: env.prayersClient.prayer(for: $0.id))
+            if state.prayers.isEmpty {
+                state.prayers = .init(uniqueElements: env.prayersClient.prayers())
             }
         case let .onSelecting(prayer):
             state.selectedPrayer = .init(prayer: prayer)
         case .prayerDetails(.dismiss):
             guard let selectedState = state.selectedPrayer else { return .none }
             state.prayers[id: selectedState.prayer.id] = selectedState.prayer
-            env.prayersClient.save(prayer: selectedState.prayer)
             state.selectedPrayer = nil
         case .prayerDetails, .binding:
             break

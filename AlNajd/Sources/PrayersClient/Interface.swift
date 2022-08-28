@@ -14,80 +14,108 @@ import Business
 import Entity
 import Adhan
 import RealmSwift
+import Utils
+import Localization
 
 public struct PrayersClient {
     let realm: Realm
-    private let seedURL: URL? = Bundle.prayersClientBundle.url(forResource: "seed", withExtension: ".realm")
     
     public init() {
         do {
-            realm = try Realm(configuration: .init(deleteRealmIfMigrationNeeded: true, seedFilePath: seedURL))
+            realm = try Realm(configuration: .init(deleteRealmIfMigrationNeeded: true))
+            print(realm.configuration.fileURL)
+            createDayIfNeeded()
         } catch {
+            debugPrint(error)
             fatalError()
         }
     }
     
-    public func save(prayer: ANPrayer) {
+    public func save(prayer: ANPrayer?) {
+        guard let dao = realm.object(ofType: ANPrayerDAO.self, forPrimaryKey: prayer.id) else { return }
         do {
             try realm.write {
-                realm.add(prayer.toDAO(), update: .modified)
+                dao.isDone = prayer.isDone
             }
         } catch {
             debugPrint(error)
         }
     }
     
-    public func prayer(for id: ANPrayer.ID) -> ANPrayerDAO? {
-        realm.object(ofType: ANPrayerDAO.self, forPrimaryKey: id)
+    public func save(sunnah: ANSunnah?) {
+        guard let dao = realm.object(ofType: ANSunnahDAO.self, forPrimaryKey: sunnah.id) else { return }
+        do {
+            try realm.write {
+                dao.isDone = sunnah.isDone
+            }
+        } catch {
+            debugPrint(error)
+        }
+    }
+    
+    public func save(zekr: ANAzkar?) {
+        guard let dao = realm.object(ofType: ANAzkarDAO.self, forPrimaryKey: zekr.id) else { return }
+        do {
+            try realm.write {
+                dao.currentCount = zekr.currentCount
+            }
+        } catch {
+            debugPrint(error)
+        }
+    }
+    
+    public func prayers(for date: Date = .now) -> [ANPrayer] {
+        realm.object(ofType: ANDayDAO.self, forPrimaryKey: ANDayDAO.getID(from: date))?.prayers.compactMap { $0.toModel() } ?? []
+    }
+    
+    private func createDayIfNeeded() {
+        let date = Date.now
+        let formattedDate = ANDayDAO.getID(from: date)
+        guard realm.object(ofType: ANDayDAO.self, forPrimaryKey: formattedDate) == nil else { return }
+        do {
+            try realm.write {
+                let day = ANDayDAO()
+                day.id = formattedDate
+                day.date = date
+                day.prayers.append(objectsIn: ANPrayerDAO.faraaid)
+                realm.add(day)
+            }
+        } catch {
+            debugPrint(error)
+        }
     }
 }
 
-public extension ANPrayer {
-    func toDAO() -> ANPrayerDAO {
-        let dao = ANPrayerDAO()
-        dao.id = self.id
-        dao.name = self.name
-        dao.isDone = self.isDone
-        dao.sunnah.append(objectsIn: self.sunnah.elements.map { $0.toDAO() })
-        dao.azkar.append(objectsIn: self.afterAzkar.elements.map { $0.toDAO() })
-        return dao
-    }
-    
-    mutating func update(from dao: ANPrayerDAO?) {
-        guard let dao = dao else { return }
-        isDone = dao.isDone
-        dao.sunnah.elements.forEach { sunnah[id: $0.id]?.update(from: $0) }
-        dao.azkar.elements.forEach { afterAzkar[id: $0.id]?.update(from: $0) }
+public extension ANPrayerDAO {
+    func toModel() -> ANPrayer {
+        .init(
+            id: id,
+            name: name.localized,
+            raqaat: raqaat,
+            sunnah: .init(uniqueElements: sunnah.map { $0.toModel() }),
+            afterAzkar: .init(uniqueElements: azkar.map { $0.toModel() }),
+            isDone: isDone
+        )
     }
 }
 
-public extension ANSunnah {
-    func toDAO() -> ANSunnahDAO {
-        let dao = ANSunnahDAO()
-        dao.id = self.id
-        dao.name = self.name
-        dao.isDone = self.isDone
-        return dao
-    }
-    
-    mutating func update(from dao: ANSunnahDAO?) {
-        guard let dao = dao else { return }
-        isDone = dao.isDone
+public extension ANSunnahDAO {
+    func toModel() -> ANSunnah {
+        .init(
+            id: id,
+            name: name.localized,
+            raqaat: raqaat,
+            position: position,
+            affirmation: affirmation,
+            azkar: [],
+            isDone: isDone
+        )
     }
 }
 
-public extension ANAzkar {
-    func toDAO() -> ANAzkarDAO {
-        let dao = ANAzkarDAO()
-        dao.id = self.id
-        dao.name = self.name
-        dao.currentCount = self.currentCount
-        return dao
-    }
-    
-    mutating func update(from dao: ANAzkarDAO?) {
-        guard let dao = dao else { return }
-        currentCount = dao.currentCount
+public extension ANAzkarDAO {
+    func toModel() -> ANAzkar {
+        .init(id: id, name: name.localized, reward: reward, repetation: repetation, currentCount: currentCount)
     }
 }
 

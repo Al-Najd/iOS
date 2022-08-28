@@ -40,13 +40,17 @@ public let prayerDetailsReducer = Reducer<
     switch action {
     case .onDoingPrayer:
         state.prayer.isDone = true
+        env.prayersClient.save(prayer: state.prayer)
     case let .onDoingSunnah(sunnah):
         state.prayer.sunnah[id: sunnah.id]?.isDone = true
+        env.prayersClient.save(sunnah: state.prayer.sunnah[id: sunnah.id])
     case let .onDoingZekr(zekr):
         let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
         state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
+        env.prayersClient.save(zekr: state.prayer.afterAzkar[id: zekr.id])
     case let .onFinishingZekr(zekr):
         state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
+        env.prayersClient.save(zekr: state.prayer.afterAzkar[id: zekr.id])
     default:
         break
     }

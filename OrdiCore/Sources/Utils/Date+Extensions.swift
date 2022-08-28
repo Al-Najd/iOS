@@ -489,12 +489,16 @@ public extension Date {
   ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
   ///
   var tomorrow: Date {
-    return calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
+    calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
   }
   
   var firstDayOfTheWeek: Date {
     calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date ?? Date()
   }
+    
+    var startOfDay: Date {
+        calendar.startOfDay(for: .now)
+    }
   
   /// SwifterSwift: UNIX timestamp from date.
   ///

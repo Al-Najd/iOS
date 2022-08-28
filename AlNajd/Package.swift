@@ -125,6 +125,7 @@ private extension ANTargets {
       dependencies: [
         "Localization",
         "Assets",
+        .product(name: "RealmSwift", package: "realm-swift"),
         .product(name: "Core", package: "OrdiCore")
       ]
     )
