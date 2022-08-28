@@ -10,6 +10,7 @@ import Localization
 import Assets
 import Utils
 import SwiftUI
+import ComposableArchitecture
 
 public struct ANPrayer: Identifiable, Equatable {
   public let id: UUID = .init()
@@ -17,11 +18,11 @@ public struct ANPrayer: Identifiable, Equatable {
   public let subtitle: String
   public let raqaat: Int
   public let image: Image
-  public var sunnah: [ANSunnah]
-  public var afterAzkar: [ANAzkar]
+  public var sunnah: IdentifiedArrayOf<ANSunnah>
+  public var afterAzkar: IdentifiedArrayOf<ANAzkar>
   public var isDone: Bool = false
   
-  init(name: String, raqaat: Int, image: Image, sunnah: [ANSunnah], afterAzkar: [ANAzkar], isDone: Bool = false) {
+  init(name: String, raqaat: Int, image: Image, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false) {
     self.title = L10n.prayerTitle(name)
     self.subtitle = L10n.raqaatCount(raqaat)
     self.raqaat = raqaat
@@ -30,16 +31,23 @@ public struct ANPrayer: Identifiable, Equatable {
     self.afterAzkar = afterAzkar
     self.isDone = isDone
   }
+    
+  public static let faraaid: IdentifiedArrayOf<ANPrayer> = [
+    .fajr,
+    .dhuhr,
+    .asr,
+    .maghrib,
+    .isha
+  ]
 }
 
 public extension ANPrayer {
-  static let faraaid: [ANPrayer] = .faraaid
   static let fajr: ANPrayer = .init(
     name: L10n.fajr,
     raqaat: 2,
     image: Asset.Prayers.Images.fajrImage.swiftUIImage,
     sunnah: [.fajrSunnah],
-    afterAzkar: .common
+    afterAzkar: ANAzkar.common
   )
   
   static let sunrise: ANPrayer = .init(
@@ -47,7 +55,7 @@ public extension ANPrayer {
     raqaat: 2,
     image: Asset.Prayers.Images.fajrImage.swiftUIImage,
     sunnah: [],
-    afterAzkar: .common
+    afterAzkar: ANAzkar.common
   )
   
   static let dhuhr: ANPrayer = .init(
@@ -55,7 +63,7 @@ public extension ANPrayer {
     raqaat: 4,
     image: Asset.Prayers.Images.dhuhrImage.swiftUIImage,
     sunnah: [.dhuhrBeforeSunnah, .dhuhrAfterSunnah, .dhuhrAfterMostahabSunnah],
-    afterAzkar: .common
+    afterAzkar: ANAzkar.common
   )
   
   static let asr: ANPrayer = .init(
@@ -63,7 +71,7 @@ public extension ANPrayer {
     raqaat: 4,
     image: Asset.Prayers.Images.asrImage.swiftUIImage,
     sunnah: [],
-    afterAzkar: .common
+    afterAzkar: ANAzkar.common
   )
   
   static let maghrib: ANPrayer = .init(
@@ -71,7 +79,7 @@ public extension ANPrayer {
     raqaat: 3,
     image: Asset.Prayers.Images.maghribImage.swiftUIImage,
     sunnah: [.maghribBeforeMostahabSunnah, .maghribAfterSunnah],
-    afterAzkar: .common
+    afterAzkar: ANAzkar.common
   )
   
   static let isha: ANPrayer = .init(
@@ -79,18 +87,8 @@ public extension ANPrayer {
     raqaat: 4,
     image: Asset.Prayers.Images.ishaImage.swiftUIImage,
     sunnah: [.ishaaBeforeMostahabSunnah, .ishaaAfterSunnah],
-    afterAzkar: .common
+    afterAzkar: ANAzkar.common
   )
-}
-
-public extension Array where Element == ANPrayer {
-  static let faraaid: [ANPrayer] = [
-    .fajr,
-    .dhuhr,
-    .asr,
-    .maghrib,
-    .isha
-  ]
 }
 
 public struct ANSunnah: Identifiable, Equatable {
@@ -233,10 +231,8 @@ public struct ANAzkar: Identifiable, Equatable {
     self.repetation = repetation
     self.currentCount = repetation
   }
-}
-
-extension Array where Element == ANAzkar {
-  static let common: [ANAzkar] = [
+  
+  public static let common: IdentifiedArrayOf<ANAzkar> = [
     .init(
       name: L10n.estigphar,
       reward: .empty,

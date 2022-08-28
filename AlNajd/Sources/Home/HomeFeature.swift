@@ -10,17 +10,21 @@ import Entities
 import PrayersClient
 import Common
 import TCACoordinators
+import PrayerDetails
 
 public struct HomeState: Equatable {
-    public var prayers: [ANPrayer]
+    public var prayers: IdentifiedArrayOf<ANPrayer>
+    @BindableState var selectedPrayer: PrayerDetailsState?
     
-    public init(prayers: [ANPrayer] = .faraaid) {
+    public init(prayers: IdentifiedArrayOf<ANPrayer> = ANPrayer.faraaid) {
         self.prayers = prayers
     }
 }
 
-public enum HomeAction: Equatable {
+public enum HomeAction: BindableAction, Equatable {
+    case prayerDetails(PrayerDetailsAction)
     case onSelecting(ANPrayer)
+    case binding(BindingAction<HomeState>)
 }
 
 public struct HomeEnvironment { public init() { } }
@@ -29,7 +33,24 @@ public let homeReducer = Reducer<
     HomeState,
     HomeAction,
     CoreEnvironment<HomeEnvironment>
-> { state, action, env in
-    state.prayers = env.prayersClient.prayers
-    return .none
-}
+>.combine(
+    prayerDetailsReducer
+        .optional()
+        .pullback(
+            state: \HomeState.selectedPrayer,
+            action: /HomeAction.prayerDetails,
+            environment: { _ in .live(.init()) }),
+    .init { state, action, env in
+        switch action {
+        case let .onSelecting(prayer):
+            state.selectedPrayer = .init(prayer: prayer)
+        case .prayerDetails(.dismiss):
+            guard let selectedState = state.selectedPrayer else { return .none }
+            state.prayers[id: selectedState.prayer.id] = selectedState.prayer
+            state.selectedPrayer = nil
+        case .prayerDetails, .binding:
+            break
+        }
+        return .none
+    }
+).binding()

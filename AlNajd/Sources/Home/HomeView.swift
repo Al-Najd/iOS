@@ -12,6 +12,7 @@ import Localization
 import Entities
 import ComposableArchitecture
 import Assets
+import PrayerDetails
 
 public struct HomeView: View {
   @ObserveInjection var inject
@@ -26,10 +27,15 @@ public struct HomeView: View {
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
           HeaderView()
-          PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0)) }
+            PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
         }
       }
       .ignoresSafeArea(edges: .top)
+      .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
+          IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
+              PrayerDetailsView(store: $0)
+          })
+      }
       .enableInjection()
     }
   }
@@ -123,7 +129,7 @@ struct ScrollViewRTL<Content: View>: View {
 }
 
 struct PrayerSliderView: View {
-  var prayers: [ANPrayer]
+  var prayers: IdentifiedArrayOf<ANPrayer>
   var onTap: (ANPrayer) -> Void
   
   var body: some View {
@@ -144,6 +150,7 @@ struct PrayerSliderView: View {
                 .overlay(
                   Color.mono.offblack.opacity(0.5)
                 )
+                .contentShape(RoundedRectangle(cornerRadius: .r16))
               VStack {
                 Spacer()
                 Text(prayer.title)
@@ -154,6 +161,7 @@ struct PrayerSliderView: View {
               }.padding(.horizontal, .p4)
             }
             .cornerRadius(.r16)
+            .clipped()
             .onTapGesture {
               onTap(prayer)
             }

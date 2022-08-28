@@ -36,7 +36,7 @@ public struct PrayerDetailsView: View {
                         Spacer()
                         
                         Button {
-                            viewStore.send(.dismiss)
+                            viewStore.send(.dismiss, animation: .default)
                         } label: {
                             Image(systemName: "xmark")
                                 .resizable()

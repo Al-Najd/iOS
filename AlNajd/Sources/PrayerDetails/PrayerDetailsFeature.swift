@@ -12,7 +12,8 @@ import Common
 import TCACoordinators
 import Utils
 
-public struct PrayerDetailsState: Equatable {
+public struct PrayerDetailsState: Identifiable, Equatable {
+    public var id: ANPrayer.ID { prayer.id }
     public var prayer: ANPrayer
     
     public init(prayer: ANPrayer) {
@@ -40,11 +41,12 @@ public let prayerDetailsReducer = Reducer<
     case .onDoingPrayer:
         state.prayer.isDone = true
     case let .onDoingSunnah(sunnah):
-        state.prayer.sunnah.replace(sunnah, with: sunnah.changing { $0.isDone = true })
+        state.prayer.sunnah[id: sunnah.id]?.isDone = true
     case let .onDoingZekr(zekr):
-        state.prayer.afterAzkar.replace(zekr, with: zekr.changing { $0.currentCount = max(0, $0.currentCount - 1) })
+        let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
+        state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
     case let .onFinishingZekr(zekr):
-        state.prayer.afterAzkar.replace(zekr, with: zekr.changing { $0.currentCount = 0 })
+        state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
     default:
         break
     }
