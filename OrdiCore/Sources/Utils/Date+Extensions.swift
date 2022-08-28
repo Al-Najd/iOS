@@ -489,12 +489,16 @@ public extension Date {
   ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
   ///
   var tomorrow: Date {
-    return calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
+    calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
   }
   
   var firstDayOfTheWeek: Date {
     calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date ?? Date()
   }
+    
+    var startOfDay: Date {
+        calendar.startOfDay(for: .now)
+    }
   
   /// SwifterSwift: UNIX timestamp from date.
   ///
@@ -1168,97 +1172,6 @@ public extension Date {
       
       return dateFormatter.string(from: self)
     }
-}
-
-public class DatePresenter { }
-
-public extension DatePresenter {
-  func present(usingString date: String) -> DateStringInput {
-    DateStringInput(date: date)
-  }
-  
-  func present(usingDate date: Date) -> DateStringOutput {
-    DateStringOutput(date: date)
-  }
-}
-
-public protocol DateFormatterBuilderProtocol: AnyObject {
-  associatedtype Builder
-  var formatter: DateFormatter { get }
-}
-
-public protocol SelfAdaptingDateFormatterBuilderProtocol: DateFormatterBuilderProtocol where Builder == Self { }
-
-public extension SelfAdaptingDateFormatterBuilderProtocol {
-  @discardableResult
-  func using(format: String) -> Self {
-    formatter.dateFormat = format
-    return self
-  }
-  
-  func using(format: Date.Format) -> Self {
-    formatter.dateFormat = format.rawValue
-    return self
-  }
-  
-  @discardableResult
-  func using(localizedTemplate: String) -> Self {
-    formatter.setLocalizedDateFormatFromTemplate(localizedTemplate)
-    return self
-  }
-  
-  @discardableResult
-  func using(localizedTemplate: [Date.Components]) -> Self {
-    self.using(localizedTemplate: localizedTemplate.map(\.rawValue).joined(separator: ""))
-  }
-  
-  @discardableResult
-  func with(locale: Locale) -> Self {
-    formatter.locale = locale
-    return self
-  }
-  
-  @discardableResult
-  func adoptLocaleCalendar() -> Self  {
-    formatter.calendar = formatter.locale.calendar
-    return self
-  }
-  
-  @discardableResult
-  func adoptLocaleTimeZone() -> Self  {
-    formatter.timeZone = .init(identifier: formatter.locale.identifier)
-    return self
-  }
-}
-
-public class DateFormatterBuilder: SelfAdaptingDateFormatterBuilderProtocol {
-  public let formatter: DateFormatter = .init()
-}
-
-public class DateStringInput: DateFormatterBuilder {
-  let date: String
-  
-  public init(date: String) {
-    self.date = date
-  }
-  
-  public func parse() -> DateStringOutput {
-    return .init(
-      date: formatter.date(from: date)!
-    )
-  }
-}
-
-public class DateStringOutput: DateFormatterBuilder {
-  let date: Date
-  
-  public init(date: Date) {
-    self.date = date
-  }
-  
-  public func display() -> String {
-    return formatter.string(from: date)
-  }
 }
 
 #endif

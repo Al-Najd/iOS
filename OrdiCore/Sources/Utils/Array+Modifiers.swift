@@ -55,6 +55,18 @@ public extension Changeable {
         change(&a)
         return a
     }
+    
+    mutating func change(_ change: (inout Self) -> Void) {
+        change(&self)
+    }
 }
 
 extension Array: Changeable where Element: Changeable {}
+
+extension Array where Element: Equatable {
+    public mutating func replace(_ element: Element, with new: Element) {
+        if let f = self.firstIndex(where: { $0 == element}) {
+            self[f] = new
+        }
+    }
+}

@@ -12,12 +12,13 @@
 
 xcassets:
   inputs:
-    - AlNajd/Sources/Home/Resources/Assets.xcassets
+    - AlNajd/Sources/Assets/Resources/Assets.xcassets
   outputs:
     - templateName: swift5
       params:
         forceProvidesNamespaces: true
-      output: AlNajd/Sources/Home/Generated.swift
+        publicAccess: true
+      output: AlNajd/Sources/Assets/Generated.swift
 strings:
   inputs:
     - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.strings

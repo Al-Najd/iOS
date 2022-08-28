@@ -7,207 +7,150 @@
 
 import Foundation
 import Localization
+import Assets
+import Utils
+import SwiftUI
+import ComposableArchitecture
+import RealmSwift
 
-public struct ANPrayer: Equatable {
-    public let name: String
-    public let raqaat: Int
-    public let sunnah: [ANSunnah]
-    public let afterAzkar: [ANAzkar]
-    
-}
-
-public extension ANPrayer {
-    static let fajr: ANPrayer = .init(
-        name: L10n.fajr,
-        raqaat: 2,
-        sunnah: [.fajrSunnah],
-        afterAzkar: .common
-    )
-    
-    static let sunrise: ANPrayer = .init(
-        name: "Sunrise",
-        raqaat: 2,
-        sunnah: [],
-        afterAzkar: .common
-    )
-    
-    static let dhuhr: ANPrayer = .init(
-        name: L10n.duhr,
-        raqaat: 4,
-        sunnah: [.dhuhrBeforeSunnah, .dhuhrAfterSunnah, .dhuhrAfterMostahabSunnah],
-        afterAzkar: .common
-    )
-    
-    static let asr: ANPrayer = .init(
-        name: L10n.aasr,
-        raqaat: 4,
-        sunnah: [],
-        afterAzkar: .common
-    )
-    
-    static let maghrib: ANPrayer = .init(
-        name: L10n.maghrib,
-        raqaat: 3,
-        sunnah: [.maghribBeforeMostahabSunnah, .maghribAfterSunnah],
-        afterAzkar: .common
-    )
-    
-    static let isha: ANPrayer = .init(
-        name: L10n.aishaa,
-        raqaat: 4,
-        sunnah: [.ishaaBeforeMostahabSunnah, .ishaaAfterSunnah],
-        afterAzkar: .common
-    )
-}
-
-public extension Array where Element == ANPrayer {
-    static let faraaid: [ANPrayer] = [
-        .fajr,
-        .dhuhr,
-        .asr,
-        .maghrib,
-        .isha
-    ]
+public struct ANPrayer: Identifiable, Equatable {
+  public let id: UUID
+  public let name: String
+  public let title: String
+  public let subtitle: String
+  public let raqaat: Int
+  public var sunnah: IdentifiedArrayOf<ANSunnah>
+  public var afterAzkar: IdentifiedArrayOf<ANAzkar>
+  public var isDone: Bool = false
+  
+  public init(id: UUID, name: String, raqaat: Int, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false) {
+    self.id = id
+    self.name = name
+    self.title = L10n.prayerTitle(name)
+    self.subtitle = L10n.raqaatCount(raqaat)
+    self.raqaat = raqaat
+    self.sunnah = sunnah
+    self.afterAzkar = afterAzkar
+    self.isDone = isDone
+  }
 }
 
 public struct ANSunnah: Identifiable, Equatable {
-    public let id: UUID = .init()
-    public let name: String
-    public let raqaat: Int
-    public let position: Position
-    public let affirmation: Affirmation
-    public let azkar: [ANAzkar]
+  public let id: UUID
+  public let name: String
+  public let raqaat: Int
+  public let position: Position
+  public let affirmation: Affirmation
+  public let azkar: [ANAzkar]
+  public var isDone: Bool = false
+  
+  public init(id: UUID, name: String, raqaat: Int, position: ANSunnah.Position, affirmation: ANSunnah.Affirmation, azkar: [ANAzkar], isDone: Bool = false) {
+    self.id = id
+    self.name = name
+    self.raqaat = raqaat
+    self.position = position
+    self.affirmation = affirmation
+    self.azkar = azkar
+    self.isDone = isDone
+  }
 }
 
 public extension ANSunnah {
-    enum Position: Equatable {
-        case before
-        case after
-        
-        public var text: String {
-            switch self {
-            case .before:
-                return L10n.raqaatPositionBefore
-            case .after:
-                return L10n.raqaatPositionAfter
-            }
-        }
+  enum Position: String, PersistableEnum, Equatable {
+    case before
+    case after
+    
+    public var text: String {
+      switch self {
+      case .before:
+        return L10n.raqaatPositionBefore
+      case .after:
+        return L10n.raqaatPositionAfter
+      }
     }
+  }
+  
+  /// Meaning: سنة مؤكدة أم مستحبة
+  enum Affirmation: String, PersistableEnum, Equatable {
+    case affirmed
+    case desirable
     
-    /// Meaning: سنة مؤكدة أم مستحبة
-    enum Affirmation: Equatable {
-        case affirmed
-        case desirable
-        
-        public var text: String {
-            switch self {
-            case .affirmed:
-                return L10n.sunnahAffirmed
-            case .desirable:
-                return L10n.sunnahDesired
-            }
-        }
+    public var text: String {
+      switch self {
+      case .affirmed:
+        return L10n.sunnahAffirmed
+      case .desirable:
+        return L10n.sunnahDesired
+      }
     }
-}
-
-public extension ANSunnah {
-    static let fajrSunnah: ANSunnah = .init(
-        name: L10n.fajr,
-        raqaat: 2,
-        position: .before,
-        affirmation: .affirmed,
-        azkar: []
-    )
-    
-    static let dhuhrBeforeSunnah: ANSunnah = .init(
-        name: L10n.duhr,
-        raqaat: 4,
-        position: .before,
-        affirmation: .affirmed,
-        azkar: []
-    )
-    
-    static let dhuhrAfterSunnah: ANSunnah = .init(
-        name: L10n.duhr,
-        raqaat: 2,
-        position: .after,
-        affirmation: .affirmed,
-        azkar: []
-    )
-    
-    static let dhuhrAfterMostahabSunnah: ANSunnah = .init(
-        name: L10n.duhr,
-        raqaat: 2,
-        position: .after,
-        affirmation: .desirable,
-        azkar: []
-    )
-    
-    static let maghribBeforeMostahabSunnah: ANSunnah = .init(
-        name: L10n.maghrib,
-        raqaat: 2,
-        position: .before,
-        affirmation: .desirable,
-        azkar: []
-    )
-    
-    static let maghribAfterSunnah: ANSunnah = .init(
-        name: L10n.maghrib,
-        raqaat: 2,
-        position: .after,
-        affirmation: .affirmed,
-        azkar: []
-    )
-    
-    static let ishaaBeforeMostahabSunnah: ANSunnah = .init(
-        name: L10n.aishaa,
-        raqaat: 2,
-        position: .before,
-        affirmation: .desirable,
-        azkar: []
-    )
-    
-    static let ishaaAfterSunnah: ANSunnah = .init(
-        name: L10n.aishaa,
-        raqaat: 2,
-        position: .after,
-        affirmation: .affirmed,
-        azkar: []
-    )
+  }
 }
 
 public struct ANNafila {
-    public let name: String
-    public let raqaat: Raqaat
+  public let name: String
+  public let raqaat: Raqaat
 }
 
 public extension ANNafila {
-    static let subh: ANNafila = .init(name: "Subh", raqaat: .defined(2))
-    static let duha: ANNafila = .init(name: "Duha", raqaat: .atLeast(4))
-    static let shaf: ANNafila = .init(name: "Shaf3", raqaat: .defined(2))
-    static let watr: ANNafila = .init(name: "Watr", raqaat: .defined(1))
-    static let qeyamAlLayf: ANNafila = .init(name: "", raqaat: .atLeast(2))
-    
-    enum Raqaat: Equatable {
-        case defined(Int)
-        case atLeast(Int)
-        case open
-    }
+  static let subh: ANNafila = .init(name: "Subh", raqaat: .defined(2))
+  static let duha: ANNafila = .init(name: "Duha", raqaat: .atLeast(4))
+  static let shaf: ANNafila = .init(name: "Shaf3", raqaat: .defined(2))
+  static let watr: ANNafila = .init(name: "Watr", raqaat: .defined(1))
+  static let qeyamAlLayf: ANNafila = .init(name: "", raqaat: .atLeast(2))
+  
+  enum Raqaat: Equatable {
+    case defined(Int)
+    case atLeast(Int)
+    case open
+  }
 }
 
 public struct ANAzkar: Identifiable, Equatable {
-    public let id: UUID = .init()
-    public let name: String
-    public let reward: String
-    public let repetation: Int
+  public let id: UUID
+  public let name: String
+  public let reward: String
+  public let repetation: Int
+  public var currentCount: Int
+  public var isDone: Bool { currentCount == .zero }
+  
+  public init(id: UUID, name: String, reward: String, repetation: Int, currentCount: Int) {
+    self.id = id
+    self.name = name
+    self.reward = reward
+    self.repetation = repetation
+    self.currentCount = currentCount
+  }
 }
 
-extension Array where Element == ANAzkar {
-    static let common: [ANAzkar] = [
-        .init(
-            name: L10n.estigphar,
-            reward: .empty,
-            repetation: 3
-        )
-    ]
+public extension ANSunnah {
+  var title: String {
+    L10n.sunnahTitle(name, affirmation.text)
+  }
+  
+  var subtitle: String {
+    return L10n.sunnahSubtitle(name, position.text, L10n.raqaatCount(raqaat))
+  }
+}
+
+extension ANPrayer: Changeable {}
+extension ANSunnah: Changeable {}
+extension ANAzkar: Changeable {}
+
+extension ANPrayer {
+  public var image: Image {
+    switch name {
+    case L10n.fajr:
+      return Asset.Prayers.Images.fajrImage.swiftUIImage
+    case L10n.duhr:
+      return Asset.Prayers.Images.dhuhrImage.swiftUIImage
+    case L10n.aasr:
+      return Asset.Prayers.Images.asrImage.swiftUIImage
+    case L10n.maghrib:
+      return Asset.Prayers.Images.maghribImage.swiftUIImage
+    case L10n.aishaa:
+      return Asset.Prayers.Images.ishaImage.swiftUIImage
+    default:
+      return Asset.Prayers.Images.fajrImage.swiftUIImage
+    }
+  }
 }

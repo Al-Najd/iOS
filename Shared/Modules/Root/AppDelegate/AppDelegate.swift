@@ -5,11 +5,6 @@
 //  Created by Ahmed Ramy on 04/03/2022.
 //
 
-import UIKit
-import ComposableArchitecture
-import Settings
-import Common
-
 //public final class AppDelegate: NSObject, UIApplicationDelegate {
 //  public let store = Store<RootState, RootAction>(
 //    initialState: RootState(),

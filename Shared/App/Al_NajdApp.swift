@@ -6,23 +6,12 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
-import Onboarding
-import Settings
-import Utils
-import Common
 import Home
-import Inject
+import ComposableArchitecture
+import Common
 
 @main
 struct Al_NajdApp: App {
-  @Environment(\.scenePhase) private var scenePhase
-  public let store = Store<RootState, RootAction>(
-    initialState: RootState(),
-    reducer: rootReducer,
-    environment: CoreEnvironment.live(RootEnvironment())
-  )
-  
   let plugins: [AppPlugin] = [
     ThemePlugin(),
     CorePlugin(),
@@ -32,7 +21,7 @@ struct Al_NajdApp: App {
   
   var body: some Scene {
     WindowGroup {
-      HomeView()
+      RootView(store: .mainRoot)
         .onAppear {
           plugins.forEach { $0.setup() }
         }

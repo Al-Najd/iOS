@@ -61,7 +61,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>Primary.background</string>
+		<string>LaunchScreen.Color</string>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
@@ -78,5 +78,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
