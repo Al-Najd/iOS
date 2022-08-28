@@ -87,8 +87,10 @@ private extension ANTargets {
         "Localization",
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
-        .product(name: "Adhan", package: "adhan-swift")
-      ]
+        .product(name: "Adhan", package: "adhan-swift"),
+        .product(name: "RealmSwift", package: "realm-swift")
+      ],
+      resources: [.process("Resources")]
     )
   ]
   
@@ -189,6 +191,10 @@ private extension ANDependencies {
       url: "https://github.com/maustinstar/swiftui-drawer",
       branch: "master"
     ),
+    .package(
+        url: "https://github.com/realm/realm-swift",
+        .upToNextMinor(from: .init(10, 28, 6))
+    )
   ]
 }
 

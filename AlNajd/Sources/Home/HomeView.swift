@@ -36,6 +36,7 @@ public struct HomeView: View {
               PrayerDetailsView(store: $0)
           })
       }
+      .onAppear { viewStore.send(.onAppear) }
       .enableInjection()
     }
   }
