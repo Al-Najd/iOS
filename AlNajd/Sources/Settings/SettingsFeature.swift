@@ -112,14 +112,7 @@ fileprivate func handlePermissionTap(_ permission: ANPermission, using env: Core
 fileprivate func handleLocationPermission(_ permission: ANPermission, using env: CoreEnvironment<SettingsEnvironment>) -> Effect<SettingsAction, Never> {
   switch permission.status {
     case .notDetermined:
-      return .merge(
-        env.locationManager
-          .create(id: LocationId())
-          .map(SettingsAction.locationManager),
-        env.locationManager
-          .requestWhenInUseAuthorization(id: LocationId())
-          .fireAndForget()
-      )
+    return .none
     case .given, .denied, .insufficient:
       openSettings()
       return .none

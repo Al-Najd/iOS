@@ -12,7 +12,27 @@ import ComposableCoreLocation
 import ComposableArchitecture
 import Business
 import Entity
+import Adhan
 
 public struct PrayersClient {
     public var prayers: (CLLocationCoordinate2D) -> Effect<PrayerScheduleResponse, OError>
+}
+
+public extension Prayer {
+  var prayerDetails: ANPrayer {
+    switch self {
+    case .fajr:
+      return .fajr
+    case .sunrise:
+      return .sunrise
+    case .dhuhr:
+      return .dhuhr
+    case .asr:
+      return .asr
+    case .maghrib:
+      return .maghrib
+    case .isha:
+      return .isha
+    }
+  }
 }

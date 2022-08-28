@@ -11,6 +11,8 @@ import Onboarding
 import Settings
 import Utils
 import Common
+import Home
+import Inject
 
 @main
 struct Al_NajdApp: App {
@@ -30,7 +32,7 @@ struct Al_NajdApp: App {
   
   var body: some Scene {
     WindowGroup {
-      RootView(store: self.store)
+      HomeView()
         .onAppear {
           plugins.forEach { $0.setup() }
         }
