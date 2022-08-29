@@ -72,7 +72,7 @@ platform :ios do
   desc "Builds and prepare for exporting the app to the App Store"
   lane :build_for_app_store_distribtion do 
     gym(
-      scheme: "Al Najd (iOS)",
+      scheme: "Al Najd",
       export_method: "app-store",
       export_xcargs: "-allowProvisioningUpdates",
       configuration: "Beta"
@@ -80,7 +80,7 @@ platform :ios do
   end
 
   desc "Uploads the app to Testflight"
-  lane :upload_to_testflight do 
+  lane :push_to_testflight do 
     changelog = changelog_from_git_commits(
       between: git_tags(limit: 2),  # Optional, lets you specify a revision/tag range between which to collect commit info
       pretty: "- %s",# Optional, lets you provide a custom format to apply to each commit when generating the changelog text
@@ -107,7 +107,7 @@ platform :ios do
   end
 
   desc "Uploads dSYMs to Sentry, Creates a Release Deployment, and specifies the commits"
-  lande :sentry_wetwork do 
+  lane :sentry_wetwork do 
     sentry_upload_dif
     sentry_create_release(
       version: get_version_number(target: "Al Najd (iOS)"), # release version to create
@@ -126,7 +126,7 @@ platform :ios do
     setup_for_ci_if_needed
     handle_versioning
     build_for_app_store_distribtion
-    upload_to_testflight
+    push_to_testflight
     sentry_wetwork
     clean_build_artifacts
     # slack

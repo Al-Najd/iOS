@@ -5,6 +5,7 @@
 //  Created by Ahmed Ramy on 28/02/2022.
 //
 
+import Foundation
 import ComposableArchitecture
 import Entities
 import PrayersClient

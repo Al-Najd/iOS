@@ -5,20 +5,17 @@
 //  Created by Ahmed Ramy on 11/02/2022.
 //
 
-// TODO: - Check for possible insight between two frames
-
 import ComposableArchitecture
 import Entities
 import Localization
 import Utils
 import Business
 import Common
-import Date
+import Foundation
 
 public struct DashboardState: Equatable {
     public var tipOfTheDay: String
     public var reports: [RangeProgress]
-    public var activeDate: Date = .now
     
     public init(
         tipOfTheDay: String = "",
@@ -31,7 +28,6 @@ public struct DashboardState: Equatable {
 
 public enum DashboardAction: Equatable {
     case onAppear
-    case onChange(Date)
     case populate(with: [RangeProgress])
 }
 
@@ -45,19 +41,9 @@ public let dashboardReducer = Reducer<
 > { state, action, env in
     switch action {
         case .onAppear:
-            return .init(
-                value: .populate(
-                    with: analyize(
-                        currentRangeReport: getLastWeekReport(env, state.activeDate),
-                        previousRangeReport: getLastWeekReport(env, state.activeDate.adding(.day, value: -7))
-                    )
-                )
-            )
-        case let .populate(with: ranges):
-            state.reports = ranges
-        case let .onChange(date):
-            state.activeDate = date
-            return .init(value: .onAppear)
+        state.reports = []
+    case let .populate(with: ranges):
+        state.reports = ranges
     }
     return .none
 }
@@ -65,25 +51,13 @@ public let dashboardReducer = Reducer<
 func analyize(
     currentRangeReport: Report.Range,
     previousRangeReport: Report.Range? = nil
-) -> [RangeProgress] {
-    let sortModifier: ((key: DeedCategory, value: [Date: [Deed]]), (key: DeedCategory, value: [Date: [Deed]])) -> Bool = {
-        $0.key.sortWeight > $1.key.sortWeight
-    }
-    
+) -> RangeProgress {
     if let previousRangeReport = previousRangeReport {
-        return zip(
-            previousRangeReport.ranges.sorted(by: sortModifier).compactMap { getRangeProgress($0, $1) },
-            currentRangeReport.ranges.sorted(by: sortModifier).compactMap { getRangeProgress($0, $1) }
-        ).compactMap { prev, current in
-            return current.changeImprovement(to: current.score >= prev.score)
-        }
+        let previous = getRangeProgress(previousRangeReport.ranges)
+        let current = getRangeProgress(currentRangeReport.ranges)
+        return current.changeImprovement(to: current.score >= previous.score)
     } else {
-        return currentRangeReport
-            .ranges
-            .sorted(by: sortModifier)
-            .compactMap {
-                getRangeProgress($0, $1).changeImprovement(to: true)
-            }
+        return getRangeProgress(currentRangeReport.ranges).changeImprovement(to: true)
     }
 }
 
@@ -92,15 +66,7 @@ func getLastWeekReport(
     _ activeDay: Date
 ) -> Report.Range {
     .init(
-        ranges: DeedCategory
-            .allCases
-            .reduce(
-                into: [DeedCategory: [Date: [Deed]]]()
-            ) { dictionary, category in
-                dictionary[category] = activeDay.previousWeek.reduce(into: [Date: [Deed]]()) { dictionary, date in
-                    dictionary[date] = env.getPrayersFromCache(date, category) ?? category.defaultDeeds
-                }
-            }
+        ranges: [:]
     )
 }
 
@@ -111,8 +77,7 @@ let noEnoughDataMessageBank = [
 ]
 
 func getRangeProgress(
-    _ category: DeedCategory,
-    _ dateIndexedDeeds: [Date: [Deed]]
+    _ dateIndexedDeeds: [Date: [ANPrayer]]
 ) -> RangeProgress {
     let countOfDoneDuringRange =  dateIndexedDeeds.values.flatMap { $0 }.filter { $0.isDone }.count
     let rangeNumberOfDays = dateIndexedDeeds.count
@@ -123,18 +88,17 @@ func getRangeProgress(
     let insight: Insight? = reports.isEmpty ? .init(
         indicator: .encourage,
         details: noEnoughDataMessageBank.randomElement() ?? noEnoughDataMessageBank[0]
-    ) : analyize(category, dateIndexedDeeds)
+    ) : analyize(dateIndexedDeeds)
     
     return RangeProgress(
-        title: category.title,
+        title: "category.title",
         reports: reports,
         insight: insight,
         score: countOfDoneDuringRange
     )
 }
 
-var fajrAndAishaaPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight? = { category, dateIndexedDeeds in
-    guard category == .fard else { return nil }
+var fajrAndAishaaPraiser: (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight? = { dateIndexedDeeds in
     let daysWhereFajrAndAishaaArePrayed = dateIndexedDeeds.compactMap { date, deeds -> Bool in
         let fajrPrayed = deeds.filter { $0.title == Deed.fajr.title }
         let aishaaPrayed = deeds.filter { $0.title == Deed.aishaa.title }
@@ -152,42 +116,19 @@ var fajrAndAishaaPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: 
     return .init(indicator: .praise, details: "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night".localized)
 }
 
-var fajrPraiser: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight? = { category, dateIndexedDeeds in
-    guard category == .fard else { return nil }
-    let daysWhereFajrIsPrayed = dateIndexedDeeds.compactMap { date, deeds -> String? in
-        let fajrDonePerDate = deeds.filter { $0.title == Deed.fajr.title }.filter { $0.isDone }
-        
-        guard fajrDonePerDate.isEmpty == false else { return nil }
-        
-        return date.dayName(ofStyle: .full)
-    }
-    
-    guard daysWhereFajrIsPrayed.isEmpty == false else { return nil }
-    let daysString = daysWhereFajrIsPrayed
-        .dropLast()
-        .joined(separator: ", ")
-    + ", and day".localized(arguments: daysWhereFajrIsPrayed.last ?? "")
-    
-    return .init(indicator: .praise, details: "Well done on praying Al Fajr on day".localized(arguments: daysString))
+var fajrPraiser: (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight? = { dateIndexedDeeds in
+    return .init(indicator: .praise, details: "Well done on praying Al Fajr on day".localized(arguments: "daysString"))
 }
 
-var fajrAdvisor: (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight? = { category, dateIndexedDeeds in
-    guard category == .fard else { return nil }
-    
-    let allDeeds = dateIndexedDeeds.values.flatMap { $0 }
-    // Make sure that total faraaid done doesn't exceed 10
-    guard allDeeds.filter({ $0.isDone }).count <= 10 else { return nil }
-    // Make sure that total fajr prayed doesn't exceed 1
-    guard allDeeds.filter({ $0 == .fajr && $0.isDone }).count <= 1 else { return nil }
-    
+var fajrAdvisor: (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight? = { dateIndexedDeeds in
     return .init(
         indicator: .encourage,
         details: "Struggling? you got this, do you want to know who can help? Al Fajr!, make sure to pray it so other deeds become easier!".localized
     )
 }
 
-func analyize(_ category: DeedCategory, _ reports: [Date: [Deed]]) -> Insight? {
-    Insight.Indicator.analysis.compactMap { $0(category, reports) }.first
+func analyize(_ reports: [Date: [ANPrayer]]) -> Insight? {
+    Insight.Indicator.analysis.compactMap { $0(reports) }.first
 }
 
 extension Store where State == DashboardState, Action == DashboardAction {
@@ -211,7 +152,7 @@ extension Store where State == DashboardState, Action == DashboardAction {
 }
 
 extension DayProgress {
-    init(deeds: [Deed], date: Date) {
+    init(deeds: [ANPrayer], date: Date) {
         func getIndicator(_ count: Int, _ limit: Int) -> DayProgress.Indicator {
             let moderateThreshold = 0.25
             let goodThreshold = 0.75
@@ -238,10 +179,10 @@ extension DayProgress {
 }
 
 
-typealias Analysis = (_ category: DeedCategory, _ dateIndexedDeeds: [Date: [Deed]]) -> Insight?
+typealias Analysis = (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight?
 extension Insight.Indicator {
     static var analysis: [Analysis] {
-        let praises: [Analysis] = [fajrPraiser]
+        let praises: [Analysis] = [fajrPraiser, fajrAndAishaaPraiser]
         let encourages: [Analysis] = [fajrAdvisor]
         let tipOfTheDay: [Analysis] = []
         let danger: [Analysis] = []

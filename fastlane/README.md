@@ -39,10 +39,10 @@ Handles any versionings and Changelogs maintenance
 
 Builds and prepare for exporting the app to the App Store
 
-### ios upload_to_testflight
+### ios push_to_testflight
 
 ```sh
-[bundle exec] fastlane ios upload_to_testflight
+[bundle exec] fastlane ios push_to_testflight
 ```
 
 Uploads the app to Testflight
@@ -54,6 +54,14 @@ Uploads the app to Testflight
 ```
 
 Syncs remote git with the local
+
+### ios sentry_wetwork
+
+```sh
+[bundle exec] fastlane ios sentry_wetwork
+```
+
+Uploads dSYMs to Sentry, Creates a Release Deployment, and specifies the commits
 
 ### ios beta
 

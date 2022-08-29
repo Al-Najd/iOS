@@ -54,5 +54,6 @@ public let prayerDetailsReducer = Reducer<
     default:
         break
     }
+    env.haptic.send(.success)
     return .none
 }.debug()

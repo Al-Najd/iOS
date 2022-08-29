@@ -4,3 +4,4 @@
 
 gem 'fastlane-plugin-changelog'
 gem 'fastlane-plugin-git_tags'
+gem 'fastlane-plugin-sentry'
