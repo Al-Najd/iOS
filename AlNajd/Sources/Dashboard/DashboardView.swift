@@ -10,6 +10,8 @@ import DesignSystem
 import Utils
 import PreviewableView
 import ComposableArchitecture
+import Inject
+import ReusableUI
 
 struct DashboardSegment: Identifiable, Hashable {
   let id = UUID().uuidString
@@ -17,9 +19,9 @@ struct DashboardSegment: Identifiable, Hashable {
 }
 
 extension DashboardSegment {
-    static let prayers: DashboardSegment = .init(title: "Prayers".localized)
-    static let azkar: DashboardSegment = .init(title: "Azkar".localized)
-    static let allStats: DashboardSegment = .init(title: "All Stats".localized)
+  static let prayers: DashboardSegment = .init(title: "Prayers".localized)
+  static let azkar: DashboardSegment = .init(title: "Azkar".localized)
+  static let allStats: DashboardSegment = .init(title: "All Stats".localized)
   
   static let allSegments: [DashboardSegment] = [
     prayers,
@@ -30,6 +32,7 @@ extension DashboardSegment {
 
 public struct DashboardView: View {
   let store: Store<DashboardState, DashboardAction>
+  @ObserveInjection var inject
   
   public init(store: Store<DashboardState, DashboardAction>) {
     self.store = store
@@ -37,15 +40,18 @@ public struct DashboardView: View {
   
   public var body: some View {
     WithViewStore(store) { viewStore in
-      ScrollView(.vertical, showsIndicators: false) {
+        ScrollView(.vertical) {
         VStack(spacing: .p16) {
           ForEach(viewStore.reports) { report in
             RangeAnalysisCardView(progress: report)
           }
-        }.padding(.p16)
+        }
+        .fill()
+        .padding(.p16)
       }.onAppear {
-          viewStore.send(.onAppear)
-      }.background(Color.primary.background)
+        viewStore.send(.onAppear)
+      }
+      .enableInjection()
     }
   }
 }
@@ -55,8 +61,7 @@ struct DashboardView_Previews: PreviewProvider {
     DashboardView(
       store: .mock
     ).background(
-        Color.mono.background.ignoresSafeArea()
-      )
-      .stay(.dark)
+      Color.mono.background.ignoresSafeArea()
+    )
   }
 }

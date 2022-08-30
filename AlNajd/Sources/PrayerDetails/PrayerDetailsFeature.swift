@@ -9,7 +9,6 @@ import ComposableArchitecture
 import Entities
 import PrayersClient
 import Common
-import TCACoordinators
 import Utils
 
 public struct PrayerDetailsState: Identifiable, Equatable {

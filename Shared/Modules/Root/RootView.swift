@@ -12,6 +12,7 @@ import PrayerDetails
 import Localization
 import DesignSystem
 import Assets
+import Dashboard
 
 public struct RootView: View {
   public let store: Store<RootState, RootAction>

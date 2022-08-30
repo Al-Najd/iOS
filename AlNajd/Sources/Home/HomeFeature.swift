@@ -10,8 +10,8 @@ import ComposableArchitecture
 import Entities
 import PrayersClient
 import Common
-import TCACoordinators
 import PrayerDetails
+import Dashboard
 
 public struct HomeState: Equatable {
     public var prayers: IdentifiedArrayOf<ANPrayer> = []
@@ -23,7 +23,7 @@ public struct HomeState: Equatable {
         formatter.numberStyle = .percent
         return formatter.string(from: .init(value: percentageValue)) ?? "%0"
     }
-    
+    var dashboard: DashboardState = .init()
     @BindableState var selectedPrayer: PrayerDetailsState?
     @BindableState var percentageValue: Float = 0
     
@@ -33,6 +33,7 @@ public struct HomeState: Equatable {
 public enum HomeAction: BindableAction, Equatable {
     case onAppear
     case prayerDetails(PrayerDetailsAction)
+    case dashboard(DashboardAction)
     case onSelecting(ANPrayer)
     case binding(BindingAction<HomeState>)
 }
@@ -44,6 +45,12 @@ public let homeReducer = Reducer<
     HomeAction,
     CoreEnvironment<HomeEnvironment>
 >.combine(
+    dashboardReducer
+        .pullback(
+            state: \HomeState.dashboard,
+            action: /HomeAction.dashboard,
+            environment: { _ in .live(.init()) }
+        ),
     prayerDetailsReducer
         .optional()
         .pullback(
@@ -65,7 +72,7 @@ public let homeReducer = Reducer<
             state.prayers[id: selectedState.prayer.id] = selectedState.prayer
             state.selectedPrayer = nil
             calculateProgress(&state)
-        case .prayerDetails, .binding:
+        default:
             break
         }
         return .none

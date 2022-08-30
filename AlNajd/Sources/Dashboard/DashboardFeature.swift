@@ -41,7 +41,12 @@ public let dashboardReducer = Reducer<
 > { state, action, env in
     switch action {
         case .onAppear:
-        state.reports = []
+        state.reports = [
+            analyize(
+                currentRangeReport: getWeeklyReport(from: .now, env),
+                previousRangeReport: getWeeklyReport(from: .now.adding(.day, value: -7), env)
+            )
+        ]
     case let .populate(with: ranges):
         state.reports = ranges
     }
@@ -50,24 +55,18 @@ public let dashboardReducer = Reducer<
 
 func analyize(
     currentRangeReport: Report.Range,
-    previousRangeReport: Report.Range? = nil
+    previousRangeReport: Report.Range
 ) -> RangeProgress {
-    if let previousRangeReport = previousRangeReport {
-        let previous = getRangeProgress(previousRangeReport.ranges)
-        let current = getRangeProgress(currentRangeReport.ranges)
-        return current.changeImprovement(to: current.score >= previous.score)
-    } else {
-        return getRangeProgress(currentRangeReport.ranges).changeImprovement(to: true)
-    }
+    let previous = getRangeProgress(previousRangeReport.ranges)
+    let current = getRangeProgress(currentRangeReport.ranges)
+    return current.changeImprovement(to: current.score >= previous.score)
 }
 
-func getLastWeekReport(
-    _ env: CoreEnvironment<DashboardEnvironment>,
-    _ activeDay: Date
-) -> Report.Range {
-    .init(
-        ranges: [:]
-    )
+func getWeeklyReport(from date: Date, _ env: CoreEnvironment<DashboardEnvironment>) -> Report.Range {
+    .init(ranges: date.currentWeek.reduce(into: [Date: [ANPrayer]]()) { current, next in
+        print(current, next)
+        current[next] = env.prayersClient.prayers(for: next)
+    })
 }
 
 let noEnoughDataMessageBank = [
@@ -80,18 +79,12 @@ func getRangeProgress(
     _ dateIndexedDeeds: [Date: [ANPrayer]]
 ) -> RangeProgress {
     let countOfDoneDuringRange =  dateIndexedDeeds.values.flatMap { $0 }.filter { $0.isDone }.count
-    let rangeNumberOfDays = dateIndexedDeeds.count
-    let reports = countOfDoneDuringRange >= rangeNumberOfDays
-    ? dateIndexedDeeds.map { (date: $0.key, deeds: $0.value) }.sorted(by: { $0.date > $1.date }).map { DayProgress(deeds: $0.deeds, date: $0.date) }
-    : []
+    let reports = dateIndexedDeeds.map { DayProgress(deeds: $0.value, date: $0.key) }
     
-    let insight: Insight? = reports.isEmpty ? .init(
-        indicator: .encourage,
-        details: noEnoughDataMessageBank.randomElement() ?? noEnoughDataMessageBank[0]
-    ) : analyize(dateIndexedDeeds)
+    let insight: Insight? = analyize(dateIndexedDeeds)
     
     return RangeProgress(
-        title: "category.title",
+        title: "Faraaid".localized,
         reports: reports,
         insight: insight,
         score: countOfDoneDuringRange
@@ -99,32 +92,35 @@ func getRangeProgress(
 }
 
 var fajrAndAishaaPraiser: (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight? = { dateIndexedDeeds in
-    let daysWhereFajrAndAishaaArePrayed = dateIndexedDeeds.compactMap { date, deeds -> Bool in
-        let fajrPrayed = deeds.filter { $0.title == Deed.fajr.title }
-        let aishaaPrayed = deeds.filter { $0.title == Deed.aishaa.title }
-        
-        return zip(fajrPrayed, aishaaPrayed).map { fajr, aishaa in
-            fajr.isDone && aishaa.isDone
-        }
-        .filter { $0 == false }
-        .count == 0
-    }
-    
-    let didPrayFajrAndAishaa = daysWhereFajrAndAishaaArePrayed.filter { $0 == true }.count > 0
-    guard didPrayFajrAndAishaa else { return nil }
-    
-    return .init(indicator: .praise, details: "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night".localized)
+//    let daysWhereFajrAndAishaaArePrayed = dateIndexedDeeds.compactMap { date, deeds -> Bool in
+//        let fajrPrayed = deeds.filter { $0.title == Deed.fajr.title }
+//        let aishaaPrayed = deeds.filter { $0.title == Deed.aishaa.title }
+//
+//        return zip(fajrPrayed, aishaaPrayed).map { fajr, aishaa in
+//            fajr.isDone && aishaa.isDone
+//        }
+//        .filter { $0 == false }
+//        .count == 0
+//    }
+//
+//    let didPrayFajrAndAishaa = daysWhereFajrAndAishaaArePrayed.filter { $0 == true }.count > 0
+//    guard didPrayFajrAndAishaa else { return nil }
+//
+//    return .init(indicator: .praise, details: "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night".localized)
+    return nil
 }
 
 var fajrPraiser: (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight? = { dateIndexedDeeds in
-    return .init(indicator: .praise, details: "Well done on praying Al Fajr on day".localized(arguments: "daysString"))
+//    return .init(indicator: .praise, details: "Well done on praying Al Fajr on day".localized(arguments: "daysString"))
+    nil
 }
 
 var fajrAdvisor: (_ dateIndexedDeeds: [Date: [ANPrayer]]) -> Insight? = { dateIndexedDeeds in
-    return .init(
-        indicator: .encourage,
-        details: "Struggling? you got this, do you want to know who can help? Al Fajr!, make sure to pray it so other deeds become easier!".localized
-    )
+//    return .init(
+//        indicator: .encourage,
+//        details: "Struggling? you got this, do you want to know who can help? Al Fajr!, make sure to pray it so other deeds become easier!".localized
+//    )
+    nil
 }
 
 func analyize(_ reports: [Date: [ANPrayer]]) -> Insight? {

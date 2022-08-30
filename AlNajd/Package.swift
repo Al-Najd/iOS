@@ -127,7 +127,8 @@ private extension ANTargets {
         "Localization",
         "Assets",
         .product(name: "RealmSwift", package: "realm-swift"),
-        .product(name: "Core", package: "OrdiCore")
+        .product(name: "Core", package: "OrdiCore"),
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
       ]
     )
   ]
@@ -139,6 +140,7 @@ private extension ANTargets {
         "Localization",
         "Assets",
         "PrayersClient",
+        "Common",
         .product(name: "Core", package: "OrdiCore")
       ]
     )

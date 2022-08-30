@@ -13,6 +13,8 @@ import Entities
 import ComposableArchitecture
 import Assets
 import PrayerDetails
+import ReusableUI
+import Dashboard
 
 public struct HomeView: View {
   @ObserveInjection var inject
@@ -28,6 +30,7 @@ public struct HomeView: View {
         VStack {
           HeaderView(viewStore: viewStore)
           PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
+          DashboardView(store: store.scope(state: { $0.dashboard }, action: HomeAction.dashboard))
         }
       }
       .ignoresSafeArea(edges: .top)
@@ -38,7 +41,7 @@ public struct HomeView: View {
       }
       .background(Color.mono.background)
       .onAppear { viewStore.send(.onAppear) }
-      .enableInjection()
+//      .enableInjection()
     }
   }
 }
@@ -105,30 +108,6 @@ struct ProgressBar: View {
         }.cornerRadius(45.0)
       }
     }
-  }
-}
-
-struct ScrollViewRTL<Content: View>: View {
-  @ViewBuilder var content: Content
-  @Environment(\.layoutDirection) private var layoutDirection
-  
-  init(@ViewBuilder content: () -> Content) {
-    self.content = content()
-  }
-  
-  @ViewBuilder var body: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      content
-        .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? -180 : 0), axis: (
-          x: CGFloat(0),
-          y: CGFloat(layoutDirection == .rightToLeft ? -10 : 0),
-          z: CGFloat(0)))
-      
-    }
-    .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? 180 : 0), axis: (
-      x: CGFloat(0),
-      y: CGFloat(layoutDirection == .rightToLeft ? 10 : 0),
-      z: CGFloat(0)))
   }
 }
 
