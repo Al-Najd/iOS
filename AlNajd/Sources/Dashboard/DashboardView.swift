@@ -12,6 +12,8 @@ import PreviewableView
 import ComposableArchitecture
 import Inject
 import ReusableUI
+import Localization
+import Assets
 
 struct DashboardSegment: Identifiable, Hashable {
   let id = UUID().uuidString
@@ -19,15 +21,31 @@ struct DashboardSegment: Identifiable, Hashable {
 }
 
 extension DashboardSegment {
-  static let prayers: DashboardSegment = .init(title: "Prayers".localized)
-  static let azkar: DashboardSegment = .init(title: "Azkar".localized)
-  static let allStats: DashboardSegment = .init(title: "All Stats".localized)
+  static let faraaid: DashboardSegment = .init(title: L10n.faraaid)
+  static let sunnah: DashboardSegment = .init(title: L10n.sunnah)
+  static let nawafil: DashboardSegment = .init(title: L10n.nafila)
+  static let azkar: DashboardSegment = .init(title: L10n.nafila)
   
   static let allSegments: [DashboardSegment] = [
-    prayers,
-    azkar,
-    allStats
+    faraaid,
+    sunnah,
+    nawafil,
+    azkar
   ]
+}
+
+struct NafilaAnalyticsData {
+  let date: Date
+  let count: Int
+  
+  static let dummy: [NafilaAnalyticsData] = {
+    (6...0).map {
+      .init(
+        date: Date.now.startOfDay.adding(.day, value: -$0),
+        count: Int.random(in: 0...8)
+      )
+    }
+  }()
 }
 
 public struct DashboardView: View {
@@ -40,19 +58,80 @@ public struct DashboardView: View {
   
   public var body: some View {
     WithViewStore(store) { viewStore in
-        ScrollView(.vertical) {
+      ScrollView(.vertical) {
         VStack(spacing: .p16) {
-          ForEach(viewStore.reports) { report in
-            RangeAnalysisCardView(progress: report)
-          }
+        makeCurrentStreakView()
+        HStack {
+          makeMetricView(title: L10n.faraaid, value: L10n.prayers)
+          makeMetricView(title: L10n.azkar, value: L10n.azkarAlSabah)
+        }.padding(.horizontal)
+        
+        makeNafilaChartView()
+          .padding(.horizontal)
         }
-        .fill()
-        .padding(.p16)
-      }.onAppear {
+      }
+      .onAppear {
         viewStore.send(.onAppear)
       }
       .enableInjection()
     }
+  }
+  
+  @ViewBuilder
+  func makeCurrentStreakView() -> some View {
+    VStack {
+      Label("Current Streak", systemImage: "flame.fill")
+        .scaledFont(.pSubheadline)
+        .foregroundColor(Asset.Colors.Primary.bluberry.swiftUIColor)
+      Text("32 Day")
+        .foregroundColor(Asset.Colors.Primary.solarbeam.swiftUIColor)
+        .scaledFont(.pTitle3, .bold)
+    }
+    .padding()
+    .fill()
+    .background(
+      RoundedRectangle(cornerRadius: .r16)
+        .fill()
+        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+        .shadow(radius: .r8)
+    )
+    .padding(.horizontal)
+  }
+  
+  @ViewBuilder
+  func makeMetricView(title: String, icon: String? = nil, value: String) -> some View {
+    VStack(spacing: .zero) {
+      Label(title, systemImage: icon ?? "")
+        .scaledFont(.pSubheadline)
+        .foregroundColor(Asset.Colors.Primary.bluberry.swiftUIColor)
+      Text(value)
+        .scaledFont(.pTitle3, .bold)
+        .foregroundColor(.mono.offwhite)
+    }
+    .padding()
+    .fill()
+    .background(
+      RoundedRectangle(cornerRadius: .r16)
+        .fill()
+        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+        .shadow(radius: .r8)
+    )
+  }
+  
+  @ViewBuilder
+  func makeNafilaChartView() -> some View {
+    VStack {
+      
+    }
+    .padding()
+    .fill()
+    .frame(height: 320)
+    .background(
+      RoundedRectangle(cornerRadius: .r16)
+        .fill()
+        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+        .shadow(radius: .r8)
+    )
   }
 }
 

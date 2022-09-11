@@ -422,9 +422,9 @@ public enum L10n {
   public static let today = L10n.tr("Localizables", "Today", fallback: "اليوم")
   /// محصلة اليوم
   public static let todaySummary = L10n.tr("Localizables", "today_summary", fallback: "محصلة اليوم")
-  /// %@%@ (%@)
+  /// %@/%@ (%@)
   public static func todaySummaryNumeric(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
-    return L10n.tr("Localizables", "today_summary_numeric", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%@%@ (%@)")
+    return L10n.tr("Localizables", "today_summary_numeric", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%@/%@ (%@)")
   }
   /// تتبع ذلك عن طريق سحبها من الجانب
   public static let trackOfItByJustSwipingFromTheSide = L10n.tr("Localizables", "Track of it by just swiping from the side", fallback: "تتبع ذلك عن طريق سحبها من الجانب")

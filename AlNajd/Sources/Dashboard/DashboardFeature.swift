@@ -64,7 +64,6 @@ func analyize(
 
 func getWeeklyReport(from date: Date, _ env: CoreEnvironment<DashboardEnvironment>) -> Report.Range {
     .init(ranges: date.currentWeek.reduce(into: [Date: [ANPrayer]]()) { current, next in
-        print(current, next)
         current[next] = env.prayersClient.prayers(for: next)
     })
 }

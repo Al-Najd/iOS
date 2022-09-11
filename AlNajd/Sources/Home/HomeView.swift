@@ -41,7 +41,7 @@ public struct HomeView: View {
       }
       .background(Color.mono.background)
       .onAppear { viewStore.send(.onAppear) }
-//      .enableInjection()
+      .enableInjection()
     }
   }
 }
@@ -51,7 +51,7 @@ struct HeaderView: View {
   
   var body: some View {
     VStack(spacing: .p4) {
-      Text(L10n.alRa3d28)
+      Text("zxcasdasd")
         .foregroundColor(.mono.offwhite)
         .scaledFont(locale: .arabic, .pFootnote, .bold)
         .multilineTextAlignment(.center)
@@ -85,7 +85,7 @@ struct HeaderView: View {
     .padding(.horizontal, .p8)
     .padding(.bottom, .p16)
     .background(
-      Asset.Prayers.Colors.headerBackgroundColor.swiftUIColor
+        Color.mono.offwhite
     )
   }
 }
