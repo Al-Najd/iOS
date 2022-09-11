@@ -47,7 +47,8 @@ public enum Scale {
                 .iPadPro11,
                 .iPadMini:
             self = .tooBig
-        case .iPhone13ProMax,
+        case .iPhone14ProMax,
+                .iPhone13ProMax,
                 .iPhone13Pro,
                 .iPhone13Mini,
                 .iPhone11ProMax,
@@ -96,6 +97,7 @@ public enum DeviceHeight {
     case iPadMini
     
     // iPhones
+    case iPhone14ProMax
     case iPhone13ProMax
     case iPhone13Pro
     case iPhone13Mini
@@ -113,6 +115,8 @@ public enum DeviceHeight {
             self = .iPadPro11
         case DeviceHeight.iPadMini.height:
             self = .iPadMini
+        case DeviceHeight.iPhone14ProMax.height:
+            self = .iPhone14ProMax
         case DeviceHeight.iPhone13ProMax.height:
             self = .iPhone13ProMax
         case DeviceHeight.iPhone13Pro.height:
@@ -141,6 +145,8 @@ public enum DeviceHeight {
             return 1194
         case .iPadMini:
             return 1133
+        case .iPhone14ProMax:
+            return 932
         case .iPhone13ProMax:
             return 926
         case .iPhone13Pro:
@@ -172,7 +178,8 @@ public enum DeviceHeight {
             return 1.5
         case .iPhone11ProMax:
             return 1.3
-        case .iPhone13Pro,
+        case .iPhone14ProMax,
+                .iPhone13Pro,
                 .iPhone13Mini,
                 .iPhone11Pro:
             return 1

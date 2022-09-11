@@ -19,9 +19,7 @@ public struct RootView: View {
 
   public var body: some View {
     WithViewStore(store) { viewStore in
-      SplashView {
-        DashboardView(store: store.scope(state: { $0.dashboard }, action: RootAction.dashboard))
-      }
+      DashboardView(store: store.scope(state: { $0.dashboard }, action: RootAction.dashboard))
     }
   }
 }

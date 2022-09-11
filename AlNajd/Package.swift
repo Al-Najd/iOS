@@ -1,11 +1,11 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
   name: "AlNajd",
   defaultLocalization: "ar",
   platforms: [
-    .iOS(.v15),
+    .iOS(.v16),
     .macOS(.v11)
   ],
   products: ANProducts.all,
