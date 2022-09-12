@@ -30,7 +30,6 @@ public struct HomeView: View {
         VStack {
           HeaderView(viewStore: viewStore)
           PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
-          DashboardView(store: store.scope(state: { $0.dashboard }, action: HomeAction.dashboard))
         }
       }
       .ignoresSafeArea(edges: .top)
@@ -85,7 +84,7 @@ struct HeaderView: View {
     .padding(.horizontal, .p8)
     .padding(.bottom, .p16)
     .background(
-        Color.mono.offwhite
+        Color.mono.ash
     )
   }
 }

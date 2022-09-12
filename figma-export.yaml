@@ -22,9 +22,9 @@ ios:
   # Absolute or relative path to the Assets.xcassets directory
   xcassetsPath: "./AlNajd/Sources/Assets/Resources/Assets.xcassets"
   # Is Assets.xcassets located in the main bundle?
-  xcassetsInMainBundle: false
+  xcassetsInMainBundle: true
   # [optional] Is Assets.xcassets located in a swift package? Default value is false.
-  xcassetsInSwiftPackage: true
+  xcassetsInSwiftPackage: false
   # [optional] When `xcassetsInSwiftPackage: true` use this property to specify a resource bundle name for Swift packages containing Assets.xcassets (e.g. ["PackageName_TargetName"]). This is necessary to avoid SwiftUI Preview crashes.
   resourceBundleNames: ["AlNajd_Assets"]
 
@@ -38,5 +38,21 @@ ios:
     nameStyle: camelCase
     # [optional] If true and a color style name contains symbol "/" then "/" symbol indicates grouping by folders, and each folder will have the "Provides Namespace" property enabled. Defaults to `false`.
     groupUsingNamespace: true
+    # [optional] Absolute or relative path to swift file where to export UIKit colors (UIColor) for accessing from the code (e.g. UIColor.backgroundPrimary)
+    colorSwift: "./AlNajd/Sources/Assets/Resources/UIColor+extension.swift"
     # [optional] Absolute or relative path to swift file where to export SwiftUI colors (Color) for accessing from the code (e.g. Color.backgroundPrimary)
     swiftuiColorSwift: "./AlNajd/Sources/Assets/Resources/Color+extension.swift"
+  # [optional] Parameters for exporting typography
+  typography:
+    # [optional] Absolute or relative path to swift file where to export UIKit fonts (UIFont extension).
+    fontSwift: "./AlNajd/Sources/Assets/Resources/UIFont+extension.swift"
+    # [optional] Absolute or relative path to swift file where to generate LabelStyle extensions for each style (LabelStyle extension).
+    labelStyleSwift: "./AlNajd/Sources/Assets/UIComponents/LabelStyle+extension.swift"
+    # [optional] Absolute or relative path to swift file where to export SwiftUI fonts (Font extension).
+    swiftUIFontSwift: "./AlNajd/Sources/Assets/Resources/Font+extension.swift"
+    # Should FigmaExport generate UILabel for each text style (font)? E.g. HeaderLabel, BodyLabel, CaptionLabel
+    generateLabels: true
+    # Relative or absolute path to directory where to place UILabel for each text style (font) (Requred if generateLabels = true)
+    labelsDirectory: "./AlNajd/Sources/Assets/UIComponents/"
+    # Typography name style: camelCase or snake_case
+    nameStyle: camelCase
