@@ -61,7 +61,8 @@ extension ANPrayerDAO {
 			name: name,
 			raqaat: raqaat,
 			sunnah: .init(uniqueElements: sunnah),
-			afterAzkar: .init(uniqueElements: azkar)
+			afterAzkar: .init(uniqueElements: azkar),
+			isDone: isDone
 		)
 	}
 }
@@ -74,7 +75,8 @@ extension ANSunnahDAO {
 			raqaat: raqaat,
 			position: position.toDomainModel(),
 			affirmation: affirmation.toDomainModel(),
-			azkar: []
+			azkar: [],
+			isDone: isDone
 		)
 	}
 }

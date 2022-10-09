@@ -60,9 +60,7 @@ public let homeReducer = Reducer<
     .init { state, action, env in
         switch action {
         case .onAppear:
-            if state.prayers.isEmpty {
-                state.prayers = .init(uniqueElements: env.prayersClient.prayers())
-            }
+			state.prayers = .init(uniqueElements: env.prayersClient.prayers())
             state.date = Date.now.startOfDay.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
             calculateProgress(&state)
         case let .onSelecting(prayer):

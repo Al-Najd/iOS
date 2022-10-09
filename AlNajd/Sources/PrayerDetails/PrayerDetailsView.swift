@@ -94,7 +94,7 @@ public struct PrayerDetailsView: View {
                                         }.frame(maxWidth: .infinity)
                                     }
 								}
-								.padding(.bottom, getSafeArea().bottom * 8)
+								.padding(.bottom, getSafeArea().bottom * 7)
                             }
                         }
                         .padding(.top)
