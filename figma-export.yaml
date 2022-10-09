@@ -22,9 +22,9 @@ ios:
   # Absolute or relative path to the Assets.xcassets directory
   xcassetsPath: "./AlNajd/Sources/Assets/Resources/Assets.xcassets"
   # Is Assets.xcassets located in the main bundle?
-  xcassetsInMainBundle: true
+  xcassetsInMainBundle: false
   # [optional] Is Assets.xcassets located in a swift package? Default value is false.
-  xcassetsInSwiftPackage: false
+  xcassetsInSwiftPackage: true
   # [optional] When `xcassetsInSwiftPackage: true` use this property to specify a resource bundle name for Swift packages containing Assets.xcassets (e.g. ["PackageName_TargetName"]). This is necessary to avoid SwiftUI Preview crashes.
   resourceBundleNames: ["AlNajd_Assets"]
 

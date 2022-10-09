@@ -6,9 +6,10 @@
 //
 
 import UIKit.UIApplication
+import PrayersClient
 
 public struct CorePlugin: AppPlugin {
   public func setup() {
-    
+		DatabaseService.setup()
   }
 }

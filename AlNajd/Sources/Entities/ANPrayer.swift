@@ -14,7 +14,7 @@ import ComposableArchitecture
 import RealmSwift
 
 public struct ANPrayer: Identifiable, Equatable {
-  public let id: UUID
+  public let id: Int
   public let name: String
   public let title: String
   public let subtitle: String
@@ -23,10 +23,10 @@ public struct ANPrayer: Identifiable, Equatable {
   public var afterAzkar: IdentifiedArrayOf<ANAzkar>
   public var isDone: Bool = false
   
-  public init(id: UUID, name: String, raqaat: Int, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false) {
-    self.id = id
+  public init(id: Int64, name: String, raqaat: Int, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false) {
+    self.id = Int(id)
     self.name = name
-    self.title = L10n.prayerTitle(name)
+    self.title = L10n.prayerTitle(name.localized)
     self.subtitle = L10n.raqaatCount(raqaat)
     self.raqaat = raqaat
     self.sunnah = sunnah
@@ -36,7 +36,7 @@ public struct ANPrayer: Identifiable, Equatable {
 }
 
 public struct ANSunnah: Identifiable, Equatable {
-  public let id: UUID
+  public let id: Int
   public let name: String
   public let raqaat: Int
   public let position: Position
@@ -44,9 +44,9 @@ public struct ANSunnah: Identifiable, Equatable {
   public let azkar: [ANAzkar]
   public var isDone: Bool = false
   
-  public init(id: UUID, name: String, raqaat: Int, position: ANSunnah.Position, affirmation: ANSunnah.Affirmation, azkar: [ANAzkar], isDone: Bool = false) {
-    self.id = id
-    self.name = name
+  public init(id: Int64, name: String, raqaat: Int, position: ANSunnah.Position, affirmation: ANSunnah.Affirmation, azkar: [ANAzkar], isDone: Bool = false) {
+    self.id = Int(id)
+	  self.name = name.localized
     self.raqaat = raqaat
     self.position = position
     self.affirmation = affirmation
@@ -106,17 +106,17 @@ public extension ANNafila {
 }
 
 public struct ANAzkar: Identifiable, Equatable {
-  public let id: UUID
+  public let id: Int
   public let name: String
   public let reward: String
   public let repetation: Int
   public var currentCount: Int
   public var isDone: Bool { currentCount == .zero }
   
-  public init(id: UUID, name: String, reward: String, repetation: Int, currentCount: Int) {
-    self.id = id
-    self.name = name
-    self.reward = reward
+  public init(id: Int64, name: String, reward: String, repetation: Int, currentCount: Int) {
+    self.id = Int(id)
+	  self.name = name.localized
+	  self.reward = reward.localized
     self.repetation = repetation
     self.currentCount = currentCount
   }
@@ -139,18 +139,18 @@ extension ANAzkar: Changeable {}
 extension ANPrayer {
   public var image: Image {
     switch name {
-    case L10n.fajr:
+    case "fajr":
       return Asset.Prayers.Images.fajrImage.swiftUIImage
-    case L10n.duhr:
+    case "duhr":
       return Asset.Prayers.Images.dhuhrImage.swiftUIImage
-    case L10n.aasr:
+    case "aasr":
       return Asset.Prayers.Images.asrImage.swiftUIImage
-    case L10n.maghrib:
+    case "maghrib":
       return Asset.Prayers.Images.maghribImage.swiftUIImage
-    case L10n.aishaa:
+    case "aishaa":
       return Asset.Prayers.Images.ishaImage.swiftUIImage
     default:
-      return Asset.Prayers.Images.fajrImage.swiftUIImage
+      fatalError()
     }
   }
 }

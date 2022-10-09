@@ -91,8 +91,11 @@ private extension ANTargets {
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
         .product(name: "Adhan", package: "adhan-swift"),
-        .product(name: "RealmSwift", package: "realm-swift")
-      ]
+        .product(name: "RealmSwift", package: "realm-swift"),
+		.product(name: "GRDB", package: "GRDB.swift"),
+		.product(name: "SwiftDate", package: "SwiftDate")
+      ],
+	  resources: [.process("Resources")]
     )
   ]
   
@@ -190,7 +193,15 @@ private extension ANDependencies {
     .package(
         url: "https://github.com/realm/realm-swift",
         .upToNextMinor(from: .init(10, 28, 6))
-    )
+    ),
+	.package(
+		url: "https://github.com/groue/GRDB.swift",
+		.upToNextMajor(from: .init(6, 0, 0))
+	),
+	.package(
+		url: "https://github.com/malcommac/SwiftDate",
+		.upToNextMajor(from: .init(7, 0, 0))
+	)
   ]
 }
 

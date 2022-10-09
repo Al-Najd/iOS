@@ -66,7 +66,10 @@ public let homeReducer = Reducer<
             state.date = Date.now.startOfDay.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
             calculateProgress(&state)
         case let .onSelecting(prayer):
-            state.selectedPrayer = .init(prayer: prayer)
+            state.selectedPrayer = .init(
+				prayer: prayer,
+				date: Date.now
+			)
         case .prayerDetails(.dismiss):
             guard let selectedState = state.selectedPrayer else { return .none }
             state.prayers[id: selectedState.prayer.id] = selectedState.prayer

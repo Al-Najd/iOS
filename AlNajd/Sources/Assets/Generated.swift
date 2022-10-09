@@ -46,6 +46,22 @@ public enum Asset {
       public static let primary = ColorAsset(name: "Cherry / Primary")
       public static let superlight = ColorAsset(name: "Cherry / Superlight")
     }
+    public enum Gradients {
+      public enum Home {
+        public enum HighCharge {
+          public static let progressEnd = ColorAsset(name: "Gradients/Home/HighCharge/ProgressEnd")
+          public static let progressStart = ColorAsset(name: "Gradients/Home/HighCharge/ProgressStart")
+        }
+        public enum LowCharge {
+          public static let progressEnd = ColorAsset(name: "Gradients/Home/LowCharge/ProgressEnd")
+          public static let progressStart = ColorAsset(name: "Gradients/Home/LowCharge/ProgressStart")
+        }
+        public enum MidCharge {
+          public static let progressEnd = ColorAsset(name: "Gradients/Home/MidCharge/ProgressEnd")
+          public static let progressStart = ColorAsset(name: "Gradients/Home/MidCharge/ProgressStart")
+        }
+      }
+    }
     public enum Greys {
       public static let gunMetal = ColorAsset(name: "Greys / Gun Metal")
       public static let nardo = ColorAsset(name: "Greys / Nardo")
@@ -60,6 +76,12 @@ public enum Asset {
       public static let nardoGrey = ColorAsset(name: "Primary/Nardo Grey")
       public static let solarbeam = ColorAsset(name: "Primary/Solarbeam")
       public static let spaceGrey = ColorAsset(name: "Primary/Space Grey")
+    }
+    public enum Shadow {
+      public static let medium = ColorAsset(name: "Shadow / Medium")
+      public static let bluberry = ColorAsset(name: "Shadow /Bluberry")
+      public static let cherry = ColorAsset(name: "Shadow /Cherry")
+      public static let tangerine = ColorAsset(name: "Shadow /Tangerine")
     }
     public enum Tangerine {
       public static let dark = ColorAsset(name: "Tangerine / Dark")

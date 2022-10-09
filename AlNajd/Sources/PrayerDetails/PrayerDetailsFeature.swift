@@ -10,13 +10,19 @@ import Entities
 import PrayersClient
 import Common
 import Utils
+import Foundation
 
 public struct PrayerDetailsState: Identifiable, Equatable {
     public var id: ANPrayer.ID { prayer.id }
     public var prayer: ANPrayer
+	public var date: String
     
-    public init(prayer: ANPrayer) {
+    public init(
+		prayer: ANPrayer,
+		date: Date
+	) {
         self.prayer = prayer
+		self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
     }
 }
 

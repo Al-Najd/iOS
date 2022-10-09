@@ -23,16 +23,16 @@ struct RepeatableSubtaskView: View {
     }
     
     var body: some View {
-        HStack {
+		HStack(spacing: .p16) {
             VStack(alignment: .leading) {
                 Text(title)
                     .foregroundColor(.mono.offwhite)
                     .scaledFont(.pFootnote, .bold)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                 Text(subtitle)
                     .foregroundColor(.mono.offwhite)
                     .scaledFont(.pFootnote)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
             }
             
             Spacer()
