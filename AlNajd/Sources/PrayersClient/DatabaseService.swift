@@ -93,7 +93,7 @@ public class DatabaseService {
 private extension DatabaseService {
 	static func seed() throws {
 		try dbQueue.write { db in
-			try Date.enumerateDates(
+			let test = Date.enumerateDates(
 				from: DateInRegion(components: {
 					$0.year = 2022
 					$0.month = 7
@@ -101,7 +101,9 @@ private extension DatabaseService {
 				})!.date.startOfDay,
 				to: Date().startOfDay,
 				increment: .create { $0.day = 1 }
-			).forEach {
+			)
+
+			try test.forEach {
 				let day = try ANDayDAO(date: $0).insertAndFetch(db)
 				try seedPrayers((day?.id)!, db)
 			}
@@ -110,13 +112,8 @@ private extension DatabaseService {
 
 	static func updatePersonalStreak() throws {
 		try dbQueue.write { db in
-			try ANPrayerDAO.fetchAll(db).map {
-				var update = $0
-				update.isDone = true
-				return update
-			}.forEach {
-				try $0.update(db)
-			}
+			try ANPrayerDAO.fetchAll(db).map { $0.changing { $0.isDone = true } }.forEach { try $0.update(db) }
+			try ANSunnahDAO.Queries.fajr.fetchAll(db).map { $0.changing { $0.isDone = true } }.forEach { try $0.update(db) }
 		}
 	}
 

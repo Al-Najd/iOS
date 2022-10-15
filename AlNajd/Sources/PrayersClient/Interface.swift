@@ -62,7 +62,7 @@ public struct PrayersClient {
 		do {
 			return try DatabaseService.dbQueue.read { db in
 				
-				return try (ANDayDAO.today.fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
+				return try (ANDayDAO.Queries.today.fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
 					$0.toDomainModel(
 						sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
 						azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() }
@@ -75,7 +75,15 @@ public struct PrayersClient {
 	}
 
 	public func getPrayingStreak() -> Int {
-		60
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				let days = try ANDayDAO.all().reversed().fetchAll(db)
+				guard let firstDayWithMissedPrayersIndex = try days.firstIndex(where: { try $0.missedPrayers.isEmpty(db) == false }) else { return days.count }
+				return firstDayWithMissedPrayersIndex
+			}
+		} catch {
+			fatalError()
+		}
 	}
 
 	public func getFaraaidDone() -> Int {
@@ -111,12 +119,9 @@ public struct PrayersClient {
 	public func getSunnahPerDay() -> [(date: Date, count: Int)] {
 		do {
 			return try DatabaseService.dbQueue.read { db in
-				try Date().previousWeek.map { date in
-					try ANDayDAO
-						.filter(ANDayDAO.Columns.date == date)
-						.fetchAll(db)
-						.compactMap { ($0.date, try $0.doneSunnah.fetchCount(db)) }
-				}.flatMap { $0 }
+				try ANDayDAO.Queries.previousWeekWithDoneSunnah.fetchAll(db).compactMap {
+					($0.date, try $0.doneSunnah.fetchCount(db))
+				}
 			}
 		} catch {
 			fatalError()

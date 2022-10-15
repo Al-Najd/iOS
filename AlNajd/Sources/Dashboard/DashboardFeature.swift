@@ -87,5 +87,5 @@ public struct ChartAnalyticsData: Identifiable, Equatable {
 	public let id: UUID = .init()
 	let date: Date
 	let count: Int
-	var animate: Bool = false
+	var animate: Bool = true
 }

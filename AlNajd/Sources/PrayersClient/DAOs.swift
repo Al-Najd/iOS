@@ -8,6 +8,7 @@
 import Foundation
 import GRDB
 import Entities
+import Utils
 
 public struct ANDayDAO {
 	public var id: Int64?
@@ -125,8 +126,22 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 		static let date = Column(CodingKeys.date)
 	}
 
-	static var today: QueryInterfaceRequest<ANDayDAO> {
-		Self.filter(Columns.date == Date().startOfDay)
+	enum Queries {
+		static var today: QueryInterfaceRequest<ANDayDAO> {
+			ANDayDAO.filter(Columns.date == Date().startOfDay)
+		}
+
+		static var previousWeek: QueryInterfaceRequest<ANDayDAO> {
+			ANDayDAO.filter(Date().previousWeek.contains(ANDayDAO.Columns.date))
+		}
+
+		var withMissedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
+			ANDayDAO.including(all: prayers).asRequest(of: ANPrayerDAO.self).filter(ANPrayerDAO.Columns.isDone == false)
+		}
+
+		static var previousWeekWithDoneSunnah: QueryInterfaceRequest<ANDayDAO> {
+			previousWeek.including(all: sunnah.filter(ANSunnahDAO.Columns.isDone == true))
+		}
 	}
 
 	var prayers: QueryInterfaceRequest<ANPrayerDAO> {
@@ -151,6 +166,10 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 
 	var doneAzkar: QueryInterfaceRequest<ANAzkarDAO> {
 		azkar.filter(ANAzkarDAO.Columns.currentCount == 0)
+	}
+
+	var missedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
+		prayers.filter(ANPrayerDAO.Columns.isDone == false)
 	}
 }
 extension ANPrayerDAO: Codable, FetchableRecord, MutablePersistableRecord { }
@@ -195,6 +214,7 @@ extension ANSunnahDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 
 extension ANSunnahDAO: TableRecord, EncodableRecord {
 	static let prayer = belongsTo(ANPrayerDAO.self)
+	static let day = hasOne(ANDayDAO.self, through: prayer, using: ANPrayerDAO.day)
 
 	public static var databaseTableName: String = "sunnah"
 
@@ -207,8 +227,18 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
 		static let affirmation = Column(CodingKeys.affirmation)
 	}
 
+	enum Queries {
+		static var fajr: QueryInterfaceRequest<ANSunnahDAO> {
+			ANSunnahDAO.filter(Columns.name == "fajr")
+		}
+	}
+
 	var prayer: QueryInterfaceRequest<ANPrayerDAO> {
 		request(for: Self.prayer)
+	}
+
+	var day: QueryInterfaceRequest<ANDayDAO> {
+		request(for: Self.day)
 	}
 }
 
@@ -296,3 +326,7 @@ extension ANAzkarDAO {
 		]
 	}
 }
+
+extension ANPrayerDAO: Changeable { }
+extension ANSunnahDAO: Changeable { }
+extension ANAzkarDAO: Changeable { }
