@@ -11,16 +11,17 @@ import CasePaths
 import Home
 import Common
 import PrayerDetails
+import Dashboard
 
 public struct RootState: Equatable {
   var home: HomeState = .init()
-  var prayerDetails: PrayerDetailsState?
+  var dashboard: DashboardState = .init()
 }
 
 public enum RootAction: Equatable {
   case onAppear
   case home(HomeAction)
-  case prayerDetails(PrayerDetailsAction)
+  case dashboard(DashboardAction)
 }
 
 public struct RootEnvironment { public init() { } }
@@ -32,8 +33,14 @@ public let rootReducer = Reducer<
 >.combine(
   homeReducer
     .pullback(
-      state: \.home,
+      state: \RootState.home,
       action: /RootAction.home,
+      environment: { _ in CoreEnvironment.live(HomeEnvironment()) }
+    ),
+  dashboardReducer
+    .pullback(
+      state: \RootState.dashboard,
+      action: /RootAction.dashboard,
       environment: { _ in .live(.init()) }
     ),
   rootReducerCore

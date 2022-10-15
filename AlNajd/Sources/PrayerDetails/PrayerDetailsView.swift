@@ -28,7 +28,7 @@ public struct PrayerDetailsView: View {
             ZStack(alignment: .bottom) {
                 VStack {
                     HStack {
-                        Label("مارس, ٢٣, ٢٠٢١", systemImage: "calendar")
+						Label(viewStore.date, systemImage: "calendar")
                             .foregroundColor(.mono.offwhite)
                             .scaledFont(.pFootnote)
                             .multilineTextAlignment(.center)
@@ -93,7 +93,8 @@ public struct PrayerDetailsView: View {
                                             viewStore.send(.onDoingZekr(zekr), animation: .default)
                                         }.frame(maxWidth: .infinity)
                                     }
-                                }
+								}
+								.padding(.bottom, getSafeArea().bottom * 7)
                             }
                         }
                         .padding(.top)

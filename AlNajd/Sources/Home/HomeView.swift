@@ -13,6 +13,8 @@ import Entities
 import ComposableArchitecture
 import Assets
 import PrayerDetails
+import ReusableUI
+import Dashboard
 
 public struct HomeView: View {
   @ObserveInjection var inject
@@ -48,7 +50,7 @@ struct HeaderView: View {
   
   var body: some View {
     VStack(spacing: .p4) {
-      Text(L10n.alRa3d28)
+	  Text(L10n.hud88)
         .foregroundColor(.mono.offwhite)
         .scaledFont(locale: .arabic, .pFootnote, .bold)
         .multilineTextAlignment(.center)
@@ -72,9 +74,12 @@ struct HeaderView: View {
             .scaledFont(.textXSmall)
             .multilineTextAlignment(.center)
         }
-        
-        ProgressBar(value: viewStore.binding(\.$percentageValue).animation())
-          .frame(height: 5)
+
+		  ProgressBar(
+			value: viewStore.binding(\.$percentageValue)
+		  )
+		  .frame(height: 8)
+		  .shadow(color: .shadowBlueperry, radius: 4, x: 0, y: 0)
       }
     }
     .frame(maxWidth: .infinity)
@@ -82,7 +87,7 @@ struct HeaderView: View {
     .padding(.horizontal, .p8)
     .padding(.bottom, .p16)
     .background(
-      Asset.Prayers.Colors.headerBackgroundColor.swiftUIColor
+		Color.primaryBlackberry
     )
   }
 }
@@ -90,7 +95,7 @@ struct HeaderView: View {
 struct ProgressBar: View {
   @Binding var value: Float
   var color: Color = .mono.offwhite
-  
+
   var body: some View {
     GeometryReader { geometry in
       ZStack(alignment: .leading) {
@@ -98,37 +103,13 @@ struct ProgressBar: View {
           Rectangle().frame(width: geometry.size.width , height: geometry.size.height)
             .opacity(0.3)
             .foregroundColor(color.opacity(0.75))
-          
+
           Rectangle().frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
             .foregroundColor(color)
-          
+
         }.cornerRadius(45.0)
       }
     }
-  }
-}
-
-struct ScrollViewRTL<Content: View>: View {
-  @ViewBuilder var content: Content
-  @Environment(\.layoutDirection) private var layoutDirection
-  
-  init(@ViewBuilder content: () -> Content) {
-    self.content = content()
-  }
-  
-  @ViewBuilder var body: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      content
-        .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? -180 : 0), axis: (
-          x: CGFloat(0),
-          y: CGFloat(layoutDirection == .rightToLeft ? -10 : 0),
-          z: CGFloat(0)))
-      
-    }
-    .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? 180 : 0), axis: (
-      x: CGFloat(0),
-      y: CGFloat(layoutDirection == .rightToLeft ? 10 : 0),
-      z: CGFloat(0)))
   }
 }
 

@@ -8,6 +8,7 @@
 import SwiftUI
 import DesignSystem
 import Common
+import Inject
 
 public struct RangeProgress: Identifiable, Equatable {
     public let id = UUID().uuidString
@@ -105,6 +106,9 @@ public struct DayProgress: Identifiable, Equatable {
 }
 
 public struct RangeAnalysisCardView: View {
+    
+    @ObserveInjection var inject
+    
     @State var highlightedDay: DayProgress?
     let progress: RangeProgress
     
@@ -184,10 +188,11 @@ public struct RangeAnalysisCardView: View {
                         x: 0, y: 0
                     )
             )
-        }
-        if let insight = progress.insight {
-            InsightCardView(insight: insight)
-        }
+            
+            if let insight = progress.insight {
+                InsightCardView(insight: insight)
+            }
+        }.enableInjection()
     }
 }
 

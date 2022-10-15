@@ -43,11 +43,11 @@ public enum L10n {
   /// عاصي
   public static let aSinner = L10n.tr("Localizables", "A Sinner", fallback: "عاصي")
   /// العصر
-  public static let aasr = L10n.tr("Localizables", "Aasr", fallback: "العصر")
+  public static let aasr = L10n.tr("Localizables", "aasr", fallback: "العصر")
   /// إمكانية الوصول
   public static let accessibility = L10n.tr("Localizables", "Accessibility", fallback: "إمكانية الوصول")
   /// عشاء
-  public static let aishaa = L10n.tr("Localizables", "Aishaa", fallback: "عشاء")
+  public static let aishaa = L10n.tr("Localizables", "aishaa", fallback: "عشاء")
   /// أخرة
   public static let akhra = L10n.tr("Localizables", "Akhra", fallback: "أخرة")
   /// الفاتحة
@@ -142,15 +142,22 @@ public enum L10n {
   public static let choose = L10n.tr("Localizables", "Choose ", fallback: "اختر ")
   /// بياناتي
   public static let dashboard = L10n.tr("Localizables", "Dashboard", fallback: "بياناتي")
+  /// Plural format key: "%#@daysCount@"
+  public static func daysCount(_ p1: Int) -> String {
+    return L10n.tr("Localizables", "days_count", p1, fallback: "Plural format key: \"%#@daysCount@\"")
+  }
   /// ممنوع
   public static let denied = L10n.tr("Localizables", "Denied", fallback: "ممنوع")
+  /// انت شغال كويس, عاش جدا!
+  /// كمل 🔥
+  public static let doingGreat = L10n.tr("Localizables", "doing_great", fallback: "انت شغال كويس, عاش جدا!\nكمل 🔥")
   /// لا تحب الألوان؟ الخط صغير جدا؟ حصلت على إذن أعطيتنا إياه من قبل
   /// 
   public static let donTLikeTheColorsFontIsTooSmallGotAPermissionYouGaveUsBefore = L10n.tr("Localizables", "Don't like the colors? Font is too small? Got a permission you gave us before\n", fallback: "لا تحب الألوان؟ الخط صغير جدا؟ حصلت على إذن أعطيتنا إياه من قبل\n")
   /// الضحي
   public static let duha = L10n.tr("Localizables", "Duha", fallback: "الضحي")
   /// الظهر
-  public static let duhr = L10n.tr("Localizables", "Duhr", fallback: "الظهر")
+  public static let duhr = L10n.tr("Localizables", "duhr", fallback: "الظهر")
   /// الدنيا
   public static let dunia = L10n.tr("Localizables", "Dunia", fallback: "الدنيا")
   /// هذا الإيمال غير صالح.
@@ -160,7 +167,7 @@ public enum L10n {
   /// استغفر الله
   public static let estigphar = L10n.tr("Localizables", "estigphar", fallback: "استغفر الله")
   /// الفچر
-  public static let fajr = L10n.tr("Localizables", "Fajr", fallback: "الفچر")
+  public static let fajr = L10n.tr("Localizables", "fajr", fallback: "الفچر")
   /// الفرائض
   public static let faraaid = L10n.tr("Localizables", "Faraaid", fallback: "الفرائض")
   /// ال%@ لا يمكن ان يكون فارغا.
@@ -196,9 +203,8 @@ public enum L10n {
   public static let hmmSadButWeStillHaveAChanceLetSPrayHardThisWeek = L10n.tr("Localizables", "Hmm, sad, but we still have a chance! let's pray hard this week!", fallback: "خسارة, لكن ماذال معانا وقت, بينا نجتهد هذا الأسبوع!")
   /// ما رأيك, ان نتخذه تحدي لأنفسنا ان نملئ هذا الأسبوع بأعمال جميلة؟ ألن يكون هذا رائعا؟
   public static let howAboutWeMakeItAChallengeToUsToPopulateThisWithGreatDeedsWouldnTThatBeAwesome = L10n.tr("Localizables", "How about we make it a challenge to us to populate this with great deeds? wouldn't that be awesome?", fallback: "ما رأيك, ان نتخذه تحدي لأنفسنا ان نملئ هذا الأسبوع بأعمال جميلة؟ ألن يكون هذا رائعا؟")
-  /// ((إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ۚ عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ))
-  /// — سورة هود: ٨٨
-  public static let hud88 = L10n.tr("Localizables", "hud-88", fallback: "((إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ۚ عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ))\n— سورة هود: ٨٨")
+  /// إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ۚ
+  public static let hud88 = L10n.tr("Localizables", "hud-88", fallback: "إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ ۚ")
   /// أطلب منكم أن 
   public static let iAskOfYouTo = L10n.tr("Localizables", "I ask of you to ", fallback: "أطلب منكم أن ")
   /// إن كانت سنة الفچر خيرا من الدنيا و ما فيها, فما بالك بفرضها؟
@@ -250,7 +256,7 @@ public enum L10n {
     return L10n.tr("Localizables", "Locked", String(describing: p1), fallback: "لم تحصل علي اي هداية من %@ بعد")
   }
   /// المغرب
-  public static let maghrib = L10n.tr("Localizables", "Maghrib", fallback: "المغرب")
+  public static let maghrib = L10n.tr("Localizables", "maghrib", fallback: "المغرب")
   /// أجعل الصلاة سهلة و طيبة
   public static let makeSalatEasyAndFun = L10n.tr("Localizables", "Make Salat Easy and Fun", fallback: "أجعل الصلاة سهلة و طيبة")
   /// اللهم اجمعنا بهم جميعا في فردوسك الأعلي
@@ -306,6 +312,8 @@ public enum L10n {
   }
   /// الصلوات
   public static let prayers = L10n.tr("Localizables", "Prayers", fallback: "الصلوات")
+  /// سلسلة الصلاوات
+  public static let prayingStreak = L10n.tr("Localizables", "praying_streak", fallback: "سلسلة الصلاوات")
   /// تذاهر بكل ما انت لست اهل له
   public static let pretendToBeEverythingThatYouReNot = L10n.tr("Localizables", "Pretend to be everything that you're not.", fallback: "تذاهر بكل ما انت لست اهل له")
   /// ضع مسافة بقدر ما تشاء بينك و بين الحقيقة
@@ -410,6 +418,10 @@ public enum L10n {
   public static let thisWorkIsASadaqaFor = L10n.tr("Localizables", "This work is a Sadaqa for...", fallback: "هذا العمل هو صدقة جارية ل...")
   /// أولئك الذين توفاهم الله
   public static let thoseWhoPassedAway = L10n.tr("Localizables", "Those who passed away", fallback: "أولئك الذين توفاهم الله")
+  /// Plural format key: "%#@timesCount@"
+  public static func timesCount(_ p1: Int) -> String {
+    return L10n.tr("Localizables", "times_count", p1, fallback: "Plural format key: \"%#@timesCount@\"")
+  }
   /// نصيحة اليوم
   public static let tipOfTheDay = L10n.tr("Localizables", "Tip of the day", fallback: "نصيحة اليوم")
   /// حتي تصل إلي 
@@ -422,9 +434,9 @@ public enum L10n {
   public static let today = L10n.tr("Localizables", "Today", fallback: "اليوم")
   /// محصلة اليوم
   public static let todaySummary = L10n.tr("Localizables", "today_summary", fallback: "محصلة اليوم")
-  /// %@%@ (%@)
+  /// %@/%@ (%@)
   public static func todaySummaryNumeric(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
-    return L10n.tr("Localizables", "today_summary_numeric", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%@%@ (%@)")
+    return L10n.tr("Localizables", "today_summary_numeric", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%@/%@ (%@)")
   }
   /// تتبع ذلك عن طريق سحبها من الجانب
   public static let trackOfItByJustSwipingFromTheSide = L10n.tr("Localizables", "Track of it by just swiping from the side", fallback: "تتبع ذلك عن طريق سحبها من الجانب")

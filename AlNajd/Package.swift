@@ -1,11 +1,11 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
   name: "AlNajd",
   defaultLocalization: "ar",
   platforms: [
-    .iOS(.v15),
+    .iOS(.v16),
     .macOS(.v11)
   ],
   products: ANProducts.all,
@@ -23,6 +23,7 @@ private enum ANTargets {
   + ANTargets.prayersClient
   + ANTargets.home
   + ANTargets.assets
+  + ANTargets.dashboard
 }
 
 private extension ANTargets {
@@ -37,6 +38,7 @@ private extension ANTargets {
         "PrayersClient",
         "Home",
         "Assets",
+        "Dashboard",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -74,6 +76,7 @@ private extension ANTargets {
         "Entities",
         "Localization",
         "PrayerDetails",
+        "Dashboard",
         .product(name: "Core", package: "OrdiCore"),
       ]
     )
@@ -88,9 +91,11 @@ private extension ANTargets {
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
         .product(name: "Adhan", package: "adhan-swift"),
-        .product(name: "RealmSwift", package: "realm-swift")
+        .product(name: "RealmSwift", package: "realm-swift"),
+		.product(name: "GRDB", package: "GRDB.swift"),
+		.product(name: "SwiftDate", package: "SwiftDate")
       ],
-      resources: [.process("Resources")]
+	  resources: [.process("Resources")]
     )
   ]
   
@@ -104,7 +109,6 @@ private extension ANTargets {
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
         .product(name: "Inject", package: "Inject"),
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "TCACoordinators", package: "TCACoordinators")
       ]
     )
   ]
@@ -126,6 +130,20 @@ private extension ANTargets {
         "Localization",
         "Assets",
         .product(name: "RealmSwift", package: "realm-swift"),
+        .product(name: "Core", package: "OrdiCore"),
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+      ]
+    )
+  ]
+  
+  static let dashboard: [Target] = [
+    .target(
+      name: "Dashboard",
+      dependencies: [
+        "Localization",
+        "Assets",
+        "PrayersClient",
+        "Common",
         .product(name: "Core", package: "OrdiCore")
       ]
     )
@@ -137,7 +155,6 @@ private extension ANTargets {
 private enum ANDependencies {
   static let all: [Package.Dependency] = ordiCore
   + pointFree
-  + quickAndNimble
   + inject
   + home
 }
@@ -152,27 +169,8 @@ private extension ANDependencies {
       .upToNextMajor(from: .init(0, 1, 0))
     ),
     .package(
-      url: "https://github.com/pointfreeco/swift-snapshot-testing",
-      .upToNextMajor(from: .init(1, 9, 0))
-    ),
-    .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
       branch: "main"
-    ),
-    .package(
-      url: "https://github.com/johnpatrickmorgan/TCACoordinators",
-      .upToNextMajor(from: .init(0, 2, 0))
-    )
-  ]
-  
-  static let quickAndNimble: [Package.Dependency] = [
-    .package(
-      url: "https://github.com/Quick/Quick",
-      .upToNextMajor(from: .init(4, 0, 0))
-    ),
-    .package(
-      url: "https://github.com/Quick/Nimble",
-      .upToNextMajor(from: .init(9, 2, 1))
     )
   ]
   
@@ -195,7 +193,15 @@ private extension ANDependencies {
     .package(
         url: "https://github.com/realm/realm-swift",
         .upToNextMinor(from: .init(10, 28, 6))
-    )
+    ),
+	.package(
+		url: "https://github.com/groue/GRDB.swift",
+		.upToNextMajor(from: .init(6, 0, 0))
+	),
+	.package(
+		url: "https://github.com/malcommac/SwiftDate",
+		.upToNextMajor(from: .init(7, 0, 0))
+	)
   ]
 }
 
@@ -210,6 +216,7 @@ private enum ANProducts {
     ANProducts.product(name: "PrayerDetails"),
     ANProducts.product(name: "PrayersClient"),
     ANProducts.product(name: "Home"),
+    ANProducts.product(name: "Dashboard"),
     ANProducts.product(name: "Assets"),
   ]
 

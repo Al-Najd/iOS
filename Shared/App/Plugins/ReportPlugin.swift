@@ -14,7 +14,6 @@ extension ReportPlugin: AppPlugin {
   func setup() {
       setupPulse()
       setupSentry()
-      LoggersManager.info(message: "Loggers Woke up")
   }
 
   private func setupPulse() {

@@ -5,12 +5,13 @@
 //  Created by Ahmed Ramy on 28/02/2022.
 //
 
+import Foundation
 import ComposableArchitecture
 import Entities
 import PrayersClient
 import Common
-import TCACoordinators
 import PrayerDetails
+import Dashboard
 
 public struct HomeState: Equatable {
     public var prayers: IdentifiedArrayOf<ANPrayer> = []
@@ -22,7 +23,7 @@ public struct HomeState: Equatable {
         formatter.numberStyle = .percent
         return formatter.string(from: .init(value: percentageValue)) ?? "%0"
     }
-    
+    var dashboard: DashboardState = .init()
     @BindableState var selectedPrayer: PrayerDetailsState?
     @BindableState var percentageValue: Float = 0
     
@@ -32,6 +33,7 @@ public struct HomeState: Equatable {
 public enum HomeAction: BindableAction, Equatable {
     case onAppear
     case prayerDetails(PrayerDetailsAction)
+    case dashboard(DashboardAction)
     case onSelecting(ANPrayer)
     case binding(BindingAction<HomeState>)
 }
@@ -43,6 +45,12 @@ public let homeReducer = Reducer<
     HomeAction,
     CoreEnvironment<HomeEnvironment>
 >.combine(
+    dashboardReducer
+        .pullback(
+            state: \HomeState.dashboard,
+            action: /HomeAction.dashboard,
+            environment: { _ in .live(.init()) }
+        ),
     prayerDetailsReducer
         .optional()
         .pullback(
@@ -52,19 +60,20 @@ public let homeReducer = Reducer<
     .init { state, action, env in
         switch action {
         case .onAppear:
-            if state.prayers.isEmpty {
-                state.prayers = .init(uniqueElements: env.prayersClient.prayers())
-            }
+			state.prayers = .init(uniqueElements: env.prayersClient.prayers())
             state.date = Date.now.startOfDay.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
             calculateProgress(&state)
         case let .onSelecting(prayer):
-            state.selectedPrayer = .init(prayer: prayer)
+            state.selectedPrayer = .init(
+				prayer: prayer,
+				date: Date.now
+			)
         case .prayerDetails(.dismiss):
             guard let selectedState = state.selectedPrayer else { return .none }
             state.prayers[id: selectedState.prayer.id] = selectedState.prayer
             state.selectedPrayer = nil
             calculateProgress(&state)
-        case .prayerDetails, .binding:
+        default:
             break
         }
         return .none

@@ -1,11 +1,11 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 
 import PackageDescription
 
 let package = Package(
   name: "OrdiCore",
   platforms: [
-    .iOS(.v15),
+    .iOS(.v16),
     .macOS(.v11)
   ],
   products: [
@@ -21,32 +21,26 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "FontBlaster",
       url: "https://github.com/ArtSabintsev/FontBlaster.git",
       .upToNextMinor(from: .init(5, 2, 0))
     ),
     .package(
-      name: "Alamofire",
       url: "https://github.com/Alamofire/Alamofire.git",
       .upToNextMinor(from: .init(5, 5, 0))
     ),
     .package(
-        name: "Pulse",
         url: "https://github.com/kean/Pulse",
         .upToNextMinor(from: .init(0, 20, 1))
     ),
     .package(
-        name: "Sentry",
         url: "https://github.com/getsentry/sentry-cocoa.git",
         .upToNextMinor(from: .init(7, 9, 0))
     ),
     .package(
-        name: "KeychainSwift",
         url: "https://github.com/evgenyneu/keychain-swift",
         .upToNextMajor(from: .init(20, 0, 0))
     ),
     .package(
-        name: "Lottie",
         url: "https://github.com/airbnb/lottie-ios",
         .upToNextMajor(from: .init(3, 3, 0))
     )
@@ -71,7 +65,7 @@ let package = Package(
             .product(name: "Pulse", package: "Pulse"),
             .product(name: "PulseUI", package: "Pulse"),
             .product(name: "PulseCore", package: "Pulse"),
-            .product(name: "Sentry", package: "Sentry")
+            .product(name: "Sentry", package: "sentry-cocoa")
         ]
     ),
     .target(
@@ -108,14 +102,14 @@ let package = Package(
             "OrdiLogging",
             "Utils",
             .product(name: "Alamofire", package: "Alamofire"),
-            .product(name: "KeychainSwift", package: "KeychainSwift")
+            .product(name: "KeychainSwift", package: "keychain-swift")
         ]
     ),
     .target(name: "PreviewableView"),
     .target(
         name: "Animations",
         dependencies: [
-            .product(name: "Lottie", package: "Lottie")
+            .product(name: "Lottie", package: "lottie-ios")
         ]
     )
   ]

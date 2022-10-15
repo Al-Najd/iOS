@@ -24,16 +24,74 @@ public typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum Asset {
-  public enum Prayers {
-    public enum Colors {
-      public static let asrColor = ColorAsset(name: "asrColor")
-      public static let dhuhrColor = ColorAsset(name: "dhuhrColor")
-      public static let duhaColor = ColorAsset(name: "duhaColor")
-      public static let fajrColor = ColorAsset(name: "fajrColor")
-      public static let headerBackgroundColor = ColorAsset(name: "headerBackgroundColor")
-      public static let ishaaColor = ColorAsset(name: "ishaaColor")
-      public static let maghribColor = ColorAsset(name: "maghribColor")
+  public enum Colors {
+    public enum Apple {
+      public static let dark = ColorAsset(name: "Apple / Dark")
+      public static let light = ColorAsset(name: "Apple / Light")
+      public static let medium = ColorAsset(name: "Apple / Medium")
+      public static let primary = ColorAsset(name: "Apple / Primary")
+      public static let superlight = ColorAsset(name: "Apple / Superlight")
     }
+    public enum Blueberry {
+      public static let dark = ColorAsset(name: "Blueberry / Dark")
+      public static let light = ColorAsset(name: "Blueberry / Light")
+      public static let medium = ColorAsset(name: "Blueberry / Medium")
+      public static let superlight = ColorAsset(name: "Blueberry / Superlight")
+      public static let primary = ColorAsset(name: "Blueberry /Primary")
+    }
+    public enum Cherry {
+      public static let dark = ColorAsset(name: "Cherry / Dark")
+      public static let light = ColorAsset(name: "Cherry / Light")
+      public static let medium = ColorAsset(name: "Cherry / Medium")
+      public static let primary = ColorAsset(name: "Cherry / Primary")
+      public static let superlight = ColorAsset(name: "Cherry / Superlight")
+    }
+    public enum Gradients {
+      public enum Home {
+        public enum HighCharge {
+          public static let progressEnd = ColorAsset(name: "Gradients/Home/HighCharge/ProgressEnd")
+          public static let progressStart = ColorAsset(name: "Gradients/Home/HighCharge/ProgressStart")
+        }
+        public enum LowCharge {
+          public static let progressEnd = ColorAsset(name: "Gradients/Home/LowCharge/ProgressEnd")
+          public static let progressStart = ColorAsset(name: "Gradients/Home/LowCharge/ProgressStart")
+        }
+        public enum MidCharge {
+          public static let progressEnd = ColorAsset(name: "Gradients/Home/MidCharge/ProgressEnd")
+          public static let progressStart = ColorAsset(name: "Gradients/Home/MidCharge/ProgressStart")
+        }
+      }
+    }
+    public enum Greys {
+      public static let gunMetal = ColorAsset(name: "Greys / Gun Metal")
+      public static let nardo = ColorAsset(name: "Greys / Nardo")
+      public static let spaceGrey = ColorAsset(name: "Greys / Space Grey")
+      public static let superLight = ColorAsset(name: "Greys / Super Light")
+      public static let white = ColorAsset(name: "Greys / White")
+      public static let blackberry = ColorAsset(name: "Greys /Blackberry")
+    }
+    public enum Primary {
+      public static let blackberry = ColorAsset(name: "Primary/Blackberry")
+      public static let bluberry = ColorAsset(name: "Primary/Bluberry")
+      public static let nardoGrey = ColorAsset(name: "Primary/Nardo Grey")
+      public static let solarbeam = ColorAsset(name: "Primary/Solarbeam")
+      public static let spaceGrey = ColorAsset(name: "Primary/Space Grey")
+    }
+    public enum Shadow {
+      public static let medium = ColorAsset(name: "Shadow / Medium")
+      public static let bluberry = ColorAsset(name: "Shadow /Bluberry")
+      public static let cherry = ColorAsset(name: "Shadow /Cherry")
+      public static let tangerine = ColorAsset(name: "Shadow /Tangerine")
+    }
+    public enum Tangerine {
+      public static let dark = ColorAsset(name: "Tangerine / Dark")
+      public static let light = ColorAsset(name: "Tangerine / Light")
+      public static let medium = ColorAsset(name: "Tangerine / Medium")
+      public static let primary = ColorAsset(name: "Tangerine / Primary")
+      public static let superlight = ColorAsset(name: "Tangerine / Superlight")
+    }
+  }
+  public enum Prayers {
     public enum Images {
       public static let asrImage = ImageAsset(name: "asrImage")
       public static let dhuhrImage = ImageAsset(name: "dhuhrImage")

@@ -16,110 +16,117 @@ import Adhan
 import RealmSwift
 import Utils
 import Localization
+import GRDB
 
 public struct PrayersClient {
-    let realm: Realm
-    
-    public init() {
-        do {
-            realm = try Realm(configuration: .init(deleteRealmIfMigrationNeeded: true))
-            print(realm.configuration.fileURL)
-            createDayIfNeeded()
-        } catch {
-            debugPrint(error)
-            fatalError()
-        }
-    }
-    
-    public func save(prayer: ANPrayer?) {
-        guard let prayer = prayer else { return }
-        guard let dao = realm.object(ofType: ANPrayerDAO.self, forPrimaryKey: prayer.id) else { return }
-        do {
-            try realm.write {
-                dao.isDone = prayer.isDone
-            }
-        } catch {
-            debugPrint(error)
-        }
-    }
-    
-    public func save(sunnah: ANSunnah?) {
-        guard let sunnah = sunnah else { return }
-        guard let dao = realm.object(ofType: ANSunnahDAO.self, forPrimaryKey: sunnah.id) else { return }
-        do {
-            try realm.write {
-                dao.isDone = sunnah.isDone
-            }
-        } catch {
-            debugPrint(error)
-        }
-    }
-    
-    public func save(zekr: ANAzkar?) {
-        guard let zekr = zekr else { return }
-        guard let dao = realm.object(ofType: ANAzkarDAO.self, forPrimaryKey: zekr.id) else { return }
-        do {
-            try realm.write {
-                dao.currentCount = zekr.currentCount
-            }
-        } catch {
-            debugPrint(error)
-        }
-    }
-    
-    public func prayers(for date: Date = .now) -> [ANPrayer] {
-        realm.object(ofType: ANDayDAO.self, forPrimaryKey: ANDayDAO.getID(from: date))?.prayers.compactMap { $0.toModel() } ?? []
-    }
-    
-    private func createDayIfNeeded() {
-        let date = Date.now
-        let formattedDate = ANDayDAO.getID(from: date)
-        guard realm.object(ofType: ANDayDAO.self, forPrimaryKey: formattedDate) == nil else { return }
-        do {
-            try realm.write {
-                let day = ANDayDAO()
-                day.id = formattedDate
-                day.date = date
-                day.prayers.append(objectsIn: ANPrayerDAO.faraaid)
-                realm.add(day)
-            }
-        } catch {
-            debugPrint(error)
-        }
-    }
-}
+	public func save(prayer: ANPrayer?) {
+		guard let prayer = prayer else { return }
+		do {
+			try DatabaseService.dbQueue.write { db in
+				var dao = try ANPrayerDAO.fetchOne(db, key: prayer.id)
+				dao?.isDone = prayer.isDone
+				try dao?.update(db)
+			}
+		} catch {
+			fatalError()
+		}
+	}
 
-public extension ANPrayerDAO {
-    func toModel() -> ANPrayer {
-        .init(
-            id: id,
-            name: name.localized,
-            raqaat: raqaat,
-            sunnah: .init(uniqueElements: sunnah.map { $0.toModel() }),
-            afterAzkar: .init(uniqueElements: azkar.map { $0.toModel() }),
-            isDone: isDone
-        )
-    }
-}
+	public func save(sunnah: ANSunnah?) {
+		guard let sunnah = sunnah else { return }
+		do {
+			try DatabaseService.dbQueue.write { db in
+				var dao = try ANSunnahDAO.fetchOne(db, key: sunnah.id)
+				dao?.isDone = sunnah.isDone
+				try dao?.update(db)
+			}
+		} catch {
+			fatalError()
+		}
+	}
 
-public extension ANSunnahDAO {
-    func toModel() -> ANSunnah {
-        .init(
-            id: id,
-            name: name.localized,
-            raqaat: raqaat,
-            position: position,
-            affirmation: affirmation,
-            azkar: [],
-            isDone: isDone
-        )
-    }
-}
+	public func save(zekr: ANAzkar?) {
+		guard let zekr = zekr else { return }
+		do {
+			try DatabaseService.dbQueue.write { db in
+				var dao = try ANAzkarDAO.fetchOne(db, key: zekr.id)
+				dao?.currentCount = zekr.currentCount
+				try dao?.update(db)
+			}
+		} catch {
+			fatalError()
+		}
+	}
 
-public extension ANAzkarDAO {
-    func toModel() -> ANAzkar {
-        .init(id: id, name: name.localized, reward: reward, repetation: repetation, currentCount: currentCount)
-    }
+	public func prayers() -> [ANPrayer] {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				
+				return try (ANDayDAO.Queries.today.fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
+					$0.toDomainModel(
+						sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
+						azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() }
+					)
+				}
+			}
+		} catch {
+			fatalError()
+		}
+	}
+
+	public func getPrayingStreak() -> Int {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				let days = try ANDayDAO.all().reversed().fetchAll(db)
+				guard let firstDayWithMissedPrayersIndex = try days.firstIndex(where: { try $0.missedPrayers.isEmpty(db) == false }) else { return days.count }
+				return firstDayWithMissedPrayersIndex
+			}
+		} catch {
+			fatalError()
+		}
+	}
+
+	public func getFaraaidDone() -> Int {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				try ANPrayerDAO.filter(ANPrayerDAO.Columns.isDone == true).fetchCount(db)
+			}
+		} catch {
+			fatalError()
+		}
+	}
+
+	public func getSunnahsPrayed() -> Int {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				try ANSunnahDAO.filter(ANSunnahDAO.Columns.isDone == true).fetchCount(db)
+			}
+		} catch {
+			fatalError()
+		}
+	}
+
+	public func getAzkarDoneCount() -> Int {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				try ANAzkarDAO.filter(ANAzkarDAO.Columns.currentCount == 0).fetchCount(db)
+			}
+		} catch {
+			fatalError()
+		}
+	}
+
+	public func getSunnahPerDay() -> [(date: Date, count: Int)] {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+				try ANDayDAO.Queries.previousWeekWithDoneSunnah.fetchAll(db).compactMap {
+					($0.date, try $0.doneSunnah.fetchCount(db))
+				}
+			}
+		} catch {
+			fatalError()
+		}
+	}
 }
 
 class CurrentBundleFinder {}
