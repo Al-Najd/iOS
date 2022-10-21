@@ -15,6 +15,7 @@ import Assets
 import PrayerDetails
 import ReusableUI
 import Dashboard
+import Utils
 
 public struct HomeView: View {
   @ObserveInjection var inject
@@ -30,7 +31,9 @@ public struct HomeView: View {
         VStack {
           HeaderView(viewStore: viewStore)
           PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
-			
+
+		  makeDuaaView(text: viewStore.duaa)
+			.padding()
         }
       }
       .ignoresSafeArea(edges: .top)
@@ -44,6 +47,26 @@ public struct HomeView: View {
       .enableInjection()
     }
   }
+
+	@ViewBuilder
+	func makeDuaaView(text: String) -> some View {
+		Text(text)
+			.scaledFont(.pBody)
+			.multilineTextAlignment(.center)
+			.foregroundColor(Asset.Colors.Apple.dark.swiftUIColor)
+			.padding()
+			.fillAndCenter()
+			.background(
+				RoundedRectangle(cornerRadius: .r8)
+					.fill()
+					.foregroundColor(Asset.Colors.Apple.light.swiftUIColor)
+					.overlay(
+						RoundedRectangle(cornerRadius: .r8)
+							.stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1)
+					)
+					.shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3)
+			)
+	}
 }
 
 struct HeaderView: View {
@@ -132,7 +155,7 @@ struct PrayerSliderView: View {
               prayer.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 125, height: 150)
+				.frame(width: 175, height: getScreenSize().height * 0.5)
                 .overlay(
                   Color.mono.offblack.opacity(0.5)
                 )

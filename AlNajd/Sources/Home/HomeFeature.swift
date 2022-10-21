@@ -84,9 +84,9 @@ public let homeReducer = Reducer<
 ).binding()
 
 fileprivate func calculateProgress(_ state: inout HomeState) {
-    state.todosCount = state.prayers.count + state.prayers.map { $0.sunnah.count }.reduce(0, +)
+    state.todosCount = state.prayers.count
     let doneDeeds = state.prayers.filter { $0.isDone }
-    state.doneTodos = doneDeeds.count + state.prayers.flatMap { $0.sunnah.filter { $0.isDone } }.count
+    state.doneTodos = doneDeeds.count
     state.percentageValue = Float(state.doneTodos)/Float(state.todosCount)
 }
 
