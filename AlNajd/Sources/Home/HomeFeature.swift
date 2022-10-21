@@ -12,6 +12,7 @@ import PrayersClient
 import Common
 import PrayerDetails
 import Dashboard
+import Localization
 
 public struct HomeState: Equatable {
     public var prayers: IdentifiedArrayOf<ANPrayer> = []
@@ -23,6 +24,7 @@ public struct HomeState: Equatable {
         formatter.numberStyle = .percent
         return formatter.string(from: .init(value: percentageValue)) ?? "%0"
     }
+	public var duaa: String = ""
     var dashboard: DashboardState = .init()
     @BindableState var selectedPrayer: PrayerDetailsState?
     @BindableState var percentageValue: Float = 0
@@ -62,6 +64,7 @@ public let homeReducer = Reducer<
         case .onAppear:
 			state.prayers = .init(uniqueElements: env.prayersClient.prayers())
             state.date = Date.now.startOfDay.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
+			state.duaa = getRandomDuaa()
             calculateProgress(&state)
         case let .onSelecting(prayer):
             state.selectedPrayer = .init(
@@ -85,4 +88,24 @@ fileprivate func calculateProgress(_ state: inout HomeState) {
     let doneDeeds = state.prayers.filter { $0.isDone }
     state.doneTodos = doneDeeds.count + state.prayers.flatMap { $0.sunnah.filter { $0.isDone } }.count
     state.percentageValue = Float(state.doneTodos)/Float(state.todosCount)
+}
+
+fileprivate func getRandomDuaa() -> String {
+	[
+		L10n.dua1,
+		L10n.dua2,
+		L10n.dua3,
+		L10n.dua4,
+		L10n.dua5,
+		L10n.dua6,
+		L10n.dua7,
+		L10n.dua8,
+		L10n.dua9,
+		L10n.dua10,
+		L10n.dua11,
+		L10n.dua12,
+		L10n.dua13,
+		L10n.dua14,
+		L10n.dua15
+	].randomElement() ?? ""
 }
