@@ -30,6 +30,7 @@ public struct HomeView: View {
         VStack {
           HeaderView(viewStore: viewStore)
           PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
+			
         }
       }
       .ignoresSafeArea(edges: .top)

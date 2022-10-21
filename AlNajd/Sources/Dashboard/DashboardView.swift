@@ -45,7 +45,7 @@ public struct DashboardView: View {
     
     public var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: .p16) {
 					makeCurrentStreakView(viewStore.prayingStreak)
 					makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone)
@@ -59,8 +59,9 @@ public struct DashboardView: View {
 					makeChartView(title: L10n.sunnah, viewStore: viewStore)
                         .padding(.horizontal)
                     makeFeedbackView()
-                        .padding(.horizontal)
+                        .padding()
                 }
+				.padding(.vertical)
             }
             .onAppear {
                 viewStore.send(.onAppear)
