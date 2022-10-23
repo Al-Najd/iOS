@@ -33,7 +33,10 @@ public struct HomeView: View {
           PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
 
 		  makeDuaaView(text: viewStore.duaa)
-			.padding()
+				.padding()
+
+		  NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+				.padding(.bottom)
         }
       }
       .ignoresSafeArea(edges: .top)
@@ -155,7 +158,7 @@ struct PrayerSliderView: View {
               prayer.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-				.frame(width: 175, height: getScreenSize().height * 0.5)
+				.frame(width: 175, height: getScreenSize().height * 0.45)
                 .overlay(
                   Color.mono.offblack.opacity(0.5)
                 )
@@ -180,4 +183,49 @@ struct PrayerSliderView: View {
       }
     }
   }
+}
+
+struct NafilaSliderView: View {
+	var prayers: IdentifiedArrayOf<ANPrayer>
+	var onTap: (ANPrayer) -> Void
+
+	var body: some View {
+		VStack(alignment: .leading, spacing: .p8) {
+			Text(L10n.nafila)
+				.foregroundColor(.mono.offblack)
+				.scaledFont(locale: .arabic, .pFootnote, .bold)
+				.multilineTextAlignment(.center)
+				.padding(.horizontal, .p16)
+			ScrollViewRTL {
+				HStack {
+					ForEach(prayers) { prayer in
+						ZStack {
+							prayer.image
+								.resizable()
+								.aspectRatio(contentMode: .fill)
+								.frame(width: getScreenSize().width * 0.8, height: getScreenSize().height * 0.15)
+								.overlay(
+									Color.mono.offblack.opacity(0.5)
+								)
+								.contentShape(RoundedRectangle(cornerRadius: .r16))
+							VStack {
+								Spacer()
+								Text(prayer.title)
+									.foregroundColor(.mono.offwhite)
+									.scaledFont(.pFootnote)
+									.multilineTextAlignment(.center)
+									.padding(.bottom, .p4)
+							}.padding(.horizontal, .p4)
+						}
+						.cornerRadius(.r16)
+						.clipped()
+						.onTapGesture {
+							onTap(prayer)
+						}
+					}
+				}
+				.padding(.horizontal, .p16)
+			}
+		}
+	}
 }
