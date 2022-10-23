@@ -21,6 +21,7 @@ public struct ANPrayerDAO {
 	public var isDone: Bool
 	public var raqaat: Int
 	public var dayId: Int64
+	public var reward: String
 }
 
 public struct ANSunnahDAO {
@@ -31,6 +32,7 @@ public struct ANSunnahDAO {
 	public var position: Position
 	public var affirmation: Affirmation
 	public var prayerId: Int64
+	public var reward: String
 }
 
 public struct ANAzkarDAO {
@@ -63,7 +65,8 @@ extension ANPrayerDAO {
 			raqaat: raqaat,
 			sunnah: .init(uniqueElements: sunnah),
 			afterAzkar: .init(uniqueElements: azkar),
-			isDone: isDone
+			isDone: isDone,
+			reward: reward
 		)
 	}
 }
@@ -77,7 +80,8 @@ extension ANSunnahDAO {
 			position: position.toDomainModel(),
 			affirmation: affirmation.toDomainModel(),
 			azkar: [],
-			isDone: isDone
+			isDone: isDone,
+			reward: reward
 		)
 	}
 }
@@ -244,28 +248,28 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
 
 extension ANSunnahDAO {
 	static let fajr: (Int64) -> ANSunnahDAO = {
-		.init(name: "fajr", isDone: false, raqaat: 2, position: .before, affirmation: .affirmed, prayerId: $0)
+		.init(name: "fajr", isDone: false, raqaat: 2, position: .before, affirmation: .affirmed, prayerId: $0, reward: "fajr_sunnah_reward")
 	}
 
 	static let dhuhr: (Int64) -> [ANSunnahDAO] = {
 		[
-			.init(name: "duhr", isDone: false, raqaat: 4, position: .before, affirmation: .affirmed, prayerId: $0),
-			.init(name: "duhr", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0),
-			.init(name: "duhr", isDone: false, raqaat: 2, position: .after, affirmation: .desirable, prayerId: $0)
+			.init(name: "duhr", isDone: false, raqaat: 4, position: .before, affirmation: .affirmed, prayerId: $0, reward: "duhr_sunnah_reward"),
+			.init(name: "duhr", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0, reward: "duhr_sunnah_reward"),
+			.init(name: "duhr", isDone: false, raqaat: 2, position: .after, affirmation: .desirable, prayerId: $0, reward: "duhr_sunnah_reward")
 		]
 	}
 
 	static let maghrib: (Int64) -> [ANSunnahDAO] = {
 		[
-			.init(name: "maghrib", isDone: false, raqaat: 2, position: .before, affirmation: .desirable, prayerId: $0),
-			.init(name: "maghrib", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0)
+			.init(name: "maghrib", isDone: false, raqaat: 2, position: .before, affirmation: .desirable, prayerId: $0, reward: "maghrib_sunnah_reward"),
+			.init(name: "maghrib", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0, reward: "maghrib_sunnah_reward")
 		]
 	}
 
 	static let aishaa: (Int64) -> [ANSunnahDAO] = {
 		[
-			.init(name: "aishaa", isDone: false, raqaat: 2, position: .before, affirmation: .desirable, prayerId: $0),
-			.init(name: "aishaa", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0),
+			.init(name: "aishaa", isDone: false, raqaat: 2, position: .before, affirmation: .desirable, prayerId: $0, reward: "ishaa_sunnah_reward"),
+			.init(name: "aishaa", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0, reward: "ishaa_sunnah_reward"),
 		]
 	}
 }

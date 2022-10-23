@@ -47,6 +47,7 @@ public class DatabaseService {
 			try db.create(table: "prayers") {
 				$0.autoIncrementedPrimaryKey("id")
 				$0.column("name", .text).notNull()
+				$0.column("reward", .text).notNull()
 				$0.column("isDone", .boolean).notNull().defaults(to: false)
 				$0.column("raqaat", .integer).notNull()
 				$0.column("dayId", .integer).notNull().indexed().references("days", onDelete: .cascade)
@@ -57,6 +58,7 @@ public class DatabaseService {
 			try db.create(table: "sunnah") {
 				$0.autoIncrementedPrimaryKey("id")
 				$0.column("name", .text).notNull()
+				$0.column("reward", .text).notNull()
 				$0.column("isDone", .boolean).notNull().defaults(to: false)
 				$0.column("raqaat", .integer).notNull()
 				$0.column("position", .integer).notNull()
@@ -117,11 +119,11 @@ private extension DatabaseService {
 	}
 
 	static func seedPrayers(_ dayId: Int64, _ db: Database) throws {
-		let fajr = try ANPrayerDAO(name: "fajr", isDone: false, raqaat: 2, dayId: dayId).insertAndFetch(db)
-		let dhuhr = try ANPrayerDAO(name: "duhr", isDone: false, raqaat: 4, dayId: dayId).insertAndFetch(db)
-		_ = try ANPrayerDAO(name: "aasr", isDone: false, raqaat: 4, dayId: dayId).insertAndFetch(db)
-		let maghrib = try ANPrayerDAO(name: "maghrib", isDone: false, raqaat: 3, dayId: dayId).insertAndFetch(db)
-		let aishaa = try ANPrayerDAO(name: "aishaa", isDone: false, raqaat: 4, dayId: dayId).insertAndFetch(db)
+		let fajr = try ANPrayerDAO(name: "fajr", isDone: false, raqaat: 2, dayId: dayId, reward: "fajr_reward").insertAndFetch(db)
+		let dhuhr = try ANPrayerDAO(name: "duhr", isDone: false, raqaat: 4, dayId: dayId, reward: "duhr_reward").insertAndFetch(db)
+		_ = try ANPrayerDAO(name: "aasr", isDone: false, raqaat: 4, dayId: dayId, reward: "aasr_reward").insertAndFetch(db)
+		let maghrib = try ANPrayerDAO(name: "maghrib", isDone: false, raqaat: 3, dayId: dayId, reward: "maghrib_reward").insertAndFetch(db)
+		let aishaa = try ANPrayerDAO(name: "aishaa", isDone: false, raqaat: 4, dayId: dayId, reward: "ishaa_reward").insertAndFetch(db)
 
 		try seedFajrSunnahAndAzkar((fajr?.id)!, db)
 		try seedDhuhrSunnahAndAzkar((dhuhr?.id)!, db)

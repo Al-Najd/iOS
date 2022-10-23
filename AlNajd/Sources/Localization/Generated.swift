@@ -44,6 +44,8 @@ public enum L10n {
   public static let aSinner = L10n.tr("Localizables", "A Sinner", fallback: "عاصي")
   /// العصر
   public static let aasr = L10n.tr("Localizables", "aasr", fallback: "العصر")
+  /// الآن اصبحت التوبة اسهل, كذلك حلول المشاكل
+  public static let aasrReward = L10n.tr("Localizables", "aasr_reward", fallback: "الآن اصبحت التوبة اسهل, كذلك حلول المشاكل")
   /// إمكانية الوصول
   public static let accessibility = L10n.tr("Localizables", "Accessibility", fallback: "إمكانية الوصول")
   /// عشاء
@@ -60,6 +62,8 @@ public enum L10n {
   public static let alNajdTranslation = L10n.tr("Localizables", "Al Najd Translation", fallback: "اي الطريقين (طريق الخير, وطريق الشر).")
   /// الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ
   public static let alRa3d28 = L10n.tr("Localizables", "al_ra3d_28", fallback: "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ")
+  /// الفرض
+  public static let alfard = L10n.tr("Localizables", "alfard", fallback: "الفرض")
   /// الحمدلله
   public static let alhamdulellah = L10n.tr("Localizables", "alhamdulellah", fallback: "الحمدلله")
   /// جميع المسلمين
@@ -186,8 +190,14 @@ public enum L10n {
   public static let dua9 = L10n.tr("Localizables", "dua_9", fallback: "اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ، مَاضٍ فِيَّ حُكْمُكَ، عَدْلٌ فِيَّ قَضَاؤُكَ، أَسْأَلُكَ بِكُلِّ اسْمٍ هُوَ لَكَ سَمَّيْتَ بِهِ نَفْسَكَ، أَوْ أَنْزَلْتَهُ فِي كِتَابِكَ، أَوْ عَلَّمْتَهُ أَحَدًا مِنْ خَلْقِكَ، أَوِ اسْتَأْثَرْتَ بِهِ فِي عِلْمِ الْغَيْبِ عِنْدَكَ، أَنْ تَجْعَلَ الْقُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي")
   /// الضحي
   public static let duha = L10n.tr("Localizables", "Duha", fallback: "الضحي")
+  /// صلاة الآوابين, نعم العباد, الله يمدح و يعتز بعباده الآوابين, فما اكرمها من عبادة ان يمدح الله اهلها و ياله من شرف عظيم, بل يجعل لك ايضا الله في كل عمل لك صدقة, و يجعل علي كل سلامة (عظمة في جسدك) صدقة!
+  public static let duhaReward = L10n.tr("Localizables", "duha_reward", fallback: "صلاة الآوابين, نعم العباد, الله يمدح و يعتز بعباده الآوابين, فما اكرمها من عبادة ان يمدح الله اهلها و ياله من شرف عظيم, بل يجعل لك ايضا الله في كل عمل لك صدقة, و يجعل علي كل سلامة (عظمة في جسدك) صدقة!")
   /// الظهر
   public static let duhr = L10n.tr("Localizables", "duhr", fallback: "الظهر")
+  /// هنالك اكثر من ٢٥ فضل في صلاة الظهر, افضلها انها تقربك من الله
+  public static let duhrReward = L10n.tr("Localizables", "duhr_reward", fallback: "هنالك اكثر من ٢٥ فضل في صلاة الظهر, افضلها انها تقربك من الله")
+  /// اصبحت الأن اقرب من الله
+  public static let duhrSunnahReward = L10n.tr("Localizables", "duhr_sunnah_reward", fallback: "اصبحت الأن اقرب من الله")
   /// الدنيا
   public static let dunia = L10n.tr("Localizables", "Dunia", fallback: "الدنيا")
   /// هذا الإيمال غير صالح.
@@ -198,8 +208,16 @@ public enum L10n {
   public static let estigphar = L10n.tr("Localizables", "estigphar", fallback: "استغفر الله")
   /// الفچر
   public static let fajr = L10n.tr("Localizables", "fajr", fallback: "الفچر")
+  /// إن كانت سنة الفچر خيرا من الدنيا و ما فيها, فما بالك بفرضها؟
+  public static let fajrReward = L10n.tr("Localizables", "fajr_reward", fallback: "إن كانت سنة الفچر خيرا من الدنيا و ما فيها, فما بالك بفرضها؟")
+  /// اغني اهل الأرض لصلاتك لسنة الفچر
+  public static let fajrSunnahReward = L10n.tr("Localizables", "fajr_sunnah_reward", fallback: "اغني اهل الأرض لصلاتك لسنة الفچر")
   /// الفرائض
   public static let faraaid = L10n.tr("Localizables", "Faraaid", fallback: "الفرائض")
+  /// فرض
+  public static let fard = L10n.tr("Localizables", "fard", fallback: "فرض")
+  /// لم تصل الفرض بعد.
+  public static let fardNotDoneYet = L10n.tr("Localizables", "fard_not_done_yet", fallback: "لم تصل الفرض بعد.")
   /// ال%@ لا يمكن ان يكون فارغا.
   public static func fieldCantBeEmpty(_ p1: Any) -> String {
     return L10n.tr("Localizables", "field_cant_be_empty", String(describing: p1), fallback: "ال%@ لا يمكن ان يكون فارغا.")
@@ -247,6 +265,10 @@ public enum L10n {
   public static let insufficient = L10n.tr("Localizables", "Insufficient", fallback: "غير كافي")
   /// الآن اصبح يصلي معه السنة و النافلة!
   public static let isNowCallingYouToPrayItAndSunnahAndNafila = L10n.tr("Localizables", "Is now calling you to pray it and Sunnah and Nafila!", fallback: "الآن اصبح يصلي معه السنة و النافلة!")
+  /// ليس فقط النوم المريح ما اكتسبت بالعشاء, بالنصف قيام الليل الأول, وما ادراك ما نصف قيام الليل
+  public static let ishaaReward = L10n.tr("Localizables", "ishaa_reward", fallback: "ليس فقط النوم المريح ما اكتسبت بالعشاء, بالنصف قيام الليل الأول, وما ادراك ما نصف قيام الليل")
+  /// غير انها سنة عن النبي, بل انها ايضا تساعدك في قيام الليل
+  public static let ishaaSunnahReward = L10n.tr("Localizables", "ishaa_sunnah_reward", fallback: "غير انها سنة عن النبي, بل انها ايضا تساعدك في قيام الليل")
   /// لا يغير هذا شئ
   public static let itChangesNothing = L10n.tr("Localizables", "It changes nothing", fallback: "لا يغير هذا شئ")
   /// يجب أن يصبح 
@@ -287,6 +309,10 @@ public enum L10n {
   }
   /// المغرب
   public static let maghrib = L10n.tr("Localizables", "maghrib", fallback: "المغرب")
+  /// هنئا لك, اصبح مالك, و دعاءك, و امنياتك مباركة, و ان شاء الله يفيض الله عليك ببركات, هذا ما كسبت من صلاة المغرب
+  public static let maghribReward = L10n.tr("Localizables", "maghrib_reward", fallback: "هنئا لك, اصبح مالك, و دعاءك, و امنياتك مباركة, و ان شاء الله يفيض الله عليك ببركات, هذا ما كسبت من صلاة المغرب")
+  /// كان صلي الله عليه و سلم لا يترك ركعتان ما بعد المغرب لفضلهم
+  public static let maghribSunnahReward = L10n.tr("Localizables", "maghrib_sunnah_reward", fallback: "كان صلي الله عليه و سلم لا يترك ركعتان ما بعد المغرب لفضلهم")
   /// أجعل الصلاة سهلة و طيبة
   public static let makeSalatEasyAndFun = L10n.tr("Localizables", "Make Salat Easy and Fun", fallback: "أجعل الصلاة سهلة و طيبة")
   /// اللهم اجمعنا بهم جميعا في فردوسك الأعلي
@@ -348,6 +374,8 @@ public enum L10n {
   public static let pretendToBeEverythingThatYouReNot = L10n.tr("Localizables", "Pretend to be everything that you're not.", fallback: "تذاهر بكل ما انت لست اهل له")
   /// ضع مسافة بقدر ما تشاء بينك و بين الحقيقة
   public static let putAsMuchDistanceBetweenYouAndTheTruthAsYouWant = L10n.tr("Localizables", "Put as much distance between you and the truth as you want", fallback: "ضع مسافة بقدر ما تشاء بينك و بين الحقيقة")
+  /// شرف المؤمن, و اختص الله هذه الصلاة في الثلث الأخير من انه يتنزل الي السماء الدنيا فينادي علي عباده,هل من سائل فيعطى سؤله، هل من داع فيستجاب له، هل من مستغفر فيغفر له هل من تائب، فيتاب عليه؟, بل من معزة مصليها عند ربهم, يشع نور من بيته كل ليلة, حتي اذا غاب سئلت عنه الملائكة و دعت له اذا علمت بمرضه بالشفاء و استغفرت له
+  public static let qeyamAlLaylReward = L10n.tr("Localizables", "qeyamAlLayl_reward", fallback: "شرف المؤمن, و اختص الله هذه الصلاة في الثلث الأخير من انه يتنزل الي السماء الدنيا فينادي علي عباده,هل من سائل فيعطى سؤله، هل من داع فيستجاب له، هل من مستغفر فيغفر له هل من تائب، فيتاب عليه؟, بل من معزة مصليها عند ربهم, يشع نور من بيته كل ليلة, حتي اذا غاب سئلت عنه الملائكة و دعت له اذا علمت بمرضه بالشفاء و استغفرت له")
   /// قيام الليل
   public static let qyamAlLayl = L10n.tr("Localizables", "Qyam Al Layl", fallback: "قيام الليل")
   /// رضيت بالله ربا و بالإسلام دينا و بمحمد صلي الله عليه نبيا و رسولا
@@ -371,7 +399,7 @@ public enum L10n {
   /// تكرار متبقي
   public static let repeatsAreLeft = L10n.tr("Localizables", "Repeats are left", fallback: "تكرار متبقي")
   /// الجوائز
-  public static let rewards = L10n.tr("Localizables", "Rewards", fallback: "الجوائز")
+  public static let rewards = L10n.tr("Localizables", "rewards", fallback: "الجوائز")
   /// اغني اهل الأرض لصلاتك لسنة الفچر
   public static let richestManOfAllWhoDidnTPray = L10n.tr("Localizables", "Richest Man of all who didn't pray!", fallback: "اغني اهل الأرض لصلاتك لسنة الفچر")
   /// قم من ظلمات انهزامك ، الي نور رحمة الله و اختار 
@@ -420,6 +448,8 @@ public enum L10n {
   /// رقيب نفسك
   /// 
   public static let supervisor = L10n.tr("Localizables", "Supervisor ", fallback: "رقيب نفسك\n")
+  /// المهم
+  public static let tasks = L10n.tr("Localizables", "tasks", fallback: "المهم")
   /// احسنت!
   public static let thatSTheSpirit = L10n.tr("Localizables", "That's the spirit!", fallback: "احسنت!")
   /// صلاة الآوابين, نعم العباد, الله يمدح و يعتز بعباده الآوابين, فما اكرمها من عبادة ان يمدح الله اهلها و ياله من شرف عظيم, بل يجعل لك ايضا الله في كل عمل لك صدقة, و يجعل علي كل سلامة (عظمة في جسدك) صدقة!
@@ -509,6 +539,8 @@ public enum L10n {
   public static let wetr = L10n.tr("Localizables", "Wetr", fallback: "رقعة وتر")
   /// إذا قرأت ٧ ايات بعد صلاة العشاء, فقد كتبت من من قام هذه الليلة
   public static let wetrWhenDoneWith7VersesIsSameAsDoingQyamAlLayl = L10n.tr("Localizables", "Wetr when done with 7 Verses, is same as doing Qyam Al Layl", fallback: "إذا قرأت ٧ ايات بعد صلاة العشاء, فقد كتبت من من قام هذه الليلة")
+  /// إذا قرأت ٧ ايات بعد صلاة العشاء, فقد كتبت من من قام هذه الليلة
+  public static let wetrReward = L10n.tr("Localizables", "wetr_reward", fallback: "إذا قرأت ٧ ايات بعد صلاة العشاء, فقد كتبت من من قام هذه الليلة")
   /// حيث ستجد كيف فعلت خلال فترة زمنية (هي ثابتة عند 7 أيام حتي نحسنها)
   public static let whereYouWillFindHowDidYouDoDuringATimePeriodNowItsStaticTo7Days = L10n.tr("Localizables", "Where you will find how did you do during a time period (now its static to 7 days)", fallback: "حيث ستجد كيف فعلت خلال فترة زمنية (هي ثابتة عند 7 أيام حتي نحسنها)")
   /// يا ليت كان هناك ما يكفي لملئ هذا الأسبوع بالأعمال الرائعة, سنفعلها هذا الأسبوع

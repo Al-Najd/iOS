@@ -19,11 +19,12 @@ public struct ANPrayer: Identifiable, Equatable {
   public let title: String
   public let subtitle: String
   public let raqaat: Int
+	public let reward: String
   public var sunnah: IdentifiedArrayOf<ANSunnah>
   public var afterAzkar: IdentifiedArrayOf<ANAzkar>
   public var isDone: Bool = false
   
-  public init(id: Int64, name: String, raqaat: Int, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false) {
+	public init(id: Int64, name: String, raqaat: Int, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false, reward: String) {
     self.id = Int(id)
     self.name = name
     self.title = L10n.prayerTitle(name.localized)
@@ -32,6 +33,7 @@ public struct ANPrayer: Identifiable, Equatable {
     self.sunnah = sunnah
     self.afterAzkar = afterAzkar
     self.isDone = isDone
+	  self.reward = reward
   }
 }
 
@@ -41,10 +43,11 @@ public struct ANSunnah: Identifiable, Equatable {
   public let raqaat: Int
   public let position: Position
   public let affirmation: Affirmation
+	public let reward: String
   public let azkar: [ANAzkar]
   public var isDone: Bool = false
   
-  public init(id: Int64, name: String, raqaat: Int, position: ANSunnah.Position, affirmation: ANSunnah.Affirmation, azkar: [ANAzkar], isDone: Bool = false) {
+	public init(id: Int64, name: String, raqaat: Int, position: ANSunnah.Position, affirmation: ANSunnah.Affirmation, azkar: [ANAzkar], isDone: Bool = false, reward: String) {
     self.id = Int(id)
 	  self.name = name.localized
     self.raqaat = raqaat
@@ -52,6 +55,7 @@ public struct ANSunnah: Identifiable, Equatable {
     self.affirmation = affirmation
     self.azkar = azkar
     self.isDone = isDone
+	  self.reward = reward
   }
 }
 
