@@ -92,7 +92,6 @@ private extension ANTargets {
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
         .product(name: "Adhan", package: "adhan-swift"),
-        .product(name: "RealmSwift", package: "realm-swift"),
 		.product(name: "GRDB", package: "GRDB.swift"),
 		.product(name: "SwiftDate", package: "SwiftDate")
       ],
@@ -130,7 +129,6 @@ private extension ANTargets {
       dependencies: [
         "Localization",
         "Assets",
-        .product(name: "RealmSwift", package: "realm-swift"),
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
       ]
@@ -171,7 +169,7 @@ private extension ANDependencies {
     ),
     .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
-      branch: "main"
+	  .upToNextMajor(from: .init(0, 40, 2))
     )
   ]
   

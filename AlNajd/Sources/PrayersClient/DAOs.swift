@@ -136,7 +136,7 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 		}
 
 		static var previousWeek: QueryInterfaceRequest<ANDayDAO> {
-			ANDayDAO.filter(Date().previousWeek.contains(ANDayDAO.Columns.date))
+			ANDayDAO.filter(Date().startOfDay.previousWeek.contains(ANDayDAO.Columns.date))
 		}
 
 		var withMissedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
@@ -145,6 +145,10 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 
 		static var previousWeekWithDoneSunnah: QueryInterfaceRequest<ANDayDAO> {
 			previousWeek.including(all: sunnah.filter(ANSunnahDAO.Columns.isDone == true))
+		}
+
+		static func getPrayers(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+			ANDayDAO.filter(Columns.date == date.startOfDay)
 		}
 	}
 

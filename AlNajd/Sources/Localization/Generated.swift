@@ -398,6 +398,8 @@ public enum L10n {
   public static let passwordTooShort = L10n.tr("Localizables", "password_too_short", fallback: "كلمة المرور قصيرة للغاية")
   /// الأذونات
   public static let permissions = L10n.tr("Localizables", "Permissions", fallback: "الأذونات")
+  /// تاريخ اليوم
+  public static let pickDate = L10n.tr("Localizables", "pick_date", fallback: "تاريخ اليوم")
   /// الخطط
   public static let plans = L10n.tr("Localizables", "Plans", fallback: "الخطط")
   /// صلاة %@

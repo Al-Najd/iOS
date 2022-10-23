@@ -16,7 +16,6 @@ import Localization
 
 public struct HomeState: Equatable {
     public var prayers: IdentifiedArrayOf<ANPrayer> = []
-    public var date: String = ""
     public var todosCount: Int = 0
     public var doneTodos: Int = 0
     public var percentage: String {
@@ -28,6 +27,7 @@ public struct HomeState: Equatable {
     var dashboard: DashboardState = .init()
     @BindableState var selectedPrayer: PrayerDetailsState?
     @BindableState var percentageValue: Float = 0
+	@BindableState var date: Date = .init().startOfDay
     
     public init() { }
 }
@@ -37,6 +37,7 @@ public enum HomeAction: BindableAction, Equatable {
     case prayerDetails(PrayerDetailsAction)
     case dashboard(DashboardAction)
     case onSelecting(ANPrayer)
+	case onChangingDate(Date)
     case binding(BindingAction<HomeState>)
 }
 
@@ -62,20 +63,24 @@ public let homeReducer = Reducer<
     .init { state, action, env in
         switch action {
         case .onAppear:
-			state.prayers = .init(uniqueElements: env.prayersClient.prayers())
-            state.date = Date.now.startOfDay.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
+			state.prayers = .init(uniqueElements: env.prayersClient.prayers(for: state.date))
 			state.duaa = getRandomDuaa()
             calculateProgress(&state)
         case let .onSelecting(prayer):
             state.selectedPrayer = .init(
 				prayer: prayer,
-				date: Date.now
+				date: state.date
 			)
         case .prayerDetails(.dismiss):
             guard let selectedState = state.selectedPrayer else { return .none }
             state.prayers[id: selectedState.prayer.id] = selectedState.prayer
             state.selectedPrayer = nil
             calculateProgress(&state)
+		case let .onChangingDate(date):
+			state.prayers = .init(uniqueElements: env.prayersClient.prayers(for: state.date))
+			calculateProgress(&state)
+        case .binding:
+            return Effect.
         default:
             break
         }

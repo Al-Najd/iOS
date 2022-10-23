@@ -184,11 +184,6 @@ public struct DashboardView: View {
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
                 .shadow(radius: .r8)
         )
-		.onAppear {
-			viewStore.sunnahPlotData.enumerated().forEach { (index: Int, data: ChartAnalyticsData) in
-				viewStore.send(.animate(data), animation: .easeInOut(duration: 0.8 + (Double(index) * 0.05)).delay(Double(index) * 0.05))
-			}
-		}
     }
 }
 

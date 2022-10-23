@@ -11,7 +11,6 @@ import Assets
 import Utils
 import SwiftUI
 import ComposableArchitecture
-import RealmSwift
 
 public struct ANPrayer: Identifiable, Equatable {
   public let id: Int
@@ -60,7 +59,7 @@ public struct ANSunnah: Identifiable, Equatable {
 }
 
 public extension ANSunnah {
-  enum Position: String, PersistableEnum, Equatable {
+  enum Position: String, Equatable {
     case before
     case after
     
@@ -75,7 +74,7 @@ public extension ANSunnah {
   }
   
   /// Meaning: سنة مؤكدة أم مستحبة
-  enum Affirmation: String, PersistableEnum, Equatable {
+  enum Affirmation: String, Equatable {
     case affirmed
     case desirable
     
