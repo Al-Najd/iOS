@@ -95,6 +95,7 @@ public enum Asset {
     public enum Images {
       public static let asrImage = ImageAsset(name: "asrImage")
       public static let dhuhrImage = ImageAsset(name: "dhuhrImage")
+      public static let duhaImage = ImageAsset(name: "duhaImage")
       public static let fajrImage = ImageAsset(name: "fajrImage")
       public static let ishaImage = ImageAsset(name: "ishaImage")
       public static let maghribImage = ImageAsset(name: "maghribImage")

@@ -16,6 +16,7 @@ import PrayerDetails
 import ReusableUI
 import Dashboard
 import Utils
+import ScalingHeaderScrollView
 
 public struct HomeView: View {
   @ObserveInjection var inject
@@ -31,12 +32,27 @@ public struct HomeView: View {
         VStack {
           HeaderView(viewStore: viewStore)
           PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
-
-		  makeDuaaView(text: viewStore.duaa)
-				.padding()
+			VStack(alignment: .leading) {
+				Text(L10n.azkar)
+					.foregroundColor(.mono.offblack)
+					.scaledFont(locale: .arabic, .pFootnote, .bold)
+					.multilineTextAlignment(.leading)
+					.padding(.horizontal, .p16)
+				makeDuaaView(text: viewStore.duaa)
+					.padding(.horizontal)
+			}
 
 		  NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
 				.padding(.bottom)
+
+			VStack(alignment: .leading) {
+				Text(L10n.ahadeeth)
+					.foregroundColor(.mono.offblack)
+					.scaledFont(locale: .arabic, .pFootnote, .bold)
+					.multilineTextAlignment(.leading)
+					.padding(.horizontal, .p16)
+				HadeethSliderView()
+			}
         }
       }
       .ignoresSafeArea(edges: .top)
@@ -114,7 +130,12 @@ struct HeaderView: View {
     .padding(.horizontal, .p8)
     .padding(.bottom, .p16)
     .background(
-		Color.primaryBlackberry
+		Color.primaryBlackberry.ignoresSafeArea()
+			.background(
+				Color.primaryBlackberry
+					.frame(height: 1000)
+					.offset(y: -500)
+			)
     )
   }
 }
@@ -200,7 +221,7 @@ struct NafilaSliderView: View {
 				HStack {
 					ForEach(prayers) { prayer in
 						ZStack {
-							prayer.image
+							Asset.Prayers.Images.duhaImage.swiftUIImage
 								.resizable()
 								.aspectRatio(contentMode: .fill)
 								.frame(width: getScreenSize().width * 0.8, height: getScreenSize().height * 0.15)
@@ -227,5 +248,32 @@ struct NafilaSliderView: View {
 				.padding(.horizontal, .p16)
 			}
 		}
+	}
+}
+
+struct HadeethSliderView: View {
+	var ahadeeth: [String] = [
+		L10n.hadeeth1,
+		L10n.hadeeth2
+	]
+
+	var body: some View {
+		Text(ahadeeth.randomElement() ?? ahadeeth[0])
+			.scaledFont(.pBody)
+			.multilineTextAlignment(.center)
+			.foregroundColor(Asset.Colors.Apple.dark.swiftUIColor)
+			.padding()
+			.frame(width: getScreenSize().width * 0.95)
+			.background(
+				RoundedRectangle(cornerRadius: .r8)
+					.fill()
+					.foregroundColor(Asset.Colors.Apple.light.swiftUIColor)
+					.overlay(
+						RoundedRectangle(cornerRadius: .r8)
+							.stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1)
+					)
+					.shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3)
+			)
+			.padding([.leading, .trailing, .bottom])
 	}
 }
