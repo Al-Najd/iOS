@@ -13,7 +13,7 @@ import Foundation
 import SwiftUI
 
 public protocol Shadowable {
-  var largeShadow: ARShadow { get }
-  var mediumShadow: ARShadow { get }
-  var smallShadow: ARShadow { get }
+    var largeShadow: ARShadow { get }
+    var mediumShadow: ARShadow { get }
+    var smallShadow: ARShadow { get }
 }

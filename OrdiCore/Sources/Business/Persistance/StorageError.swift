@@ -6,11 +6,11 @@
 //  Copyright © 2020 Ahmed Ramy. All rights reserved.
 //
 
-import Foundation
 import Entity
+import Foundation
 
 public enum StorageError: Error {
-  case notFound
-  case cantWrite(Error)
-  case cantDelete(StorageKey)
+    case notFound
+    case cantWrite(Error)
+    case cantDelete(StorageKey)
 }

@@ -17,7 +17,7 @@ public typealias Guarentee<T> = Promise<T>
 /// Lightweight Promise Wrapper for better code readability
 /// ## Promise
 /// ### Normal way of doing things
-///```
+/// ```
 /// func asyncWork(completion: (String) -> Void) {
 ///     // ...
 ///     completion("test")
@@ -35,10 +35,10 @@ public typealias Guarentee<T> = Promise<T>
 ///     }
 ///   }
 /// }
-///```
+/// ```
 ///
 /// ### With Promise
-///```
+/// ```
 /// let asyncPromise = Promise<String> { resolve in
 ///    // ...
 ///    resolve("test")
@@ -62,58 +62,57 @@ public typealias Guarentee<T> = Promise<T>
 ///
 /// ```
 public class Promise<Value> {
-  
-  enum State<T> {
-    case pending
-    case resolved(T)
-  }
-  
-  private var state: State<Value> = .pending
-  private var callbacks: [(Value) -> Void] = []
-  
-  init(executor: (_ resolve: @escaping (Value) -> Void) -> Void) {
-    executor(resolve)
-  }
-  
-  // observe
-  public func then(_ onResolved: @escaping (Value) -> Void) {
-    callbacks.append(onResolved)
-    triggerCallbacksIfResolved()
-  }
-  
-  // flatMap
-  public func then<NewValue>(_ onResolved: @escaping (Value) -> Promise<NewValue>) -> Promise<NewValue> {
-    return Promise<NewValue> { resolve in
-      then { value in
-        onResolved(value).then(resolve)
-      }
+    enum State<T> {
+        case pending
+        case resolved(T)
     }
-  }
-  
-  // map
-  public func then<NewValue>(_ onResolved: @escaping (Value) -> NewValue) -> Promise<NewValue> {
-    return then { value in
-      return Promise<NewValue> { resolve in
-        resolve(onResolved(value))
-      }
+
+    private var state: State<Value> = .pending
+    private var callbacks: [(Value) -> Void] = []
+
+    init(executor: (_ resolve: @escaping (Value) -> Void) -> Void) {
+        executor(resolve)
     }
-  }
-  
-  private func resolve(value: Value) {
-    updateState(to: .resolved(value))
-  }
-  
-  private func updateState(to newState: State<Value>) {
-    guard case .pending = state else { return }
-    state = newState
-    triggerCallbacksIfResolved()
-  }
-  
-  private func triggerCallbacksIfResolved() {
-    guard case let .resolved(value) = state else { return }
-    callbacks.forEach { callback in
-      callback(value)
+
+    // observe
+    public func then(_ onResolved: @escaping (Value) -> Void) {
+        callbacks.append(onResolved)
+        triggerCallbacksIfResolved()
     }
-    callbacks.removeAll()
-  }
+
+    // flatMap
+    public func then<NewValue>(_ onResolved: @escaping (Value) -> Promise<NewValue>) -> Promise<NewValue> {
+        return Promise<NewValue> { resolve in
+            then { value in
+                onResolved(value).then(resolve)
+            }
+        }
+    }
+
+    // map
+    public func then<NewValue>(_ onResolved: @escaping (Value) -> NewValue) -> Promise<NewValue> {
+        return then { value in
+            Promise<NewValue> { resolve in
+                resolve(onResolved(value))
+            }
+        }
+    }
+
+    private func resolve(value: Value) {
+        updateState(to: .resolved(value))
+    }
+
+    private func updateState(to newState: State<Value>) {
+        guard case .pending = state else { return }
+        state = newState
+        triggerCallbacksIfResolved()
+    }
+
+    private func triggerCallbacksIfResolved() {
+        guard case let .resolved(value) = state else { return }
+        callbacks.forEach { callback in
+            callback(value)
+        }
+        callbacks.removeAll()
+    }
 }

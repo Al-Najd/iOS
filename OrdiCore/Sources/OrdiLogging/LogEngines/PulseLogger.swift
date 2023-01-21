@@ -6,8 +6,8 @@
 //  Copyright © 2021 Ahmed Ramy. All rights reserved.
 //
 
-import Pulse
 import Logging
+import Pulse
 
 public final class PulseLogger: LogEngine {
     public static let main: PulseLogger = .init()

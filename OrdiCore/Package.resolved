@@ -1,0 +1,68 @@
+{
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
+        "version" : "5.5.0"
+      }
+    },
+    {
+      "identity" : "fontblaster",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ArtSabintsev/FontBlaster.git",
+      "state" : {
+        "revision" : "6734d3929d019e4a36b7aa771232cfca65ff99b4",
+        "version" : "5.2.1"
+      }
+    },
+    {
+      "identity" : "keychain-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/keychain-swift",
+      "state" : {
+        "revision" : "d108a1fa6189e661f91560548ef48651ed8d93b9",
+        "version" : "20.0.0"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+        "version" : "3.5.0"
+      }
+    },
+    {
+      "identity" : "pulse",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Pulse",
+      "state" : {
+        "revision" : "ba7a0e4668de7074470bd37a60b1f89325a416bb",
+        "version" : "0.20.2"
+      }
+    },
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa.git",
+      "state" : {
+        "revision" : "967f04b3cd6989df3f9ced3060481a21646c146d",
+        "version" : "7.9.0"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "32e8d724467f8fe623624570367e3d50c5638e46",
+        "version" : "1.5.2"
+      }
+    }
+  ],
+  "version" : 2
+}

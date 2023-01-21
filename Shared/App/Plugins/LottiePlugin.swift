@@ -9,7 +9,5 @@ import Foundation
 import Lottie
 
 struct LottiePlugin: AppPlugin {
-  func setup() {
-    
-  }
+    func setup() {}
 }

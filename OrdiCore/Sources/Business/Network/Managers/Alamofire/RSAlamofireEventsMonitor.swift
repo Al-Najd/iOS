@@ -6,8 +6,8 @@
 //
 
 import Alamofire
-import Foundation
 import Entity
+import Foundation
 import Logging
 import OrdiLogging
 import Pulse

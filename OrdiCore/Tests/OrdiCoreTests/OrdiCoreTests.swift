@@ -1,5 +1,5 @@
-import XCTest
 @testable import OrdiCore
+import XCTest
 
 final class OrdiCoreTests: XCTestCase {
     func testExample() throws {

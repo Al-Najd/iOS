@@ -1,28 +1,28 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 14/08/2022.
 //
 
+import Common
 import ComposableArchitecture
 import Entities
-import PrayersClient
-import Common
-import Utils
 import Foundation
+import PrayersClient
+import Utils
 
 public struct PrayerDetailsState: Identifiable, Equatable {
     public var id: ANPrayer.ID { prayer.id }
     public var prayer: ANPrayer
-	public var date: String
-    
+    public var date: String
+
     public init(
-		prayer: ANPrayer,
-		date: Date
-	) {
+        prayer: ANPrayer,
+        date: Date
+    ) {
         self.prayer = prayer
-		self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
+        self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
     }
 }
 
@@ -31,11 +31,11 @@ public enum PrayerDetailsAction: Equatable {
     case onDoingSunnah(ANSunnah)
     case onDoingZekr(ANAzkar)
     case onFinishingZekr(ANAzkar)
-    
+
     case dismiss
 }
 
-public struct PrayerDetailsEnvironment { public init() { } }
+public struct PrayerDetailsEnvironment { public init() {} }
 
 public let prayerDetailsReducer = Reducer<
     PrayerDetailsState,

@@ -1,14 +1,14 @@
 //
 //  SwiftUIView 3.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 12/02/2022.
 //
 
-import SwiftUI
-import DesignSystem
 import Common
+import DesignSystem
 import Inject
+import SwiftUI
 
 public struct RangeProgress: Identifiable, Equatable {
     public let id = UUID().uuidString
@@ -18,9 +18,9 @@ public struct RangeProgress: Identifiable, Equatable {
     public let progressColor: BrandColor
     public let insight: Insight?
     public let score: Int
-    
+
     public var isImproving: Bool?
-    
+
     public init(
         title: String,
         reports: [DayProgress],
@@ -31,18 +31,18 @@ public struct RangeProgress: Identifiable, Equatable {
         self.title = title
         self.reports = reports
         self.isImproving = isImproving
-        self.progressColor = isImproving ?? true ? Color.success : Color.danger
+        progressColor = isImproving ?? true ? Color.success : Color.danger
         self.insight = insight
-        self.hasEnoughData = !reports.isEmpty
+        hasEnoughData = !reports.isEmpty
         self.score = score
     }
-    
-    public static func ==(lhs: RangeProgress, rhs: RangeProgress) -> Bool {
+
+    public static func == (lhs: RangeProgress, rhs: RangeProgress) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     func changeImprovement(to didImprove: Bool) -> RangeProgress {
-        .init(title: self.title, reports: self.reports, isImproving: didImprove, insight: self.insight)
+        .init(title: title, reports: reports, isImproving: didImprove, insight: insight)
     }
 }
 
@@ -81,7 +81,7 @@ public struct DayProgress: Identifiable, Equatable {
     let day: String
     let limit: Int
     let indicator: Indicator
-    
+
     static let mock: [DayProgress] = [
         .init(count: 5, day: "S", limit: 5, indicator: .good),
         .init(count: 0, day: "S", limit: 5, indicator: .bad),
@@ -89,29 +89,28 @@ public struct DayProgress: Identifiable, Equatable {
         .init(count: 2, day: "T", limit: 5, indicator: .moderate),
         .init(count: 4, day: "W", limit: 5, indicator: .good),
         .init(count: 3, day: "T", limit: 5, indicator: .moderate),
-        .init(count: 5, day: "F", limit: 5, indicator: .good)
+        .init(count: 5, day: "F", limit: 5, indicator: .good),
     ]
-    
+
     public struct Indicator {
         let color: BrandColor
-        
+
         static let good: Indicator = .init(color: Color.success)
         static let moderate: Indicator = .init(color: Color.warning)
         static let bad: Indicator = .init(color: Color.danger)
     }
-    
+
     public static func == (lhs: DayProgress, rhs: DayProgress) -> Bool {
         lhs.id == rhs.id
     }
 }
 
 public struct RangeAnalysisCardView: View {
-    
     @ObserveInjection var inject
-    
+
     @State var highlightedDay: DayProgress?
     let progress: RangeProgress
-    
+
     public var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 15) {
@@ -120,24 +119,23 @@ public struct RangeAnalysisCardView: View {
                         Text(progress.title.localized)
                             .scaledFont(.pTitle1, .bold)
                             .foregroundColor(.mono.offblack)
-                        
+
                         if progress.hasEnoughData {
-                            
                             if let highlightedDay = highlightedDay {
                                 Text(
                                     "n out of n".localized(
                                         arguments: highlightedDay.count, highlightedDay.limit
                                     )
                                 )
-                                    .scaledFont(.pHeadline, .bold)
-                                    .foregroundColor(highlightedDay.indicator.color.light)
-                                    .padding(.vertical, .p4)
-                                    .padding(.horizontal, .p8)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: .r16)
-                                            .fill(highlightedDay.indicator.color.dark)
-                                            .shadow(color: highlightedDay.indicator.color.default, radius: .r4)
-                                    )
+                                .scaledFont(.pHeadline, .bold)
+                                .foregroundColor(highlightedDay.indicator.color.light)
+                                .padding(.vertical, .p4)
+                                .padding(.horizontal, .p8)
+                                .background(
+                                    RoundedRectangle(cornerRadius: .r16)
+                                        .fill(highlightedDay.indicator.color.dark)
+                                        .shadow(color: highlightedDay.indicator.color.default, radius: .r4)
+                                )
                             } else {
                                 Text("Last n Days".localized(arguments: progress.reports.count))
                                     .scaledFont(.pHeadline, .bold)
@@ -145,9 +143,9 @@ public struct RangeAnalysisCardView: View {
                             }
                         }
                     }
-                    
+
                     Spacer()
-                    
+
                     if progress.hasEnoughData, let isImproving = progress.isImproving {
                         Image(systemName: "arrow.up.forward")
                             .scaledFont(.pTitle3, .bold)
@@ -161,7 +159,7 @@ public struct RangeAnalysisCardView: View {
                             .rotationEffect(.degrees(isImproving ? 0 : 90))
                     }
                 }
-                
+
                 if progress.hasEnoughData {
                     BarGraph(
                         days: progress.reports,
@@ -188,7 +186,7 @@ public struct RangeAnalysisCardView: View {
                         x: 0, y: 0
                     )
             )
-            
+
             if let insight = progress.insight {
                 InsightCardView(insight: insight)
             }

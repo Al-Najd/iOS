@@ -6,8 +6,8 @@
 //
 
 import Combine
-import Foundation
 import Entity
+import Foundation
 
 public typealias RSExpected<T> = Result<T, OError>
 public typealias RSHandler<T> = (RSExpected<T>) -> Void
@@ -18,7 +18,6 @@ public enum RSProgressResponse<T: Codable>: Codable {
     case loading(Double)
     case finished(T)
 }
-
 
 public protocol NetworkProtocol {
     func call<T: Codable, U: Endpoint>(api: U, model: T.Type) -> RSResponse<T>

@@ -5,11 +5,11 @@
 //  Created by Ahmed Ramy on 16/11/2021.
 //
 
-//import Foundation
+// import Foundation
 import Entity
-//import GoogleSignIn
+// import GoogleSignIn
 //
-//public struct GIDSignInErrorToOErrorAdapter: AdapterProtocol {
+// public struct GIDSignInErrorToOErrorAdapter: AdapterProtocol {
 //    typealias Input = GIDSignInError
 //    typealias Output = OError
 //
@@ -41,4 +41,4 @@ import Entity
 //            return .somethingWentWrong
 //        }
 //    }
-//}
+// }

@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 12/02/2022.
 //
@@ -8,23 +8,22 @@
 import Foundation
 
 public extension String {
-  /// SwifterSwift: Returns a localized string, with an optional comment for translators.
-  ///
-  ///        "Hello world".localized -> Hallo Welt
-  ///
-  var localized: String {
-      return NSLocalizedString(self, tableName: "Localizables", bundle: .localizationBundle, comment: "")
-  }
-  
-  func localized(arguments: CVarArg...) -> String {
-      return String(format: self.localized, arguments: arguments.map { "\($0)" })
-  }
+    /// SwifterSwift: Returns a localized string, with an optional comment for translators.
+    ///
+    ///        "Hello world".localized -> Hallo Welt
+    ///
+    var localized: String {
+        return NSLocalizedString(self, tableName: "Localizables", bundle: .localizationBundle, comment: "")
+    }
+
+    func localized(arguments: CVarArg...) -> String {
+        return String(format: localized, arguments: arguments.map { "\($0)" })
+    }
 }
 
 class CurrentBundleFinder {}
 
 extension Foundation.Bundle {
-        
     static var localizationBundle: Bundle = {
         /* The name of your local package, prepended by "LocalPackages_" */
         let bundleName = "AlNajd_Localization"

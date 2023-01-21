@@ -5,8 +5,8 @@
 //  Created by Ahmed Ramy on 23/10/2021.
 //
 
-import Foundation
 import Entity
+import Foundation
 
 public enum LoggersManager {
     private static var engines: [LogEngine] {
@@ -53,8 +53,8 @@ public extension String {
     func withPrefix(_ prefix: String) -> String {
         "\(prefix)\(self)"
     }
-  
-  func withSuffix(_ suffix: String) -> String {
-    "\(self)\(suffix)"
-  }
+
+    func withSuffix(_ suffix: String) -> String {
+        "\(self)\(suffix)"
+    }
 }

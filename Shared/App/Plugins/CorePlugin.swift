@@ -5,11 +5,11 @@
 //  Created by Ahmed Ramy on 13/10/2021.
 //
 
-import UIKit.UIApplication
 import PrayersClient
+import UIKit.UIApplication
 
 public struct CorePlugin: AppPlugin {
-  public func setup() {
-		DatabaseService.setup()
-  }
+    public func setup() {
+        DatabaseService.setup()
+    }
 }

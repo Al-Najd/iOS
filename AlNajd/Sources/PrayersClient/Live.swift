@@ -1,15 +1,15 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 28/02/2022.
 //
 
-import Foundation
-import ComposableArchitecture
 import Business
+import ComposableArchitecture
 import Entities
+import Foundation
 
-extension PrayersClient {
-    public static let live = PrayersClient()
+public extension PrayersClient {
+    static let live = PrayersClient()
 }

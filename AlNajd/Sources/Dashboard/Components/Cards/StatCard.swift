@@ -1,6 +1,6 @@
 //
 //  SwiftUIView 2.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 12/02/2022.
 //
@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct StatProgress: Identifiable {
-  let id: String = UUID().uuidString
-  let title: String
-  let stat: String
+    let id: String = UUID().uuidString
+    let title: String
+    let stat: String
 }
 
 struct StatCard: View {

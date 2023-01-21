@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol AppPlugin {
-  func setup()
+    func setup()
 }

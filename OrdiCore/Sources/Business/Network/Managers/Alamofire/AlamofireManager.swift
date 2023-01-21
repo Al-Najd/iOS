@@ -8,8 +8,8 @@
 import Alamofire
 import AuthenticationServices
 import Combine
-import Foundation
 import Entity
+import Foundation
 import OrdiLogging
 import Pulse
 
@@ -145,7 +145,7 @@ public struct OErrorParser {
         }
     }
 
-    func parse(_ data: Data) -> OError {
+    func parse(_: Data) -> OError {
         .somethingWentWrong
     }
 }

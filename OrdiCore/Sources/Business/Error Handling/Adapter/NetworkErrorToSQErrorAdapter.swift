@@ -6,8 +6,8 @@
 //
 
 import Alamofire
-import Foundation
 import Entity
+import Foundation
 import OrdiLogging
 
 public struct NetworkErrorToOErrorAdapter: AdapterProtocol {

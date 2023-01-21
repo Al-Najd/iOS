@@ -5,14 +5,14 @@
 //  Created by Ahmed Ramy on 24/04/2021.
 //
 
-//import Unrealm
-//import RealmSwift
+// import Unrealm
+// import RealmSwift
 //
-//final class RealmStorage {
+// final class RealmStorage {
 //  private var realm = try! RealmSwift.Realm()
-//}
+// }
 //
-//extension RealmStorage: WritableStorage {
+// extension RealmStorage: WritableStorage {
 //  func save<T: Codable>(value: T, for key: StorageKey) throws {
 //    try realm.write {
 //      self.realm.add(value, update: .all)
@@ -27,9 +27,9 @@
 //
 //    realm.delete(objectToRemove)
 //  }
-//}
+// }
 //
-//extension RealmStorage: ReadableStorage {
+// extension RealmStorage: ReadableStorage {
 //  func fetchValue<T: Codable>(for key: StorageKey) throws -> T {
 //
 //    guard let object = realm.object(ofType: T.self, forPrimaryKey: "1") else {
@@ -39,4 +39,4 @@
 //
 //    return object
 //  }
-//}
+// }

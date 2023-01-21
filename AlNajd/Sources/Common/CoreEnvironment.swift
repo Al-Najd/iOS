@@ -5,12 +5,12 @@
 //  Created by Ahmed Ramy on 27/01/2022.
 //
 
-import Utils
 import Business
-import Foundation
-import Entities
 import ComposableCoreLocation
+import Entities
+import Foundation
 import PrayersClient
+import Utils
 
 @dynamicMemberLookup
 public struct CoreEnvironment<Environment> {
@@ -21,14 +21,14 @@ public struct CoreEnvironment<Environment> {
     public var prayersClient: PrayersClient
     public var haptic: HapticFeedbackClient
     public var coordinates: CLLocationCoordinate2D? = nil
-    
+
     public subscript<Dependency>(
         dynamicMember keyPath: WritableKeyPath<Environment, Dependency>
     ) -> Dependency {
         get { self.environment[keyPath: keyPath] }
         set { self.environment[keyPath: keyPath] = newValue }
     }
-    
+
     public static func live(_ environment: Environment) -> Self {
         Self(
             environment: environment,

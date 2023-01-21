@@ -11,10 +11,10 @@ import OrdiLogging
 
 public extension Encodable {
     func asDictionary() -> [String: Any] {
-        let serialized = (try? JSONSerialization.jsonObject(with: self.encode(), options: .allowFragments)) ?? nil
+        let serialized = (try? JSONSerialization.jsonObject(with: encode(), options: .allowFragments)) ?? nil
         return serialized as? [String: Any] ?? [String: Any]()
     }
-    
+
     func encode() -> Data {
         return (try? JSONEncoder().encode(self)) ?? Data()
     }

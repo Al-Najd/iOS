@@ -1,12 +1,12 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 14/08/2022.
 //
 
-import SwiftUI
 import Entities
+import SwiftUI
 
 struct RepeatableSubtaskView: View {
     var title: String
@@ -14,16 +14,16 @@ struct RepeatableSubtaskView: View {
     var repetation: Int
     var isDone: Bool { repetation == .zero }
     var onDoing: () -> Void
-        
+
     init(_ zekr: ANAzkar, onDoing: @escaping () -> Void) {
         title = zekr.name
         subtitle = zekr.reward
         repetation = zekr.currentCount
         self.onDoing = onDoing
     }
-    
+
     var body: some View {
-		HStack(spacing: .p16) {
+        HStack(spacing: .p16) {
             VStack(alignment: .leading) {
                 Text(title)
                     .foregroundColor(.mono.offwhite)
@@ -34,9 +34,9 @@ struct RepeatableSubtaskView: View {
                     .scaledFont(.pFootnote)
                     .multilineTextAlignment(.leading)
             }
-            
+
             Spacer()
-            
+
             Button(action: onDoing, label: {
                 Group {
                     if isDone {
@@ -58,16 +58,16 @@ struct RepeatableSubtaskView: View {
                             .multilineTextAlignment(.center)
                     }
                 }
-                    .frame(width: .p24, height: .p24)
-                    .padding()
-                    .background(
-                        Circle()
-                            .foregroundColor(
-                                isDone
+                .frame(width: .p24, height: .p24)
+                .padding()
+                .background(
+                    Circle()
+                        .foregroundColor(
+                            isDone
                                 ? .success.light.opacity(0.25)
                                 : .mono.offwhite.opacity(0.1)
-                            )
-                    )
+                        )
+                )
             })
         }
         .padding(.horizontal, .p16)
