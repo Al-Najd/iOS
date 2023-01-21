@@ -39,7 +39,23 @@ public struct HomeView: View {
 							.multilineTextAlignment(.leading)
 							.padding(.horizontal, .p16)
 						makeDuaaView(text: viewStore.duaa)
-							.padding(.horizontal)
+				.padding()
+
+		  NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+				.padding(.bottom)
+        }
+      }
+      .ignoresSafeArea(edges: .top)
+      .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
+        IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
+          PrayerDetailsView(store: $0)
+        })
+      }
+      .background(Color.mono.background)
+      .onAppear { viewStore.send(.onAppear) }
+      .enableInjection()
+    }
+  }
 					}
 
 					VStack {
