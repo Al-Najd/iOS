@@ -12,6 +12,7 @@ import Utils
 import Business
 import Common
 import Foundation
+import SwiftUI
 
 public struct DashboardState: Equatable {
     public var tipOfTheDay: String
@@ -69,8 +70,14 @@ public let dashboardReducer = Reducer<
 				ChartAnalyticsData(date: $0, count: $1)
 			}
 		)
+
+		state.sunnahPlotData.enumerated().forEach { (index: Int, data: ChartAnalyticsData) in
+			withAnimation(.easeInOut(duration: 0.8 + (Double(index) * 0.05)).delay(Double(index) * 0.05)) {
+				state.sunnahPlotData[id: data.id]?.animate = true
+			}
+		}
 	case let .animate(data):
-		state.sunnahPlotData[id: data.id]?.animate = true
+		break
     }
     return .none
 }

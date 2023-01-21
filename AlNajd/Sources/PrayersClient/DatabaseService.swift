@@ -26,6 +26,7 @@ public class DatabaseService {
 
 		return try DatabaseQueue(path: dbPath)
 	}()
+
 	private static var migrator: DatabaseMigrator {
 		var migrator = DatabaseMigrator()
 
@@ -94,27 +95,14 @@ public class DatabaseService {
 private extension DatabaseService {
 	static func seed() throws {
 		try dbQueue.write { db in
-			let test = Date.enumerateDates(
-				from: DateInRegion(components: {
-					$0.year = 2022
-					$0.month = 7
-					$0.day = 1
-				})!.date.startOfDay,
-				to: Date().startOfDay,
-				increment: .create { $0.day = 1 }
-			)
+			let startDate = "2022-07-01T00:00:00-04:00".toDate()!.date.startOfDay
+			let endDate = Date().startOfDay
 
-			try test.forEach {
+
+			try Date.dates(from: startDate, to: endDate).forEach {
 				let day = try ANDayDAO(date: $0).insertAndFetch(db)
 				try seedPrayers((day?.id)!, db)
 			}
-		}
-	}
-
-	static func updatePersonalStreak() throws {
-		try dbQueue.write { db in
-			try ANPrayerDAO.fetchAll(db).map { $0.changing { $0.isDone = true } }.forEach { try $0.update(db) }
-			try ANSunnahDAO.Queries.fajr.fetchAll(db).map { $0.changing { $0.isDone = true } }.forEach { try $0.update(db) }
 		}
 	}
 
@@ -152,5 +140,19 @@ private extension DatabaseService {
 	static func seedAishaaSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {
 		try ANSunnahDAO.aishaa(prayerId).forEach { _ = try $0.insertAndFetch(db) }
 		try (ANAzkarDAO.common(prayerId) + ANAzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+	}
+}
+
+extension Date {
+	static func dates(from fromDate: Date, to toDate: Date) -> [Date] {
+		var dates: [Date] = []
+		var date = fromDate
+
+		while date <= toDate {
+			dates.append(date)
+			guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: date) else { break }
+			date = newDate
+		}
+		return dates
 	}
 }

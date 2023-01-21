@@ -497,7 +497,7 @@ public extension Date {
   }
     
     var startOfDay: Date {
-        calendar.startOfDay(for: .now)
+        calendar.startOfDay(for: self)
     }
   
   /// SwifterSwift: UNIX timestamp from date.
@@ -1066,7 +1066,7 @@ public extension Date {
     
     var previousWeek: [Date] {
         (0...6).map {
-            self.adding(.day, value: -$0)
+			self.adding(.day, value: -$0)
         }
     }
 }

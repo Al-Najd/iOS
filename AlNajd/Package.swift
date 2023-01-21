@@ -78,6 +78,7 @@ private extension ANTargets {
         "PrayerDetails",
         "Dashboard",
         .product(name: "Core", package: "OrdiCore"),
+		.product(name: "ScalingHeaderScrollView", package: "ScalingHeaderScrollView")
       ]
     )
   ]
@@ -91,7 +92,6 @@ private extension ANTargets {
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableCoreLocation", package: "composable-core-location"),
         .product(name: "Adhan", package: "adhan-swift"),
-        .product(name: "RealmSwift", package: "realm-swift"),
 		.product(name: "GRDB", package: "GRDB.swift"),
 		.product(name: "SwiftDate", package: "SwiftDate")
       ],
@@ -129,7 +129,6 @@ private extension ANTargets {
       dependencies: [
         "Localization",
         "Assets",
-        .product(name: "RealmSwift", package: "realm-swift"),
         .product(name: "Core", package: "OrdiCore"),
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
       ]
@@ -170,7 +169,7 @@ private extension ANDependencies {
     ),
     .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
-      branch: "main"
+	  .upToNextMajor(from: .init(0, 40, 2))
     )
   ]
   
@@ -201,6 +200,10 @@ private extension ANDependencies {
 	.package(
 		url: "https://github.com/malcommac/SwiftDate",
 		.upToNextMajor(from: .init(7, 0, 0))
+	),
+	.package(
+		url: "https://github.com/exyte/ScalingHeaderScrollView.git",
+		.upToNextMajor(from: .init(0, 0, 6))
 	)
   ]
 }

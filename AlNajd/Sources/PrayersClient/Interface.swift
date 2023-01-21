@@ -13,7 +13,6 @@ import ComposableArchitecture
 import Business
 import Entity
 import Adhan
-import RealmSwift
 import Utils
 import Localization
 import GRDB
@@ -58,10 +57,25 @@ public struct PrayersClient {
 		}
 	}
 
-	public func prayers() -> [ANPrayer] {
+	public func prayers(for date: Date) -> [ANPrayer] {
 		do {
 			return try DatabaseService.dbQueue.read { db in
-				
+				return try (ANDayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
+					$0.toDomainModel(
+						sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
+						azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() }
+					)
+				}
+			}
+		} catch {
+			fatalError()
+		}
+	}
+
+	public func todayPrayers() -> [ANPrayer] {
+		do {
+			return try DatabaseService.dbQueue.read { db in
+
 				return try (ANDayDAO.Queries.today.fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
 					$0.toDomainModel(
 						sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
@@ -119,7 +133,7 @@ public struct PrayersClient {
 	public func getSunnahPerDay() -> [(date: Date, count: Int)] {
 		do {
 			return try DatabaseService.dbQueue.read { db in
-				try ANDayDAO.Queries.previousWeekWithDoneSunnah.fetchAll(db).compactMap {
+				try ANDayDAO.Queries.previousWeek.fetchAll(db).compactMap {
 					($0.date, try $0.doneSunnah.fetchCount(db))
 				}
 			}
