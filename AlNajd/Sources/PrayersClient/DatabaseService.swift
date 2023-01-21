@@ -83,7 +83,6 @@ public class DatabaseService {
 		do {
 			try migrator.migrate(dbQueue)
 			try seed()
-			try updatePersonalStreak()
 		} catch {
 			fatalError()
 		}
