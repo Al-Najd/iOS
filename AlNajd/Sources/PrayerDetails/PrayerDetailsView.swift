@@ -59,46 +59,7 @@ public struct PrayerDetailsView: View {
                 }
                 
                 Drawer(startingHeight: 50) {
-                    ZStack {
-                        BlurView(.systemChromeMaterialDark)
-                            .cornerRadius(.r24 + .r8)
-                            .shadow(radius: 100)
-                        
-                        VStack(alignment: .center) {
-                            RoundedRectangle(cornerRadius: 3.0)
-                                .foregroundColor(.gray)
-                                .frame(width: 30.0, height: 6.0)
-                                .padding(.top, .p4)
-                                .padding(.bottom, .p8)
-                            
-                            VStack {
-                                SubtaskView(viewStore.prayer) { viewStore.send(.onDoingPrayer, animation: .default) }
-                                ScrollView(.vertical, showsIndicators: false) {
-                                    Text(L10n.sunnah)
-                                        .foregroundColor(.mono.offwhite)
-                                        .scaledFont(.pFootnote, .bold)
-                                        .multilineTextAlignment(.center)
-                                        .if(viewStore.prayer.sunnah.isEmpty, transform: { _ in EmptyView() })
-                                            ForEach(viewStore.prayer.sunnah) { sunnah in
-                                            SubtaskView(sunnah) {
-                                                viewStore.send(.onDoingSunnah(sunnah), animation: .default)
-                                            }.frame(maxWidth: .infinity)
-                                        }
-                                    Text(L10n.azkar)
-                                        .foregroundColor(.mono.offwhite)
-                                        .scaledFont(.pFootnote, .bold)
-                                        .multilineTextAlignment(.center)
-                                    ForEach(viewStore.prayer.afterAzkar) { zekr in
-                                        RepeatableSubtaskView(zekr) {
-                                            viewStore.send(.onDoingZekr(zekr), animation: .default)
-                                        }.frame(maxWidth: .infinity)
-                                    }
-								}
-								.padding(.bottom, getSafeArea().bottom * 7)
-                            }
-                        }
-                        .padding(.top)
-                    }
+					TasksView(viewStore: viewStore)
                 }
                 .rest(at: .constant(
                     [
@@ -136,4 +97,132 @@ extension CGFloat {
     func asPercentage() -> CGFloat {
         getScreenSize().height * self
     }
+}
+
+struct TasksView: View {
+	let viewStore: ViewStore<PrayerDetailsState, PrayerDetailsAction>
+
+	@State var tab: Int = 0
+
+	var body: some View {
+		ZStack {
+			BlurView(.systemChromeMaterialDark)
+				.cornerRadius(.r24 + .r8)
+				.shadow(radius: 100)
+
+			VStack(alignment: .center) {
+				RoundedRectangle(cornerRadius: 3.0)
+					.foregroundColor(.gray)
+					.frame(width: 30.0, height: 6.0)
+					.padding(.top, .p4)
+					.padding(.bottom, .p8)
+
+				TabView(selection: $tab) {
+					makeTasksList()
+					makeRewardsList()
+				}.tabViewStyle(.page(indexDisplayMode: .never))
+			}
+			.padding(.top)
+		}
+	}
+
+	@ViewBuilder
+	func makeTasksList() -> some View {
+		VStack {
+			SubtaskView(viewStore.prayer) { viewStore.send(.onDoingPrayer, animation: .default) }
+			ScrollView(.vertical, showsIndicators: false) {
+				Text(L10n.sunnah)
+					.foregroundColor(.mono.offwhite)
+					.scaledFont(.pFootnote, .bold)
+					.multilineTextAlignment(.center)
+					.if(viewStore.prayer.sunnah.isEmpty, transform: { _ in EmptyView() })
+						ForEach(viewStore.prayer.sunnah) { sunnah in
+						SubtaskView(sunnah) {
+							viewStore.send(.onDoingSunnah(sunnah), animation: .default)
+						}.frame(maxWidth: .infinity)
+					}
+				Text(L10n.azkar)
+					.foregroundColor(.mono.offwhite)
+					.scaledFont(.pFootnote, .bold)
+					.multilineTextAlignment(.center)
+				ForEach(viewStore.prayer.afterAzkar) { zekr in
+					RepeatableSubtaskView(zekr) {
+						viewStore.send(.onDoingZekr(zekr), animation: .default)
+					}.frame(maxWidth: .infinity)
+				}
+			}
+			.padding(.bottom, getSafeArea().bottom * 5)
+		}
+	}
+
+	@ViewBuilder
+	func makeRewardsList() -> some View {
+		VStack {
+			if viewStore.prayer.isDone {
+				Text(L10n.alfard)
+					.foregroundColor(.mono.offwhite)
+					.scaledFont(.pFootnote, .bold)
+					.multilineTextAlignment(.center)
+				RewardView(viewStore.prayer)
+				if viewStore.prayer.sunnah.filter { $0.isDone }.count > 0 {
+					ScrollView(.vertical, showsIndicators: false) {
+						Text(L10n.sunnah)
+							.foregroundColor(.mono.offwhite)
+							.scaledFont(.pFootnote, .bold)
+							.multilineTextAlignment(.center)
+							.if(
+								viewStore.prayer.sunnah.isEmpty, transform: { _ in EmptyView() })
+								ForEach(viewStore.prayer.sunnah) { sunnah in
+								RewardView(sunnah)
+									.frame(maxWidth: .infinity)
+							}
+					}
+				} else {
+					Spacer()
+				}
+			} else {
+				Text("🤷‍♂️")
+					.scaledFont(.pLargeTitle, .bold)
+					.multilineTextAlignment(.center)
+				Text(L10n.fardNotDoneYet)
+					.foregroundColor(.mono.offwhite)
+					.scaledFont(.pTitle1, .bold)
+					.multilineTextAlignment(.center)
+			}
+		}.padding(.bottom, getSafeArea().bottom * 5)
+	}
+}
+
+struct RewardView: View {
+	var title: String
+	var subtitle: String
+
+	init(_ prayer: ANPrayer) {
+		title = prayer.title
+		subtitle = prayer.reward.localized
+	}
+
+	init(_ sunnah: ANSunnah) {
+		title = sunnah.title
+		subtitle = sunnah.reward.localized
+	}
+
+	var body: some View {
+		HStack {
+			VStack(alignment: .leading) {
+				Text(title)
+					.foregroundColor(.mono.offwhite)
+					.scaledFont(.pBody)
+					.multilineTextAlignment(.leading)
+				Text(subtitle)
+					.foregroundColor(.success.light)
+					.scaledFont(.pBody, .bold)
+					.multilineTextAlignment(.leading)
+			}
+
+			Spacer()
+		}
+		.padding(.horizontal, .p16)
+		.padding(.bottom, .p8)
+	}
 }

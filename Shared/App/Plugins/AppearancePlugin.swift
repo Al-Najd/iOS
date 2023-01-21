@@ -21,9 +21,20 @@ private extension AppearancesPlugin {
     adaptNavigationBarAppearance()
     adaptUITableViewAppearance()
     UISegmentedControl.appearance().setTitleTextAttributes(
-      [.font: ARFont.pSubheadline.font],
+      [
+				.font: ARFont.pSubheadline.font,
+				.foregroundColor: UIColor(Color.mono.offwhite)
+			],
       for: .normal
     )
+
+		UISegmentedControl.appearance().setTitleTextAttributes(
+			[
+				.font: ARFont.pSubheadline.font,
+				.foregroundColor: UIColor(Color.mono.offblack)
+			],
+			for: .selected
+		)
   }
   
   func adaptUITableViewAppearance() {

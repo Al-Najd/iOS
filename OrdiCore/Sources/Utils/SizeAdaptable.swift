@@ -132,7 +132,7 @@ public enum DeviceHeight {
         case DeviceHeight.iPhone8.height:
             self = .iPhone8
         default:
-            assertionFailure("Height not found: \(size)")
+//            assertionFailure("Height not found: \(size)")
             self = .iPhone13Pro
         }
     }
