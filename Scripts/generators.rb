@@ -13,4 +13,4 @@ system("swiftgen")
 # MARK: - XcodeGen
 
 say "⛽️ Generating Xcode project"
-system("xcodegen generate")
+system("tuist generate")
