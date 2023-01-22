@@ -16,7 +16,6 @@ def findOrInstall(package)
     end
 end
 
-findOrInstall("xcodegen")
 findOrInstall("swiftgen")
 findOrInstall("swiftformat")
 findOrInstall("swiftlint")

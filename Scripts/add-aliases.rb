@@ -10,7 +10,7 @@ require 'fileutils'
 ### Helpers Start ###
 def add_aliases(aliases)
     File.open(File.expand_path('~/.zshrc'), 'a') do |file|
-        file.puts "\n# Aliases added by CAFU ⛽️"
+        file.puts "\n# Aliases added by Al Najd ⛽️"
         aliases.each do |alias_struct|
             file.puts "alias #{alias_struct.name}='#{alias_struct.command}'"
         end

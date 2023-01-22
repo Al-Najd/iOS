@@ -73,6 +73,7 @@ Package.resolved
 *.DS_Store
 
 # Xcodegen & SwiftGen
+*.xcworkspace/**
 *.xcodeproj/**
 !*.xcodeproj/project.xcworkspace
 *.xcodeproj/project.xcworkspace/*
@@ -82,6 +83,10 @@ Package.resolved
 *.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/*
 !*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 **/Generated*.swift
+
+# Ignore any folder starting with '.mockyXXX' where XXX is any string and all its content
+.mocky*/
+
 
 # Anyfile that has +Generated.swift in the end
 **/*+Generated.swift

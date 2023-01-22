@@ -1,6 +1,6 @@
 import Foundation
 
-public final class AlNajdKit {
+public enum AlNajdKit {
     public static func hello() {
         print("Hello, from your Kit framework")
     }

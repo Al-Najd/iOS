@@ -1,5 +1,5 @@
-import SwiftUI
 import AlNajdUI
+import SwiftUI
 
 @main
 struct AlNajdApp: App {

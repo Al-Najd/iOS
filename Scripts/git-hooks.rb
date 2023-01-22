@@ -43,10 +43,6 @@ hooks_and_commands = {
     "pre-commit" => [
             "swiftformat .",
         ],
-    "post-push" => [
-            # "fastlane scan"
-            # get_notifiable_command("slather coverage --html --show --scheme CAFU  CAFU.xcodeproj", should_notify)
-        ],
     "post-checkout" => [
             "ruby Scripts/generators.rb",
         ]

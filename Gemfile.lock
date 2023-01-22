@@ -103,6 +103,7 @@ GEM
       xcpretty-travis-formatter (>= 0.0.3)
     fastlane-plugin-changelog (0.16.0)
     fastlane-plugin-git_tags (0.1.1)
+    fastlane-plugin-sentry (1.12.2)
     ffi (1.15.4)
     gh_inspector (1.1.3)
     google-apis-androidpublisher_v3 (0.12.0)
@@ -208,12 +209,14 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
+  arm64-darwin-21
   universal-darwin-20
 
 DEPENDENCIES
   fastlane
   fastlane-plugin-changelog
   fastlane-plugin-git_tags
+  fastlane-plugin-sentry
   ffi
 
 BUNDLED WITH

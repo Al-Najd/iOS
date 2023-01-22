@@ -9,7 +9,5 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "tuist-my-cli"
-        ),
-    ]
-)
+            name: "tuist-my-cli"),
+    ])
