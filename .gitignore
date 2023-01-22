@@ -73,29 +73,22 @@ Package.resolved
 *.DS_Store
 
 # Xcodegen & SwiftGen
-CAFU.xcodeproj/**
-!CAFU.xcodeproj/project.xcworkspace
-CAFU.xcodeproj/project.xcworkspace/*
-!CAFU.xcodeproj/project.xcworkspace/xcshareddata
-CAFU.xcodeproj/project.xcworkspace/xcshareddata/*
-!CAFU.xcodeproj/project.xcworkspace/xcshareddata/swiftpm
-CAFU.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/*
-!CAFU.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+*.xcodeproj/**
+!*.xcodeproj/project.xcworkspace
+*.xcodeproj/project.xcworkspace/*
+!*.xcodeproj/project.xcworkspace/xcshareddata
+*.xcodeproj/project.xcworkspace/xcshareddata/*
+!*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/*
+!*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 **/Generated*.swift
 
 # Anyfile that has +Generated.swift in the end
 **/*+Generated.swift
-
-CAFU/Core/Resources/Images\+Generated.swift
-fastlane/LocalConfigs.json
+**/*.generated.swift
 /Gemfile.lock
 .ruby-version
-CAFUTests/Mock.generated.swift
 Reports/**
-
 .ruby-version
-
-CAFUTests/Mock.generated.swift
-
 test-reports/
 fastlane/.env.default
