@@ -1,7 +1,9 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
+import SwiftUITemplate
 
 let dependencies = Dependencies(
-    swiftPackageManager: [
-        .remote(url: "https://github.com/pointfreeco/swift-composable-architecture",requirement: .exact(.init(0, 49, 2))),
-    ],
-    platforms: [.iOS])
+    swiftPackageManager: .init(
+        modules.allSwiftPacakges,
+        targetSettings: modules.allTargetSettings),
+    platforms: [platform])
