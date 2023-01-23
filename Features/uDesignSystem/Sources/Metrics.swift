@@ -28,7 +28,7 @@ public extension CGFloat {
     static let s48: CGFloat = 48
 }
 
-extension Radius {
+public extension Radius {
     /// *Radius*: 4
     static let r4: CGFloat = 4
     /// *Radius*: 8
