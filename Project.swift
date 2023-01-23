@@ -124,5 +124,5 @@ public let modules: [Module] = [
 
 let project = Project(
     name: "Al Najd",
-    organizationName: "com.nerdor",
+    organizationName: "Al Najd",
     targets: modules.allProjectTargets)
