@@ -6,6 +6,7 @@
 //  Copyright © 2023 com.nerdor. All rights reserved.
 //
 
+import iOS
 import SwiftUI
 
 @main

@@ -10,7 +10,7 @@ private class BundleFinder {}
 extension Foundation.Bundle {
     /// Since uDesignSystem is a staticFramework, the bundle containing the resources is copied into the final product.
     static var module: Bundle = {
-        let bundleName = "Al Najd_uDesignSystem"
+        let bundleName = "AlNajd_uDesignSystem"
 
         let candidates = [
             Bundle.main.resourceURL,
@@ -24,7 +24,7 @@ extension Foundation.Bundle {
                 return bundle
             }
         }
-        fatalError("unable to find bundle named Al Najd_uDesignSystem")
+        fatalError("unable to find bundle named AlNajd_uDesignSystem")
     }()
 }
 

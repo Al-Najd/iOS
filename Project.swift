@@ -123,6 +123,6 @@ public let modules: [Module] = [
 // MARK: - Project
 
 let project = Project(
-    name: "Al Najd",
+    name: "AlNajd",
     organizationName: "Al Najd",
     targets: modules.allProjectTargets)
