@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug tuist-my-cli (Plugins/AlNajd)",
+            "program": "${workspaceFolder:Al-Najd}/Plugins/AlNajd/.build/debug/tuist-my-cli",
+            "args": [],
+            "cwd": "${workspaceFolder:Al-Najd}/Plugins/AlNajd",
+            "preLaunchTask": "swift: Build Debug tuist-my-cli (Plugins/AlNajd)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release tuist-my-cli (Plugins/AlNajd)",
+            "program": "${workspaceFolder:Al-Najd}/Plugins/AlNajd/.build/release/tuist-my-cli",
+            "args": [],
+            "cwd": "${workspaceFolder:Al-Najd}/Plugins/AlNajd",
+            "preLaunchTask": "swift: Build Release tuist-my-cli (Plugins/AlNajd)"
+        }
+    ]
+}

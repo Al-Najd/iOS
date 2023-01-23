@@ -1,0 +1,35 @@
+sourceryCommand: null
+sourceryTemplate: null
+AlNajdKitTests:
+  sources:
+    include:
+    - ./Targets/AlNajdKit/Sources/AlNajdKit.swift
+  output: ./Derived/InfoPlists/Mock.generated.swift
+  targets:
+  - AlNajdKitTests
+  testable:
+  - AlNajdKit
+  import:
+  - Foundation
+AlNajdTests:
+  sources:
+    include:
+    - ./.
+  output: ./Derived/InfoPlists/Mock.generated.swift
+  targets:
+  - AlNajdTests
+  testable:
+  - AlNajd
+  import:
+  - Foundation
+AlNajdUITests:
+  sources:
+    include:
+    - ./Targets/AlNajdUI/Sources/ContentView.swift
+  output: ./Derived/InfoPlists/Mock.generated.swift
+  targets:
+  - AlNajdUITests
+  testable:
+  - AlNajdUI
+  import:
+  - Foundation
