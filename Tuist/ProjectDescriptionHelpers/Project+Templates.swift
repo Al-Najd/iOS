@@ -5,12 +5,12 @@ import ProjectDescription
 /// Share code to create targets, settings, dependencies,
 /// Create your own conventions, e.g: a func that makes sure all shared targets are "static frameworks"
 /// See https://tuist.io/docs/usage/helpers/
-let bundleIdentifier = "co.hellobit.tuist"
+let bundleIdentifier = "com.nerdor.alnajd"
 
 // MARK: - uFeatureTarget
 
 public enum uFeatureTarget {
-    case framework
+    case package
     case tests
     case examples
     case testing
@@ -22,8 +22,9 @@ public extension Target {
         name: String,
         displayName: String,
         dependencies: [String] = [],
+        hasResources: Bool = false,
         testDependencies: [String] = []) -> [Target] {
-        let targetDependencies: [TargetDependency] = dependencies.map { .target(name: $0) }
+        let targetDependencies: [TargetDependency] = dependencies.map { .package(product: $0) }
         return [
             Target(
                 name: name,
@@ -36,9 +37,8 @@ public extension Target {
                         "UILaunchStoryboardName": .string("Launchscreen")
                     ]),
                 sources: ["Projects/\(name)/Sources/**/*.swift"],
-                resources: ["Projects/\(name)/Resources/**/*"],
-                dependencies: targetDependencies,
-                settings: Settings()),
+                resources: hasResources ? ["Projects/\(name)/Resources/**/*"] : [],
+                dependencies: targetDependencies),
             Target(
                 name: "\(name)Tests",
                 platform: .iOS,
@@ -49,8 +49,7 @@ public extension Target {
                 dependencies: [
                     .target(name: name),
                     .xctest,
-                ] + testDependencies.map { .target(name: $0) },
-                settings: Settings())
+                ] + testDependencies.map { .target(name: $0) })
         ]
     }
 
@@ -58,8 +57,8 @@ public extension Target {
         name: String,
         dependencies: [String] = [],
         testDependencies: [String] = [],
-        targets: Set<uFeatureTarget> = Set([.framework, .tests, .examples, .testing]),
-        sdks: [String] = [],
+        targets: Set<uFeatureTarget> = Set([.package, .tests, .examples, .testing]),
+        packages: [String] = [],
         dependsOnXCTest: Bool = false,
         externalDependencies: [TargetDependency] = []) -> [Target] {
         // Test dependencies
@@ -70,14 +69,14 @@ public extension Target {
 
         // Target dependencies
         var targetDependencies: [TargetDependency] = dependencies.map { .target(name: $0) }
-        targetDependencies.append(contentsOf: sdks.map { .sdk(name: $0) })
+        targetDependencies.append(contentsOf: packages.map { .package(product: $0) })
         if dependsOnXCTest {
             targetDependencies.append(.xctest)
         }
 
         // Targets
         var projectTargets: [Target] = []
-        if targets.contains(.framework) {
+        if targets.contains(.package) {
             targetDependencies.append(contentsOf: externalDependencies)
 
             projectTargets.append(Target(
@@ -86,9 +85,8 @@ public extension Target {
                 product: .framework,
                 bundleId: "\(bundleIdentifier).\(name)",
                 infoPlist: .default,
-                sources: ["Projects/\(name)/Sources/**/*.swift"],
-                dependencies: targetDependencies,
-                settings: Settings()))
+                sources: ["Projects/Packages/\(name)/Sources/**/*.swift"],
+                dependencies: targetDependencies))
         }
         if targets.contains(.tests) {
             projectTargets.append(Target(
@@ -97,9 +95,8 @@ public extension Target {
                 product: .unitTests,
                 bundleId: "\(bundleIdentifier).\(name)Tests",
                 infoPlist: .default,
-                sources: ["Projects/\(name)/Tests/**/*.swift"],
-                dependencies: targetTestDependencies,
-                settings: Settings()))
+                sources: ["Projects/Packages/\(name)/Tests/**/*.swift"],
+                dependencies: targetTestDependencies))
         }
         return projectTargets
     }
