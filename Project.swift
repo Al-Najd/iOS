@@ -1,28 +1,13 @@
 import MyPlugin
 import ProjectDescription
 import ProjectDescriptionHelpers
+import SwiftUITemplate
 
-//               +-------------+
-//               |             |
-//               |     App     | Contains AlNajd App target and AlNajd unit-test target
-//               |             |
-//        +------+-------------+-------+
-//        |         depends on         |
-//        |                            |
-// +----v-----+                   +-----v-----+
-// |          |                   |           |
-// |   Kit    |                   |     UI    |   Two independent frameworks to share code and start modularising your app
-// |          |                   |           |
-// +----------+                   +-----------+
-//
+let project: Project = {
+    GenerationConfig.default.platform = platform
 
-// MARK: - Project
-
-// Local plugin loaded
-let localHelper = LocalHelper(name: "MyPlugin")
-
-// Creates our project using a helper function defined in ProjectDescriptionHelpers
-let project = Project.app(
-    name: "AlNajd",
-    platform: .iOS,
-    additionalTargets: ["AlNajdKit", "AlNajdUI"])
+    return Project(
+        name: "AlNajd",
+        organizationName: "Al Najd",
+        targets: modules.allProjectTargets)
+}()
