@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Reminders
+//  iOS
 //
 //  Created by ahmed on 23/01/2023.
 //  Copyright © 2023 com.nerdor. All rights reserved.
