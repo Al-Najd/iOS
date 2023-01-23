@@ -1,79 +1,106 @@
+//  Based on the Tuist uFeatures example project (https://github.com/tuist/microfeatures-example)
 import ProjectDescription
 
 /// Project helpers are functions that simplify the way you define your project.
 /// Share code to create targets, settings, dependencies,
 /// Create your own conventions, e.g: a func that makes sure all shared targets are "static frameworks"
-/// See https://docs.tuist.io/guides/helpers/
+/// See https://tuist.io/docs/usage/helpers/
+let bundleIdentifier = "co.hellobit.tuist"
 
-extension Project {
-    /// Helper function to create the Project for this ExampleApp
-    public static func app(name: String, platform: Platform, additionalTargets: [String]) -> Project {
-        var targets = makeAppTargets(
-            name: name,
-            platform: platform,
-            dependencies: additionalTargets.map { TargetDependency.target(name: $0) })
-        targets += additionalTargets.flatMap { makeFrameworkTargets(name: $0, platform: platform) }
-        return Project(
-            name: name,
-            organizationName: "tuist.io",
-            targets: targets)
-    }
+// MARK: - uFeatureTarget
 
-    // MARK: - Private
+public enum uFeatureTarget {
+    case framework
+    case tests
+    case examples
+    case testing
+    case thirdParty
+}
 
-    /// Helper function to create a framework target and an associated unit test target
-    private static func makeFrameworkTargets(name: String, platform: Platform) -> [Target] {
-        let sources = Target(
-            name: name,
-            platform: platform,
-            product: .framework,
-            bundleId: "io.tuist.\(name)",
-            infoPlist: .default,
-            sources: ["Targets/\(name)/Sources/**"],
-            resources: [],
-            dependencies: [])
-        let tests = Target(
-            name: "\(name)Tests",
-            platform: platform,
-            product: .unitTests,
-            bundleId: "io.tuist.\(name)Tests",
-            infoPlist: .default,
-            sources: ["Targets/\(name)/Tests/**"],
-            resources: [],
-            dependencies: [.target(name: name)])
-        return [sources, tests]
-    }
-
-    /// Helper function to create the application target and the unit test target.
-    private static func makeAppTargets(name: String, platform: Platform, dependencies: [TargetDependency]) -> [Target] {
-        let platform: Platform = platform
-        let infoPlist: [String: InfoPlist.Value] = [
-            "CFBundleShortVersionString": "1.0",
-            "CFBundleVersion": "1",
-            "UIMainStoryboardFile": "",
-            "UILaunchStoryboardName": "LaunchScreen"
+public extension Target {
+    static func makeAppTargets(
+        name: String,
+        displayName: String,
+        dependencies: [String] = [],
+        testDependencies: [String] = []) -> [Target] {
+        let targetDependencies: [TargetDependency] = dependencies.map { .target(name: $0) }
+        return [
+            Target(
+                name: name,
+                platform: .iOS,
+                product: .app,
+                productName: displayName,
+                bundleId: "\(bundleIdentifier).\(name)",
+                infoPlist: InfoPlist.extendingDefault(
+                    with: [
+                        "UILaunchStoryboardName": .string("Launchscreen")
+                    ]),
+                sources: ["Projects/\(name)/Sources/**/*.swift"],
+                resources: ["Projects/\(name)/Resources/**/*"],
+                dependencies: targetDependencies,
+                settings: Settings()),
+            Target(
+                name: "\(name)Tests",
+                platform: .iOS,
+                product: .unitTests,
+                bundleId: "\(bundleIdentifier).\(name)Tests",
+                infoPlist: .default,
+                sources: ["Projects/\(name)/Tests/**/*.swift"],
+                dependencies: [
+                    .target(name: name),
+                    .xctest,
+                ] + testDependencies.map { .target(name: $0) },
+                settings: Settings())
         ]
+    }
 
-        let mainTarget = Target(
-            name: name,
-            platform: platform,
-            product: .app,
-            bundleId: "io.tuist.\(name)",
-            infoPlist: .extendingDefault(with: infoPlist),
-            sources: ["Targets/\(name)/Sources/**"],
-            resources: ["Targets/\(name)/Resources/**"],
-            dependencies: dependencies)
+    static func makeFrameworkTargets(
+        name: String,
+        dependencies: [String] = [],
+        testDependencies: [String] = [],
+        targets: Set<uFeatureTarget> = Set([.framework, .tests, .examples, .testing]),
+        sdks: [String] = [],
+        dependsOnXCTest: Bool = false,
+        externalDependencies: [TargetDependency] = []) -> [Target] {
+        // Test dependencies
+        let targetTestDependencies: [TargetDependency] = [
+            .target(name: "\(name)"),
+            .xctest,
+        ] + testDependencies.map { .target(name: $0) }
 
-        let testTarget = Target(
-            name: "\(name)Tests",
-            platform: platform,
-            product: .unitTests,
-            bundleId: "io.tuist.\(name)Tests",
-            infoPlist: .default,
-            sources: ["Targets/\(name)/Tests/**"],
-            dependencies: [
-                .target(name: "\(name)")
-            ])
-        return [mainTarget, testTarget]
+        // Target dependencies
+        var targetDependencies: [TargetDependency] = dependencies.map { .target(name: $0) }
+        targetDependencies.append(contentsOf: sdks.map { .sdk(name: $0) })
+        if dependsOnXCTest {
+            targetDependencies.append(.xctest)
+        }
+
+        // Targets
+        var projectTargets: [Target] = []
+        if targets.contains(.framework) {
+            targetDependencies.append(contentsOf: externalDependencies)
+
+            projectTargets.append(Target(
+                name: name,
+                platform: .iOS,
+                product: .framework,
+                bundleId: "\(bundleIdentifier).\(name)",
+                infoPlist: .default,
+                sources: ["Projects/\(name)/Sources/**/*.swift"],
+                dependencies: targetDependencies,
+                settings: Settings()))
+        }
+        if targets.contains(.tests) {
+            projectTargets.append(Target(
+                name: "\(name)Tests",
+                platform: .iOS,
+                product: .unitTests,
+                bundleId: "\(bundleIdentifier).\(name)Tests",
+                infoPlist: .default,
+                sources: ["Projects/\(name)/Tests/**/*.swift"],
+                dependencies: targetTestDependencies,
+                settings: Settings()))
+        }
+        return projectTargets
     }
 }
