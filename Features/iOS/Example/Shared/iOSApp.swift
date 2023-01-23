@@ -6,7 +6,6 @@
 //  Copyright © 2023 com.nerdor. All rights reserved.
 //
 
-import Reminders
 import SwiftUI
 
 @main

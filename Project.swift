@@ -94,31 +94,14 @@ private extension Module {
 
 // MARK: - Features
 private extension Module {
-    static var uRemindersKit: Module {
-        .uFeature(
-            name: "uRemindersKit",
-            targets: [
-                .framework: .hasDependencies([TCA])
-            ])
-    }
-
-    static var uRemindersUI: Module {
-        .uFeature(
-            name: "uRemindersUI",
-            targets: [
-                .framework: .hasDependencies(
-                    [
-                        TCA,
-                        uRemindersKit
-                    ])
-            ])
-    }
-
     static var Reminders: Module {
         .uFeature(
             name: "Reminders",
             targets: [
-                .framework: .hasDependencies([uRemindersUI, uRemindersKit])
+                .framework: .hasDependencies([
+                    TCA,
+                    uDesignSystem,
+                ])
             ])
     }
 }
@@ -134,8 +117,6 @@ public let modules: [Module] = [
     Module.uRewardsService,
     Module.uDuaaService,
     Module.uTasksService,
-    Module.uRemindersKit,
-    Module.uRemindersUI,
     Module.Reminders,
 ]
 
