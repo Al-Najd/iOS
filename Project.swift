@@ -29,7 +29,7 @@ private extension Module {
         .uFeature(
             name: "uDesignSystem",
             targets: [
-                .framework: .default
+                .framework: .resourcesOnly
             ])
     }
 
@@ -123,6 +123,6 @@ public let modules: [Module] = [
 // MARK: - Project
 
 let project = Project(
-    name: "Al Najd",
-    organizationName: "com.nerdor",
+    name: "AlNajd",
+    organizationName: "Al Najd",
     targets: modules.allProjectTargets)
