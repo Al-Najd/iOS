@@ -26,7 +26,7 @@ public extension Target {
         dependencies: [String] = [],
         hasResources: Bool = false,
         testDependencies: [String] = []) -> [Target] {
-        let targetDependencies: [TargetDependency] = dependencies.map { .package(product: $0) }
+        let targetDependencies: [TargetDependency] = dependencies.map { .sdk(name: $0, type: .framework) }
         return [
             Target(
                 name: name,

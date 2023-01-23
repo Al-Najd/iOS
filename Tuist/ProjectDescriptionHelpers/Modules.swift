@@ -97,15 +97,12 @@ private extension Module {
 }
 
 // MARK: - Features
-private extension Module {
+public extension Module {
     static var Reminders: Module {
         .uFeature(
             name: "Reminders",
             targets: [
-                .exampleApp: .hasDependencies([
-                    TCA,
-                    uDesignSystem,
-                ]),
+                .exampleApp: .default,
                 .framework: .hasDependencies([
                     TCA,
                     uDesignSystem,
@@ -115,7 +112,6 @@ private extension Module {
 }
 
 public let modules: [Module] = [
-    Module.iOSApp,
     Module.uDesignSystem,
     Module.uContent,
     Module.uDatabase,
@@ -125,7 +121,7 @@ public let modules: [Module] = [
     Module.uRewardsService,
     Module.uDuaaService,
     Module.uTasksService,
-    Module.Reminders,
+    Module.Reminders
 ]
 
 public let platform: Platform = .iOS
