@@ -29,7 +29,7 @@ private extension Module {
         .uFeature(
             name: "uDesignSystem",
             targets: [
-                .framework: .default
+                .framework: .resourcesOnly
             ])
     }
 
