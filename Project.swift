@@ -1,28 +1,128 @@
-import MyPlugin
 import ProjectDescription
 import ProjectDescriptionHelpers
+import SwiftUITemplate
 
-//               +-------------+
-//               |             |
-//               |     App     | Contains AlNajd App target and AlNajd unit-test target
-//               |             |
-//        +------+-------------+-------+
-//        |         depends on         |
-//        |                            |
-// +----v-----+                   +-----v-----+
-// |          |                   |           |
-// |   Kit    |                   |     UI    |   Two independent frameworks to share code and start modularising your app
-// |          |                   |           |
-// +----------+                   +-----------+
-//
+private extension Module {
+    static var iOSApp: Module {
+        .uFeature(name: "iOS", targets: [
+            .exampleApp: .resourcesOnly,
+            .framework: .hasDependencies([
+                Reminders
+            ])
+        ])
+    }
+}
+
+// MARK: - Packages
+private extension Module {
+    static var TCA: Module {
+        .package(
+            name: "ComposableArchitecture",
+            url: "https://github.com/pointfreeco/swift-composable-architecture",
+            requirement: .exact(.init(0, 49, 2)))
+    }
+}
+
+// MARK: - Microfeatures
+private extension Module {
+    static var uDesignSystem: Module {
+        .uFeature(
+            name: "uDesignSystem",
+            targets: [
+                .framework: .default
+            ])
+    }
+
+    static var uContent: Module {
+        .uFeature(
+            name: "uContent",
+            targets: [.framework: .default])
+    }
+
+    static var uDatabase: Module {
+        .uFeature(
+            name: "uDatabase",
+            targets: [.framework: .default])
+    }
+
+    static var uFluentDBService: Module {
+        .uFeature(
+            name: "uFluentDBService",
+            targets: [
+                .framework: .hasDependencies([uDatabase])
+            ])
+    }
+
+    static var uAnalyticsService: Module {
+        .uFeature(
+            name: "uAnalyticsService",
+            targets: [
+                .framework: .hasDependencies([uDatabase])
+            ])
+    }
+
+    static var uDashboardService: Module {
+        .uFeature(
+            name: "uDashboardService",
+            targets: [
+                .framework: .hasDependencies([uAnalyticsService])
+            ])
+    }
+
+    static var uRewardsService: Module {
+        .uFeature(
+            name: "uRewardsService",
+            targets: [
+                .framework: .hasDependencies([uFluentDBService])
+            ])
+    }
+
+    static var uDuaaService: Module {
+        .uFeature(
+            name: "uDuaaService",
+            targets: [.framework: .hasDependencies([uFluentDBService])])
+    }
+
+    static var uTasksService: Module {
+        .uFeature(
+            name: "uTasksService",
+            targets: [
+                .framework: .hasDependencies([uFluentDBService])
+            ])
+    }
+}
+
+// MARK: - Features
+private extension Module {
+    static var Reminders: Module {
+        .uFeature(
+            name: "Reminders",
+            targets: [
+                .framework: .hasDependencies([
+                    TCA,
+                    uDesignSystem,
+                ])
+            ])
+    }
+}
+
+public let modules: [Module] = [
+    Module.iOSApp,
+    Module.uDesignSystem,
+    Module.uContent,
+    Module.uDatabase,
+    Module.uFluentDBService,
+    Module.uAnalyticsService,
+    Module.uDashboardService,
+    Module.uRewardsService,
+    Module.uDuaaService,
+    Module.uTasksService,
+    Module.Reminders,
+]
 
 // MARK: - Project
 
-// Local plugin loaded
-let localHelper = LocalHelper(name: "MyPlugin")
-
-// Creates our project using a helper function defined in ProjectDescriptionHelpers
-let project = Project.app(
-    name: "AlNajd",
-    platform: .iOS,
-    additionalTargets: ["AlNajdKit", "AlNajdUI"])
+let project = Project(
+    name: "Al Najd",
+    organizationName: "com.nerdor",
+    targets: modules.allProjectTargets)
