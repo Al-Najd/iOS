@@ -9,6 +9,8 @@
 import SwiftUI
 import uDesignSystem
 
+// MARK: - RemindersView
+
 public struct RemindersView: View {
     public init() { }
 
@@ -32,5 +34,13 @@ public struct RemindersView: View {
         .padding()
         .background(Color.grayscaleHeader)
         .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - RemindersView_Previews
+
+struct RemindersView_Previews: PreviewProvider {
+    static var previews: some View {
+        RemindersView()
     }
 }
