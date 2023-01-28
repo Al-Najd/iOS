@@ -94,6 +94,12 @@ private extension Module {
                 .framework: .hasDependencies([uFluentDBService])
             ])
     }
+
+    static var uEntities: Module {
+        .uFeature(
+            name: "uEntities",
+            targets: [.framework: .default])
+    }
 }
 
 // MARK: - Features
@@ -106,6 +112,7 @@ public extension Module {
                 .framework: .hasDependencies([
                     TCA,
                     uDesignSystem,
+                    uEntities
                 ])
             ])
     }
@@ -121,6 +128,7 @@ public let modules: [Module] = [
     Module.uRewardsService,
     Module.uDuaaService,
     Module.uTasksService,
+    Module.uEntities,
     Module.Reminders
 ]
 

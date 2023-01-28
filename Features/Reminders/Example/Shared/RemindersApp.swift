@@ -6,6 +6,7 @@
 //  Copyright © 2023 com.nerdor. All rights reserved.
 //
 
+import ComposableArchitecture
 import Reminders
 import SwiftUI
 
@@ -13,7 +14,10 @@ import SwiftUI
 struct RemindersApp: App {
     var body: some Scene {
         WindowGroup {
-            RemindersView()
+            RemindersView(
+                store: .init(
+                    initialState: .init(),
+                    reducer: Reminders()))
         }
     }
 }

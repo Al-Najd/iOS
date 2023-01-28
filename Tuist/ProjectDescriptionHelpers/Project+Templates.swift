@@ -34,7 +34,7 @@ public extension Target {
                 product: .app,
                 productName: displayName,
                 bundleId: "\(bundleIdentifier).\(name)",
-                infoPlist: InfoPlist.extendingDefault(
+                deploymentTarget: .iOS(targetVersion: "16.0", devices: .iphone), infoPlist: InfoPlist.extendingDefault(
                     with: [
                         "UILaunchStoryboardName": .string("Launchscreen")
                     ]),
@@ -103,8 +103,6 @@ public extension Target {
         return projectTargets
     }
 }
-
-/// See https://docs.tuist.io/guides/helpers/
 
 extension Project {
     /// Helper function to create the Project for this ExampleApp

@@ -6,20 +6,38 @@
 //  Copyright © 2023 Al Najd. All rights reserved.
 //
 
+import ComposableArchitecture
 import SwiftUI
 import uDesignSystem
+import uEntities
 
 // MARK: - RemindersView
 
 public struct RemindersView: View {
-    @State var progress = 1.0
-    @State var text = "00:00"
+    let store: StoreOf<Reminders>
 
-    public init() { }
+    @ObservedObject var viewStore: ViewStore<ViewState, Reminders.Action>
+
+    struct ViewState: Equatable {
+        let progress: Double
+        let title: String
+        let time: String
+
+        init(state: Reminders.State) {
+            progress = state.progress.value
+            title = state.didFinish ? "Well Done!" : "5 Mins of Azkar"
+            time = Countdown(startDate: state.startDate, endDate: state.endDate).display()
+        }
+    }
+
+    public init(store: StoreOf<Reminders>) {
+        self.store = store
+        viewStore = ViewStore(self.store.scope(state: ViewState.init))
+    }
 
     public var body: some View {
         VStack {
-            Text("5 Mins Of Zekr")
+            Text(viewStore.title)
                 .font(.mobileDisplayLarge())
                 .bold()
                 .foregroundColor(.grayscaleBackground)
@@ -32,7 +50,7 @@ public struct RemindersView: View {
                             .padding(-.s40)
 
                         Circle()
-                            .trim(from: 0, to: progress)
+                            .trim(from: 0, to: viewStore.progress)
                             .stroke(Color.grayscaleBackground.opacity(0.03), lineWidth: .s40 + .s40)
                             .blur(radius: .r16)
                             .padding(-.s4)
@@ -51,12 +69,12 @@ public struct RemindersView: View {
                             .padding(-.s4)
 
                         Circle()
-                            .trim(from: 0, to: progress)
+                            .trim(from: 0, to: viewStore.progress)
                             .stroke(
                                 Color.primaryDefault.opacity(0.7),
                                 lineWidth: 10)
 
-                        Text(text)
+                        Text(viewStore.time)
                             .font(.mobileDisplayHuge())
                             .bold()
                             .rotationEffect(.degrees(90))
@@ -64,7 +82,7 @@ public struct RemindersView: View {
                     .padding(.s8 * 8)
                     .frame(width: proxy.size.width)
                     .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut, value: progress)
+                    .animation(.easeInOut, value: viewStore.progress)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
@@ -74,6 +92,9 @@ public struct RemindersView: View {
             Color.grayscaleHeaderWeak.ignoresSafeArea()
         }
         .preferredColorScheme(.dark)
+        .onAppear {
+            viewStore.send(.start)
+        }
     }
 }
 
@@ -81,7 +102,8 @@ public struct RemindersView: View {
 
 struct RemindersView_Previews: PreviewProvider {
     static var previews: some View {
-        RemindersView()
+        RemindersView(
+            store: .init(initialState: .init(startDate: .now), reducer: Reminders()))
     }
 }
 
