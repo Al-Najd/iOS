@@ -10,47 +10,14 @@ import ComposableArchitecture
 import Foundation
 import uEntities
 
-// MARK: - Countdown
-
-public struct Countdown: Equatable {
-    public let startDate: Date
-    public let endDate: Date
-
-    public func display() -> String {
-        CountdownFormatter().format(for: startDate, endDate: endDate)
-    }
-}
-
-// MARK: - CountdownFormatter
-
-public class CountdownFormatter: DateComponentsFormatter {
-    override public init() {
-        super.init()
-        setup()
-    }
-
-    public required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-
-    private func setup() {
-        allowedUnits = [.minute, .second]
-        zeroFormattingBehavior = .pad
-    }
-
-    public func format(for startDate: Date, endDate: Date) -> String {
-        string(from: startDate, to: endDate) ?? "00:00"
-    }
-}
-
 // MARK: - Reminders
 
 public struct Reminders: ReducerProtocol {
     @Dependency(\.suspendingClock) var clock
+    @Dependency(\.feedback) var feedback
 
     public struct State: Equatable {
-        public static let initialTime: TimeInterval = 5 * 60
+        public static let initialTime: TimeInterval = 3
 
         public var startDate: Date
         public var timeInterval: TimeInterval
@@ -97,6 +64,8 @@ public struct Reminders: ReducerProtocol {
 
         case .finish:
             state.didFinish = true
+            Vibration.oldSchool.vibrate()
+            feedback.audio.play(sound: .countdownFinish)
             return .none
         }
     }
