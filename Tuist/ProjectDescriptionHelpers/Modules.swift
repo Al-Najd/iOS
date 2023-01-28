@@ -100,6 +100,12 @@ private extension Module {
             name: "uEntities",
             targets: [.framework: .default])
     }
+
+    static var uAudioFeedback: Module {
+        .uFeature(
+            name: "uAudioFeedback",
+            targets: [.framework: .resourcesOnly])
+    }
 }
 
 // MARK: - Features
@@ -112,6 +118,7 @@ public extension Module {
                 .framework: .hasDependencies([
                     TCA,
                     uDesignSystem,
+                    uAudioFeedback,
                     uEntities
                 ])
             ])
@@ -129,6 +136,7 @@ public let modules: [Module] = [
     Module.uDuaaService,
     Module.uTasksService,
     Module.uEntities,
+    Module.uAudioFeedback,
     Module.Reminders
 ]
 
