@@ -10,21 +10,12 @@
 #     - templateName: structured-swift5
 #       output: Strings+Generated.swift
 
-xcassets:
-  inputs:
-    - AlNajd/Sources/Assets/Resources/Assets.xcassets
-  outputs:
-    - templateName: swift5
-      params:
-        forceProvidesNamespaces: true
-        publicAccess: true
-      output: AlNajd/Sources/Assets/Generated.swift
 strings:
   inputs:
-    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.strings
-    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.stringsdict
+    - Features/uContent/Sources/Assets/ar.lproj/Localizable.strings
+    - Features/uContent/Sources/Assets/ar.lproj/Localizable.stringsdict
   outputs:
     - templateName: structured-swift5
       params:
         publicAccess: true
-      output: AlNajd/Sources/Localization/Generated.swift
+      output: Features/uContent/Sources/uContent/L10n.swift

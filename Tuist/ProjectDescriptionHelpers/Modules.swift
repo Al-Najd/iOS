@@ -37,7 +37,7 @@ private extension Module {
     static var uContent: Module {
         .uFeature(
             name: "uContent",
-            targets: [.framework: .default])
+            targets: [.framework: .resourcesOnly])
     }
 }
 
