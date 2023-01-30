@@ -15,9 +15,10 @@ import uEntities
 public struct Reminders: ReducerProtocol {
     @Dependency(\.suspendingClock) var clock
     @Dependency(\.feedback) var feedback
+    @Dependency(\.countDownFormatter) var formatter
 
     public struct State: Equatable {
-        public static let initialTime: TimeInterval = 3
+        public static let initialTime: TimeInterval = 60 * 5
 
         public var startDate: Date
         public var timeInterval: TimeInterval
@@ -31,9 +32,23 @@ public struct Reminders: ReducerProtocol {
             startDate.addingTimeInterval(timeInterval)
         }
 
+        var displayTime: String?
+
         public init(startDate: Date = .now, timeInterval: TimeInterval = Self.initialTime) {
             self.startDate = startDate
             self.timeInterval = timeInterval
+        }
+    }
+
+    struct ViewState: Equatable {
+        let progress: Double
+        let title: String
+        let time: String
+
+        init(state: State) {
+            progress = state.progress.value
+            title = state.didFinish ? "Well Done!" : "5 Mins of Azkar"
+            time = state.displayTime ?? ""
         }
     }
 
@@ -50,7 +65,7 @@ public struct Reminders: ReducerProtocol {
         case .start:
             let startDate = Date()
             state.startDate = startDate
-
+            state.displayTime = formatter.formate(startDate, state.endDate)
             return .run { promise in
                 for await _ in clock.timer(interval: .seconds(1)) where !checkIfTimerShouldStop(startDate: startDate) {
                     await promise.send(.decrementTimeInterval)

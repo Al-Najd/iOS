@@ -15,24 +15,11 @@ import uEntities
 
 public struct RemindersView: View {
     let store: StoreOf<Reminders>
-
-    @ObservedObject var viewStore: ViewStore<ViewState, Reminders.Action>
-
-    struct ViewState: Equatable {
-        let progress: Double
-        let title: String
-        let time: String
-
-        init(state: Reminders.State) {
-            progress = state.progress.value
-            title = state.didFinish ? "Well Done!" : "5 Mins of Azkar"
-            time = Countdown(startDate: state.startDate, endDate: state.endDate).display()
-        }
-    }
+    @ObservedObject var viewStore: ViewStore<Reminders.ViewState, Reminders.Action>
 
     public init(store: StoreOf<Reminders>) {
         self.store = store
-        viewStore = ViewStore(self.store.scope(state: ViewState.init))
+        viewStore = ViewStore(self.store.scope(state: Reminders.ViewState.init))
     }
 
     public var body: some View {

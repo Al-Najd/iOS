@@ -6,18 +6,40 @@
 //  Copyright © 2023 Al Najd. All rights reserved.
 //
 
+import Dependencies
 import Foundation
 
-public struct Countdown: Equatable {
-    public let startDate: Date
-    public let endDate: Date
+// MARK: - CounterDepend
 
-    public init(startDate: Date, endDate: Date) {
-        self.startDate = startDate
-        self.endDate = endDate
-    }
+public struct CounterDepend {
+    public var formate: (_ startDate: Date, _ endDate: Date) -> String
+    private static var formatter: CountdownFormatter = .init()
+}
 
-    public func display() -> String {
-        CountdownFormatter().format(for: startDate, endDate: endDate)
+public extension DependencyValues {
+    var countDownFormatter: CounterDepend {
+        get { self[CounterDepend.self] }
+        set { self[CounterDepend.self] = newValue }
     }
 }
+
+// MARK: - CounterDepend + DependencyKey
+
+extension CounterDepend: DependencyKey {
+    public static var liveValue: CounterDepend {
+        CounterDepend { startDate, endDate in
+            formatter.format(for: startDate, endDate: endDate)
+        }
+    }
+}
+
+// extension AudioFeedbackClient: DependencyKey {
+//    static let liveValue = Self(audio: .shared)
+// }
+//
+// extension DependencyValues {
+//    var feedback: AudioFeedbackClient {
+//        get { self[AudioFeedbackClient.self] }
+//        set { self[AudioFeedbackClient.self] = newValue }
+//    }
+// }
