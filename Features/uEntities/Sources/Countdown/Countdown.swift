@@ -9,37 +9,26 @@
 import Dependencies
 import Foundation
 
-// MARK: - CounterDepend
+// MARK: - Countdown
 
-public struct CounterDepend {
-    public var formate: (_ startDate: Date, _ endDate: Date) -> String
-    private static var formatter: CountdownFormatter = .init()
-}
+public struct Countdown: Equatable {
+    public let startDate: Date
+    public let endDate: Date
 
-public extension DependencyValues {
-    var countDownFormatter: CounterDepend {
-        get { self[CounterDepend.self] }
-        set { self[CounterDepend.self] = newValue }
+    public var hasFinished: Bool {
+        startDate > endDate
+    }
+
+    public init(startDate: Date, endDate: Date) {
+        self.startDate = startDate
+        self.endDate = endDate
+    }
+
+    public func display() -> String {
+        CountdownFormatter().format(for: startDate, endDate: endDate)
     }
 }
 
-// MARK: - CounterDepend + DependencyKey
-
-extension CounterDepend: DependencyKey {
-    public static var liveValue: CounterDepend {
-        CounterDepend { startDate, endDate in
-            formatter.format(for: startDate, endDate: endDate)
-        }
-    }
+public extension Countdown {
+    static let none = Countdown(startDate: .now, endDate: .now)
 }
-
-// extension AudioFeedbackClient: DependencyKey {
-//    static let liveValue = Self(audio: .shared)
-// }
-//
-// extension DependencyValues {
-//    var feedback: AudioFeedbackClient {
-//        get { self[AudioFeedbackClient.self] }
-//        set { self[AudioFeedbackClient.self] = newValue }
-//    }
-// }

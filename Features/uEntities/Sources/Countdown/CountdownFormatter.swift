@@ -6,7 +6,10 @@
 //  Copyright © 2023 Al Najd. All rights reserved.
 //
 
+import ComposableArchitecture
 import Foundation
+
+// MARK: - CountdownFormatter
 
 public class CountdownFormatter: DateComponentsFormatter {
     override public init() {
@@ -26,5 +29,18 @@ public class CountdownFormatter: DateComponentsFormatter {
 
     public func format(for startDate: Date, endDate: Date) -> String {
         string(from: startDate, to: endDate) ?? "00:00"
+    }
+}
+
+// MARK: DependencyKey
+
+extension CountdownFormatter: DependencyKey {
+    public static let liveValue = CountdownFormatter()
+}
+
+public extension DependencyValues {
+    var countdownFormatter: CountdownFormatter {
+        get { self[CountdownFormatter.self] }
+        set { self[CountdownFormatter.self] = newValue }
     }
 }
