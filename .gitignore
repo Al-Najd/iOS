@@ -136,3 +136,4 @@ Reports/**
 test-reports/
 fastlane/.env.default
 */L10n.swift
+Features/uContent/Sources/uContent/L10n.swift
