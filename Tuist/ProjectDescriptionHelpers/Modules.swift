@@ -39,6 +39,12 @@ private extension Module {
             name: "uContent",
             targets: [.framework: .resourcesOnly])
     }
+
+    static var uCountdown: Module {
+        .uFeature(
+            name: "uCountdown",
+            targets: [.framework: .hasDependencies([TCA])])
+    }
 }
 
 // MARK: - Services
@@ -119,6 +125,8 @@ public extension Module {
                     TCA,
                     uDesignSystem,
                     uAudioFeedback,
+                    uCountdown,
+                    uContent,
                     uEntities
                 ])
             ])
@@ -137,6 +145,7 @@ public let modules: [Module] = [
     Module.uTasksService,
     Module.uEntities,
     Module.uAudioFeedback,
+    Module.uCountdown,
     Module.Reminders
 ]
 

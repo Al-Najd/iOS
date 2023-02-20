@@ -8,32 +8,16 @@
 
 import ComposableArchitecture
 import Foundation
+import uCountdown
 import uEntities
 
 // MARK: - Reminders
 
 public struct Reminders: ReducerProtocol {
-    @Dependency(\.suspendingClock) var clock
     @Dependency(\.feedback) var feedback
 
     public struct State: Equatable {
-        public static let initialTime: TimeInterval = 60 * 5
-
-        public var startDate: Date
-        public var timeInterval: TimeInterval
-
-        public var progress: Percent {
-            .init(value: timeInterval / Self.initialTime)
-        }
-
-        public var countdown: Countdown {
-            Countdown(startDate: startDate, endDate: startDate.addingTimeInterval(timeInterval))
-        }
-
-        public init(startDate: Date = .now, timeInterval: TimeInterval = Self.initialTime) {
-            self.startDate = startDate
-            self.timeInterval = timeInterval
-        }
+        var countdownTimer: CountdownTimer.State
     }
 
     struct ViewState: Equatable {
@@ -41,48 +25,20 @@ public struct Reminders: ReducerProtocol {
         let title: String
         let time: String
 
-        init(state: State) {
-            progress = state.progress.value
-            title = state.countdown.hasFinished ? "Well Done!" : "5 Mins of Azkar"
-            time = state.countdown.display()
-        }
+        init(state: CountdownTimer.State) { }
     }
 
     public init() { }
 
     public enum Action: Equatable {
-        case start
-        case decrementTimeInterval
-        case finish
+        case countdown(CountdownTimer.Action)
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .start:
-            let startDate = Date()
-            state.startDate = startDate
-            return .run { promise in
-                for await _ in clock.timer(interval: .seconds(1)) where !checkIfTimerShouldStop(startDate: startDate) {
-                    await promise.send(.decrementTimeInterval)
-                }
-            }
-        case .decrementTimeInterval:
-            state.timeInterval -= 1
-            return checkIfFinished(startDate: state.startDate)
-                ? .run { promise in await promise.send(.finish) }
-                : .none
-
-        case .finish:
-            feedback.audio.play(sound: .countdownFinish)
-            return .none
+    public var body: some ReducerProtocol {
+        Scope(state: \State.countdownTimer, action: /Action.countdown) {
+            CountdownTimer()
         }
     }
 
-    private func checkIfTimerShouldStop(startDate: Date) -> Bool {
-        Date() > startDate.addingTimeInterval(State.initialTime + 1)
-    }
-
-    private func checkIfFinished(startDate: Date) -> Bool {
-        Date() > startDate.addingTimeInterval(State.initialTime)
-    }
+    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> { }
 }
