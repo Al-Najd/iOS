@@ -28,18 +28,8 @@ public struct HomeView: View {
 
     @ViewBuilder
     private func nafilaSection(_ viewStore: ViewStoreOf<Home>) -> some View {
-        VStack(alignment: .leading) {
-            Text(L10n.azkar)
-                .foregroundColor(.mono.offblack)
-                .scaledFont(locale: .arabic, .pFootnote, .bold)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, .p16)
-            makeDuaaView(text: viewStore.duaa)
-                .padding()
-
-            NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
-                .padding(.bottom)
-        }
+        NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+            .padding(.bottom)
     }
 
     @ViewBuilder
@@ -91,6 +81,7 @@ public struct HomeView: View {
                     HeaderView(viewStore: viewStore)
                     prayersSection(viewStore)
                     daySelectorSection(viewStore)
+                    makeDuaaView(viewStore)
                     nafilaSection(viewStore)
                     hadeethSection()
                 }
@@ -107,60 +98,31 @@ public struct HomeView: View {
         }
     }
 
-					VStack {
-						Text(L10n.pickDate)
-							.foregroundColor(.mono.offblack)
-							.scaledFont(locale: .arabic, .pFootnote, .bold)
-							.multilineTextAlignment(.leading)
-							.padding(.horizontal, .p16)
-
-						DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
-							.datePickerStyle(.graphical)
-					}.padding()
-
-					NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
-						.padding(.bottom)
-
-					VStack(alignment: .leading) {
-						Text(L10n.ahadeeth)
-							.foregroundColor(.mono.offblack)
-							.scaledFont(locale: .arabic, .pFootnote, .bold)
-							.multilineTextAlignment(.leading)
-							.padding(.horizontal, .p16)
-						HadeethSliderView()
-					}
-				}
-			}
-			.ignoresSafeArea(edges: .top)
-			.fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
-				IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
-					PrayerDetailsView(store: $0)
-				})
-			}
-			.background(Color.mono.background)
-			.onAppear { viewStore.send(.onAppear) }
-			.enableInjection()
-		}
-	}
-
 	@ViewBuilder
-	func makeDuaaView(text: String) -> some View {
-		Text(text)
-			.scaledFont(.pBody)
-			.multilineTextAlignment(.center)
-			.foregroundColor(Asset.Colors.Apple.dark.swiftUIColor)
-			.padding()
-			.fillAndCenter()
-			.background(
-				RoundedRectangle(cornerRadius: .r8)
-					.fill()
-					.foregroundColor(Asset.Colors.Apple.light.swiftUIColor)
-					.overlay(
-						RoundedRectangle(cornerRadius: .r8)
-							.stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1)
-					)
-					.shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3)
-			)
+	private func makeDuaaView(_ viewStore: ViewStoreOf<Home>) -> some View {
+        VStack {
+            Text(L10n.todayDuaa)
+                .foregroundColor(.mono.offblack)
+                .scaledFont(locale: .arabic, .pFootnote, .bold)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, .p16)
+            Text(viewStore.duaa)
+                .scaledFont(.pBody)
+                .multilineTextAlignment(.center)
+                .foregroundColor(Asset.Colors.Apple.dark.swiftUIColor)
+                .padding()
+                .fillAndCenter()
+                .background(
+                    RoundedRectangle(cornerRadius: .r8)
+                        .fill()
+                        .foregroundColor(Asset.Colors.Apple.light.swiftUIColor)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .r8)
+                                .stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1)
+                        )
+                        .shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3)
+                )
+        }.padding()
 	}
 }
 
