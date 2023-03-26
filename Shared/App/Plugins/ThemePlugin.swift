@@ -5,17 +5,17 @@
 //  Created by Ahmed Ramy on 13/10/2021.
 //
 
-import UIKit.UIApplication
 import DesignSystem
+import UIKit.UIApplication
+
+// MARK: - ThemePlugin
 
 public struct ThemePlugin: AppPlugin {
-  public func setup() {
-    setupTheme()
-  }
+    public func setup() {
+        setupTheme()
+    }
 }
 
 private extension ThemePlugin {
-  private func setupTheme() {
-    
-  }
+    private func setupTheme() { }
 }

@@ -7,11 +7,15 @@
 
 import Foundation
 
+// MARK: - LogEngine
+
 public protocol LogEngine {
     func info(message: String)
     func warn(message: String)
     func error(message: String)
 }
+
+// MARK: - LogTag
 
 public enum LogTag: String {
     case `internal` = "[Internal]"

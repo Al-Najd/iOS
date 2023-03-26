@@ -14,43 +14,48 @@ public typealias Callback<T> = (_: T) -> Void
 public typealias VoidCallback = () -> Void
 public typealias ProgressCallback<T> = Callback<Progress<T>>
 
+// MARK: - Progress
+
 public enum Progress<T> {
-  case idle
-  case loading
-  case success(T)
-  case failure(Error)
-  
-  var value: T? {
-    switch self {
-    case .success(let value): return value
-    default: return nil
+    case idle
+    case loading
+    case success(T)
+    case failure(Error)
+
+    var value: T? {
+        switch self {
+        case .success(let value): return value
+        default: return nil
+        }
     }
-  }
-  
-  var error: Error? {
-    switch self {
-    case .failure(let error): return error
-    default: return nil
+
+    var error: Error? {
+        switch self {
+        case .failure(let error): return error
+        default: return nil
+        }
     }
-  }
-  
-  var isLoading: Bool {
-    switch self {
-    case .loading: return true
-    default: return false 
+
+    var isLoading: Bool {
+        switch self {
+        case .loading: return true
+        default: return false
+        }
     }
-  }
-  
-  var isIdle: Bool {
-    switch self {
-    case .idle: return true
-    default: return false
+
+    var isIdle: Bool {
+        switch self {
+        case .idle: return true
+        default: return false
+        }
     }
-  }
 }
 
+// MARK: Equatable
+
 extension Progress: Equatable where T: Equatable {
-  public static func == (lhs: Progress<T>, rhs: Progress<T>) -> Bool {
-    (lhs.value == rhs.value || lhs.error?.localizedDescription == rhs.error?.localizedDescription) && lhs.isLoading && rhs.isLoading
-  }
+    public static func == (lhs: Progress<T>, rhs: Progress<T>) -> Bool {
+        (lhs.value == rhs.value || lhs.error?.localizedDescription == rhs.error?.localizedDescription) && lhs.isLoading && rhs
+            .isLoading
+    }
 }

@@ -9,23 +9,23 @@ import Foundation
 
 public final class SystemLogger: LogEngine {
     public static let main: SystemLogger = .init()
-    private init() {}
+    private init() { }
 
     public func info(message: String) {
         #if DEBUG
-            print(message.withPrefix("ℹ️ "))
+        print(message.withPrefix("ℹ️ "))
         #endif
     }
 
     public func warn(message: String) {
         #if DEBUG
-            print(message.withPrefix("⚠️ "))
+        print(message.withPrefix("⚠️ "))
         #endif
     }
 
     public func error(message: String) {
         #if DEBUG
-            print(message.withPrefix("🚨 "))
+        print(message.withPrefix("🚨 "))
         #endif
     }
 }

@@ -1,6 +1,6 @@
 //
 //  ScheduleTests.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 06/02/2022.
 //
@@ -8,7 +8,6 @@
 import XCTest
 
 class ScheduleTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -27,9 +26,8 @@ class ScheduleTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

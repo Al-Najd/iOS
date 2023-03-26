@@ -9,18 +9,17 @@
 //  Copyright © 2021 Proba B.V. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 public struct BlurView: UIViewRepresentable {
-
     let style: UIBlurEffect.Style
 
     public init(_ style: UIBlurEffect.Style) {
         self.style = style
     }
-    
-    public func makeUIView(context: UIViewRepresentableContext<BlurView>) -> UIView {
+
+    public func makeUIView(context _: UIViewRepresentableContext<BlurView>) -> UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
         let blurEffect = UIBlurEffect(style: style)
@@ -34,9 +33,7 @@ public struct BlurView: UIViewRepresentable {
         return view
     }
 
-    public func updateUIView(_ uiView: UIView,
-                      context: UIViewRepresentableContext<BlurView>) {
-
-    }
-
+    public func updateUIView(
+        _: UIView,
+        context _: UIViewRepresentableContext<BlurView>) { }
 }

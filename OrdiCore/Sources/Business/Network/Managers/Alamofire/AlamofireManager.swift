@@ -8,10 +8,12 @@
 import Alamofire
 import AuthenticationServices
 import Combine
-import Foundation
 import Entity
+import Foundation
 import OrdiLogging
 import Pulse
+
+// MARK: - AlamofireManager
 
 public final class AlamofireManager: NetworkProtocol {
     public static let main = AlamofireManager()
@@ -32,8 +34,7 @@ public final class AlamofireManager: NetworkProtocol {
             method: api.method.toAlamofireFriendly(),
             parameters: api.parameters,
             encoding: api.encoding.toAlamofireFriendly(),
-            headers: api.headers.toAlamofireFriendly()
-        ).responseData { response in
+            headers: api.headers.toAlamofireFriendly()).responseData { response in
             var result: Result<Data, Error>
             if let data = response.data {
                 result = .success(data)
@@ -44,7 +45,7 @@ public final class AlamofireManager: NetworkProtocol {
             }
 
             switch result {
-            case let .success(data):
+            case .success(let data):
                 let error = OErrorParser().parse(data)
                 if error.text != OError.somethingWentWrong.text {
                     subject.send(completion: .failure(error))
@@ -53,7 +54,7 @@ public final class AlamofireManager: NetworkProtocol {
                 } else {
                     subject.send(completion: .failure(.somethingWentWrong))
                 }
-            case let .failure(error):
+            case .failure(let error):
                 subject.send(completion: .failure(OErrorParser().parse(error)))
             }
         }
@@ -67,8 +68,7 @@ public final class AlamofireManager: NetworkProtocol {
             multipartFormData:
             ParametersToMultipartFormDataAdapter()
                 .adapt(api.parameters),
-            to: api.baseURL + api.path
-        ).uploadProgress { progress in
+            to: api.baseURL + api.path).uploadProgress { progress in
             let totalBytesSent = progress.totalUnitCount
             let totalBytesExpectedToSend = progress.completedUnitCount
             debugPrint(progress)
@@ -88,14 +88,14 @@ public final class AlamofireManager: NetworkProtocol {
             }
 
             switch result {
-            case let .success(data):
+            case .success(let data):
                 if let model = SuccessParser().parse(data, expectedType: model) {
                     subject.send(.finished(model))
                     subject.send(completion: .finished)
                 } else {
                     subject.send(completion: .failure(OErrorParser().parse(data)))
                 }
-            case let .failure(error):
+            case .failure(let error):
                 subject.send(completion: .failure(OErrorParser().parse(error)))
             }
         }
@@ -123,11 +123,15 @@ public final class AlamofireManager: NetworkProtocol {
     }
 }
 
+// MARK: - SuccessParser
+
 public struct SuccessParser {
     func parse<T: Codable>(_ data: Data, expectedType: T.Type) -> T? {
         data.decode(expectedType)
     }
 }
+
+// MARK: - OErrorParser
 
 public struct OErrorParser {
     func parse(_ error: Error) -> OError {
@@ -145,7 +149,7 @@ public struct OErrorParser {
         }
     }
 
-    func parse(_ data: Data) -> OError {
+    func parse(_: Data) -> OError {
         .somethingWentWrong
     }
 }

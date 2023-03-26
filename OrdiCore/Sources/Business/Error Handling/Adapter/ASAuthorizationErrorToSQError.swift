@@ -7,8 +7,8 @@
 
 import AuthenticationServices
 
-import Foundation
 import Entity
+import Foundation
 
 public struct ASAuthorizationErrorToOError: AdapterProtocol {
     typealias Input = ASAuthorizationError

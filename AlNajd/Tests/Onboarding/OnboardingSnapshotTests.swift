@@ -1,47 +1,46 @@
 //
 //  OnboardingSnapshotTests.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 18/02/2022.
 //
 
-import XCTest
-import SnapshotTesting
-import ComposableArchitecture
-import Utils
 import Calendar
+import Common
+import ComposableArchitecture
 import DesignSystem
 import Onboarding
+import SnapshotTesting
 import SwiftUI
-import Common
+import Utils
+import XCTest
+
+// MARK: - OnboardingSnapshotTests
 
 class OnboardingSnapshotTests: XCTestCase {
-    static override func setUp() {
+    override static func setUp() {
         super.setUp()
         SnapshotTesting.diffTool = "ksdiff"
     }
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         //    isRecording = true
     }
-    
+
     override func tearDown() {
         isRecording = false
         super.tearDown()
     }
-    
+
     func testSteps() {
-        
         let view = OnboardingView(
             store: .init(
                 initialState: .init(step: .step000_ThereIsNoWayYouCanHide),
                 reducer: .empty,
-                environment: CoreEnvironment.live(OnboardingEnvironment())
-            ),
-            injectedView: { EmptyView() }
-        )
-        
+                environment: CoreEnvironment.live(OnboardingEnvironment())),
+            injectedView: { EmptyView() })
+
         assertSnapshots(matching: view, as: [
             "Light": .image(
                 layout: .device(config: .iPhoneXsMax),
@@ -50,15 +49,14 @@ class OnboardingSnapshotTests: XCTestCase {
             "Dark": .image(
                 layout: .device(config: .iPhoneXsMax),
                 traits: .init(userInterfaceStyle: .dark)
-            )
+            ),
         ])
     }
 }
 
 extension OnboardingEnvironment {
-    static let failing = Self.init()
+    static let failing = Self()
 }
-    
 
 extension View {
     func toUIVC() -> UIViewController {

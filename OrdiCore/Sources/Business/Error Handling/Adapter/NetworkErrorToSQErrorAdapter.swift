@@ -6,8 +6,8 @@
 //
 
 import Alamofire
-import Foundation
 import Entity
+import Foundation
 import OrdiLogging
 
 public struct NetworkErrorToOErrorAdapter: AdapterProtocol {
@@ -18,13 +18,14 @@ public struct NetworkErrorToOErrorAdapter: AdapterProtocol {
         switch error {
         case URLError.unknown:
             return .somethingWentWrong
-        case URLError.cancelled, AFError.explicitlyCancelled:
+        case URLError.cancelled,
+             AFError.explicitlyCancelled:
             return .requestCancelled
         case URLError.networkConnectionLost:
             return .noNetworkOrTooWeak
         case URLError.notConnectedToInternet:
             return .noNetworkOrTooWeak
-        case let AFError.multipartEncodingFailed(reason: reason):
+        case AFError.multipartEncodingFailed(reason: let reason):
             LoggersManager.error(message: "\(reason)")
             return .somethingWentWrong
 

@@ -1,20 +1,22 @@
 //
 //  DashboardView.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 11/02/2022.
 //
 
-import SwiftUI
-import DesignSystem
-import Utils
-import PreviewableView
-import ComposableArchitecture
-import Inject
-import ReusableUI
-import Localization
 import Assets
 import Charts
+import ComposableArchitecture
+import DesignSystem
+import Inject
+import Localization
+import PreviewableView
+import ReusableUI
+import SwiftUI
+import Utils
+
+// MARK: - DashboardSegment
 
 struct DashboardSegment: Identifiable, Hashable {
     let id = UUID().uuidString
@@ -26,56 +28,56 @@ extension DashboardSegment {
     static let sunnah: DashboardSegment = .init(title: L10n.sunnah)
     static let nawafil: DashboardSegment = .init(title: L10n.nafila)
     static let azkar: DashboardSegment = .init(title: L10n.nafila)
-    
+
     static let allSegments: [DashboardSegment] = [
         faraaid,
         sunnah,
         nawafil,
-        azkar
+        azkar,
     ]
 }
 
+// MARK: - DashboardView
+
 public struct DashboardView: View {
-    let store: Store<DashboardState, DashboardAction>
+    let store: StoreOf<Dashboard>
     @ObserveInjection var inject
 
-    public init(store: Store<DashboardState, DashboardAction>) {
+    public init(store: StoreOf<Dashboard>) {
         self.store = store
     }
-    
+
     public var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: .p16) {
-					makeCurrentStreakView(viewStore.prayingStreak)
-					makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone)
-						.padding(.horizontal)
+                    makeCurrentStreakView(viewStore.prayingStreak)
+                    makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone)
+                        .padding(.horizontal)
                     HStack {
-						makeMetricView(title: L10n.sunnah, value: viewStore.sunnahsPrayed)
-						makeMetricView(title: L10n.azkar, value: viewStore.azkarDoneCount)
+                        makeMetricView(title: L10n.sunnah, value: viewStore.sunnahsPrayed)
+                        makeMetricView(title: L10n.azkar, value: viewStore.azkarDoneCount)
                     }.padding(.horizontal)
-					
-                    
-					makeChartView(title: L10n.sunnah, viewStore: viewStore)
+
+                    makeChartView(title: L10n.sunnah, viewStore: viewStore)
                         .padding(.horizontal)
                     makeFeedbackView()
                         .padding()
                 }
-				.padding(.vertical)
+                .padding(.vertical)
             }
             .onAppear {
                 viewStore.send(.onAppear)
             }
             .background(
-                Color.mono.background
-            )
+                Color.mono.background)
             .enableInjection()
         }
     }
-    
+
     @ViewBuilder
     func makeFeedbackView() -> some View {
-		Text(L10n.doingGreat)
+        Text(L10n.doingGreat)
             .scaledFont(.pBody)
             .multilineTextAlignment(.center)
             .foregroundColor(Asset.Colors.Apple.dark.swiftUIColor)
@@ -87,16 +89,14 @@ public struct DashboardView: View {
                     .foregroundColor(Asset.Colors.Apple.light.swiftUIColor)
                     .overlay(
                         RoundedRectangle(cornerRadius: .r8)
-                            .stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1)
-                    )
-                    .shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3)
-            )
+                            .stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1))
+                    .shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3))
     }
-    
+
     @ViewBuilder
-	func makeCurrentStreakView(_ streak: String) -> some View {
+    func makeCurrentStreakView(_ streak: String) -> some View {
         VStack {
-			Label(L10n.prayingStreak, systemImage: "flame.fill")
+            Label(L10n.prayingStreak, systemImage: "flame.fill")
                 .scaledFont(.pSubheadline)
                 .foregroundColor(Asset.Colors.Primary.bluberry.swiftUIColor)
             Text(streak)
@@ -109,11 +109,10 @@ public struct DashboardView: View {
             RoundedRectangle(cornerRadius: .r16)
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                .shadow(radius: .r8)
-        )
+                .shadow(radius: .r8))
         .padding(.horizontal)
     }
-    
+
     @ViewBuilder
     func makeMetricView(title: String, icon: String? = nil, value: String) -> some View {
         VStack(spacing: .zero) {
@@ -130,34 +129,32 @@ public struct DashboardView: View {
             RoundedRectangle(cornerRadius: .r16)
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                .shadow(radius: .r8)
-        )
+                .shadow(radius: .r8))
     }
-    
+
     @ViewBuilder
-	func makeChartView(title: String, viewStore: ViewStore<DashboardState, DashboardAction>) -> some View {
+    func makeChartView(title: String, viewStore: ViewStoreOf<Dashboard>) -> some View {
         VStack {
-			Text(title)
+            Text(title)
                 .foregroundColor(Asset.Colors.Blueberry.primary.swiftUIColor)
                 .scaledFont(.pHeadline, .bold)
                 .fillOnLeading()
             Chart {
-				ForEach(viewStore.sunnahPlotData) { data in
+                ForEach(viewStore.sunnahPlotData) { data in
                     BarMark(
                         x: .value("Day", data.date.string(withFormat: "d/M")),
-                        y: .value("Progress", data.animate ? data.count : 0)
-                    )
-                    .foregroundStyle(Asset.Colors.Blueberry.primary.swiftUIColor.gradient)
-                    .cornerRadius(.r8)
+                        y: .value("Progress", data.animate ? data.count : 0))
+                        .foregroundStyle(Asset.Colors.Blueberry.primary.swiftUIColor.gradient)
+                        .cornerRadius(.r8)
                 }
             }
-            .chartYScale(domain: 0...8)
+            .chartYScale(domain: 0 ... 8)
             .frame(height: 320)
             .chartXAxis {
                 AxisMarks(values: .automatic) { value in
                     AxisGridLine(centered: true, stroke: StrokeStyle(dash: [1, 2, 4]))
                         .foregroundStyle(Asset.Colors.Primary.spaceGrey.swiftUIColor)
-                    AxisValueLabel() {
+                    AxisValueLabel {
                         Text(value.as(String.self) ?? "")
                             .foregroundColor(.mono.offwhite)
                             .scaledFont(.pFootnote, .bold)
@@ -168,7 +165,7 @@ public struct DashboardView: View {
                 AxisMarks(values: .automatic) { value in
                     AxisGridLine(centered: true, stroke: StrokeStyle(dash: [1, 2]))
                         .foregroundStyle(Asset.Colors.Primary.spaceGrey.swiftUIColor)
-                    AxisValueLabel() {
+                    AxisValueLabel {
                         Text(String(format: "%.0f", value.as(Double.self) ?? 0))
                             .foregroundColor(.mono.offwhite)
                             .scaledFont(.pFootnote, .bold)
@@ -182,17 +179,6 @@ public struct DashboardView: View {
             RoundedRectangle(cornerRadius: .r16)
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                .shadow(radius: .r8)
-        )
-    }
-}
-
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(
-            store: .mock
-        ).background(
-            Color.mono.background.ignoresSafeArea()
-        )
+                .shadow(radius: .r8))
     }
 }

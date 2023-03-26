@@ -1,64 +1,76 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ahmed Ramy on 14/08/2022.
 //
 
+import Common
 import ComposableArchitecture
 import Entities
-import PrayersClient
-import Common
-import Utils
 import Foundation
+import PrayersClient
+import Utils
 
-public struct PrayerDetailsState: Identifiable, Equatable {
-    public var id: ANPrayer.ID { prayer.id }
-    public var prayer: ANPrayer
-	public var date: String
-    
-    public init(
-		prayer: ANPrayer,
-		date: Date
-	) {
-        self.prayer = prayer
-		self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
+// MARK: - PrayerDetailsState
+
+public struct PrayerDetails: ReducerProtocol {
+    @Dependency(\.haptic)
+    private var haptic
+
+    @Dependency(\.prayersDB)
+    private var prayersDB
+
+    public init() {}
+
+    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+        switch action {
+        case .onDoingPrayer:
+            state.prayer.isDone = true
+            prayersDB.save(prayer: state.prayer)
+        case .onDoingSunnah(let sunnah):
+            state.prayer.sunnah[id: sunnah.id]?.isDone = true
+            prayersDB.save(sunnah: state.prayer.sunnah[id: sunnah.id])
+        case .onDoingZekr(let zekr):
+            let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
+            state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
+            prayersDB.save(zekr: state.prayer.afterAzkar[id: zekr.id])
+        case .onFinishingZekr(let zekr):
+            state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
+            prayersDB.save(zekr: state.prayer.afterAzkar[id: zekr.id])
+        default:
+            break
+        }
+        haptic.send(.success)
+
+        return .none
     }
 }
 
-public enum PrayerDetailsAction: Equatable {
-    case onDoingPrayer
-    case onDoingSunnah(ANSunnah)
-    case onDoingZekr(ANAzkar)
-    case onFinishingZekr(ANAzkar)
-    
-    case dismiss
+extension PrayerDetails {
+    public struct State: Identifiable, Equatable {
+        public var id: ANPrayer.ID { prayer.id }
+        public var prayer: ANPrayer
+        public var date: String
+
+        public init(
+            prayer: ANPrayer,
+            date: Date) {
+                self.prayer = prayer
+                self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
+            }
+    }
 }
 
-public struct PrayerDetailsEnvironment { public init() { } }
+// MARK: - PrayerDetailsAction
 
-public let prayerDetailsReducer = Reducer<
-    PrayerDetailsState,
-    PrayerDetailsAction,
-    CoreEnvironment<PrayerDetailsEnvironment>
-> { state, action, env in
-    switch action {
-    case .onDoingPrayer:
-        state.prayer.isDone = true
-        env.prayersClient.save(prayer: state.prayer)
-    case let .onDoingSunnah(sunnah):
-        state.prayer.sunnah[id: sunnah.id]?.isDone = true
-        env.prayersClient.save(sunnah: state.prayer.sunnah[id: sunnah.id])
-    case let .onDoingZekr(zekr):
-        let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
-        state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
-        env.prayersClient.save(zekr: state.prayer.afterAzkar[id: zekr.id])
-    case let .onFinishingZekr(zekr):
-        state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
-        env.prayersClient.save(zekr: state.prayer.afterAzkar[id: zekr.id])
-    default:
-        break
+extension PrayerDetails {
+    public enum Action: Equatable {
+        case onDoingPrayer
+        case onDoingSunnah(ANSunnah)
+        case onDoingZekr(ANAzkar)
+        case onFinishingZekr(ANAzkar)
+
+        case dismiss
     }
-    env.haptic.send(.success)
-    return .none
-}.debug()
+}

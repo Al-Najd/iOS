@@ -7,6 +7,8 @@
 
 import Sentry
 
+// MARK: - SentryService
+
 public enum SentryService {
     public static func setup() {
         SentrySDK.start { options in
@@ -18,6 +20,8 @@ public enum SentryService {
     }
 }
 
+// MARK: SentryService.Configurations
+
 private extension SentryService {
     struct Configurations {
         let dsn: String
@@ -25,20 +29,21 @@ private extension SentryService {
         let traceSampleRate: NSNumber
 
         #if DEBUG
-            let environment: String = "Development"
+        let environment = "Development"
         #elseif STAGING
-            let environment: String = "Staging"
+        let environment = "Staging"
         #else
-            let environment: String = "Production"
+        let environment = "Production"
         #endif
 
         static let `default`: Configurations = .init(
             dsn: "https://0526add1e72543819237e2018fa6b72e@o455344.ingest.sentry.io/6031596",
             debug: false,
-            traceSampleRate: 1.0
-        )
+            traceSampleRate: 1.0)
     }
 }
+
+// MARK: - SentryLogger
 
 final class SentryLogger: LogEngine {
     public static let main: SentryLogger = .init()

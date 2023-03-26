@@ -5,22 +5,25 @@
 //  Created by Ahmed Ramy on 23/10/2021.
 //
 
-import UIKit.UIApplication
 import OrdiLogging
 import Pulse
-struct ReportPlugin {}
+import UIKit.UIApplication
+
+// MARK: - ReportPlugin
+
+struct ReportPlugin { }
+
+// MARK: AppPlugin
 
 extension ReportPlugin: AppPlugin {
-  func setup() {
-      setupPulse()
-      setupSentry()
-  }
+    func setup() {
+        setupPulse()
+        setupSentry()
+    }
 
-  private func setupPulse() {
-    
-  }
+    private func setupPulse() { }
 
-  private func setupSentry() {
-      SentryService.setup()
-  }
+    private func setupSentry() {
+        SentryService.setup()
+    }
 }
