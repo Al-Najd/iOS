@@ -20,6 +20,10 @@ public struct Root: ReducerProtocol {
     Scope(state: \.home, action: /Action.home) {
       Home()
     }
+
+    Scope(state: \.dashboard, action: /Action.dashboard) {
+      Dashboard()
+    }
   }
 }
 
@@ -30,7 +34,7 @@ extension StoreOf {
 public extension Root {
   struct State: Equatable {
     var home: Home.State = .init()
-//    var dashboard: Dashboard.State = .init()
+    var dashboard: Dashboard.State = .init()
   }
 }
 
@@ -38,5 +42,6 @@ public extension Root {
   enum Action {
     case onAppear
     case home(Home.Action)
+    case dashboard(Dashboard.Action)
   }
 }

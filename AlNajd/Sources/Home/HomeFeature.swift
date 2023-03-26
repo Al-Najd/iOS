@@ -75,6 +75,9 @@ public struct Home: ReducerProtocol {
 
             return .none
         }
+        .ifLet(\.selectedPrayer, action: /Action.prayerDetails) {
+            PrayerDetails()
+        }
     }
 
     private func calculateProgress(_ state: inout State) {

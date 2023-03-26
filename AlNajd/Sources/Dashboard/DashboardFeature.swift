@@ -19,29 +19,29 @@ public struct Dashboard: ReducerProtocol {
     @Dependency(\.prayersDB)
     private var prayersDB
 
-    public var body: some ReducerProtocol<State, Action> {
-        Reduce { state, action in
-            switch action {
-            case .onAppear:
-                state.prayingStreak = L10n.daysCount(prayersDB.getPrayingStreak())
-                state.sunnahsPrayed = L10n.timesCount(prayersDB.getSunnahsPrayed())
-                state.azkarDoneCount = L10n.timesCount(prayersDB.getAzkarDoneCount())
-                state.totalFaraaidDone = L10n.timesCount(prayersDB.getFaraaidDone())
-                state.sunnahPlotData = .init(
-                    uniqueElements: prayersDB.getSunnahPerDay().map {
-                        ChartAnalyticsData(date: $0, count: $1)
-                    })
+    public init() { }
 
-                state.sunnahPlotData.enumerated().forEach { (index: Int, data: ChartAnalyticsData) in
-                    withAnimation(.easeInOut(duration: 0.8 + (Double(index) * 0.05)).delay(Double(index) * 0.05)) {
-                        state.sunnahPlotData[id: data.id]?.animate = true
-                    }
+    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+        switch action {
+        case .onAppear:
+            state.prayingStreak = L10n.daysCount(prayersDB.getPrayingStreak())
+            state.sunnahsPrayed = L10n.timesCount(prayersDB.getSunnahsPrayed())
+            state.azkarDoneCount = L10n.timesCount(prayersDB.getAzkarDoneCount())
+            state.totalFaraaidDone = L10n.timesCount(prayersDB.getFaraaidDone())
+            state.sunnahPlotData = .init(
+                uniqueElements: prayersDB.getSunnahPerDay().map {
+                    ChartAnalyticsData(date: $0, count: $1)
+                })
+
+            state.sunnahPlotData.enumerated().forEach { (index: Int, data: ChartAnalyticsData) in
+                withAnimation(.easeInOut(duration: 0.8 + (Double(index) * 0.05)).delay(Double(index) * 0.05)) {
+                    state.sunnahPlotData[id: data.id]?.animate = true
                 }
-            default:
-                break
             }
-            return .none
+        default:
+            break
         }
+        return .none
     }
 }
 

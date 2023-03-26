@@ -21,29 +21,29 @@ public struct PrayerDetails: ReducerProtocol {
     @Dependency(\.prayersDB)
     private var prayersDB
 
-    public var body: some ReducerProtocol<State, Action> {
-        Reduce { state, action in
-            switch action {
-            case .onDoingPrayer:
-                state.prayer.isDone = true
-                prayersDB.save(prayer: state.prayer)
-            case .onDoingSunnah(let sunnah):
-                state.prayer.sunnah[id: sunnah.id]?.isDone = true
-                prayersDB.save(sunnah: state.prayer.sunnah[id: sunnah.id])
-            case .onDoingZekr(let zekr):
-                let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
-                state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
-                prayersDB.save(zekr: state.prayer.afterAzkar[id: zekr.id])
-            case .onFinishingZekr(let zekr):
-                state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
-                prayersDB.save(zekr: state.prayer.afterAzkar[id: zekr.id])
-            default:
-                break
-            }
-            haptic.send(.success)
+    public init() {}
 
-            return .none
+    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+        switch action {
+        case .onDoingPrayer:
+            state.prayer.isDone = true
+            prayersDB.save(prayer: state.prayer)
+        case .onDoingSunnah(let sunnah):
+            state.prayer.sunnah[id: sunnah.id]?.isDone = true
+            prayersDB.save(sunnah: state.prayer.sunnah[id: sunnah.id])
+        case .onDoingZekr(let zekr):
+            let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
+            state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
+            prayersDB.save(zekr: state.prayer.afterAzkar[id: zekr.id])
+        case .onFinishingZekr(let zekr):
+            state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
+            prayersDB.save(zekr: state.prayer.afterAzkar[id: zekr.id])
+        default:
+            break
         }
+        haptic.send(.success)
+
+        return .none
     }
 }
 

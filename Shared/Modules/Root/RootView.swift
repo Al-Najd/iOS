@@ -31,14 +31,14 @@ public struct RootView: View {
                         .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
                     }
 
-//                DashboardView(store: store.scope(state: { $0.dashboard }, action: .dashboard))
-//                    .tabItem {
-//                        VStack {
-//                            Image(systemName: "chart.bar.xaxis")
-//                            Text(L10n.dashboard)
-//                        }
-//                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-//                    }
+              DashboardView(store: store.scope(state: \.dashboard, action: Root.Action.dashboard))
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "chart.bar.xaxis")
+                            Text(L10n.dashboard)
+                        }
+                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+                    }
             }.onAppear {
                 // correct the transparency bug for Tab bars
                 let tabBarAppearance = UITabBarAppearance()

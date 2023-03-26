@@ -129,7 +129,9 @@ struct TasksView: View {
     @ViewBuilder
     func makeTasksList() -> some View {
         VStack {
-            SubtaskView(viewStore.prayer) { viewStore.send(.onDoingPrayer, animation: .default) }
+            SubtaskView(viewStore.prayer) {
+                viewStore.send(.onDoingPrayer, animation: .default)
+            }
             ScrollView(.vertical, showsIndicators: false) {
                 Text(L10n.sunnah)
                     .foregroundColor(.mono.offwhite)
