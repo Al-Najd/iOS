@@ -1077,12 +1077,6 @@ public extension Date {
         (0 ... 6).map {
             self.adding(.day, value: $0)
         }
-
-        var previousWeek: [Date] {
-            (0 ... 6).map {
-                self.adding(.day, value: -$0)
-            }
-        }
     }
 
     var previousWeek: [Date] {
@@ -1090,6 +1084,7 @@ public extension Date {
             self.adding(.day, value: -$0)
         }
     }
+}
 
 public extension DateFormatter {
     convenience init(dateFormat: String, calendar: Calendar) {

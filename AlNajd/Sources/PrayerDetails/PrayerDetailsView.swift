@@ -19,9 +19,9 @@ import Utils
 
 public struct PrayerDetailsView: View {
     @ObserveInjection var inject
-    let store: Store<PrayerDetailsState, PrayerDetailsAction>
+    let store: StoreOf<PrayerDetails>
 
-    public init(store: Store<PrayerDetailsState, PrayerDetailsAction>) {
+    public init(store: StoreOf<PrayerDetails>) {
         self.store = store
     }
 
@@ -100,7 +100,7 @@ extension CGFloat {
 // MARK: - TasksView
 
 struct TasksView: View {
-    let viewStore: ViewStore<PrayerDetailsState, PrayerDetailsAction>
+    let viewStore: ViewStoreOf<PrayerDetails>
 
     @State var tab = 0
 

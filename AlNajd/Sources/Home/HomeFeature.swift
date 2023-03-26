@@ -18,6 +18,8 @@ public struct Home: ReducerProtocol {
     @Dependency(\.prayersDB)
     private var prayersDB
 
+    public init() { }
+
     public struct State: Equatable {
         public var prayers: IdentifiedArrayOf<ANPrayer> = []
         public var todosCount = 0
@@ -30,7 +32,7 @@ public struct Home: ReducerProtocol {
 
         public var duaa = ""
         var dashboard: DashboardState = .init()
-        @BindingState var selectedPrayer: PrayerDetailsState?
+        @BindingState var selectedPrayer: PrayerDetails.State?
         @BindingState var percentageValue: Float = 0
         @BindingState var date: Date = .init().startOfDay
 
@@ -39,7 +41,7 @@ public struct Home: ReducerProtocol {
 
     public enum Action: BindableAction {
         case onAppear
-        case prayerDetails(PrayerDetailsAction)
+        case prayerDetails(PrayerDetails.Action)
         case dashboard(DashboardAction)
         case onSelecting(ANPrayer)
         case binding(BindingAction<State>)
@@ -102,39 +104,3 @@ public struct Home: ReducerProtocol {
         ].randomElement() ?? ""
     }
 }
-
-// public let homeReducer = Reducer<
-//    HomeState,
-//    HomeAction,
-//    CoreEnvironment<HomeEnvironment>
-// >.combine(
-//    dashboardReducer
-//        .pullback(
-//            state: \HomeState.dashboard,
-//            action: /HomeAction.dashboard,
-//            environment: { _ in .live(.init()) }
-//        ),
-//    prayerDetailsReducer
-//        .optional()
-//        .pullback(
-//            state: \HomeState.selectedPrayer,
-//            action: /HomeAction.prayerDetails,
-//            environment: { _ in .live(.init()) }),
-//    .init { state, action, env in
-//        switch action {
-//        case .onAppear:
-//        case let .onSelecting(prayer):
-
-//        case .prayerDetails(.dismiss):
-
-//		case let .onChangingDate(date):
-//			state.prayers = .init(uniqueElements: env.prayersClient.prayers(for: state.date))
-//			calculateProgress(&state)
-//        case .binding:
-//            return Effect.
-//        default:
-//            break
-//        }
-//        return .none
-//    }
-// ).binding()

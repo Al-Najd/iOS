@@ -38,6 +38,6 @@ public struct CoreEnvironment<Environment> {
             locationManager: .live,
             mainQueue: .main,
             prayersClient: .live,
-            haptic: .main)
+            haptic: .init())
     }
 }

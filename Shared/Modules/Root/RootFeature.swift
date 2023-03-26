@@ -16,8 +16,10 @@ import PrayerDetails
 // MARK: - RootState
 
 public struct Root: ReducerProtocol {
-  public func reduce(into state: inout State, action: Action) -> ComposableArchitecture.EffectTask<Action> {
-    Home()
+  public var body: some ReducerProtocol<State, Action> {
+    Scope(state: \.home, action: /Action.home) {
+      Home()
+    }
   }
 }
 
@@ -29,41 +31,8 @@ public extension Root {
 }
 
 public extension Root {
-  enum Action: Equatable {
+  enum Action {
     case onAppear
     case home(Home.Action)
-//    case dashboard(Dashboard.Action)
   }
-}
-
-// MARK: - RootEnvironment
-
-public struct RootEnvironment { public init() { } }
-
-public let rootReducer = Reducer<
-    RootState,
-    RootAction,
-    CoreEnvironment<RootEnvironment>
->.combine(
-    homeReducer
-        .pullback(
-            state: \RootState.home,
-            action: /RootAction.home,
-            environment: { _ in CoreEnvironment.live(HomeEnvironment()) }),
-    dashboardReducer
-        .pullback(
-            state: \RootState.dashboard,
-            action: /RootAction.dashboard,
-            environment: { _ in .live(.init()) }),
-    rootReducerCore)
-
-private let rootReducerCore = Reducer<RootState, RootAction, CoreEnvironment<RootEnvironment>> { _, _, _ in
-    .none
-}
-
-extension Store where State == RootState, Action == RootAction {
-    static let mainRoot: Store<State, Action> = .init(
-        initialState: .init(),
-        reducer: rootReducer,
-        environment: CoreEnvironment.live(RootEnvironment()))
 }
