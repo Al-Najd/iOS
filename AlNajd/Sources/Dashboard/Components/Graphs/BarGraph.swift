@@ -61,12 +61,3 @@ public struct BarGraph: View {
         }
     }
 }
-
-// MARK: - SwiftUIView_Previews
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(store: .mock)
-            .stay(.dark)
-    }
-}

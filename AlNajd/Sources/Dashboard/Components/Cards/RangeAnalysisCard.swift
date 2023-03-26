@@ -189,11 +189,3 @@ public struct RangeAnalysisCardView: View {
         }.enableInjection()
     }
 }
-
-// MARK: - SwiftUIView_3_Previews
-
-struct SwiftUIView_3_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(store: .mock)
-    }
-}

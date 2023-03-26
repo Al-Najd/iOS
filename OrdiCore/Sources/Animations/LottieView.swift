@@ -31,7 +31,7 @@ public struct LottieView: UIViewRepresentable {
 
     public func makeUIView(context _: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
-        let animationView = AnimationView()
+        let animationView = LottieAnimationView()
 
         animationView.animation = Animation.named(animation.name)
         animationView.contentMode = contentMode
@@ -50,7 +50,7 @@ public struct LottieView: UIViewRepresentable {
 
     public func updateUIView(_: UIView, context _: UIViewRepresentableContext<LottieView>) { }
 
-    private func startPlaying(_ animationView: AnimationView, handlers: [AnimationHandler]) {
+    private func startPlaying(_ animationView: LottieAnimationView, handlers: [AnimationHandler]) {
         guard !handlers.isEmpty else { return }
         let handler = handlers[0]
         animationView.play(

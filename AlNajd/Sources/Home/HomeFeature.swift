@@ -31,7 +31,7 @@ public struct Home: ReducerProtocol {
         }
 
         public var duaa = ""
-        var dashboard: DashboardState = .init()
+        var dashboard: Dashboard.State = .init()
         @BindingState var selectedPrayer: PrayerDetails.State?
         @BindingState var percentageValue: Float = 0
         @BindingState var date: Date = .init().startOfDay
@@ -42,7 +42,7 @@ public struct Home: ReducerProtocol {
     public enum Action: BindableAction {
         case onAppear
         case prayerDetails(PrayerDetails.Action)
-        case dashboard(DashboardAction)
+        case dashboard(Dashboard.Action)
         case onSelecting(ANPrayer)
         case binding(BindingAction<State>)
     }

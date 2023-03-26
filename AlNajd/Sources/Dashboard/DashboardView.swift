@@ -40,10 +40,10 @@ extension DashboardSegment {
 // MARK: - DashboardView
 
 public struct DashboardView: View {
-    let store: Store<DashboardState, DashboardAction>
+    let store: StoreOf<Dashboard>
     @ObserveInjection var inject
 
-    public init(store: Store<DashboardState, DashboardAction>) {
+    public init(store: StoreOf<Dashboard>) {
         self.store = store
     }
 
@@ -133,7 +133,7 @@ public struct DashboardView: View {
     }
 
     @ViewBuilder
-    func makeChartView(title: String, viewStore: ViewStore<DashboardState, DashboardAction>) -> some View {
+    func makeChartView(title: String, viewStore: ViewStoreOf<Dashboard>) -> some View {
         VStack {
             Text(title)
                 .foregroundColor(Asset.Colors.Blueberry.primary.swiftUIColor)
@@ -180,15 +180,5 @@ public struct DashboardView: View {
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
                 .shadow(radius: .r8))
-    }
-}
-
-// MARK: - DashboardView_Previews
-
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(
-            store: .mock).background(
-            Color.mono.background.ignoresSafeArea())
     }
 }

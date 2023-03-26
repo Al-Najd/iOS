@@ -17,12 +17,12 @@ import SwiftUI
 // MARK: - RootView
 
 public struct RootView: View {
-    public let store: Store<RootState, RootAction>
+    public let store: StoreOf<Root>
 
     public var body: some View {
-        WithViewStore(store) { _ in
+        WithViewStore(store) { viewStore in
             TabView {
-                HomeView(store: store.scope(state: { $0.home }, action: RootAction.home))
+              HomeView(store: store.scope(state: \.home, action: Root.Action.home))
                     .tabItem {
                         VStack {
                             Image(systemName: "sun.dust.circle.fill")
@@ -31,14 +31,14 @@ public struct RootView: View {
                         .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
                     }
 
-                DashboardView(store: store.scope(state: { $0.dashboard }, action: RootAction.dashboard))
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "chart.bar.xaxis")
-                            Text(L10n.dashboard)
-                        }
-                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                    }
+//                DashboardView(store: store.scope(state: { $0.dashboard }, action: .dashboard))
+//                    .tabItem {
+//                        VStack {
+//                            Image(systemName: "chart.bar.xaxis")
+//                            Text(L10n.dashboard)
+//                        }
+//                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+//                    }
             }.onAppear {
                 // correct the transparency bug for Tab bars
                 let tabBarAppearance = UITabBarAppearance()
@@ -50,13 +50,5 @@ public struct RootView: View {
                 UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
             }
         }
-    }
-}
-
-// MARK: - RootView_Previews
-
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView(store: .mainRoot)
     }
 }

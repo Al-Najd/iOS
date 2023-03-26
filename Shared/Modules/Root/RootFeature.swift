@@ -23,6 +23,10 @@ public struct Root: ReducerProtocol {
   }
 }
 
+extension StoreOf {
+  public static var mainRoot: StoreOf<Root> { .init(initialState: .init(), reducer: Root()) }
+}
+
 public extension Root {
   struct State: Equatable {
     var home: Home.State = .init()

@@ -22,11 +22,3 @@ struct StatCard: View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
-
-// MARK: - SwiftUIView_2_Previews
-
-struct SwiftUIView_2_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(store: .mock)
-    }
-}

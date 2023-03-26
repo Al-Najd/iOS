@@ -178,9 +178,6 @@ private extension ANDependencies {
             url: "https://github.com/maustinstar/swiftui-drawer",
             branch: "master"),
         .package(
-            url: "https://github.com/realm/realm-swift",
-            .upToNextMinor(from: .init(10, 28, 6))),
-        .package(
             url: "https://github.com/groue/GRDB.swift",
             .upToNextMajor(from: .init(6, 0, 0))),
         .package(
