@@ -8,6 +8,8 @@
 import Entity
 import Foundation
 
+// MARK: - LoggersManager
+
 public enum LoggersManager {
     private static var engines: [LogEngine] {
         .all

@@ -98,9 +98,12 @@ platform :ios do
 
   desc "Syncs remote git with the local"
   lane :sync_git do
+    version_number = get_version_number(target: "CAFU")
+    # Checkout a new branch called "release/#{version_number}"
+    system("git checkout -b release/#{version_number}")
     git_add
     git_commit(
-      message: "🚀 Released iOS #{get_version_number(target: "Al Najd (iOS)")}! [Beta Release]",
+      message: "🚀 Released iOS #{version_number}! [Beta Release]",
       path: "*"
     )
     push_to_git_remote
@@ -129,7 +132,6 @@ platform :ios do
     push_to_testflight
     sentry_wetwork
     clean_build_artifacts
-    # slack
     sync_git
   end
 

@@ -25,7 +25,7 @@ public struct ConfigFonts: Codable {
     }
 }
 
-// MARK: - ConfigDefaultConfigurations
+// MARK: - ConfigFontsDefaultConfigurations
 
 public struct ConfigFontsDefaultConfigurations: Codable {
     public let type: String
@@ -50,7 +50,7 @@ public struct ConfigFontsDefaultConfigurations: Codable {
     }
 }
 
-// MARK: - ConfigFont
+// MARK: - ConfigFontsElement
 
 public struct ConfigFontsElement: Codable {
     public let family: String

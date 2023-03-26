@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-public protocol Then {}
+// MARK: - Then
+
+public protocol Then { }
 
 public extension Then where Self: Any {
     /// Makes it available to set properties with closures just after initializing and copying the value types.
@@ -49,15 +51,46 @@ public extension Then where Self: AnyObject {
     }
 }
 
-extension NSObject: Then {}
+// MARK: - NSObject + Then
 
-extension CGPoint: Then {}
-extension CGRect: Then {}
-extension CGSize: Then {}
-extension CGVector: Then {}
-extension Array: Then {}
-extension Dictionary: Then {}
-extension Set: Then {}
-extension UIEdgeInsets: Then {}
-extension UIOffset: Then {}
-extension UIRectEdge: Then {}
+extension NSObject: Then { }
+
+// MARK: - CGPoint + Then
+
+extension CGPoint: Then { }
+
+// MARK: - CGRect + Then
+
+extension CGRect: Then { }
+
+// MARK: - CGSize + Then
+
+extension CGSize: Then { }
+
+// MARK: - CGVector + Then
+
+extension CGVector: Then { }
+
+// MARK: - Array + Then
+
+extension Array: Then { }
+
+// MARK: - Dictionary + Then
+
+extension Dictionary: Then { }
+
+// MARK: - Set + Then
+
+extension Set: Then { }
+
+// MARK: - UIEdgeInsets + Then
+
+extension UIEdgeInsets: Then { }
+
+// MARK: - UIOffset + Then
+
+extension UIOffset: Then { }
+
+// MARK: - UIRectEdge + Then
+
+extension UIRectEdge: Then { }

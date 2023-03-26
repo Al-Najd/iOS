@@ -25,11 +25,12 @@ public extension View {
     }
 
     func getSafeArea() -> UIEdgeInsets {
-        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
             .windows.first?.safeAreaInsets ?? .zero
     }
 
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
         if condition {
             transform(self)
         } else {

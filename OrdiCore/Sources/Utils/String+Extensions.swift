@@ -15,33 +15,33 @@ public extension String {
     }
 
     var asError: Error {
-        return NSError(domain: self, code: -1, userInfo: [NSLocalizedDescriptionKey: self])
+        NSError(domain: self, code: -1, userInfo: [NSLocalizedDescriptionKey: self])
     }
 
     func matches(_ regex: String) -> Bool {
-        return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+        range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }
 
 public extension Optional where Wrapped == String {
     var emptyIfNil: String {
-        return self ?? .empty
+        self ?? .empty
     }
 
     var dotIfNil: String {
-        return self ?? "."
+        self ?? "."
     }
 }
 
 public extension Optional where Wrapped == NSAttributedString {
     var emptyIfNil: NSAttributedString {
-        return self ?? NSAttributedString(string: .empty)
+        self ?? NSAttributedString(string: .empty)
     }
 }
 
 public extension String {
     var trimCardNumber: String {
-        return replacingOccurrences(of: "*", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+        replacingOccurrences(of: "*", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     func replacingOccurrences(with this: [String]) -> String {
@@ -51,7 +51,7 @@ public extension String {
     }
 
     var trimPhoneNumber: String {
-        return replacingOccurrences(of: "(", with: "")
+        replacingOccurrences(of: "(", with: "")
             .replacingOccurrences(of: ")", with: "")
             .replacingOccurrences(of: "-", with: "")
             .replacingOccurrences(of: " ", with: "")

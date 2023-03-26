@@ -14,10 +14,14 @@ public typealias RSHandler<T> = (RSExpected<T>) -> Void
 public typealias RSResponse<T: Codable> = AnyPublisher<T, OError>
 public typealias RSResponseWithProgress<T: Codable> = RSResponse<RSProgressResponse<T>>
 
+// MARK: - RSProgressResponse
+
 public enum RSProgressResponse<T: Codable>: Codable {
     case loading(Double)
     case finished(T)
 }
+
+// MARK: - NetworkProtocol
 
 public protocol NetworkProtocol {
     func call<T: Codable, U: Endpoint>(api: U, model: T.Type) -> RSResponse<T>

@@ -20,79 +20,79 @@ import ScalingHeaderScrollView
 
 public struct HomeView: View {
 	@ObserveInjection var inject
-	let store: Store<HomeState, HomeAction>
+	let store: StoreOf<Home>
 
-	public init(store: Store<HomeState, HomeAction>) {
+	public init(store: StoreOf<Home>) {
 		self.store = store
 	}
 
-	public var body: some View {
-		WithViewStore(store) { viewStore in
-			ScrollView(.vertical, showsIndicators: false) {
-				VStack {
-					HeaderView(viewStore: viewStore)
-					PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(HomeAction.onSelecting($0), animation: .default) }
-					VStack(alignment: .leading) {
-						Text(L10n.azkar)
-							.foregroundColor(.mono.offblack)
-							.scaledFont(locale: .arabic, .pFootnote, .bold)
-							.multilineTextAlignment(.leading)
-							.padding(.horizontal, .p16)
-						makeDuaaView(text: viewStore.duaa)
-				.padding()
+    public var body: some View {
+        WithViewStore(store) { viewStore in
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    HeaderView(viewStore: viewStore)
+                    PrayerSliderView(prayers: viewStore.prayers) {
+                        viewStore.send(.onSelecting($0), animation: .default)
+                    }
 
-		  NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
-				.padding(.bottom)
+                    VStack(alignment: .leading) {
+                        Text(L10n.azkar)
+                            .foregroundColor(.mono.offblack)
+                            .scaledFont(locale: .arabic, .pFootnote, .bold)
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal, .p16)
+                        makeDuaaView(text: viewStore.duaa)
+                            .padding()
+
+                        NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+                            .padding(.bottom)
+                    }
+                }
+                .ignoresSafeArea(edges: .top)
+                .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
+                    IfLetStore(store.scope(state: \.selectedPrayer, action: Home.Action.prayerDetails), then: {
+                        PrayerDetailsView(store: $0)
+                    })
+                }
+                .background(Color.mono.background)
+                .onAppear { viewStore.send(.onAppear) }
+                .enableInjection()
+            }
+
+
+            VStack {
+                Text(L10n.pickDate)
+                    .foregroundColor(.mono.offblack)
+                    .scaledFont(locale: .arabic, .pFootnote, .bold)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, .p16)
+
+                DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
+                    .datePickerStyle(.graphical)
+            }.padding()
+
+            NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+                .padding(.bottom)
+
+            VStack(alignment: .leading) {
+                Text(L10n.ahadeeth)
+                    .foregroundColor(.mono.offblack)
+                    .scaledFont(locale: .arabic, .pFootnote, .bold)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, .p16)
+                HadeethSliderView()
+            }
+            .ignoresSafeArea(edges: .top)
+            .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
+                IfLetStore(store.scope(state: \.selectedPrayer, action: Home.Action.prayerDetails), then: {
+                    PrayerDetailsView(store: $0)
+                })
+            }
+            .background(Color.mono.background)
+            .onAppear { viewStore.send(.onAppear) }
+            .enableInjection()
         }
-      }
-      .ignoresSafeArea(edges: .top)
-      .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
-        IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
-          PrayerDetailsView(store: $0)
-        })
-      }
-      .background(Color.mono.background)
-      .onAppear { viewStore.send(.onAppear) }
-      .enableInjection()
     }
-  }
-					}
-
-					VStack {
-						Text(L10n.pickDate)
-							.foregroundColor(.mono.offblack)
-							.scaledFont(locale: .arabic, .pFootnote, .bold)
-							.multilineTextAlignment(.leading)
-							.padding(.horizontal, .p16)
-
-						DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
-							.datePickerStyle(.graphical)
-					}.padding()
-
-					NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
-						.padding(.bottom)
-
-					VStack(alignment: .leading) {
-						Text(L10n.ahadeeth)
-							.foregroundColor(.mono.offblack)
-							.scaledFont(locale: .arabic, .pFootnote, .bold)
-							.multilineTextAlignment(.leading)
-							.padding(.horizontal, .p16)
-						HadeethSliderView()
-					}
-				}
-			}
-			.ignoresSafeArea(edges: .top)
-			.fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
-				IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
-					PrayerDetailsView(store: $0)
-				})
-			}
-			.background(Color.mono.background)
-			.onAppear { viewStore.send(.onAppear) }
-			.enableInjection()
-		}
-	}
 
 	@ViewBuilder
 	func makeDuaaView(text: String) -> some View {
@@ -116,7 +116,7 @@ public struct HomeView: View {
 }
 
 struct HeaderView: View {
-	let viewStore: ViewStore<HomeState, HomeAction>
+	let viewStore: ViewStoreOf<Home>
 
 	var body: some View {
 		VStack(spacing: .p4) {

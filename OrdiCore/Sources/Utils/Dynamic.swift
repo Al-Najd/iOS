@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Dynamic
+
 /// Lightweight Observable Pattern
 public class Dynamic<T> {
     private var bindings: [Callback<T>] = []
@@ -31,6 +33,8 @@ public class Dynamic<T> {
         bindings.append(binding)
     }
 }
+
+// MARK: Equatable
 
 extension Dynamic: Equatable where T: Equatable {
     public static func == (lhs: Dynamic<T>, rhs: Dynamic<T>) -> Bool {

@@ -16,11 +16,13 @@ import OrdiLogging
 import SwiftUI
 import Utils
 
+// MARK: - FontManager
+
 public final class FontManager {
     public static var shared: FontManager = .init()
 
-    public var supportsAccessibilityAdaption: Bool = false
-    public var supportsDeviceSizeAdaption: Bool = true
+    public var supportsAccessibilityAdaption = false
+    public var supportsDeviceSizeAdaption = true
     public var fontMultiplier: CGFloat = 1.0
 
     // Note: Forced here as the app shouldn't run unless this is set
@@ -34,16 +36,16 @@ public final class FontManager {
     public func getSuitableFont(
         category: FontCategory,
         scale: FontScale,
-        weight: FontWeight
-    ) -> ARFont {
-        guard let suitableFont = configuration.availableFonts
-            .first(
-                where: {
-                    $0.fontLocale == configuration.fontsLocale &&
+        weight: FontWeight)
+        -> ARFont {
+        guard
+            let suitableFont = configuration.availableFonts
+                .first(
+                    where: {
                         $0.fontLocale == configuration.fontsLocale &&
-                        $0.fontType == configuration.fontsType
-                }
-            )
+                            $0.fontLocale == configuration.fontsLocale &&
+                            $0.fontType == configuration.fontsType
+                    })
         else { fatalError("Can't find a suitable font to set") }
 
         return ARFont(fontDetails: suitableFont, fontCategory: category, fontScale: scale, fontWeight: weight)
@@ -54,15 +56,18 @@ public final class FontManager {
         type: FontType,
         category: FontCategory,
         scale: FontScale,
-        weight: FontWeight
-    ) -> ARFont {
-        guard let suitableFont = configuration.availableFonts
-            .first(where: { $0.fontLocale == locale && $0.fontType == type })
+        weight: FontWeight)
+        -> ARFont {
+        guard
+            let suitableFont = configuration.availableFonts
+                .first(where: { $0.fontLocale == locale && $0.fontType == type })
         else { return getSuitableFont(category: category, scale: scale, weight: weight) }
 
         return ARFont(fontDetails: suitableFont, fontCategory: category, fontScale: scale, fontWeight: weight)
     }
 }
+
+// MARK: FontManager.Configuration
 
 public extension FontManager {
     struct Configuration: Codable {
@@ -84,8 +89,7 @@ private extension FontManager {
         else {
             LoggersManager.error(message: "Couldn't find fonts.json in designSystemBundle")
             fatalError(
-                "\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
-            )
+                "\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)")
         }
 
         do {
@@ -95,19 +99,14 @@ private extension FontManager {
             configuration = .init(
                 fontsLocale: .init(
                     language: .init(
-                        Bundle.main.preferredLocalizations.first ?? "ar"
-                    )
-                ),
+                        Bundle.main.preferredLocalizations.first ?? "ar")),
                 fontsType: configs.defaultConfigurations.sdkFriendlyType(),
-                availableFonts: configs.fonts.map { $0.toSDKFont() }
-            )
+                availableFonts: configs.fonts.map { $0.toSDKFont() })
         } catch {
             LoggersManager.error(
-                message: "Couldn't parse fonts.json\nerror: \(error),\ndescription: \(error.localizedDescription)"
-            )
+                message: "Couldn't parse fonts.json\nerror: \(error),\ndescription: \(error.localizedDescription)")
             fatalError(
-                "\(error.localizedDescription)\n\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)"
-            )
+                "\(error.localizedDescription)\n\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)")
         }
     }
 }

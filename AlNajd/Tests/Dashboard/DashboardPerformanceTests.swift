@@ -5,9 +5,9 @@
 //  Created by Ahmed Ramy on 13/02/2022.
 //
 
+import XCTest
 @testable import Dashboard
 @testable import Entities
-import XCTest
 
 class DashboardPerformanceTests: XCTestCase {
     let goodWeekSeeder: (inout [Date: [Deed]], Date) -> Void = { dictionary, date in
@@ -30,8 +30,7 @@ class DashboardPerformanceTests: XCTestCase {
                     .fard: currentWeekFakeData,
                     .sunnah: currentWeekFakeData,
                     .nafila: currentWeekFakeData,
-                ])
-            )
+                ]))
         }
     }
 
@@ -49,8 +48,7 @@ class DashboardPerformanceTests: XCTestCase {
                     .fard: previousWeekFakeData,
                     .sunnah: previousWeekFakeData,
                     .nafila: previousWeekFakeData,
-                ])
-            )
+                ]))
         }
     }
 }

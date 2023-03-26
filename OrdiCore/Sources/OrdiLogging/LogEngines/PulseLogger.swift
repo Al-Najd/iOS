@@ -20,19 +20,19 @@ public final class PulseLogger: LogEngine {
 
     public func info(message: String) {
         #if DEBUG
-            logger.info(Logger.Message(stringLiteral: message))
+        logger.info(Logger.Message(stringLiteral: message))
         #endif
     }
 
     public func warn(message: String) {
         #if DEBUG
-            logger.warning(Logger.Message(stringLiteral: message))
+        logger.warning(Logger.Message(stringLiteral: message))
         #endif
     }
 
     public func error(message: String) {
         #if DEBUG
-            logger.error(Logger.Message(stringLiteral: message))
+        logger.error(Logger.Message(stringLiteral: message))
         #endif
     }
 }

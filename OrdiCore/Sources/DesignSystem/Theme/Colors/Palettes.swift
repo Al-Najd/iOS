@@ -11,6 +11,8 @@
 
 import SwiftUI
 
+// MARK: - PrimaryPalette
+
 public struct PrimaryPalette: BrandColor {
     public var `default`: Color
     public var dark: Color
@@ -26,6 +28,8 @@ public struct PrimaryPalette: BrandColor {
         background = .init("Primary.background", bundle: bundle)
     }
 }
+
+// MARK: - SecondaryPalette
 
 public struct SecondaryPalette: BrandColor {
     public var `default`: Color
@@ -43,6 +47,8 @@ public struct SecondaryPalette: BrandColor {
     }
 }
 
+// MARK: - SuccessPalette
+
 public struct SuccessPalette: BrandColor {
     public var `default`: Color
     public var dark: Color
@@ -58,6 +64,8 @@ public struct SuccessPalette: BrandColor {
         background = .init("Success.background", bundle: bundle)
     }
 }
+
+// MARK: - WarningPalette
 
 public struct WarningPalette: BrandColor {
     public var `default`: Color
@@ -75,6 +83,8 @@ public struct WarningPalette: BrandColor {
     }
 }
 
+// MARK: - DangerPalette
+
 public struct DangerPalette: BrandColor {
     public var `default`: Color
     public var dark: Color
@@ -90,6 +100,8 @@ public struct DangerPalette: BrandColor {
         background = .init("Danger.background", bundle: bundle)
     }
 }
+
+// MARK: - InfoPalette
 
 public struct InfoPalette: BrandColor {
     public var `default`: Color
@@ -107,6 +119,8 @@ public struct InfoPalette: BrandColor {
     }
 }
 
+// MARK: - TransparencyPalette
+
 public struct TransparencyPalette: Transparency {
     public var light: Color = .init("Transparency.light.full")
     public var dark: Color = .init("Transparency.dark.full")
@@ -121,6 +135,8 @@ public struct TransparencyPalette: Transparency {
             .opacity(Double(percentage) / 100)
     }
 }
+
+// MARK: - MonochromaticPalette
 
 public struct MonochromaticPalette: MonochromaticColor {
     public var offblack: Color
@@ -146,20 +162,22 @@ public struct MonochromaticPalette: MonochromaticColor {
     }
 }
 
-class CurrentBundleFinder {}
+// MARK: - CurrentBundleFinder
+
+class CurrentBundleFinder { }
 
 extension Foundation.Bundle {
     static var designSystemBundle: Bundle = {
-        /* The name of your local package, prepended by "LocalPackages_" */
+        // The name of your local package, prepended by "LocalPackages_"
         let bundleName = "OrdiCore_DesignSystem"
         let candidates = [
-            /* Bundle should be present here when the package is linked into an App. */
+            // Bundle should be present here when the package is linked into an App.
             Bundle.main.resourceURL,
-            /* Bundle should be present here when the package is linked into a framework. */
+            // Bundle should be present here when the package is linked into a framework.
             Bundle(for: CurrentBundleFinder.self).resourceURL,
-            /* For command-line tools. */
+            // For command-line tools.
             Bundle.main.bundleURL,
-            /* Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/"). */
+            // Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/").
             Bundle(for: CurrentBundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent(),
         ]
         for candidate in candidates {

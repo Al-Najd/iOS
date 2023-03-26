@@ -13,6 +13,8 @@ public extension View {
     }
 }
 
+// MARK: - RoundedCorner
+
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners

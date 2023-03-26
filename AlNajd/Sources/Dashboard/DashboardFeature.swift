@@ -14,6 +14,8 @@ import Localization
 import SwiftUI
 import Utils
 
+// MARK: - DashboardState
+
 public struct DashboardState: Equatable {
     public var tipOfTheDay: String
     public var prayingStreak: String
@@ -28,8 +30,7 @@ public struct DashboardState: Equatable {
         sunnahsPrayed: String = "",
         azkarDoneCount: String = "",
         totalFaraaidDone: String = "",
-        sunnahPlotData: IdentifiedArrayOf<ChartAnalyticsData> = .init(uniqueElements: [])
-    ) {
+        sunnahPlotData: IdentifiedArrayOf<ChartAnalyticsData> = .init(uniqueElements: [])) {
         self.tipOfTheDay = tipOfTheDay
         self.prayingStreak = prayingStreak
         self.sunnahsPrayed = sunnahsPrayed
@@ -39,19 +40,23 @@ public struct DashboardState: Equatable {
     }
 
     public static func == (lhs: DashboardState, rhs: DashboardState) -> Bool {
-        return lhs.tipOfTheDay == rhs.tipOfTheDay
+        lhs.tipOfTheDay == rhs.tipOfTheDay
             && lhs.sunnahsPrayed == rhs.prayingStreak
             && lhs.azkarDoneCount == rhs.sunnahsPrayed
             && lhs.prayingStreak == rhs.azkarDoneCount
     }
 }
 
+// MARK: - DashboardAction
+
 public enum DashboardAction: Equatable {
     case onAppear
     case animate(ChartAnalyticsData)
 }
 
-public struct DashboardEnvironment { public init() {} }
+// MARK: - DashboardEnvironment
+
+public struct DashboardEnvironment { public init() { } }
 
 public let dashboardReducer = Reducer<
     DashboardState,
@@ -67,15 +72,14 @@ public let dashboardReducer = Reducer<
         state.sunnahPlotData = .init(
             uniqueElements: env.prayersClient.getSunnahPerDay().map {
                 ChartAnalyticsData(date: $0, count: $1)
-            }
-        )
+            })
 
         state.sunnahPlotData.enumerated().forEach { (index: Int, data: ChartAnalyticsData) in
             withAnimation(.easeInOut(duration: 0.8 + (Double(index) * 0.05)).delay(Double(index) * 0.05)) {
                 state.sunnahPlotData[id: data.id]?.animate = true
             }
         }
-    case let .animate(data):
+    case .animate(let data):
         break
     }
     return .none
@@ -85,13 +89,14 @@ extension Store where State == DashboardState, Action == DashboardAction {
     static let mock: Store = .init(
         initialState: .init(),
         reducer: dashboardReducer,
-        environment: .live(DashboardEnvironment())
-    )
+        environment: .live(DashboardEnvironment()))
 }
+
+// MARK: - ChartAnalyticsData
 
 public struct ChartAnalyticsData: Identifiable, Equatable {
     public let id: UUID = .init()
     let date: Date
     let count: Int
-    var animate: Bool = true
+    var animate = true
 }

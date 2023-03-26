@@ -42,13 +42,15 @@ public extension Array {
 
 extension Sequence {
     func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
-        return sorted { a, b in
+        sorted { a, b in
             a[keyPath: keyPath] < b[keyPath: keyPath]
         }
     }
 }
 
-public protocol Changeable {}
+// MARK: - Changeable
+
+public protocol Changeable { }
 public extension Changeable {
     func changing(_ change: (inout Self) -> Void) -> Self {
         var a = self
@@ -61,7 +63,9 @@ public extension Changeable {
     }
 }
 
-extension Array: Changeable where Element: Changeable {}
+// MARK: - Array + Changeable
+
+extension Array: Changeable where Element: Changeable { }
 
 public extension Array where Element: Equatable {
     mutating func replace(_ element: Element, with new: Element) {

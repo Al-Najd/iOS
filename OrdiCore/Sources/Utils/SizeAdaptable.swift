@@ -11,6 +11,8 @@ public func getScreenSize() -> CGRect {
     UIScreen.main.bounds
 }
 
+// MARK: - SizeAdaptable
+
 public protocol SizeAdaptable {
     associatedtype AdaptableType
     var maxVBreakpoint: DeviceHeight { get }
@@ -22,6 +24,8 @@ public protocol SizeAdaptable {
     func getSelf() -> AdaptableType
 }
 
+// MARK: - SizeRangeAdaptable
+
 public protocol SizeRangeAdaptable: SizeAdaptable {
     func adaptV(min: AdaptableType) -> AdaptableType
     func adaptV(max: AdaptableType) -> AdaptableType
@@ -32,9 +36,13 @@ public protocol SizeRangeAdaptable: SizeAdaptable {
     func adaptH(min: AdaptableType, max: AdaptableType) -> AdaptableType
 }
 
+// MARK: - SizeRatioAdaptable
+
 public protocol SizeRatioAdaptable: SizeAdaptable {
     func adaptRatio() -> AdaptableType
 }
+
+// MARK: - Scale
 
 public enum Scale {
     case normal
@@ -61,6 +69,8 @@ public enum Scale {
         }
     }
 }
+
+// MARK: - DeviceWidth
 
 public enum DeviceWidth {
     case small
@@ -89,6 +99,8 @@ public enum DeviceWidth {
         }
     }
 }
+
+// MARK: - DeviceHeight
 
 public enum DeviceHeight {
     // iPads
@@ -285,11 +297,15 @@ public extension SizeRangeAdaptable {
     }
 }
 
+// MARK: - CGFloat + SizeRangeAdaptable
+
 extension CGFloat: SizeRangeAdaptable {
     public func getSelf() -> CGFloat {
         self
     }
 }
+
+// MARK: - CGFloat + SizeRatioAdaptable
 
 extension CGFloat: SizeRatioAdaptable {
     public func adaptRatio() -> CGFloat {
@@ -297,11 +313,15 @@ extension CGFloat: SizeRatioAdaptable {
     }
 }
 
+// MARK: - Int + SizeRangeAdaptable
+
 extension Int: SizeRangeAdaptable {
     public func getSelf() -> Int {
         self
     }
 }
+
+// MARK: - Double + SizeRangeAdaptable
 
 extension Double: SizeRangeAdaptable {
     public func getSelf() -> Double {
@@ -309,11 +329,15 @@ extension Double: SizeRangeAdaptable {
     }
 }
 
+// MARK: - Double + SizeRatioAdaptable
+
 extension Double: SizeRatioAdaptable {
     public func adaptRatio() -> Double {
         self * DeviceHeight(size: UIScreen.main.bounds.height).multiplier
     }
 }
+
+// MARK: - HorizontalAlignment + SizeRangeAdaptable
 
 extension HorizontalAlignment: SizeRangeAdaptable {
     public func getSelf() -> HorizontalAlignment {
@@ -321,11 +345,15 @@ extension HorizontalAlignment: SizeRangeAdaptable {
     }
 }
 
+// MARK: - TextAlignment + SizeRangeAdaptable
+
 extension TextAlignment: SizeRangeAdaptable {
     public func getSelf() -> TextAlignment {
         self
     }
 }
+
+// MARK: - Alignment + SizeRangeAdaptable
 
 extension Alignment: SizeRangeAdaptable {
     public func getSelf() -> Alignment {
@@ -337,8 +365,8 @@ public extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content
-    ) -> some View {
+        @ViewBuilder placeholder: () -> Content)
+        -> some View {
         ZStack(alignment: alignment) {
             placeholder().opacity(shouldShow ? 1 : 0)
             self

@@ -8,6 +8,8 @@
 import DesignSystem
 import SwiftUI
 
+// MARK: - RTextField
+
 public struct RTextField: View {
     let icon: String
     let title: String
@@ -18,8 +20,7 @@ public struct RTextField: View {
         icon: String,
         title: String,
         hint: String,
-        value: Binding<String>
-    ) {
+        value: Binding<String>) {
         self.icon = icon
         self.title = title
         self.hint = hint
@@ -41,11 +42,12 @@ public struct RTextField: View {
 
             Divider()
                 .background(
-                    Color.mono.line
-                )
+                    Color.mono.line)
         }
     }
 }
+
+// MARK: - RTextField_Previews
 
 struct RTextField_Previews: PreviewProvider {
     static var previews: some View {
@@ -56,18 +58,16 @@ struct RTextField_Previews: PreviewProvider {
                     icon: "envelope",
                     title: "Some Field",
                     hint: "Some Field",
-                    value: .constant("")
-                )
-                .padding()
+                    value: .constant(""))
+                    .padding()
 
                 Text("Filled State")
                 RTextField(
                     icon: "envelope",
                     title: "Some Field",
                     hint: "Some Field",
-                    value: .constant("Hi There!")
-                )
-                .padding()
+                    value: .constant("Hi There!"))
+                    .padding()
             }.padding()
         }
     }

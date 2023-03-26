@@ -4,11 +4,9 @@ let target = Target(
     name: "Al Najd",
     platform: .iOS,
     product: .app,
-    bundleId: ""
-)
+    bundleId: "")
 let project = Project(
     name: "Al Najd",
     organizationName: "Ahmed Ramy",
     settings: nil,
-    targets: []
-)
+    targets: [])

@@ -10,6 +10,8 @@ import Entity
 import Foundation
 import Utils
 
+// MARK: - DiskStorage
+
 public final class DiskStorage {
     private let queue: DispatchQueue
     private let fileManager: FileManager
@@ -18,13 +20,14 @@ public final class DiskStorage {
     public init(
         queue: DispatchQueue = .global(qos: DispatchQoS.QoSClass.default),
         fileManager: FileManager = .default,
-        path: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    ) {
+        path: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]) {
         self.queue = queue
         self.fileManager = fileManager
         self.path = path
     }
 }
+
+// MARK: WritableStorage
 
 extension DiskStorage: WritableStorage {
     public func remove<T>(type _: T.Type, for key: StorageKey) throws where T: Codable {
@@ -53,11 +56,12 @@ extension DiskStorage {
             try fileManager.createDirectory(
                 at: folderUrl,
                 withIntermediateDirectories: true,
-                attributes: nil
-            )
+                attributes: nil)
         }
     }
 }
+
+// MARK: ReadableStorage
 
 extension DiskStorage: ReadableStorage {
     public func fetchValue<T: Codable>(for key: StorageKey) -> T? {

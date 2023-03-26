@@ -8,6 +8,8 @@
 import Foundation
 import Utils
 
+// MARK: - RepeatableDeed
+
 public struct RepeatableDeed: Identifiable, Codable, Equatable {
     public var id: UUID = .init()
 
@@ -40,8 +42,7 @@ public extension Array where Element == RepeatableDeed {
             title: $0.zekr,
             numberOfRepeats: $0.count,
             category: .sabah,
-            reward: .init(title: $0.purpose)
-        )
+            reward: .init(title: $0.purpose))
     }
 
     static let masaa: [RepeatableDeed] = Zekr.mainAzkar.filter { $0.category == .masaa }.map {
@@ -49,9 +50,10 @@ public extension Array where Element == RepeatableDeed {
             title: $0.zekr,
             numberOfRepeats: $0.count,
             category: .masaa,
-            reward: .init(title: $0.purpose)
-        )
+            reward: .init(title: $0.purpose))
     }
 }
 
-extension RepeatableDeed: Changeable {}
+// MARK: - RepeatableDeed + Changeable
+
+extension RepeatableDeed: Changeable { }

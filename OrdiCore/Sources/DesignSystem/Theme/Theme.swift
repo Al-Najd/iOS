@@ -11,7 +11,11 @@
 
 import SwiftUI
 
-public protocol Theme: Colorable, Shadowable {}
+// MARK: - Theme
+
+public protocol Theme: Colorable, Shadowable { }
+
+// MARK: - ThemeManager
 
 public final class ThemeManager {
     public var selectedTheme: Theme = PackageDefaultTheme()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - PrayerSchedule
+// MARK: - PrayerScheduleResponse
 
 public class PrayerScheduleResponse: Codable {
     public let code: Int
@@ -27,7 +27,7 @@ public class PrayerScheduleResponse: Codable {
     }
 }
 
-// MARK: - Results
+// MARK: - PrayersSchedule
 
 public class PrayersSchedule: Codable {
     let datetime: [Datetime]
@@ -109,7 +109,16 @@ public class Times: Codable {
         case midnight
     }
 
-    public init(imsak: String, sunrise: String, fajr: String, dhuhr: String, asr: String, sunset: String, maghrib: String, isha: String, midnight: String) {
+    public init(
+        imsak: String,
+        sunrise: String,
+        fajr: String,
+        dhuhr: String,
+        asr: String,
+        sunset: String,
+        maghrib: String,
+        isha: String,
+        midnight: String) {
         self.imsak = imsak
         self.sunrise = sunrise
         self.fajr = fajr
@@ -143,7 +152,14 @@ public class Location: Codable {
         case localOffset
     }
 
-    public init(latitude: Double, longitude: Double, elevation: Int, country: String, countryCode: String, timezone: String, localOffset: Int) {
+    public init(
+        latitude: Double,
+        longitude: Double,
+        elevation: Int,
+        country: String,
+        countryCode: String,
+        timezone: String,
+        localOffset: Int) {
         self.latitude = latitude
         self.longitude = longitude
         self.elevation = elevation

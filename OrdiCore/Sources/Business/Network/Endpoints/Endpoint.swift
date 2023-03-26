@@ -10,6 +10,8 @@ import Alamofire
 public typealias HTTPHeaders = [String: String]
 public typealias HTTPParameters = [String: Any]
 
+// MARK: - Endpoint
+
 /// A protocol that carries the request details for the network manager to use
 ///
 ///
@@ -31,7 +33,7 @@ public extension Endpoint {
     /// Base URL for calling endpoints which is configurable according to Build
     /// Configurations
     var baseURL: String {
-        return "https://api.dev.RS.tech/m/"
+        "https://api.dev.RS.tech/m/"
     }
 
     var headers: HTTPHeaders {
@@ -51,13 +53,15 @@ public extension Endpoint {
 
     // TODO: - Add Authorization when you come up with a good idea of how to handle the user
     func defaultHeaders() -> HTTPHeaders {
-        return [
+        [
             "Accept-Language": "en",
             "Accept": "application/json",
             "Content-Type": "application/json",
         ]
     }
 }
+
+// MARK: - ParametersEncoding
 
 /// Determines how the network manager will encode the parameters when firing the
 /// request
@@ -69,6 +73,8 @@ public enum ParametersEncoding {
     /// Encodes the parameters as a multipart form data and file data
     case multipartEncoding
 }
+
+// MARK: - HTTPMethod
 
 /// HTTPMethods enum in String to ease generating Request and avoid switching and enjoy syntactic sugar
 public enum HTTPMethod: String {

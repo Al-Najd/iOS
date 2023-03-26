@@ -10,10 +10,14 @@ import Foundation
 import GRDB
 import Utils
 
+// MARK: - ANDayDAO
+
 public struct ANDayDAO {
     public var id: Int64?
     public var date: Date
 }
+
+// MARK: - ANPrayerDAO
 
 public struct ANPrayerDAO {
     public var id: Int64?
@@ -23,6 +27,8 @@ public struct ANPrayerDAO {
     public var dayId: Int64
     public var reward: String
 }
+
+// MARK: - ANSunnahDAO
 
 public struct ANSunnahDAO {
     public var id: Int64?
@@ -34,6 +40,8 @@ public struct ANSunnahDAO {
     public var prayerId: Int64
     public var reward: String
 }
+
+// MARK: - ANAzkarDAO
 
 public struct ANAzkarDAO {
     public var id: Int64?
@@ -66,8 +74,7 @@ extension ANPrayerDAO {
             sunnah: .init(uniqueElements: sunnah),
             afterAzkar: .init(uniqueElements: azkar),
             isDone: isDone,
-            reward: reward
-        )
+            reward: reward)
     }
 }
 
@@ -81,8 +88,7 @@ extension ANSunnahDAO {
             affirmation: affirmation.toDomainModel(),
             azkar: [],
             isDone: isDone,
-            reward: reward
-        )
+            reward: reward)
     }
 }
 
@@ -111,15 +117,18 @@ extension ANAzkarDAO {
             name: name,
             reward: reward,
             repetation: repetation,
-            currentCount: currentCount
-        )
+            currentCount: currentCount)
     }
 }
 
-extension ANDayDAO: Codable, FetchableRecord, MutablePersistableRecord {}
+// MARK: - ANDayDAO + Codable, FetchableRecord, MutablePersistableRecord
+
+extension ANDayDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+
+// MARK: - ANDayDAO + TableRecord, EncodableRecord
 
 extension ANDayDAO: TableRecord, EncodableRecord {
-    public static var databaseTableName: String = "days"
+    public static var databaseTableName = "days"
 
     static let prayers = hasMany(ANPrayerDAO.self)
     static let sunnah = hasMany(ANSunnahDAO.self, through: prayers, using: ANPrayerDAO.sunnah)
@@ -181,14 +190,18 @@ extension ANDayDAO: TableRecord, EncodableRecord {
     }
 }
 
-extension ANPrayerDAO: Codable, FetchableRecord, MutablePersistableRecord {}
+// MARK: - ANPrayerDAO + Codable, FetchableRecord, MutablePersistableRecord
+
+extension ANPrayerDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+
+// MARK: - ANPrayerDAO + TableRecord, EncodableRecord
 
 extension ANPrayerDAO: TableRecord, EncodableRecord {
     static let day = belongsTo(ANDayDAO.self)
     static let sunnah = hasMany(ANSunnahDAO.self)
     static let azkar = hasMany(ANAzkarDAO.self)
 
-    public static var databaseTableName: String = "prayers"
+    public static var databaseTableName = "prayers"
 
     enum Columns {
         static let id = Column(CodingKeys.id)
@@ -219,13 +232,17 @@ extension ANPrayerDAO: TableRecord, EncodableRecord {
     }
 }
 
-extension ANSunnahDAO: Codable, FetchableRecord, MutablePersistableRecord {}
+// MARK: - ANSunnahDAO + Codable, FetchableRecord, MutablePersistableRecord
+
+extension ANSunnahDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+
+// MARK: - ANSunnahDAO + TableRecord, EncodableRecord
 
 extension ANSunnahDAO: TableRecord, EncodableRecord {
     static let prayer = belongsTo(ANPrayerDAO.self)
     static let day = hasOne(ANDayDAO.self, through: prayer, using: ANPrayerDAO.day)
 
-    public static var databaseTableName: String = "sunnah"
+    public static var databaseTableName = "sunnah"
 
     enum Columns {
         static let id = Column(CodingKeys.id)
@@ -253,37 +270,98 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
 
 extension ANSunnahDAO {
     static let fajr: (Int64) -> ANSunnahDAO = {
-        .init(name: "fajr", isDone: false, raqaat: 2, position: .before, affirmation: .affirmed, prayerId: $0, reward: "fajr_sunnah_reward")
+        .init(
+            name: "fajr",
+            isDone: false,
+            raqaat: 2,
+            position: .before,
+            affirmation: .affirmed,
+            prayerId: $0,
+            reward: "fajr_sunnah_reward")
     }
 
     static let dhuhr: (Int64) -> [ANSunnahDAO] = {
         [
-            .init(name: "duhr", isDone: false, raqaat: 4, position: .before, affirmation: .affirmed, prayerId: $0, reward: "duhr_sunnah_reward"),
-            .init(name: "duhr", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0, reward: "duhr_sunnah_reward"),
-            .init(name: "duhr", isDone: false, raqaat: 2, position: .after, affirmation: .desirable, prayerId: $0, reward: "duhr_sunnah_reward"),
+            .init(
+                name: "duhr",
+                isDone: false,
+                raqaat: 4,
+                position: .before,
+                affirmation: .affirmed,
+                prayerId: $0,
+                reward: "duhr_sunnah_reward"),
+            .init(
+                name: "duhr",
+                isDone: false,
+                raqaat: 2,
+                position: .after,
+                affirmation: .affirmed,
+                prayerId: $0,
+                reward: "duhr_sunnah_reward"),
+            .init(
+                name: "duhr",
+                isDone: false,
+                raqaat: 2,
+                position: .after,
+                affirmation: .desirable,
+                prayerId: $0,
+                reward: "duhr_sunnah_reward"),
         ]
     }
 
     static let maghrib: (Int64) -> [ANSunnahDAO] = {
         [
-            .init(name: "maghrib", isDone: false, raqaat: 2, position: .before, affirmation: .desirable, prayerId: $0, reward: "maghrib_sunnah_reward"),
-            .init(name: "maghrib", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0, reward: "maghrib_sunnah_reward"),
+            .init(
+                name: "maghrib",
+                isDone: false,
+                raqaat: 2,
+                position: .before,
+                affirmation: .desirable,
+                prayerId: $0,
+                reward: "maghrib_sunnah_reward"),
+            .init(
+                name: "maghrib",
+                isDone: false,
+                raqaat: 2,
+                position: .after,
+                affirmation: .affirmed,
+                prayerId: $0,
+                reward: "maghrib_sunnah_reward"),
         ]
     }
 
     static let aishaa: (Int64) -> [ANSunnahDAO] = {
         [
-            .init(name: "aishaa", isDone: false, raqaat: 2, position: .before, affirmation: .desirable, prayerId: $0, reward: "ishaa_sunnah_reward"),
-            .init(name: "aishaa", isDone: false, raqaat: 2, position: .after, affirmation: .affirmed, prayerId: $0, reward: "ishaa_sunnah_reward"),
+            .init(
+                name: "aishaa",
+                isDone: false,
+                raqaat: 2,
+                position: .before,
+                affirmation: .desirable,
+                prayerId: $0,
+                reward: "ishaa_sunnah_reward"),
+            .init(
+                name: "aishaa",
+                isDone: false,
+                raqaat: 2,
+                position: .after,
+                affirmation: .affirmed,
+                prayerId: $0,
+                reward: "ishaa_sunnah_reward"),
         ]
     }
 }
 
-extension ANAzkarDAO: Codable, FetchableRecord, MutablePersistableRecord {}
+// MARK: - ANAzkarDAO + Codable, FetchableRecord, MutablePersistableRecord
+
+extension ANAzkarDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+
+// MARK: - ANAzkarDAO + TableRecord, EncodableRecord
+
 extension ANAzkarDAO: TableRecord, EncodableRecord {
     static let prayer = belongsTo(ANPrayerDAO.self)
 
-    public static var databaseTableName: String = "azkar"
+    public static var databaseTableName = "azkar"
 
     enum Columns {
         static let id = Column(CodingKeys.id)
@@ -305,13 +383,23 @@ extension ANAzkarDAO {
             .init(name: "alhamdulellah", reward: "", repetation: 33, currentCount: 33, prayerId: $0),
             .init(name: "allahuakbar", reward: "", repetation: 33, currentCount: 33, prayerId: $0),
             .init(name: "la_ilah_ila_allah", reward: "", repetation: 1, currentCount: 1, prayerId: $0),
-            .init(name: "la_ilah_ila_allah_la_hawl_wala_qwata_ila_bellah", reward: "", repetation: 1, currentCount: 1, prayerId: $0),
+            .init(
+                name: "la_ilah_ila_allah_la_hawl_wala_qwata_ila_bellah",
+                reward: "",
+                repetation: 1,
+                currentCount: 1,
+                prayerId: $0),
         ]
     }
 
     static let fajrAndMaghrib: (Int64) -> [ANAzkarDAO] = {
         [
-            .init(name: "la_ilah_ila_allah_wahdah", reward: "la_ilah_ila_allah_wahdah_reward", repetation: 10, currentCount: 10, prayerId: $0),
+            .init(
+                name: "la_ilah_ila_allah_wahdah",
+                reward: "la_ilah_ila_allah_wahdah_reward",
+                repetation: 10,
+                currentCount: 10,
+                prayerId: $0),
         ]
             +
             sewarFajrAndMaghrib($0)
@@ -336,6 +424,14 @@ extension ANAzkarDAO {
     }
 }
 
-extension ANPrayerDAO: Changeable {}
-extension ANSunnahDAO: Changeable {}
-extension ANAzkarDAO: Changeable {}
+// MARK: - ANPrayerDAO + Changeable
+
+extension ANPrayerDAO: Changeable { }
+
+// MARK: - ANSunnahDAO + Changeable
+
+extension ANSunnahDAO: Changeable { }
+
+// MARK: - ANAzkarDAO + Changeable
+
+extension ANAzkarDAO: Changeable { }

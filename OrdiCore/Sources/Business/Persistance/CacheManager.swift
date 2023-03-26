@@ -9,6 +9,8 @@
 import Entity
 import Foundation
 
+// MARK: - CacheManager
+
 public final class CacheManager {
     public enum SupportedStorage {
         case userDefaults
@@ -24,14 +26,13 @@ public final class CacheManager {
 
     public init(
         decoder: JSONDecoder = .init(),
-        encoder: JSONEncoder = .init()
-    ) {
+        encoder: JSONEncoder = .init()) {
         self.decoder = decoder
         self.encoder = encoder
     }
 
     public func fetch<T: Codable>(_: T.Type, for key: StorageKey) -> T? {
-        return getSuitableStorage(from: key.suitableStorage).fetchValue(for: key)
+        getSuitableStorage(from: key.suitableStorage).fetchValue(for: key)
     }
 
     public func save<T: Codable>(_ value: T, for key: StorageKey) {

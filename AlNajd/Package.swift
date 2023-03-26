@@ -10,10 +10,9 @@ let package = Package(
     ],
     products: ANProducts.all,
     dependencies: ANDependencies.all,
-    targets: ANTargets.all
-)
+    targets: ANTargets.all)
 
-// MARK: - Targets
+// MARK: - ANTargets
 
 private enum ANTargets {
     static let all: [Target] = ANTargets.alCore
@@ -41,8 +40,7 @@ private extension ANTargets {
                 "Assets",
                 "Dashboard",
                 .product(name: "Core", package: "OrdiCore"),
-            ]
-        ),
+            ]),
     ]
 }
 
@@ -52,8 +50,7 @@ private extension ANTargets {
             name: "Assets",
             resources: [
                 .process("Resources"),
-            ]
-        ),
+            ]),
     ]
 
     static let prayerDetails: [Target] = [
@@ -66,8 +63,7 @@ private extension ANTargets {
                 "PrayersClient",
                 .product(name: "Drawer", package: "swiftui-drawer"),
                 .product(name: "Core", package: "OrdiCore"),
-            ]
-        ),
+            ]),
     ]
 
     static let home: [Target] = [
@@ -81,8 +77,7 @@ private extension ANTargets {
                 "Dashboard",
                 .product(name: "Core", package: "OrdiCore"),
                 .product(name: "ScalingHeaderScrollView", package: "ScalingHeaderScrollView"),
-            ]
-        ),
+            ]),
     ]
 
     static let prayersClient: [Target] = [
@@ -97,8 +92,7 @@ private extension ANTargets {
                 .product(name: "GRDB", package: "GRDB.swift"),
                 .product(name: "SwiftDate", package: "SwiftDate"),
             ],
-            resources: [.process("Resources")]
-        ),
+            resources: [.process("Resources")]),
     ]
 
     static let common: [Target] = [
@@ -111,8 +105,7 @@ private extension ANTargets {
                 .product(name: "ComposableCoreLocation", package: "composable-core-location"),
                 .product(name: "Inject", package: "Inject"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-            ]
-        ),
+            ]),
     ]
 
     static let localization: [Target] = [
@@ -121,8 +114,7 @@ private extension ANTargets {
             dependencies: [],
             resources: [
                 .process("Resources"),
-            ]
-        ),
+            ]),
     ]
 
     static let entities: [Target] = [
@@ -133,8 +125,7 @@ private extension ANTargets {
                 "Assets",
                 .product(name: "Core", package: "OrdiCore"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-            ]
-        ),
+            ]),
     ]
 
     static let dashboard: [Target] = [
@@ -146,12 +137,11 @@ private extension ANTargets {
                 "PrayersClient",
                 "Common",
                 .product(name: "Core", package: "OrdiCore"),
-            ]
-        ),
+            ]),
     ]
 }
 
-// MARK: - Dependencies
+// MARK: - ANDependencies
 
 private enum ANDependencies {
     static let all: [Package.Dependency] = ordiCore
@@ -168,50 +158,41 @@ private extension ANDependencies {
     static let pointFree: [Package.Dependency] = [
         .package(
             url: "https://github.com/pointfreeco/composable-core-location",
-            .upToNextMajor(from: .init(0, 1, 0))
-        ),
+            .upToNextMajor(from: .init(0, 1, 0))),
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
-            .upToNextMajor(from: .init(0, 40, 2))
-        ),
+            branch: "main"),
     ]
 
     static let inject: [Package.Dependency] = [
         .package(
             url: "https://github.com/krzysztofzablocki/Inject",
-            .upToNextMajor(from: .init(1, 2, 1))
-        ),
+            .upToNextMajor(from: .init(1, 2, 1))),
     ]
 
     static let home: [Package.Dependency] = [
         .package(
             url: "https://github.com/batoulapps/adhan-swift",
-            branch: "main"
-        ),
+            branch: "main"),
         .package(
             url: "https://github.com/maustinstar/swiftui-drawer",
-            branch: "master"
-        ),
+            branch: "master"),
         .package(
             url: "https://github.com/realm/realm-swift",
-            .upToNextMinor(from: .init(10, 28, 6))
-        ),
+            .upToNextMinor(from: .init(10, 28, 6))),
         .package(
             url: "https://github.com/groue/GRDB.swift",
-            .upToNextMajor(from: .init(6, 0, 0))
-        ),
+            .upToNextMajor(from: .init(6, 0, 0))),
         .package(
             url: "https://github.com/malcommac/SwiftDate",
-            .upToNextMajor(from: .init(7, 0, 0))
-        ),
+            .upToNextMajor(from: .init(7, 0, 0))),
         .package(
             url: "https://github.com/exyte/ScalingHeaderScrollView.git",
-            .upToNextMajor(from: .init(0, 0, 6))
-        ),
+            .upToNextMajor(from: .init(0, 0, 6))),
     ]
 }
 
-// MARK: - Products
+// MARK: - ANProducts
 
 private enum ANProducts {
     static let all: [PackageDescription.Product] = [
@@ -229,7 +210,6 @@ private enum ANProducts {
     static func product(name: String) -> PackageDescription.Product {
         .library(
             name: name,
-            targets: [name]
-        )
+            targets: [name])
     }
 }

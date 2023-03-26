@@ -14,6 +14,8 @@ import Localization
 import PrayerDetails
 import SwiftUI
 
+// MARK: - RootView
+
 public struct RootView: View {
     public let store: Store<RootState, RootAction>
 
@@ -50,6 +52,8 @@ public struct RootView: View {
         }
     }
 }
+
+// MARK: - RootView_Previews
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {

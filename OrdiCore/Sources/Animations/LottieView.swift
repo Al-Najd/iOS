@@ -8,6 +8,8 @@
 import Lottie
 import SwiftUI
 
+// MARK: - LottieView
+
 public struct LottieView: UIViewRepresentable {
     var animation: OAnimation
     var loopMode: LottieLoopMode
@@ -20,8 +22,7 @@ public struct LottieView: UIViewRepresentable {
         animation: OAnimation,
         loopMode: LottieLoopMode = .loop,
         contentMode: UIView.ContentMode = .scaleAspectFit,
-        animationFramesHandlers: [AnimationHandler] = []
-    ) {
+        animationFramesHandlers: [AnimationHandler] = []) {
         self.animation = animation
         self.loopMode = loopMode
         self.contentMode = contentMode
@@ -47,7 +48,7 @@ public struct LottieView: UIViewRepresentable {
         return view
     }
 
-    public func updateUIView(_: UIView, context _: UIViewRepresentableContext<LottieView>) {}
+    public func updateUIView(_: UIView, context _: UIViewRepresentableContext<LottieView>) { }
 
     private func startPlaying(_ animationView: AnimationView, handlers: [AnimationHandler]) {
         guard !handlers.isEmpty else { return }
@@ -55,13 +56,14 @@ public struct LottieView: UIViewRepresentable {
         animationView.play(
             fromFrame: handler.startFrame,
             toFrame: handler.endFrame,
-            loopMode: .playOnce
-        ) { didFinish in
-            handler.onComplete(didFinish)
-            startPlaying(animationView, handlers: Array(handlers.dropFirst()))
-        }
+            loopMode: .playOnce) { didFinish in
+                handler.onComplete(didFinish)
+                startPlaying(animationView, handlers: Array(handlers.dropFirst()))
+            }
     }
 }
+
+// MARK: - OAnimation
 
 public struct OAnimation {
     let name: String
@@ -70,6 +72,8 @@ public struct OAnimation {
         self.name = name
     }
 }
+
+// MARK: - AnimationHandler
 
 public struct AnimationHandler {
     let startFrame: CGFloat

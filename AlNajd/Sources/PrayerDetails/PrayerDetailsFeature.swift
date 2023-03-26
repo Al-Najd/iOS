@@ -12,6 +12,8 @@ import Foundation
 import PrayersClient
 import Utils
 
+// MARK: - PrayerDetailsState
+
 public struct PrayerDetailsState: Identifiable, Equatable {
     public var id: ANPrayer.ID { prayer.id }
     public var prayer: ANPrayer
@@ -19,12 +21,13 @@ public struct PrayerDetailsState: Identifiable, Equatable {
 
     public init(
         prayer: ANPrayer,
-        date: Date
-    ) {
+        date: Date) {
         self.prayer = prayer
         self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
     }
 }
+
+// MARK: - PrayerDetailsAction
 
 public enum PrayerDetailsAction: Equatable {
     case onDoingPrayer
@@ -35,7 +38,9 @@ public enum PrayerDetailsAction: Equatable {
     case dismiss
 }
 
-public struct PrayerDetailsEnvironment { public init() {} }
+// MARK: - PrayerDetailsEnvironment
+
+public struct PrayerDetailsEnvironment { public init() { } }
 
 public let prayerDetailsReducer = Reducer<
     PrayerDetailsState,
@@ -46,14 +51,14 @@ public let prayerDetailsReducer = Reducer<
     case .onDoingPrayer:
         state.prayer.isDone = true
         env.prayersClient.save(prayer: state.prayer)
-    case let .onDoingSunnah(sunnah):
+    case .onDoingSunnah(let sunnah):
         state.prayer.sunnah[id: sunnah.id]?.isDone = true
         env.prayersClient.save(sunnah: state.prayer.sunnah[id: sunnah.id])
-    case let .onDoingZekr(zekr):
+    case .onDoingZekr(let zekr):
         let currentCount = state.prayer.afterAzkar[id: zekr.id]?.currentCount ?? 0
         state.prayer.afterAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
         env.prayersClient.save(zekr: state.prayer.afterAzkar[id: zekr.id])
-    case let .onFinishingZekr(zekr):
+    case .onFinishingZekr(let zekr):
         state.prayer.afterAzkar[id: zekr.id]?.currentCount = 0
         env.prayersClient.save(zekr: state.prayer.afterAzkar[id: zekr.id])
     default:

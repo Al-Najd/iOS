@@ -7,4 +7,4 @@
 
 import XCTest
 
-class OnboardingPerformanceTests: XCTestCase {}
+class OnboardingPerformanceTests: XCTestCase { }

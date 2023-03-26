@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - BarGraph
+
 public struct BarGraph: View {
     let days: [DayProgress]
     @Binding var highlightedDay: DayProgress?
@@ -44,16 +46,14 @@ public struct BarGraph: View {
                 .foregroundColor(
                     isPressing && highlightedDay == day
                         ? day.indicator.color.default
-                        : .mono.label
-                )
+                        : .mono.label)
         }
-        .onTapGesture {}
+        .onTapGesture { }
         .onLongPressGesture(
-            minimumDuration: .infinity
-        ) { isPressing in
-            withAnimation(.easeInOut) {
-                highlightedDay = isPressing ? day : nil
-            }
+            minimumDuration: .infinity) { isPressing in
+                withAnimation(.easeInOut) {
+                    highlightedDay = isPressing ? day : nil
+                }
         } perform: {
             withAnimation(.easeInOut) {
                 highlightedDay = isPressing ? day : nil
@@ -61,6 +61,8 @@ public struct BarGraph: View {
         }
     }
 }
+
+// MARK: - SwiftUIView_Previews
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {

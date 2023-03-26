@@ -9,9 +9,13 @@ import Entity
 import Foundation
 import KeychainSwift
 
+// MARK: - EncryptedStorage
+
 public final class EncryptedStorage {
     private let keychain = KeychainSwift()
 }
+
+// MARK: WritableStorage
 
 extension EncryptedStorage: WritableStorage {
     public func remove<T>(type _: T.Type, for key: StorageKey) throws where T: Codable {
@@ -22,6 +26,8 @@ extension EncryptedStorage: WritableStorage {
         keychain.set(value.encode(), forKey: key.key)
     }
 }
+
+// MARK: ReadableStorage
 
 extension EncryptedStorage: ReadableStorage {
     public func fetchValue<T: Codable>(for key: StorageKey) -> T? {

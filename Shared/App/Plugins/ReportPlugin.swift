@@ -8,7 +8,12 @@
 import OrdiLogging
 import Pulse
 import UIKit.UIApplication
-struct ReportPlugin {}
+
+// MARK: - ReportPlugin
+
+struct ReportPlugin { }
+
+// MARK: AppPlugin
 
 extension ReportPlugin: AppPlugin {
     func setup() {
@@ -16,7 +21,7 @@ extension ReportPlugin: AppPlugin {
         setupSentry()
     }
 
-    private func setupPulse() {}
+    private func setupPulse() { }
 
     private func setupSentry() {
         SentryService.setup()

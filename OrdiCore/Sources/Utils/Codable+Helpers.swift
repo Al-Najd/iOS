@@ -16,7 +16,7 @@ public extension Encodable {
     }
 
     func encode() -> Data {
-        return (try? JSONEncoder().encode(self)) ?? Data()
+        (try? JSONEncoder().encode(self)) ?? Data()
     }
 }
 

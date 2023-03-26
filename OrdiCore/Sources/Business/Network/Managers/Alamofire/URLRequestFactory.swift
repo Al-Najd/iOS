@@ -9,6 +9,8 @@ import Entity
 import Foundation
 import OrdiLogging
 
+// MARK: - URLRequestFactory
+
 public enum URLRequestFactory {
     /// Generates URLRequest after building the URL, injecting the method and the headers
     /// and encoding the Parameters suitably according to the endpoint

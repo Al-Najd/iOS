@@ -10,6 +10,8 @@ import DesignSystem
 import Inject
 import SwiftUI
 
+// MARK: - RangeProgress
+
 public struct RangeProgress: Identifiable, Equatable {
     public let id = UUID().uuidString
     public let title: String
@@ -26,8 +28,7 @@ public struct RangeProgress: Identifiable, Equatable {
         reports: [DayProgress],
         isImproving: Bool? = nil,
         insight: Insight? = nil,
-        score: Int = 0
-    ) {
+        score: Int = 0) {
         self.title = title
         self.reports = reports
         self.isImproving = isImproving
@@ -52,28 +53,27 @@ public extension RangeProgress {
             title: "Faraaid",
             reports: DayProgress.mock,
             isImproving: false,
-            insight: .init(indicator: .danger, details: "Al Faraaid are very important, make sure you don't miss them intentionally and ask for help from Allah, you got this!")
-        ),
+            insight: .init(
+                indicator: .danger,
+                details: "Al Faraaid are very important, make sure you don't miss them intentionally and ask for help from Allah, you got this!")),
         .init(
             title: "Sunnah",
             reports: DayProgress.mock,
             isImproving: true,
             insight: .init(
                 indicator: .encourage,
-                details: "You did great with Sunnah last week, let's max out this week's Sunnah!"
-            )
-        ),
+                details: "You did great with Sunnah last week, let's max out this week's Sunnah!")),
         .init(
             title: "Nafila",
             reports: DayProgress.mock,
             isImproving: false,
             insight: .init(
                 indicator: .praise,
-                details: "You did Wonderful in Nafila!, I mean, wow! off the charts!, are we speaking to a 'Wali' now or what? haha, great work champ!"
-            )
-        ),
+                details: "You did Wonderful in Nafila!, I mean, wow! off the charts!, are we speaking to a 'Wali' now or what? haha, great work champ!")),
     ]
 }
+
+// MARK: - DayProgress
 
 public struct DayProgress: Identifiable, Equatable {
     public var id = UUID().uuidString
@@ -105,6 +105,8 @@ public struct DayProgress: Identifiable, Equatable {
     }
 }
 
+// MARK: - RangeAnalysisCardView
+
 public struct RangeAnalysisCardView: View {
     @ObserveInjection var inject
 
@@ -125,17 +127,15 @@ public struct RangeAnalysisCardView: View {
                                 Text(
                                     "n out of n".localized(
                                         arguments: highlightedDay.count, highlightedDay.limit
-                                    )
-                                )
-                                .scaledFont(.pHeadline, .bold)
-                                .foregroundColor(highlightedDay.indicator.color.light)
-                                .padding(.vertical, .p4)
-                                .padding(.horizontal, .p8)
-                                .background(
-                                    RoundedRectangle(cornerRadius: .r16)
-                                        .fill(highlightedDay.indicator.color.dark)
-                                        .shadow(color: highlightedDay.indicator.color.default, radius: .r4)
-                                )
+                                    ))
+                                    .scaledFont(.pHeadline, .bold)
+                                    .foregroundColor(highlightedDay.indicator.color.light)
+                                    .padding(.vertical, .p4)
+                                    .padding(.horizontal, .p8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: .r16)
+                                            .fill(highlightedDay.indicator.color.dark)
+                                            .shadow(color: highlightedDay.indicator.color.default, radius: .r4))
                             } else {
                                 Text("Last n Days".localized(arguments: progress.reports.count))
                                     .scaledFont(.pHeadline, .bold)
@@ -154,8 +154,7 @@ public struct RangeAnalysisCardView: View {
                             .background(
                                 Circle()
                                     .fill(progress.progressColor.background)
-                                    .shadow(color: progress.progressColor.background, radius: 5, x: 0, y: 0)
-                            )
+                                    .shadow(color: progress.progressColor.background, radius: 5, x: 0, y: 0))
                             .rotationEffect(.degrees(isImproving ? 0 : 90))
                     }
                 }
@@ -163,8 +162,7 @@ public struct RangeAnalysisCardView: View {
                 if progress.hasEnoughData {
                     BarGraph(
                         days: progress.reports,
-                        highlightedDay: $highlightedDay
-                    )
+                        highlightedDay: $highlightedDay)
                 } else {
                     VStack {
                         Image(systemName: "questionmark.circle.fill")
@@ -183,9 +181,7 @@ public struct RangeAnalysisCardView: View {
                     .shadow(
                         color: .black.opacity(0.25),
                         radius: 2,
-                        x: 0, y: 0
-                    )
-            )
+                        x: 0, y: 0))
 
             if let insight = progress.insight {
                 InsightCardView(insight: insight)
@@ -193,6 +189,8 @@ public struct RangeAnalysisCardView: View {
         }.enableInjection()
     }
 }
+
+// MARK: - SwiftUIView_3_Previews
 
 struct SwiftUIView_3_Previews: PreviewProvider {
     static var previews: some View {

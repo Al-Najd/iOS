@@ -16,6 +16,8 @@ import ReusableUI
 import SwiftUI
 import Utils
 
+// MARK: - DashboardSegment
+
 struct DashboardSegment: Identifiable, Hashable {
     let id = UUID().uuidString
     let title: String
@@ -34,6 +36,8 @@ extension DashboardSegment {
         azkar,
     ]
 }
+
+// MARK: - DashboardView
 
 public struct DashboardView: View {
     let store: Store<DashboardState, DashboardAction>
@@ -66,8 +70,7 @@ public struct DashboardView: View {
                 viewStore.send(.onAppear)
             }
             .background(
-                Color.mono.background
-            )
+                Color.mono.background)
             .enableInjection()
         }
     }
@@ -86,10 +89,8 @@ public struct DashboardView: View {
                     .foregroundColor(Asset.Colors.Apple.light.swiftUIColor)
                     .overlay(
                         RoundedRectangle(cornerRadius: .r8)
-                            .stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1)
-                    )
-                    .shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3)
-            )
+                            .stroke(Asset.Colors.Apple.medium.swiftUIColor.gradient, lineWidth: 1))
+                    .shadow(color: Asset.Colors.Apple.light.swiftUIColor, radius: 33, x: 0, y: 3))
     }
 
     @ViewBuilder
@@ -108,8 +109,7 @@ public struct DashboardView: View {
             RoundedRectangle(cornerRadius: .r16)
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                .shadow(radius: .r8)
-        )
+                .shadow(radius: .r8))
         .padding(.horizontal)
     }
 
@@ -129,8 +129,7 @@ public struct DashboardView: View {
             RoundedRectangle(cornerRadius: .r16)
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                .shadow(radius: .r8)
-        )
+                .shadow(radius: .r8))
     }
 
     @ViewBuilder
@@ -144,10 +143,9 @@ public struct DashboardView: View {
                 ForEach(viewStore.sunnahPlotData) { data in
                     BarMark(
                         x: .value("Day", data.date.string(withFormat: "d/M")),
-                        y: .value("Progress", data.animate ? data.count : 0)
-                    )
-                    .foregroundStyle(Asset.Colors.Blueberry.primary.swiftUIColor.gradient)
-                    .cornerRadius(.r8)
+                        y: .value("Progress", data.animate ? data.count : 0))
+                        .foregroundStyle(Asset.Colors.Blueberry.primary.swiftUIColor.gradient)
+                        .cornerRadius(.r8)
                 }
             }
             .chartYScale(domain: 0 ... 8)
@@ -181,17 +179,16 @@ public struct DashboardView: View {
             RoundedRectangle(cornerRadius: .r16)
                 .fill()
                 .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                .shadow(radius: .r8)
-        )
+                .shadow(radius: .r8))
     }
 }
+
+// MARK: - DashboardView_Previews
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardView(
-            store: .mock
-        ).background(
-            Color.mono.background.ignoresSafeArea()
-        )
+            store: .mock).background(
+            Color.mono.background.ignoresSafeArea())
     }
 }

@@ -12,6 +12,8 @@
 import FontBlaster
 import Foundation
 
+// MARK: - DefaultTheme
+
 public struct DefaultTheme: Theme {
     public var primary: BrandColor = PrimaryPalette()
     public var secondary: BrandColor = SecondaryPalette()
@@ -24,6 +26,8 @@ public struct DefaultTheme: Theme {
     public var mediumShadow: ARShadow = .init(color: .black.opacity(0.09), radius: 32, position: .zero)
     public var smallShadow: ARShadow = .init(color: .black.opacity(0.09), radius: 16, position: .zero)
 }
+
+// MARK: - PackageDefaultTheme
 
 public struct PackageDefaultTheme: Theme {
     public var primary: BrandColor = PrimaryPalette(.designSystemBundle)

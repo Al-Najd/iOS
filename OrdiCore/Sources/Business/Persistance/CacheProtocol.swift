@@ -8,9 +8,13 @@
 import Entity
 import Foundation
 
+// MARK: - ReadableStorage
+
 public protocol ReadableStorage {
     func fetchValue<T: Codable>(for key: StorageKey) -> T?
 }
+
+// MARK: - WritableStorage
 
 public protocol WritableStorage {
     func save<T: Codable>(value: T, for key: StorageKey) throws

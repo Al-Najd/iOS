@@ -23,8 +23,8 @@ public struct CoreEnvironment<Environment> {
     public var coordinates: CLLocationCoordinate2D? = nil
 
     public subscript<Dependency>(
-        dynamicMember keyPath: WritableKeyPath<Environment, Dependency>
-    ) -> Dependency {
+        dynamicMember keyPath: WritableKeyPath<Environment, Dependency>)
+        -> Dependency {
         get { self.environment[keyPath: keyPath] }
         set { self.environment[keyPath: keyPath] = newValue }
     }
@@ -38,7 +38,6 @@ public struct CoreEnvironment<Environment> {
             locationManager: .live,
             mainQueue: .main,
             prayersClient: .live,
-            haptic: .main
-        )
+            haptic: .main)
     }
 }

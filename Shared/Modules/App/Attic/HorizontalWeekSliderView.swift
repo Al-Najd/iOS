@@ -19,8 +19,7 @@ public struct HorizontalWeekSliderView: View {
     init(
         _ activeDay: Date,
         _ currentWeek: [Date],
-        _ onChange: @escaping (Date) -> Void
-    ) {
+        _ onChange: @escaping (Date) -> Void) {
         activeDate = activeDay
         self.onChange = onChange
         self.currentWeek = currentWeek
@@ -46,8 +45,7 @@ public struct HorizontalWeekSliderView: View {
                         withAnimation(.spring()) {
                             value.scrollTo(activeDate, anchor: .center)
                         }
-                    }
-                )
+                    })
             }
         }
     }
@@ -55,45 +53,40 @@ public struct HorizontalWeekSliderView: View {
     @ViewBuilder
     func createDateText(
         _ date: Date,
-        _ activeDate: Date
-    ) -> some View {
+        _ activeDate: Date)
+        -> some View {
         VStack(alignment: .center, spacing: .p8.adaptRatio()) {
             Text("\(date.day)")
-                .font(date.day == activeDate.day
-                    ? .pBody.bold()
-                    : .pBody)
-                .foregroundColor(
+                .font(
                     date.day == activeDate.day
-                        ? .mono.offwhite
-                        : .mono.placeholder
-                )
-                .scaleEffect(
-                    date.day == activeDate.day
-                        ? 1.0.adaptV(max: 2)
-                        : 0.75.adaptV(max: 1.5)
-                )
-            if date.day == activeDate.day {
-                Text("\(date.monthName(ofStyle: .threeLetters))")
-                    .font(
-                        .pFootnote.bold()
-                    )
+                        ? .pBody.bold()
+                        : .pBody)
                     .foregroundColor(
                         date.day == activeDate.day
                             ? .mono.offwhite
-                            : .mono.placeholder
-                    )
+                            : .mono.placeholder)
+                        .scaleEffect(
+                            date.day == activeDate.day
+                                ? 1.0.adaptV(max: 2)
+                                : 0.75.adaptV(max: 1.5))
+            if date.day == activeDate.day {
+                Text("\(date.monthName(ofStyle: .threeLetters))")
+                    .font(
+                        .pFootnote.bold())
+                    .foregroundColor(
+                        date.day == activeDate.day
+                            ? .mono.offwhite
+                            : .mono.placeholder)
             }
 
             if date.isInFuture {
                 Image(systemName: "lock")
                     .font(
-                        .pFootnote.bold()
-                    )
+                        .pFootnote.bold())
                     .foregroundColor(
                         date.day == activeDate.day
                             ? .mono.offwhite
-                            : .mono.placeholder
-                    )
+                            : .mono.placeholder)
             }
         }
     }

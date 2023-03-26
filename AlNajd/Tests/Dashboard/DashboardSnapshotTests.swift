@@ -7,4 +7,4 @@
 
 import XCTest
 
-class DashboardSnapshotTests: XCTestCase {}
+class DashboardSnapshotTests: XCTestCase { }

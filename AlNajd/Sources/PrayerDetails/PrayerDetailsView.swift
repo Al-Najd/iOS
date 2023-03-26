@@ -15,6 +15,8 @@ import ReusableUI
 import SwiftUI
 import Utils
 
+// MARK: - PrayerDetailsView
+
 public struct PrayerDetailsView: View {
     @ObserveInjection var inject
     let store: Store<PrayerDetailsState, PrayerDetailsAction>
@@ -46,8 +48,7 @@ public struct PrayerDetailsView: View {
                                 .padding(.p8)
                                 .background(
                                     Circle()
-                                        .foregroundColor(.mono.offwhite.opacity(0.25))
-                                )
+                                        .foregroundColor(.mono.offwhite.opacity(0.25)))
                         }
                     }.padding()
 
@@ -66,8 +67,7 @@ public struct PrayerDetailsView: View {
                         50,
                         0.25.asPercentage(),
                         0.5.asPercentage(),
-                    ]
-                ))
+                    ]))
                 .impact(.heavy)
                 .spring(.p32)
                 .padding(.bottom, getSafeArea().bottom)
@@ -79,10 +79,8 @@ public struct PrayerDetailsView: View {
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
                     .overlay(
-                        Color.mono.offblack.opacity(0.5)
-                    )
-            )
-            .enableInjection()
+                        Color.mono.offblack.opacity(0.5)))
+                .enableInjection()
         }
     }
 }
@@ -99,10 +97,12 @@ extension CGFloat {
     }
 }
 
+// MARK: - TasksView
+
 struct TasksView: View {
     let viewStore: ViewStore<PrayerDetailsState, PrayerDetailsAction>
 
-    @State var tab: Int = 0
+    @State var tab = 0
 
     var body: some View {
         ZStack {
@@ -171,8 +171,7 @@ struct TasksView: View {
                             .scaledFont(.pFootnote, .bold)
                             .multilineTextAlignment(.center)
                             .if(
-                                viewStore.prayer.sunnah.isEmpty, transform: { _ in EmptyView() }
-                            )
+                                viewStore.prayer.sunnah.isEmpty, transform: { _ in EmptyView() })
                         ForEach(viewStore.prayer.sunnah) { sunnah in
                             RewardView(sunnah)
                                 .frame(maxWidth: .infinity)
@@ -193,6 +192,8 @@ struct TasksView: View {
         }.padding(.bottom, getSafeArea().bottom * 5)
     }
 }
+
+// MARK: - RewardView
 
 struct RewardView: View {
     var title: String

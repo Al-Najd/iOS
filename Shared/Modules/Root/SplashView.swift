@@ -13,10 +13,10 @@ import SwiftUI
 import Utils
 
 struct SplashView<Content: View>: View {
-    @State var showAnimation: Bool = false
-    @State var showFooterText: Bool = false
-    @State var endSplashFlow: Bool = false
-    @State var showNextFlow: Bool = false
+    @State var showAnimation = false
+    @State var showFooterText = false
+    @State var endSplashFlow = false
+    @State var showNextFlow = false
 
     private let injectedView: () -> Content
 
@@ -30,17 +30,16 @@ struct SplashView<Content: View>: View {
                 .offset(y: endSplashFlow ? 0 : -getScreenSize().height)
 
             VStack {
-                /* Lottie Wrapping Begins */
+                // Lottie Wrapping Begins
                 LottieView(
                     animation: .splash,
                     animationFramesHandlers: [
                         makeShowingFootersHandler(),
                         makeTransitioningToAppHandler(),
-                    ]
-                )
-                .opacity(showAnimation ? 1 : 0)
-                .scaleEffect(showAnimation ? 1 : .ulpOfOne)
-                /* Lottie Wrapping Ends */
+                    ])
+                    .opacity(showAnimation ? 1 : 0)
+                    .scaleEffect(showAnimation ? 1 : .ulpOfOne)
+                // Lottie Wrapping Ends
 
                 if showFooterText {
                     Text("Al Najd".localized)
@@ -59,9 +58,7 @@ struct SplashView<Content: View>: View {
                                     type: .sansSerif,
                                     category: .display,
                                     scale: .large,
-                                    weight: .bold
-                                )
-                        )
+                                    weight: .bold))
                         .foregroundColor(.success.default)
                         .opacity(showFooterText ? 1 : 0)
                         .offset(y: showFooterText ? 0 : 100)
@@ -83,8 +80,7 @@ struct SplashView<Content: View>: View {
             }.offset(y: endSplashFlow ? getScreenSize().height : 0)
         }.background(
             Color("96A8B1")
-                .ignoresSafeArea()
-        )
+                .ignoresSafeArea())
     }
 
     func makeShowingFootersHandler() -> AnimationHandler {

@@ -11,6 +11,8 @@
 
 import SwiftUI
 
+// MARK: - Colorable
+
 public protocol Colorable {
     var primary: BrandColor { get }
     var secondary: BrandColor { get }
@@ -21,6 +23,8 @@ public protocol Colorable {
     var monochromatic: MonochromaticColor { get }
 }
 
+// MARK: - BrandColor
+
 public protocol BrandColor {
     var `default`: Color { get }
     var dark: Color { get }
@@ -28,6 +32,8 @@ public protocol BrandColor {
     var light: Color { get }
     var background: Color { get }
 }
+
+// MARK: - MonochromaticColor
 
 public protocol MonochromaticColor {
     var offblack: Color { get }
@@ -40,6 +46,8 @@ public protocol MonochromaticColor {
     var background: Color { get }
     var offwhite: Color { get }
 }
+
+// MARK: - Transparency
 
 public protocol Transparency {
     var light: Color { get }

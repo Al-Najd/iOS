@@ -8,6 +8,8 @@
 import DesignSystem
 import SwiftUI
 
+// MARK: - RSecureField
+
 public struct RSecureField: View {
     let icon: String
     let title: String
@@ -20,8 +22,7 @@ public struct RSecureField: View {
         title: String,
         hint: String,
         value: Binding<String>,
-        showPassword: Binding<Bool>
-    ) {
+        showPassword: Binding<Bool>) {
         self.icon = icon
         self.title = title
         self.hint = hint
@@ -44,8 +45,7 @@ public struct RSecureField: View {
 
             Divider()
                 .background(
-                    Color.mono.line
-                )
+                    Color.mono.line)
         }.overlay(
             Group {
                 Button {
@@ -56,16 +56,13 @@ public struct RSecureField: View {
                     Text(
                         showPassword
                             ? "Hide"
-                            : "Show"
-                    )
-                    .scaledFont(
-                        .pFootnote
-                    )
-                    .foregroundColor(.primary.default)
+                            : "Show")
+                        .scaledFont(
+                            .pFootnote)
+                        .foregroundColor(.primary.default)
                 }.offset(y: .p16)
             },
-            alignment: .trailing
-        )
+            alignment: .trailing)
     }
 
     @ViewBuilder
@@ -78,6 +75,8 @@ public struct RSecureField: View {
     }
 }
 
+// MARK: - RSecureField_Previews
+
 struct RSecureField_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -88,9 +87,8 @@ struct RSecureField_Previews: PreviewProvider {
                     title: "Some Field",
                     hint: "Some Field",
                     value: .constant(""),
-                    showPassword: .constant(false)
-                )
-                .padding()
+                    showPassword: .constant(false))
+                    .padding()
 
                 Text("Filled State")
                 RSecureField(
@@ -98,9 +96,8 @@ struct RSecureField_Previews: PreviewProvider {
                     title: "Some Field",
                     hint: "Some Field",
                     value: .constant("Hi There!"),
-                    showPassword: .constant(false)
-                )
-                .padding()
+                    showPassword: .constant(false))
+                    .padding()
 
                 Text("Shown State")
                 RSecureField(
@@ -108,9 +105,8 @@ struct RSecureField_Previews: PreviewProvider {
                     title: "Some Field",
                     hint: "Some Field",
                     value: .constant("Hi There!"),
-                    showPassword: .constant(true)
-                )
-                .padding()
+                    showPassword: .constant(true))
+                    .padding()
 
             }.padding()
         }

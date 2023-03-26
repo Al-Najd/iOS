@@ -7,7 +7,9 @@
 
 import Foundation
 
-public enum Report {}
+// MARK: - Report
+
+public enum Report { }
 
 public extension Report {
     struct Daily: Equatable {

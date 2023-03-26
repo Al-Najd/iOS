@@ -14,6 +14,8 @@ import Foundation
 public typealias Future<T> = Promise<Expected<T>>
 public typealias Guarentee<T> = Promise<T>
 
+// MARK: - Promise
+
 /// Lightweight Promise Wrapper for better code readability
 /// ## Promise
 /// ### Normal way of doing things
@@ -82,7 +84,7 @@ public class Promise<Value> {
 
     // flatMap
     public func then<NewValue>(_ onResolved: @escaping (Value) -> Promise<NewValue>) -> Promise<NewValue> {
-        return Promise<NewValue> { resolve in
+        Promise<NewValue> { resolve in
             then { value in
                 onResolved(value).then(resolve)
             }
@@ -91,7 +93,7 @@ public class Promise<Value> {
 
     // map
     public func then<NewValue>(_ onResolved: @escaping (Value) -> NewValue) -> Promise<NewValue> {
-        return then { value in
+        then { value in
             Promise<NewValue> { resolve in
                 resolve(onResolved(value))
             }
@@ -109,7 +111,7 @@ public class Promise<Value> {
     }
 
     private func triggerCallbacksIfResolved() {
-        guard case let .resolved(value) = state else { return }
+        guard case .resolved(let value) = state else { return }
         callbacks.forEach { callback in
             callback(value)
         }

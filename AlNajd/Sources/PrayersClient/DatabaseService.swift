@@ -9,6 +9,8 @@ import Foundation
 import GRDB
 import SwiftDate
 
+// MARK: - DatabaseService
+
 public enum DatabaseService {
     static let dbQueue: DatabaseQueue = try! {
         let fileManager = FileManager.default
@@ -31,9 +33,9 @@ public enum DatabaseService {
         var migrator = DatabaseMigrator()
 
         #if DEBUG
-            // Speed up development by nuking the database when migrations change
-            // See https://github.com/groue/GRDB.swift/blob/master/Documentation/Migrations.md#the-erasedatabaseonschemachange-option
-            migrator.eraseDatabaseOnSchemaChange = true
+        // Speed up development by nuking the database when migrations change
+        // See https://github.com/groue/GRDB.swift/blob/master/Documentation/Migrations.md#the-erasedatabaseonschemachange-option
+        migrator.eraseDatabaseOnSchemaChange = true
         #endif
         migrator.registerMigration("createDays") { db in
             // Create a table
@@ -107,10 +109,13 @@ private extension DatabaseService {
 
     static func seedPrayers(_ dayId: Int64, _ db: Database) throws {
         let fajr = try ANPrayerDAO(name: "fajr", isDone: false, raqaat: 2, dayId: dayId, reward: "fajr_reward").insertAndFetch(db)
-        let dhuhr = try ANPrayerDAO(name: "duhr", isDone: false, raqaat: 4, dayId: dayId, reward: "duhr_reward").insertAndFetch(db)
+        let dhuhr = try ANPrayerDAO(name: "duhr", isDone: false, raqaat: 4, dayId: dayId, reward: "duhr_reward")
+            .insertAndFetch(db)
         _ = try ANPrayerDAO(name: "aasr", isDone: false, raqaat: 4, dayId: dayId, reward: "aasr_reward").insertAndFetch(db)
-        let maghrib = try ANPrayerDAO(name: "maghrib", isDone: false, raqaat: 3, dayId: dayId, reward: "maghrib_reward").insertAndFetch(db)
-        let aishaa = try ANPrayerDAO(name: "aishaa", isDone: false, raqaat: 4, dayId: dayId, reward: "ishaa_reward").insertAndFetch(db)
+        let maghrib = try ANPrayerDAO(name: "maghrib", isDone: false, raqaat: 3, dayId: dayId, reward: "maghrib_reward")
+            .insertAndFetch(db)
+        let aishaa = try ANPrayerDAO(name: "aishaa", isDone: false, raqaat: 4, dayId: dayId, reward: "ishaa_reward")
+            .insertAndFetch(db)
 
         try seedFajrSunnahAndAzkar((fajr?.id)!, db)
         try seedDhuhrSunnahAndAzkar((dhuhr?.id)!, db)
@@ -122,8 +127,7 @@ private extension DatabaseService {
         _ = try ANSunnahDAO.fajr(prayerId).insertAndFetch(db)
         try (
             ANAzkarDAO.common(prayerId) +
-                ANAzkarDAO.fajrAndMaghrib(prayerId)
-        ).forEach { _ = try $0.insertAndFetch(db) }
+                ANAzkarDAO.fajrAndMaghrib(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 
     static func seedDhuhrSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {

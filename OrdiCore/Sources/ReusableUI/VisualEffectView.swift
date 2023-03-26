@@ -33,6 +33,7 @@ public struct BlurView: UIViewRepresentable {
         return view
     }
 
-    public func updateUIView(_: UIView,
-                             context _: UIViewRepresentableContext<BlurView>) {}
+    public func updateUIView(
+        _: UIView,
+        context _: UIViewRepresentableContext<BlurView>) { }
 }

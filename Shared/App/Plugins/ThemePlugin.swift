@@ -8,6 +8,8 @@
 import DesignSystem
 import UIKit.UIApplication
 
+// MARK: - ThemePlugin
+
 public struct ThemePlugin: AppPlugin {
     public func setup() {
         setupTheme()
@@ -15,5 +17,5 @@ public struct ThemePlugin: AppPlugin {
 }
 
 private extension ThemePlugin {
-    private func setupTheme() {}
+    private func setupTheme() { }
 }

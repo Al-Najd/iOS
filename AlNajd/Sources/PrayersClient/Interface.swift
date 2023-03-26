@@ -17,6 +17,8 @@ import GRDB
 import Localization
 import Utils
 
+// MARK: - PrayersClient
+
 public struct PrayersClient {
     public func save(prayer: ANPrayer?) {
         guard let prayer = prayer else { return }
@@ -63,8 +65,7 @@ public struct PrayersClient {
                 try (ANDayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
-                        azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() }
-                    )
+                        azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
                 }
             }
         } catch {
@@ -79,8 +80,7 @@ public struct PrayersClient {
                 try (ANDayDAO.Queries.today.fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
-                        azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() }
-                    )
+                        azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
                 }
             }
         } catch {
@@ -92,7 +92,9 @@ public struct PrayersClient {
         do {
             return try DatabaseService.dbQueue.read { db in
                 let days = try ANDayDAO.all().reversed().fetchAll(db)
-                guard let firstDayWithMissedPrayersIndex = try days.firstIndex(where: { try $0.missedPrayers.isEmpty(db) == false }) else { return days.count }
+                guard
+                    let firstDayWithMissedPrayersIndex = try days
+                        .firstIndex(where: { try $0.missedPrayers.isEmpty(db) == false }) else { return days.count }
                 return firstDayWithMissedPrayersIndex
             }
         } catch {
@@ -143,20 +145,35 @@ public struct PrayersClient {
     }
 }
 
-class CurrentBundleFinder {}
+// MARK: DependencyKey
+
+extension PrayersClient: DependencyKey {
+    public static let liveValue = PrayersClient()
+}
+
+public extension DependencyValues {
+    var prayersDB: PrayersClient {
+        get { self[PrayersClient.self] }
+        set { self[PrayersClient.self] = newValue }
+    }
+}
+
+// MARK: - CurrentBundleFinder
+
+class CurrentBundleFinder { }
 
 extension Foundation.Bundle {
     static var prayersClientBundle: Bundle = {
-        /* The name of your local package, prepended by "LocalPackages_" */
+        // The name of your local package, prepended by "LocalPackages_"
         let bundleName = "AlNajd_PrayersClient"
         let candidates = [
-            /* Bundle should be present here when the package is linked into an App. */
+            // Bundle should be present here when the package is linked into an App.
             Bundle.main.resourceURL,
-            /* Bundle should be present here when the package is linked into a framework. */
+            // Bundle should be present here when the package is linked into a framework.
             Bundle(for: CurrentBundleFinder.self).resourceURL,
-            /* For command-line tools. */
+            // For command-line tools.
             Bundle.main.bundleURL,
-            /* Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/"). */
+            // Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/").
             Bundle(for: CurrentBundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent(),
         ]
         for candidate in candidates {

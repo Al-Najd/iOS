@@ -7,8 +7,10 @@
 
 import Common
 import Nimble
+import Quick
+import XCTest
 @testable import Onboarding
 import Quick
 import XCTest
 
-class OnboardingTests: XCTestCase {}
+class OnboardingTests: XCTestCase { }

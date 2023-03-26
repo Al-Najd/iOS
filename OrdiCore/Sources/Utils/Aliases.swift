@@ -14,6 +14,8 @@ public typealias Callback<T> = (_: T) -> Void
 public typealias VoidCallback = () -> Void
 public typealias ProgressCallback<T> = Callback<Progress<T>>
 
+// MARK: - Progress
+
 public enum Progress<T> {
     case idle
     case loading
@@ -22,14 +24,14 @@ public enum Progress<T> {
 
     var value: T? {
         switch self {
-        case let .success(value): return value
+        case .success(let value): return value
         default: return nil
         }
     }
 
     var error: Error? {
         switch self {
-        case let .failure(error): return error
+        case .failure(let error): return error
         default: return nil
         }
     }
@@ -49,8 +51,11 @@ public enum Progress<T> {
     }
 }
 
+// MARK: Equatable
+
 extension Progress: Equatable where T: Equatable {
     public static func == (lhs: Progress<T>, rhs: Progress<T>) -> Bool {
-        (lhs.value == rhs.value || lhs.error?.localizedDescription == rhs.error?.localizedDescription) && lhs.isLoading && rhs.isLoading
+        (lhs.value == rhs.value || lhs.error?.localizedDescription == rhs.error?.localizedDescription) && lhs.isLoading && rhs
+            .isLoading
     }
 }

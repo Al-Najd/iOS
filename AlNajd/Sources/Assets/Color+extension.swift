@@ -10,6 +10,8 @@
 
 import SwiftUI
 
+// MARK: - BundleProvider
+
 private enum BundleProvider {
     static let bundle = Bundle._module
 }
@@ -53,7 +55,7 @@ public extension Color {
 }
 
 private extension Foundation.Bundle {
-    private class BundleFinder {}
+    private class BundleFinder { }
 
     /// Returns the resource bundle associated with the current Swift module.
     static var _module: Bundle = {
@@ -69,13 +71,14 @@ private extension Foundation.Bundle {
                 Bundle.main.bundleURL,
             ]
             #if DEBUG
-                candidates.append(contentsOf: [
-                    // Bundle should be present here when the package is used in UI Tests.
-                    Bundle(for: BundleFinder.self).resourceURL?.deletingLastPathComponent(),
-                    // Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/").
-                    Bundle(for: BundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent(),
-                    Bundle(for: BundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent(),
-                ])
+            candidates.append(contentsOf: [
+                // Bundle should be present here when the package is used in UI Tests.
+                Bundle(for: BundleFinder.self).resourceURL?.deletingLastPathComponent(),
+                // Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/").
+                Bundle(for: BundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent()
+                    .deletingLastPathComponent(),
+                Bundle(for: BundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent(),
+            ])
             #endif
             return candidates
         }()

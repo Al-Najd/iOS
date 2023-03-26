@@ -5,10 +5,12 @@
 //  Created by Ahmed Ramy on 13/09/2021.
 //
 
+// MARK: - OError
+
 public struct OError: Error, Codable {
     public var text: String
-    public var loggable: Bool = true
-    public var presentable: Bool = true
+    public var loggable = true
+    public var presentable = true
 
     public init(text: String, loggable: Bool = true, presentable: Bool = true) {
         self.text = text

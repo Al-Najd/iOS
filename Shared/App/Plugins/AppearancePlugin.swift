@@ -9,6 +9,8 @@ import DesignSystem
 import SwiftUI
 import UIKit.UIApplication
 
+// MARK: - AppearancesPlugin
+
 struct AppearancesPlugin: AppPlugin {
     func setup() {
         addAppearances()
@@ -25,16 +27,14 @@ private extension AppearancesPlugin {
                 .font: ARFont.pSubheadline.font,
                 .foregroundColor: UIColor(Color.mono.offwhite),
             ],
-            for: .normal
-        )
+            for: .normal)
 
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 .font: ARFont.pSubheadline.font,
                 .foregroundColor: UIColor(Color.mono.offblack),
             ],
-            for: .selected
-        )
+            for: .selected)
     }
 
     func adaptUITableViewAppearance() {
@@ -55,8 +55,7 @@ private extension AppearancesPlugin {
 
         UITabBarItem.appearance().setTitleTextAttributes(
             [.font: ARFont.textXSmall.font],
-            for: []
-        )
+            for: [])
     }
 
     func adaptNavigationBarAppearance() {

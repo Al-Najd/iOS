@@ -43,8 +43,7 @@ struct RepeatableSubtaskView: View {
                         Image(systemName: "checkmark.square.fill")
                             .resizable()
                             .foregroundColor(
-                                .success.darkMode
-                            )
+                                .success.darkMode)
                     } else if repetation == 1 {
                         Image(systemName: "square")
                             .resizable()
@@ -65,9 +64,7 @@ struct RepeatableSubtaskView: View {
                         .foregroundColor(
                             isDone
                                 ? .success.light.opacity(0.25)
-                                : .mono.offwhite.opacity(0.1)
-                        )
-                )
+                                : .mono.offwhite.opacity(0.1)))
             })
         }
         .padding(.horizontal, .p16)

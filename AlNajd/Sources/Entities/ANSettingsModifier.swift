@@ -21,8 +21,7 @@ public struct ANSettingsModifier: Identifiable, Equatable {
         title: String,
         icon: String,
         subtitles: String,
-        isInternal: Bool
-    ) {
+        isInternal: Bool) {
         self.title = title
         self.icon = icon
         self.subtitles = subtitles

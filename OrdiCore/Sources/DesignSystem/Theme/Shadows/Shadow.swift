@@ -11,6 +11,8 @@
 
 import SwiftUI
 
+// MARK: - ARShadow
+
 public struct ARShadow {
     var color: Color
     var radius: CGFloat
@@ -20,16 +22,14 @@ public struct ARShadow {
         ARShadow(
             color: color,
             radius: radius,
-            position: .init(x: x, y: y)
-        )
+            position: .init(x: x, y: y))
     }
 
     func spreadBy(_ radius: CGFloat) -> ARShadow {
         ARShadow(
             color: color,
             radius: radius,
-            position: position
-        )
+            position: position)
     }
 }
 

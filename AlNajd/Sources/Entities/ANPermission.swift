@@ -8,6 +8,8 @@
 import CoreLocation
 import Foundation
 
+// MARK: - ANPermission
+
 public struct ANPermission: Identifiable, Equatable {
     public let id: String = UUID().uuidString
     public let title: String
@@ -25,8 +27,7 @@ public struct ANPermission: Identifiable, Equatable {
         subtitles: String,
         needs: [String],
         status: Status = .notDetermined,
-        isInternal: Bool
-    ) {
+        isInternal: Bool) {
         self.title = title
         self.icon = icon
         self.subtitles = subtitles

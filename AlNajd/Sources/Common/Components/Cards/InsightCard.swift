@@ -8,6 +8,8 @@
 import DesignSystem
 import SwiftUI
 
+// MARK: - Insight
+
 public struct Insight {
     public let indicator: Indicator
     public let details: String
@@ -17,6 +19,8 @@ public struct Insight {
         self.details = details
     }
 }
+
+// MARK: - InsightCardView
 
 public struct InsightCardView: View {
     public let insight: Insight
@@ -47,11 +51,11 @@ public struct InsightCardView: View {
                 .shadow(
                     color: .black.opacity(0.25),
                     radius: 2,
-                    x: 0, y: 0
-                )
-        )
+                    x: 0, y: 0))
     }
 }
+
+// MARK: - Insight.Indicator
 
 public extension Insight {
     struct Indicator: Identifiable, Equatable {
@@ -63,8 +67,7 @@ public extension Insight {
         public static let praise: Indicator = .init(
             color: Color.success,
             icon: "hands.clap.fill",
-            title: "Good Job!".localized
-        )
+            title: "Good Job!".localized)
 
         public static func == (lhs: Insight.Indicator, rhs: Insight.Indicator) -> Bool {
             lhs.id == rhs.id
@@ -73,19 +76,16 @@ public extension Insight {
         public static let encourage: Indicator = .init(
             color: Color.warning,
             icon: "bolt.heart.fill",
-            title: "Keep it up, you can do it!".localized
-        )
+            title: "Keep it up, you can do it!".localized)
 
         public static let tipOfTheDay: Indicator = .init(
             color: Color.success,
             icon: "star.fill",
-            title: "Tip of the day".localized
-        )
+            title: "Tip of the day".localized)
 
         public static let danger: Indicator = .init(
             color: Color.danger,
             icon: "flame.circle.fill",
-            title: "Heads up!".localized
-        )
+            title: "Heads up!".localized)
     }
 }

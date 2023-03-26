@@ -14,14 +14,16 @@ public extension OAnimation {
     static let splash: OAnimation = .init(name: "splash")
 }
 
+// MARK: - ImageKey
+
 public enum ImageKey {
-    public static let prayerWalkthrough: String = "prayer_walkthrough"
-    public static let rewardsWalkthrough: String = "rewards_walkthrough"
-    public static let azkarWalkthrough: String = "azkar_walkthrough"
-    public static let dashboardWalkthrough: String = "dashboard_walkthrough"
-    public static let calendarWalkthrough: String = "calendar_walkthrough"
-    public static let dashboardInsightsWalkthrough: String = "dashboard_insights_walkthrough"
-    public static let settingsWalkthrough: String = "settings_walkthrough"
+    public static let prayerWalkthrough = "prayer_walkthrough"
+    public static let rewardsWalkthrough = "rewards_walkthrough"
+    public static let azkarWalkthrough = "azkar_walkthrough"
+    public static let dashboardWalkthrough = "dashboard_walkthrough"
+    public static let calendarWalkthrough = "calendar_walkthrough"
+    public static let dashboardInsightsWalkthrough = "dashboard_insights_walkthrough"
+    public static let settingsWalkthrough = "settings_walkthrough"
 }
 
 public extension StorageKey {
@@ -30,55 +32,46 @@ public extension StorageKey {
     static let prayers: (_ date: Date, _ category: DeedCategory) -> StorageKey = {
         .init(
             key: "\($0.day)-\($0.month)-\($0.year)-\($1)-prayers",
-            suitableStorage: .userDefaults
-        )
+            suitableStorage: .userDefaults)
     }
 
     static let azkar: (_ date: Date, _ category: AzkarCategory) -> StorageKey = {
         .init(
             key: "\($0.day)-\($0.month)-\($0.year)-\($1)-azkar",
-            suitableStorage: .userDefaults
-        )
+            suitableStorage: .userDefaults)
     }
 
     static let prayersRewards: (_ date: Date, _ category: DeedCategory) -> StorageKey = {
         .init(
             key: "\($0.day)-\($0.month)-\($0.year)-\($1)-prayers-rewards",
-            suitableStorage: .userDefaults
-        )
+            suitableStorage: .userDefaults)
     }
 
     static let azkarRewards: (_ date: Date, _ category: AzkarCategory) -> StorageKey = {
         .init(
             key: "\($0.day)-\($0.month)-\($0.year)-\($1)-azkar-rewards",
-            suitableStorage: .userDefaults
-        )
+            suitableStorage: .userDefaults)
     }
 
     static let isNotificationsEnabled: StorageKey = .init(
         key: "isNotificationsEnabled",
-        suitableStorage: .userDefaults
-    )
+        suitableStorage: .userDefaults)
 
     static let enableAccessibilityFont: StorageKey = .init(
         key: "enableAccessibilityFont",
-        suitableStorage: .userDefaults
-    )
+        suitableStorage: .userDefaults)
 
     static let fontMultiplier: StorageKey = .init(
         key: "fontMultiplier",
-        suitableStorage: .userDefaults
-    )
+        suitableStorage: .userDefaults)
 
     static let didCompleteOnboarding: StorageKey = .init(
         key: "didCompleteOnboarding",
-        suitableStorage: .userDefaults
-    )
+        suitableStorage: .userDefaults)
 
     static let onboardingStep: StorageKey = .init(
         key: "onboardingStep",
-        suitableStorage: .userDefaults
-    )
+        suitableStorage: .userDefaults)
 }
 
 public extension StorageKey {
@@ -91,32 +84,32 @@ public extension StorageKey {
         let prayers: (_ category: DeedCategory) -> StorageKey = {
             .init(
                 key: "\($0.id)-prayer",
-                suitableStorage: .userDefaults
-            )
+                suitableStorage: .userDefaults)
         }
 
         let azkar: (_ category: AzkarCategory) -> StorageKey = {
             .init(
                 key: "\($0.id)-azkar",
-                suitableStorage: .userDefaults
-            )
+                suitableStorage: .userDefaults)
         }
     }
 }
 
-class CurrentBundleFinder {}
+// MARK: - CurrentBundleFinder
+
+class CurrentBundleFinder { }
 public extension Foundation.Bundle {
     static var commonBundle: Bundle = {
-        /* The name of your local package, prepended by "LocalPackages_" */
+        // The name of your local package, prepended by "LocalPackages_"
         let bundleName = "AlNajd_Common"
         let candidates = [
-            /* Bundle should be present here when the package is linked into an App. */
+            // Bundle should be present here when the package is linked into an App.
             Bundle.main.resourceURL,
-            /* Bundle should be present here when the package is linked into a framework. */
+            // Bundle should be present here when the package is linked into a framework.
             Bundle(for: CurrentBundleFinder.self).resourceURL,
-            /* For command-line tools. */
+            // For command-line tools.
             Bundle.main.bundleURL,
-            /* Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/"). */
+            // Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/").
             Bundle(for: CurrentBundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent(),
         ]
         for candidate in candidates {

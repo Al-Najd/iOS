@@ -15,6 +15,8 @@ import SwiftUI
 import Utils
 import XCTest
 
+// MARK: - OnboardingSnapshotTests
+
 class OnboardingSnapshotTests: XCTestCase {
     override static func setUp() {
         super.setUp()
@@ -36,10 +38,8 @@ class OnboardingSnapshotTests: XCTestCase {
             store: .init(
                 initialState: .init(step: .step000_ThereIsNoWayYouCanHide),
                 reducer: .empty,
-                environment: CoreEnvironment.live(OnboardingEnvironment())
-            ),
-            injectedView: { EmptyView() }
-        )
+                environment: CoreEnvironment.live(OnboardingEnvironment())),
+            injectedView: { EmptyView() })
 
         assertSnapshots(matching: view, as: [
             "Light": .image(

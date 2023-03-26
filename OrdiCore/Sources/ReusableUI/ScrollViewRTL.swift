@@ -21,13 +21,11 @@ public struct ScrollViewRTL<Content: View>: View {
                 .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? -180 : 0), axis: (
                     x: CGFloat(0),
                     y: CGFloat(layoutDirection == .rightToLeft ? -10 : 0),
-                    z: CGFloat(0)
-                ))
+                    z: CGFloat(0)))
         }
         .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? 180 : 0), axis: (
             x: CGFloat(0),
             y: CGFloat(layoutDirection == .rightToLeft ? 10 : 0),
-            z: CGFloat(0)
-        ))
+            z: CGFloat(0)))
     }
 }

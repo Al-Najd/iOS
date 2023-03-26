@@ -40,6 +40,8 @@ import SwiftUI
     public typealias MPTextAutocorrectionType = UITextSpellCheckingType
 #endif
 
+// MARK: - FontType
+
 public enum FontType: String, Codable {
     case sansSerif
     case serif
@@ -56,6 +58,8 @@ public enum FontType: String, Codable {
     }
 }
 
+// MARK: - FontCategory
+
 public enum FontCategory: String, Codable {
     /// Big Titles and large pieces of texts
     /// Font Sizes: 34 - 20
@@ -67,6 +71,8 @@ public enum FontCategory: String, Codable {
     /// Font Sizes: 20 - 13
     case link
 }
+
+// MARK: - FontScale
 
 public enum FontScale: String, Codable {
     /// Display -> 34
@@ -91,6 +97,8 @@ public enum FontScale: String, Codable {
     case xsmall
 }
 
+// MARK: - FontWeight
+
 public enum FontWeight: String, Codable {
     case regular
     case bold
@@ -104,6 +112,8 @@ public enum FontWeight: String, Codable {
         }
     }
 }
+
+// MARK: - FontLocale
 
 public enum FontLocale: String, Codable {
     case english
@@ -139,6 +149,8 @@ public enum FontLocale: String, Codable {
     }
 }
 
+// MARK: - FontProtocol
+
 public protocol FontProtocol: Codable {
     var fontDetails: FontDetails { get set }
     var fontCategory: FontCategory { get set }
@@ -159,7 +171,8 @@ public extension FontProtocol {
                 return .init(size: 28, lineHeight: 40, letterSpacing: 1)
             case .medium:
                 return .init(size: 24, lineHeight: 34, letterSpacing: 1)
-            case .small, .xsmall:
+            case .small,
+                 .xsmall:
                 return .init(size: 20, lineHeight: 32, letterSpacing: 1)
             }
         case .text:
@@ -190,7 +203,7 @@ public extension FontProtocol {
     }
 
     var font: MPFont {
-        return MPFont(name: fontName, size: metrics.size) ?? .systemFont(ofSize: metrics.size)
+        MPFont(name: fontName, size: metrics.size) ?? .systemFont(ofSize: metrics.size)
     }
 
     var fontName: String {
@@ -207,17 +220,23 @@ public extension FontProtocol {
     }
 }
 
+// MARK: - FontMetricsProtocol
+
 public protocol FontMetricsProtocol {
     var size: CGFloat { get }
     var lineHeight: CGFloat { get }
     var letterSpacing: CGFloat { get }
 }
 
+// MARK: - FontMetrics
+
 public struct FontMetrics: Codable, FontMetricsProtocol {
     public let size: CGFloat
     public let lineHeight: CGFloat
     public let letterSpacing: CGFloat
 }
+
+// MARK: - FontDetails
 
 public struct FontDetails: Codable {
     public var name: String
@@ -230,6 +249,8 @@ public struct FontDetails: Codable {
         self.fontType = fontType
     }
 }
+
+// MARK: - ARFont
 
 public struct ARFont: FontProtocol {
     public var fontDetails: FontDetails
@@ -290,16 +311,15 @@ public extension ARFont {
 @available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
 public extension View {
     func scaledFont(_ font: ARFont, _ weight: Font.Weight = .regular) -> some View {
-        return modifier(
-            ScaledFont(name: font.fontName, size: font.metrics.size, weight: weight)
-        )
+        modifier(
+            ScaledFont(name: font.fontName, size: font.metrics.size, weight: weight))
     }
 
     func scaledFont(
         locale: FontLocale,
         _ font: ARFont,
-        _ weight: Font.Weight = .regular
-    ) -> some View {
+        _ weight: Font.Weight = .regular)
+        -> some View {
         let extractedExpr: ScaledFont = { (font: ARFont) -> ScaledFont in
             ScaledFont(name: font.fontName, size: font.metrics.size, weight: weight)
         }(
@@ -308,14 +328,13 @@ public extension View {
                 type: font.fontDetails.fontType,
                 category: font.fontCategory,
                 scale: font.fontScale,
-                weight: font.fontWeight
-            )
-        )
+                weight: font.fontWeight))
         return modifier(
-            extractedExpr
-        )
+            extractedExpr)
     }
 }
+
+// MARK: - ScaledFont
 
 struct ScaledFont: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
@@ -329,18 +348,21 @@ struct ScaledFont: ViewModifier {
     }
 }
 
+// MARK: - SizeAdaptableFont
+
 public protocol SizeAdaptableFont {
     /// Scaled per Size font for FontStyle.
     var sizeAdaptableFont: MPFont { get }
 }
 
+// MARK: - ARFont + SizeAdaptableFont
+
 extension ARFont: SizeAdaptableFont {
     public var sizeAdaptableFont: MPFont {
-        return MPFont(
+        MPFont(
             name: fontName,
-            size: adapt(metrics.size)
-        ) ?? .systemFont(ofSize: adapt(metrics.size)
-        )
+            size: adapt(metrics.size)) ?? .systemFont(
+            ofSize: adapt(metrics.size))
     }
 
     private func adapt(_ size: CGFloat) -> CGFloat {
@@ -353,10 +375,14 @@ extension ARFont: SizeAdaptableFont {
     }
 }
 
+// MARK: - AccessibilityFont
+
 public protocol AccessibilityFont {
     /// Dynamically scalled font for FontStyle.
     var accessibleFont: MPFont { get }
 }
+
+// MARK: - ARFont + AccessibilityFont
 
 extension ARFont: AccessibilityFont {
     private func getMappedTextStyle() -> MPFont.TextStyle {
@@ -397,25 +423,25 @@ extension ARFont: AccessibilityFont {
 
     public var accessibleFont: MPFont {
         #if os(macOS)
-            font
+        font
         #else
-            UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledFont(for: font)
+        UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledFont(for: font)
         #endif
     }
 
     public var accessibleLineHeight: CGFloat {
         #if os(macOS)
-            metrics.lineHeight
+        metrics.lineHeight
         #else
-            UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledValue(for: metrics.lineHeight)
+        UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledValue(for: metrics.lineHeight)
         #endif
     }
 
     public var accessibleLetterSpacing: CGFloat {
         #if os(macOS)
-            metrics.letterSpacing
+        metrics.letterSpacing
         #else
-            UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledValue(for: metrics.letterSpacing)
+        UIFontMetrics(forTextStyle: getMappedTextStyle()).scaledValue(for: metrics.letterSpacing)
         #endif
     }
 }
@@ -426,10 +452,11 @@ private extension MPFont {
         let size = pointSize.adaptV(min: pointSize * 0.75, max: pointSize * 2) * CGFloat(FontManager.shared.fontMultiplier)
         return MPFont(
             name: fontName,
-            size: size
-        ) ?? .systemFont(ofSize: size)
+            size: size) ?? .systemFont(ofSize: size)
     }
 }
+
+// MARK: - Language
 
 public enum Language: CaseIterable {
     case arabic
@@ -459,6 +486,6 @@ public enum Language: CaseIterable {
     }
 
     public var isRTLLanguage: Bool {
-        return self == .arabic
+        self == .arabic
     }
 }

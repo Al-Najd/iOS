@@ -6,18 +6,16 @@
 //
 
 import Common
-@testable import Dashboard
-@testable import Entities
 import Nimble
 import Quick
 import XCTest
+@testable import Dashboard
+@testable import Entities
 
-/**
- 1. Measure Performance of each test (Done)
- 2. Test cases of ranges (Done)
- 3. Test cases of individual metrics (TODO)
- 4. Test cases of caching the calculations (TODO)
- */
+/// 1. Measure Performance of each test (Done)
+/// 2. Test cases of ranges (Done)
+/// 3. Test cases of individual metrics (TODO)
+/// 4. Test cases of caching the calculations (TODO)
 class DashboardTests: QuickSpec {
     override func spec() {
         describe("the dashboard") {
@@ -44,13 +42,13 @@ class DashboardTests: QuickSpec {
                     }
 
                     context("when previous range is empty and current range is not") {
-                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek.reduce(into: [Date: [Deed]](), emptyWeekSeeder)
+                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek
+                            .reduce(into: [Date: [Deed]](), emptyWeekSeeder)
                         let currentWeekFakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]](), goodWeekSeeder)
 
                         let analysis = analyize(
                             currentRangeReport: .init(ranges: [.fard: currentWeekFakeData]),
-                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData])
-                        )[0]
+                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData]))[0]
 
                         it("should have a good indicator") {
                             expect(analysis.isImproving).to(beTrue())
@@ -58,13 +56,13 @@ class DashboardTests: QuickSpec {
                     }
 
                     context("when current range is better than the previous") {
-                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek.reduce(into: [Date: [Deed]](), badWeekSeeder)
+                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek
+                            .reduce(into: [Date: [Deed]](), badWeekSeeder)
                         let currentWeekFakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]](), goodWeekSeeder)
 
                         let analysis = analyize(
                             currentRangeReport: .init(ranges: [.fard: currentWeekFakeData]),
-                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData])
-                        )[0]
+                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData]))[0]
 
                         it("should have a good indicator") {
                             expect(analysis.isImproving).to(beTrue())
@@ -72,13 +70,13 @@ class DashboardTests: QuickSpec {
                     }
 
                     context("when previous range is better than the current") {
-                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek.reduce(into: [Date: [Deed]](), goodWeekSeeder)
+                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek
+                            .reduce(into: [Date: [Deed]](), goodWeekSeeder)
                         let currentWeekFakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]](), badWeekSeeder)
 
                         let analysis = analyize(
                             currentRangeReport: .init(ranges: [.fard: currentWeekFakeData]),
-                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData])
-                        )[0]
+                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData]))[0]
 
                         it("should label the user's performance as improving") {
                             expect(analysis.isImproving).to(beFalse())
@@ -86,13 +84,13 @@ class DashboardTests: QuickSpec {
                     }
 
                     context("when both ranges are the same") {
-                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek.reduce(into: [Date: [Deed]](), goodWeekSeeder)
+                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek
+                            .reduce(into: [Date: [Deed]](), goodWeekSeeder)
                         let currentWeekFakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]](), goodWeekSeeder)
 
                         let analysis = analyize(
                             currentRangeReport: .init(ranges: [.fard: currentWeekFakeData]),
-                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData])
-                        )[0]
+                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData]))[0]
 
                         it("should label the user's performance as improving for keeping his performance") {
                             expect(analysis.isImproving).to(beTrue())
@@ -100,13 +98,13 @@ class DashboardTests: QuickSpec {
                     }
 
                     context("when the current is maxed out") {
-                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek.reduce(into: [Date: [Deed]](), badWeekSeeder)
+                        let previousWeekFakeData = Date.now.adding(.day, value: -7).previousWeek
+                            .reduce(into: [Date: [Deed]](), badWeekSeeder)
                         let currentWeekFakeData = Date.now.previousWeek.reduce(into: [Date: [Deed]](), maxedOutWeekSeeder)
 
                         let analysis = analyize(
                             currentRangeReport: .init(ranges: [.fard: currentWeekFakeData]),
-                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData])
-                        )[0]
+                            previousRangeReport: .init(ranges: [.fard: previousWeekFakeData]))[0]
 
                         // TODO: - Change isImproving to an enum or struct so you can scale it better
                         it("should label the user's performance as improving") {
@@ -130,12 +128,9 @@ class DashboardTests: QuickSpec {
 
                             it("should tell user that no sufficient data for this") {
                                 expect(
-                                    analysis.insight?.indicator.id
-                                ).to(
+                                    analysis.insight?.indicator.id).to(
                                     equal(
-                                        Insight.Indicator.encourage.id
-                                    )
-                                )
+                                        Insight.Indicator.encourage.id))
                             }
                         }
                     }

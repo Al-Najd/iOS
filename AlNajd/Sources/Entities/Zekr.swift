@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Zekr
+
 struct Zekr: Codable {
     let category: Category
     let count: Int
@@ -39,8 +41,8 @@ struct Zekr: Codable {
             let url = Bundle.main.url(forResource: "azkar-db", withExtension: "json"),
             let data = try? Data(contentsOf: url),
             let azkar = try? decoder
-            .decode(FailableCodableArray<Zekr>.self, from: data)
-            .elements
+                .decode(FailableCodableArray<Zekr>.self, from: data)
+                .elements
         else {
             return []
         }
@@ -48,6 +50,8 @@ struct Zekr: Codable {
         return azkar
     }()
 }
+
+// MARK: Zekr.Category
 
 extension Zekr {
     enum Category: String, Decodable {
@@ -67,6 +71,8 @@ extension Zekr.Category {
     }
 }
 
+// MARK: - FailableDecodable
+
 struct FailableDecodable<Base: Decodable>: Decodable {
     let base: Base?
 
@@ -75,6 +81,8 @@ struct FailableDecodable<Base: Decodable>: Decodable {
         base = try? container.decode(Base.self)
     }
 }
+
+// MARK: - FailableCodableArray
 
 struct FailableCodableArray<Element: Codable>: Codable {
     var elements: [Element]
@@ -88,9 +96,9 @@ struct FailableCodableArray<Element: Codable>: Codable {
         }
 
         while !container.isAtEnd {
-            if let element = try container
-                .decode(FailableDecodable<Element>.self).base
-            {
+            if
+                let element = try container
+                    .decode(FailableDecodable<Element>.self).base {
                 elements.append(element)
             }
         }

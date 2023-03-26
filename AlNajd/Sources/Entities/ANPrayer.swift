@@ -12,6 +12,8 @@ import Localization
 import SwiftUI
 import Utils
 
+// MARK: - ANPrayer
+
 public struct ANPrayer: Identifiable, Equatable {
     public let id: Int
     public let name: String
@@ -21,9 +23,16 @@ public struct ANPrayer: Identifiable, Equatable {
     public let reward: String
     public var sunnah: IdentifiedArrayOf<ANSunnah>
     public var afterAzkar: IdentifiedArrayOf<ANAzkar>
-    public var isDone: Bool = false
+    public var isDone = false
 
-    public init(id: Int64, name: String, raqaat: Int, sunnah: IdentifiedArrayOf<ANSunnah>, afterAzkar: IdentifiedArrayOf<ANAzkar>, isDone: Bool = false, reward: String) {
+    public init(
+        id: Int64,
+        name: String,
+        raqaat: Int,
+        sunnah: IdentifiedArrayOf<ANSunnah>,
+        afterAzkar: IdentifiedArrayOf<ANAzkar>,
+        isDone: Bool = false,
+        reward: String) {
         self.id = Int(id)
         self.name = name
         title = L10n.prayerTitle(name.localized)
@@ -36,6 +45,8 @@ public struct ANPrayer: Identifiable, Equatable {
     }
 }
 
+// MARK: - ANSunnah
+
 public struct ANSunnah: Identifiable, Equatable {
     public let id: Int
     public let name: String
@@ -44,9 +55,17 @@ public struct ANSunnah: Identifiable, Equatable {
     public let affirmation: Affirmation
     public let reward: String
     public let azkar: [ANAzkar]
-    public var isDone: Bool = false
+    public var isDone = false
 
-    public init(id: Int64, name: String, raqaat: Int, position: ANSunnah.Position, affirmation: ANSunnah.Affirmation, azkar: [ANAzkar], isDone: Bool = false, reward: String) {
+    public init(
+        id: Int64,
+        name: String,
+        raqaat: Int,
+        position: ANSunnah.Position,
+        affirmation: ANSunnah.Affirmation,
+        azkar: [ANAzkar],
+        isDone: Bool = false,
+        reward: String) {
         self.id = Int(id)
         self.name = name.localized
         self.raqaat = raqaat
@@ -89,6 +108,8 @@ public extension ANSunnah {
     }
 }
 
+// MARK: - ANNafila
+
 public struct ANNafila {
     public let name: String
     public let raqaat: Raqaat
@@ -107,6 +128,8 @@ public extension ANNafila {
         case open
     }
 }
+
+// MARK: - ANAzkar
 
 public struct ANAzkar: Identifiable, Equatable {
     public let id: Int
@@ -131,13 +154,21 @@ public extension ANSunnah {
     }
 
     var subtitle: String {
-        return L10n.sunnahSubtitle(name, position.text, L10n.raqaatCount(raqaat))
+        L10n.sunnahSubtitle(name, position.text, L10n.raqaatCount(raqaat))
     }
 }
 
-extension ANPrayer: Changeable {}
-extension ANSunnah: Changeable {}
-extension ANAzkar: Changeable {}
+// MARK: - ANPrayer + Changeable
+
+extension ANPrayer: Changeable { }
+
+// MARK: - ANSunnah + Changeable
+
+extension ANSunnah: Changeable { }
+
+// MARK: - ANAzkar + Changeable
+
+extension ANAzkar: Changeable { }
 
 public extension ANPrayer {
     var image: Image {

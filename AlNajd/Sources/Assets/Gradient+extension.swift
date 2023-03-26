@@ -14,8 +14,7 @@ public extension LinearGradient {
             Color("Gradients/Home/LowCharge/ProgressEnd"),
         ],
         startPoint: .top,
-        endPoint: .bottom
-    )
+        endPoint: .bottom)
 
     static let homeMidCharge: LinearGradient = .init(
         colors: [
@@ -23,8 +22,7 @@ public extension LinearGradient {
             Color("Gradients/Home/MidCharge/ProgressEnd"),
         ],
         startPoint: .top,
-        endPoint: .bottom
-    )
+        endPoint: .bottom)
 
     static let homeHighCharge: LinearGradient = .init(
         colors: [
@@ -32,6 +30,5 @@ public extension LinearGradient {
             Color("Gradients/Home/HighCharge/ProgressEnd"),
         ],
         startPoint: .leading,
-        endPoint: .trailing
-    )
+        endPoint: .trailing)
 }

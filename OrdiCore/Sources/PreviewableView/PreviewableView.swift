@@ -9,6 +9,8 @@ import SwiftUI
 
 public typealias PreviewableView<T: View> = WrapperView<T>
 
+// MARK: - PreviewableFeatures
+
 @frozen
 public enum PreviewableFeatures: Identifiable {
     case darkMode
@@ -33,6 +35,8 @@ public enum PreviewableFeatures: Identifiable {
     }
 }
 
+// MARK: - LocalizationVariation
+
 public struct LocalizationVariation: Identifiable, Equatable, Hashable {
     public var id: String { "\(locale)-\(includeDarkMode)" }
     let locale: String
@@ -47,16 +51,18 @@ public struct LocalizationVariation: Identifiable, Equatable, Hashable {
 public extension Array where Element == PreviewableFeatures {
     static let all: [PreviewableFeatures] = [
         .darkMode,
-        .localization(Bundle.main.localizations.map {
-            LocalizationVariation(locale: $0, includeDarkMode: true)
-        }
-        ),
+        .localization(
+            Bundle.main.localizations.map {
+                LocalizationVariation(locale: $0, includeDarkMode: true)
+            }),
         .smallDevice,
         .noNotch,
         .iPad,
         .darkMode,
     ]
 }
+
+// MARK: - WrapperView
 
 public struct WrapperView<Content: View>: View {
     private let injectedView: () -> Content
@@ -83,7 +89,7 @@ public struct WrapperView<Content: View>: View {
                     injectedView()
                         .preferredColorScheme(.dark)
                 }
-            case let .localization(variations):
+            case .localization(let variations):
                 ForEach(variations) { variation in
                     injectedView()
                         .environment(\.locale, Locale(identifier: variation.locale))

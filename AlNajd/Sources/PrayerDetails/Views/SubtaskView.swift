@@ -49,18 +49,15 @@ struct SubtaskView: View {
                     .foregroundColor(
                         isDone
                             ? .success.darkMode
-                            : .mono.offwhite
-                    )
-                    .frame(width: .p24, height: .p24)
-                    .padding()
-                    .background(
-                        Circle()
-                            .foregroundColor(
-                                isDone
-                                    ? .success.light.opacity(0.25)
-                                    : .mono.offwhite.opacity(0.1)
-                            )
-                    )
+                            : .mono.offwhite)
+                        .frame(width: .p24, height: .p24)
+                        .padding()
+                        .background(
+                            Circle()
+                                .foregroundColor(
+                                    isDone
+                                        ? .success.light.opacity(0.25)
+                                        : .mono.offwhite.opacity(0.1)))
             })
         }
         .padding(.horizontal, .p16)
