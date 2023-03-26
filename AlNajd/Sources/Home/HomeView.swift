@@ -107,6 +107,42 @@ public struct HomeView: View {
         }
     }
 
+					VStack {
+						Text(L10n.pickDate)
+							.foregroundColor(.mono.offblack)
+							.scaledFont(locale: .arabic, .pFootnote, .bold)
+							.multilineTextAlignment(.leading)
+							.padding(.horizontal, .p16)
+
+						DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
+							.datePickerStyle(.graphical)
+					}.padding()
+
+					NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+						.padding(.bottom)
+
+					VStack(alignment: .leading) {
+						Text(L10n.ahadeeth)
+							.foregroundColor(.mono.offblack)
+							.scaledFont(locale: .arabic, .pFootnote, .bold)
+							.multilineTextAlignment(.leading)
+							.padding(.horizontal, .p16)
+						HadeethSliderView()
+					}
+				}
+			}
+			.ignoresSafeArea(edges: .top)
+			.fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
+				IfLetStore(store.scope(state: \.selectedPrayer, action: HomeAction.prayerDetails), then: {
+					PrayerDetailsView(store: $0)
+				})
+			}
+			.background(Color.mono.background)
+			.onAppear { viewStore.send(.onAppear) }
+			.enableInjection()
+		}
+	}
+
 	@ViewBuilder
 	func makeDuaaView(text: String) -> some View {
 		Text(text)
