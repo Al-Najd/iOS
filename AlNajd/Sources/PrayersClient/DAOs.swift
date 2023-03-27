@@ -133,6 +133,7 @@ extension ANDayDAO: TableRecord, EncodableRecord {
     static let prayers = hasMany(ANPrayerDAO.self)
     static let sunnah = hasMany(ANSunnahDAO.self, through: prayers, using: ANPrayerDAO.sunnah)
     static let azkar = hasMany(ANAzkarDAO.self, through: prayers, using: ANPrayerDAO.azkar)
+    static let timedAzkar = hasMany(ANAzkarTimedDAO.self)
 
     enum Columns {
         static let id = Column(CodingKeys.id)
@@ -171,6 +172,10 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 
     var azkar: QueryInterfaceRequest<ANAzkarDAO> {
         request(for: Self.azkar)
+    }
+
+    var timedAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
+        request(for: Self.timedAzkar)
     }
 
     var donePrayers: QueryInterfaceRequest<ANPrayerDAO> {

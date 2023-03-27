@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		044BB70B27DD4511004C2E0C /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB70A27DD4511004C2E0C /* RootFeature.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
-		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
 		0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61727A385A600913892 /* PluginProtocol.swift */; };
 		0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61827A385A600913892 /* AppearancePlugin.swift */; };
@@ -55,7 +54,6 @@
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
-		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		0472C61727A385A600913892 /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
 		0472C61827A385A600913892 /* AppearancePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			children = (
 				0479448127BD9A7A0063E746 /* Assets.xcassets */,
 				0472C60327A385A600913892 /* Animations */,
-				0472C60527A385A600913892 /* azkar-db.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -401,7 +398,6 @@
 			files = (
 				0472C63527A385A700913892 /* splash.json in Resources */,
 				04B8B05327CABBD50001F744 /* Assets.xcassets in Resources */,
-				0472C63627A385A700913892 /* azkar-db.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

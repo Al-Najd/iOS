@@ -24,6 +24,7 @@ private enum ANTargets {
         + ANTargets.home
         + ANTargets.assets
         + ANTargets.dashboard
+        + ANTargets.azkar
 }
 
 private extension ANTargets {
@@ -39,6 +40,7 @@ private extension ANTargets {
                 "Home",
                 "Assets",
                 "Dashboard",
+                "Azkar",
                 .product(name: "Core", package: "OrdiCore"),
             ]),
     ]
@@ -138,6 +140,19 @@ private extension ANTargets {
                 "Common",
                 .product(name: "Core", package: "OrdiCore"),
             ]),
+    ]
+
+    static let azkar: [Target] = [
+        .target(
+            name: "Azkar",
+            dependencies: [
+                "Localization",
+                "Assets",
+                "PrayersClient",
+                "Common",
+                .product(name: "Core", package: "OrdiCore"),
+            ]
+        )
     ]
 }
 
