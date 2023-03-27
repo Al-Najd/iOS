@@ -9,17 +9,19 @@ import Foundation
 import GRDB
 
 extension ANAzkarTimedDAO: FetchableRecord, MutablePersistableRecord {
-    static let morning: () -> [ANAzkarTimedDAO] = {
-        Zekr
+    @discardableResult
+    static func seedMorningAzkar(_ dayId: Int64, _ db: Database) throws -> [ANAzkarTimedDAO] {
+        try Zekr
             .mainAzkar
             .filter { $0.category == .sabah }
-            .map { $0.toDAO() }
+            .compactMap { zekr in try zekr.toDAO(dayId).insertAndFetch(db) }
     }
 
-    static let night: () -> [ANAzkarTimedDAO] = {
-        Zekr
+    @discardableResult
+    static func seedNightAzkar(_ dayId: Int64, _ db: Database) throws -> [ANAzkarTimedDAO] {
+        try Zekr
             .mainAzkar
             .filter { $0.category == .masaa }
-            .map { $0.toDAO() }
+            .compactMap { zekr in try zekr.toDAO(dayId).insertAndFetch(db) }
     }
 }

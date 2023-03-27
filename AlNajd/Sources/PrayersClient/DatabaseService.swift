@@ -103,6 +103,7 @@ private extension DatabaseService {
             try Date.dates(from: startDate, to: endDate).forEach {
                 let day = try ANDayDAO(date: $0).insertAndFetch(db)
                 try seedPrayers((day?.id)!, db)
+                try seedTimedAzkar((day?.id)!, db)
             }
         }
     }
@@ -121,6 +122,11 @@ private extension DatabaseService {
         try seedDhuhrSunnahAndAzkar((dhuhr?.id)!, db)
         try seedMaghribSunnahAndAzkar((maghrib?.id)!, db)
         try seedAishaaSunnahAndAzkar((aishaa?.id)!, db)
+    }
+
+    static func seedTimedAzkar(_ dayId: Int64, _ db: Database) throws {
+        try ANAzkarTimedDAO.seedMorningAzkar(dayId, db)
+        try ANAzkarTimedDAO.seedNightAzkar(dayId, db)
     }
 
     static func seedFajrSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {

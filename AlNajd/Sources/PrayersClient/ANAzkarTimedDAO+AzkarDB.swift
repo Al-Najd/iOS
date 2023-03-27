@@ -61,8 +61,13 @@ extension Zekr {
 }
 
 extension Zekr {
-    func toDAO() -> ANAzkarTimedDAO {
-        .init(name: zekr, reward: purpose, time: category.toDAO(), repetation: count)
+    func toDAO(_ dayId: Int64) -> ANAzkarTimedDAO {
+        .init(
+            name: zekr,
+            reward: purpose,
+            time: category.toDAO(),
+            repetation: count,
+            dayId: dayId)
     }
 }
 

@@ -17,15 +17,17 @@ public struct ANAzkarTimedDAO: Codable {
     public var repetation: Int
     public var time: Time
     public var currentCount: Int
+    public var dayId: Int64
     public var isDone: Bool { currentCount == .zero }
 
-    init(id: Int64? = nil, name: String, reward: String, time: Time, repetation: Int) {
+    init(id: Int64? = nil, name: String, reward: String, time: Time, repetation: Int, dayId: Int64) {
         self.id = id
         self.name = name
         self.reward = reward
         self.time = time
         self.repetation = repetation
         self.currentCount = repetation
+        self.dayId = dayId
     }
 }
 
