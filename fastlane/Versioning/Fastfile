@@ -1,0 +1,82 @@
+fastlane_require 'colored'
+fastlane_require 'yaml'
+fastlane_require 'json'
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# MARK: - Fastlane 
+
+platform :ios do
+    lane :validate_tag do |options|
+      UI.header "Tag Inspectation started! 🧐"
+      UI.important "Fetching all tags to ensure being in an updated state"
+      git_pull(only_tags: true)
+      validate_tag_environment(options)
+      add_tag_to_git(options)
+    end
+
+    lane :add_tag_to_git do |options|
+      UI.header "Tag Creation started! 🚀"
+      tag_to_add = `#{options[:env]}-#{options[:sprint_number]}.#{options[:build_number]}`
+      UI.important "Adding Tag #{tag_to_add} to Git"
+      add_git_tag(tag: tag_to_add)
+      UI.success "Tag Creation finished! 🚀"
+    end
+    
+    lane :update_build_number do |options|
+      UI.important "Updating Build Number, based on latest TestFlight build number"
+
+      new_build_number = latest_testflight_build_number + 1
+      increment_build_number(build_number: new_build_number)
+      xcodegen_update_build_number(build_number: new_build_number)
+
+      UI.success "Build Number updated! 🚀"
+      UI.important "New Build Number: #{new_build_number}"
+    end
+
+    lane :validate_tag_environment do |options|
+      UI.header "Tag Validation started! 🧐"
+      # Check if Tag follows this format ENV-SprintNumber.BuildNumber
+      tag = options[:tag]
+      tag_format = '*-*.*'
+      is_valid = tag.match(tag_format)
+      
+      unless is_valid
+        UI.user_error!("Tag #{tag} does not follow the format #{tag_format} example: QA-14.1 (14 = Sprint Number) (1 = Build Number)")
+      end
+
+      # Get Supported Env through ENV["ALLOWED_ENVIRONMENTS"], which is a string of comma separated values
+      allowed_envs = ENV["ALLOWED_ENVIRONMENTS"].split(",")
+
+      # Extract Environment from Tag
+      env = tag.split("-")[0]
+
+      # Check if Environment is supported
+      unless allowed_envs.include?(env)
+        UI.user_error!("Environment #{env} is not supported. Supported Environments are: #{allowed_envs}")
+      end
+
+      UI.success "Validating Inspectation finished! 🚀"
+    end
+
+    private_lane :xcodegen_update_build_number do |options|
+      project_yml = YAML.load_file("../project.yml")
+      project_json = project_yml.to_h
+      project_json["targets"]["CAFU"]["settings"]["base"]["CURRENT_PROJECT_VERSION"] = options[:build_number]
+      File.write("../project.yml", project_json.to_yaml)
+      system(`xcodegen generate`)
+    end
+end

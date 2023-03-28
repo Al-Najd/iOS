@@ -1,0 +1,103 @@
+fastlane_require 'colored'
+fastlane_require 'yaml'
+fastlane_require 'json'
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# MARK: - Fastlane 
+
+platform :ios do
+  lane :make_changelog_more_readable do |options|
+    changelog = options[:notes]
+    
+    # Capitalize every first letter of every line
+    changelog = changelog
+    .split("\n")
+    .map { |line| line
+      .split(" ")
+      .map { |word| word.capitalize }
+      .join(" ")
+    }
+    .join("\n")
+
+    # Uppercase any occurence of evc
+    changelog = changelog
+      .gsub("evc", "EVC")
+    
+    # Remove the git commit hashes
+    changelog = changelog
+      .split("\n")
+      .map { |line| line
+        .split(" ")
+        .select { |word| !word.include?("([") }
+        .join(" ")
+      }
+      .join("\n")
+
+      changelog
+  end
+
+  lane :make_changelogs do 
+    UI.message('Generating release notes for this version')
+    notes = conventional_changelog(
+      format: 'markdown',
+      order: [
+        "feat",
+        "hotfix", 
+        "fix", 
+        "docs",
+        "refactor",
+        "style",
+        "test"
+      ],
+      display_links: false
+    )
+
+    UI.message('Recording to Changelog.md')
+    file_prepend('../CHANGELOG.md', notes)
+    
+    notes
+  end
+end
+
+# MARK: - ------------ Helpers ------------
+def input(placeholder)
+  return prompt(text: placeholder)
+end
+
+def nilOrEmpty(variable)
+  return variable.nil? || variable.empty?
+end 
+
+def file_prepend(file, str)
+  # Check if file exists
+  if File.exist?(file)
+    new_contents = ""
+    File.open(file, 'r') do |fd|
+      contents = fd.read
+      new_contents = "#{str}\n\n\n#{contents}"
+    end
+    # Overwrite file but now with prepended string on it
+    File.open(file, 'w') do |fd| 
+      fd.write(new_contents)
+    end
+  else
+    # Create file & recurse
+    FileUtils.touch(file)
+    file_prepend(file, str)
+  end
+end
+# MARK: - ------------ Helpers ------------

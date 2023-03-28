@@ -81,6 +81,19 @@ public enum DatabaseService {
             }
         }
 
+        migrator.registerMigration("createAzkarTimed") { db in
+            try db.create(table: "azkar-timed") {
+                $0.autoIncrementedPrimaryKey("id")
+                $0.column("name", .text).notNull()
+                $0.column("reward", .text).notNull()
+                $0.column("repetation", .integer).notNull()
+                $0.column("time", .integer).notNull()
+                $0.column("currentCount", .integer).notNull()
+                $0.column("isDone", .boolean).notNull()
+                $0.column("dayId", .integer).notNull().indexed().references("days", onDelete: .cascade)
+            }
+        }
+
         return migrator
     }
 
@@ -103,6 +116,7 @@ private extension DatabaseService {
             try Date.dates(from: startDate, to: endDate).forEach {
                 let day = try ANDayDAO(date: $0).insertAndFetch(db)
                 try seedPrayers((day?.id)!, db)
+                try seedTimedAzkar((day?.id)!, db)
             }
         }
     }
@@ -121,6 +135,11 @@ private extension DatabaseService {
         try seedDhuhrSunnahAndAzkar((dhuhr?.id)!, db)
         try seedMaghribSunnahAndAzkar((maghrib?.id)!, db)
         try seedAishaaSunnahAndAzkar((aishaa?.id)!, db)
+    }
+
+    static func seedTimedAzkar(_ dayId: Int64, _ db: Database) throws {
+        try ANAzkarTimedDAO.seedMorningAzkar(dayId, db)
+        try ANAzkarTimedDAO.seedNightAzkar(dayId, db)
     }
 
     static func seedFajrSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {

@@ -22,6 +22,9 @@ struct Al_NajdApp: App {
     var body: some Scene {
         WindowGroup {
           RootView(store: .mainRoot)
+            .onAppear {
+              plugins.forEach { $0.setup() }
+            }
         }
     }
 }

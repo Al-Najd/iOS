@@ -1,0 +1,4 @@
+clean(true)
+output_types("html")
+project "CAFU.xcodeproj"
+scheme  "CAFU"

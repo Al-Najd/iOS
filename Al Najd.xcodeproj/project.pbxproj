@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		044BB70B27DD4511004C2E0C /* RootFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BB70A27DD4511004C2E0C /* RootFeature.swift */; };
 		0472C63527A385A700913892 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60427A385A600913892 /* splash.json */; };
-		0472C63627A385A700913892 /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = 0472C60527A385A600913892 /* azkar-db.json */; };
 		0472C63C27A385A700913892 /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61527A385A600913892 /* Al_NajdApp.swift */; };
 		0472C63D27A385A700913892 /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61727A385A600913892 /* PluginProtocol.swift */; };
 		0472C63E27A385A700913892 /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472C61827A385A600913892 /* AppearancePlugin.swift */; };
@@ -55,7 +54,6 @@
 		044E004527979E15005E6277 /* OrdiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OrdiCore; sourceTree = "<group>"; };
 		045849EF27A43EE80090FB3C /* AlNajd */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AlNajd; sourceTree = "<group>"; };
 		0472C60427A385A600913892 /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
-		0472C60527A385A600913892 /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
 		0472C61527A385A600913892 /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		0472C61727A385A600913892 /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
 		0472C61827A385A600913892 /* AppearancePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearancePlugin.swift; sourceTree = "<group>"; };
@@ -69,7 +67,7 @@
 		04C2FAF627D4A3A9002CEC77 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		04C2FAF927D4A3A9002CEC77 /* AppDelegateFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateFeature.swift; sourceTree = "<group>"; };
 		04C2FAFA27D4A3A9002CEC77 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B86588102716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B86588102716CC5500FC0CBB /* Al Najd Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86588132716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B86588182716CC5500FC0CBB /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B865881A2716CC5500FC0CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			children = (
 				0479448127BD9A7A0063E746 /* Assets.xcassets */,
 				0472C60327A385A600913892 /* Animations */,
-				0472C60527A385A600913892 /* azkar-db.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -222,7 +219,7 @@
 		B86588112716CC5500FC0CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B86588102716CC5500FC0CBB /* Al Najd.app */,
+				B86588102716CC5500FC0CBB /* Al Najd Develop.app */,
 				B86588182716CC5500FC0CBB /* Al Najd.app */,
 				B86588202716CC5500FC0CBB /* Tests iOS.xctest */,
 				B865882B2716CC5500FC0CBB /* Tests macOS.xctest */,
@@ -287,7 +284,7 @@
 				048CC8CF27B08505007BC3C7 /* AlCore */,
 			);
 			productName = "The One (iOS)";
-			productReference = B86588102716CC5500FC0CBB /* Al Najd.app */;
+			productReference = B86588102716CC5500FC0CBB /* Al Najd Develop.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B86588172716CC5500FC0CBB /* Al Najd (macOS) */ = {
@@ -401,7 +398,6 @@
 			files = (
 				0472C63527A385A700913892 /* splash.json in Resources */,
 				04B8B05327CABBD50001F744 /* Assets.xcassets in Resources */,
-				0472C63627A385A700913892 /* azkar-db.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +509,164 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		048F104727DCCB7A006C7FE1 /* Beta */ = {
+		048F104727DCCB7A006C7FE1 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Alpha;
+		};
+		048F104827DCCB7A006C7FE1 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RC";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 969Y6REAB6;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.19.1;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.alpha;
+				PRODUCT_NAME = "Al Najd Alpha";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Alpha;
+		};
+		048F104927DCCB7A006C7FE1 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 969Y6REAB6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
+				PRODUCT_NAME = "Al Najd";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Alpha;
+		};
+		048F104A27DCCB7A006C7FE1 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 969Y6REAB6;
+				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Al Najd (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Alpha;
+		};
+		048F104B27DCCB7A006C7FE1 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 969Y6REAB6;
+				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "The One (macOS)";
+			};
+			name = Alpha;
+		};
+		048F104C27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -566,30 +719,33 @@
 			};
 			name = Beta;
 		};
-		048F104827DCCB7A006C7FE1 /* Beta */ = {
+		048F104D27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.19.1;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
-				PRODUCT_NAME = "Al Najd";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.beta;
+				PRODUCT_NAME = "Al Najd Beta";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
 				SWIFT_VERSION = 5.0;
@@ -599,7 +755,7 @@
 			};
 			name = Beta;
 		};
-		048F104927DCCB7A006C7FE1 /* Beta */ = {
+		048F104E27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -625,7 +781,7 @@
 			};
 			name = Beta;
 		};
-		048F104A27DCCB7A006C7FE1 /* Beta */ = {
+		048F104F27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -649,7 +805,7 @@
 			};
 			name = Beta;
 		};
-		048F104B27DCCB7A006C7FE1 /* Beta */ = {
+		048F105027DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -669,162 +825,6 @@
 				TEST_TARGET_NAME = "The One (macOS)";
 			};
 			name = Beta;
-		};
-		048F104C27DCCBC6006C7FE1 /* RC */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-			};
-			name = RC;
-		};
-		048F104D27DCCBC6006C7FE1 /* RC */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RC";
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = 969Y6REAB6;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_TESTING_SEARCH_PATHS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 0.5.0;
-				OTHER_LDFLAGS = (
-					"-Xlinker",
-					"-interposable",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
-				PRODUCT_NAME = "Al Najd";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = RC;
-		};
-		048F104E27DCCBC6006C7FE1 /* RC */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 969Y6REAB6;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
-				PRODUCT_NAME = "Al Najd";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = RC;
-		};
-		048F104F27DCCBC6006C7FE1 /* RC */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 969Y6REAB6;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.Tests-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Al Najd (iOS)";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = RC;
-		};
-		048F105027DCCBC6006C7FE1 /* RC */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 969Y6REAB6;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.Tests-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "The One (macOS)";
-			};
-			name = RC;
 		};
 		B86588382716CC5500FC0CBB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -946,7 +946,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -956,13 +956,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.19.1;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One.dev";
-				PRODUCT_NAME = "Al Najd";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.dev;
+				PRODUCT_NAME = "Al Najd Develop";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -977,7 +977,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -987,12 +987,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.19.1;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios;
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
@@ -1153,8 +1153,8 @@
 			buildConfigurations = (
 				B86588382716CC5500FC0CBB /* Debug */,
 				B86588392716CC5500FC0CBB /* Release */,
-				048F104727DCCB7A006C7FE1 /* Beta */,
-				048F104C27DCCBC6006C7FE1 /* RC */,
+				048F104727DCCB7A006C7FE1 /* Alpha */,
+				048F104C27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1164,8 +1164,8 @@
 			buildConfigurations = (
 				B865883B2716CC5500FC0CBB /* Debug */,
 				B865883C2716CC5500FC0CBB /* Release */,
-				048F104827DCCB7A006C7FE1 /* Beta */,
-				048F104D27DCCBC6006C7FE1 /* RC */,
+				048F104827DCCB7A006C7FE1 /* Alpha */,
+				048F104D27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1175,8 +1175,8 @@
 			buildConfigurations = (
 				B865883E2716CC5500FC0CBB /* Debug */,
 				B865883F2716CC5500FC0CBB /* Release */,
-				048F104927DCCB7A006C7FE1 /* Beta */,
-				048F104E27DCCBC6006C7FE1 /* RC */,
+				048F104927DCCB7A006C7FE1 /* Alpha */,
+				048F104E27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1186,8 +1186,8 @@
 			buildConfigurations = (
 				B86588412716CC5500FC0CBB /* Debug */,
 				B86588422716CC5500FC0CBB /* Release */,
-				048F104A27DCCB7A006C7FE1 /* Beta */,
-				048F104F27DCCBC6006C7FE1 /* RC */,
+				048F104A27DCCB7A006C7FE1 /* Alpha */,
+				048F104F27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1197,8 +1197,8 @@
 			buildConfigurations = (
 				B86588442716CC5500FC0CBB /* Debug */,
 				B86588452716CC5500FC0CBB /* Release */,
-				048F104B27DCCB7A006C7FE1 /* Beta */,
-				048F105027DCCBC6006C7FE1 /* RC */,
+				048F104B27DCCB7A006C7FE1 /* Alpha */,
+				048F105027DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

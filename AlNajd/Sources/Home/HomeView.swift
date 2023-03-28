@@ -19,59 +19,11 @@ import Utils
 import ScalingHeaderScrollView
 
 public struct HomeView: View {
-	@ObserveInjection var inject
-	let store: StoreOf<Home>
+    @ObserveInjection var inject
+    let store: StoreOf<Home>
 
-	public init(store: StoreOf<Home>) {
-		self.store = store
-	}
-
-    @ViewBuilder
-    private func nafilaSection(_ viewStore: ViewStoreOf<Home>) -> some View {
-        NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
-            .padding(.bottom)
-    }
-
-    @ViewBuilder
-    private func hadeethSection() -> some View {
-        VStack(alignment: .leading) {
-            Text(L10n.ahadeeth)
-                .foregroundColor(.mono.offblack)
-                .scaledFont(locale: .arabic, .pFootnote, .bold)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, .p16)
-            HadeethSliderView()
-        }
-    }
-
-
-
-    @ViewBuilder
-    private func prayersSection(_ viewStore: ViewStoreOf<Home>) -> some View {
-        VStack {
-            Text(L10n.pickDate)
-                .foregroundColor(.mono.offblack)
-                .scaledFont(locale: .arabic, .pFootnote, .bold)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, .p16)
-
-            DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
-                .datePickerStyle(.graphical)
-        }.padding()
-    }
-
-    @ViewBuilder
-    private func daySelectorSection(_ viewStore: ViewStoreOf<Home>) -> some View {
-        VStack {
-            Text(L10n.pickDate)
-                .foregroundColor(.mono.offblack)
-                .scaledFont(locale: .arabic, .pFootnote, .bold)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, .p16)
-
-            DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
-                .datePickerStyle(.graphical)
-        }.padding()
+    public init(store: StoreOf<Home>) {
+        self.store = store
     }
 
     public var body: some View {
@@ -97,9 +49,52 @@ public struct HomeView: View {
             }
         }
     }
+}
+
+private extension HomeView {
+
+    @ViewBuilder
+    func nafilaSection(_ viewStore: ViewStoreOf<Home>) -> some View {
+        NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+            .padding(.bottom)
+    }
+
+    @ViewBuilder
+    func hadeethSection() -> some View {
+        VStack(alignment: .leading) {
+            Text(L10n.ahadeeth)
+                .foregroundColor(.mono.offblack)
+                .scaledFont(locale: .arabic, .pFootnote, .bold)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, .p16)
+            HadeethSliderView()
+        }
+    }
+
+
+
+    @ViewBuilder
+    func prayersSection(_ viewStore: ViewStoreOf<Home>) -> some View {
+        PrayerSliderView(prayers: viewStore.prayers) { viewStore.send(
+            .onSelecting($0), animation: .default) }
+    }
+
+    @ViewBuilder
+    func daySelectorSection(_ viewStore: ViewStoreOf<Home>) -> some View {
+        VStack {
+            Text(L10n.pickDate)
+                .foregroundColor(.mono.offblack)
+                .scaledFont(locale: .arabic, .pFootnote, .bold)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, .p16)
+
+            DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
+                .datePickerStyle(.graphical)
+        }.padding()
+    }
 
 	@ViewBuilder
-	private func makeDuaaView(_ viewStore: ViewStoreOf<Home>) -> some View {
+	func makeDuaaView(_ viewStore: ViewStoreOf<Home>) -> some View {
         VStack {
             Text(L10n.todayDuaa)
                 .foregroundColor(.mono.offblack)

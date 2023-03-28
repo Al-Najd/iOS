@@ -1,0 +1,97 @@
+fastlane_require 'colored'
+fastlane_require 'yaml'
+fastlane_require 'json'
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# MARK: - Fastlane 
+
+platform :ios do
+  desc """
+  After versioning to a newer version, this lane will:
+  1. Checks current version
+  2. Calculates current branch
+  3. If current branch is release/VERSION_ID, then it won't checkout, else will create this branch
+  4. Commits & Pushes the changes
+  5. Creates a new tag
+  6. Pushes the tag
+  """
+  lane :prepare_for_release do |options|
+    UI.message "Preparing for Release"
+
+    # Check current version
+    current_version = ENV["RELEASE_NEXT_VERSION"]
+    UI.message "Current Version: #{current_version}"
+    
+    # Creates a new tag
+    ## Check if tag already exists, if not create it
+    latest_git_tag_version = last_git_tag
+    is_same_vesion = Gem::Version.new(current_version) == Gem::Version.new(latest_git_tag_version)
+    if !is_same_vesion
+      add_git_tag(tag: current_version)
+      push_git_tags()
+    else
+      UI.message "Tag already exists, skipping tag creation on Git"
+    end
+
+    # Calculate current branch
+    branch_name = "release/#{current_version}"
+    UI.message "Current Branch: #{branch_name}"
+    
+    # If current branch is release/VERSION_ID, then it won't checkout, else will create this branch
+    is_on_correct_branch = git_branch == branch_name
+    if is_on_correct_branch
+      UI.message "Current branch is release, skipping checkout"
+    else
+      UI.message "Current branch is not release, checking out to release/#{current_version}"
+      system("git checkout -b #{branch_name}")
+    end
+
+    # Commits & Pushes the changes
+    git_add(path: ".")
+    git_commit(path: ".", message: "[Release] Beta for #{current_version} 🚀", allow_nothing_to_commit: true)
+    push_to_git_remote(set_upstream: true)
+  end
+end
+
+# MARK: - ------------ Helpers ------------
+def input(placeholder)
+    return prompt(text: placeholder)
+  end
+  
+  def nilOrEmpty(variable)
+    return variable.nil? || variable.empty?
+  end 
+  
+  def file_prepend(file, str)
+    # Check if file exists
+    if File.exist?(file)
+      new_contents = ""
+      File.open(file, 'r') do |fd|
+        contents = fd.read
+        new_contents = "#{str}\n\n\n#{contents}"
+      end
+      # Overwrite file but now with prepended string on it
+      File.open(file, 'w') do |fd| 
+        fd.write(new_contents)
+      end
+    else
+      # Create file & recurse
+      FileUtils.touch(file)
+      file_prepend(file, str)
+    end
+  end
+  # MARK: - ------------ Helpers ------------

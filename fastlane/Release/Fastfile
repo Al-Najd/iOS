@@ -1,0 +1,89 @@
+fastlane_require 'colored'
+fastlane_require 'yaml'
+fastlane_require 'json'
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# MARK: - Fastlane 
+
+platform :ios do
+    desc "Opens a PR to develop & master"
+    lane :sync_production_release_branch do |options|
+      UI.message "Creating a PR to develop"
+      version = get_version_number(target: "CAFU")
+      changelog = options[:notes]
+      # Sync release branch with develop
+      ## Check if a PR already exists with name "release: [Production] Release Version #{version} 🚀"
+  
+      list_of_prs = system(`glab mr list -l "Production" | grep "Production"`)
+      no_pr_exists = list_of_prs == nil
+      if no_pr_exists
+        UI.message "PR doesn't exist, creating a PR"
+        system(`glab mr create -t "release: [Production] Release Version #{version} 🚀" -d "#{changelog}" -b "develop" --label Production --allow-collaboration --remove-source-branch -y`)
+      else
+        UI.message "PR already exists, skipping PR creation on Git"
+      end
+  
+      # Sync release branch with master
+      list_of_prs = system(`glab mr list -l "Production" | grep "Production"`)
+      no_pr_exists = list_of_prs == nil
+      if no_pr_exists
+        UI.message "PR doesn't exist, creating a PR"
+        system(`glab mr create -t "release: [Production] Release Version #{version} 🚀" -d "#{changelog}" -b "master" --label Production --allow-collaboration --remove-source-branch -y`)
+      else
+        UI.message "PR already exists, skipping PR creation on Git"
+      end
+    end
+
+    desc "Opens a PR to develop & master"
+    lane :sync_release_branch do |options|
+      UI.message "Creating a PR to develop"
+      version = get_version_number(target: "CAFU")
+      changelog = options[:notes]
+      # Sync release branch with develop
+      ## Check if a PR already exists with name "release: [Beta] Release Version #{version} 🚀"
+  
+      list_of_prs = system(`glab mr list -l "Beta" | grep "Beta"`)
+      no_pr_exists = list_of_prs == nil
+      if no_pr_exists
+        UI.message "PR doesn't exist, creating a PR"
+        system(`glab mr create -t "release: [Beta] Release Version #{version} 🚀" -d "#{changelog}" -b "develop" --label Beta --allow-collaboration --remove-source-branch -y`)
+      else
+        UI.message "PR already exists, skipping PR creation on Git"
+      end
+    end
+
+    desc "Creates a new release on Gitlab"
+    lane :gitlab_release do |options|
+      version = get_version_number(target: "CAFU")
+      release_title = "Release of #{version} 🚀"
+      release_description = make_changelog_more_readable(notes: options[:notes])
+  
+      # Create a new release on Gitlab
+      system(`glab release create #{version} -n "#{release_title}" -N "#{release_description}"`)
+    end
+
+    desc "Uploads the app to Testflight"
+    lane :push_to_testflight do |options|
+      changelog = options[:notes]
+      
+      # Upload to Testflight
+      pilot(
+        changelog: changelog,
+      )
+    end
+end
+
