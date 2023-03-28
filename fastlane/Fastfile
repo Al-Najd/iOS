@@ -1,3 +1,15 @@
+fastlane_require 'colored'
+fastlane_require 'yaml'
+fastlane_require 'json'
+
+import './Build & Test/Fastfile'
+import './CHANGELOG Generation/Fastfile'
+import './CI Environment Adaption/Fastfile'
+import './Match/Fastfile'
+import './Release/Fastfile'
+import './Syncing Develop & Main/Fastfile'
+import './Versioning/Fastfile'
+
 # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
 #
@@ -13,136 +25,105 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-require 'json'
+# MARK: - Fastlane
 
 default_platform(:ios)
 
-# Gathering 3rd party Keys and Secrets from Configs
-configs = JSON.parse(File.read('./LocalConfig.json'), object_class: OpenStruct)
-ENV["SENTRY_AUTH_TOKEN"] =  configs.sentry.auth_token
-ENV["SENTRY_ORG_SLUG"] =  configs.sentry.org
-ENV["SENTRY_PROJECT_SLUG"] =  configs.sentry.proj
-
-def file_prepend(file, str)
-  new_contents = ""
-  File.open(file, 'r') do |fd|
-    contents = fd.read
-    new_contents = str << contents
-  end
-  # Overwrite file but now with prepended string on it
-  File.open(file, 'w') do |fd| 
-    fd.write(new_contents)
-  end
-end
-
 platform :ios do
-  lane :setup_for_ci_if_needed do
-    setup_ci if ENV['CI']
+  before_all do
+    setup_for_ci_if_needed
   end
 
-  desc "Handles any versionings and Changelogs maintenance"
-  lane :handle_versioning do
-    xcode_vesion = get_version_number(target: "Al Najd (iOS)")
-    latest_git_tag_version = last_git_tag
+  desc "Helps devs to release easier without much hassle" 
+  lane :manual_release do
+    release_type = UI.select("Select which type of release you're looking for...", ['Adhoc', 'TestFlight-Review', 'TestFlight-Staging', 'Directly to the AppStore'])
 
-    is_same_vesion = Gem::Version.new(xcode_vesion) == Gem::Version.new(latest_git_tag_version)
-    is_new_version = Gem::Version.new(xcode_vesion) < Gem::Version.new(latest_git_tag_version)
-
-    if is_same_vesion
-      increment_build_number
-    elsif is_new_version
-      increment_build_number(
-        build_number: 1
-      )
-
-      increment_version_number(
-        version_number: latest_git_tag_version
-      )
-    else 
-      increment_build_number(
-        build_number: 1
-      )
-
-      add_git_tag(
-        git_tag: xcode_vesion
-      )
+    case release_type
+    when "Adhoc"
+      UI.important "You've come to the wrong place my brother, AdHoc is handled by Bitrise"
+    when "TestFlight-Review"
+      UI.success "Alright, doing so now!"
+      beta
+    when "TestFlight-Staging"
+      UI.success "Alright, doing so now!"
+      staging
+    when "Directly to the AppStore"
+      UI.user_error! "Sorry, but AppStore Lane is not yet done... 😓"
+    else
+      UI.user_error! "Whoops, looks like you picked something wrong this time, its ok, happens to the best of us, now re-run me again 😛"
     end
   end
 
-  desc "Builds and prepare for exporting the app to the App Store"
-  lane :build_for_app_store_distribtion do 
-    gym(
-      scheme: "Al Najd",
-      export_method: "app-store",
-      export_xcargs: "-allowProvisioningUpdates",
-      configuration: "Beta"
-    )
+  lane :ensure_being_on_develop do 
+    current_branch = `git rev-parse --abbrev-ref HEAD`.strip
+    if current_branch == 'develop'
+      UI.success "Alright, we r on develop, that's great..."
+    else
+      UI.user_error! "Umm... you need to be on develop to ensure smooth launching... 👉👈"
+    end
   end
-
-  desc "Uploads the app to Testflight"
-  lane :push_to_testflight do 
-    changelog = changelog_from_git_commits(
-      between: git_tags(limit: 2),  # Optional, lets you specify a revision/tag range between which to collect commit info
-      pretty: "- %s",# Optional, lets you provide a custom format to apply to each commit when generating the changelog text
-      date_format: "short",# Optional, lets you provide an additional date format to dates within the pretty-formatted string
-      match_lightweight_tag: false,  # Optional, lets you ignore lightweight (non-annotated) tags when searching for the last tag
-      merge_commit_filtering: "exclude_merges" # Optional, lets you filter out merge commits
-    )
-    
-    pilot(
-      changelog: changelog,
-      distribute_external: true,
-      groups: ['App Store Connect Users', 'Beta Testers'],
-    )
-  end
-
-  desc "Syncs remote git with the local"
-  lane :sync_git do
-    version_number = get_version_number(target: "CAFU")
-    # Checkout a new branch called "release/#{version_number}"
-    system("git checkout -b release/#{version_number}")
-    git_add
-    git_commit(
-      message: "🚀 Released iOS #{version_number}! [Beta Release]",
-      path: "*"
-    )
-    push_to_git_remote
-  end
-
-  desc "Uploads dSYMs to Sentry, Creates a Release Deployment, and specifies the commits"
-  lane :sentry_wetwork do 
-    sentry_upload_dif
-    sentry_create_release(
-      version: get_version_number(target: "Al Najd (iOS)"), # release version to create
-      app_identifier: get_info_plist_value(path: "./iOS/Info.plist", key: "CFBundleIdentifier") # pass in the bundle_identifer of your app
-    )
-    sentry_set_commits(
-      version: get_version_number(target: "Al Najd (iOS)"),
-      app_identifier: get_info_plist_value(path: "./iOS/Info.plist", key: "CFBundleIdentifier"), # pass in the bundle_identifer of your app
-      build: get_build_number, # Optionally pass in the build number of your app
-      auto: true, # enable completely automated commit management
-      clear: false, # clear all current commits from the release
-    )
-  end
-
-  lane :beta do 
-    setup_for_ci_if_needed
-    handle_versioning
-    build_for_app_store_distribtion
-    push_to_testflight
-    sentry_wetwork
+  
+  desc "Releases the app to TestFlight for Internal Testers"
+  lane :beta do |options|
+    ensure_being_on_develop
+    version
+    changelog = make_changelogs
+    prepare_for_release
+    notes = make_changelog_more_readable(notes: changelog)
+    build_for_internal_testers
+    push_to_testflight(notes: changelog)
+    sync_release_branch(notes: changelog)
+    gitlab_release(notes: changelog)
     clean_build_artifacts
-    sync_git
   end
 
-  lane :test_slack do
-    # slack(message: "Testing Webhook")
+  desc "Releases the app to TestFlight for Staging"
+  lane :staging do |options|
+    ensure_being_on_develop
+    version
+    changelog = make_changelogs
+    prepare_for_release
+    notes = make_changelog_more_readable(notes: changelog)
+    build_for_staging
+    push_to_testflight(notes: changelog)
+    sync_release_branch(notes: changelog)
+    gitlab_release(notes: changelog)
+    clean_build_artifacts
   end
 
-  error do |lane, exception, options|
-    # slack(
-    #   message: "Ooops, looks like something went wrong :O\n\n\n#{exception.message}",
-    #   success: false
-    # )
+  desc "Releases app internally to TestFlight from CI environment"
+  lane :ci_beta do |options|
+    version
+    changelog = make_changelogs
+    prepare_for_release
+    notes = make_changelog_more_readable(notes: changelog)
+    ci_build_for_adhoc
+    sync_release_branch(notes: changelog)
+    gitlab_release(notes: changelog)
+  end
+
+  desc "Release the app directly to the AppStore"
+  lane :production do |options|
+    setup_for_ci_if_needed
+    version
+    changelog = make_changelogs
+    prepare_for_release
+    notes = make_changelog_more_readable(notes: changelog)
+    build_for_production
+    push_to_testflight(notes: changelog)
+    sync_production_release_branch(notes: changelog)
+    gitlab_release(notes: changelog)
+    clean_build_artifacts
+  end
+
+  desc "Release the app directly to the AppStore"
+  lane :ci_production do |options|
+    version
+    changelog = make_changelogs
+    prepare_for_release
+    notes = make_changelog_more_readable(notes: changelog)
+    ci_build_for_appstore
+    sync_production_release_branch(notes: changelog)
+    gitlab_release(notes: changelog)
   end
 end

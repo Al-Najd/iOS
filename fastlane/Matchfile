@@ -1,14 +1,14 @@
-git_url("https://github.com/aramy23/the-one-certs-profiles")
-
+git_url("https://gitlab.intelligentb.com/cafu/mobile/customer-ev-certificates.git")
 storage_mode("git")
-
-type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
-
-app_identifier(["com.nerdor.theone.The-One"])
-username("dev.ahmedramy@icloud.com") # Your Apple Developer Portal username
-team_id("969Y6REAB6") # The ID of your Developer Portal team if you're in multiple teams
-# itc_team_id "123475450" # The ID of your iTunes Connect team if you're in multiple teams
-# For all available options run `fastlane match --help`
-# Remove the # in the beginning of the line to enable the other options
-
-# The docs are available on https://docs.fastlane.tools/actions/match
+type("development") # The default type, can be: appstore, adhoc, enterprise or development
+username("fastlane@cafu.com")
+git_user_email("fastlane@cafu.com")
+git_private_key("Cafu@4040")
+app_identifier(
+    [
+        "com.cafu.ev.customer.dev",
+        "com.cafu.ev.customer.review",
+        "com.cafu.ev.customer.staging",
+        "com.cafu.ev.customer"
+    ]
+)

@@ -2,6 +2,7 @@
 #
 # Ensure this file is checked in to source control!
 
+gem 'fastlane-plugin-lizard'
+gem 'fastlane-plugin-semantic_release'
 gem 'fastlane-plugin-changelog'
 gem 'fastlane-plugin-git_tags'
-gem 'fastlane-plugin-sentry'

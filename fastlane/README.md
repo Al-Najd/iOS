@@ -15,6 +15,70 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios test
+
+```sh
+[bundle exec] fastlane ios test
+```
+
+Runs Unit Tests & Calculates Coverage for specific parts of the project
+
+### ios build_for_internal_testers
+
+```sh
+[bundle exec] fastlane ios build_for_internal_testers
+```
+
+Builds and prepare Internal Testers
+
+### ios build_for_staging
+
+```sh
+[bundle exec] fastlane ios build_for_staging
+```
+
+Builds and prepare Staging build
+
+### ios build_for_production
+
+```sh
+[bundle exec] fastlane ios build_for_production
+```
+
+Builds and prepare production build
+
+### ios ci_build_for_adhoc
+
+```sh
+[bundle exec] fastlane ios ci_build_for_adhoc
+```
+
+Build and prepare for AdHoc CI providers
+
+### ios ci_build_for_appstore
+
+```sh
+[bundle exec] fastlane ios ci_build_for_appstore
+```
+
+Build and prepare for AdHoc CI providers
+
+### ios make_changelog_more_readable
+
+```sh
+[bundle exec] fastlane ios make_changelog_more_readable
+```
+
+
+
+### ios make_changelogs
+
+```sh
+[bundle exec] fastlane ios make_changelogs
+```
+
+
+
 ### ios setup_for_ci_if_needed
 
 ```sh
@@ -23,21 +87,77 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios handle_versioning
+### ios onboard
 
 ```sh
-[bundle exec] fastlane ios handle_versioning
+[bundle exec] fastlane ios onboard
 ```
 
-Handles any versionings and Changelogs maintenance
+Add new comer's Device to Profiles
 
-### ios build_for_app_store_distribtion
+### ios match_onboarding
 
 ```sh
-[bundle exec] fastlane ios build_for_app_store_distribtion
+[bundle exec] fastlane ios match_onboarding
 ```
 
-Builds and prepare for exporting the app to the App Store
+
+
+### ios add_devices
+
+```sh
+[bundle exec] fastlane ios add_devices
+```
+
+Asks user to input their mac's UUID & iPhone's UUID to add them to the profiles
+
+### ios push_notifications_dev
+
+```sh
+[bundle exec] fastlane ios push_notifications_dev
+```
+
+Creates Push Notifications Certs from customer.dev
+
+### ios push_notifications_prod
+
+```sh
+[bundle exec] fastlane ios push_notifications_prod
+```
+
+Creates Push Notifications Certs from customer.dev
+
+### ios push_notifications_staging
+
+```sh
+[bundle exec] fastlane ios push_notifications_staging
+```
+
+Creates Push Notifications Certs from customer.dev
+
+### ios sync_production_release_branch
+
+```sh
+[bundle exec] fastlane ios sync_production_release_branch
+```
+
+Opens a PR to develop & master
+
+### ios sync_release_branch
+
+```sh
+[bundle exec] fastlane ios sync_release_branch
+```
+
+Opens a PR to develop & master
+
+### ios gitlab_release
+
+```sh
+[bundle exec] fastlane ios gitlab_release
+```
+
+Creates a new release on Gitlab
 
 ### ios push_to_testflight
 
@@ -47,21 +167,45 @@ Builds and prepare for exporting the app to the App Store
 
 Uploads the app to Testflight
 
-### ios sync_git
+### ios prepare_for_release
 
 ```sh
-[bundle exec] fastlane ios sync_git
+[bundle exec] fastlane ios prepare_for_release
 ```
 
-Syncs remote git with the local
 
-### ios sentry_wetwork
+  After versioning to a newer version, this lane will:
+  1. Checks current version
+  2. Calculates current branch
+  3. If current branch is release/VERSION_ID, then it won't checkout, else will create this branch
+  4. Commits & Pushes the changes
+  5. Creates a new tag
+  6. Pushes the tag
+  
+
+### ios version
 
 ```sh
-[bundle exec] fastlane ios sentry_wetwork
+[bundle exec] fastlane ios version
 ```
 
-Uploads dSYMs to Sentry, Creates a Release Deployment, and specifies the commits
+Handles reading git history & generating CHANGELOG from it
+
+### ios manual_release
+
+```sh
+[bundle exec] fastlane ios manual_release
+```
+
+Helps devs to release easier without much hassle
+
+### ios ensure_being_on_develop
+
+```sh
+[bundle exec] fastlane ios ensure_being_on_develop
+```
+
+
 
 ### ios beta
 
@@ -69,15 +213,39 @@ Uploads dSYMs to Sentry, Creates a Release Deployment, and specifies the commits
 [bundle exec] fastlane ios beta
 ```
 
+Releases the app to TestFlight for Internal Testers
 
-
-### ios test_slack
+### ios staging
 
 ```sh
-[bundle exec] fastlane ios test_slack
+[bundle exec] fastlane ios staging
 ```
 
+Releases the app to TestFlight for Staging
 
+### ios ci_beta
+
+```sh
+[bundle exec] fastlane ios ci_beta
+```
+
+Releases app internally to TestFlight from CI environment
+
+### ios production
+
+```sh
+[bundle exec] fastlane ios production
+```
+
+Release the app directly to the AppStore
+
+### ios ci_production
+
+```sh
+[bundle exec] fastlane ios ci_production
+```
+
+Release the app directly to the AppStore
 
 ----
 

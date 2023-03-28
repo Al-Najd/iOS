@@ -1,0 +1,186 @@
+fastlane_require 'colored'
+fastlane_require 'yaml'
+fastlane_require 'json'
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# MARK: - Fastlane 
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Add new comer's Device to Profiles"
+  lane :onboard do
+    UI.message "Welcome to CAFU, now, for the fun part, let's match you"
+    match_onboarding
+
+    UI.message "Now, let's add your devices to the profiles"
+    add_devices
+
+    UI.message "Alright, that's all"
+    UI.message "Welcome aboard!"
+  end
+
+  lane :match_onboarding do
+    match(
+      type: "development",
+      api_key: app_store_connect_api_key(
+        key_id: ENV['ASCAPI_KEY_ID'],
+        issuer_id: ENV['ASCAPI_ISSUER_ID'],
+        key_filepath: "AuthKey_5LVSVRR9D3.p8"
+      )
+    )
+
+    match(
+      type: "appstore",
+      api_key: app_store_connect_api_key(
+        key_id: ENV['ASCAPI_KEY_ID'],
+        issuer_id: ENV['ASCAPI_ISSUER_ID'],
+        key_filepath: "AuthKey_5LVSVRR9D3.p8"
+      )
+    )
+
+    match(
+      type: "adhoc",
+      api_key: app_store_connect_api_key(
+        key_id: ENV['ASCAPI_KEY_ID'],
+        issuer_id: ENV['ASCAPI_ISSUER_ID'],
+        key_filepath: "AuthKey_5LVSVRR9D3.p8"
+      )
+    )
+end
+
+desc "Asks user to input their mac's UUID & iPhone's UUID to add them to the profiles"
+  lane :add_devices do
+    ####################
+    # Add Devices
+    ####################
+    # 1. Get Mac Nickname & UUID
+    # 2. Get all iPhones' Nickname & UUID
+    # 3. Add mac's details
+    # 4. Add all iPhones' details
+    # 5. Refresh Profiles
+
+    # 1. Get Mac's UUID
+    UI.message "we going to add your mac's UUID to the provisioning profiles so you're able to develop on it"
+    UI.message "In order to make it differentiable, we will ask you for a nickname for it too"
+    
+    mac_nickname = input("Please enter your Mac's nickname")
+    
+    UI.message "Please enter your Mac's UUID"
+    system("system_profiler SPHardwareDataType | grep 'Hardware UUID'")
+    
+    UI.message "Please copy the UUID and paste it below (After all you've seen, and the automation, yea, we couldn't automate this part 🤣)"
+    
+    mac_uuid = input("Please enter your Mac's UUID")
+
+    # 2. Get iPhone's UUID
+    UI.message "Alright, now it's your iPhone's turn"
+
+    # Ask user if they have an iPhone, if they do, ask for nickname and UUID
+    # If not, skip this step
+    if agree("Do you have an iPhone? (y/n)")
+      # Ask how many iPhones they have
+      number_of_devices = input("How many iPhones do you have?")
+      # Now loop for number_of_devices times, and ask them for nickname and UUID, then map them to a hash
+      iPhones = { }
+
+
+      number_of_devices.to_i.times do |i|
+        device_nickname = input("Please enter your iPhone's nickname")
+        
+        UI.message "To find your iPhone's UUID, we will open this website (https://udid.tech/), scan the QR code, and list your uuid when inputed"
+        system("open https://udid.tech/")
+
+        device_uuid = input("Please enter your iPhone's UUID")
+        iPhones[device_nickname] = device_uuid
+      end
+    end
+
+    # 3. Add mac's details to the profiles
+    macDevices = {
+      "#{mac_nickname}": "#{mac_uuid}"
+    }
+
+    iPhoneDevices = iPhones
+
+    UI.message macDevices
+
+    UI.message iPhoneDevices
+    
+    register_devices(devices: macDevices)
+
+    # 4. Add user's iPhones to the profiles
+    register_devices(
+      devices: iPhones
+    )
+
+    UI.message "Devices have been added successfully, Welcome aboard!"
+  end
+
+  desc "Creates Push Notifications Certs from customer.dev"
+  lane :push_notifications_dev do
+    pem(
+      development: true,
+      app_identifier: "com.cafu.ev.customer.dev",
+    )
+  end
+
+  desc "Creates Push Notifications Certs from customer.dev"
+  lane :push_notifications_prod do
+    pem(
+      development: false,
+      app_identifier: "com.cafu.ev.customer",
+    )
+  end
+
+  desc "Creates Push Notifications Certs from customer.dev"
+  lane :push_notifications_staging do
+    pem(
+      development: false,
+      app_identifier: "com.cafu.ev.customer.staging",
+    )
+  end
+end
+
+# MARK: - ------------ Helpers ------------
+def input(placeholder)
+  return prompt(text: placeholder)
+end
+
+def nilOrEmpty(variable)
+  return variable.nil? || variable.empty?
+end 
+
+def file_prepend(file, str)
+  # Check if file exists
+  if File.exist?(file)
+    new_contents = ""
+    File.open(file, 'r') do |fd|
+      contents = fd.read
+      new_contents = "#{str}\n\n\n#{contents}"
+    end
+    # Overwrite file but now with prepended string on it
+    File.open(file, 'w') do |fd| 
+      fd.write(new_contents)
+    end
+  else
+    # Create file & recurse
+    FileUtils.touch(file)
+    file_prepend(file, str)
+  end
+end
+# MARK: - ------------ Helpers ------------

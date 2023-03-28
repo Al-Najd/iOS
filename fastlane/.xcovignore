@@ -1,0 +1,37 @@
+- "**/*.xib"
+- "**/*.storyboard"
+- "**/*.mp4"
+- "**/*VC.swift"
+- "**/*ViewController.swift"
+- "**/*Permission.swift"
+- "**/*Decorator.swift"
+- "**/*+Adapters.swift"
+- "**/*+BorderSettings.swift"
+- "**/*+InputFormatting.swift"
+- "**/*Builder.swift"
+- CAFU/Core/Application/*
+- CAFU/Core/Configs/*
+- CAFU/Core/Extensions/*
+- CAFU/Core/Navigation/*
+- CAFU/Core/Protocols/*
+- CAFU/Core/Resources/*
+- CAFU/Core/Services/Cache/CacheService.swift
+- CAFU/Core/Services/Cache/CacheServiceKey.swift
+- CAFU/Core/Services/Cache/CachingError.swift
+- CAFU/Core/Services/Firebase/*
+- CAFU/Core/Services/Network/Alamofire/*
+- CAFU/Core/Services/Storyboards/*
+- CAFU/Core/UI Components/Basic Components/Button/*
+- CAFU/Core/UI Components/Basic Components/Label/*
+- CAFU/Core/UI Components/Basic Components/Text Fields/Text Field/Helpers/*
+- CAFU/Core/UI Components/Basic Components/Text Fields/Text Field/TextField.swift
+- CAFU/Core/UI Components/Basic Components/Text Fields/Phone Text Field/PhoneNumberKit/**/*
+- CAFU/Core/UI Components/Basic Components/Text Fields/Phone Text Field/PhoneTextField.swift
+- CAFU/Core/UI Components/Basic Components/Text Fields/Text Field/Text Formatter/String+FormattingUtils.swift
+- CAFU/Core/UI Components/Terms & Conditions/*
+- CAFU/Core/UI Components/Video Player/*
+- CAFU/Core/Usecase/*
+- CAFU/Core/Utils/*
+- ~/Library/Developer/Xcode/DerivedData/**/*
+- ~/Library/Developer/Xcode/DerivedData/**/*
+- ../../../../Library/Developer/Xcode/DerivedData/**/*
