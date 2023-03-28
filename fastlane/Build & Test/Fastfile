@@ -30,24 +30,19 @@ platform :ios do
   desc "Builds and prepare Internal Testers"
   lane :build_for_internal_testers do 
     sync_code_signing(
-      type: "appstore",
-        app_identifier: "com.cafu.ev.customer.review",
-        api_key: app_store_connect_api_key(
-          key_id: ENV['ASCAPI_KEY_ID'],
-          issuer_id: ENV['ASCAPI_ISSUER_ID'],
-          key_filepath: "AuthKey_5LVSVRR9D3.p8"
-        )
+        type: "appstore",
+        app_identifier: "com.alnajd.alnajd.ios.beta"
       )
 
     build_app(
       scheme: "CAFU",
       export_method: "app-store",
       export_xcargs: "-allowProvisioningUpdates",
-      configuration: "Review",
+      configuration: "Beta",
       export_team_id: ENV["TEAM_ID"],
       export_options: {
         provisioningProfiles: {
-          "com.cafu.ev.customer.review" => "match AppStore com.cafu.ev.customer.review"
+          "ccom.alnajd.alnajd.ios.beta" => "match AppStore com.alnajd.alnajd.ios.beta"
         }
       }
     )

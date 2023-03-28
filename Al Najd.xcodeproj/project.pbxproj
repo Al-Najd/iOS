@@ -509,7 +509,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		048F104727DCCB7A006C7FE1 /* Beta */ = {
+		048F104727DCCB7A006C7FE1 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -560,9 +560,9 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
-			name = Beta;
+			name = Alpha;
 		};
-		048F104827DCCB7A006C7FE1 /* Beta */ = {
+		048F104827DCCB7A006C7FE1 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
@@ -584,7 +584,7 @@
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.beta;
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
@@ -593,9 +593,9 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = Beta;
+			name = Alpha;
 		};
-		048F104927DCCB7A006C7FE1 /* Beta */ = {
+		048F104927DCCB7A006C7FE1 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -619,9 +619,9 @@
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
-			name = Beta;
+			name = Alpha;
 		};
-		048F104A27DCCB7A006C7FE1 /* Beta */ = {
+		048F104A27DCCB7A006C7FE1 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -643,9 +643,9 @@
 				TEST_TARGET_NAME = "Al Najd (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Beta;
+			name = Alpha;
 		};
-		048F104B27DCCB7A006C7FE1 /* Beta */ = {
+		048F104B27DCCB7A006C7FE1 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -664,9 +664,9 @@
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "The One (macOS)";
 			};
-			name = Beta;
+			name = Alpha;
 		};
-		048F104C27DCCBC6006C7FE1 /* RC */ = {
+		048F104C27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -717,9 +717,9 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
-			name = RC;
+			name = Beta;
 		};
-		048F104D27DCCBC6006C7FE1 /* RC */ = {
+		048F104D27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RC";
@@ -730,6 +730,7 @@
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -741,7 +742,7 @@
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.rc;
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -749,9 +750,9 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = RC;
+			name = Beta;
 		};
-		048F104E27DCCBC6006C7FE1 /* RC */ = {
+		048F104E27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -775,9 +776,9 @@
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
-			name = RC;
+			name = Beta;
 		};
-		048F104F27DCCBC6006C7FE1 /* RC */ = {
+		048F104F27DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -799,9 +800,9 @@
 				TEST_TARGET_NAME = "Al Najd (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = RC;
+			name = Beta;
 		};
-		048F105027DCCBC6006C7FE1 /* RC */ = {
+		048F105027DCCBC6006C7FE1 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -820,7 +821,7 @@
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "The One (macOS)";
 			};
-			name = RC;
+			name = Beta;
 		};
 		B86588382716CC5500FC0CBB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -957,7 +958,7 @@
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.dev;
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -988,7 +989,7 @@
 					"-Xlinker",
 					"-interposable",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nerdor.theone.The-One";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios;
 				PRODUCT_NAME = "Al Najd";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
@@ -1149,8 +1150,8 @@
 			buildConfigurations = (
 				B86588382716CC5500FC0CBB /* Debug */,
 				B86588392716CC5500FC0CBB /* Release */,
-				048F104727DCCB7A006C7FE1 /* Beta */,
-				048F104C27DCCBC6006C7FE1 /* RC */,
+				048F104727DCCB7A006C7FE1 /* Alpha */,
+				048F104C27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1160,8 +1161,8 @@
 			buildConfigurations = (
 				B865883B2716CC5500FC0CBB /* Debug */,
 				B865883C2716CC5500FC0CBB /* Release */,
-				048F104827DCCB7A006C7FE1 /* Beta */,
-				048F104D27DCCBC6006C7FE1 /* RC */,
+				048F104827DCCB7A006C7FE1 /* Alpha */,
+				048F104D27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1171,8 +1172,8 @@
 			buildConfigurations = (
 				B865883E2716CC5500FC0CBB /* Debug */,
 				B865883F2716CC5500FC0CBB /* Release */,
-				048F104927DCCB7A006C7FE1 /* Beta */,
-				048F104E27DCCBC6006C7FE1 /* RC */,
+				048F104927DCCB7A006C7FE1 /* Alpha */,
+				048F104E27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1182,8 +1183,8 @@
 			buildConfigurations = (
 				B86588412716CC5500FC0CBB /* Debug */,
 				B86588422716CC5500FC0CBB /* Release */,
-				048F104A27DCCB7A006C7FE1 /* Beta */,
-				048F104F27DCCBC6006C7FE1 /* RC */,
+				048F104A27DCCB7A006C7FE1 /* Alpha */,
+				048F104F27DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1193,8 +1194,8 @@
 			buildConfigurations = (
 				B86588442716CC5500FC0CBB /* Debug */,
 				B86588452716CC5500FC0CBB /* Release */,
-				048F104B27DCCB7A006C7FE1 /* Beta */,
-				048F105027DCCBC6006C7FE1 /* RC */,
+				048F104B27DCCB7A006C7FE1 /* Alpha */,
+				048F105027DCCBC6006C7FE1 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

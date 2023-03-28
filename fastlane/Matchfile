@@ -1,14 +1,13 @@
-git_url("https://gitlab.intelligentb.com/cafu/mobile/customer-ev-certificates.git")
+git_url("https://github.com/Al-Najd/ios-certs-profiles.git")
 storage_mode("git")
-type("development") # The default type, can be: appstore, adhoc, enterprise or development
-username("fastlane@cafu.com")
-git_user_email("fastlane@cafu.com")
-git_private_key("Cafu@4040")
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
+username("dev.ahmedramy@icloud.com")
+git_user_email("dev.ahmedramy@icloud.com")
 app_identifier(
     [
-        "com.cafu.ev.customer.dev",
-        "com.cafu.ev.customer.review",
-        "com.cafu.ev.customer.staging",
-        "com.cafu.ev.customer"
+        "com.alnajd.alnajd.ios.dev",
+        "com.alnajd.alnajd.ios.alpha",
+        "com.alnajd.alnajd.ios.beta",
+        "com.alnajd.alnajd.ios"
     ]
 )
