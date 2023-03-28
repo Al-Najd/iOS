@@ -17,3 +17,7 @@ fastlane/Config.json
 fastlane/LocalConfig.json
 
 Gemfile.lock
+.env.default.auth
+.env.default.formatting
+.env.default.plugin
+.env.default.project

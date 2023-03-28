@@ -31,12 +31,61 @@ default_platform(:ios)
 
 platform :ios do
   before_all do
+    setup_environment
     setup_for_ci_if_needed
   end
 
+  desc "Sets up Environment Variables provided from CAFU"
+  lane :setup_environment do
+    UI.header "Setting up Environment Variables..."
+
+    Dotenv.load ".env.default.auth"
+    Dotenv.load ".env.default.formatting"
+    Dotenv.load ".env.default.project"
+    Dotenv.load ".env.default.plugins"
+
+    UI.success "Environment Variables are set up successfully!"
+  end
+
+  desc """
+  Automated Release, expects release env & sprint number & Build Number
+  Supported Envs: qa, staging, production
+  """
+  lane :release do |options|
+    UI.header "Starting Automated Release..."
+    ensure_being_on_develop()
+    ensure_git_status_clean()
+    validate_tag_environment(options)
+    update_build_number(options)
+    release_accoring_to_environment(options)
+  end
+
+  lane :release_accoring_to_environment do |options|
+    env = options[:env].downcase
+
+    case env
+    when "qa"
+      UI.success "1 QA Build, Coming right up!"
+      beta
+    when "rc"
+      UI.success "1 RC Build, Coming right up!"
+      staging
+    when "prod"
+      UI.success "1 Production Build, Coming right up!"
+      production
+    else
+      UI.user_error! "Whoops, looks like you picked a wrong environment this time, its ok, happens to the best of us, now re-run me again 😛"
+    end
+  end
+
+
   desc "Helps devs to release easier without much hassle" 
-  lane :manual_release do
-    release_type = UI.select("Select which type of release you're looking for...", ['Adhoc', 'TestFlight-Review', 'TestFlight-Staging', 'Directly to the AppStore'])
+  lane :interactive_release do
+    env = UI.select("Select which environment you'd like to release to...", ['QA', 'RC', 'Prod'])
+    sprint_number = UI.input("Enter the Sprint Number")
+    build_number = UI.input("Enter the Build Number")
+
+    release(env: env, sprint_number: sprint_number, build_number: build_number)
 
     case release_type
     when "Adhoc"
@@ -66,7 +115,7 @@ platform :ios do
   desc "Releases the app to TestFlight for Internal Testers"
   lane :beta do |options|
     ensure_being_on_develop
-    version
+    ensure_git_status_clean
     changelog = make_changelogs
     prepare_for_release
     notes = make_changelog_more_readable(notes: changelog)
@@ -80,6 +129,7 @@ platform :ios do
   desc "Releases the app to TestFlight for Staging"
   lane :staging do |options|
     ensure_being_on_develop
+    ensure_git_status_clean
     version
     changelog = make_changelogs
     prepare_for_release
@@ -105,6 +155,8 @@ platform :ios do
   desc "Release the app directly to the AppStore"
   lane :production do |options|
     setup_for_ci_if_needed
+    ensure_being_on_develop
+    ensure_git_status_clean
     version
     changelog = make_changelogs
     prepare_for_release

@@ -19,106 +19,64 @@ fastlane_require 'json'
 
 # MARK: - Fastlane 
 
-default_platform(:ios)
-
 platform :ios do
-    desc "Handles reading git history & generating CHANGELOG from it"
-    lane :version do
-      UI.header "Versioning the project"
-
+    lane :validate_tag do |options|
+      UI.header "Tag Inspectation started! 🧐"
       UI.important "Fetching all tags to ensure being in an updated state"
       git_pull(only_tags: true)
-      
-      tag_format = '*'
-      is_releasable = analyze_commits(
-        match: tag_format,
-        releases: {:fix=>"patch", :feat=>"minor", :hotfix=>"patch"}
-      )
-      unless is_releasable
-        UI.message('Nothing to release, incrementing Build Number')
-        ENV["RELEASE_NEXT_VERSION"] = last_git_tag
-        ENV["VERSION_NUMBER"] = last_git_tag
-        increment_build_number
-        xcodegen_update_version_and_build_number(version: ENV["RELEASE_NEXT_VERSION"], build_number: get_build_number)
-        next
-      end
-  
-      UI.message('A New tag can be released\n\n')
-  
-      UI.message('Resetting Build number to 1')
-      increment_build_number(build_number: 1)
-      
-      next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
-    
-      ENV["RELEASE_NEXT_VERSION"] = next_version
-      ENV["VERSION_NUMBER"] = next_version
-  
-      tag = "#{next_version}"
-  
-      UI.message('Incrementing Version Number')
-      increment_version_number(version_number: next_version)
+      validate_tag_environment(options)
+      add_tag_to_git(options)
     end
 
-    private_lane :xcodegen_update_version_and_build_number do |options|
+    lane :add_tag_to_git do |options|
+      UI.header "Tag Creation started! 🚀"
+      tag_to_add = `#{options[:env]}-#{options[:sprint_number]}.#{options[:build_number]}`
+      UI.important "Adding Tag #{tag_to_add} to Git"
+      add_git_tag(tag: tag_to_add)
+      UI.success "Tag Creation finished! 🚀"
+    end
+    
+    lane :update_build_number do |options|
+      UI.important "Updating Build Number, based on latest TestFlight build number"
+
+      new_build_number = latest_testflight_build_number + 1
+      increment_build_number(build_number: new_build_number)
+      xcodegen_update_build_number(build_number: new_build_number)
+
+      UI.success "Build Number updated! 🚀"
+      UI.important "New Build Number: #{new_build_number}"
+    end
+
+    lane :validate_tag_environment do |options|
+      UI.header "Tag Validation started! 🧐"
+      # Check if Tag follows this format ENV-SprintNumber.BuildNumber
+      tag = options[:tag]
+      tag_format = '*-*.*'
+      is_valid = tag.match(tag_format)
+      
+      unless is_valid
+        UI.user_error!("Tag #{tag} does not follow the format #{tag_format} example: QA-14.1 (14 = Sprint Number) (1 = Build Number)")
+      end
+
+      # Get Supported Env through ENV["ALLOWED_ENVIRONMENTS"], which is a string of comma separated values
+      allowed_envs = ENV["ALLOWED_ENVIRONMENTS"].split(",")
+
+      # Extract Environment from Tag
+      env = tag.split("-")[0]
+
+      # Check if Environment is supported
+      unless allowed_envs.include?(env)
+        UI.user_error!("Environment #{env} is not supported. Supported Environments are: #{allowed_envs}")
+      end
+
+      UI.success "Validating Inspectation finished! 🚀"
+    end
+
+    private_lane :xcodegen_update_build_number do |options|
       project_yml = YAML.load_file("../project.yml")
       project_json = project_yml.to_h
-      project_json["targets"]["CAFU"]["settings"]["base"]["MARKETING_VERSION"] = options[:version]
       project_json["targets"]["CAFU"]["settings"]["base"]["CURRENT_PROJECT_VERSION"] = options[:build_number]
       File.write("../project.yml", project_json.to_yaml)
       system(`xcodegen generate`)
     end
-    
-    
-  desc "Handles any versionings and build numbers"
-  private_lane :update_versions_and_build_number do
-    xcode_vesion = get_version_number(target: "CAFU")
-    latest_git_tag_version = last_git_tag
-
-    is_same_vesion = Gem::Version.new(xcode_vesion) == Gem::Version.new(latest_git_tag_version)
-    is_new_version = Gem::Version.new(xcode_vesion) < Gem::Version.new(latest_git_tag_version)
-
-    if is_same_vesion
-      UI.message "No Need to Update the version, incrementing the build number"
-      # get latest build number
-      increment_build_number
-      
-    elsif is_new_version
-      UI.message "New Version Detected, resetting the build number to 1 and updating the version number to #{latest_git_tag_version}"
-      increment_build_number(build_number: 1)
-      increment_version_number(version_number: latest_git_tag_version)
-    else 
-      increment_build_number(build_number: 1)
-    end
-
-    xcodegen_update_version_and_build_number(version: xcode_vesion, build_number: get_build_number)
-  end
 end
-
-# MARK: - ------------ Helpers ------------
-def input(placeholder)
-  return prompt(text: placeholder)
-end
-
-def nilOrEmpty(variable)
-  return variable.nil? || variable.empty?
-end 
-
-def file_prepend(file, str)
-  # Check if file exists
-  if File.exist?(file)
-    new_contents = ""
-    File.open(file, 'r') do |fd|
-      contents = fd.read
-      new_contents = "#{str}\n\n\n#{contents}"
-    end
-    # Overwrite file but now with prepended string on it
-    File.open(file, 'w') do |fd| 
-      fd.write(new_contents)
-    end
-  else
-    # Create file & recurse
-    FileUtils.touch(file)
-    file_prepend(file, str)
-  end
-end
-# MARK: - ------------ Helpers ------------

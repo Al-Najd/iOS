@@ -183,18 +183,61 @@ Uploads the app to Testflight
   6. Pushes the tag
   
 
-### ios version
+### ios validate_tag
 
 ```sh
-[bundle exec] fastlane ios version
+[bundle exec] fastlane ios validate_tag
 ```
 
-Handles reading git history & generating CHANGELOG from it
 
-### ios manual_release
+
+### ios update_build_number
 
 ```sh
-[bundle exec] fastlane ios manual_release
+[bundle exec] fastlane ios update_build_number
+```
+
+
+
+### ios validate_tag_environment
+
+```sh
+[bundle exec] fastlane ios validate_tag_environment
+```
+
+
+
+### ios setup_environment
+
+```sh
+[bundle exec] fastlane ios setup_environment
+```
+
+Sets up Environment Variables provided from CAFU
+
+### ios release
+
+```sh
+[bundle exec] fastlane ios release
+```
+
+
+  Automated Release, expects release env & sprint number & Build Number
+  Supported Envs: qa, staging, production
+  
+
+### ios determine_which_type_of_release
+
+```sh
+[bundle exec] fastlane ios determine_which_type_of_release
+```
+
+
+
+### ios interactive_release
+
+```sh
+[bundle exec] fastlane ios interactive_release
 ```
 
 Helps devs to release easier without much hassle

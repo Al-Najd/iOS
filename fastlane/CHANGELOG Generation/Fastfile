@@ -19,8 +19,6 @@ fastlane_require 'json'
 
 # MARK: - Fastlane 
 
-default_platform(:ios)
-
 platform :ios do
   lane :make_changelog_more_readable do |options|
     changelog = options[:notes]

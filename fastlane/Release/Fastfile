@@ -19,8 +19,6 @@ fastlane_require 'json'
 
 # MARK: - Fastlane 
 
-default_platform(:ios)
-
 platform :ios do
     desc "Opens a PR to develop & master"
     lane :sync_production_release_branch do |options|
