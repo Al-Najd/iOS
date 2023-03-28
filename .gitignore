@@ -15,3 +15,5 @@ OrdiCore/.swiftpm/xcode/xcuserdata/mac.xcuserdatad/xcschemes/xcschememanagement.
 
 fastlane/Config.json
 fastlane/LocalConfig.json
+
+Gemfile.lock
