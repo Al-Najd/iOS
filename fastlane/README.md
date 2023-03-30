@@ -199,18 +199,10 @@ Uploads the app to Testflight
 
 
 
-### ios update_build_number
+### ios ensure_being_on_develop
 
 ```sh
-[bundle exec] fastlane ios update_build_number
-```
-
-
-
-### ios validate_tag_environment
-
-```sh
-[bundle exec] fastlane ios validate_tag_environment
+[bundle exec] fastlane ios ensure_being_on_develop
 ```
 
 
@@ -230,14 +222,14 @@ Sets up Environment Variables provided from CAFU
 ```
 
 
-  Automated Release, expects release env & sprint number & Build Number
+  Automated Release, expects release env & version number & Build Number
   Supported Envs: qa, staging, production
   
 
-### ios release_accoring_to_environment
+### ios release_according_to_environment
 
 ```sh
-[bundle exec] fastlane ios release_accoring_to_environment
+[bundle exec] fastlane ios release_according_to_environment
 ```
 
 
@@ -249,14 +241,6 @@ Sets up Environment Variables provided from CAFU
 ```
 
 Helps devs to release easier without much hassle
-
-### ios ensure_being_on_develop
-
-```sh
-[bundle exec] fastlane ios ensure_being_on_develop
-```
-
-
 
 ### ios beta
 

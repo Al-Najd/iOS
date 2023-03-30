@@ -23,7 +23,7 @@ platform :ios do
     desc "Opens a PR to develop & master"
     lane :sync_production_release_branch do |options|
       UI.message "Creating a PR to develop"
-      version = get_version_number(target: "CAFU")
+      version = get_version_number(target: 'Al Najd (iOS)')
       changelog = options[:notes]
       # Sync release branch with develop
       ## Check if a PR already exists with name "release: [Production] Release Version #{version} 🚀"
@@ -51,7 +51,7 @@ platform :ios do
     desc "Opens a PR to develop & master"
     lane :sync_release_branch do |options|
       UI.message "Creating a PR to develop"
-      version = get_version_number(target: "CAFU")
+      version = get_version_number(target: 'Al Najd (iOS)')
       changelog = options[:notes]
       # Sync release branch with develop
       ## Check if a PR already exists with name "release: [Beta] Release Version #{version} 🚀"
@@ -68,7 +68,7 @@ platform :ios do
 
     desc "Creates a new release on Gitlab"
     lane :gitlab_release do |options|
-      version = get_version_number(target: "CAFU")
+      version = get_version_number(target: 'Al Najd (iOS)')
       release_title = "Release of #{version} 🚀"
       release_description = make_changelog_more_readable(notes: options[:notes])
   

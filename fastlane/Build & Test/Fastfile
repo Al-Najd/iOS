@@ -36,6 +36,9 @@ platform :ios do
       configuration: "Beta",
       export_team_id: ENV["TEAM_ID"]
     )
+
+    # Set DSYM Path for Sentry from SharedValues
+    ENV['SENTRY_DSYM_PATH'] = lane_context[SharedValues::DSYM_OUTPUT_PATH]
   end
 
   desc "Builds and prepare Staging build"

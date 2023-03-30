@@ -48,28 +48,27 @@ platform :ios do
   end
 
   desc """
-  Automated Release, expects release env & sprint number & Build Number
+  Automated Release, expects release env & version number & Build Number
   Supported Envs: qa, staging, production
   """
   lane :release do |options|
     UI.header "Starting Automated Release..."
-    ensure_being_on_develop()
-    ensure_git_status_clean()
-    validate_tag_environment(options)
-    update_build_number(options)
-    release_accoring_to_environment(options)
+    ensure_being_on_develop
+    # ensure_git_status_clean
+    ensure_release_options(options[:env], options[:build_number])
+    validate_tag_environment
+    update_build_number
+    release_according_to_environment
   end
 
-  lane :release_accoring_to_environment do |options|
-    env = options[:env].downcase
-
-    case env
-    when "qa"
-      UI.success "1 QA Build, Coming right up!"
+  lane :release_according_to_environment do |options|
+    case ENV['RELEASE_TARGET_ENV']
+    when "alpha"
+      UI.success "1 alpha Build, Coming right up!"
       beta
-    when "rc"
-      UI.success "1 RC Build, Coming right up!"
-      staging
+    when "beta"
+      UI.success "1 beta Build, Coming right up!"
+      beta
     when "prod"
       UI.success "1 Production Build, Coming right up!"
       production
@@ -78,52 +77,40 @@ platform :ios do
     end
   end
 
+  def ensure_release_options(env, build_number)
+    UI.user_error! "Please provide the environment you'd like to release to, e.g. fastlane release env:alpha" unless env
+    UI.user_error! "Please provide the Build Number you'd like to release with, e.g. fastlane release build_number:123" unless build_number
+
+    ENV['RELEASE_TARGET_ENV'] = env
+    ENV['RELEASE_TARGET_BUILD_NUMBER'] = build_number
+
+    UI.important "Release Target Environment: #{env}"
+    UI.important "Release Target Build Number: #{build_number}"
+
+    UI.success "Release Options are set up successfully!"
+  end
 
   desc "Helps devs to release easier without much hassle" 
   lane :interactive_release do
-    env = UI.select("Select which environment you'd like to release to...", ['QA', 'RC', 'Prod'])
-    sprint_number = UI.input("Enter the Sprint Number")
+    env = UI.select("Select which environment you'd like to release to...", ['Alpha', 'Beta', 'Prod'])
     build_number = UI.input("Enter the Build Number")
 
-    release(env: env, sprint_number: sprint_number, build_number: build_number)
-
-    case release_type
-    when "Adhoc"
-      UI.important "You've come to the wrong place my brother, AdHoc is handled by Bitrise"
-    when "TestFlight-Review"
-      UI.success "Alright, doing so now!"
-      beta
-    when "TestFlight-Staging"
-      UI.success "Alright, doing so now!"
-      staging
-    when "Directly to the AppStore"
-      UI.user_error! "Sorry, but AppStore Lane is not yet done... 😓"
-    else
-      UI.user_error! "Whoops, looks like you picked something wrong this time, its ok, happens to the best of us, now re-run me again 😛"
-    end
-  end
-
-  lane :ensure_being_on_develop do 
-    current_branch = `git rev-parse --abbrev-ref HEAD`.strip
-    if current_branch == 'develop'
-      UI.success "Alright, we r on develop, that's great..."
-    else
-      UI.user_error! "Umm... you need to be on develop to ensure smooth launching... 👉👈"
-    end
+    release(env: env, build_number: build_number)
   end
   
   desc "Releases the app to TestFlight for Internal Testers"
   lane :beta do |options|
     ensure_being_on_develop
-    ensure_git_status_clean
-    # changelog = make_changelogs
-    # prepare_for_release
-    # notes = make_changelog_more_readable(notes: changelog)
-    build_for_internal_testers
+    ensure_git_status_clean()
+    sentry_check_cli_installed()
+    validate_tag()
+    sentry_create_release(version: ENV['RELEASE_TARGET_TAG'], app_identifier: 'com.alnajd.alnajd.ios.beta')
+    build_for_internal_testers()
     push_to_testflight(notes: "")
-    # sync_release_branch(notes: changelog)
-    # gitlab_release(notes: changelog)
-    clean_build_artifacts
+    sentry_set_commits(version: ENV['RELEASE_TARGET_TAG'], auto: true, ignore_missing: true)
+    sentry_upload_dif()
+    sentry_finalize_release(version: ENV['RELEASE_TARGET_TAG'])
+    clean_build_artifacts()
   end
 
   desc "Releases the app to TestFlight for Staging"

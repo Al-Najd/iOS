@@ -24,38 +24,48 @@ platform :ios do
       UI.header "Tag Inspectation started! 🧐"
       UI.important "Fetching all tags to ensure being in an updated state"
       git_pull(only_tags: true)
-      validate_tag_environment(options)
-      add_tag_to_git(options)
+      validate_tag_environment()
+      add_tag_to_git()
     end
 
     lane :add_tag_to_git do |options|
       UI.header "Tag Creation started! 🚀"
-      tag_to_add = `#{options[:env]}-#{options[:sprint_number]}.#{options[:build_number]}`
+      tag_to_add = ENV['RELEASE_TARGET_TAG']
       UI.important "Adding Tag #{tag_to_add} to Git"
       add_git_tag(tag: tag_to_add)
       UI.success "Tag Creation finished! 🚀"
     end
+
+    lane :ensure_being_on_develop do 
+      current_branch = `git rev-parse --abbrev-ref HEAD`.strip
+      if current_branch == 'develop'
+        UI.success "Alright, we r on develop, that's great..."
+      else
+        UI.user_error! "Umm... you need to be on develop to ensure smooth launching... 👉👈"
+      end
+    end
     
-    lane :update_build_number do |options|
+    def update_build_number()
       UI.important "Updating Build Number, based on latest TestFlight build number"
 
-      new_build_number = latest_testflight_build_number + 1
+      new_build_number = latest_testflight_build_number(app_identifier: "com.alnajd.alnajd.ios.beta", initial_build_number: 0) + 1
       increment_build_number(build_number: new_build_number)
-      xcodegen_update_build_number(build_number: new_build_number)
-
       UI.success "Build Number updated! 🚀"
       UI.important "New Build Number: #{new_build_number}"
     end
 
-    lane :validate_tag_environment do |options|
+    def validate_tag_environment()
       UI.header "Tag Validation started! 🧐"
-      # Check if Tag follows this format ENV-SprintNumber.BuildNumber
-      tag = options[:tag]
-      tag_format = '*-*.*'
+      env = ENV['RELEASE_TARGET_ENV'].upcase
+      build_number = ENV['RELEASE_TARGET_BUILD_NUMBER']
+
+      # Check if Tag follows this format ENV-VersionNumber-BuildNumber
+      tag = "#{env}-#{get_version_number(target: 'Al Najd (iOS)')}-#{build_number}"
+      tag_format = '^[a-zA-Z]+-[0-9]+\.[0-9]+\.[0-9]+-[0-9]+$'
       is_valid = tag.match(tag_format)
       
       unless is_valid
-        UI.user_error!("Tag #{tag} does not follow the format #{tag_format} example: QA-14.1 (14 = Sprint Number) (1 = Build Number)")
+        UI.user_error!("Tag #{tag} does not follow the format #{tag_format} example: BETA-1.0.0-1 (1.0.0 = Version Number) (1 = Build Number)")
       end
 
       # Get Supported Env through ENV["ALLOWED_ENVIRONMENTS"], which is a string of comma separated values
@@ -69,14 +79,8 @@ platform :ios do
         UI.user_error!("Environment #{env} is not supported. Supported Environments are: #{allowed_envs}")
       end
 
-      UI.success "Validating Inspectation finished! 🚀"
-    end
+      ENV["RELEASE_TARGET_TAG"] = tag
 
-    private_lane :xcodegen_update_build_number do |options|
-      project_yml = YAML.load_file("../project.yml")
-      project_json = project_yml.to_h
-      project_json["targets"]["CAFU"]["settings"]["base"]["CURRENT_PROJECT_VERSION"] = options[:build_number]
-      File.write("../project.yml", project_json.to_yaml)
-      system(`xcodegen generate`)
+      UI.success "Validating Inspectation finished! 🚀"
     end
 end
