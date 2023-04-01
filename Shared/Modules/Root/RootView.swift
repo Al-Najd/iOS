@@ -13,6 +13,7 @@ import Home
 import Localization
 import PrayerDetails
 import SwiftUI
+import Azkar
 
 // MARK: - RootView
 
@@ -37,6 +38,15 @@ public struct RootView: View {
                   VStack {
                     Image(systemName: "chart.bar.xaxis")
                     Text(L10n.dashboard)
+                  }
+                  .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+                }
+
+              AzkarView(store: store.scope(state: \.azkar, action: Root.Action.azkar))
+                .tabItem {
+                  VStack {
+                    Image(systemName: "bolt.heart.fill")
+                    Text(L10n.azkar)
                   }
                   .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
                 }

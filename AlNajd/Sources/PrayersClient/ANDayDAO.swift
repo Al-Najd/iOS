@@ -56,6 +56,10 @@ extension ANDayDAO: TableRecord, EncodableRecord {
         static func getPrayers(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
             ANDayDAO.filter(Columns.date == date.startOfDay)
         }
+
+        static func getAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+            ANDayDAO.filter(Columns.date == date.startOfDay)
+        }
     }
 
     var prayers: QueryInterfaceRequest<ANPrayerDAO> {
@@ -72,6 +76,14 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 
     var timedAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
         request(for: Self.timedAzkar)
+    }
+
+    var morningAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
+        timedAzkar.filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.day)
+    }
+
+    var nightAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
+        timedAzkar.filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.night)
     }
 
     var donePrayers: QueryInterfaceRequest<ANPrayerDAO> {

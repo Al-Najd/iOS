@@ -32,10 +32,16 @@ public struct ANAzkarTimedDAO: Codable {
     }
 }
 
+extension ANAzkarTimedDAO {
+    func toDomainModel() -> ANAzkar {
+        ANAzkar(id: id!, name: name, reward: reward, repetation: repetation, currentCount: currentCount)
+    }
+}
+
 public extension ANAzkarTimedDAO {
     enum Time: Int, Codable, DatabaseValueConvertible {
-        case day
-        case night
+        case day = 0
+        case night = 1
     }
 }
 
