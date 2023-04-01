@@ -12,22 +12,50 @@ import DesignSystem
 import ReusableUI
 import Inject
 import Entity
+import ComposableArchitecture
+import Localization
 
 public struct AzkarView: View {
     @ObserveInjection var inject
-    public init() { }
+    var store: StoreOf<Azkar>
+
+    public init(store: StoreOf<Azkar>) {
+        self.store = store
+    }
 
     public var body: some View {
-        VStack {
-            ZekrView(title: "Something Title", subtitle: "Something Subtitle", repetation: 1) {
-                
-            }.padding()
+        WithViewStore(store) { viewStore in
+            ScrollView {
+                VStack {
+                    Text(L10n.azkarAlSabah)
+                        .foregroundColor(.mono.offblack)
+                        .scaledFont(.pTitle2, .bold)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, .p16)
+
+                    ForEach(viewStore.morningAzkar) { zekr in
+                        ZekrView(title: zekr.name, subtitle: zekr.reward, repetation: zekr.currentCount) {
+                            viewStore.send(.onDoingMorning(zekr), animation: .default)
+                        }.padding()
+                    }
+
+                    Text(L10n.azkarAlMasaa)
+                        .foregroundColor(.mono.offblack)
+                        .scaledFont(.pTitle2, .bold)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, .p16)
+
+                    ForEach(viewStore.nightAzkar) { zekr in
+                        ZekrView(title: zekr.name, subtitle: zekr.reward, repetation: zekr.currentCount) {
+                            viewStore.send(.onDoingNight(zekr), animation: .default)
+                        }.padding()
+                    }
+                }
+            }
+            .fill()
+            .background(Color.mono.background.ignoresSafeArea())
+            .onAppear { viewStore.send(.onAppear, animation: .default) }
         }
-        .fill()
-        .background(
-            Color.mono.background
-                .ignoresSafeArea()
-        )
         .enableInjection()
     }
 }

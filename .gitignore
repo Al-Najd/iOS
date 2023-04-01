@@ -21,3 +21,4 @@ Gemfile.lock
 .env.default.formatting
 .env.default.plugin
 .env.default.project
+fastlane/report.xml

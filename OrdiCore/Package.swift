@@ -31,7 +31,7 @@ let package = Package(
             .upToNextMinor(from: .init(0, 20, 1))),
         .package(
             url: "https://github.com/getsentry/sentry-cocoa.git",
-            .upToNextMinor(from: .init(7, 9, 0))),
+            .upToNextMinor(from: .init(8, 3, 3))),
         .package(
             url: "https://github.com/evgenyneu/keychain-swift",
             .upToNextMajor(from: .init(20, 0, 0))),

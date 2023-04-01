@@ -217,6 +217,7 @@ private enum ANProducts {
         ANProducts.product(name: "Home"),
         ANProducts.product(name: "Dashboard"),
         ANProducts.product(name: "Assets"),
+        ANProducts.product(name: "Azkar"),
     ]
 
     static func product(name: String) -> PackageDescription.Product {

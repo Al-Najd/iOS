@@ -30,8 +30,10 @@ private extension SentryService {
 
         #if DEBUG
         let environment = "Development"
-        #elseif STAGING
-        let environment = "Staging"
+        #elseif ALPHA
+        let environment = "Alpha"
+        #elseif BETA
+        let environment = "Beta"
         #else
         let environment = "Production"
         #endif
@@ -39,7 +41,8 @@ private extension SentryService {
         static let `default`: Configurations = .init(
             dsn: "https://0526add1e72543819237e2018fa6b72e@o455344.ingest.sentry.io/6031596",
             debug: false,
-            traceSampleRate: 1.0)
+            traceSampleRate: 1.0
+        )
     }
 }
 
