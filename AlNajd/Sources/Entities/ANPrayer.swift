@@ -110,18 +110,23 @@ public extension ANSunnah {
 
 // MARK: - ANNafila
 
-public struct ANNafila {
+public struct ANNafila: Identifiable, Equatable {
+    public let id: Int
     public let name: String
     public let raqaat: Raqaat
+    public let reward: String
+    public let isDone: Bool
+
+    public init(id: Int64, name: String, raqaat: Raqaat, reward: String, isDone: Bool) {
+        self.id = Int(id)
+        self.name = name
+        self.raqaat = raqaat
+        self.reward = reward
+        self.isDone = isDone
+    }
 }
 
 public extension ANNafila {
-    static let subh: ANNafila = .init(name: "Subh", raqaat: .defined(2))
-    static let duha: ANNafila = .init(name: "Duha", raqaat: .atLeast(4))
-    static let shaf: ANNafila = .init(name: "Shaf3", raqaat: .defined(2))
-    static let watr: ANNafila = .init(name: "Watr", raqaat: .defined(1))
-    static let qeyamAlLayf: ANNafila = .init(name: "", raqaat: .atLeast(2))
-
     enum Raqaat: Equatable {
         case defined(Int)
         case atLeast(Int)
@@ -183,6 +188,25 @@ public extension ANPrayer {
             return Asset.Prayers.Faraaid.maghribImage
         case "aishaa":
             return Asset.Prayers.Faraaid.ishaImage
+        default:
+            fatalError()
+        }
+    }
+}
+
+public extension ANNafila {
+    var image: ImageAsset {
+        switch name {
+        case "subh":
+            return Asset.Prayers.Nafila.subhImage
+        case "duha":
+            return Asset.Prayers.Nafila.duhaImage
+        case "shaf3":
+            return Asset.Prayers.Nafila.qeyamImage
+        case "watr":
+            return Asset.Prayers.Nafila.qeyamImage
+        case "qeyam":
+            return Asset.Prayers.Nafila.qeyamImage
         default:
             fatalError()
         }

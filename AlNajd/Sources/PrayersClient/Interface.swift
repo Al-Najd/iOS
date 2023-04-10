@@ -59,6 +59,18 @@ public struct PrayersClient {
         }
     }
 
+    public func nafila(for date: Date) -> [ANNafila] {
+        do {
+            return try DatabaseService.dbQueue.read { db in
+                try (ANDayDAO.Queries.getNafila(for: date).fetchOne(db)?.nafila.fetchAll(db))!.compactMap {
+                    $0.toDomainModel()
+                }
+            }
+        } catch {
+            fatalError()
+        }
+    }
+
     public func prayers(for date: Date) -> [ANPrayer] {
         do {
             return try DatabaseService.dbQueue.read { db in

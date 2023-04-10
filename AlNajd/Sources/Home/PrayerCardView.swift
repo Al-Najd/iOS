@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  PrayerCardView.swift
 //  
 //
 //  Created by Ahmed Ramy on 10/04/2023.
@@ -14,10 +14,14 @@ import Assets
 import ReusableUI
 import Utils
 
-struct PrayerCardView: View {
+public struct PrayerCardView: View {
     var prayer: ANPrayer
 
-    var body: some View {
+    public init(prayer: ANPrayer) {
+        self.prayer = prayer
+    }
+
+    public var body: some View {
         VStack {
             VStack {
                 Text(prayer.title)

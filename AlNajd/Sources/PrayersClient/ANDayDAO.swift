@@ -30,6 +30,7 @@ extension ANDayDAO: TableRecord, EncodableRecord {
     static let sunnah = hasMany(ANSunnahDAO.self, through: prayers, using: ANPrayerDAO.sunnah)
     static let azkar = hasMany(ANAzkarDAO.self, through: prayers, using: ANPrayerDAO.azkar)
     static let timedAzkar = hasMany(ANAzkarTimedDAO.self)
+    static let nafila = hasMany(ANNafilaDAO.self)
 
     enum Columns {
         static let id = Column(CodingKeys.id)
@@ -60,6 +61,14 @@ extension ANDayDAO: TableRecord, EncodableRecord {
         static func getAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
             ANDayDAO.filter(Columns.date == date.startOfDay)
         }
+
+        static func getNafila(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+            ANDayDAO.filter(Columns.date == date.startOfDay)
+        }
+    }
+
+    var nafila: QueryInterfaceRequest<ANNafilaDAO> {
+        request(for: Self.nafila)
     }
 
     var prayers: QueryInterfaceRequest<ANPrayerDAO> {

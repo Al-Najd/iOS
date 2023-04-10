@@ -94,6 +94,18 @@ public enum DatabaseService {
             }
         }
 
+        migrator.registerMigration("createNafila") { db in
+            try db.create(table: ANNafilaDAO.databaseTableName, body: {
+                $0.autoIncrementedPrimaryKey("id")
+                $0.column("name", .text).notNull()
+                $0.column("reward", .text).notNull()
+                $0.column("raqaatCount", .integer).notNull()
+                $0.column("raqaat", .integer).notNull()
+                $0.column("isDone", .boolean).notNull()
+                $0.column("dayId", .integer).notNull().indexed().references("days", onDelete: .cascade)
+            })
+        }
+
         return migrator
     }
 
@@ -117,24 +129,35 @@ private extension DatabaseService {
                 let day = try ANDayDAO(date: $0).insertAndFetch(db)
                 try seedPrayers((day?.id)!, db)
                 try seedTimedAzkar((day?.id)!, db)
+                try seedNafila((day?.id)!, db)
             }
         }
+    }
+
+    static func seedNafila(_ dayId: Int64, _ db: Database) throws {
+        ANNafilaDAO.subh(dayId).insert(db)
+        ANNafilaDAO.duha(dayId).insert(db)
+        ANNafilaDAO.shafaa(dayId).insert(db)
+        ANNafilaDAO.watr(dayId).insert(db)
+        ANNafilaDAO.qeyam(dayId).insert(db)
     }
 
     static func seedPrayers(_ dayId: Int64, _ db: Database) throws {
         let fajr = try ANPrayerDAO(name: "fajr", isDone: false, raqaat: 2, dayId: dayId, reward: "fajr_reward").insertAndFetch(db)
         let dhuhr = try ANPrayerDAO(name: "duhr", isDone: false, raqaat: 4, dayId: dayId, reward: "duhr_reward")
             .insertAndFetch(db)
-        _ = try ANPrayerDAO(name: "aasr", isDone: false, raqaat: 4, dayId: dayId, reward: "aasr_reward").insertAndFetch(db)
+        let aasr = try ANPrayerDAO(name: "aasr", isDone: false, raqaat: 4, dayId: dayId, reward: "aasr_reward").insertAndFetch(db)
         let maghrib = try ANPrayerDAO(name: "maghrib", isDone: false, raqaat: 3, dayId: dayId, reward: "maghrib_reward")
             .insertAndFetch(db)
         let aishaa = try ANPrayerDAO(name: "aishaa", isDone: false, raqaat: 4, dayId: dayId, reward: "ishaa_reward")
             .insertAndFetch(db)
 
         try seedFajrSunnahAndAzkar((fajr?.id)!, db)
+        try seedAasrAzkar((aasr?.id)!, db)
         try seedDhuhrSunnahAndAzkar((dhuhr?.id)!, db)
         try seedMaghribSunnahAndAzkar((maghrib?.id)!, db)
         try seedAishaaSunnahAndAzkar((aishaa?.id)!, db)
+
     }
 
     static func seedTimedAzkar(_ dayId: Int64, _ db: Database) throws {
@@ -147,6 +170,10 @@ private extension DatabaseService {
         try (
             ANAzkarDAO.common(prayerId) +
                 ANAzkarDAO.fajrAndMaghrib(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+    }
+
+    static func seedAasrAzkar(_ prayerId: Int64, _ db: Database) throws {
+        try (ANAzkarDAO.common(prayerId) + ANAzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 
     static func seedDhuhrSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {

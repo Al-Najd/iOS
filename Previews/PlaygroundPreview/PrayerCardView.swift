@@ -9,86 +9,76 @@ import SwiftUI
 import Assets
 import Home
 import Localization
+import Utils
+import Common
+import DesignSystem
+import ComposableArchitecture
+import ReusableUI
+import Entities
+import Inject
 
-struct PrayerCardView: View {
+struct PlaygroundView: View {
+  @ObserveInjection var inject
+
   let image: ImageAsset = Asset
     .Prayers
     .Faraaid
     .maghribImage
 
   @State var progress: Double = 0.25
+  let store = StoreOf<Home>.init(initialState: .init(), reducer: Home())
 
   var body: some View {
-    HeaderView()
-  }
-}
-
-struct HeaderView: View {
-  var body: some View {
-    VStack {
-      VStack(spacing: .p4) {
-        Text(L10n.hud88)
-          .foregroundColor(.mono.offwhite)
-          .scaledFont(locale: .arabic, .pFootnote, .bold)
-          .multilineTextAlignment(.center)
-
-        Label("12/12/2012", systemImage: "calendar")
-          .foregroundColor(.mono.offwhite)
-          .scaledFont(locale: .arabic, .pFootnote)
-          .multilineTextAlignment(.center)
-
-        VStack(spacing: .p4) {
-          HStack {
-            Text(L10n.todaySummary)
-              .foregroundColor(.mono.offwhite)
-              .scaledFont(.textXSmall)
-              .multilineTextAlignment(.center)
-
-            Spacer()
-          }
-
-          ProgressBar(
-            value: .constant(0.75)
-          )
-          .frame(height: 8)
-          .shadow(color: .shadowBlueperry, radius: 4, x: 0, y: 0)
-          .padding(.bottom, .p16)
-        }
+    WithViewStore(store) { viewStore in
+      PrayerSliderView(prayers: viewStore.prayers) {_ in 
+        
       }
-      .frame(maxWidth: .infinity)
-      .padding(.top, getSafeArea().top)
-      .padding(.horizontal, .p8)
-      .padding(.bottom, .p16)
-      .background(
-        ZStack {
-          Color
-            .primaryBlackberry
-            .ignoresSafeArea()
-            .background(
-              Color.primaryBlackberry
-                .frame(height: 1000)
-                .offset(y: -500)
-            )
-            .offset(y: -100)
-
-          Asset
-            .Background
-            .headerMini
-            .swiftUIImage
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .ignoresSafeArea()
-        }
-      )
-
-      Spacer()
+      .onAppear { viewStore.send(.onAppear) }
+      .enableInjection()
     }
   }
 }
 
-struct PrayerCardView_Previews: PreviewProvider {
+struct PrayerSliderView: View {
+  var prayers: IdentifiedArrayOf<ANPrayer>
+  var onTap: (ANPrayer) -> Void
+
+  private let screenSize = getScreenSize()
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: .p8) {
+      Text(L10n.prayers)
+        .foregroundColor(.mono.offblack)
+        .scaledFont(locale: .arabic, .pFootnote, .bold)
+        .multilineTextAlignment(.center)
+        .padding(.horizontal, .p16)
+      ScrollViewRTL {
+        HStack(spacing: .p32) {
+          ForEach(prayers) { prayer in
+            GeometryReader { geometry in
+              PrayerCardView(prayer: prayer)
+                .rotation3DEffect(
+                  .degrees(((.p32 + geometry.frame(in: .local).width) / 2 - geometry.frame(in: .global).minX) / (30.0)),
+                  axis: (x: 15, y: 45, z: 0)
+                )
+                .onTapGesture {
+                  onTap(prayer)
+                }
+            }
+            .frame(width: screenSize.width * 0.45, height: screenSize.height * 0.33)
+          }
+        }
+        .padding(.horizontal, .p16)
+      }.onAppear {
+        print(screenSize.height)
+      }
+    }.padding()
+  }
+}
+
+struct PlaygroundView_Previews: PreviewProvider {
     static var previews: some View {
-        PrayerCardView()
+      PlaygroundView()
     }
 }
 

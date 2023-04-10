@@ -221,12 +221,19 @@ struct PrayerSliderView: View {
 				.multilineTextAlignment(.center)
 				.padding(.horizontal, .p16)
 			ScrollViewRTL {
-				HStack {
+                HStack(spacing: .p32) {
 					ForEach(prayers) { prayer in
-                        PrayerCardView(prayer: prayer)
-                            .onTapGesture {
-                                onTap(prayer)
-                            }
+                        GeometryReader { geometry in
+                            PrayerCardView(prayer: prayer)
+                                .rotation3DEffect(
+                                    .degrees(((.p32 + geometry.frame(in: .local).width) / 2 - geometry.frame(in: .global).minX) / (30.0)),
+                                    axis: (x: 15, y: 45, z: 0)
+                                )
+                                .onTapGesture {
+                                    onTap(prayer)
+                                }
+                        }
+                        .frame(width: 175, height: 265)
 					}
 				}
 				.padding(.horizontal, .p16)

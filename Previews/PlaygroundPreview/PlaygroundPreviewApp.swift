@@ -19,7 +19,7 @@ struct PlaygroundPreviewApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      PlaygroundView()
         .onAppear {
           plugins.forEach { $0.setup() }
         }
