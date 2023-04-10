@@ -37,7 +37,6 @@ public struct HomeView: View {
                     nafilaSection(viewStore)
                     hadeethSection()
                 }
-                .ignoresSafeArea(edges: .top)
                 .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
                     IfLetStore(store.scope(state: \.selectedPrayer, action: Home.Action.prayerDetails), then: {
                         PrayerDetailsView(store: $0)
@@ -46,7 +45,7 @@ public struct HomeView: View {
                 .background(Color.mono.background)
                 .onAppear { viewStore.send(.onAppear) }
                 .enableInjection()
-            }
+            }.ignoresSafeArea(edges: .top)
         }
     }
 }
@@ -149,27 +148,43 @@ struct HeaderView: View {
 						.foregroundColor(.mono.offwhite)
 						.scaledFont(.textXSmall)
 						.multilineTextAlignment(.center)
-				}
+				}.padding(.horizontal, .p8)
 
 				ProgressBar(
 					value: viewStore.binding(\.$percentageValue)
 				)
 				.frame(height: 8)
 				.shadow(color: .shadowBlueperry, radius: 4, x: 0, y: 0)
+                .padding(.bottom, .p16)
+                .padding(.horizontal, .p8)
 			}
 		}
 		.frame(maxWidth: .infinity)
 		.padding(.top, getSafeArea().top)
 		.padding(.horizontal, .p8)
 		.padding(.bottom, .p16)
-		.background(
-			Color.primaryBlackberry.ignoresSafeArea()
-				.background(
-					Color.primaryBlackberry
-						.frame(height: 1000)
-						.offset(y: -500)
-				)
-		)
+        .background(
+            ZStack {
+                Color
+                    .primaryBlackberry
+                    .ignoresSafeArea()
+                    .background(
+                        Color.primaryBlackberry
+                            .frame(height: 1000)
+                            .offset(y: -500)
+                    )
+                    .offset(y: -100)
+
+                Asset
+                    .Background
+                    .headerMini
+                    .swiftUIImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
+        )
+
+        Spacer()
 	}
 }
 
@@ -208,34 +223,15 @@ struct PrayerSliderView: View {
 			ScrollViewRTL {
 				HStack {
 					ForEach(prayers) { prayer in
-						ZStack {
-							prayer.image
-								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.frame(width: 175, height: getScreenSize().height * 0.45)
-								.overlay(
-									Color.mono.offblack.opacity(0.5)
-								)
-								.contentShape(RoundedRectangle(cornerRadius: .r16))
-							VStack {
-								Spacer()
-								Text(prayer.title)
-									.foregroundColor(.mono.offwhite)
-									.scaledFont(.pFootnote)
-									.multilineTextAlignment(.center)
-									.padding(.bottom, .p4)
-							}.padding(.horizontal, .p4)
-						}
-						.cornerRadius(.r16)
-						.clipped()
-						.onTapGesture {
-							onTap(prayer)
-						}
+                        PrayerCardView(prayer: prayer)
+                            .onTapGesture {
+                                onTap(prayer)
+                            }
 					}
 				}
 				.padding(.horizontal, .p16)
-			}
-		}
+            }
+        }.padding()
 	}
 }
 
@@ -254,7 +250,7 @@ struct NafilaSliderView: View {
 				HStack {
 					ForEach(prayers) { prayer in
 						ZStack {
-							Asset.Prayers.Images.duhaImage.swiftUIImage
+							Asset.Prayers.Nafila.duhaImage.swiftUIImage
 								.resizable()
 								.aspectRatio(contentMode: .fill)
 								.frame(width: getScreenSize().width * 0.8, height: getScreenSize().height * 0.15)

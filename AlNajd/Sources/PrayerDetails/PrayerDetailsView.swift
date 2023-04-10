@@ -75,6 +75,7 @@ public struct PrayerDetailsView: View {
 
             }.background(
                 viewStore.prayer.image
+                    .swiftUIImage
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()

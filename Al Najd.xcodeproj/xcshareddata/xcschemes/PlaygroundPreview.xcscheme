@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1300"
-   version = "1.3">
+   LastUpgradeVersion = "1420"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B865880F2716CC5500FC0CBB"
-               BuildableName = "Al Najd.app"
-               BlueprintName = "Al Najd (iOS)"
+               BlueprintIdentifier = "E23F7B1429DCCF1D00CC275F"
+               BuildableName = "PlaygroundPreview.app"
+               BlueprintName = "PlaygroundPreview"
                ReferencedContainer = "container:Al Najd.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,28 +26,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      localizableStringsDataGatheringEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B865881F2716CC5500FC0CBB"
-               BuildableName = "Tests iOS.xctest"
-               BlueprintName = "Tests iOS"
-               ReferencedContainer = "container:Al Najd.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "ar"
-      region = "EG"
+      language = "en"
+      region = "CA"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -58,12 +46,16 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B865880F2716CC5500FC0CBB"
-            BuildableName = "Al Najd.app"
-            BlueprintName = "Al Najd (iOS)"
+            BlueprintIdentifier = "E23F7B1429DCCF1D00CC275F"
+            BuildableName = "PlaygroundPreview.app"
+            BlueprintName = "PlaygroundPreview"
             ReferencedContainer = "container:Al Najd.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <LocationScenarioReference
+         identifier = "London, England"
+         referenceType = "1">
+      </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,18 +67,18 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B865880F2716CC5500FC0CBB"
-            BuildableName = "Al Najd.app"
-            BlueprintName = "Al Najd (iOS)"
+            BlueprintIdentifier = "E23F7B1429DCCF1D00CC275F"
+            BuildableName = "PlaygroundPreview.app"
+            BlueprintName = "PlaygroundPreview"
             ReferencedContainer = "container:Al Najd.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Beta"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
