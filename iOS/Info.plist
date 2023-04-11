@@ -37,7 +37,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>11</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
@@ -48,10 +48,8 @@
 	<string>(Optional) In case you want to associate automation workflow or other Siri Actions</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Klasik-Regular.otf</string>
-		<string>Klasik-Bold.otf</string>
-		<string>ElMessiri-Regular.ttf</string>
-		<string>ElMessiri-Bold.ttf</string>
+		<string>Cairo-Bold</string>
+		<string>Cairo-Regular</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -41,15 +41,6 @@ public struct RootView: View {
                   }
                   .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
                 }
-
-              AzkarView(store: store.scope(state: \.azkar, action: Root.Action.azkar))
-                .tabItem {
-                  VStack {
-                    Image(systemName: "bolt.heart.fill")
-                    Text(L10n.azkar)
-                  }
-                  .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-                }
             }.onAppear {
               // correct the transparency bug for Tab bars
               let tabBarAppearance = UITabBarAppearance()
