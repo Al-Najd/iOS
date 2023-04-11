@@ -20,6 +20,19 @@ import Utils
 // MARK: - PrayersClient
 
 public struct PrayersClient {
+    public func save(nafila: ANNafila?) {
+        guard let nafila = nafila else { return }
+        do {
+            try DatabaseService.dbQueue.write { db in
+                var dao = try ANNafilaDAO.fetchOne(db, key: nafila.id)
+                dao?.isDone = nafila.isDone
+                try dao?.update(db)
+            }
+        } catch {
+            fatalError()
+        }
+    }
+
     public func save(prayer: ANPrayer?) {
         guard let prayer = prayer else { return }
         do {
@@ -53,6 +66,18 @@ public struct PrayersClient {
                 var dao = try ANAzkarDAO.fetchOne(db, key: zekr.id)
                 dao?.currentCount = zekr.currentCount
                 try dao?.update(db)
+            }
+        } catch {
+            fatalError()
+        }
+    }
+
+    public func nafila(for date: Date) -> [ANNafila] {
+        do {
+            return try DatabaseService.dbQueue.read { db in
+                try (ANDayDAO.Queries.getNafila(for: date).fetchOne(db)?.nafila.fetchAll(db))!.compactMap {
+                    $0.toDomainModel()
+                }
             }
         } catch {
             fatalError()

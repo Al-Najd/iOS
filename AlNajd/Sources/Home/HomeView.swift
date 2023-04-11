@@ -17,6 +17,7 @@ import ReusableUI
 import Dashboard
 import Utils
 import ScalingHeaderScrollView
+import NafilaDetails
 
 public struct HomeView: View {
     @ObserveInjection var inject
@@ -37,16 +38,20 @@ public struct HomeView: View {
                     nafilaSection(viewStore)
                     hadeethSection()
                 }
-                .ignoresSafeArea(edges: .top)
                 .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { prayerState in
                     IfLetStore(store.scope(state: \.selectedPrayer, action: Home.Action.prayerDetails), then: {
                         PrayerDetailsView(store: $0)
                     })
                 }
+                .fullScreenCover(item: viewStore.binding(\.$selectedNafila)) { nafilaState in
+                    IfLetStore(store.scope(state: \.selectedNafila, action: Home.Action.nafilaDetails), then: {
+                        NafilaDetailsView(store: $0)
+                    })
+                }
                 .background(Color.mono.background)
                 .onAppear { viewStore.send(.onAppear) }
                 .enableInjection()
-            }
+            }.ignoresSafeArea(edges: .top)
         }
     }
 }
@@ -55,7 +60,7 @@ private extension HomeView {
 
     @ViewBuilder
     func nafilaSection(_ viewStore: ViewStoreOf<Home>) -> some View {
-        NafilaSliderView(prayers: viewStore.prayers) { _ in print("ok") }
+        NafilaSliderView(nafilas: viewStore.nafila) { viewStore.send(.onSelectingNafila($0)) }
             .padding(.bottom)
     }
 
@@ -149,27 +154,43 @@ struct HeaderView: View {
 						.foregroundColor(.mono.offwhite)
 						.scaledFont(.textXSmall)
 						.multilineTextAlignment(.center)
-				}
+				}.padding(.horizontal, .p8)
 
 				ProgressBar(
 					value: viewStore.binding(\.$percentageValue)
 				)
 				.frame(height: 8)
 				.shadow(color: .shadowBlueperry, radius: 4, x: 0, y: 0)
+                .padding(.bottom, .p16)
+                .padding(.horizontal, .p8)
 			}
 		}
 		.frame(maxWidth: .infinity)
 		.padding(.top, getSafeArea().top)
 		.padding(.horizontal, .p8)
 		.padding(.bottom, .p16)
-		.background(
-			Color.primaryBlackberry.ignoresSafeArea()
-				.background(
-					Color.primaryBlackberry
-						.frame(height: 1000)
-						.offset(y: -500)
-				)
-		)
+        .background(
+            ZStack {
+                Color
+                    .primaryBlackberry
+                    .ignoresSafeArea()
+                    .background(
+                        Color.primaryBlackberry
+                            .frame(height: 1000)
+                            .offset(y: -500)
+                    )
+                    .offset(y: -100)
+
+                Asset
+                    .Background
+                    .headerMini
+                    .swiftUIImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
+        )
+
+        Spacer()
 	}
 }
 
@@ -206,76 +227,50 @@ struct PrayerSliderView: View {
 				.multilineTextAlignment(.center)
 				.padding(.horizontal, .p16)
 			ScrollViewRTL {
-				HStack {
+                HStack(spacing: .p32) {
 					ForEach(prayers) { prayer in
-						ZStack {
-							prayer.image
-								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.frame(width: 175, height: getScreenSize().height * 0.45)
-								.overlay(
-									Color.mono.offblack.opacity(0.5)
-								)
-								.contentShape(RoundedRectangle(cornerRadius: .r16))
-							VStack {
-								Spacer()
-								Text(prayer.title)
-									.foregroundColor(.mono.offwhite)
-									.scaledFont(.pFootnote)
-									.multilineTextAlignment(.center)
-									.padding(.bottom, .p4)
-							}.padding(.horizontal, .p4)
-						}
-						.cornerRadius(.r16)
-						.clipped()
-						.onTapGesture {
-							onTap(prayer)
-						}
+                        GeometryReader { geometry in
+                            PrayerCardView(prayer: prayer)
+                                .rotation3DEffect(
+                                    .degrees(((.p32 + geometry.frame(in: .local).width) / 2 - geometry.frame(in: .global).minX) / (30.0)),
+                                    axis: (x: 15, y: 45, z: 0)
+                                )
+                                .onTapGesture {
+                                    onTap(prayer)
+                                }
+                        }
+                        .frame(width: 175, height: 265)
 					}
 				}
 				.padding(.horizontal, .p16)
-			}
-		}
+            }
+        }.padding()
 	}
 }
 
 struct NafilaSliderView: View {
-	var prayers: IdentifiedArrayOf<ANPrayer>
-	var onTap: (ANPrayer) -> Void
+	var nafilas: IdentifiedArrayOf<ANNafila>
+	var onTap: (ANNafila) -> Void
 
 	var body: some View {
 		VStack(alignment: .leading, spacing: .p8) {
-			Text(L10n.nafila)
+            Text(L10n.nafila)
 				.foregroundColor(.mono.offblack)
 				.scaledFont(locale: .arabic, .pFootnote, .bold)
 				.multilineTextAlignment(.center)
 				.padding(.horizontal, .p16)
 			ScrollViewRTL {
-				HStack {
-					ForEach(prayers) { prayer in
-						ZStack {
-							Asset.Prayers.Images.duhaImage.swiftUIImage
-								.resizable()
-								.aspectRatio(contentMode: .fill)
-								.frame(width: getScreenSize().width * 0.8, height: getScreenSize().height * 0.15)
-								.overlay(
-									Color.mono.offblack.opacity(0.5)
-								)
-								.contentShape(RoundedRectangle(cornerRadius: .r16))
-							VStack {
-								Spacer()
-								Text(prayer.title)
-									.foregroundColor(.mono.offwhite)
-									.scaledFont(.pFootnote)
-									.multilineTextAlignment(.center)
-									.padding(.bottom, .p4)
-							}.padding(.horizontal, .p4)
-						}
-						.cornerRadius(.r16)
-						.clipped()
-						.onTapGesture {
-							onTap(prayer)
-						}
+				HStack(spacing: .p32) {
+					ForEach(nafilas) { nafila in
+                        GeometryReader { geometry in
+                            PrayerCardView(nafila: nafila)
+                                .rotation3DEffect(
+                                    .degrees(((.p32 + geometry.frame(in: .local).width) / 2 - geometry.frame(in: .global).minX) / (30.0)),
+                                    axis: (x: 15, y: 45, z: 0)
+                                )
+                                .onTapGesture { onTap(nafila) }
+                        }
+                        .frame(width: 360, height: 265)
 					}
 				}
 				.padding(.horizontal, .p16)

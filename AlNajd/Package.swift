@@ -25,6 +25,7 @@ private enum ANTargets {
         + ANTargets.assets
         + ANTargets.dashboard
         + ANTargets.azkar
+        + ANTargets.nafilaDetails
 }
 
 private extension ANTargets {
@@ -41,12 +42,26 @@ private extension ANTargets {
                 "Assets",
                 "Dashboard",
                 "Azkar",
+                "NafilaDetails",
                 .product(name: "Core", package: "OrdiCore"),
             ]),
     ]
 }
 
 private extension ANTargets {
+    static let nafilaDetails: [Target] = [
+        .target(
+            name: "NafilaDetails",
+            dependencies: [
+                "Common",
+                "Entities",
+                "Localization",
+                "PrayersClient",
+                .product(name: "Drawer", package: "swiftui-drawer"),
+                .product(name: "Core", package: "OrdiCore"),
+            ]),
+    ]
+
     static let assets: [Target] = [
         .target(
             name: "Assets",
@@ -77,6 +92,7 @@ private extension ANTargets {
                 "Localization",
                 "PrayerDetails",
                 "Dashboard",
+                "NafilaDetails",
                 .product(name: "Core", package: "OrdiCore"),
                 .product(name: "ScalingHeaderScrollView", package: "ScalingHeaderScrollView"),
             ]),
@@ -218,6 +234,7 @@ private enum ANProducts {
         ANProducts.product(name: "Dashboard"),
         ANProducts.product(name: "Assets"),
         ANProducts.product(name: "Azkar"),
+        ANProducts.product(name: "NafilaDetails"),
     ]
 
     static func product(name: String) -> PackageDescription.Product {

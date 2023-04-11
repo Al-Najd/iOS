@@ -110,18 +110,27 @@ public extension ANSunnah {
 
 // MARK: - ANNafila
 
-public struct ANNafila {
+public struct ANNafila: Identifiable, Equatable {
+    public let id: Int
     public let name: String
     public let raqaat: Raqaat
+    public let title: String
+    public let subtitle: String
+    public let reward: String
+    public var isDone: Bool
+
+    public init(id: Int64, name: String, raqaat: Raqaat, reward: String, isDone: Bool) {
+        self.id = Int(id)
+        self.name = name
+        self.raqaat = raqaat
+        self.reward = reward
+        self.isDone = isDone
+        self.title = name.localized
+        self.subtitle = reward.localized
+    }
 }
 
 public extension ANNafila {
-    static let subh: ANNafila = .init(name: "Subh", raqaat: .defined(2))
-    static let duha: ANNafila = .init(name: "Duha", raqaat: .atLeast(4))
-    static let shaf: ANNafila = .init(name: "Shaf3", raqaat: .defined(2))
-    static let watr: ANNafila = .init(name: "Watr", raqaat: .defined(1))
-    static let qeyamAlLayf: ANNafila = .init(name: "", raqaat: .atLeast(2))
-
     enum Raqaat: Equatable {
         case defined(Int)
         case atLeast(Int)
@@ -171,20 +180,55 @@ extension ANSunnah: Changeable { }
 extension ANAzkar: Changeable { }
 
 public extension ANPrayer {
-    var image: Image {
+    var image: ImageAsset {
         switch name {
         case "fajr":
-            return Asset.Prayers.Images.fajrImage.swiftUIImage
+            return Asset.Prayers.Faraaid.fajrImage
         case "duhr":
-            return Asset.Prayers.Images.dhuhrImage.swiftUIImage
+            return Asset.Prayers.Faraaid.dhuhrImage
         case "aasr":
-            return Asset.Prayers.Images.asrImage.swiftUIImage
+            return Asset.Prayers.Faraaid.asrImage
         case "maghrib":
-            return Asset.Prayers.Images.maghribImage.swiftUIImage
+            return Asset.Prayers.Faraaid.maghribImage
         case "aishaa":
-            return Asset.Prayers.Images.ishaImage.swiftUIImage
+            return Asset.Prayers.Faraaid.ishaImage
         default:
             fatalError()
         }
+    }
+}
+
+public extension ANNafila {
+    var image: ImageAsset {
+        switch name {
+        case "subh":
+            return Asset.Prayers.Nafila.subhImage
+        case "duha":
+            return Asset.Prayers.Nafila.duhaImage
+        case "shaf3":
+            return Asset.Prayers.Nafila.qeyamImage
+        case "watr":
+            return Asset.Prayers.Nafila.qeyamImage
+        case "qeyam":
+            return Asset.Prayers.Nafila.qeyamImage
+        default:
+            fatalError()
+        }
+    }
+}
+
+public extension ImageAsset {
+    var averageColor: Color {
+        guard let inputImage = CIImage(image: self.image) else { return .clear }
+        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
+
+        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return .clear }
+        guard let outputImage = filter.outputImage else { return .clear }
+
+        var bitmap = [UInt8](repeating: 0, count: 4)
+        let context = CIContext(options: [.workingColorSpace: kCFNull])
+        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
+
+        return Color(UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255))
     }
 }

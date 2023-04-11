@@ -102,6 +102,7 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
     }
 }
 
+// MARK: - Seedings
 extension ANSunnahDAO {
     static let fajr: (Int64) -> ANSunnahDAO = {
         .init(
