@@ -79,7 +79,9 @@ public extension FontManager {
 
 private extension FontManager {
     func fillUpInfoPListWithCustomFont() {
-        FontBlaster.blast(bundle: .designSystemBundle)
+        Once().run {
+            FontBlaster.blast(bundle: .designSystemBundle)
+        }
     }
 
     func parseFontJSON() {

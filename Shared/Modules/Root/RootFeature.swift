@@ -25,6 +25,10 @@ public struct Root: ReducerProtocol {
     Scope(state: \.dashboard, action: /Action.dashboard) {
       Dashboard()
     }
+
+    Scope(state: \.azkar, action: /Action.azkar) {
+      Azkar()
+    }
   }
 }
 
@@ -36,6 +40,7 @@ public extension Root {
   struct State: Equatable {
     var home: Home.State = .init()
     var dashboard: Dashboard.State = .init()
+    var azkar: Azkar.State = .init()
   }
 }
 
@@ -44,5 +49,6 @@ public extension Root {
     case onAppear
     case home(Home.Action)
     case dashboard(Dashboard.Action)
+    case azkar(Azkar.Action)
   }
 }
