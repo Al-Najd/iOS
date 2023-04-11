@@ -12,6 +12,7 @@ import Foundation
 import Localization
 import PrayerDetails
 import PrayersClient
+import NafilaDetails
 
 public struct Home: ReducerProtocol {
     @Dependency(\.prayersDB)
@@ -21,6 +22,7 @@ public struct Home: ReducerProtocol {
 
     public struct State: Equatable {
         public var prayers: IdentifiedArrayOf<ANPrayer> = []
+        public var nafila: IdentifiedArrayOf<ANNafila> = []
         public var todosCount = 0
         public var doneTodos = 0
         public var percentage: String {
@@ -31,6 +33,7 @@ public struct Home: ReducerProtocol {
 
         public var duaa = ""
         @BindingState var selectedPrayer: PrayerDetails.State?
+        @BindingState var selectedNafila: NafilaDetails.State?
         @BindingState var percentageValue: Float = 0
         @BindingState var date: Date = .init().startOfDay
 
@@ -40,7 +43,9 @@ public struct Home: ReducerProtocol {
     public enum Action: BindableAction {
         case onAppear
         case prayerDetails(PrayerDetails.Action)
+        case nafilaDetails(NafilaDetails.Action)
         case onSelecting(ANPrayer)
+        case onSelectingNafila(ANNafila)
         case binding(BindingAction<State>)
     }
 
@@ -51,17 +56,27 @@ public struct Home: ReducerProtocol {
             switch action {
             case .onAppear:
                 state.prayers = .init(uniqueElements: prayersDB.prayers(for: state.date))
+                state.nafila = .init(uniqueElements: prayersDB.nafila(for: state.date))
                 state.duaa = getRandomDuaa()
                 calculateProgress(&state)
             case .onSelecting(let prayer):
                 state.selectedPrayer = .init(
                     prayer: prayer,
                     date: state.date)
+            case .onSelectingNafila(let nafila):
+                state.selectedNafila = .init(
+                    nafila: nafila,
+                    date: state.date)
             case .prayerDetails(.dismiss):
                 guard let selectedState = state.selectedPrayer else { return .none }
                 state.prayers[id: selectedState.prayer.id] = selectedState.prayer
                 state.selectedPrayer = nil
                 calculateProgress(&state)
+            case .nafilaDetails(.dismiss):
+                guard let selectedState = state.selectedNafila else { return .none }
+                state.nafila[id: selectedState.nafila.id] = selectedState.nafila
+                state.selectedNafila = nil
+//                calculateProgress(&state)
             case .binding(\.$date):
                 state.prayers = .init(uniqueElements: prayersDB.prayers(for: state.date))
                 calculateProgress(&state)
@@ -74,6 +89,9 @@ public struct Home: ReducerProtocol {
         }
         .ifLet(\.selectedPrayer, action: /Action.prayerDetails) {
             PrayerDetails()
+        }
+        .ifLet(\.selectedNafila, action: /Action.nafilaDetails) {
+            NafilaDetails()
         }
     }
 

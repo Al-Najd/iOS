@@ -78,22 +78,22 @@ extension ANNafilaDAO: TableRecord, EncodableRecord {
 // MARK: - Seedings
 extension ANNafilaDAO {
     static let subh: (Int64) -> ANNafilaDAO = {
-        .init(name: "subh", raqaatCount: 2, raqaat: .defined, reward: "nafila_subh", isDone: false, dayId: $0)
+        .init(name: "subh", raqaatCount: 2, raqaat: .defined, reward: "nafila_subh_reward", isDone: false, dayId: $0)
     }
 
     static let duha: (Int64) -> ANNafilaDAO = {
-        .init(name: "duha", raqaatCount: 4, raqaat: .atLeast, reward: "nafila_duha", isDone: false, dayId: $0)
+        .init(name: "duha", raqaatCount: 4, raqaat: .atLeast, reward: "nafila_duha_reward", isDone: false, dayId: $0)
     }
 
     static let shafaa: (Int64) -> ANNafilaDAO = {
-        .init(name: "shaf3", raqaatCount: 2, raqaat: .defined, reward: "nafila_shaf3", isDone: false, dayId: $0)
+        .init(name: "shaf3", raqaatCount: 2, raqaat: .defined, reward: "nafila_shaf3_reward", isDone: false, dayId: $0)
     }
 
     static let watr: (Int64) -> ANNafilaDAO = {
-        .init(name: "watr", raqaatCount: 1, raqaat: .defined, reward: "nafila_watr", isDone: false, dayId: $0)
+        .init(name: "watr", raqaatCount: 1, raqaat: .defined, reward: "nafila_watr_reward", isDone: false, dayId: $0)
     }
 
     static let qeyam: (Int64) -> ANNafilaDAO = {
-        .init(name: "qeyam", raqaatCount: -1, raqaat: .open, reward: "nafila_qeyam", isDone: false, dayId: $0)
+        .init(name: "qeyam", raqaatCount: -1, raqaat: .open, reward: "nafila_qeyam_reward", isDone: false, dayId: $0)
     }
 }

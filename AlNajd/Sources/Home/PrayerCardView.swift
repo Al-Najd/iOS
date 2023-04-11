@@ -15,16 +15,29 @@ import ReusableUI
 import Utils
 
 public struct PrayerCardView: View {
-    var prayer: ANPrayer
+    let title: String
+    let reward: String
+    let isDone: Bool
+    let image: ImageAsset
 
     public init(prayer: ANPrayer) {
-        self.prayer = prayer
+        title = prayer.title
+        reward = prayer.reward.localized
+        isDone = prayer.isDone
+        image = prayer.image
+    }
+
+    public init(nafila: ANNafila) {
+        title = nafila.title
+        reward = nafila.subtitle
+        isDone = nafila.isDone
+        image = nafila.image
     }
 
     public var body: some View {
         VStack {
             VStack {
-                Text(prayer.title)
+                Text(title)
                     .foregroundColor(.white)
                     .scaledFont(.pFootnote)
                     .padding(8)
@@ -36,7 +49,7 @@ public struct PrayerCardView: View {
                             .stroke(lineWidth: 1)
                             .foregroundStyle(
                                 .linearGradient(
-                                    colors: [prayer.image.averageColor, .clear, .white.opacity(0.5)],
+                                    colors: [image.averageColor, .clear, .white.opacity(0.5)],
                                     startPoint: .leading,
                                     endPoint: .bottom
                                 )
@@ -48,7 +61,7 @@ public struct PrayerCardView: View {
 
                 ZStack(alignment: .top) {
                     VStack {
-                        Text(prayer.reward.localized)
+                        Text(reward)
                             .padding()
                             .foregroundColor(.white)
                             .scaledFont(.pFootnote, .regular)
@@ -70,7 +83,7 @@ public struct PrayerCardView: View {
                             )
                     )
 
-                    if prayer.isDone {
+                    if isDone {
                         Image(systemName: "checkmark.seal.fill")
                             .frame(width: 44, height: 44)
                             .foregroundColor(.success.darkMode)
@@ -109,23 +122,21 @@ public struct PrayerCardView: View {
                             .background(
                                 HexagonShape()
                                     .fill()
-                                    .foregroundColor(prayer.image.averageColor)
+                                    .foregroundColor(image.averageColor)
                             )
                             .offset(y: -22 - 4)
                     }
                 }
             }
             .background(
-                prayer
-                    .image
+                image
                     .swiftUIImage
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             )
-            .frame(width: 175, height: 265)
             .cornerRadius(16)
             .shadow(
-                color: prayer.image.averageColor,
+                color: image.averageColor,
                 radius: 25,
                 x: 0,
                 y: 0
@@ -135,7 +146,7 @@ public struct PrayerCardView: View {
                     .stroke(lineWidth: 1)
                     .foregroundStyle(
                         .linearGradient(
-                            colors: [.white.opacity(0.25), prayer.image.averageColor, .clear],
+                            colors: [.white.opacity(0.25), image.averageColor, .clear],
                             startPoint: .top,
                             endPoint: .bottom
                         )

@@ -135,11 +135,11 @@ private extension DatabaseService {
     }
 
     static func seedNafila(_ dayId: Int64, _ db: Database) throws {
-        ANNafilaDAO.subh(dayId).insert(db)
-        ANNafilaDAO.duha(dayId).insert(db)
-        ANNafilaDAO.shafaa(dayId).insert(db)
-        ANNafilaDAO.watr(dayId).insert(db)
-        ANNafilaDAO.qeyam(dayId).insert(db)
+        _ = try ANNafilaDAO.subh(dayId).insertAndFetch(db)
+        _ = try ANNafilaDAO.duha(dayId).insertAndFetch(db)
+        _ = try ANNafilaDAO.shafaa(dayId).insertAndFetch(db)
+        _ = try ANNafilaDAO.watr(dayId).insertAndFetch(db)
+        _ = try ANNafilaDAO.qeyam(dayId).insertAndFetch(db)
     }
 
     static func seedPrayers(_ dayId: Int64, _ db: Database) throws {

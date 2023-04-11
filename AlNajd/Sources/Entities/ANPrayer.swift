@@ -114,8 +114,10 @@ public struct ANNafila: Identifiable, Equatable {
     public let id: Int
     public let name: String
     public let raqaat: Raqaat
+    public let title: String
+    public let subtitle: String
     public let reward: String
-    public let isDone: Bool
+    public var isDone: Bool
 
     public init(id: Int64, name: String, raqaat: Raqaat, reward: String, isDone: Bool) {
         self.id = Int(id)
@@ -123,6 +125,8 @@ public struct ANNafila: Identifiable, Equatable {
         self.raqaat = raqaat
         self.reward = reward
         self.isDone = isDone
+        self.title = name.localized
+        self.subtitle = reward.localized
     }
 }
 
