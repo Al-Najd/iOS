@@ -11,6 +11,22 @@ import Localization
 import PreviewableView
 import SwiftUI
 import Utils
+import ComposableArchitecture
+
+//struct Splash: ReducerProtocol {
+//  @Dependency(\.prayersDB)
+//  private var prayersDB
+//
+//  init() { }
+//
+//  struct State: Equatable {
+//    var canProceed: Bool = false
+//  }
+//
+//  enum Action {
+//    case onAppear
+//  }
+//}
 
 struct SplashView<Content: View>: View {
     @State var showAnimation = false

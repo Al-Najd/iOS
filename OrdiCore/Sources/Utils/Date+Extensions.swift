@@ -56,7 +56,7 @@ public extension Date {
     /// SwifterSwift: User’s current calendar.
     var calendar: Calendar {
         // Workaround to segfault on corelibs foundation https://bugs.swift.org/browse/SR-10147
-        Calendar(identifier: .gregorian)
+        Calendar(identifier: .iso8601)
     }
 
     /// SwifterSwift: Era.
@@ -497,7 +497,11 @@ public extension Date {
     }
 
     var startOfDay: Date {
-        calendar.startOfDay(for: self)
+        let timeZone = TimeZone(identifier: "UTC")!
+        var calendar = calendar
+        calendar.timeZone = timeZone
+
+        return calendar.startOfDay(for: self)
     }
 
     /// SwifterSwift: UNIX timestamp from date.

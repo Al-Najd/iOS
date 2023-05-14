@@ -12,19 +12,20 @@ import SwiftUI
 
 @main
 struct Al_NajdApp: App {
-    let plugins: [AppPlugin] = [
-        ThemePlugin(),
-        CorePlugin(),
-        AppearancesPlugin(),
-        ReportPlugin(),
-    ]
+  let plugins: [AppPlugin] = [
+    CorePlugin(),
+    ThemePlugin(),
+    AppearancesPlugin(),
+    ReportPlugin(),
+  ]
 
-    var body: some Scene {
-        WindowGroup {
-          RootView(store: .mainRoot)
-            .onAppear {
-              plugins.forEach { $0.setup() }
-            }
-        }
+  init() {
+    plugins.forEach { $0.setup() }
+  }
+
+  var body: some Scene {
+    WindowGroup {
+      RootView(store: .mainRoot)
     }
+  }
 }

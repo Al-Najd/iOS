@@ -15,26 +15,26 @@ public struct AzkarClient {
     public func getMorningAzkar(for date: Date) -> [ANAzkar] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try (ANDayDAO.Queries.getAzkar(for: date)
-                    .fetchOne(db)?.morningAzkar.fetchAll(db))!.compactMap {
+                try ANDayDAO.Queries.getMorningAzkar(for: date).fetchOne(db)?.morningAzkar.fetchAll(db).compactMap {
                     $0.toDomainModel()
-                }
+                } ?? []
             }
         } catch {
-            fatalError()
+            debugPrint(error.localizedDescription)
+            return []
         }
     }
 
     public func getNightAzkar(for date: Date) -> [ANAzkar] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try (ANDayDAO.Queries.getAzkar(for: date)
-                    .fetchOne(db)?.nightAzkar.fetchAll(db))!.compactMap {
-                        $0.toDomainModel()
-                    }
+                try ANDayDAO.Queries.getNightAzkar(for: date).fetchOne(db)?.morningAzkar.fetchAll(db).compactMap {
+                    $0.toDomainModel()
+                } ?? []
             }
         } catch {
-            fatalError()
+            debugPrint(error.localizedDescription)
+            return []
         }
     }
 
@@ -49,7 +49,7 @@ public struct AzkarClient {
                 try dao?.update(db)
             }
         } catch {
-            fatalError()
+            debugPrint(error.localizedDescription)
         }
     }
 }

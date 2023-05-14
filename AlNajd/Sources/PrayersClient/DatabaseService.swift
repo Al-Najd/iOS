@@ -109,28 +109,31 @@ public enum DatabaseService {
         return migrator
     }
 
-    public static func setup() {
+    public static func setupSchemes() {
         do {
             try migrator.migrate(dbQueue)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+
+    public static func seedDatabase() {
+        do {
             try seed()
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
         }
     }
 }
 
 private extension DatabaseService {
     static func seed() throws {
+        let date = Date().startOfDay
         try dbQueue.write { db in
-            let startDate = "2022-07-01T00:00:00-04:00".toDate()!.date.startOfDay
-            let endDate = Date().startOfDay
-
-            try Date.dates(from: startDate, to: endDate).forEach {
-                let day = try ANDayDAO(date: $0).insertAndFetch(db)
-                try seedPrayers((day?.id)!, db)
-                try seedTimedAzkar((day?.id)!, db)
-                try seedNafila((day?.id)!, db)
-            }
+            let day = try ANDayDAO(date: date).insertAndFetch(db)
+            try seedPrayers((day?.id)!, db)
+            try seedTimedAzkar((day?.id)!, db)
+            try seedNafila((day?.id)!, db)
         }
     }
 
