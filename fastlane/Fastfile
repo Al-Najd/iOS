@@ -92,7 +92,7 @@ platform :ios do
 
   desc "Helps devs to release easier without much hassle" 
   lane :interactive_release do
-    env = UI.select("Select which environment you'd like to release to...", ['Alpha', 'Beta', 'Prod'])
+    env = UI.select("Select which environment you'd like to release to...", ['alpha', 'beta', 'prod'])
     build_number = UI.input("Enter the Build Number")
 
     release(env: env, build_number: build_number)

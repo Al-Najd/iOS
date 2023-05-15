@@ -8,7 +8,6 @@
 
 import Entity
 import Foundation
-import ComposableArchitecture
 
 // MARK: - CacheManager
 
@@ -55,16 +54,5 @@ public extension CacheManager {
         case .userDefaults:
             return userDefaultsStorage
         }
-    }
-}
-
-extension CacheManager: DependencyKey {
-    public static let liveValue = CacheManager()
-}
-
-public extension DependencyValues {
-    var cache: CacheManager {
-        get { self[CacheManager.self] }
-        set { self[CacheManager.self] = newValue }
     }
 }

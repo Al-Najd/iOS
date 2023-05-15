@@ -6,6 +6,7 @@
 //
 
 import Business
+import ComposableArchitecture
 import ComposableCoreLocation
 import Entities
 import Foundation
@@ -39,5 +40,17 @@ public struct CoreEnvironment<Environment> {
             mainQueue: .main,
             prayersClient: .live,
             haptic: .init())
+    }
+}
+
+
+extension CacheManager: DependencyKey {
+    public static let liveValue = CacheManager()
+}
+
+public extension DependencyValues {
+    var cache: CacheManager {
+        get { self[CacheManager.self] }
+        set { self[CacheManager.self] = newValue }
     }
 }
