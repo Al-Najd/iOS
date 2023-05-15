@@ -42,7 +42,7 @@ public enum DatabaseService {
             // See https://github.com/groue/GRDB.swift#create-tables
             try db.create(table: "days") {
                 $0.autoIncrementedPrimaryKey("id")
-                $0.column("date", .date).notNull()
+                $0.column("date", .date).notNull().unique(onConflict: .ignore)
             }
         }
 
@@ -109,24 +109,34 @@ public enum DatabaseService {
         return migrator
     }
 
-    public static func setup() {
+    public static func setupSchemes() {
         do {
             try migrator.migrate(dbQueue)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+
+    public static func seedDatabase() {
+        do {
             try seed()
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
         }
     }
 }
 
 private extension DatabaseService {
     static func seed() throws {
-        try dbQueue.write { db in
-            let startDate = "2022-07-01T00:00:00-04:00".toDate()!.date.startOfDay
-            let endDate = Date().startOfDay
+        let region = Region(calendar: Calendars.gregorian, zone: Zones.gmt, locale: Locales.english)
+        let from = DateInRegion("2023-01-01T00:00:00.0000Z", region: region)!
+        let to = DateInRegion("2024-01-01T00:00:00.0000Z", region: region)!
+        let increment = DateComponents.create { $0.day = 1 }
+        let daysInCurrentYear = DateInRegion.enumerateDates(from: from, to: to, increment: increment)
 
-            try Date.dates(from: startDate, to: endDate).forEach {
-                let day = try ANDayDAO(date: $0).insertAndFetch(db)
+        try dbQueue.write { db in
+            try daysInCurrentYear.forEach {
+                let day = try ANDayDAO(date: $0.date).insertAndFetch(db)
                 try seedPrayers((day?.id)!, db)
                 try seedTimedAzkar((day?.id)!, db)
                 try seedNafila((day?.id)!, db)

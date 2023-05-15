@@ -22,7 +22,7 @@ public struct RootView: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-          SplashView {
+//          SplashView {
             TabView {
               HomeView(store: store.scope(state: \.home, action: Root.Action.home))
                 .tabItem {
@@ -61,6 +61,6 @@ public struct RootView: View {
               UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
             }
           }
-        }
+//        }
     }
 }

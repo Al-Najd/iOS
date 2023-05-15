@@ -7,9 +7,23 @@
 
 import PrayersClient
 import UIKit.UIApplication
+import ComposableArchitecture
+import Business
 
 public struct CorePlugin: AppPlugin {
-    public func setup() {
-        DatabaseService.setup()
+  @Dependency(\.cache)
+  private var cache
+  private var needsToSeedData: Bool { (cache.fetch(Bool.self, for: .didSeedData) ?? false) == false }
+
+  public func setup() {
+    DatabaseService.setupSchemes()
+    if needsToSeedData {
+      DatabaseService.seedDatabase()
+      cache.save(true, for: .didSeedData)
     }
+  }
+}
+
+extension StorageKey {
+  static let didSeedData: StorageKey = .init(key: "didSeedData", suitableStorage: .userDefaults)
 }

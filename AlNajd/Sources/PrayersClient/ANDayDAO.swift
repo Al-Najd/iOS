@@ -39,14 +39,18 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 
     enum Queries {
         static var today: QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(Columns.date == Date().startOfDay)
+            ANDayDAO.filter(Columns.date == Date().dateAtStartOf(.day))
+        }
+
+        static var todayPrayers: QueryInterfaceRequest<ANPrayerDAO> {
+            today.including(all: prayers).asRequest(of: ANPrayerDAO.self)
         }
 
         static var previousWeek: QueryInterfaceRequest<ANDayDAO> {
             ANDayDAO.filter(Date().startOfDay.previousWeek.contains(ANDayDAO.Columns.date))
         }
 
-        var withMissedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
+        static var withMissedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
             ANDayDAO.including(all: prayers).asRequest(of: ANPrayerDAO.self).filter(ANPrayerDAO.Columns.isDone == false)
         }
 
@@ -54,16 +58,32 @@ extension ANDayDAO: TableRecord, EncodableRecord {
             previousWeek.including(all: sunnah.filter(ANSunnahDAO.Columns.isDone == true))
         }
 
-        static func getPrayers(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+        private static func getDay(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
             ANDayDAO.filter(Columns.date == date.startOfDay)
+        }
+
+        static func getPrayers(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+            getDay(for: date)
         }
 
         static func getAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(Columns.date == date.startOfDay)
+            getDay(for: date)
         }
 
         static func getNafila(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(Columns.date == date.startOfDay)
+            getDay(for: date)
+        }
+
+        private static func getTimedAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+            getDay(for: date)
+        }
+
+        static func getMorningAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+            getTimedAzkar(for: date).filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.day)
+        }
+
+        static func getNightAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+            getTimedAzkar(for: date).filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.night)
         }
     }
 
@@ -109,5 +129,17 @@ extension ANDayDAO: TableRecord, EncodableRecord {
 
     var missedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
         prayers.filter(ANPrayerDAO.Columns.isDone == false)
+    }
+}
+
+extension Date {
+    func asDateSearchText() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = .init(identifier: "en")
+        formatter.timeZone = .current
+        formatter.calendar = .current
+        formatter.dateFormat = "YYYY-MM-DD HH:MM:SS"
+
+        return formatter.string(from: self)
     }
 }

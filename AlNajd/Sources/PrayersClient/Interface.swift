@@ -29,7 +29,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
         }
     }
 
@@ -42,7 +42,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
         }
     }
 
@@ -55,7 +55,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
         }
     }
 
@@ -68,7 +68,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
         }
     }
 
@@ -80,36 +80,38 @@ public struct PrayersClient {
                 }
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return []
         }
     }
 
     public func prayers(for date: Date) -> [ANPrayer] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try (ANDayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
+                try ANDayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db).compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
                         azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
-                }
+                } ?? []
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return []
         }
     }
 
     public func todayPrayers() -> [ANPrayer] {
         do {
             return try DatabaseService.dbQueue.read { db in
-
-                try (ANDayDAO.Queries.today.fetchOne(db)?.prayers.fetchAll(db))!.compactMap {
+                try ANDayDAO.Queries.todayPrayers.fetchAll(db).compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
                         azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
                 }
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return []
         }
     }
 
@@ -123,7 +125,8 @@ public struct PrayersClient {
                 return firstDayWithMissedPrayersIndex
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return 0
         }
     }
 
@@ -133,7 +136,8 @@ public struct PrayersClient {
                 try ANPrayerDAO.filter(ANPrayerDAO.Columns.isDone == true).fetchCount(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return 0
         }
     }
 
@@ -143,7 +147,8 @@ public struct PrayersClient {
                 try ANSunnahDAO.filter(ANSunnahDAO.Columns.isDone == true).fetchCount(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return 0
         }
     }
 
@@ -153,7 +158,8 @@ public struct PrayersClient {
                 try ANAzkarDAO.filter(ANAzkarDAO.Columns.currentCount == 0).fetchCount(db)
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return 0
         }
     }
 
@@ -165,7 +171,8 @@ public struct PrayersClient {
                 }
             }
         } catch {
-            fatalError()
+            assertionFailure(error.localizedDescription)
+            return []
         }
     }
 }
