@@ -17,7 +17,6 @@ public struct CorePlugin: AppPlugin {
 
   public func setup() {
     DatabaseService.setupSchemes()
-
     if needsToSeedData {
       DatabaseService.seedDatabase()
       cache.save(true, for: .didSeedData)

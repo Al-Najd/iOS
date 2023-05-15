@@ -88,7 +88,7 @@ public struct PrayersClient {
     public func prayers(for date: Date) -> [ANPrayer] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.getPrayers(for: date.startOfDay).fetchOne(db)?.prayers.fetchAll(db).compactMap {
+                try ANDayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db).compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
                         azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
