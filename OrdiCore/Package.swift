@@ -28,10 +28,10 @@ let package = Package(
             .upToNextMinor(from: .init(5, 5, 0))),
         .package(
             url: "https://github.com/kean/Pulse",
-            .upToNextMinor(from: .init(0, 20, 1))),
+            .upToNextMinor(from: .init(3, 7, 2))),
         .package(
             url: "https://github.com/getsentry/sentry-cocoa.git",
-            .upToNextMinor(from: .init(8, 3, 3))),
+            .upToNextMinor(from: .init(8, 7, 2))),
         .package(
             url: "https://github.com/evgenyneu/keychain-swift",
             .upToNextMajor(from: .init(20, 0, 0))),
@@ -57,7 +57,6 @@ let package = Package(
                 "Entity",
                 .product(name: "Pulse", package: "Pulse"),
                 .product(name: "PulseUI", package: "Pulse"),
-                .product(name: "PulseCore", package: "Pulse"),
                 .product(name: "Sentry", package: "sentry-cocoa"),
             ]),
         .target(

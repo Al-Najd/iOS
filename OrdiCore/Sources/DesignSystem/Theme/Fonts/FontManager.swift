@@ -87,7 +87,7 @@ private extension FontManager {
     func parseFontJSON() {
         guard let url = Bundle.designSystemBundle.url(forResource: "fonts", withExtension: "json")
         else {
-            LoggersManager.error(message: "Couldn't find fonts.json in designSystemBundle")
+            Log.error("Couldn't find fonts.json in designSystemBundle")
             fatalError(
                 "\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)")
         }
@@ -103,8 +103,7 @@ private extension FontManager {
                 fontsType: configs.defaultConfigurations.sdkFriendlyType(),
                 availableFonts: configs.fonts.map { $0.toSDKFont() })
         } catch {
-            LoggersManager.error(
-                message: "Couldn't parse fonts.json\nerror: \(error),\ndescription: \(error.localizedDescription)")
+            Log.error("Couldn't parse fonts.json\nerror: \(error),\ndescription: \(error.localizedDescription)")
             fatalError(
                 "\(error.localizedDescription)\n\(Bundle.allBundles)\n\(Bundle.allBundles.first(where: { $0.url(forResource: "fonts", withExtension: "json") != nil }) ?? Bundle.designSystemBundle)")
         }

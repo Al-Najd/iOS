@@ -25,7 +25,7 @@ public extension Data {
         do {
             return (try JSONDecoder().decode(object, from: self))
         } catch {
-            LoggersManager.error(message: "Failed to Parse Object with this type: \(object)\nError: \(error)")
+            Log.error("Failed to Parse Object with this type: \(object)\nError: \(error)")
             return nil
         }
     }

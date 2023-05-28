@@ -67,7 +67,7 @@ private extension URLRequestFactory {
             let data = try JSONSerialization.data(withJSONObject: endpoint.parameters, options: [])
             request.httpBody = data
         } catch {
-            LoggersManager.error(OErrorParser().parse(error))
+            OErrorParser().parse(error).log()
         }
     }
 

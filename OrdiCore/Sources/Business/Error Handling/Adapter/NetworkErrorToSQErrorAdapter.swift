@@ -26,7 +26,7 @@ public struct NetworkErrorToOErrorAdapter: AdapterProtocol {
         case URLError.notConnectedToInternet:
             return .noNetworkOrTooWeak
         case AFError.multipartEncodingFailed(reason: let reason):
-            LoggersManager.error(message: "\(reason)")
+            Log.error("\(reason)")
             return .somethingWentWrong
 
         default:

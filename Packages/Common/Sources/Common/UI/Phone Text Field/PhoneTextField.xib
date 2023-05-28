@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro.ttf">
+            <string>SFPro-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneTextField" customModule="Common">
+            <connections>
+                <outlet property="countryCodeLabel" destination="Gwn-69-tT8" id="9Ne-bG-bPZ"/>
+                <outlet property="innerBorderView" destination="Y6c-fP-Ig6" id="gw3-qA-X7l"/>
+                <outlet property="outerBorderView" destination="5v1-3a-r4X" id="KDj-92-3vo"/>
+                <outlet property="subtitle" destination="l83-fX-QiL" id="so6-Ya-Ode"/>
+                <outlet property="textField" destination="BH5-Jk-rPJ" id="ed3-yD-PJ0"/>
+                <outlet property="trailingIconImageView" destination="7K2-hb-8na" id="fjS-Bd-7cu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="97"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j2q-HM-tbn">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="97"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5v1-3a-r4X" userLabel="Outerborder">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="68.5"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-fP-Ig6" userLabel="Innerborder">
+                                    <rect key="frame" x="3" y="3" width="337" height="62.5"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Zko-iy-ogW">
+                                            <rect key="frame" x="0.0" y="0.0" width="337" height="62.5"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMn-JT-UPg">
+                                                    <rect key="frame" x="8" y="13.5" width="61.5" height="36"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="🇨🇦 +1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwn-69-tT8" customClass="BodyRegularLabel" customModule="Common">
+                                                            <rect key="frame" x="8" y="8" width="45.5" height="20"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" name="Primary/Blackberry"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="Greys / Super Light"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="Gwn-69-tT8" secondAttribute="trailing" constant="8" id="XtU-Fa-ogU"/>
+                                                        <constraint firstAttribute="height" constant="36" id="oqV-x3-fEn"/>
+                                                        <constraint firstItem="Gwn-69-tT8" firstAttribute="leading" secondItem="AMn-JT-UPg" secondAttribute="leading" constant="8" id="pV1-vw-t46"/>
+                                                        <constraint firstItem="Gwn-69-tT8" firstAttribute="top" secondItem="AMn-JT-UPg" secondAttribute="top" constant="8" id="tWq-wg-Yp1"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Gwn-69-tT8" secondAttribute="bottom" constant="8" id="wTh-pa-R6q"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layerCornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="(416) 395 – 8299" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BH5-Jk-rPJ">
+                                                    <rect key="frame" x="77.5" y="22.5" width="251.5" height="18"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="Blueberry /Primary"/>
+                                                    <color key="textColor" name="Primary/Blackberry"/>
+                                                    <fontDescription key="fontDescription" name="SFPro-Regular" family="SF Pro" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field-error-icon" translatesAutoresizingMaskIntoConstraints="NO" id="7K2-hb-8na">
+                                                    <rect key="frame" x="329" y="23.5" width="0.0" height="16"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Zko-iy-ogW" secondAttribute="bottom" id="K1W-fy-Elk"/>
+                                        <constraint firstItem="Zko-iy-ogW" firstAttribute="top" secondItem="Y6c-fP-Ig6" secondAttribute="top" id="SEP-zF-T0r"/>
+                                        <constraint firstItem="Zko-iy-ogW" firstAttribute="leading" secondItem="Y6c-fP-Ig6" secondAttribute="leading" id="UKA-1K-mc6"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zko-iy-ogW" secondAttribute="trailing" id="aNB-J2-1lP"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layerBorderColor">
+                                            <color key="value" name="Blueberry /Primary"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layerBorderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layerCornerRadius">
+                                            <real key="value" value="13.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" name="Greys / White"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Y6c-fP-Ig6" secondAttribute="trailing" constant="3" id="2Pg-5n-HdV"/>
+                                <constraint firstItem="Y6c-fP-Ig6" firstAttribute="leading" secondItem="5v1-3a-r4X" secondAttribute="leading" constant="3" id="Scv-y1-8xg"/>
+                                <constraint firstAttribute="bottom" secondItem="Y6c-fP-Ig6" secondAttribute="bottom" constant="3" id="Wnj-oG-GiT"/>
+                                <constraint firstItem="Y6c-fP-Ig6" firstAttribute="top" secondItem="5v1-3a-r4X" secondAttribute="top" constant="3" id="wAP-lt-Oiw"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layerBorderColor">
+                                    <color key="value" name="Blueberry / Light"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layerBorderWidth">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layerCornerRadius">
+                                    <real key="value" value="16"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AxY-WG-xoZ">
+                            <rect key="frame" x="0.0" y="76.5" width="343" height="20.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Invalid phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l83-fX-QiL" customClass="BodySmallLabel" customModule="Common">
+                                    <rect key="frame" x="3" y="0.0" width="337" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" name="Red/Primary Red"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="l83-fX-QiL" firstAttribute="top" secondItem="AxY-WG-xoZ" secondAttribute="top" id="fWt-ot-cun"/>
+                                <constraint firstAttribute="bottom" secondItem="l83-fX-QiL" secondAttribute="bottom" id="gll-mj-0Cx"/>
+                                <constraint firstAttribute="trailing" secondItem="l83-fX-QiL" secondAttribute="trailing" constant="3" id="k8f-aA-dF3"/>
+                                <constraint firstItem="l83-fX-QiL" firstAttribute="leading" secondItem="AxY-WG-xoZ" secondAttribute="leading" constant="3" id="peN-m6-lOR"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="j2q-HM-tbn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="D3q-gf-yXc"/>
+                <constraint firstItem="j2q-HM-tbn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Jqg-uz-HNn"/>
+                <constraint firstAttribute="bottom" secondItem="j2q-HM-tbn" secondAttribute="bottom" id="rKb-MS-ylU"/>
+                <constraint firstAttribute="trailing" secondItem="j2q-HM-tbn" secondAttribute="trailing" id="sGN-mh-pZ2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="131.15942028985509" y="144.30803571428569"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="Gwn-69-tT8">
+            <size key="intrinsicContentSize" width="45.5" height="20.5"/>
+        </designable>
+        <designable name="l83-fX-QiL">
+            <size key="intrinsicContentSize" width="164" height="20.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="field-error-icon" width="16" height="16"/>
+        <namedColor name="Blueberry / Light">
+            <color red="0.82400000095367432" green="0.94900000095367432" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Blueberry /Primary">
+            <color red="0.31000000238418579" green="0.76899999380111694" blue="0.80400002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Greys / Super Light">
+            <color red="0.94900000095367432" green="0.9570000171661377" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Greys / White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary/Blackberry">
+            <color red="0.19599999487400055" green="0.24300000071525574" blue="0.28200000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red/Primary Red">
+            <color red="0.9179999828338623" green="0.14100000262260437" blue="0.14100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

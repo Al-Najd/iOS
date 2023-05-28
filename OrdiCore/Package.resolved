@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Pulse",
       "state" : {
-        "revision" : "ba7a0e4668de7074470bd37a60b1f89325a416bb",
-        "version" : "0.20.2"
+        "revision" : "5e992c400538d92600790e60ad42ef247052ae9e",
+        "version" : "3.7.2"
       }
     },
     {
@@ -50,17 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "967f04b3cd6989df3f9ced3060481a21646c146d",
-        "version" : "7.9.0"
-      }
-    },
-    {
-      "identity" : "swift-log",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-log.git",
-      "state" : {
-        "revision" : "32e8d724467f8fe623624570367e3d50c5638e46",
-        "version" : "1.5.2"
+        "revision" : "8dab665edf492580977d353f8f8bf2da57c04420",
+        "version" : "8.7.2"
       }
     }
   ],

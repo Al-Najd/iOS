@@ -1,0 +1,99 @@
+// The MIT License (MIT)
+//
+// Copyright (c) 2020–2023 Alexander Grebenyuk (github.com/kean).
+
+#if os(macOS)
+
+import Pulse
+import SwiftUI
+import UniformTypeIdentifiers
+
+public struct SettingsView: View {
+    @ObservedObject var viewModel: SettingsViewModel
+
+    var store: LoggerStore { viewModel.store }
+
+    @State private var isPresentingShareStoreView = false
+    @State private var shareItems: ShareItems?
+
+    public init(store: LoggerStore = .shared) {
+        viewModel = SettingsViewModel(store: store)
+    }
+
+    init(viewModel: SettingsViewModel) {
+        self.viewModel = viewModel
+    }
+
+    public var body: some View {
+        Form {
+            settings
+        }
+    }
+
+    @ViewBuilder
+    private var settings: some View {
+        ConsoleSection(isDividerHidden: true, header: { SectionHeaderView(title: "Share") }) {
+            HStack {
+                Button("Show in Finder") {
+                    NSWorkspace.shared.activateFileViewerSelecting([store.storeURL])
+                }
+                Spacer()
+            }
+        }
+        if !(store.options.contains(.readonly)) {
+            ConsoleSection(header: { SectionHeaderView(title: "Manage Messages") }) {
+                Button {
+                    viewModel.buttonRemoveAllMessagesTapped()
+                } label: {
+                    Label("Remove Logs", systemImage: "trash")
+                }
+            }
+        }
+        ConsoleSection(header: { SectionHeaderView(title: "Remote Logging") }) {
+            if viewModel.isRemoteLoggingAvailable {
+                RemoteLoggerSettingsView(viewModel: .shared)
+            } else {
+                Text("Not available")
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
+
+// MARK: - Preview
+
+#if DEBUG
+struct UserSettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(viewModel: SettingsViewModel(store: .shared))
+    }
+}
+#endif
+#endif
+
+#if os(iOS) || os(macOS)
+
+import SwiftUI
+
+struct SectionHeaderView: View {
+    var systemImage: String?
+    let title: String
+
+    var body: some View {
+        HStack {
+            if let systemImage = systemImage {
+                Image(systemName: systemImage)
+            }
+            Text(title)
+                .lineLimit(1)
+                .font(.headline)
+                .foregroundColor(.secondary)
+            Spacer()
+        }
+        #if os(macOS)
+        .padding(.bottom, 8)
+        #endif
+    }
+}
+
+#endif
