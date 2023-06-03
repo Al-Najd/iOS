@@ -58,7 +58,7 @@ extension ANDayDAO: TableRecord, EncodableRecord {
             previousWeek.including(all: sunnah.filter(ANSunnahDAO.Columns.isDone == true))
         }
 
-        private static func getDay(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+        static func getDay(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
             ANDayDAO.filter(Columns.date == date.startOfDay)
         }
 

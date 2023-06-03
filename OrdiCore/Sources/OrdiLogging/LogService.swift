@@ -13,7 +13,11 @@ public typealias Log = LoggersService
 
 public enum LoggersService {
     private static let logger: [Logger] = {
-        [SystemLogger.main, PulseLogger.main]
+        [
+            SystemLogger.main,
+            PulseLogger.main,
+            SentryLogger.main
+        ]
     }()
 }
 

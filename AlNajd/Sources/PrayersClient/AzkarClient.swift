@@ -10,17 +10,20 @@ import GRDB
 import Entities
 import Entity
 import ComposableArchitecture
+import OrdiLogging
 
 public struct AzkarClient {
     public func getMorningAzkar(for date: Date) -> [ANAzkar] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.getMorningAzkar(for: date).fetchOne(db)?.morningAzkar.fetchAll(db).compactMap {
-                    $0.toDomainModel()
-                } ?? []
+                try ANDayDAO.Queries.getDay(for: date).fetchOne(db)?.morningAzkar.fetchAll(db).compactMap { $0.toDomainModel() } ?? []
             }
         } catch {
-            debugPrint(error.localizedDescription)
+            Log.error("""
+Failed to get Morning Azkar
+
+Error Description: \(error.debugDescription)
+""")
             return []
         }
     }
@@ -33,7 +36,11 @@ public struct AzkarClient {
                 } ?? []
             }
         } catch {
-            debugPrint(error.localizedDescription)
+            Log.error("""
+Failed to get Night Azkar
+
+Error Description: \(error.debugDescription)
+""")
             return []
         }
     }
@@ -49,7 +56,7 @@ public struct AzkarClient {
                 try dao?.update(db)
             }
         } catch {
-            debugPrint(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 }
