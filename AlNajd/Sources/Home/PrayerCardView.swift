@@ -49,7 +49,7 @@ public struct PrayerCardView: View {
                             .stroke(lineWidth: 1)
                             .foregroundStyle(
                                 .linearGradient(
-                                    colors: [image.averageColor, .clear, .white.opacity(0.5)],
+                                    colors: [.blueberryPrimary, .clear, .white.opacity(0.5)],
                                     startPoint: .leading,
                                     endPoint: .bottom
                                 )

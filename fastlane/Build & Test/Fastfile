@@ -34,7 +34,12 @@ platform :ios do
       export_method: "app-store",
       export_xcargs: "-allowProvisioningUpdates",
       configuration: "Beta",
-      export_team_id: ENV["TEAM_ID"]
+      export_team_id: ENV["TEAM_ID"],
+      export_options: {
+        provisioningProfiles: {
+          "com.alnajd.alnajd.ios.beta" => "match AppStore com.alnajd.alnajd.ios.beta"
+        }
+      }
     )
 
     # Set DSYM Path for Sentry from SharedValues

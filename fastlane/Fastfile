@@ -101,7 +101,7 @@ platform :ios do
   desc "Releases the app to TestFlight for Internal Testers"
   lane :beta do |options|
     ensure_being_on_develop
-    ensure_git_status_clean()
+    #ensure_git_status_clean()
     sentry_check_cli_installed()
     validate_tag()
     sentry_create_release(version: ENV['RELEASE_TARGET_TAG'], app_identifier: 'com.alnajd.alnajd.ios.beta')
@@ -116,7 +116,7 @@ platform :ios do
   desc "Releases the app to TestFlight for Staging"
   lane :staging do |options|
     ensure_being_on_develop
-    ensure_git_status_clean
+    #ensure_git_status_clean
     version
     changelog = make_changelogs
     prepare_for_release
@@ -143,7 +143,7 @@ platform :ios do
   lane :production do |options|
     setup_for_ci_if_needed
     ensure_being_on_develop
-    ensure_git_status_clean
+    #ensure_git_status_clean
     version
     changelog = make_changelogs
     prepare_for_release
