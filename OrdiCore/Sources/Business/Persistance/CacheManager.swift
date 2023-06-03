@@ -20,7 +20,6 @@ public final class CacheManager {
 
     private let decoder: JSONDecoder
     private let encoder: JSONEncoder
-    private lazy var encryptedStorage = EncryptedStorage()
     private lazy var diskStorage = DiskStorage()
     private lazy var userDefaultsStorage = UserDefaultsStorage()
 
@@ -48,7 +47,7 @@ public extension CacheManager {
     func getSuitableStorage(from choice: SupportedStorage) -> Storage {
         switch choice {
         case .encrypted:
-            return encryptedStorage
+            return userDefaultsStorage
         case .disk:
             return diskStorage
         case .userDefaults:

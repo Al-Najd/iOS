@@ -105,8 +105,6 @@ private extension ANTargets {
                 "Entities",
                 "Localization",
                 .product(name: "Core", package: "OrdiCore"),
-                .product(name: "ComposableCoreLocation", package: "composable-core-location"),
-                .product(name: "Adhan", package: "adhan-swift"),
                 .product(name: "GRDB", package: "GRDB.swift"),
                 .product(name: "SwiftDate", package: "SwiftDate"),
             ],

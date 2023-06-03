@@ -36,9 +36,6 @@ let package = Package(
             url: "https://github.com/getsentry/sentry-cocoa.git",
             .upToNextMinor(from: .init(8, 7, 2))),
         .package(
-            url: "https://github.com/evgenyneu/keychain-swift",
-            .upToNextMajor(from: .init(20, 0, 0))),
-        .package(
             url: "https://github.com/airbnb/lottie-ios",
             .upToNextMajor(from: .init(3, 3, 0))),
     ],
@@ -93,7 +90,6 @@ let package = Package(
                 "OrdiLogging",
                 "Utils",
                 .product(name: "Alamofire", package: "Alamofire"),
-                .product(name: "KeychainSwift", package: "keychain-swift"),
             ]),
         .target(name: "PreviewableView"),
         .target(
