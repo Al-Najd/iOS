@@ -6,8 +6,6 @@
 //
 
 import Combine
-import Common
-import DataSources
 import Factory
 import PulseUI
 import SwiftUI
@@ -26,14 +24,14 @@ public struct DebugView: View {
         VStack {
             Text("CAFU Debug View")
                 .frame(maxWidth: .infinity)
-                .font(Font(UIFont.headerLarge()))
+                .font(.headline)
                 .padding()
 
             List {
                 Section {
                     Button("Pulse") {
                         showPulse = true
-                    }.foregroundColor(.tealPrimaryTeal)
+                    }.foregroundColor(.primary)
                 } header: {
                     Text("DEBUGGERS")
                 } footer: {
@@ -46,14 +44,14 @@ public struct DebugView: View {
                         VStack {
                             Toggle(isOn: $config.value) {
                                 Text(config.title)
-                                    .font(Font(UIFont.bodyRegular()))
-                                    .foregroundColor(.greyPrimaryGrey)
+                                    .font(.headline)
+                                    .foregroundColor(.gray)
                             }
 
                             if let description = config.description {
                                 Text(description)
-                                    .font(Font(UIFont.headerSmall()))
-                                    .foregroundColor(.greyRegular)
+                                    .font(.subheadline.bold())
+                                    .foregroundColor(.gray)
                             }
                         }
                         .padding(.vertical, 4)
@@ -70,14 +68,14 @@ public struct DebugView: View {
                         VStack {
                             Button(action: config.onExecute) {
                                 Text(config.title)
-                                    .font(Font(UIFont.bodyRegular()))
-                                    .foregroundColor(.greyPrimaryGrey)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
                             }
 
                             if let description = config.description {
                                 Text(description)
-                                    .font(Font(UIFont.headerSmall()))
-                                    .foregroundColor(.greyRegular)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
                             }
                         }.padding(.vertical, 4)
                     }
@@ -91,8 +89,8 @@ public struct DebugView: View {
             Spacer()
 
             Text("Happy Debugging 👾")
-                .font(Font(UIFont.bodySmall()))
-                .foregroundColor(.greyMedium)
+                .font(.subheadline)
+                .foregroundColor(.gray)
         }
         .sheet(isPresented: $showPulse, content: {
             NavigationView {

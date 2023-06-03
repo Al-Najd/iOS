@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import OrdiLogging
 // MARK: - Zekr
 
 struct Zekr: Codable {
@@ -45,7 +45,7 @@ struct Zekr: Codable {
                 .elements
             return azkar
         } catch {
-            debugPrint(error)
+            Log.error(error.debugDescription)
             return []
         }
     }()

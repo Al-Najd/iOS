@@ -30,6 +30,9 @@ let package = Package(
             url: "https://github.com/kean/Pulse",
             .upToNextMinor(from: .init(3, 7, 2))),
         .package(
+            url: "https://github.com/hmlongco/Factory",
+            .upToNextMinor(from: .init(2, 1, 5))),
+        .package(
             url: "https://github.com/getsentry/sentry-cocoa.git",
             .upToNextMinor(from: .init(8, 7, 2))),
         .package(
@@ -58,6 +61,7 @@ let package = Package(
                 .product(name: "Pulse", package: "Pulse"),
                 .product(name: "PulseUI", package: "Pulse"),
                 .product(name: "Sentry", package: "sentry-cocoa"),
+                .product(name: "Factory", package: "Factory"),
             ]),
         .target(
             name: "Entity"),

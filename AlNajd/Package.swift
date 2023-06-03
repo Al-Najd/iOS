@@ -179,7 +179,6 @@ private enum ANDependencies {
         + pointFree
         + inject
         + home
-        + qaTools
 }
 
 private extension ANDependencies {
@@ -218,13 +217,6 @@ private extension ANDependencies {
         .package(
             url: "https://github.com/exyte/ScalingHeaderScrollView.git",
             .upToNextMajor(from: .init(0, 0, 6))),
-    ]
-
-    static let qaTools: [Package.Dependency] = [
-        .package(path: "../Packages/Loggers"),
-        .package(path: "../Packages/Configs"),
-        .package(path: "../Packages/Common"),
-        .package(path: "../Packages/DebuggingTools")
     ]
 }
 
