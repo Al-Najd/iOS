@@ -122,7 +122,7 @@ public struct PrayerCardView: View {
                             .background(
                                 HexagonShape()
                                     .fill()
-                                    .foregroundColor(image.averageColor)
+                                    .foregroundColor(.blueberryPrimary)
                             )
                             .offset(y: -22 - 4)
                     }
@@ -136,7 +136,7 @@ public struct PrayerCardView: View {
             )
             .cornerRadius(16)
             .shadow(
-                color: image.averageColor,
+                color: .shadowBlueperry,
                 radius: 25,
                 x: 0,
                 y: 0
@@ -146,7 +146,7 @@ public struct PrayerCardView: View {
                     .stroke(lineWidth: 1)
                     .foregroundStyle(
                         .linearGradient(
-                            colors: [.white.opacity(0.25), image.averageColor, .clear],
+                            colors: [.white.opacity(0.25), .blueberryPrimary, .clear],
                             startPoint: .top,
                             endPoint: .bottom
                         )
