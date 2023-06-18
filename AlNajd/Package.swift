@@ -118,7 +118,6 @@ private extension ANTargets {
                 "Entities",
                 "PrayersClient",
                 .product(name: "Core", package: "OrdiCore"),
-                .product(name: "ComposableCoreLocation", package: "composable-core-location"),
                 .product(name: "Inject", package: "Inject"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
@@ -158,7 +157,9 @@ private extension ANTargets {
 
     static let azkar: [Target] = [
         .target(
-            name: "Azkar",
+            name:
+
+                "Azkar",
             dependencies: [
                 "Localization",
                 "Assets",
@@ -186,9 +187,6 @@ private extension ANDependencies {
 
     static let pointFree: [Package.Dependency] = [
         .package(
-            url: "https://github.com/pointfreeco/composable-core-location",
-            .upToNextMajor(from: .init(0, 1, 0))),
-        .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
             branch: "main"),
     ]
@@ -200,9 +198,6 @@ private extension ANDependencies {
     ]
 
     static let home: [Package.Dependency] = [
-        .package(
-            url: "https://github.com/batoulapps/adhan-swift",
-            branch: "main"),
         .package(
             url: "https://github.com/maustinstar/swiftui-drawer",
             branch: "master"),

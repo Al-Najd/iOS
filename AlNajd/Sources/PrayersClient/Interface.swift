@@ -5,7 +5,7 @@
 //  Created by Ahmed Ramy on 28/02/2022.
 //
 
-import Adhan
+import OrdiLogging
 import Business
 import ComposableArchitecture
 import ComposableCoreLocation
@@ -29,7 +29,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 
@@ -42,7 +42,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 
@@ -55,7 +55,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 
@@ -68,7 +68,7 @@ public struct PrayersClient {
                 try dao?.update(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 
@@ -80,7 +80,7 @@ public struct PrayersClient {
                 }
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return []
         }
     }
@@ -95,7 +95,7 @@ public struct PrayersClient {
                 } ?? []
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return []
         }
     }
@@ -110,7 +110,7 @@ public struct PrayersClient {
                 }
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return []
         }
     }
@@ -125,7 +125,7 @@ public struct PrayersClient {
                 return firstDayWithMissedPrayersIndex
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return 0
         }
     }
@@ -136,7 +136,7 @@ public struct PrayersClient {
                 try ANPrayerDAO.filter(ANPrayerDAO.Columns.isDone == true).fetchCount(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return 0
         }
     }
@@ -147,7 +147,7 @@ public struct PrayersClient {
                 try ANSunnahDAO.filter(ANSunnahDAO.Columns.isDone == true).fetchCount(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return 0
         }
     }
@@ -158,7 +158,7 @@ public struct PrayersClient {
                 try ANAzkarDAO.filter(ANAzkarDAO.Columns.currentCount == 0).fetchCount(db)
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return 0
         }
     }
@@ -171,7 +171,7 @@ public struct PrayersClient {
                 }
             }
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
             return []
         }
     }

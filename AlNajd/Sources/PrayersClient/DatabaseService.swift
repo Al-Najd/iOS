@@ -8,6 +8,7 @@
 import Foundation
 import GRDB
 import SwiftDate
+import OrdiLogging
 
 // MARK: - DatabaseService
 
@@ -19,7 +20,7 @@ public enum DatabaseService {
             .appendingPathComponent("alnajd.sqlite3")
             .path
 
-        print(dbPath)
+        Log.info(dbPath, tags: [.debuggable])
 
         if !fileManager.fileExists(atPath: dbPath) {
             let dbResourcePath = Bundle.module.path(forResource: "alnajd", ofType: "sqlite3")!
@@ -113,7 +114,7 @@ public enum DatabaseService {
         do {
             try migrator.migrate(dbQueue)
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 
@@ -121,7 +122,7 @@ public enum DatabaseService {
         do {
             try seed()
         } catch {
-            assertionFailure(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
 }
