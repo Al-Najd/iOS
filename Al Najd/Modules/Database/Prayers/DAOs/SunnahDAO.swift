@@ -12,7 +12,7 @@ import GRDB
 
 // MARK: - ANSunnahDAO
 
-public struct ANSunnahDAO {
+public struct SunnahDAO {
     public var id: Int64?
     public var name: String
     public var isDone: Bool
@@ -23,7 +23,7 @@ public struct ANSunnahDAO {
     public var reward: String
 }
 
-public extension ANSunnahDAO {
+public extension SunnahDAO {
     enum Affirmation: Int, Codable, DatabaseValueConvertible {
         case affirmed
         case desirable
@@ -35,7 +35,7 @@ public extension ANSunnahDAO {
     }
 }
 
-extension ANSunnahDAO {
+extension SunnahDAO {
     func toDomainModel() -> Sunnah {
         .init(
             id: id!,
@@ -49,7 +49,7 @@ extension ANSunnahDAO {
     }
 }
 
-extension ANSunnahDAO.Position {
+extension SunnahDAO.Position {
     func toDomainModel() -> Sunnah.Position {
         switch self {
         case .before: return .before
@@ -58,7 +58,7 @@ extension ANSunnahDAO.Position {
     }
 }
 
-extension ANSunnahDAO.Affirmation {
+extension SunnahDAO.Affirmation {
     func toDomainModel() -> Sunnah.Affirmation {
         switch self {
         case .affirmed: return .affirmed
@@ -69,13 +69,13 @@ extension ANSunnahDAO.Affirmation {
 
 // MARK: - ANSunnahDAO + Codable, FetchableRecord, MutablePersistableRecord
 
-extension ANSunnahDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+extension SunnahDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 
 // MARK: - ANSunnahDAO + TableRecord, EncodableRecord
 
-extension ANSunnahDAO: TableRecord, EncodableRecord {
-    static let prayer = belongsTo(ANPrayerDAO.self)
-    static let day = hasOne(DayDAO.self, through: prayer, using: ANPrayerDAO.day)
+extension SunnahDAO: TableRecord, EncodableRecord {
+    static let prayer = belongsTo(PrayerDAO.self)
+    static let day = hasOne(DayDAO.self, through: prayer, using: PrayerDAO.day)
 
     public static var databaseTableName = "sunnah"
 
@@ -89,12 +89,12 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
     }
 
     enum Queries {
-        static var fajr: QueryInterfaceRequest<ANSunnahDAO> {
-            ANSunnahDAO.filter(Columns.name == "fajr")
+        static var fajr: QueryInterfaceRequest<SunnahDAO> {
+            SunnahDAO.filter(Columns.name == "fajr")
         }
     }
 
-    var prayer: QueryInterfaceRequest<ANPrayerDAO> {
+    var prayer: QueryInterfaceRequest<PrayerDAO> {
         request(for: Self.prayer)
     }
 
@@ -104,8 +104,8 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
 }
 
 // MARK: - Seedings
-extension ANSunnahDAO {
-    static let fajr: (Int64) -> ANSunnahDAO = {
+extension SunnahDAO {
+    static let fajr: (Int64) -> SunnahDAO = {
         .init(
             name: "fajr",
             isDone: false,
@@ -116,7 +116,7 @@ extension ANSunnahDAO {
             reward: "fajr_sunnah_reward")
     }
 
-    static let dhuhr: (Int64) -> [ANSunnahDAO] = {
+    static let dhuhr: (Int64) -> [SunnahDAO] = {
         [
             .init(
                 name: "duhr",
@@ -145,7 +145,7 @@ extension ANSunnahDAO {
         ]
     }
 
-    static let maghrib: (Int64) -> [ANSunnahDAO] = {
+    static let maghrib: (Int64) -> [SunnahDAO] = {
         [
             .init(
                 name: "maghrib",
@@ -166,7 +166,7 @@ extension ANSunnahDAO {
         ]
     }
 
-    static let aishaa: (Int64) -> [ANSunnahDAO] = {
+    static let aishaa: (Int64) -> [SunnahDAO] = {
         [
             .init(
                 name: "aishaa",

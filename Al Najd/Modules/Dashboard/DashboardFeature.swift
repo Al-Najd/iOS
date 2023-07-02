@@ -17,20 +17,20 @@ import SwiftUI
 // MARK: - Dashboard
 
 public struct Dashboard: ReducerProtocol {
-    @Dependency(\.prayersDB)
-    private var prayersDB
+    @Dependency(\.prayersService)
+    private var service
 
     public init() { }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case .onAppear:
-            state.prayingStreak = L10n.daysCount(prayersDB.getPrayingStreak())
-            state.sunnahsPrayed = L10n.timesCount(prayersDB.getSunnahsPrayed())
-            state.azkarDoneCount = L10n.timesCount(prayersDB.getAzkarDoneCount())
-            state.totalFaraaidDone = L10n.timesCount(prayersDB.getFaraaidDone())
+            state.prayingStreak = L10n.daysCount(service.getPrayingStreak())
+            state.sunnahsPrayed = L10n.timesCount(service.getSunnahsPrayed())
+            state.azkarDoneCount = L10n.timesCount(service.getAzkarDoneCount())
+            state.totalFaraaidDone = L10n.timesCount(service.getFaraaidDone())
             state.sunnahPlotData = .init(
-                uniqueElements: prayersDB.getSunnahPerDay().map {
+                uniqueElements: service.getSunnahPerDay().map {
                     ChartAnalyticsData(date: $0, count: $1)
                 })
 
@@ -39,18 +39,113 @@ public struct Dashboard: ReducerProtocol {
                     state.sunnahPlotData[id: data.id]?.animate = true
                 }
             }
+
+            let report = analyize(currentRangeReport: getCurrentWeekReport(), previousRangeReport: getLastWeekReport())
+            state.report = report
+            state.feedback = report.insight?.details ?? L10n.doingGreat
         default:
             break
         }
         return .none
     }
 
-    private func getReportThisWeek() {
+    let noEnoughDataMessageBank = [
+        L10n.dashboardNotEnoughDataMessage1,
+        L10n.dashboardNotEnoughDataMessage2,
+        L10n.dashboardNotEnoughDataMessage3
+    ]
 
+    func getCurrentWeekReport() -> Report.Range {
+        let days = service.getCurrentWeek()
+        let ranges = days.reduce(into: [Date: [Prayer]]()) { dictionary, day in
+            dictionary[day.date] = day.prayers.elements
+        }
+
+        return .init(ranges: ranges)
     }
 
-    private func getReportPreviousWeek() {
+    func getLastWeekReport() -> Report.Range {
+        let days = service.getPreviousWeek()
+        let ranges = days.reduce(into: [Date: [Prayer]]()) { dictionary, day in
+            dictionary[day.date] = day.prayers.elements
+        }
 
+        return .init(ranges: ranges)
+    }
+
+    func analyize(
+        currentRangeReport: Report.Range,
+        previousRangeReport: Report.Range? = nil
+    ) -> RangeProgress {
+        if let previousRangeReport = previousRangeReport {
+            let prev = getRangeProgress(previousRangeReport.range)
+            let current = getRangeProgress(currentRangeReport.range)
+
+            return current.changeImprovement(to: current.score >= prev.score)
+        } else {
+            return getRangeProgress(currentRangeReport.range)
+                .changeImprovement(to: true)
+        }
+    }
+
+    func getRangeProgress(_ range: PrayersRange) -> RangeProgress {
+        let countOfDoneDuringRange =  range.values.flatMap { $0 }.filter { $0.isDone }.count
+        let rangeNumberOfDays = range.count
+        let reports = countOfDoneDuringRange >= rangeNumberOfDays
+        ? range.map { (date: $0.key, deeds: $0.value) }.sorted(by: { $0.date > $1.date }).map { DayProgress(deeds: $0.deeds, date: $0.date) }
+        : []
+
+        let insight: Insight? = reports.isEmpty ? .init(
+            indicator: .encourage,
+            details: noEnoughDataMessageBank.randomElement() ?? noEnoughDataMessageBank[0]
+        ) : analyize(range)
+
+        return RangeProgress(
+            title: L10n.faraaid,
+            reports: reports,
+            insight: insight,
+            score: countOfDoneDuringRange
+        )
+    }
+
+    static var fajrAndAishaaPraiser: Analysis = { dateIndexedDeeds in
+        let daysWhereFajrAndAishaaArePrayed = dateIndexedDeeds.compactMap { date, deeds -> Bool in
+            let fajrPrayed = deeds.filter { $0.name == "fajr" }
+            let aishaaPrayed = deeds.filter { $0.name == "aishaa" }
+
+            return zip(fajrPrayed, aishaaPrayed).map { fajr, aishaa in
+                fajr.isDone && aishaa.isDone
+            }
+            .filter { $0 == false }
+            .count == 0
+        }
+
+        let didPrayFajrAndAishaa = daysWhereFajrAndAishaaArePrayed.filter { $0 == true }.count > 0
+        guard didPrayFajrAndAishaa else { return nil }
+
+        return .init(indicator: .praise, details: L10n.dashboardIndicatorFajrAndAishaaPraiserMessage)
+    }
+
+    static var fajrPraiser: Analysis = { reports in
+        guard let dayName = reports.first(where: { (key: Date, prayers: [Prayer]) in
+            prayers.first(where: { $0.name == "fajr" }) != nil
+        })?.key.dayName(ofStyle: .full) else {
+            Log.error("Couldn't get day's name when praising for Fajr")
+            return .init(indicator: .praise, details: L10n.dashboardIndicatorFajrPraiserMessage(""))
+        }
+
+        return .init(indicator: .praise, details: L10n.dashboardIndicatorFajrPraiserMessage(dayName))
+    }
+
+    static var fajrAdvisor: Analysis = { dateIndexedDeeds in
+        return .init(
+            indicator: .encourage,
+            details: L10n.dashboardIndicatorFajrAdvisorMessage
+        )
+    }
+
+    func analyize(_ reports: PrayersRange) -> Insight? {
+        Insight.Indicator.analysis.compactMap { $0(reports) }.first
     }
 }
 
@@ -65,6 +160,7 @@ public extension Dashboard {
         public var totalFaraaidDone: String
         public var sunnahPlotData: IdentifiedArrayOf<ChartAnalyticsData>
         public var feedback: String
+        public var report: RangeProgress
 
         public init(
             tipOfTheDay: String = "",
@@ -73,7 +169,8 @@ public extension Dashboard {
             azkarDoneCount: String = "",
             totalFaraaidDone: String = "",
             sunnahPlotData: IdentifiedArrayOf<ChartAnalyticsData> = .init(uniqueElements: []),
-            feedback: String = ""
+            feedback: String = "",
+            report: RangeProgress = .init(title: "", reports: [])
         ) {
             self.tipOfTheDay = tipOfTheDay
             self.prayingStreak = prayingStreak
@@ -82,6 +179,7 @@ public extension Dashboard {
             self.totalFaraaidDone = totalFaraaidDone
             self.sunnahPlotData = sunnahPlotData
             self.feedback = feedback
+            self.report = report
         }
 
         public static func == (lhs: State, rhs: State) -> Bool {
@@ -141,86 +239,6 @@ extension DayProgress {
 
 typealias Analysis = (_ dateIndexedDeeds: [Date: [Prayer]]) -> Insight?
 
-//extension Insight.Indicator {
-//    static var analysis: [Analysis] {
-//        let praises: [Analysis] = [
-//            fajrPraiser,
-//            fajrAndAishaaPraiser,
-//
-//        ]
-//        let encourages: [Analysis] = [
-//            fajrAdvisor
-//        ]
-//
-//        let tipOfTheDay: [Analysis] = []
-//
-//        let danger: [Analysis] = []
-//
-//        return praises + encourages + tipOfTheDay + danger
-//    }
-//
-//    static var fajrAndAishaaPraiser: (_ days: [DayDAO]) -> Insight? = { dateIndexedDeeds in
-//        //    let daysWhereFajrAndAishaaArePrayed = dateIndexedDeeds.compactMap { date, deeds -> Bool in
-//        //        let fajrPrayed = deeds.filter { $0.title == Deed.fajr.title }
-//        //        let aishaaPrayed = deeds.filter { $0.title == Deed.aishaa.title }
-//        //
-//        //        return zip(fajrPrayed, aishaaPrayed).map { fajr, aishaa in
-//        //            fajr.isDone && aishaa.isDone
-//        //        }
-//        //        .filter { $0 == false }
-//        //        .count == 0
-//        //    }
-//        //
-//        //    let didPrayFajrAndAishaa = daysWhereFajrAndAishaaArePrayed.filter { $0 == true }.count > 0
-//        //    guard didPrayFajrAndAishaa else { return nil }
-//        //
-//        //    return .init(indicator: .praise, details: "Well Done on praying Fajr and Aishaa 👏\nIf you prayed this in Group, the reward is like you've done Qeyam Al Layil of the whole night".localized)
-//        return nil
-//    }
-//
-//    static var fajrPraiser: (_ dateIndexedDeeds: [DayDAO]) -> Insight? = { dateIndexedDeeds in
-//        //    return .init(indicator: .praise, details: "Well done on praying Al Fajr on day".localized(arguments: "daysString"))
-//        nil
-//    }
-//
-//    static var fajrAdvisor: (_ dateIndexedDeeds: [DayDAO]) -> Insight? = { dateIndexedDeeds in
-//        //    return .init(
-//        //        indicator: .encourage,
-//        //        details: "Struggling? you got this, do you want to know who can help? Al Fajr!, make sure to pray it so other deeds become easier!".localized
-//        //    )
-//        nil
-//    }
-//}
-
-//public extension RangeProgress {
-//    static let mock: [RangeProgress] = [
-//        .init(
-//            title: "Faraaid",
-//            reports: DayProgress.mock,
-//            isImproving: false,
-//            insight: .init(indicator: .danger, details: "Al Faraaid are very important, make sure you don't miss them intentionally and ask for help from Allah, you got this!")
-//        ),
-//        .init(
-//            title: "Sunnah",
-//            reports: DayProgress.mock,
-//            isImproving: true,
-//            insight: .init(
-//                indicator: .encourage,
-//                details: "You did great with Sunnah last week, let's max out this week's Sunnah!"
-//            )
-//        ),
-//        .init(
-//            title: "Nafila",
-//            reports: DayProgress.mock,
-//            isImproving: false,
-//            insight: .init(
-//                indicator: .praise,
-//                details: "You did Wonderful in Nafila!, I mean, wow! off the charts!, are we speaking to a 'Wali' now or what? haha, great work champ!"
-//            )
-//        ),
-//    ]
-//}
-
 public struct DayProgress: Identifiable, Equatable {
     public var id = UUID().uuidString
     let count: Int
@@ -229,14 +247,31 @@ public struct DayProgress: Identifiable, Equatable {
     let indicator: Indicator
 
     public struct Indicator {
-        let color: BrandColor
+        let fill: Color
+        let stroke: Color
+        let shadow: Color
 
-        static let good: Indicator = .init(color: Color.success)
-        static let moderate: Indicator = .init(color: Color.warning)
-        static let bad: Indicator = .init(color: Color.danger)
+        static let good: Indicator = .init(fill: .mono.offwhite, stroke: .primaryBluberry, shadow: .shadowBlueperry)
+        static let moderate: Indicator = .init(fill: .tangerinePrimary, stroke: .tangerineLight, shadow: .shadowTangerine)
+        static let bad: Indicator = .init(fill: .cherryPrimary, stroke: .cherryLight, shadow: .shadowCherry)
     }
 
     public static func == (lhs: DayProgress, rhs: DayProgress) -> Bool {
         lhs.id == rhs.id
+    }
+}
+
+extension Insight.Indicator {
+    static var analysis: [Analysis] {
+        let praises: [Analysis] = [
+            Dashboard.fajrPraiser,
+            Dashboard.fajrAndAishaaPraiser
+        ]
+
+        let encourages: [Analysis] = [Dashboard.fajrAdvisor]
+        let tipOfTheDay: [Analysis] = []
+        let danger: [Analysis] = []
+
+        return praises + encourages + tipOfTheDay + danger
     }
 }

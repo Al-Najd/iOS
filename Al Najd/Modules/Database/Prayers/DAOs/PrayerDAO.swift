@@ -12,7 +12,7 @@ import GRDB
 
 // MARK: - ANPrayerDAO
 
-public struct ANPrayerDAO {
+public struct PrayerDAO {
     public var id: Int64?
     public var name: String
     public var isDone: Bool
@@ -21,7 +21,13 @@ public struct ANPrayerDAO {
     public var reward: String
 }
 
-extension ANPrayerDAO {
+extension PrayerDAO {
+    func toDomainModel(_ db: Database) throws -> Prayer {
+        toDomainModel(
+            sunnah: try sunnah.fetchAll(db).map { $0.toDomainModel() },
+            azkar: try azkar.fetchAll(db).map { $0.toDomainModel() })
+    }
+    
     func toDomainModel(sunnah: [Sunnah], azkar: [Zekr]) -> Prayer {
         .init(
             id: id!,
@@ -36,13 +42,13 @@ extension ANPrayerDAO {
 
 // MARK: Codable, FetchableRecord, MutablePersistableRecord
 
-extension ANPrayerDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+extension PrayerDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 
 // MARK: TableRecord, EncodableRecord
 
-extension ANPrayerDAO: TableRecord, EncodableRecord {
+extension PrayerDAO: TableRecord, EncodableRecord {
     static let day = belongsTo(DayDAO.self)
-    static let sunnah = hasMany(ANSunnahDAO.self)
+    static let sunnah = hasMany(SunnahDAO.self)
     static let azkar = hasMany(AzkarDAO.self)
 
     public static var databaseTableName = "prayers"
@@ -59,16 +65,16 @@ extension ANPrayerDAO: TableRecord, EncodableRecord {
         request(for: Self.day)
     }
 
-    var doneFaraaid: QueryInterfaceRequest<ANPrayerDAO> {
-        ANPrayerDAO.filter(Columns.isDone == true)
+    var doneFaraaid: QueryInterfaceRequest<PrayerDAO> {
+        PrayerDAO.filter(Columns.isDone == true)
     }
 
-    var sunnah: QueryInterfaceRequest<ANSunnahDAO> {
+    var sunnah: QueryInterfaceRequest<SunnahDAO> {
         request(for: Self.sunnah)
     }
 
-    var doneSunnah: QueryInterfaceRequest<ANSunnahDAO> {
-        sunnah.filter(ANSunnahDAO.Columns.isDone == true)
+    var doneSunnah: QueryInterfaceRequest<SunnahDAO> {
+        sunnah.filter(SunnahDAO.Columns.isDone == true)
     }
 
     var azkar: QueryInterfaceRequest<AzkarDAO> {

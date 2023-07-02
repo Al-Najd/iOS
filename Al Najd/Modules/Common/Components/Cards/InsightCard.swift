@@ -37,19 +37,23 @@ public struct InsightCardView: View {
                 Image(systemName: insight.indicator.icon)
             }
             .scaledFont(.pHeadline, .bold)
-            .foregroundColor(insight.indicator.color.default)
+            .foregroundColor(insight.indicator.fill)
+            .frame(maxWidth: .infinity)
+            .multilineTextAlignment(.leading)
 
             Text(insight.details)
                 .scaledFont(.pBody, .bold)
-                .foregroundColor(.mono.offblack)
+                .foregroundColor(.mono.line)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.leading)
         }
         .frame(maxWidth: .infinity)
         .padding(.p16)
         .background(
             RoundedRectangle(cornerRadius: .r16)
-                .fill(Color.mono.offwhite)
+                .fill(Color.primaryBlackberry)
                 .shadow(
-                    color: .black.opacity(0.25),
+                    color: insight.indicator.shadow,
                     radius: 2,
                     x: 0, y: 0))
     }
@@ -60,32 +64,31 @@ public struct InsightCardView: View {
 public extension Insight {
     struct Indicator: Identifiable, Equatable {
         public let id = UUID().uuidString
-        let color: BrandColor
+        let fill: Color
+        let shadow: Color
         let icon: String
         let title: String
 
         public static let praise: Indicator = .init(
-            color: Color.success,
+            fill: .primaryBluberry,
+            shadow: .shadowBlueperry,
             icon: "hands.clap.fill",
-            title: "Good Job!".localized)
+            title: L10n.dashboardIndicatorPraiseMessage.localized)
 
         public static func == (lhs: Insight.Indicator, rhs: Insight.Indicator) -> Bool {
             lhs.id == rhs.id
         }
 
         public static let encourage: Indicator = .init(
-            color: Color.warning,
+            fill: .tangerinePrimary,
+            shadow: .shadowTangerine,
             icon: "bolt.heart.fill",
-            title: "Keep it up, you can do it!".localized)
-
-        public static let tipOfTheDay: Indicator = .init(
-            color: Color.success,
-            icon: "star.fill",
-            title: "Tip of the day".localized)
+            title: L10n.dashboardIndicatorEncourageMessage.localized)
 
         public static let danger: Indicator = .init(
-            color: Color.danger,
+            fill: .cherryPrimary,
+            shadow: .shadowCherry,
             icon: "flame.circle.fill",
-            title: "Heads up!".localized)
+            title: L10n.dashboardIndicatorWarningMessage.localized)
     }
 }

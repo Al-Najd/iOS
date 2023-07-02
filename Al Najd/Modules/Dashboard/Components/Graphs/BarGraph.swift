@@ -30,23 +30,24 @@ public struct BarGraph: View {
             GeometryReader { proxy in
                 ZStack {
                     RoundedRectangle(cornerRadius: .r8)
-                        .stroke(day.indicator.color.default)
+                        .stroke(day.indicator.stroke)
                         .frame(maxHeight: .infinity, alignment: .bottom)
 
                     RoundedRectangle(cornerRadius: .r8)
-                        .fill(day.indicator.color.default)
+                        .fill(day.indicator.fill)
                         .opacity(!isPressing ? 1 : (highlightedDay == day ? 1 : 0.35))
                         .frame(height: (Double(day.count) / Double(day.limit)) * (proxy.size.height))
                         .frame(maxHeight: .infinity, alignment: .bottom)
                 }
             }
             .frame(height: 150)
+            .shadow(color: day.indicator.shadow, radius: 4, x: 0, y: 0)
             Text(day.day)
                 .scaledFont(.pFootnote)
                 .foregroundColor(
                     isPressing && highlightedDay == day
-                        ? day.indicator.color.default
-                        : .mono.label)
+                    ? day.indicator.fill
+                    : .mono.line)
         }
         .onTapGesture { }
         .onLongPressGesture(

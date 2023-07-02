@@ -14,7 +14,7 @@ import ComposableArchitecture
 
 // MARK: - AzkarClient
 
-public struct AzkarClient {
+public struct AzkarService {
     public func getMorningAzkar(for date: Date) -> [Zekr] {
         do {
             return try DatabaseService.dbQueue.read { db in
@@ -66,13 +66,13 @@ public struct AzkarClient {
 
 // MARK: DependencyKey
 
-extension AzkarClient: DependencyKey {
-    public static let liveValue = AzkarClient()
+extension AzkarService: DependencyKey {
+    public static let liveValue = AzkarService()
 }
 
 public extension DependencyValues {
-    var azkarDB: AzkarClient {
-        get { self[AzkarClient.self] }
-        set { self[AzkarClient.self] = newValue }
+    var azkarService: AzkarService {
+        get { self[AzkarService.self] }
+        set { self[AzkarService.self] = newValue }
     }
 }

@@ -18,7 +18,7 @@ public struct NafilaDetails: ReducerProtocol {
     @Dependency(\.haptic)
     private var haptic
 
-    @Dependency(\.prayersDB)
+    @Dependency(\.prayersService)
     private var prayersDB
 
     public init() { }

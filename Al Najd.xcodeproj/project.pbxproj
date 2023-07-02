@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E208E9DA2A51E57B00D7734A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208E9D92A51E57B00D7734A /* Day.swift */; };
 		E29B86192A51BB3700F9B73F /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854A2A51BB3600F9B73F /* Al_NajdApp.swift */; };
 		E29B861A2A51BB3700F9B73F /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854C2A51BB3600F9B73F /* PluginProtocol.swift */; };
 		E29B861B2A51BB3700F9B73F /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854D2A51BB3600F9B73F /* AppearancePlugin.swift */; };
@@ -38,18 +39,17 @@
 		E29B86352A51BB3700F9B73F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85752A51BB3700F9B73F /* Fonts.swift */; };
 		E29B86362A51BB3700F9B73F /* OrdiDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85762A51BB3700F9B73F /* OrdiDesignSystem.swift */; };
 		E29B86372A51BB3700F9B73F /* ANNafilaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85782A51BB3700F9B73F /* ANNafilaDAO.swift */; };
-		E29B86382A51BB3700F9B73F /* ANPrayerDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85792A51BB3700F9B73F /* ANPrayerDAO.swift */; };
+		E29B86382A51BB3700F9B73F /* PrayerDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85792A51BB3700F9B73F /* PrayerDAO.swift */; };
 		E29B86392A51BB3700F9B73F /* AzkarTimedDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B857A2A51BB3700F9B73F /* AzkarTimedDAO.swift */; };
 		E29B863A2A51BB3700F9B73F /* alnajd.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = E29B857C2A51BB3700F9B73F /* alnajd.sqlite3 */; };
 		E29B863B2A51BB3700F9B73F /* azkar-db.json in Resources */ = {isa = PBXBuildFile; fileRef = E29B857D2A51BB3700F9B73F /* azkar-db.json */; };
 		E29B863C2A51BB3700F9B73F /* ANAzkarTimedDAO+AzkarDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B857E2A51BB3700F9B73F /* ANAzkarTimedDAO+AzkarDB.swift */; };
 		E29B863D2A51BB3700F9B73F /* DayDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B857F2A51BB3700F9B73F /* DayDAO.swift */; };
 		E29B863E2A51BB3700F9B73F /* AzkarDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85802A51BB3700F9B73F /* AzkarDAO.swift */; };
-		E29B863F2A51BB3700F9B73F /* AzkarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85812A51BB3700F9B73F /* AzkarClient.swift */; };
+		E29B863F2A51BB3700F9B73F /* AzkarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85812A51BB3700F9B73F /* AzkarService.swift */; };
 		E29B86402A51BB3700F9B73F /* DAOs+Changeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85822A51BB3700F9B73F /* DAOs+Changeable.swift */; };
-		E29B86412A51BB3700F9B73F /* ANSunnahDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85832A51BB3700F9B73F /* ANSunnahDAO.swift */; };
-		E29B86422A51BB3700F9B73F /* Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85842A51BB3700F9B73F /* Live.swift */; };
-		E29B86432A51BB3700F9B73F /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85852A51BB3700F9B73F /* Interface.swift */; };
+		E29B86412A51BB3700F9B73F /* SunnahDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85832A51BB3700F9B73F /* SunnahDAO.swift */; };
+		E29B86432A51BB3700F9B73F /* PrayersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85852A51BB3700F9B73F /* PrayersService.swift */; };
 		E29B86442A51BB3700F9B73F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85862A51BB3700F9B73F /* DatabaseService.swift */; };
 		E29B86452A51BB3700F9B73F /* ANAzkarTimedDAO+Seeding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85872A51BB3700F9B73F /* ANAzkarTimedDAO+Seeding.swift */; };
 		E29B86492A51BB3700F9B73F /* NafilaDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85902A51BB3700F9B73F /* NafilaDetailsView.swift */; };
@@ -155,6 +155,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E208E9D92A51E57B00D7734A /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		E29B85382A51BB1D00F9B73F /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29B854A2A51BB3600F9B73F /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		E29B854C2A51BB3600F9B73F /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
@@ -187,18 +188,17 @@
 		E29B85752A51BB3700F9B73F /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E29B85762A51BB3700F9B73F /* OrdiDesignSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdiDesignSystem.swift; sourceTree = "<group>"; };
 		E29B85782A51BB3700F9B73F /* ANNafilaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANNafilaDAO.swift; sourceTree = "<group>"; };
-		E29B85792A51BB3700F9B73F /* ANPrayerDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANPrayerDAO.swift; sourceTree = "<group>"; };
+		E29B85792A51BB3700F9B73F /* PrayerDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayerDAO.swift; sourceTree = "<group>"; };
 		E29B857A2A51BB3700F9B73F /* AzkarTimedDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarTimedDAO.swift; sourceTree = "<group>"; };
 		E29B857C2A51BB3700F9B73F /* alnajd.sqlite3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = alnajd.sqlite3; sourceTree = "<group>"; };
 		E29B857D2A51BB3700F9B73F /* azkar-db.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "azkar-db.json"; sourceTree = "<group>"; };
 		E29B857E2A51BB3700F9B73F /* ANAzkarTimedDAO+AzkarDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ANAzkarTimedDAO+AzkarDB.swift"; sourceTree = "<group>"; };
 		E29B857F2A51BB3700F9B73F /* DayDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayDAO.swift; sourceTree = "<group>"; };
 		E29B85802A51BB3700F9B73F /* AzkarDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarDAO.swift; sourceTree = "<group>"; };
-		E29B85812A51BB3700F9B73F /* AzkarClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarClient.swift; sourceTree = "<group>"; };
+		E29B85812A51BB3700F9B73F /* AzkarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarService.swift; sourceTree = "<group>"; };
 		E29B85822A51BB3700F9B73F /* DAOs+Changeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DAOs+Changeable.swift"; sourceTree = "<group>"; };
-		E29B85832A51BB3700F9B73F /* ANSunnahDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANSunnahDAO.swift; sourceTree = "<group>"; };
-		E29B85842A51BB3700F9B73F /* Live.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Live.swift; sourceTree = "<group>"; };
-		E29B85852A51BB3700F9B73F /* Interface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		E29B85832A51BB3700F9B73F /* SunnahDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunnahDAO.swift; sourceTree = "<group>"; };
+		E29B85852A51BB3700F9B73F /* PrayersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayersService.swift; sourceTree = "<group>"; };
 		E29B85862A51BB3700F9B73F /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		E29B85872A51BB3700F9B73F /* ANAzkarTimedDAO+Seeding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ANAzkarTimedDAO+Seeding.swift"; sourceTree = "<group>"; };
 		E29B85902A51BB3700F9B73F /* NafilaDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NafilaDetailsView.swift; sourceTree = "<group>"; };
@@ -314,6 +314,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E208E9D62A51E43800D7734A /* Azkar */ = {
+			isa = PBXGroup;
+			children = (
+				E29B85812A51BB3700F9B73F /* AzkarService.swift */,
+				E208E9D82A51E4E900D7734A /* DAOs */,
+			);
+			path = Azkar;
+			sourceTree = "<group>";
+		};
+		E208E9D72A51E4CC00D7734A /* DAOs */ = {
+			isa = PBXGroup;
+			children = (
+				E29B85782A51BB3700F9B73F /* ANNafilaDAO.swift */,
+				E29B85792A51BB3700F9B73F /* PrayerDAO.swift */,
+				E29B857F2A51BB3700F9B73F /* DayDAO.swift */,
+				E29B85822A51BB3700F9B73F /* DAOs+Changeable.swift */,
+				E29B85832A51BB3700F9B73F /* SunnahDAO.swift */,
+			);
+			path = DAOs;
+			sourceTree = "<group>";
+		};
+		E208E9D82A51E4E900D7734A /* DAOs */ = {
+			isa = PBXGroup;
+			children = (
+				E29B85872A51BB3700F9B73F /* ANAzkarTimedDAO+Seeding.swift */,
+				E29B85802A51BB3700F9B73F /* AzkarDAO.swift */,
+				E29B857A2A51BB3700F9B73F /* AzkarTimedDAO.swift */,
+				E29B857E2A51BB3700F9B73F /* ANAzkarTimedDAO+AzkarDB.swift */,
+			);
+			path = DAOs;
+			sourceTree = "<group>";
+		};
 		E29B852F2A51BB1D00F9B73F = {
 			isa = PBXGroup;
 			children = (
@@ -365,9 +397,9 @@
 		E29B85522A51BB3700F9B73F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E2DC699C2A51E37A001679A6 /* Database */,
 				E29B85532A51BB3700F9B73F /* Home */,
 				E29B85572A51BB3700F9B73F /* DesignSystem */,
-				E29B85772A51BB3700F9B73F /* PrayersClient */,
 				E29B858F2A51BB3700F9B73F /* NafilaDetails */,
 				E29B85962A51BB3700F9B73F /* Business */,
 				E29B85B12A51BB3700F9B73F /* Utils */,
@@ -510,24 +542,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		E29B85772A51BB3700F9B73F /* PrayersClient */ = {
+		E29B85772A51BB3700F9B73F /* Prayers */ = {
 			isa = PBXGroup;
 			children = (
-				E29B85782A51BB3700F9B73F /* ANNafilaDAO.swift */,
-				E29B85792A51BB3700F9B73F /* ANPrayerDAO.swift */,
-				E29B857A2A51BB3700F9B73F /* AzkarTimedDAO.swift */,
-				E29B857E2A51BB3700F9B73F /* ANAzkarTimedDAO+AzkarDB.swift */,
-				E29B857F2A51BB3700F9B73F /* DayDAO.swift */,
-				E29B85802A51BB3700F9B73F /* AzkarDAO.swift */,
-				E29B85812A51BB3700F9B73F /* AzkarClient.swift */,
-				E29B85822A51BB3700F9B73F /* DAOs+Changeable.swift */,
-				E29B85832A51BB3700F9B73F /* ANSunnahDAO.swift */,
-				E29B85842A51BB3700F9B73F /* Live.swift */,
-				E29B85852A51BB3700F9B73F /* Interface.swift */,
-				E29B85862A51BB3700F9B73F /* DatabaseService.swift */,
-				E29B85872A51BB3700F9B73F /* ANAzkarTimedDAO+Seeding.swift */,
+				E29B85852A51BB3700F9B73F /* PrayersService.swift */,
+				E208E9D72A51E4CC00D7734A /* DAOs */,
 			);
-			path = PrayersClient;
+			path = Prayers;
 			sourceTree = "<group>";
 		};
 		E29B858F2A51BB3700F9B73F /* NafilaDetails */ = {
@@ -821,6 +842,7 @@
 				E29B86052A51BB3700F9B73F /* ANZekr.swift */,
 				E29B86062A51BB3700F9B73F /* Recommendation.swift */,
 				E2DC699A2A51C884001679A6 /* OError.swift */,
+				E208E9D92A51E57B00D7734A /* Day.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -851,6 +873,16 @@
 				E2DC698F2A51C668001679A6 /* splash.json */,
 			);
 			path = Animations;
+			sourceTree = "<group>";
+		};
+		E2DC699C2A51E37A001679A6 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				E29B85862A51BB3700F9B73F /* DatabaseService.swift */,
+				E208E9D62A51E43800D7734A /* Azkar */,
+				E29B85772A51BB3700F9B73F /* Prayers */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -970,7 +1002,7 @@
 				E29B86812A51BB3700F9B73F /* PrayerDetailsView.swift in Sources */,
 				E29B862C2A51BB3700F9B73F /* Shadowable.swift in Sources */,
 				E29B865E2A51BB3700F9B73F /* Once.swift in Sources */,
-				E29B86382A51BB3700F9B73F /* ANPrayerDAO.swift in Sources */,
+				E29B86382A51BB3700F9B73F /* PrayerDAO.swift in Sources */,
 				E29B86982A51BB3700F9B73F /* Report.swift in Sources */,
 				E29B86232A51BB3700F9B73F /* Metrics.swift in Sources */,
 				E29B869F2A51BB3700F9B73F /* Recommendation.swift in Sources */,
@@ -984,7 +1016,6 @@
 				E29B86212A51BB3700F9B73F /* HomeFeature.swift in Sources */,
 				E29B86532A51BB3700F9B73F /* NetworkProtocol.swift in Sources */,
 				E29B864D2A51BB3700F9B73F /* Endpoint.swift in Sources */,
-				E29B86422A51BB3700F9B73F /* Live.swift in Sources */,
 				E29B86872A51BB3700F9B73F /* AppDelegate.swift in Sources */,
 				E29B86732A51BB3700F9B73F /* ResourcesAccess.swift in Sources */,
 				E29B867C2A51BB3700F9B73F /* SentryLogger.swift in Sources */,
@@ -996,8 +1027,9 @@
 				E29B865C2A51BB3700F9B73F /* NetworkErrorToSQErrorAdapter.swift in Sources */,
 				E29B863C2A51BB3700F9B73F /* ANAzkarTimedDAO+AzkarDB.swift in Sources */,
 				E29B86782A51BB3700F9B73F /* PulseLogger.swift in Sources */,
-				E29B86412A51BB3700F9B73F /* ANSunnahDAO.swift in Sources */,
+				E29B86412A51BB3700F9B73F /* SunnahDAO.swift in Sources */,
 				E29B86822A51BB3700F9B73F /* DeviceState.swift in Sources */,
+				E208E9DA2A51E57B00D7734A /* Day.swift in Sources */,
 				E29B866E2A51BB3700F9B73F /* StatCard.swift in Sources */,
 				E29B86202A51BB3700F9B73F /* HomeView.swift in Sources */,
 				E29B868A2A51BB3700F9B73F /* RSecureField.swift in Sources */,
@@ -1061,7 +1093,7 @@
 				E29B86602A51BB3700F9B73F /* Int+Extensions.swift in Sources */,
 				E29B86862A51BB3700F9B73F /* AppDelegateFeature.swift in Sources */,
 				E29B86402A51BB3700F9B73F /* DAOs+Changeable.swift in Sources */,
-				E29B86432A51BB3700F9B73F /* Interface.swift in Sources */,
+				E29B86432A51BB3700F9B73F /* PrayersService.swift in Sources */,
 				E29B86632A51BB3700F9B73F /* Aliases.swift in Sources */,
 				E29B86362A51BB3700F9B73F /* OrdiDesignSystem.swift in Sources */,
 				E29B86562A51BB3700F9B73F /* UserDefaultsStorage.swift in Sources */,
@@ -1078,7 +1110,7 @@
 				E29B86882A51BB3700F9B73F /* ScrollViewRTL.swift in Sources */,
 				E29B866B2A51BB3700F9B73F /* Dispatch+Additions.swift in Sources */,
 				E29B86222A51BB3700F9B73F /* PrayerCardView.swift in Sources */,
-				E29B863F2A51BB3700F9B73F /* AzkarClient.swift in Sources */,
+				E29B863F2A51BB3700F9B73F /* AzkarService.swift in Sources */,
 				E29B86962A51BB3700F9B73F /* LottieView.swift in Sources */,
 				E29B86572A51BB3700F9B73F /* CacheManager.swift in Sources */,
 				E29B86842A51BB3700F9B73F /* SplashView.swift in Sources */,

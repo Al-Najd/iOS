@@ -9,6 +9,8 @@ import Foundation
 
 // MARK: - Report
 
+public typealias PrayersRange = [Date: [Prayer]]
+
 public enum Report { }
 
 public extension Report {
@@ -23,10 +25,10 @@ public extension Report {
     }
 
     struct Range: Equatable {
-        public let ranges: [Date: [Prayer]]
+        public let range: PrayersRange
 
-        public init(ranges: [Date: [Prayer]]) {
-            self.ranges = ranges
+        public init(ranges: PrayersRange) {
+            self.range = ranges
         }
     }
 }

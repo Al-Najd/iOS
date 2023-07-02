@@ -14,24 +14,24 @@ import Foundation
 // MARK: - Azkar
 
 public struct Azkar: ReducerProtocol {
-    @Dependency(\.azkarDB)
-    var db
+    @Dependency(\.azkarService)
+    var service
 
     public init() { }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case .onAppear:
-            state.morningAzkar = .init(uniqueElements: db.getMorningAzkar(for: state.date))
-            state.nightAzkar = .init(uniqueElements: db.getNightAzkar(for: state.date))
+            state.morningAzkar = .init(uniqueElements: service.getMorningAzkar(for: state.date))
+            state.nightAzkar = .init(uniqueElements: service.getNightAzkar(for: state.date))
         case .onDoingMorning(let zekr):
             let currentCount = state.morningAzkar[id: zekr.id]?.currentCount ?? 0
             state.morningAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
-            db.save(zekr: zekr)
+            service.save(zekr: zekr)
         case .onDoingNight(let zekr):
             let currentCount = state.nightAzkar[id: zekr.id]?.currentCount ?? 0
             state.nightAzkar[id: zekr.id]?.currentCount = max(0, currentCount - 1)
-            db.save(zekr: zekr)
+            service.save(zekr: zekr)
         }
 
         return .none

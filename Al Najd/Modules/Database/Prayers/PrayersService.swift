@@ -11,7 +11,7 @@ import GRDB
 
 // MARK: - PrayersClient
 
-public struct PrayersClient {
+public struct PrayersService {
     public func save(nafila: Nafila?) {
         guard let nafila = nafila else { return }
         do {
@@ -29,7 +29,7 @@ public struct PrayersClient {
         guard let prayer = prayer else { return }
         do {
             try DatabaseService.dbQueue.write { db in
-                var dao = try ANPrayerDAO.fetchOne(db, key: prayer.id)
+                var dao = try PrayerDAO.fetchOne(db, key: prayer.id)
                 dao?.isDone = prayer.isDone
                 try dao?.update(db)
             }
@@ -42,7 +42,7 @@ public struct PrayersClient {
         guard let sunnah = sunnah else { return }
         do {
             try DatabaseService.dbQueue.write { db in
-                var dao = try ANSunnahDAO.fetchOne(db, key: sunnah.id)
+                var dao = try SunnahDAO.fetchOne(db, key: sunnah.id)
                 dao?.isDone = sunnah.isDone
                 try dao?.update(db)
             }
@@ -61,6 +61,32 @@ public struct PrayersClient {
             }
         } catch {
             Log.error(error.localizedDescription)
+        }
+    }
+
+    public func getCurrentWeek() -> [Day] {
+        do {
+            return try DatabaseService.dbQueue.read { db in
+                try DayDAO.Queries.currentWeek.fetchAll(db).map {
+                    try $0.toDomainModel(db)
+                }
+            }
+        } catch {
+            Log.error(error.localizedDescription)
+            return []
+        }
+    }
+
+    public func getPreviousWeek() -> [Day] {
+        do {
+            return try DatabaseService.dbQueue.read { db in
+                try DayDAO.Queries.previousWeek.fetchAll(db).map {
+                    try $0.toDomainModel(db)
+                }
+            }
+        } catch {
+            Log.error(error.localizedDescription)
+            return []
         }
     }
 
@@ -124,7 +150,7 @@ public struct PrayersClient {
     public func getFaraaidDone() -> Int {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANPrayerDAO.filter(ANPrayerDAO.Columns.isDone == true).fetchCount(db)
+                try PrayerDAO.filter(PrayerDAO.Columns.isDone == true).fetchCount(db)
             }
         } catch {
             Log.error(error.localizedDescription)
@@ -135,7 +161,7 @@ public struct PrayersClient {
     public func getSunnahsPrayed() -> Int {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANSunnahDAO.filter(ANSunnahDAO.Columns.isDone == true).fetchCount(db)
+                try SunnahDAO.filter(SunnahDAO.Columns.isDone == true).fetchCount(db)
             }
         } catch {
             Log.error(error.localizedDescription)
@@ -170,37 +196,13 @@ public struct PrayersClient {
 
 // MARK: DependencyKey
 
-extension PrayersClient: DependencyKey {
-    public static let liveValue = PrayersClient()
+extension PrayersService: DependencyKey {
+    public static let liveValue = PrayersService()
 }
 
 public extension DependencyValues {
-    var prayersDB: PrayersClient {
-        get { self[PrayersClient.self] }
-        set { self[PrayersClient.self] = newValue }
+    var prayersService: PrayersService {
+        get { self[PrayersService.self] }
+        set { self[PrayersService.self] = newValue }
     }
-}
-
-extension Foundation.Bundle {
-    static var prayersClientBundle: Bundle = {
-        // The name of your local package, prepended by "LocalPackages_"
-        let bundleName = "AlNajd_PrayersClient"
-        let candidates = [
-            // Bundle should be present here when the package is linked into an App.
-            Bundle.main.resourceURL,
-            // Bundle should be present here when the package is linked into a framework.
-            Bundle(for: CurrentBundleFinder.self).resourceURL,
-            // For command-line tools.
-            Bundle.main.bundleURL,
-            // Bundle should be present here when running previews from a different package (this is the path to "…/Debug-iphonesimulator/").
-            Bundle(for: CurrentBundleFinder.self).resourceURL?.deletingLastPathComponent().deletingLastPathComponent(),
-        ]
-        for candidate in candidates {
-            let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
-            if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
-                return bundle
-            }
-        }
-        fatalError("unable to find bundle named \(bundleName)")
-    }()
 }

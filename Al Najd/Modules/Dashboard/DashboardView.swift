@@ -46,16 +46,17 @@ public struct DashboardView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: .p16) {
                     makeCurrentStreakView(viewStore.prayingStreak)
-                    makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone)
-                        .padding(.horizontal)
+                    makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone).padding(.horizontal)
                     HStack {
                         makeMetricView(title: L10n.sunnah, value: viewStore.sunnahsPrayed)
                         makeMetricView(title: L10n.azkar, value: viewStore.azkarDoneCount)
                     }.padding(.horizontal)
 
+                    RangeAnalysisCardView(progress: viewStore.report)
+                        .padding(.horizontal)
                     makeChartView(title: L10n.sunnah, viewStore: viewStore)
                         .padding(.horizontal)
-                    makeFeedbackView()
+                    makeFeedbackView(viewStore.feedback)
                         .padding()
                 }
                 .padding(.vertical)
@@ -70,8 +71,8 @@ public struct DashboardView: View {
     }
 
     @ViewBuilder
-    func makeFeedbackView() -> some View {
-        Text(L10n.doingGreat)
+    func makeFeedbackView(_ feedback: String) -> some View {
+        Text(feedback)
             .scaledFont(.pBody)
             .multilineTextAlignment(.center)
             .foregroundColor(Asset.Colors.Apple.dark.swiftUIColor)

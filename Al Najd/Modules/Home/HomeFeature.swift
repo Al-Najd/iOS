@@ -9,7 +9,7 @@ import ComposableArchitecture
 import Foundation
 
 public struct Home: ReducerProtocol {
-    @Dependency(\.prayersDB)
+    @Dependency(\.prayersService)
     private var prayersDB
 
     public init() { }

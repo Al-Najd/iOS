@@ -40,7 +40,7 @@ extension AzkarDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 // MARK: TableRecord, EncodableRecord
 
 extension AzkarDAO: TableRecord, EncodableRecord {
-    static let prayer = belongsTo(ANPrayerDAO.self)
+    static let prayer = belongsTo(PrayerDAO.self)
 
     public static var databaseTableName = "azkar"
 

@@ -148,6 +148,29 @@ public enum L10n {
   public static let choose = L10n.tr("Localizables", "Choose ", fallback: "اختر ")
   /// بياناتي
   public static let dashboard = L10n.tr("Localizables", "Dashboard", fallback: "بياناتي")
+  /// استمر، إنت قادر عليه!
+  public static let dashboardIndicatorEncourageMessage = L10n.tr("Localizables", "dashboard_indicator_encourageMessage", fallback: "استمر، إنت قادر عليه!")
+  /// مشقت؟ لا تقلق، إنت قدها، تعرف مين بيقدر يساعدك؟ الفجر! احرص على صلاة الفجر لتسهل باقي الأعمال!
+  public static let dashboardIndicatorFajrAdvisorMessage = L10n.tr("Localizables", "dashboard_indicator_fajrAdvisorMessage", fallback: "مشقت؟ لا تقلق، إنت قدها، تعرف مين بيقدر يساعدك؟ الفجر! احرص على صلاة الفجر لتسهل باقي الأعمال!")
+  /// ممتاز على صلاة الفجر والعشاء 👏
+  /// إذا صليتهما في الجماعة، فالأجر مثل أنك قمت بقيام الليل كله
+  public static let dashboardIndicatorFajrAndAishaaPraiserMessage = L10n.tr("Localizables", "dashboard_indicator_fajrAndAishaaPraiserMessage", fallback: "ممتاز على صلاة الفجر والعشاء 👏\nإذا صليتهما في الجماعة، فالأجر مثل أنك قمت بقيام الليل كله")
+  /// أبليت حسنا علي صلاتك للفجر في %@
+  public static func dashboardIndicatorFajrPraiserMessage(_ p1: Any) -> String {
+    return L10n.tr("Localizables", "dashboard_indicator_fajrPraiserMessage", String(describing: p1), fallback: "أبليت حسنا علي صلاتك للفجر في %@")
+  }
+  /// شغل جيد!
+  public static let dashboardIndicatorPraiseMessage = L10n.tr("Localizables", "dashboard_indicator_praiseMessage", fallback: "شغل جيد!")
+  /// نصيحة اليوم
+  public static let dashboardIndicatorTipOfTheDayMessage = L10n.tr("Localizables", "dashboard_indicator_tipOfTheDayMessage", fallback: "نصيحة اليوم")
+  /// أنتبه!
+  public static let dashboardIndicatorWarningMessage = L10n.tr("Localizables", "dashboard_indicator_warningMessage", fallback: "أنتبه!")
+  /// إزاي لو نخليه تحدي علينا نسجّل إنجازات عظيمة هنا؟ مش هيبقى رهيب؟
+  public static let dashboardNotEnoughDataMessage1 = L10n.tr("Localizables", "dashboard_notEnoughData_message1", fallback: "إزاي لو نخليه تحدي علينا نسجّل إنجازات عظيمة هنا؟ مش هيبقى رهيب؟")
+  /// يا تُرَا نقدر نعمل إنجازات جامدة طول الأسبوع ونعرضها هنا؟ خلينا نحقق الهدف ده في الأسبوع ده!
+  public static let dashboardNotEnoughDataMessage2 = L10n.tr("Localizables", "dashboard_notEnoughData_message2", fallback: "يا تُرَا نقدر نعمل إنجازات جامدة طول الأسبوع ونعرضها هنا؟ خلينا نحقق الهدف ده في الأسبوع ده!")
+  /// يعني حزين قوي، بس لسه في فرصة! خلينا ندعي بجد في الأسبوع ده!
+  public static let dashboardNotEnoughDataMessage3 = L10n.tr("Localizables", "dashboard_notEnoughData_message3", fallback: "يعني حزين قوي، بس لسه في فرصة! خلينا ندعي بجد في الأسبوع ده!")
   /// Plural format key: "%#@daysCount@"
   public static func daysCount(_ p1: Int) -> String {
     return L10n.tr("Localizables", "days_count", p1, fallback: "Plural format key: \"%#@daysCount@\"")

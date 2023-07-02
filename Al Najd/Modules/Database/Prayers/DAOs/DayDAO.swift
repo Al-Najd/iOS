@@ -17,6 +17,18 @@ public struct DayDAO {
     public var date: Date
 }
 
+extension DayDAO {
+    func toDomainModel(_ db: Database) throws -> Day {
+        .init(
+            id: Int(id!),
+            date: date,
+            prayers: .init(uniqueElements: try prayers.fetchAll(db).map { try $0.toDomainModel(db) }),
+            morningAzkar: .init(uniqueElements: try morningAzkar.fetchAll(db).map { $0.toDomainModel() }),
+            nightAzkar: .init(uniqueElements: try nightAzkar.fetchAll(db).map { $0.toDomainModel() })
+        )
+    }
+}
+
 // MARK: Codable, FetchableRecord, MutablePersistableRecord
 
 extension DayDAO: Codable, FetchableRecord, MutablePersistableRecord { }
@@ -26,9 +38,9 @@ extension DayDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 extension DayDAO: TableRecord, EncodableRecord {
     public static var databaseTableName = "days"
 
-    static let prayers = hasMany(ANPrayerDAO.self)
-    static let sunnah = hasMany(ANSunnahDAO.self, through: prayers, using: ANPrayerDAO.sunnah)
-    static let azkar = hasMany(AzkarDAO.self, through: prayers, using: ANPrayerDAO.azkar)
+    static let prayers = hasMany(PrayerDAO.self)
+    static let sunnah = hasMany(SunnahDAO.self, through: prayers, using: PrayerDAO.sunnah)
+    static let azkar = hasMany(AzkarDAO.self, through: prayers, using: PrayerDAO.azkar)
     static let timedAzkar = hasMany(AzkarTimedDAO.self)
     static let nafila = hasMany(ANNafilaDAO.self)
 
@@ -38,6 +50,20 @@ extension DayDAO: TableRecord, EncodableRecord {
     }
 
     enum Queries {
+        static var currentWeek: QueryInterfaceRequest<DayDAO> {
+            DayDAO.filter(
+                Columns.date <= Date().dateAtStartOf(.day) &&
+                Columns.date >= Date().dateAtStartOf(.day).adding(.day, value: -6)
+            )
+        }
+
+        static var previousWeek: QueryInterfaceRequest<DayDAO> {
+            DayDAO.filter(
+                Columns.date <= Date().dateAtStartOf(.day).adding(.day, value: -6) &&
+                Columns.date >= Date().dateAtStartOf(.day).adding(.day, value: -13)
+            )
+        }
+
         static var beforeToday: QueryInterfaceRequest<DayDAO> {
             DayDAO.filter(
                 Columns.date <= Date().dateAtStartOf(.day)
@@ -48,20 +74,16 @@ extension DayDAO: TableRecord, EncodableRecord {
             DayDAO.filter(Columns.date == Date().dateAtStartOf(.day))
         }
 
-        static var todayPrayers: QueryInterfaceRequest<ANPrayerDAO> {
-            today.including(all: prayers).asRequest(of: ANPrayerDAO.self)
+        static var todayPrayers: QueryInterfaceRequest<PrayerDAO> {
+            today.including(all: prayers).asRequest(of: PrayerDAO.self)
         }
 
-        static var previousWeek: QueryInterfaceRequest<DayDAO> {
-            DayDAO.filter(Date().startOfDay.previousWeek.contains(DayDAO.Columns.date))
-        }
-
-        static var withMissedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
-            DayDAO.including(all: prayers).asRequest(of: ANPrayerDAO.self).filter(ANPrayerDAO.Columns.isDone == false)
+        static var withMissedPrayers: QueryInterfaceRequest<PrayerDAO> {
+            DayDAO.including(all: prayers).asRequest(of: PrayerDAO.self).filter(PrayerDAO.Columns.isDone == false)
         }
 
         static var previousWeekWithDoneSunnah: QueryInterfaceRequest<DayDAO> {
-            previousWeek.including(all: sunnah.filter(ANSunnahDAO.Columns.isDone == true))
+            previousWeek.including(all: sunnah.filter(SunnahDAO.Columns.isDone == true))
         }
 
         static func getDay(for date: Date) -> QueryInterfaceRequest<DayDAO> {
@@ -97,11 +119,11 @@ extension DayDAO: TableRecord, EncodableRecord {
         request(for: Self.nafila)
     }
 
-    var prayers: QueryInterfaceRequest<ANPrayerDAO> {
+    var prayers: QueryInterfaceRequest<PrayerDAO> {
         request(for: Self.prayers)
     }
 
-    var sunnah: QueryInterfaceRequest<ANSunnahDAO> {
+    var sunnah: QueryInterfaceRequest<SunnahDAO> {
         request(for: Self.sunnah)
     }
 
@@ -121,20 +143,20 @@ extension DayDAO: TableRecord, EncodableRecord {
         timedAzkar.filter(AzkarTimedDAO.Columns.time == AzkarTimedDAO.Time.night)
     }
 
-    var donePrayers: QueryInterfaceRequest<ANPrayerDAO> {
-        prayers.filter(ANPrayerDAO.Columns.isDone)
+    var donePrayers: QueryInterfaceRequest<PrayerDAO> {
+        prayers.filter(PrayerDAO.Columns.isDone)
     }
 
-    var doneSunnah: QueryInterfaceRequest<ANSunnahDAO> {
-        sunnah.filter(ANSunnahDAO.Columns.isDone == true)
+    var doneSunnah: QueryInterfaceRequest<SunnahDAO> {
+        sunnah.filter(SunnahDAO.Columns.isDone == true)
     }
 
     var doneAzkar: QueryInterfaceRequest<AzkarDAO> {
         azkar.filter(AzkarDAO.Columns.currentCount == 0)
     }
 
-    var missedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
-        prayers.filter(ANPrayerDAO.Columns.isDone == false)
+    var missedPrayers: QueryInterfaceRequest<PrayerDAO> {
+        prayers.filter(PrayerDAO.Columns.isDone == false)
     }
 }
 

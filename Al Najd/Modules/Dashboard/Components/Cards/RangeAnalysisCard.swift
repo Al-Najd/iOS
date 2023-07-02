@@ -57,12 +57,12 @@ public struct RangeAnalysisCardView: View {
 
     public var body: some View {
         VStack {
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: .p16) {
                 HStack {
                     VStack(alignment: .leading, spacing: .p8) {
                         Text(progress.title.localized)
                             .scaledFont(.pTitle1, .bold)
-                            .foregroundColor(.mono.offblack)
+                            .foregroundColor(.primaryBluberry)
 
                         if progress.hasEnoughData {
                             if let highlightedDay = highlightedDay {
@@ -71,17 +71,17 @@ public struct RangeAnalysisCardView: View {
                                         arguments: highlightedDay.count, highlightedDay.limit
                                     ))
                                     .scaledFont(.pHeadline, .bold)
-                                    .foregroundColor(highlightedDay.indicator.color.light)
+                                    .foregroundColor(highlightedDay.indicator.fill)
                                     .padding(.vertical, .p4)
                                     .padding(.horizontal, .p8)
                                     .background(
                                         RoundedRectangle(cornerRadius: .r16)
-                                            .fill(highlightedDay.indicator.color.dark)
-                                            .shadow(color: highlightedDay.indicator.color.default, radius: .r4))
+                                            .fill(highlightedDay.indicator.stroke)
+                                            .shadow(color: highlightedDay.indicator.shadow, radius: .r4))
                             } else {
                                 Text("Last n Days".localized(arguments: progress.reports.count))
                                     .scaledFont(.pHeadline, .bold)
-                                    .foregroundColor(.mono.offblack.opacity(0.5))
+                                    .foregroundColor(.mono.line)
                             }
                         }
                     }
@@ -119,7 +119,7 @@ public struct RangeAnalysisCardView: View {
             .padding(.p16)
             .background(
                 RoundedRectangle(cornerRadius: .r16)
-                    .fill(Color.mono.offwhite)
+                    .fill(Color.primaryBlackberry)
                     .shadow(
                         color: .black.opacity(0.25),
                         radius: 2,

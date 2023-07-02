@@ -12,11 +12,11 @@ import GRDB
 
 // MARK: - ANPrayerDAO + Changeable
 
-extension ANPrayerDAO: Changeable { }
+extension PrayerDAO: Changeable { }
 
 // MARK: - ANSunnahDAO + Changeable
 
-extension ANSunnahDAO: Changeable { }
+extension SunnahDAO: Changeable { }
 
 // MARK: - ANAzkarDAO + Changeable
 
