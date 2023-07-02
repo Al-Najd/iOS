@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E208E9DA2A51E57B00D7734A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208E9D92A51E57B00D7734A /* Day.swift */; };
+		E208E9E22A520C2000D7734A /* ElMessiri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E208E9E02A520C1F00D7734A /* ElMessiri-Bold.ttf */; };
+		E208E9E32A520C2000D7734A /* ElMessiri-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E208E9E12A520C2000D7734A /* ElMessiri-Regular.ttf */; };
 		E29B86192A51BB3700F9B73F /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854A2A51BB3600F9B73F /* Al_NajdApp.swift */; };
 		E29B861A2A51BB3700F9B73F /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854C2A51BB3600F9B73F /* PluginProtocol.swift */; };
 		E29B861B2A51BB3700F9B73F /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854D2A51BB3600F9B73F /* AppearancePlugin.swift */; };
@@ -21,8 +23,6 @@
 		E29B86232A51BB3700F9B73F /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85592A51BB3700F9B73F /* Metrics.swift */; };
 		E29B86242A51BB3700F9B73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29B855B2A51BB3700F9B73F /* Assets.xcassets */; };
 		E29B86252A51BB3700F9B73F /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = E29B855C2A51BB3700F9B73F /* fonts.json */; };
-		E29B86262A51BB3700F9B73F /* Cairo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E29B855F2A51BB3700F9B73F /* Cairo-Regular.ttf */; };
-		E29B86272A51BB3700F9B73F /* Cairo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E29B85602A51BB3700F9B73F /* Cairo-Bold.ttf */; };
 		E29B86282A51BB3700F9B73F /* SFProRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E29B85622A51BB3700F9B73F /* SFProRounded-Bold.otf */; };
 		E29B86292A51BB3700F9B73F /* SFProRounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E29B85632A51BB3700F9B73F /* SFProRounded-Regular.otf */; };
 		E29B862A2A51BB3700F9B73F /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E29B85652A51BB3700F9B73F /* Poppins-Regular.ttf */; };
@@ -156,6 +156,8 @@
 
 /* Begin PBXFileReference section */
 		E208E9D92A51E57B00D7734A /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		E208E9E02A520C1F00D7734A /* ElMessiri-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ElMessiri-Bold.ttf"; sourceTree = "<group>"; };
+		E208E9E12A520C2000D7734A /* ElMessiri-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ElMessiri-Regular.ttf"; sourceTree = "<group>"; };
 		E29B85382A51BB1D00F9B73F /* Al Najd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Al Najd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29B854A2A51BB3600F9B73F /* Al_NajdApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Al_NajdApp.swift; sourceTree = "<group>"; };
 		E29B854C2A51BB3600F9B73F /* PluginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
@@ -170,8 +172,6 @@
 		E29B85592A51BB3700F9B73F /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		E29B855B2A51BB3700F9B73F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E29B855C2A51BB3700F9B73F /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
-		E29B855F2A51BB3700F9B73F /* Cairo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-Regular.ttf"; sourceTree = "<group>"; };
-		E29B85602A51BB3700F9B73F /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		E29B85622A51BB3700F9B73F /* SFProRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProRounded-Bold.otf"; sourceTree = "<group>"; };
 		E29B85632A51BB3700F9B73F /* SFProRounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProRounded-Regular.otf"; sourceTree = "<group>"; };
 		E29B85652A51BB3700F9B73F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -346,6 +346,15 @@
 			path = DAOs;
 			sourceTree = "<group>";
 		};
+		E208E9DB2A520B8300D7734A /* ElMessiri */ = {
+			isa = PBXGroup;
+			children = (
+				E208E9E02A520C1F00D7734A /* ElMessiri-Bold.ttf */,
+				E208E9E12A520C2000D7734A /* ElMessiri-Regular.ttf */,
+			);
+			path = ElMessiri;
+			sourceTree = "<group>";
+		};
 		E29B852F2A51BB1D00F9B73F = {
 			isa = PBXGroup;
 			children = (
@@ -459,20 +468,11 @@
 		E29B855D2A51BB3700F9B73F /* Families */ = {
 			isa = PBXGroup;
 			children = (
-				E29B855E2A51BB3700F9B73F /* Cairo */,
+				E208E9DB2A520B8300D7734A /* ElMessiri */,
 				E29B85612A51BB3700F9B73F /* SFProRounded */,
 				E29B85642A51BB3700F9B73F /* Poppins */,
 			);
 			path = Families;
-			sourceTree = "<group>";
-		};
-		E29B855E2A51BB3700F9B73F /* Cairo */ = {
-			isa = PBXGroup;
-			children = (
-				E29B855F2A51BB3700F9B73F /* Cairo-Regular.ttf */,
-				E29B85602A51BB3700F9B73F /* Cairo-Bold.ttf */,
-			);
-			path = Cairo;
 			sourceTree = "<group>";
 		};
 		E29B85612A51BB3700F9B73F /* SFProRounded */ = {
@@ -981,12 +981,12 @@
 				E2DC69992A51C788001679A6 /* Images.xcassets in Resources */,
 				E29B863B2A51BB3700F9B73F /* azkar-db.json in Resources */,
 				E2DC69932A51C668001679A6 /* Localizables.strings in Resources */,
+				E208E9E22A520C2000D7734A /* ElMessiri-Bold.ttf in Resources */,
 				E29B863A2A51BB3700F9B73F /* alnajd.sqlite3 in Resources */,
 				E29B86282A51BB3700F9B73F /* SFProRounded-Bold.otf in Resources */,
 				E29B862B2A51BB3700F9B73F /* Poppins-Bold.ttf in Resources */,
-				E29B86272A51BB3700F9B73F /* Cairo-Bold.ttf in Resources */,
+				E208E9E32A520C2000D7734A /* ElMessiri-Regular.ttf in Resources */,
 				E2DC69942A51C668001679A6 /* Assets.xcassets in Resources */,
-				E29B86262A51BB3700F9B73F /* Cairo-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
