@@ -12,7 +12,7 @@ import GRDB
 
 // MARK: - ANAzkarDAO
 
-public struct ANAzkarDAO {
+public struct AzkarDAO {
     public var id: Int64?
     public var name: String
     public var reward: String
@@ -22,8 +22,8 @@ public struct ANAzkarDAO {
     public var prayerId: Int64?
 }
 
-extension ANAzkarDAO {
-    func toDomainModel() -> ANAzkar {
+extension AzkarDAO {
+    func toDomainModel() -> Zekr {
         .init(
             id: id!,
             name: name,
@@ -35,11 +35,11 @@ extension ANAzkarDAO {
 
 // MARK: Codable, FetchableRecord, MutablePersistableRecord
 
-extension ANAzkarDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+extension AzkarDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 
 // MARK: TableRecord, EncodableRecord
 
-extension ANAzkarDAO: TableRecord, EncodableRecord {
+extension AzkarDAO: TableRecord, EncodableRecord {
     static let prayer = belongsTo(ANPrayerDAO.self)
 
     public static var databaseTableName = "azkar"
@@ -53,8 +53,8 @@ extension ANAzkarDAO: TableRecord, EncodableRecord {
     }
 }
 
-extension ANAzkarDAO {
-    static let common: (Int64) -> [ANAzkarDAO] = {
+extension AzkarDAO {
+    static let common: (Int64) -> [AzkarDAO] = {
         [
             .init(name: "estigphar", reward: "afterAzkar_estigphar_reward", repetation: 3, currentCount: 3, prayerId: $0),
             .init(name: "ant_al_salam", reward: "", repetation: 1, currentCount: 1, prayerId: $0),
@@ -73,7 +73,7 @@ extension ANAzkarDAO {
         ]
     }
 
-    static let fajrAndMaghrib: (Int64) -> [ANAzkarDAO] = {
+    static let fajrAndMaghrib: (Int64) -> [AzkarDAO] = {
         [
             .init(
                 name: "la_ilah_ila_allah_wahdah",
@@ -86,7 +86,7 @@ extension ANAzkarDAO {
             sewarFajrAndMaghrib($0)
     }
 
-    static let sewar: (Int64) -> [ANAzkarDAO] = {
+    static let sewar: (Int64) -> [AzkarDAO] = {
         [
             .init(name: "ayat_al_kursi", reward: "", repetation: 1, currentCount: 1, prayerId: $0),
             .init(name: "ayat_al_ikhlas", reward: "", repetation: 1, currentCount: 1, prayerId: $0),
@@ -95,7 +95,7 @@ extension ANAzkarDAO {
         ]
     }
 
-    static let sewarFajrAndMaghrib: (Int64) -> [ANAzkarDAO] = {
+    static let sewarFajrAndMaghrib: (Int64) -> [AzkarDAO] = {
         [
             .init(name: "ayat_al_kursi", reward: "", repetation: 3, currentCount: 3, prayerId: $0),
             .init(name: "ayat_al_ikhlas", reward: "", repetation: 3, currentCount: 3, prayerId: $0),

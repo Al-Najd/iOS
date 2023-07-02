@@ -47,64 +47,6 @@ public struct RangeProgress: Identifiable, Equatable {
     }
 }
 
-public extension RangeProgress {
-    static let mock: [RangeProgress] = [
-        .init(
-            title: "Faraaid",
-            reports: DayProgress.mock,
-            isImproving: false,
-            insight: .init(
-                indicator: .danger,
-                details: "Al Faraaid are very important, make sure you don't miss them intentionally and ask for help from Allah, you got this!")),
-        .init(
-            title: "Sunnah",
-            reports: DayProgress.mock,
-            isImproving: true,
-            insight: .init(
-                indicator: .encourage,
-                details: "You did great with Sunnah last week, let's max out this week's Sunnah!")),
-        .init(
-            title: "Nafila",
-            reports: DayProgress.mock,
-            isImproving: false,
-            insight: .init(
-                indicator: .praise,
-                details: "You did Wonderful in Nafila!, I mean, wow! off the charts!, are we speaking to a 'Wali' now or what? haha, great work champ!")),
-    ]
-}
-
-// MARK: - DayProgress
-
-public struct DayProgress: Identifiable, Equatable {
-    public var id = UUID().uuidString
-    let count: Int
-    let day: String
-    let limit: Int
-    let indicator: Indicator
-
-    static let mock: [DayProgress] = [
-        .init(count: 5, day: "S", limit: 5, indicator: .good),
-        .init(count: 0, day: "S", limit: 5, indicator: .bad),
-        .init(count: 1, day: "M", limit: 5, indicator: .bad),
-        .init(count: 2, day: "T", limit: 5, indicator: .moderate),
-        .init(count: 4, day: "W", limit: 5, indicator: .good),
-        .init(count: 3, day: "T", limit: 5, indicator: .moderate),
-        .init(count: 5, day: "F", limit: 5, indicator: .good),
-    ]
-
-    public struct Indicator {
-        let color: BrandColor
-
-        static let good: Indicator = .init(color: Color.success)
-        static let moderate: Indicator = .init(color: Color.warning)
-        static let bad: Indicator = .init(color: Color.danger)
-    }
-
-    public static func == (lhs: DayProgress, rhs: DayProgress) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
 // MARK: - RangeAnalysisCardView
 
 public struct RangeAnalysisCardView: View {

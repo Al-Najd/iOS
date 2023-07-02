@@ -12,24 +12,24 @@ import GRDB
 
 // MARK: - ANDayDAO
 
-public struct ANDayDAO {
+public struct DayDAO {
     public var id: Int64?
     public var date: Date
 }
 
 // MARK: Codable, FetchableRecord, MutablePersistableRecord
 
-extension ANDayDAO: Codable, FetchableRecord, MutablePersistableRecord { }
+extension DayDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 
 // MARK: TableRecord, EncodableRecord
 
-extension ANDayDAO: TableRecord, EncodableRecord {
+extension DayDAO: TableRecord, EncodableRecord {
     public static var databaseTableName = "days"
 
     static let prayers = hasMany(ANPrayerDAO.self)
     static let sunnah = hasMany(ANSunnahDAO.self, through: prayers, using: ANPrayerDAO.sunnah)
-    static let azkar = hasMany(ANAzkarDAO.self, through: prayers, using: ANPrayerDAO.azkar)
-    static let timedAzkar = hasMany(ANAzkarTimedDAO.self)
+    static let azkar = hasMany(AzkarDAO.self, through: prayers, using: ANPrayerDAO.azkar)
+    static let timedAzkar = hasMany(AzkarTimedDAO.self)
     static let nafila = hasMany(ANNafilaDAO.self)
 
     enum Columns {
@@ -38,58 +38,58 @@ extension ANDayDAO: TableRecord, EncodableRecord {
     }
 
     enum Queries {
-        static var beforeToday: QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(
+        static var beforeToday: QueryInterfaceRequest<DayDAO> {
+            DayDAO.filter(
                 Columns.date <= Date().dateAtStartOf(.day)
             )
         }
 
-        static var today: QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(Columns.date == Date().dateAtStartOf(.day))
+        static var today: QueryInterfaceRequest<DayDAO> {
+            DayDAO.filter(Columns.date == Date().dateAtStartOf(.day))
         }
 
         static var todayPrayers: QueryInterfaceRequest<ANPrayerDAO> {
             today.including(all: prayers).asRequest(of: ANPrayerDAO.self)
         }
 
-        static var previousWeek: QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(Date().startOfDay.previousWeek.contains(ANDayDAO.Columns.date))
+        static var previousWeek: QueryInterfaceRequest<DayDAO> {
+            DayDAO.filter(Date().startOfDay.previousWeek.contains(DayDAO.Columns.date))
         }
 
         static var withMissedPrayers: QueryInterfaceRequest<ANPrayerDAO> {
-            ANDayDAO.including(all: prayers).asRequest(of: ANPrayerDAO.self).filter(ANPrayerDAO.Columns.isDone == false)
+            DayDAO.including(all: prayers).asRequest(of: ANPrayerDAO.self).filter(ANPrayerDAO.Columns.isDone == false)
         }
 
-        static var previousWeekWithDoneSunnah: QueryInterfaceRequest<ANDayDAO> {
+        static var previousWeekWithDoneSunnah: QueryInterfaceRequest<DayDAO> {
             previousWeek.including(all: sunnah.filter(ANSunnahDAO.Columns.isDone == true))
         }
 
-        static func getDay(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
-            ANDayDAO.filter(Columns.date == date.startOfDay)
+        static func getDay(for date: Date) -> QueryInterfaceRequest<DayDAO> {
+            DayDAO.filter(Columns.date == date.startOfDay)
         }
 
-        static func getPrayers(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+        static func getPrayers(for date: Date) -> QueryInterfaceRequest<DayDAO> {
             getDay(for: date)
         }
 
-        static func getAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+        static func getAzkar(for date: Date) -> QueryInterfaceRequest<DayDAO> {
             getDay(for: date)
         }
 
-        static func getNafila(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+        static func getNafila(for date: Date) -> QueryInterfaceRequest<DayDAO> {
             getDay(for: date)
         }
 
-        private static func getTimedAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
+        private static func getTimedAzkar(for date: Date) -> QueryInterfaceRequest<DayDAO> {
             getDay(for: date)
         }
 
-        static func getMorningAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
-            getTimedAzkar(for: date).filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.day)
+        static func getMorningAzkar(for date: Date) -> QueryInterfaceRequest<DayDAO> {
+            getTimedAzkar(for: date).filter(AzkarTimedDAO.Columns.time == AzkarTimedDAO.Time.day)
         }
 
-        static func getNightAzkar(for date: Date) -> QueryInterfaceRequest<ANDayDAO> {
-            getTimedAzkar(for: date).filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.night)
+        static func getNightAzkar(for date: Date) -> QueryInterfaceRequest<DayDAO> {
+            getTimedAzkar(for: date).filter(AzkarTimedDAO.Columns.time == AzkarTimedDAO.Time.night)
         }
     }
 
@@ -105,20 +105,20 @@ extension ANDayDAO: TableRecord, EncodableRecord {
         request(for: Self.sunnah)
     }
 
-    var azkar: QueryInterfaceRequest<ANAzkarDAO> {
+    var azkar: QueryInterfaceRequest<AzkarDAO> {
         request(for: Self.azkar)
     }
 
-    var timedAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
+    var timedAzkar: QueryInterfaceRequest<AzkarTimedDAO> {
         request(for: Self.timedAzkar)
     }
 
-    var morningAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
-        timedAzkar.filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.day)
+    var morningAzkar: QueryInterfaceRequest<AzkarTimedDAO> {
+        timedAzkar.filter(AzkarTimedDAO.Columns.time == AzkarTimedDAO.Time.day)
     }
 
-    var nightAzkar: QueryInterfaceRequest<ANAzkarTimedDAO> {
-        timedAzkar.filter(ANAzkarTimedDAO.Columns.time == ANAzkarTimedDAO.Time.night)
+    var nightAzkar: QueryInterfaceRequest<AzkarTimedDAO> {
+        timedAzkar.filter(AzkarTimedDAO.Columns.time == AzkarTimedDAO.Time.night)
     }
 
     var donePrayers: QueryInterfaceRequest<ANPrayerDAO> {
@@ -129,8 +129,8 @@ extension ANDayDAO: TableRecord, EncodableRecord {
         sunnah.filter(ANSunnahDAO.Columns.isDone == true)
     }
 
-    var doneAzkar: QueryInterfaceRequest<ANAzkarDAO> {
-        azkar.filter(ANAzkarDAO.Columns.currentCount == 0)
+    var doneAzkar: QueryInterfaceRequest<AzkarDAO> {
+        azkar.filter(AzkarDAO.Columns.currentCount == 0)
     }
 
     var missedPrayers: QueryInterfaceRequest<ANPrayerDAO> {

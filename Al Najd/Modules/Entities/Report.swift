@@ -14,18 +14,18 @@ public enum Report { }
 public extension Report {
     struct Daily: Equatable {
         public let date: Date
-        public let prayers: [ANPrayer]
+        public let prayers: [Prayer]
 
-        public init(date: Date, prayers: [ANPrayer]) {
+        public init(date: Date, prayers: [Prayer]) {
             self.date = date
             self.prayers = prayers
         }
     }
 
     struct Range: Equatable {
-        public let ranges: [Date: [ANPrayer]]
+        public let ranges: [Date: [Prayer]]
 
-        public init(ranges: [Date: [ANPrayer]]) {
+        public init(ranges: [Date: [Prayer]]) {
             self.ranges = ranges
         }
     }

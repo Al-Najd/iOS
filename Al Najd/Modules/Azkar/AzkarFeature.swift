@@ -43,8 +43,8 @@ public struct Azkar: ReducerProtocol {
 public extension Azkar {
     struct State: Equatable {
         var date = Date().startOfDay
-        var morningAzkar: IdentifiedArrayOf<ANAzkar> = []
-        var nightAzkar: IdentifiedArrayOf<ANAzkar> = []
+        var morningAzkar: IdentifiedArrayOf<Zekr> = []
+        var nightAzkar: IdentifiedArrayOf<Zekr> = []
 
         public init() { }
     }
@@ -55,7 +55,7 @@ public extension Azkar {
 public extension Azkar {
     enum Action {
         case onAppear
-        case onDoingMorning(ANAzkar)
-        case onDoingNight(ANAzkar)
+        case onDoingMorning(Zekr)
+        case onDoingNight(Zekr)
     }
 }

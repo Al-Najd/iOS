@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Zekr
 
-struct Zekr: Codable {
+struct ZekrLM: Codable {
     let category: Category
     let count: Int
     let purpose: String
@@ -35,13 +35,13 @@ struct Zekr: Codable {
         fatalError()
     }
 
-    static var mainAzkar: [Zekr] = {
+    static var mainAzkar: [ZekrLM] = {
         let decoder = JSONDecoder()
         do {
             guard let url = Bundle.main.url(forResource: "azkar-db", withExtension: "json") else { return [] }
             let data = try Data(contentsOf: url)
             let azkar = try decoder
-                .decode(FailableCodableArray<Zekr>.self, from: data)
+                .decode(FailableCodableArray<ZekrLM>.self, from: data)
                 .elements
             return azkar
         } catch {
@@ -53,15 +53,15 @@ struct Zekr: Codable {
 
 // MARK: Zekr.Category
 
-extension Zekr {
+extension ZekrLM {
     enum Category: String, Decodable {
         case sabah = "أذكار الصباح"
         case masaa = "أذكار المساء"
     }
 }
 
-extension Zekr {
-    func toDAO(_ dayId: Int64) -> ANAzkarTimedDAO {
+extension ZekrLM {
+    func toDAO(_ dayId: Int64) -> AzkarTimedDAO {
         .init(
             name: zekr,
             reward: purpose,
@@ -72,8 +72,8 @@ extension Zekr {
     }
 }
 
-extension Zekr.Category {
-    func toDAO() -> ANAzkarTimedDAO.Time {
+extension ZekrLM.Category {
+    func toDAO() -> AzkarTimedDAO.Time {
         switch self {
         case .sabah:
             return .day

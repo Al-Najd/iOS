@@ -12,7 +12,7 @@ import GRDB
 // MARK: - PrayersClient
 
 public struct PrayersClient {
-    public func save(nafila: ANNafila?) {
+    public func save(nafila: Nafila?) {
         guard let nafila = nafila else { return }
         do {
             try DatabaseService.dbQueue.write { db in
@@ -25,7 +25,7 @@ public struct PrayersClient {
         }
     }
 
-    public func save(prayer: ANPrayer?) {
+    public func save(prayer: Prayer?) {
         guard let prayer = prayer else { return }
         do {
             try DatabaseService.dbQueue.write { db in
@@ -38,7 +38,7 @@ public struct PrayersClient {
         }
     }
 
-    public func save(sunnah: ANSunnah?) {
+    public func save(sunnah: Sunnah?) {
         guard let sunnah = sunnah else { return }
         do {
             try DatabaseService.dbQueue.write { db in
@@ -51,11 +51,11 @@ public struct PrayersClient {
         }
     }
 
-    public func save(zekr: ANAzkar?) {
+    public func save(zekr: Zekr?) {
         guard let zekr = zekr else { return }
         do {
             try DatabaseService.dbQueue.write { db in
-                var dao = try ANAzkarDAO.fetchOne(db, key: zekr.id)
+                var dao = try AzkarDAO.fetchOne(db, key: zekr.id)
                 dao?.currentCount = zekr.currentCount
                 try dao?.update(db)
             }
@@ -64,10 +64,10 @@ public struct PrayersClient {
         }
     }
 
-    public func nafila(for date: Date) -> [ANNafila] {
+    public func nafila(for date: Date) -> [Nafila] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try (ANDayDAO.Queries.getNafila(for: date).fetchOne(db)?.nafila.fetchAll(db))!.compactMap {
+                try (DayDAO.Queries.getNafila(for: date).fetchOne(db)?.nafila.fetchAll(db))!.compactMap {
                     $0.toDomainModel()
                 }
             }
@@ -77,10 +77,10 @@ public struct PrayersClient {
         }
     }
 
-    public func prayers(for date: Date) -> [ANPrayer] {
+    public func prayers(for date: Date) -> [Prayer] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db).compactMap {
+                try DayDAO.Queries.getPrayers(for: date).fetchOne(db)?.prayers.fetchAll(db).compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
                         azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
@@ -92,10 +92,10 @@ public struct PrayersClient {
         }
     }
 
-    public func todayPrayers() -> [ANPrayer] {
+    public func todayPrayers() -> [Prayer] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.todayPrayers.fetchAll(db).compactMap {
+                try DayDAO.Queries.todayPrayers.fetchAll(db).compactMap {
                     $0.toDomainModel(
                         sunnah: try $0.sunnah.fetchAll(db).map { $0.toDomainModel() },
                         azkar: try $0.azkar.fetchAll(db).map { $0.toDomainModel() })
@@ -111,7 +111,7 @@ public struct PrayersClient {
         do {
             return try DatabaseService.dbQueue.read { db in
                 // Get days from today till days where streak was broken
-                let days = try ANDayDAO.Queries.beforeToday.including(all: ANDayDAO.prayers).all().fetchAll(db)
+                let days = try DayDAO.Queries.beforeToday.including(all: DayDAO.prayers).all().fetchAll(db)
                 let daysWithFullPrayers = try days.filter { try $0.missedPrayers.isEmpty(db) != false }
                 return daysWithFullPrayers.count
             }
@@ -146,7 +146,7 @@ public struct PrayersClient {
     public func getAzkarDoneCount() -> Int {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANAzkarDAO.filter(ANAzkarDAO.Columns.currentCount == 0).fetchCount(db)
+                try AzkarDAO.filter(AzkarDAO.Columns.currentCount == 0).fetchCount(db)
             }
         } catch {
             Log.error(error.localizedDescription)
@@ -157,7 +157,7 @@ public struct PrayersClient {
     public func getSunnahPerDay() -> [(date: Date, count: Int)] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.previousWeek.fetchAll(db).compactMap {
+                try DayDAO.Queries.previousWeek.fetchAll(db).compactMap {
                     ($0.date, try $0.doneSunnah.fetchCount(db))
                 }
             }

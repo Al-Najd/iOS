@@ -128,7 +128,7 @@ struct NafilaSubtaskView: View {
     var isDone: Bool
     var onDoing: () -> Void
 
-    init(_ nafila: ANNafila, onDoing: @escaping () -> Void) {
+    init(_ nafila: Nafila, onDoing: @escaping () -> Void) {
         title = nafila.title
         subtitle = nafila.subtitle
         isDone = nafila.isDone

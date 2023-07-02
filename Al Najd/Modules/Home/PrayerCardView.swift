@@ -16,14 +16,14 @@ public struct PrayerCardView: View {
     let isDone: Bool
     let image: ImageAsset
 
-    public init(prayer: ANPrayer) {
+    public init(prayer: Prayer) {
         title = prayer.title
         reward = prayer.reward.localized
         isDone = prayer.isDone
         image = prayer.image
     }
 
-    public init(nafila: ANNafila) {
+    public init(nafila: Nafila) {
         title = nafila.title
         reward = nafila.subtitle
         isDone = nafila.isDone

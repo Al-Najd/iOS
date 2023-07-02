@@ -41,11 +41,11 @@ public struct NafilaDetails: ReducerProtocol {
 
 public extension NafilaDetails {
     struct State: Identifiable, Equatable {
-        public var id: ANNafila.ID { nafila.id }
-        public var nafila: ANNafila
+        public var id: Nafila.ID { nafila.id }
+        public var nafila: Nafila
         public var date: String
 
-        public init(nafila: ANNafila, date: Date) {
+        public init(nafila: Nafila, date: Date) {
             self.nafila = nafila
             self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
         }

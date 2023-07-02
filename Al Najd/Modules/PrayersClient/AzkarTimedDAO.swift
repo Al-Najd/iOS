@@ -12,7 +12,7 @@ import GRDB
 
 // MARK: - ANAzkarTimedDAO
 
-public struct ANAzkarTimedDAO: Codable {
+public struct AzkarTimedDAO: Codable {
     public var id: Int64?
     public var name: String
     public var reward: String
@@ -34,15 +34,15 @@ public struct ANAzkarTimedDAO: Codable {
     }
 }
 
-extension ANAzkarTimedDAO {
-    func toDomainModel() -> ANAzkar {
-        ANAzkar(id: id!, name: name, reward: reward, repetation: repetation, currentCount: currentCount)
+extension AzkarTimedDAO {
+    func toDomainModel() -> Zekr {
+        Zekr(id: id!, name: name, reward: reward, repetation: repetation, currentCount: currentCount)
     }
 }
 
 // MARK: ANAzkarTimedDAO.Time
 
-public extension ANAzkarTimedDAO {
+public extension AzkarTimedDAO {
     enum Time: Int, Codable, DatabaseValueConvertible {
         case day = 0
         case night = 1
@@ -51,8 +51,8 @@ public extension ANAzkarTimedDAO {
 
 // MARK: TableRecord, EncodableRecord
 
-extension ANAzkarTimedDAO: TableRecord, EncodableRecord {
-    static let day = belongsTo(ANDayDAO.self)
+extension AzkarTimedDAO: TableRecord, EncodableRecord {
+    static let day = belongsTo(DayDAO.self)
 
     public static var databaseTableName = "azkar-timed"
 

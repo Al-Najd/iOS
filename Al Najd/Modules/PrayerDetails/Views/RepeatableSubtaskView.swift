@@ -15,7 +15,7 @@ struct RepeatableSubtaskView: View {
     var isDone: Bool { repetation == .zero }
     var onDoing: () -> Void
 
-    init(_ zekr: ANAzkar, onDoing: @escaping () -> Void) {
+    init(_ zekr: Zekr, onDoing: @escaping () -> Void) {
         title = zekr.name
         subtitle = zekr.reward
         repetation = zekr.currentCount

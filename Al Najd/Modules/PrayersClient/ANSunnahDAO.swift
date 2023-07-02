@@ -36,7 +36,7 @@ public extension ANSunnahDAO {
 }
 
 extension ANSunnahDAO {
-    func toDomainModel() -> ANSunnah {
+    func toDomainModel() -> Sunnah {
         .init(
             id: id!,
             name: name,
@@ -50,7 +50,7 @@ extension ANSunnahDAO {
 }
 
 extension ANSunnahDAO.Position {
-    func toDomainModel() -> ANSunnah.Position {
+    func toDomainModel() -> Sunnah.Position {
         switch self {
         case .before: return .before
         case .after: return .after
@@ -59,7 +59,7 @@ extension ANSunnahDAO.Position {
 }
 
 extension ANSunnahDAO.Affirmation {
-    func toDomainModel() -> ANSunnah.Affirmation {
+    func toDomainModel() -> Sunnah.Affirmation {
         switch self {
         case .affirmed: return .affirmed
         case .desirable: return .desirable
@@ -75,7 +75,7 @@ extension ANSunnahDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 
 extension ANSunnahDAO: TableRecord, EncodableRecord {
     static let prayer = belongsTo(ANPrayerDAO.self)
-    static let day = hasOne(ANDayDAO.self, through: prayer, using: ANPrayerDAO.day)
+    static let day = hasOne(DayDAO.self, through: prayer, using: ANPrayerDAO.day)
 
     public static var databaseTableName = "sunnah"
 
@@ -98,7 +98,7 @@ extension ANSunnahDAO: TableRecord, EncodableRecord {
         request(for: Self.prayer)
     }
 
-    var day: QueryInterfaceRequest<ANDayDAO> {
+    var day: QueryInterfaceRequest<DayDAO> {
         request(for: Self.day)
     }
 }

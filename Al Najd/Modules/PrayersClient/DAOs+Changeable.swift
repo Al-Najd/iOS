@@ -20,4 +20,4 @@ extension ANSunnahDAO: Changeable { }
 
 // MARK: - ANAzkarDAO + Changeable
 
-extension ANAzkarDAO: Changeable { }
+extension AzkarDAO: Changeable { }

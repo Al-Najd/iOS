@@ -136,7 +136,7 @@ private extension DatabaseService {
 
         try dbQueue.write { db in
             try daysInCurrentYear.forEach {
-                let day = try ANDayDAO(date: $0.date).insertAndFetch(db)
+                let day = try DayDAO(date: $0.date).insertAndFetch(db)
                 try seedPrayers((day?.id)!, db)
                 try seedTimedAzkar((day?.id)!, db)
                 try seedNafila((day?.id)!, db)
@@ -170,34 +170,34 @@ private extension DatabaseService {
     }
 
     static func seedTimedAzkar(_ dayId: Int64, _ db: Database) throws {
-        try ANAzkarTimedDAO.seedMorningAzkar(dayId, db)
-        try ANAzkarTimedDAO.seedNightAzkar(dayId, db)
+        try AzkarTimedDAO.seedMorningAzkar(dayId, db)
+        try AzkarTimedDAO.seedNightAzkar(dayId, db)
     }
 
     static func seedFajrSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {
         _ = try ANSunnahDAO.fajr(prayerId).insertAndFetch(db)
         try (
-            ANAzkarDAO.common(prayerId) +
-                ANAzkarDAO.fajrAndMaghrib(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+            AzkarDAO.common(prayerId) +
+                AzkarDAO.fajrAndMaghrib(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 
     static func seedAasrAzkar(_ prayerId: Int64, _ db: Database) throws {
-        try (ANAzkarDAO.common(prayerId) + ANAzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+        try (AzkarDAO.common(prayerId) + AzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 
     static func seedDhuhrSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {
         try ANSunnahDAO.dhuhr(prayerId).forEach { _ = try $0.insertAndFetch(db) }
-        try (ANAzkarDAO.common(prayerId) + ANAzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+        try (AzkarDAO.common(prayerId) + AzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 
     static func seedMaghribSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {
         try ANSunnahDAO.maghrib(prayerId).forEach { _ = try $0.insertAndFetch(db) }
-        try (ANAzkarDAO.common(prayerId) + ANAzkarDAO.fajrAndMaghrib(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+        try (AzkarDAO.common(prayerId) + AzkarDAO.fajrAndMaghrib(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 
     static func seedAishaaSunnahAndAzkar(_ prayerId: Int64, _ db: Database) throws {
         try ANSunnahDAO.aishaa(prayerId).forEach { _ = try $0.insertAndFetch(db) }
-        try (ANAzkarDAO.common(prayerId) + ANAzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
+        try (AzkarDAO.common(prayerId) + AzkarDAO.sewar(prayerId)).forEach { _ = try $0.insertAndFetch(db) }
     }
 }
 

@@ -14,14 +14,14 @@ struct SubtaskView: View {
     var isDone: Bool
     var onDoing: () -> Void
 
-    init(_ prayer: ANPrayer, onDoing: @escaping () -> Void) {
+    init(_ prayer: Prayer, onDoing: @escaping () -> Void) {
         title = prayer.title
         subtitle = prayer.subtitle
         isDone = prayer.isDone
         self.onDoing = onDoing
     }
 
-    init(_ sunnah: ANSunnah, onDoing: @escaping () -> Void) {
+    init(_ sunnah: Sunnah, onDoing: @escaping () -> Void) {
         title = sunnah.title
         subtitle = sunnah.subtitle
         isDone = sunnah.isDone

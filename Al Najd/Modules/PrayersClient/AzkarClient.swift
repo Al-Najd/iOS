@@ -15,10 +15,10 @@ import ComposableArchitecture
 // MARK: - AzkarClient
 
 public struct AzkarClient {
-    public func getMorningAzkar(for date: Date) -> [ANAzkar] {
+    public func getMorningAzkar(for date: Date) -> [Zekr] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.getDay(for: date).fetchOne(db)?.morningAzkar.fetchAll(db)
+                try DayDAO.Queries.getDay(for: date).fetchOne(db)?.morningAzkar.fetchAll(db)
                     .compactMap { $0.toDomainModel() } ?? []
             }
         } catch {
@@ -31,10 +31,10 @@ public struct AzkarClient {
         }
     }
 
-    public func getNightAzkar(for date: Date) -> [ANAzkar] {
+    public func getNightAzkar(for date: Date) -> [Zekr] {
         do {
             return try DatabaseService.dbQueue.read { db in
-                try ANDayDAO.Queries.getNightAzkar(for: date).fetchOne(db)?.morningAzkar.fetchAll(db).compactMap {
+                try DayDAO.Queries.getNightAzkar(for: date).fetchOne(db)?.morningAzkar.fetchAll(db).compactMap {
                     $0.toDomainModel()
                 } ?? []
             }
@@ -48,11 +48,11 @@ public struct AzkarClient {
         }
     }
 
-    public func save(zekr: ANAzkar?) {
+    public func save(zekr: Zekr?) {
         guard let zekr else { return }
         do {
             try DatabaseService.dbQueue.write { db in
-                var dao = try ANAzkarTimedDAO.fetchOne(db, key: zekr.id)
+                var dao = try AzkarTimedDAO.fetchOne(db, key: zekr.id)
                 dao?.repetation = zekr.repetation
                 dao?.currentCount = zekr.currentCount
                 dao?.isDone = zekr.isDone

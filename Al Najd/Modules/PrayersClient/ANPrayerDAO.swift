@@ -22,7 +22,7 @@ public struct ANPrayerDAO {
 }
 
 extension ANPrayerDAO {
-    func toDomainModel(sunnah: [ANSunnah], azkar: [ANAzkar]) -> ANPrayer {
+    func toDomainModel(sunnah: [Sunnah], azkar: [Zekr]) -> Prayer {
         .init(
             id: id!,
             name: name,
@@ -41,9 +41,9 @@ extension ANPrayerDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 // MARK: TableRecord, EncodableRecord
 
 extension ANPrayerDAO: TableRecord, EncodableRecord {
-    static let day = belongsTo(ANDayDAO.self)
+    static let day = belongsTo(DayDAO.self)
     static let sunnah = hasMany(ANSunnahDAO.self)
-    static let azkar = hasMany(ANAzkarDAO.self)
+    static let azkar = hasMany(AzkarDAO.self)
 
     public static var databaseTableName = "prayers"
 
@@ -55,7 +55,7 @@ extension ANPrayerDAO: TableRecord, EncodableRecord {
         static let dayId = Column(CodingKeys.dayId)
     }
 
-    var day: QueryInterfaceRequest<ANDayDAO> {
+    var day: QueryInterfaceRequest<DayDAO> {
         request(for: Self.day)
     }
 
@@ -71,7 +71,7 @@ extension ANPrayerDAO: TableRecord, EncodableRecord {
         sunnah.filter(ANSunnahDAO.Columns.isDone == true)
     }
 
-    var azkar: QueryInterfaceRequest<ANAzkarDAO> {
+    var azkar: QueryInterfaceRequest<AzkarDAO> {
         request(for: Self.azkar)
     }
 }

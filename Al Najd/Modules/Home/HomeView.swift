@@ -214,8 +214,8 @@ struct ProgressBar: View {
 // MARK: - PrayerSliderView
 
 struct PrayerSliderView: View {
-    var prayers: IdentifiedArrayOf<ANPrayer>
-    var onTap: (ANPrayer) -> Void
+    var prayers: IdentifiedArrayOf<Prayer>
+    var onTap: (Prayer) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: .p8) {
@@ -250,8 +250,8 @@ struct PrayerSliderView: View {
 // MARK: - NafilaSliderView
 
 struct NafilaSliderView: View {
-    var nafilas: IdentifiedArrayOf<ANNafila>
-    var onTap: (ANNafila) -> Void
+    var nafilas: IdentifiedArrayOf<Nafila>
+    var onTap: (Nafila) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: .p8) {

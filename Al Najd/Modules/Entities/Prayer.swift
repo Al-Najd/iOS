@@ -14,23 +14,23 @@ import SwiftUI
 
 // MARK: - ANPrayer
 
-public struct ANPrayer: Identifiable, Equatable {
+public struct Prayer: Identifiable, Equatable {
     public let id: Int
     public let name: String
     public let title: String
     public let subtitle: String
     public let raqaat: Int
     public let reward: String
-    public var sunnah: IdentifiedArrayOf<ANSunnah>
-    public var afterAzkar: IdentifiedArrayOf<ANAzkar>
+    public var sunnah: IdentifiedArrayOf<Sunnah>
+    public var afterAzkar: IdentifiedArrayOf<Zekr>
     public var isDone = false
 
     public init(
         id: Int64,
         name: String,
         raqaat: Int,
-        sunnah: IdentifiedArrayOf<ANSunnah>,
-        afterAzkar: IdentifiedArrayOf<ANAzkar>,
+        sunnah: IdentifiedArrayOf<Sunnah>,
+        afterAzkar: IdentifiedArrayOf<Zekr>,
         isDone: Bool = false,
         reward: String) {
         self.id = Int(id)
@@ -47,23 +47,23 @@ public struct ANPrayer: Identifiable, Equatable {
 
 // MARK: - ANSunnah
 
-public struct ANSunnah: Identifiable, Equatable {
+public struct Sunnah: Identifiable, Equatable {
     public let id: Int
     public let name: String
     public let raqaat: Int
     public let position: Position
     public let affirmation: Affirmation
     public let reward: String
-    public let azkar: [ANAzkar]
+    public let azkar: [Zekr]
     public var isDone = false
 
     public init(
         id: Int64,
         name: String,
         raqaat: Int,
-        position: ANSunnah.Position,
-        affirmation: ANSunnah.Affirmation,
-        azkar: [ANAzkar],
+        position: Sunnah.Position,
+        affirmation: Sunnah.Affirmation,
+        azkar: [Zekr],
         isDone: Bool = false,
         reward: String) {
         self.id = Int(id)
@@ -77,7 +77,7 @@ public struct ANSunnah: Identifiable, Equatable {
     }
 }
 
-public extension ANSunnah {
+public extension Sunnah {
     enum Position: String, Equatable {
         case before
         case after
@@ -110,7 +110,7 @@ public extension ANSunnah {
 
 // MARK: - ANNafila
 
-public struct ANNafila: Identifiable, Equatable {
+public struct Nafila: Identifiable, Equatable {
     public let id: Int
     public let name: String
     public let raqaat: Raqaat
@@ -132,7 +132,7 @@ public struct ANNafila: Identifiable, Equatable {
 
 // MARK: ANNafila.Raqaat
 
-public extension ANNafila {
+public extension Nafila {
     enum Raqaat: Equatable {
         case defined(Int)
         case atLeast(Int)
@@ -142,7 +142,7 @@ public extension ANNafila {
 
 // MARK: - ANAzkar
 
-public struct ANAzkar: Identifiable, Equatable {
+public struct Zekr: Identifiable, Equatable {
     public let id: Int
     public let name: String
     public let reward: String
@@ -159,7 +159,7 @@ public struct ANAzkar: Identifiable, Equatable {
     }
 }
 
-public extension ANSunnah {
+public extension Sunnah {
     var title: String {
         L10n.sunnahTitle(name, affirmation.text)
     }
@@ -171,17 +171,17 @@ public extension ANSunnah {
 
 // MARK: - ANPrayer + Changeable
 
-extension ANPrayer: Changeable { }
+extension Prayer: Changeable { }
 
 // MARK: - ANSunnah + Changeable
 
-extension ANSunnah: Changeable { }
+extension Sunnah: Changeable { }
 
 // MARK: - ANAzkar + Changeable
 
-extension ANAzkar: Changeable { }
+extension Zekr: Changeable { }
 
-public extension ANPrayer {
+public extension Prayer {
     var image: ImageAsset {
         switch name {
         case "fajr":
@@ -200,7 +200,7 @@ public extension ANPrayer {
     }
 }
 
-public extension ANNafila {
+public extension Nafila {
     var image: ImageAsset {
         switch name {
         case "subh":

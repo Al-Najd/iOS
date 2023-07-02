@@ -34,7 +34,7 @@ public extension ANNafilaDAO {
 }
 
 extension ANNafilaDAO {
-    func toDomainModel() -> ANNafila {
+    func toDomainModel() -> Nafila {
         .init(
             id: id!,
             name: name,
@@ -45,7 +45,7 @@ extension ANNafilaDAO {
 }
 
 extension ANNafilaDAO {
-    func raqaatToDomainModel() -> ANNafila.Raqaat {
+    func raqaatToDomainModel() -> Nafila.Raqaat {
         switch raqaat {
         case .open:
             return .open
@@ -64,7 +64,7 @@ extension ANNafilaDAO: Codable, FetchableRecord, MutablePersistableRecord { }
 // MARK: TableRecord, EncodableRecord
 
 extension ANNafilaDAO: TableRecord, EncodableRecord {
-    static let day = belongsTo(ANDayDAO.self)
+    static let day = belongsTo(DayDAO.self)
 
     public static var databaseTableName = "nafilas"
 
@@ -77,7 +77,7 @@ extension ANNafilaDAO: TableRecord, EncodableRecord {
         static let isDone = Column(CodingKeys.isDone)
     }
 
-    var day: QueryInterfaceRequest<ANDayDAO> {
+    var day: QueryInterfaceRequest<DayDAO> {
         request(for: Self.day)
     }
 }

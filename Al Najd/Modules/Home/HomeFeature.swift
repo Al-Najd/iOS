@@ -15,8 +15,8 @@ public struct Home: ReducerProtocol {
     public init() { }
 
     public struct State: Equatable {
-        public var prayers: IdentifiedArrayOf<ANPrayer> = []
-        public var nafila: IdentifiedArrayOf<ANNafila> = []
+        public var prayers: IdentifiedArrayOf<Prayer> = []
+        public var nafila: IdentifiedArrayOf<Nafila> = []
         public var todosCount = 0
         public var doneTodos = 0
         public var percentage: String {
@@ -38,8 +38,8 @@ public struct Home: ReducerProtocol {
         case onAppear
         case prayerDetails(PrayerDetails.Action)
         case nafilaDetails(NafilaDetails.Action)
-        case onSelecting(ANPrayer)
-        case onSelectingNafila(ANNafila)
+        case onSelecting(Prayer)
+        case onSelectingNafila(Nafila)
         case binding(BindingAction<State>)
     }
 

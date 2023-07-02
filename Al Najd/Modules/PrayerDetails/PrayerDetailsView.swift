@@ -198,12 +198,12 @@ struct RewardView: View {
     var title: String
     var subtitle: String
 
-    init(_ prayer: ANPrayer) {
+    init(_ prayer: Prayer) {
         title = prayer.title
         subtitle = prayer.reward.localized
     }
 
-    init(_ sunnah: ANSunnah) {
+    init(_ sunnah: Sunnah) {
         title = sunnah.title
         subtitle = sunnah.reward.localized
     }

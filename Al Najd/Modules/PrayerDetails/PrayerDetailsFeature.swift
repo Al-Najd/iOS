@@ -51,12 +51,12 @@ public struct PrayerDetails: ReducerProtocol {
 
 public extension PrayerDetails {
     struct State: Identifiable, Equatable {
-        public var id: ANPrayer.ID { prayer.id }
-        public var prayer: ANPrayer
+        public var id: Prayer.ID { prayer.id }
+        public var prayer: Prayer
         public var date: String
 
         public init(
-            prayer: ANPrayer,
+            prayer: Prayer,
             date: Date) {
             self.prayer = prayer
             self.date = date.format(with: [.dayOfMonth, .monthFull, .yearFull]) ?? ""
@@ -69,9 +69,9 @@ public extension PrayerDetails {
 public extension PrayerDetails {
     enum Action: Equatable {
         case onDoingPrayer
-        case onDoingSunnah(ANSunnah)
-        case onDoingZekr(ANAzkar)
-        case onFinishingZekr(ANAzkar)
+        case onDoingSunnah(Sunnah)
+        case onDoingZekr(Zekr)
+        case onFinishingZekr(Zekr)
 
         case dismiss
     }
