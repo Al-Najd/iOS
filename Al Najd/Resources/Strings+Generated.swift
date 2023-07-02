@@ -227,11 +227,11 @@ public enum L10n {
   /// سهولة الكتابة
   public static let fontAccessibility = L10n.tr("Localizables", "Font Accessibility", fallback: "سهولة الكتابة")
   /// Localizables.strings
-  ///   Proba B.V.
+  ///  Proba B.V.
   /// 
-  ///   Created by Ahmed Ramy on 10/1/20.
-  /// //  Copyright © 2020 Proba B.V. All rights reserved.
-  ///   Copyright © 2020 Proba B.V. All rights reserved.
+  ///  Created by Ahmed Ramy on 10/1/20.
+  ///  //  Copyright © 2020 Proba B.V. All rights reserved.
+  ///  Copyright © 2020 Proba B.V. All rights reserved.
   public static let genericError = L10n.tr("Localizables", "generic_error", fallback: "حدث خطأ ما...")
   /// بينا نبدأ!
   public static let getStarted = L10n.tr("Localizables", "Get Started", fallback: "بينا نبدأ!")
