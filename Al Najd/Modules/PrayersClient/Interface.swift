@@ -110,11 +110,10 @@ public struct PrayersClient {
     public func getPrayingStreak() -> Int {
         do {
             return try DatabaseService.dbQueue.read { db in
-                let days = try ANDayDAO.all().reversed().fetchAll(db)
-                guard
-                    let firstDayWithMissedPrayersIndex = try days
-                        .firstIndex(where: { try $0.missedPrayers.isEmpty(db) == false }) else { return days.count }
-                return firstDayWithMissedPrayersIndex
+                // Get days from today till days where streak was broken
+                let days = try ANDayDAO.Queries.beforeToday.including(all: ANDayDAO.prayers).all().fetchAll(db)
+                let daysWithFullPrayers = try days.filter { try $0.missedPrayers.isEmpty(db) != false }
+                return daysWithFullPrayers.count
             }
         } catch {
             Log.error(error.localizedDescription)

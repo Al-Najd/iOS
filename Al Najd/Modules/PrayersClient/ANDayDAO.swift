@@ -38,6 +38,12 @@ extension ANDayDAO: TableRecord, EncodableRecord {
     }
 
     enum Queries {
+        static var beforeToday: QueryInterfaceRequest<ANDayDAO> {
+            ANDayDAO.filter(
+                Columns.date <= Date().dateAtStartOf(.day)
+            )
+        }
+
         static var today: QueryInterfaceRequest<ANDayDAO> {
             ANDayDAO.filter(Columns.date == Date().dateAtStartOf(.day))
         }
