@@ -6,24 +6,23 @@
 //
 
 import SwiftUI
-import Home
+
 
 @main
 struct HomePreviewApp: App {
-  let plugins: [AppPlugin] = [
-    ThemePlugin(),
-    CorePlugin(),
-    AppearancesPlugin(),
-    ReportPlugin(),
-  ]
+    let plugins: [AppPlugin] = [
+        ThemePlugin(),
+        CorePlugin(),
+        AppearancesPlugin(),
+        ReportPlugin(),
+    ]
 
-  var body: some Scene {
-    WindowGroup {
-      HomeView(store: .init(initialState: .init(), reducer: Home()))
-        .onAppear {
-          plugins.forEach { $0.setup() }
+    var body: some Scene {
+        WindowGroup {
+            HomeView(store: .init(initialState: .init(), reducer: Home()))
+                .onAppear {
+                    plugins.forEach { $0.setup() }
+                }
         }
     }
-
-  }
 }

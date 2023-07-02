@@ -53,8 +53,8 @@ public struct DeviceStateModifier: ViewModifier {
             .onAppear()
             .onReceive(
                 NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    self.state.previousOrientation = self.state.orientation
-                    self.state.orientation = UIDevice.current.orientation
+                    state.previousOrientation = state.orientation
+                    state.orientation = UIDevice.current.orientation
             }
             .environment(\.deviceState, state)
     }

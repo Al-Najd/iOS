@@ -5,15 +5,11 @@
 //  Created by Ahmed Ramy on 23/01/2022.
 //
 
-import Animations
-import DesignSystem
-import Localization
-import PreviewableView
 import SwiftUI
-import Utils
+
 import ComposableArchitecture
 
-//struct Splash: ReducerProtocol {
+// struct Splash: ReducerProtocol {
 //  @Dependency(\.prayersDB)
 //  private var prayersDB
 //
@@ -26,7 +22,7 @@ import ComposableArchitecture
 //  enum Action {
 //    case onAppear
 //  }
-//}
+// }
 
 struct SplashView<Content: View>: View {
     @State var showAnimation = false
