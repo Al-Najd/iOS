@@ -5,7 +5,7 @@
 //  Created by Ahmed Ramy on 23/10/2021.
 //
 
-import OrdiLogging
+
 import Pulse
 import UIKit.UIApplication
 

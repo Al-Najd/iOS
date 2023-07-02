@@ -6,100 +6,109 @@
 //
 
 import SwiftUI
-import Assets
-import Home
-import Localization
-import Utils
-import Common
-import DesignSystem
+
+
+
+
+
+
 import ComposableArchitecture
-import ReusableUI
-import Entities
+
+
 import Inject
 
+// MARK: - PlaygroundView
+
 struct PlaygroundView: View {
-  @ObserveInjection var inject
+    @ObserveInjection var inject
 
-  let image: ImageAsset = Asset
-    .Prayers
-    .Faraaid
-    .maghribImage
+    let image: ImageAsset = Asset
+        .Prayers
+        .Faraaid
+        .maghribImage
 
-  @State var progress: Double = 0.25
-  let store = StoreOf<Home>.init(initialState: .init(), reducer: Home())
+    @State var progress = 0.25
+    let store = StoreOf<Home>.init(initialState: .init(), reducer: Home())
 
-  var body: some View {
-    WithViewStore(store) { viewStore in
-      PrayerSliderView(prayers: viewStore.prayers) {_ in 
-        
-      }
-      .onAppear { viewStore.send(.onAppear) }
-      .enableInjection()
+    var body: some View {
+        WithViewStore(store) { viewStore in
+            PrayerSliderView(prayers: viewStore.prayers) { _ in
+            }
+            .onAppear { viewStore.send(.onAppear) }
+            .enableInjection()
+        }
     }
-  }
 }
+
+// MARK: - PrayerSliderView
 
 struct PrayerSliderView: View {
-  var prayers: IdentifiedArrayOf<ANPrayer>
-  var onTap: (ANPrayer) -> Void
+    var prayers: IdentifiedArrayOf<ANPrayer>
+    var onTap: (ANPrayer) -> Void
 
-  private let screenSize = getScreenSize()
+    private let screenSize = getScreenSize()
 
-  var body: some View {
-    VStack(alignment: .leading, spacing: .p8) {
-      Text(L10n.prayers)
-        .foregroundColor(.mono.offblack)
-        .scaledFont(locale: .arabic, .pFootnote, .bold)
-        .multilineTextAlignment(.center)
-        .padding(.horizontal, .p16)
-      ScrollViewRTL {
-        HStack(spacing: .p32) {
-          ForEach(prayers) { prayer in
-            GeometryReader { geometry in
-              PrayerCardView(prayer: prayer)
-                .rotation3DEffect(
-                  .degrees(((.p32 + geometry.frame(in: .local).width) / 2 - geometry.frame(in: .global).minX) / (30.0)),
-                  axis: (x: 15, y: 45, z: 0)
-                )
-                .onTapGesture {
-                  onTap(prayer)
+    var body: some View {
+        VStack(alignment: .leading, spacing: .p8) {
+            Text(L10n.prayers)
+                .foregroundColor(.mono.offblack)
+                .scaledFont(locale: .arabic, .pFootnote, .bold)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, .p16)
+            ScrollViewRTL {
+                HStack(spacing: .p32) {
+                    ForEach(prayers) { prayer in
+                        GeometryReader { geometry in
+                            PrayerCardView(prayer: prayer)
+                                .rotation3DEffect(
+                                    .degrees(
+                                        ((.p32 + geometry.frame(in: .local).width) / 2 - geometry.frame(in: .global).minX) /
+                                            30.0),
+                                    axis: (x: 15, y: 45, z: 0))
+                                .onTapGesture {
+                                    onTap(prayer)
+                                }
+                        }
+                        .frame(width: screenSize.width * 0.45, height: screenSize.height * 0.33)
+                    }
                 }
+                .padding(.horizontal, .p16)
+            }.onAppear {
+                print(screenSize.height)
             }
-            .frame(width: screenSize.width * 0.45, height: screenSize.height * 0.33)
-          }
-        }
-        .padding(.horizontal, .p16)
-      }.onAppear {
-        print(screenSize.height)
-      }
-    }.padding()
-  }
+        }.padding()
+    }
 }
+
+// MARK: - PlaygroundView_Previews
 
 struct PlaygroundView_Previews: PreviewProvider {
     static var previews: some View {
-      PlaygroundView()
+        PlaygroundView()
     }
 }
 
+// MARK: - ProgressBar
+
 struct ProgressBar: View {
-  @Binding var value: Double
-  var color: Color = .mono.offwhite
+    @Binding var value: Double
+    var color: Color = .mono.offwhite
 
-  var body: some View {
-    GeometryReader { geometry in
-      ZStack(alignment: .leading) {
-        Group {
-          Rectangle().frame(width: geometry.size.width , height: geometry.size.height)
-            .opacity(0.3)
-            .foregroundColor(color.opacity(0.75))
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Group {
+                    Rectangle().frame(width: geometry.size.width , height: geometry.size.height)
+                        .opacity(0.3)
+                        .foregroundColor(color.opacity(0.75))
 
-          Rectangle().frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
-            .foregroundColor(color)
+                    Rectangle()
+                        .frame(width: min(CGFloat(value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
+                        .foregroundColor(color)
 
-        }.cornerRadius(45.0)
-      }
+                }.cornerRadius(45.0)
+            }
+        }
     }
-  }
 }
 

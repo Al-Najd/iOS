@@ -6,23 +6,23 @@
 //
 
 import SwiftUI
-import DesignSystem
+
 
 @main
 struct PlaygroundPreviewApp: App {
-  let plugins: [AppPlugin] = [
-    ThemePlugin(),
-    CorePlugin(),
-    AppearancesPlugin(),
-    ReportPlugin(),
-  ]
+    let plugins: [AppPlugin] = [
+        ThemePlugin(),
+        CorePlugin(),
+        AppearancesPlugin(),
+        ReportPlugin(),
+    ]
 
-  var body: some Scene {
-    WindowGroup {
-      PlaygroundView()
-        .onAppear {
-          plugins.forEach { $0.setup() }
+    var body: some Scene {
+        WindowGroup {
+            PlaygroundView()
+                .onAppear {
+                    plugins.forEach { $0.setup() }
+                }
         }
     }
-  }
 }
