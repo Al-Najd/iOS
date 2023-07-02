@@ -12,19 +12,19 @@
 
 xcassets:
   inputs:
-    - AlNajd/Sources/Assets/Resources/Assets.xcassets
+    - Al Najd/Resources/Images.xcassets
   outputs:
     - templateName: swift5
       params:
         forceProvidesNamespaces: true
         publicAccess: true
-      output: AlNajd/Sources/Assets/Generated.swift
+      output: Al Najd/Resources/Images+Generated.swift
 strings:
   inputs:
-    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.strings
-    - AlNajd/Sources/Localization/Resources/ar.lproj/Localizables.stringsdict
+    - Al Najd/Resources/ar.lproj/Localizables.strings
+    - Al Najd/Resources/ar.lproj/Localizables.stringsdict
   outputs:
     - templateName: structured-swift5
       params:
         publicAccess: true
-      output: AlNajd/Sources/Localization/Generated.swift
+      output: Al Najd/Resources/Strings+Generated.swift

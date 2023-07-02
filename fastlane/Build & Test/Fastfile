@@ -30,7 +30,6 @@ platform :ios do
   desc "Builds and prepare Internal Testers"
   lane :build_for_internal_testers do 
     build_app(
-      scheme: "Al-Najd",
       export_method: "app-store",
       export_xcargs: "-allowProvisioningUpdates",
       configuration: "Beta",

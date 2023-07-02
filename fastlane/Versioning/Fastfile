@@ -60,7 +60,7 @@ platform :ios do
       build_number = ENV['RELEASE_TARGET_BUILD_NUMBER']
 
       # Check if Tag follows this format ENV-VersionNumber-BuildNumber
-      tag = "#{env}-#{get_version_number(target: 'Al Najd (iOS)')}-#{build_number}"
+      tag = "#{env}-#{get_version_number()}-#{build_number}"
       tag_format = '^[a-zA-Z]+-[0-9]+\.[0-9]+\.[0-9]+-[0-9]+$'
       is_valid = tag.match(tag_format)
       
