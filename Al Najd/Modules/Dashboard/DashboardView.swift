@@ -35,39 +35,38 @@ extension DashboardSegment {
 
 public struct DashboardView: View {
     let store: StoreOf<Dashboard>
+    @ObservedObject var viewStore: ViewStoreOf<Dashboard>
     @ObserveInjection var inject
 
     public init(store: StoreOf<Dashboard>) {
         self.store = store
+        self.viewStore = ViewStore(self.store, observe: { $0 })
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: .p16) {
-                    makeCurrentStreakView(viewStore.prayingStreak)
-                    makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone).padding(.horizontal)
-                    HStack {
-                        makeMetricView(title: L10n.sunnah, value: viewStore.sunnahsPrayed)
-                        makeMetricView(title: L10n.azkar, value: viewStore.azkarDoneCount)
-                    }.padding(.horizontal)
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: .p16) {
+                makeCurrentStreakView(viewStore.prayingStreak)
+                makeMetricView(title: L10n.faraaid, value: viewStore.totalFaraaidDone).padding(.horizontal)
+                HStack {
+                    makeMetricView(title: L10n.sunnah, value: viewStore.sunnahsPrayed)
+                    makeMetricView(title: L10n.azkar, value: viewStore.azkarDoneCount)
+                }.padding(.horizontal)
 
-                    RangeAnalysisCardView(progress: viewStore.report)
-                        .padding(.horizontal)
-                    makeChartView(title: L10n.sunnah, viewStore: viewStore)
-                        .padding(.horizontal)
-                    makeFeedbackView(viewStore.feedback)
-                        .padding()
-                }
-                .padding(.vertical)
+                RangeAnalysisCardView(progress: viewStore.report)
+                    .padding(.horizontal)
+                makeChartView(title: L10n.sunnah, viewStore: viewStore)
+                    .padding(.horizontal)
+                makeFeedbackView(viewStore.feedback)
+                    .padding()
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
-            .background(
-                Color.mono.background)
-            .enableInjection()
+            .padding(.vertical)
         }
+        .onAppear {
+            viewStore.send(.onAppear)
+        }
+        .background(Color.mono.background)
+        .enableInjection()
     }
 
     @ViewBuilder

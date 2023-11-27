@@ -14,37 +14,37 @@ import SwiftUI
 public struct HomeView: View {
     @ObserveInjection var inject
     let store: StoreOf<Home>
+    @ObservedObject var viewStore: ViewStoreOf<Home>
 
     public init(store: StoreOf<Home>) {
         self.store = store
+        self.viewStore = ViewStore(self.store, observe: { $0 })
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    HeaderView(viewStore: viewStore)
-                    prayersSection(viewStore)
-                    daySelectorSection(viewStore)
-                    makeDuaaView(viewStore)
-                    nafilaSection(viewStore)
-                    hadeethSection()
-                }
-                .fullScreenCover(item: viewStore.binding(\.$selectedPrayer)) { _ in
-                    IfLetStore(store.scope(state: \.selectedPrayer, action: Home.Action.prayerDetails), then: {
-                        PrayerDetailsView(store: $0)
-                    })
-                }
-                .fullScreenCover(item: viewStore.binding(\.$selectedNafila)) { _ in
-                    IfLetStore(store.scope(state: \.selectedNafila, action: Home.Action.nafilaDetails), then: {
-                        NafilaDetailsView(store: $0)
-                    })
-                }
-                .background(Color.mono.background)
-                .onAppear { viewStore.send(.onAppear) }
-                .enableInjection()
-            }.ignoresSafeArea(edges: .top)
-        }
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                HeaderView(viewStore: viewStore)
+                prayersSection(viewStore)
+                daySelectorSection(viewStore)
+                makeDuaaView(viewStore)
+                nafilaSection(viewStore)
+                hadeethSection()
+            }
+            .fullScreenCover(item: viewStore.$selectedPrayer) { _ in
+                IfLetStore(store.scope(state: \.selectedPrayer, action: Home.Action.prayerDetails), then: {
+                    PrayerDetailsView(store: $0)
+                })
+            }
+            .fullScreenCover(item: viewStore.$selectedNafila) { _ in
+                IfLetStore(store.scope(state: \.selectedNafila, action: Home.Action.nafilaDetails), then: {
+                    NafilaDetailsView(store: $0)
+                })
+            }
+            .background(Color.mono.background)
+            .onAppear { viewStore.send(.onAppear) }
+            .enableInjection()
+        }.ignoresSafeArea(edges: .top)
     }
 }
 
@@ -65,6 +65,7 @@ private extension HomeView {
                 .padding(.horizontal, .p16)
             HadeethSliderView()
         }
+        .padding()
     }
 
 
@@ -84,7 +85,7 @@ private extension HomeView {
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, .p16)
 
-            DatePicker("", selection: viewStore.binding(\.$date), displayedComponents: .date)
+            DatePicker("", selection: viewStore.$date, displayedComponents: .date)
                 .datePickerStyle(.graphical)
         }.padding()
     }
@@ -153,12 +154,13 @@ struct HeaderView: View {
                 }.padding(.horizontal, .p8)
 
                 ProgressBar(
-                    value: viewStore.binding(\.$percentageValue))
+                    value: viewStore.$percentageValue)
                     .frame(height: 8)
                     .shadow(color: .shadowBlueperry, radius: 4, x: 0, y: 0)
-                    .padding(.bottom, .p16)
+                    .padding(.bottom, .p32)
                     .padding(.horizontal, .p8)
             }
+            .padding([.top, .horizontal])
         }
         .frame(maxWidth: .infinity)
         .padding(.top, getSafeArea().top)
@@ -277,7 +279,7 @@ struct NafilaSliderView: View {
                 }
                 .padding(.horizontal, .p16)
             }
-        }
+        }.padding(  )
     }
 }
 

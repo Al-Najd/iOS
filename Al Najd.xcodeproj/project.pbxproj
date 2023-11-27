@@ -10,6 +10,7 @@
 		E208E9DA2A51E57B00D7734A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E208E9D92A51E57B00D7734A /* Day.swift */; };
 		E208E9E22A520C2000D7734A /* ElMessiri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E208E9E02A520C1F00D7734A /* ElMessiri-Bold.ttf */; };
 		E208E9E32A520C2000D7734A /* ElMessiri-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E208E9E12A520C2000D7734A /* ElMessiri-Regular.ttf */; };
+		E23E3BB02B1792860053920A /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E23E3BAF2B1792860053920A /* SwiftUIIntrospect */; };
 		E29B86192A51BB3700F9B73F /* Al_NajdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854A2A51BB3600F9B73F /* Al_NajdApp.swift */; };
 		E29B861A2A51BB3700F9B73F /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854C2A51BB3600F9B73F /* PluginProtocol.swift */; };
 		E29B861B2A51BB3700F9B73F /* AppearancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B854D2A51BB3600F9B73F /* AppearancePlugin.swift */; };
@@ -119,7 +120,6 @@
 		E29B868B2A51BB3700F9B73F /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85EC2A51BB3700F9B73F /* VisualEffectView.swift */; };
 		E29B868C2A51BB3700F9B73F /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85ED2A51BB3700F9B73F /* CornerRadius.swift */; };
 		E29B868D2A51BB3700F9B73F /* AzkarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85EF2A51BB3700F9B73F /* AzkarFeature.swift */; };
-		E29B868E2A51BB3700F9B73F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85F02A51BB3700F9B73F /* SwiftUIView.swift */; };
 		E29B868F2A51BB3700F9B73F /* AzkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85F12A51BB3700F9B73F /* AzkarView.swift */; };
 		E29B86922A51BB3700F9B73F /* Gradient+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85F62A51BB3700F9B73F /* Gradient+extension.swift */; };
 		E29B86932A51BB3700F9B73F /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B85F72A51BB3700F9B73F /* Color+extension.swift */; };
@@ -136,12 +136,10 @@
 		E29B86BA2A51BC0B00F9B73F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86B92A51BC0B00F9B73F /* Alamofire */; };
 		E29B86BD2A51BC3000F9B73F /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86BC2A51BC3000F9B73F /* Pulse */; };
 		E29B86BF2A51BC3000F9B73F /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86BE2A51BC3000F9B73F /* PulseUI */; };
-		E29B86C22A51BD0B00F9B73F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86C12A51BD0B00F9B73F /* Introspect */; };
 		E29B86C52A51BD2300F9B73F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86C42A51BD2300F9B73F /* SwiftDate */; };
 		E29B86C82A51BDC200F9B73F /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86C72A51BDC200F9B73F /* Drawer */; };
 		E29B86CB2A51BDEB00F9B73F /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86CA2A51BDEB00F9B73F /* GRDB */; };
 		E29B86CE2A51BE1100F9B73F /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E29B86CD2A51BE1100F9B73F /* ComposableArchitecture */; };
-		E2DC697D2A51C20B001679A6 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E2DC697C2A51C20B001679A6 /* Inject */; };
 		E2DC69802A51C292001679A6 /* FontBlaster in Frameworks */ = {isa = PBXBuildFile; productRef = E2DC697F2A51C292001679A6 /* FontBlaster */; };
 		E2DC69912A51C668001679A6 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC69832A51C668001679A6 /* String+Localization.swift */; };
 		E2DC69922A51C668001679A6 /* Localizables.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = E2DC69852A51C668001679A6 /* Localizables.stringsdict */; };
@@ -152,7 +150,21 @@
 		E2DC69972A51C668001679A6 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = E2DC698F2A51C668001679A6 /* splash.json */; };
 		E2DC69992A51C788001679A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2DC69982A51C788001679A6 /* Images.xcassets */; };
 		E2DC699B2A51C884001679A6 /* OError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC699A2A51C884001679A6 /* OError.swift */; };
+		E2E3D7812B14D09A003A0AF4 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E2E3D7802B14D09A003A0AF4 /* Inject */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E23E3BB62B17945A0053920A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E208E9D92A51E57B00D7734A /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
@@ -268,7 +280,6 @@
 		E29B85EC2A51BB3700F9B73F /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		E29B85ED2A51BB3700F9B73F /* CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		E29B85EF2A51BB3700F9B73F /* AzkarFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarFeature.swift; sourceTree = "<group>"; };
-		E29B85F02A51BB3700F9B73F /* SwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		E29B85F12A51BB3700F9B73F /* AzkarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AzkarView.swift; sourceTree = "<group>"; };
 		E29B85F62A51BB3700F9B73F /* Gradient+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gradient+extension.swift"; sourceTree = "<group>"; };
 		E29B85F72A51BB3700F9B73F /* Color+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
@@ -299,15 +310,15 @@
 				E29B86CB2A51BDEB00F9B73F /* GRDB in Frameworks */,
 				E29B86CE2A51BE1100F9B73F /* ComposableArchitecture in Frameworks */,
 				E29B86B12A51BBE200F9B73F /* Factory in Frameworks */,
+				E2E3D7812B14D09A003A0AF4 /* Inject in Frameworks */,
 				E29B86BA2A51BC0B00F9B73F /* Alamofire in Frameworks */,
 				E29B86BD2A51BC3000F9B73F /* Pulse in Frameworks */,
 				E29B86C52A51BD2300F9B73F /* SwiftDate in Frameworks */,
-				E29B86C22A51BD0B00F9B73F /* Introspect in Frameworks */,
 				E2DC69802A51C292001679A6 /* FontBlaster in Frameworks */,
 				E29B86C82A51BDC200F9B73F /* Drawer in Frameworks */,
 				E29B86B42A51BBF000F9B73F /* Sentry in Frameworks */,
 				E29B86B72A51BBFD00F9B73F /* Lottie in Frameworks */,
-				E2DC697D2A51C20B001679A6 /* Inject in Frameworks */,
+				E23E3BB02B1792860053920A /* SwiftUIIntrospect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,7 +823,6 @@
 			isa = PBXGroup;
 			children = (
 				E29B85EF2A51BB3700F9B73F /* AzkarFeature.swift */,
-				E29B85F02A51BB3700F9B73F /* SwiftUIView.swift */,
 				E29B85F12A51BB3700F9B73F /* AzkarView.swift */,
 			);
 			path = Azkar;
@@ -895,6 +905,7 @@
 				E29B85342A51BB1D00F9B73F /* Sources */,
 				E29B85352A51BB1D00F9B73F /* Frameworks */,
 				E29B85362A51BB1D00F9B73F /* Resources */,
+				E23E3BB62B17945A0053920A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -908,13 +919,13 @@
 				E29B86B92A51BC0B00F9B73F /* Alamofire */,
 				E29B86BC2A51BC3000F9B73F /* Pulse */,
 				E29B86BE2A51BC3000F9B73F /* PulseUI */,
-				E29B86C12A51BD0B00F9B73F /* Introspect */,
 				E29B86C42A51BD2300F9B73F /* SwiftDate */,
 				E29B86C72A51BDC200F9B73F /* Drawer */,
 				E29B86CA2A51BDEB00F9B73F /* GRDB */,
 				E29B86CD2A51BE1100F9B73F /* ComposableArchitecture */,
-				E2DC697C2A51C20B001679A6 /* Inject */,
 				E2DC697F2A51C292001679A6 /* FontBlaster */,
+				E2E3D7802B14D09A003A0AF4 /* Inject */,
+				E23E3BAF2B1792860053920A /* SwiftUIIntrospect */,
 			);
 			productName = "Al Najd";
 			productReference = E29B85382A51BB1D00F9B73F /* Al Najd.app */;
@@ -950,13 +961,13 @@
 				E29B86B52A51BBFD00F9B73F /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				E29B86B82A51BC0B00F9B73F /* XCRemoteSwiftPackageReference "alamofire" */,
 				E29B86BB2A51BC3000F9B73F /* XCRemoteSwiftPackageReference "Pulse" */,
-				E29B86C02A51BD0B00F9B73F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				E29B86C32A51BD2300F9B73F /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				E29B86C62A51BDC200F9B73F /* XCRemoteSwiftPackageReference "swiftui-drawer" */,
 				E29B86C92A51BDEB00F9B73F /* XCRemoteSwiftPackageReference "GRDB" */,
 				E29B86CC2A51BE1100F9B73F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				E2DC697B2A51C20B001679A6 /* XCRemoteSwiftPackageReference "Inject" */,
 				E2DC697E2A51C292001679A6 /* XCRemoteSwiftPackageReference "FontBlaster" */,
+				E2E3D77F2B14D09A003A0AF4 /* XCRemoteSwiftPackageReference "Inject" */,
+				E23E3BAE2B1792860053920A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = E29B85392A51BB1D00F9B73F /* Products */;
 			projectDirPath = "";
@@ -1037,7 +1048,6 @@
 				E29B862E2A51BB3700F9B73F /* Palette.swift in Sources */,
 				E29B86352A51BB3700F9B73F /* Fonts.swift in Sources */,
 				E29B86952A51BB3700F9B73F /* PreviewableView.swift in Sources */,
-				E29B868E2A51BB3700F9B73F /* SwiftUIView.swift in Sources */,
 				E29B868C2A51BB3700F9B73F /* CornerRadius.swift in Sources */,
 				E29B86762A51BB3700F9B73F /* HapticFeedbackClient.swift in Sources */,
 				E29B86832A51BB3700F9B73F /* RootView.swift in Sources */,
@@ -1259,7 +1269,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1268,11 +1278,17 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.20.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1287,7 +1303,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1296,13 +1312,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.20.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1375,7 +1398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RC";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1384,11 +1407,17 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.20.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1463,7 +1492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 969Y6REAB6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1472,11 +1501,17 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.20.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alnajd.alnajd.ios.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1513,6 +1548,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E23E3BAE2B1792860053920A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 		E29B86AF2A51BBE200F9B73F /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -1553,14 +1596,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		E29B86C02A51BD0B00F9B73F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.8.0;
-			};
-		};
 		E29B86C32A51BD2300F9B73F /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/malcommac/SwiftDate";
@@ -1593,14 +1628,6 @@
 				minimumVersion = 0.55.0;
 			};
 		};
-		E2DC697B2A51C20B001679A6 /* XCRemoteSwiftPackageReference "Inject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/krzysztofzablocki/Inject";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		E2DC697E2A51C292001679A6 /* XCRemoteSwiftPackageReference "FontBlaster" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ArtSabintsev/FontBlaster";
@@ -1609,9 +1636,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E2E3D77F2B14D09A003A0AF4 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E23E3BAF2B1792860053920A /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E23E3BAE2B1792860053920A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
 		E29B86B02A51BBE200F9B73F /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E29B86AF2A51BBE200F9B73F /* XCRemoteSwiftPackageReference "Factory" */;
@@ -1642,11 +1682,6 @@
 			package = E29B86BB2A51BC3000F9B73F /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
 		};
-		E29B86C12A51BD0B00F9B73F /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E29B86C02A51BD0B00F9B73F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
 		E29B86C42A51BD2300F9B73F /* SwiftDate */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E29B86C32A51BD2300F9B73F /* XCRemoteSwiftPackageReference "SwiftDate" */;
@@ -1667,15 +1702,15 @@
 			package = E29B86CC2A51BE1100F9B73F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		E2DC697C2A51C20B001679A6 /* Inject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2DC697B2A51C20B001679A6 /* XCRemoteSwiftPackageReference "Inject" */;
-			productName = Inject;
-		};
 		E2DC697F2A51C292001679A6 /* FontBlaster */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E2DC697E2A51C292001679A6 /* XCRemoteSwiftPackageReference "FontBlaster" */;
 			productName = FontBlaster;
+		};
+		E2E3D7802B14D09A003A0AF4 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2E3D77F2B14D09A003A0AF4 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

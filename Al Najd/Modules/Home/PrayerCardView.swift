@@ -30,6 +30,13 @@ public struct PrayerCardView: View {
         image = nafila.image
     }
 
+    public init(zekr: Zekr) {
+        title = zekr.name
+        reward = zekr.reward
+        isDone = zekr.isDone
+        image = Asset.Prayers.Faraaid.dhuhrImage
+    }
+
     public var body: some View {
         VStack {
             VStack {

@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import PulseUI
 import SwiftUI
-
+import Inject
 // MARK: - Al_NajdApp
 
 @main

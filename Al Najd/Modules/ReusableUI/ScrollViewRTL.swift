@@ -5,7 +5,7 @@
 //  Created by Ahmed Ramy on 29/08/2022.
 //
 
-import Introspect
+import SwiftUIIntrospect
 import SwiftUI
 
 public struct ScrollViewRTL<Content: View>: View {
@@ -24,8 +24,8 @@ public struct ScrollViewRTL<Content: View>: View {
                     y: CGFloat(layoutDirection == .rightToLeft ? -10 : 0),
                     z: CGFloat(0)))
         }
-        .introspectScrollView {
-            $0.clipsToBounds = false
+        .introspect(.scrollView, on: .iOS(.v17)) { scrollView in
+            scrollView.clipsToBounds = false
         }
         .rotation3DEffect(Angle(degrees: layoutDirection == .rightToLeft ? 180 : 0), axis: (
             x: CGFloat(0),

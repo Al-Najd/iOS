@@ -65,5 +65,7 @@ private extension AppearancesPlugin {
         appearance.backgroundColor = UIColor(.mono.background)
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UICollectionView.appearance(whenContainedInInstancesOf: [UIDatePicker.self]).semanticContentAttribute = .forceLeftToRight
+        UIPickerView.appearance(whenContainedInInstancesOf: [UIDatePicker.self]).semanticContentAttribute = .forceLeftToRight
     }
 }
