@@ -1568,7 +1568,7 @@
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				minimumVersion = 8.17.1;
 			};
 		};
 		E29B86B52A51BBFD00F9B73F /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -1592,7 +1592,7 @@
 			repositoryURL = "https://github.com/kean/Pulse";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 4.0.5;
 			};
 		};
 		E29B86C32A51BD2300F9B73F /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
@@ -1607,16 +1607,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maustinstar/swiftui-drawer";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
 			};
 		};
 		E29B86C92A51BDEB00F9B73F /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.23.0;
 			};
 		};
 		E29B86CC2A51BE1100F9B73F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
@@ -1624,7 +1624,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.55.0;
+				minimumVersion = 1.5.3;
 			};
 		};
 		E2DC697E2A51C292001679A6 /* XCRemoteSwiftPackageReference "FontBlaster" */ = {
