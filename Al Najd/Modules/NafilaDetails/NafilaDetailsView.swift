@@ -20,72 +20,72 @@ import SwiftUI
 public struct NafilaDetailsView: View {
     @ObserveInjection var inject
     let store: StoreOf<NafilaDetails>
+    @ObservedObject var viewStore: ViewStoreOf<NafilaDetails>
 
     public init(store: StoreOf<NafilaDetails>) {
         self.store = store
+        self.viewStore = ViewStore(self.store, observe: { $0 })
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            ZStack(alignment: .bottom) {
-                VStack {
-                    HStack {
-                        Label(viewStore.date, systemImage: "calendar")
+        ZStack(alignment: .bottom) {
+            VStack {
+                HStack {
+                    Label(viewStore.date, systemImage: "calendar")
+                        .foregroundColor(.mono.offwhite)
+                        .scaledFont(.pFootnote)
+                        .multilineTextAlignment(.center)
+
+                    Spacer()
+
+                    Button {
+                        viewStore.send(.dismiss, animation: .default)
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
                             .foregroundColor(.mono.offwhite)
                             .scaledFont(.pFootnote)
-                            .multilineTextAlignment(.center)
+                            .frame(width: 12, height: 12)
+                            .padding(.p8)
+                            .background(
+                                Circle()
+                                    .foregroundColor(.mono.offwhite.opacity(0.25)))
+                    }
+                }.padding()
 
-                        Spacer()
+                Text(viewStore.nafila.title)
+                    .foregroundColor(.mono.offwhite)
+                    .scaledFont(locale: .arabic, .pBody)
+                    .multilineTextAlignment(.center)
+                Spacer()
+            }
 
-                        Button {
-                            viewStore.send(.dismiss, animation: .default)
-                        } label: {
-                            Image(systemName: "xmark")
-                                .resizable()
-                                .foregroundColor(.mono.offwhite)
-                                .scaledFont(.pFootnote)
-                                .frame(width: 12, height: 12)
-                                .padding(.p8)
-                                .background(
-                                    Circle()
-                                        .foregroundColor(.mono.offwhite.opacity(0.25)))
-                        }
-                    }.padding()
-
-                    Text(viewStore.nafila.title)
-                        .foregroundColor(.mono.offwhite)
-                        .scaledFont(locale: .arabic, .pBody)
-                        .multilineTextAlignment(.center)
+            Drawer(startingHeight: 50) {
+                VStack {
+                    NafilaTasksView(viewStore: viewStore)
                     Spacer()
                 }
+            }
+            .rest(at: .constant(
+                [
+                    50,
+                    0.25.asPercentage(),
+                    0.5.asPercentage(),
+                ]))
+            .impact(.heavy)
+            .spring(.p32)
+            .padding(.bottom, getSafeArea().bottom)
+            .padding(.bottom, .p16)
 
-                Drawer(startingHeight: 50) {
-                    VStack {
-                        NafilaTasksView(viewStore: viewStore)
-                        Spacer()
-                    }
-                }
-                .rest(at: .constant(
-                    [
-                        50,
-                        0.25.asPercentage(),
-                        0.5.asPercentage(),
-                    ]))
-                .impact(.heavy)
-                .spring(.p32)
-                .padding(.bottom, getSafeArea().bottom)
-                .padding(.bottom, .p16)
-
-            }.background(
-                viewStore.nafila.image
-                    .swiftUIImage
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .ignoresSafeArea()
-                    .overlay(
-                        Color.mono.offblack.opacity(0.5)))
-                .enableInjection()
-        }
+        }.background(
+            viewStore.nafila.image
+                .swiftUIImage
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .overlay(
+                    Color.mono.offblack.opacity(0.5)))
+        .enableInjection()
     }
 }
 

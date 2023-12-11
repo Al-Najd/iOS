@@ -30,7 +30,9 @@ public struct Root: ReducerProtocol {
 }
 
 public extension StoreOf {
-    static var mainRoot: StoreOf<Root> { .init(initialState: .init(), reducer: Root()) }
+    static var mainRoot: StoreOf<Root> {
+        .init(initialState: .init(), reducer: { Root() })
+    }
 }
 
 // MARK: - Root.State
