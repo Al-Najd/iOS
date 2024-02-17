@@ -14,7 +14,7 @@ import Foundation
 
 // MARK: - NafilaDetails
 
-public struct NafilaDetails: ReducerProtocol {
+public struct NafilaDetails: Reducer {
     @Dependency(\.haptic)
     private var haptic
 
@@ -23,7 +23,7 @@ public struct NafilaDetails: ReducerProtocol {
 
     public init() { }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onDoingNafila:
             state.nafila.isDone = true

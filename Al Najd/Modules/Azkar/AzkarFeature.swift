@@ -13,13 +13,13 @@ import Foundation
 
 // MARK: - Azkar
 
-public struct Azkar: ReducerProtocol {
+public struct Azkar: Reducer {
     @Dependency(\.azkarService)
     var service
 
     public init() { }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onAppear:
             state.morningAzkar = .init(uniqueElements: service.getMorningAzkar(for: state.date))

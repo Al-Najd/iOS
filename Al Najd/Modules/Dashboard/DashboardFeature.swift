@@ -5,24 +5,19 @@
 //  Created by Ahmed Ramy on 11/02/2022.
 //
 
-
-
 import ComposableArchitecture
-
 import Foundation
-
 import SwiftUI
-
 
 // MARK: - Dashboard
 
-public struct Dashboard: ReducerProtocol {
+public struct Dashboard: Reducer {
     @Dependency(\.prayersService)
     private var service
 
     public init() { }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onAppear:
             state.prayingStreak = L10n.daysCount(service.getPrayingStreak())

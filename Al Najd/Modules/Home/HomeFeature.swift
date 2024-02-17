@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import Foundation
 
-public struct Home: ReducerProtocol {
+public struct Home: Reducer {
     @Dependency(\.prayersService)
     private var prayersDB
 
@@ -43,7 +43,7 @@ public struct Home: ReducerProtocol {
         case binding(BindingAction<State>)
     }
 
-    public var body: some ReducerProtocol<State, Action> {
+    public var body: some Reducer<State, Action> {
         BindingReducer()
 
         Reduce { state, action in

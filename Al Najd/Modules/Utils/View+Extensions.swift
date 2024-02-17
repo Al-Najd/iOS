@@ -8,20 +8,24 @@
 import SwiftUI
 
 public extension View {
+    public func getScreenSize() -> CGRect {
+        UIScreen.main.bounds
+    }
+
     func fill() -> some View {
-        frame(maxWidth: .infinity, maxHeight: .infinity)
+        frame(maxWidth: getScreenSize().width, maxHeight: getScreenSize().height)
     }
 
     func fillOnLeading() -> some View {
-        frame(maxWidth: .infinity, alignment: .leading)
+        frame(maxWidth: getScreenSize().width, alignment: .leading)
     }
 
     func fillOnTrailing() -> some View {
-        frame(maxWidth: .infinity, alignment: .trailing)
+        frame(maxWidth: getScreenSize().width, alignment: .trailing)
     }
 
     func fillAndCenter() -> some View {
-        frame(maxWidth: .infinity, alignment: .center)
+        frame(maxWidth: getScreenSize().width, alignment: .center)
     }
 
     func getSafeArea() -> UIEdgeInsets {

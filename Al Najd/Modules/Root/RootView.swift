@@ -22,23 +22,23 @@ public struct RootView: View {
     public var body: some View {
         SplashView {
             TabView {
-//                HomeView(store: store.scope(state: \.home, action: Root.Action.home))
-//                    .tabItem {
-//                        VStack {
-//                            Image(systemName: "sun.dust.circle.fill")
-//                            Text(L10n.today)
-//                        }
-//                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-//                    }
-//
-//                DashboardView(store: store.scope(state: \.dashboard, action: Root.Action.dashboard))
-//                    .tabItem {
-//                        VStack {
-//                            Image(systemName: "chart.bar.xaxis")
-//                            Text(L10n.dashboard)
-//                        }
-//                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
-//                    }
+                HomeView(store: store.scope(state: \.home, action: Root.Action.home))
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "sun.dust.circle.fill")
+                            Text(L10n.today)
+                        }
+                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+                    }
+
+                DashboardView(store: store.scope(state: \.dashboard, action: Root.Action.dashboard))
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "chart.bar.xaxis")
+                            Text(L10n.dashboard)
+                        }
+                        .foregroundColor(Asset.Colors.Primary.blackberry.swiftUIColor)
+                    }
 
                 AzkarView(store: store.scope(state: \.azkar, action: Root.Action.azkar))
                     .tabItem {

@@ -9,12 +9,10 @@ import CasePaths
 import ComposableArchitecture
 import Foundation
 
-
-
 // MARK: - Root
 
-public struct Root: ReducerProtocol {
-    public var body: some ReducerProtocol<State, Action> {
+public struct Root: Reducer {
+    public var body: some Reducer<State, Action> {
         Scope(state: \.home, action: /Action.home) {
             Home()
         }

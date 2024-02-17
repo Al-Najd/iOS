@@ -14,7 +14,7 @@ import Foundation
 
 // MARK: - PrayerDetails
 
-public struct PrayerDetails: ReducerProtocol {
+public struct PrayerDetails: Reducer {
     @Dependency(\.haptic)
     private var haptic
 
@@ -23,7 +23,7 @@ public struct PrayerDetails: ReducerProtocol {
 
     public init() { }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onDoingPrayer:
             state.prayer.isDone = true
