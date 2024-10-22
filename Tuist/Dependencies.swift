@@ -1,0 +1,42 @@
+import ProjectDescription
+
+let dependencies = Dependencies(
+    swiftPackageManager: [
+        .local(path: "Packages/VideoPlayer"),
+        .local(path: "Packages/ActionProcessor"),
+        .local(path: "Packages/AudioService"),
+        .local(path: "Packages/Keys"),
+        .local(path: "Packages/KeysInterfaces"),
+        .local(path: "Packages/FeatureFlags"),
+        .local(path: "Packages/CafuWebView"),
+        .local(path: "Packages/ProfilePicture"),
+        .local(path: "Packages/ApplePay"),
+        .local(path: "Packages/swift-snapshot-testing"),
+        .local(path: "Packages/PhoneNumberKit"),
+        .local(path: "Packages/LocationService"),
+        .local(path: "Packages/Deeplinking"),
+        .local(path: "Packages/Navigation"),
+        .local(path: "Packages/Permissions"),
+        .local(path: "Packages/Data"),
+        .local(path: "Packages/Business"),
+        .local(path: "Packages/DataSources"),
+        .local(path: "Packages/Common"),
+        .local(path: "Packages/Configs"),
+        .local(path: "Packages/Content"),
+        .local(path: "Packages/Loggers"),
+        .local(path: "Packages/Snackbar"),
+        .local(path: "Packages/Analytics"),
+        .local(path: "Packages/SwiftKeychainWrapper"),
+        .local(path: "Packages/Alamofire"),
+        .local(path: "Packages/Factory"),
+        .local(path: "Packages/DebuggingTools"),
+        .local(path: "Packages/ImagePicker"),
+        .local(path: "Packages/OrderETAComponent"),
+        .remote(url: "https://github.com/AppPear/SwiftyMocky", requirement: .upToNextMajor(from: "4.2.0")),
+        .remote(url: "https://github.com/firebase/firebase-ios-sdk.git", requirement: .upToNextMajor: "10.26.0"),
+        .remote(url: "https://github.com/CleverTap/clevertap-ios-sdk", requirement: .upToNextMajor(from: "4.2.2")),
+        .remote(url: "https://github.com/Juanpe/SkeletonView.git", requirement: .upToNextMajor(from: "1.30.4")),
+        .remote(url: "https://github.com/siteline/SwiftUI-Introspect.git", requirement: .upToNextMajor(from: "0.1.4"))
+    ],
+    platforms: [.iOS]
+)

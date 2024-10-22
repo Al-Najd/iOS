@@ -7,12 +7,8 @@
 *.xcbkptlist
 
 
-Al Najd.xcodeproj/xcuserdata/
-
-Al Najd.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
-
-OrdiCore/.swiftpm/xcode/xcuserdata/mac.xcuserdatad/xcschemes/xcschememanagement.plist
-
+*.xcodeproj/**/*
+*.xcworkspace/**/*
 fastlane/Config.json
 fastlane/LocalConfig.json
 
@@ -22,3 +18,4 @@ Gemfile.lock
 .env.default.plugin
 .env.default.project
 fastlane/report.xml
+Tuist/.build/**/*

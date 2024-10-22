@@ -129,8 +129,8 @@ public enum DatabaseService {
 private extension DatabaseService {
     static func seed() throws {
         let region = Region(calendar: Calendars.gregorian, zone: Zones.gmt, locale: Locales.english)
-        let from = DateInRegion("2023-01-01T00:00:00.0000Z", region: region)!
-        let to = DateInRegion("2024-01-01T00:00:00.0000Z", region: region)!
+        let from = DateInRegion("2024-01-01T00:00:00.0000Z", region: region)!
+        let to = DateInRegion("2026-01-01T00:00:00.0000Z", region: region)!
         let increment = DateComponents.create { $0.day = 1 }
         let daysInCurrentYear = DateInRegion.enumerateDates(from: from, to: to, increment: increment)
 
